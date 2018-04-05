@@ -16,6 +16,10 @@ Collaboratori :
   
 Descrizione progetto:
 Implementazione del gioco da tavolo "Sagrada" distribuito dalla Cranio.
-![alt text](https://github.com/chiaracriscuolo/MuranoLab/blob/master/sagrada_regole_ITA.pdf)
+
+![alt text](https://github.com/chiaracriscuolo/MuranoLab/blob/master/sagrada_regole_1_ITA.jpg)
+![alt text](https://github.com/chiaracriscuolo/MuranoLab/blob/master/sagrada_regole_2_ITA.jpg)
+![alt text](https://github.com/chiaracriscuolo/MuranoLab/blob/master/sagrada_regole_3_ITA.jpg)
+![alt text](https://github.com/chiaracriscuolo/MuranoLab/blob/master/sagrada_regole_4_ITA.jpg)
 
   
