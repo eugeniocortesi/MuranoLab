@@ -1,5 +1,5 @@
 # MuranoLab
-Nome gruppo: MuranoLAb
+Nome gruppo: MuranoLab
 
 Progetto di Ingegneria del Software 2018. 
 
