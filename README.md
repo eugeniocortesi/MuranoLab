@@ -14,6 +14,7 @@ Collaboratori :
   Chiara Criscuolo 849364
   10541002
   
-Descrizione progetto
+Descrizione progetto:
 Implementazione del gioco da tavolo "Sagrada" distribuito dalla Cranio.
+
   
