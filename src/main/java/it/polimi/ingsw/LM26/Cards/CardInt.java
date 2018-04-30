@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.Cards;
 
-public interface CardInt {
+        import java.io.Serializable;
 
-   public String getTitle();
+public interface CardInt extends Serializable {
+
 }

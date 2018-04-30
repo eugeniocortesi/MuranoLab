@@ -1,8 +1,16 @@
 package it.polimi.ingsw.LM26.Cards;
 
+import it.polimi.ingsw.LM26.Serialization.Effect;
+
 public class ConcreteObjectivePublicCardCreator extends CardCreatorAC {
 
-    public static CardInt createCard(){
-        return new ObjectivePublicCard();
+    public static CardInt createCard(int points, Effect effect){
+
+        return new ObjectivePublicCard(points, effect);
+    }
+
+    public static CardInt createCard(Effect effect){
+
+        return new ObjectivePublicCard(effect);
     }
 }
