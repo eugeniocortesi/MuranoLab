@@ -1,27 +1,39 @@
 package it.polimi.ingsw.LM26.PlayArea;
 
+import it.polimi.ingsw.LM26.Cards.CardInt;
 import it.polimi.ingsw.LM26.Cards.Decks;
 import it.polimi.ingsw.LM26.Cards.ObjectivePublicCard;
 import it.polimi.ingsw.LM26.Cards.ToolCard;
 
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.LM26.Serialization.Global.decks;
+
 public class OnBoardCards {
 
-    private Decks objectivePublicCardList;
+    private ArrayList<ObjectivePublicCard>  objectivePublicCardList;
 
-    private Decks toolCardList;
+    private ArrayList<ToolCard>  toolCardList;
 
-    public OnBoardCards(Decks objectivePublicCardList, Decks toolCardList) {
+    public OnBoardCards(ArrayList<ObjectivePublicCard> objectivePublicCardList,ArrayList<ToolCard> toolCardList) {
 
         this.objectivePublicCardList = objectivePublicCardList;
 
         this.toolCardList = toolCardList;
+
+    }
+
+    public ArrayList<ObjectivePublicCard> getObjectivePublicCardList() {
+        return objectivePublicCardList;
+
+    }
+
+    public ArrayList<ToolCard> getToolCardList() {
+        return toolCardList;
     }
 }
 
 //nel main
-// public Decks decks = new Decks ()
 // public OnBoardCards onBoardCards = new (decks.getObjectivePublicCardDeck(), decks.getToolCardDeck())
 
 

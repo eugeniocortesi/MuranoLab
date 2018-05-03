@@ -3,7 +3,7 @@ package it.polimi.ingsw.LM26.PublicPlayerZone;
 import it.polimi.ingsw.LM26.Cards.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.Cards.WindowPatternCard;
 
-public class PlayerZone {
+public class PlayerZone implements PlayerZoneInt {
 
 
         public String namePlayer;

@@ -4,43 +4,43 @@ import java.util.ArrayList;
 
 public class Decks {
 
-    public ArrayList<CardInt> ObjectivePublicCardDeck;
+    public ArrayList<ObjectivePublicCard> ObjectivePublicCardDeck;
 
-    private ArrayList<CardInt> ObjectivePrivateCardDeck;
+    public ArrayList<ObjectivePrivateCard> ObjectivePrivateCardDeck;
 
-    public ArrayList<CardInt> WindowPatternCardDeck;
+    public ArrayList<WindowPatternCard> WindowPatternCardDeck;
 
-    public ArrayList<CardInt> WindowFramePlayerBoardDeck;
+    public ArrayList<WindowFramePlayerBoard> WindowFramePlayerBoardDeck;
 
-    public ArrayList<CardInt> ToolCardDeck;
+    public ArrayList<ToolCard> ToolCardDeck;
 
-    public ArrayList<CardInt> getObjectivePublicCardDeck() {
+    public ArrayList<ObjectivePublicCard> getObjectivePublicCardDeck() {
         return ObjectivePublicCardDeck;
     }
 
-    public ArrayList<CardInt> getToolCardDeck() {
+    public ArrayList<ToolCard> getToolCardDeck() {
         return ToolCardDeck;
     }
 
-    public void setObjectivePublicCardDeck(ArrayList<CardInt> objectivePublicCardDeck) {
+    public void setObjectivePublicCardDeck(ArrayList<ObjectivePublicCard> objectivePublicCardDeck) {
         this.ObjectivePublicCardDeck = objectivePublicCardDeck;
     }
 
 
-    public void setObjectivePrivateCardDeck(ArrayList<CardInt> objectivePrivateCardDeck) {
+    public void setObjectivePrivateCardDeck(ArrayList<ObjectivePrivateCard> objectivePrivateCardDeck) {
         ObjectivePrivateCardDeck = objectivePrivateCardDeck;
     }
 
 
-    public void setWindowPatternCardDeck(ArrayList<CardInt> windowPatternCardDeck) {
+    public void setWindowPatternCardDeck(ArrayList<WindowPatternCard> windowPatternCardDeck) {
         WindowPatternCardDeck = windowPatternCardDeck;
     }
 
-    public void setWindowFramePlayerBoardDeck(ArrayList<CardInt> windowFramePlayerBoardDeck) {
+    public void setWindowFramePlayerBoardDeck(ArrayList<WindowFramePlayerBoard> windowFramePlayerBoardDeck) {
         WindowFramePlayerBoardDeck = windowFramePlayerBoardDeck;
     }
 
-    public void setToolCardDeck(ArrayList<CardInt> toolCardDeck) {
+    public void setToolCardDeck(ArrayList<ToolCard> toolCardDeck) {
         this.ToolCardDeck = toolCardDeck;
     }
 }

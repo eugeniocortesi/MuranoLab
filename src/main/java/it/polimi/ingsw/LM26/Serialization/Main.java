@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import static it.polimi.ingsw.LM26.Cards.Color.*;
 import static it.polimi.ingsw.LM26.Cards.ConcreteObjectivePublicCardCreator.createCard;
 import static it.polimi.ingsw.LM26.Serialization.Elements.elements.*;
-
+import static it.polimi.ingsw.LM26.Serialization.Global.decks;
 
 
 public class Main {
@@ -25,14 +25,16 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-            serialize();
+            serialize(decks);
             } catch (IOException e) {
         }
 
-        deserialize();
+        deserialize(decks);
+
+
     }
 
-    private static void serialize() throws IOException {
+    private static void serialize(Decks d) throws IOException {
 
         CardCreator creator = new CardCreator();
 
@@ -180,29 +182,29 @@ public class Main {
                                                                                     VIOLET, YELLOW, EMPTY, EMPTY, DARK6,
                                                                                     YELLOW, EMPTY, EMPTY, DARK5, MEDIUMS3,
                                                                                     EMPTY, DARK5, MEDIUMS4, LIGHT2, LIGHT1));
-        CardInt Frame1 = creator.createCard(ANSI_RED);
-        CardInt Frame2 = creator.createCard(ANSI_GREEN);
-        CardInt Frame3 = creator.createCard(ANSI_BLUE);
-        CardInt Frame4 = creator.createCard(ANSI_PURPLE);
+        WindowFramePlayerBoard Frame1 = new WindowFramePlayerBoard(ANSI_RED);
+        WindowFramePlayerBoard Frame2 = new WindowFramePlayerBoard(ANSI_GREEN);
+        WindowFramePlayerBoard Frame3 = new WindowFramePlayerBoard(ANSI_BLUE);
+        WindowFramePlayerBoard Frame4 = new WindowFramePlayerBoard(ANSI_PURPLE);
 
-        CardInt tool1 = creator.createCard(1);
-        CardInt tool2 = creator.createCard(2);
-        CardInt tool3 = creator.createCard(3);
-        CardInt tool4 = creator.createCard(4);
-        CardInt tool5 = creator.createCard(5);
-        CardInt tool6 = creator.createCard(6);
-        CardInt tool7 = creator.createCard(7);
-        CardInt tool8 = creator.createCard(8);
-        CardInt tool9 = creator.createCard(9);
-        CardInt tool10 = creator.createCard(10);
-        CardInt tool11 = creator.createCard(11);
-        CardInt tool12= creator.createCard(12);
+        ToolCard tool1 = new ToolCard(1);
+        ToolCard tool2 = new ToolCard(2);
+        ToolCard tool3 = new ToolCard(3);
+        ToolCard tool4 = new ToolCard(4);
+        ToolCard tool5 = new ToolCard(5);
+        ToolCard tool6 = new ToolCard(6);
+        ToolCard tool7 = new ToolCard(7);
+        ToolCard tool8 = new ToolCard(8);
+        ToolCard tool9 = new ToolCard(9);
+        ToolCard tool10 = new ToolCard(10);
+        ToolCard tool11 = new ToolCard(11);
+        ToolCard tool12 = new ToolCard(12);
 
         ArrayList<CardInt> Private = new ArrayList<CardInt>();
         ArrayList<CardInt> Public = new ArrayList<CardInt>();
         ArrayList<CardInt> Windows = new ArrayList<CardInt>();
-        ArrayList<CardInt> Frames = new ArrayList<CardInt>();
-        ArrayList<CardInt> tools = new ArrayList<CardInt>();
+        ArrayList<WindowFramePlayerBoard> Frames = new ArrayList<WindowFramePlayerBoard>();
+        ArrayList<ToolCard> tools = new ArrayList<ToolCard>();
 
         Private.add(private1);
         Private.add(private2);
@@ -264,11 +266,13 @@ public class Main {
         tools.add(tool11);
         tools.add(tool12);
 
-        Decks Toolsdeck= new Decks();
-        Toolsdeck.setToolCardDeck(tools);
+        //Decks Toolsdeck= new Decks();
+        //Toolsdeck.setToolCardDeck(tools);
+        d.setToolCardDeck(tools);
 
-        Decks Framesdeck= new Decks();
-        Framesdeck.setWindowFramePlayerBoardDeck(Frames);
+        //Decks Framesdeck= new Decks();
+        //Framesdeck.setWindowFramePlayerBoardDeck(Frames);
+        d.setWindowFramePlayerBoardDeck(Frames);
 
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
@@ -293,7 +297,7 @@ public class Main {
     }
 
 
-    private static void deserialize() {
+    private static void deserialize(Decks d) {
 
         FileReader fr1 = null, fr2 = null, fr3=null;
         BufferedReader br1 = null, br2 = null, br3=null;
@@ -305,7 +309,7 @@ public class Main {
 
 
             Type Private = new TypeToken<ArrayList<ObjectivePrivateCard>>() { }.getType();
-            ArrayList<CardInt> privateCards = new ArrayList<CardInt>();
+            ArrayList<ObjectivePrivateCard> privateCards = new ArrayList<ObjectivePrivateCard>();
 
             Gson gson = new GsonBuilder()
                     .setPrettyPrinting()
@@ -320,8 +324,9 @@ public class Main {
             System.out.println(privateCards.get(4).getColour());*/
 
 
-            Decks newprivatedeck= new Decks();
-            newprivatedeck.setObjectivePrivateCardDeck(privateCards);
+            //Decks newprivatedeck= new Decks();
+            //newprivatedeck.setObjectivePrivateCardDeck(privateCards);
+            d.setObjectivePrivateCardDeck(privateCards);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -343,7 +348,7 @@ public class Main {
 
             Type Public = new TypeToken<ArrayList<ObjectivePublicCard>>() {
             }.getType();
-            ArrayList<CardInt> publicCards = new ArrayList<CardInt>();
+            ArrayList<ObjectivePublicCard> publicCards = new ArrayList<ObjectivePublicCard>();
 
             RuntimeTypeAdapterFactory1<Effect> runtimeTypeAdapterFactory1 = RuntimeTypeAdapterFactory1
                     .of(Effect.class, "type")
@@ -380,8 +385,10 @@ public class Main {
             System.out.println(publicCards.get(9).getEffect());*/
 
 
-            Decks newpublicdeck= new Decks();
-            newpublicdeck.setObjectivePublicCardDeck(publicCards);
+            //Decks newpublicdeck= new Decks();
+            //newpublicdeck.setObjectivePublicCardDeck(publicCards);
+            d.setObjectivePublicCardDeck(publicCards);
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -406,7 +413,7 @@ public class Main {
 
 
             Type Window = new TypeToken<ArrayList<WindowPatternCard>>() { }.getType();
-            ArrayList<CardInt> WindowCards = new ArrayList<CardInt>();
+            ArrayList<WindowPatternCard> WindowCards = new ArrayList<WindowPatternCard>();
 
             Gson gson = new GsonBuilder()
                     .setPrettyPrinting()
@@ -489,8 +496,9 @@ public class Main {
             WindowCards.get(23).printWindowPatter();*/
 
 
-            Decks windowdeckdeck= new Decks();
-            windowdeckdeck.setWindowPatternCardDeck(WindowCards);
+            //Decks windowdeckdeck= new Decks();
+            //windowdeckdeck.setWindowPatternCardDeck(WindowCards);
+            d.setWindowPatternCardDeck(WindowCards);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -506,4 +514,6 @@ public class Main {
         }
 
     }
+
+
 }
