@@ -12,8 +12,15 @@ public class Decks {
 
     public ArrayList<CardInt> WindowFramePlayerBoardDeck;
 
-    private ArrayList<CardInt> ToolCardDeck;
+    public ArrayList<CardInt> ToolCardDeck;
 
+    public ArrayList<CardInt> getObjectivePublicCardDeck() {
+        return ObjectivePublicCardDeck;
+    }
+
+    public ArrayList<CardInt> getToolCardDeck() {
+        return ToolCardDeck;
+    }
 
     public void setObjectivePublicCardDeck(ArrayList<CardInt> objectivePublicCardDeck) {
         this.ObjectivePublicCardDeck = objectivePublicCardDeck;

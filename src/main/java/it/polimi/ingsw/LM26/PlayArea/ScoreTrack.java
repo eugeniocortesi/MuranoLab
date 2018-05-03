@@ -15,6 +15,6 @@ public class ScoreTrack implements ScoreTrackInt {
     }
 
     public int getScoreTrack(ScoreMarker sm) {
-        return sm.getPoints();
+        return sm.getRealPoints();
     }
 }

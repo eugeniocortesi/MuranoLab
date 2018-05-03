@@ -6,11 +6,17 @@ import java.io.FileReader;
 
 public class ScoreMarker {
 
-    public Color color;
+    private Color color;
 
-    public int points = 0;
+    private int points = 0;
+    //not all points if more50 is true
+    //in this case points = points + 50;
 
-    public boolean more50 = false;
+    private boolean more50 = false;
+
+    public boolean isMore50() {
+        return more50;
+    }
 
     public ScoreMarker(Color color) {
         this.color = color;
@@ -20,15 +26,34 @@ public class ScoreMarker {
         return color;
     }
 
-    public int getPoints() {
+    public int getRealPoints() {
+
+        if (more50==true) {
+
+            return points + 50;
+        }
         return points;
     }
 
-    public void incrementScore(int increment){
-        points=points + increment;
-        }
+    public int getPoints(){
+        return this.points;
+    }
 
+    public void incrementScore(int increment) {
+        if (this.points + increment < 50){
+            this.points = this.points + increment;
+    }
+        else
+
+    {
+
+        this.points = this.points + increment - 50;
+        flipScoreMarker();
+    }
+
+}
         public void flipScoreMarker(){
         this.more50=true;
+
         }
 }
