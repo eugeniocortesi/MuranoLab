@@ -1,9 +1,9 @@
 package it.polimi.ingsw.LM26.Cards;
 
-public class ConcreteToolCardCreator extends CardCreatorAC {
+public class ConcreteToolCardCreator extends CardCreator {
 
-    public static CardInt createCard(String title, String effect){
+    public static CardInt createCard(int num){
 
-        return new ToolCard(title, effect);
+        return new ToolCard(num);
     }
 }

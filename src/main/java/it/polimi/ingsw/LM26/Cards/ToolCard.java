@@ -2,14 +2,13 @@ package it.polimi.ingsw.LM26.Cards;
 
 public class ToolCard implements CardInt  {
 
-    String title= null;
-    String effect=null;
+    private String title= null;
+    private int num;
 
-    public ToolCard(String title, String effect) {
 
-        this.title=title;
+    public ToolCard(int num) {
 
-        this.effect=effect;
+        this.num=num;
     }
 
 }

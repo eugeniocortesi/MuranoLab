@@ -4,7 +4,8 @@ import it.polimi.ingsw.LM26.Serialization.Effect;
 import it.polimi.ingsw.LM26.Serialization.Matrix;
 import it.polimi.ingsw.LM26.Serialization.Elements.elements;
 
-public class CardCreatorAC {
+
+public class CardCreator {
 
     public static CardInt createCard(elements colour) {
         CardInt card = ConcreteObjectivePrivateCardCreator.createCard(colour);
@@ -21,8 +22,8 @@ public class CardCreatorAC {
         return card;
     }
 
-    public static CardInt createCard(String title, String effect) {
-        CardInt card = ConcreteToolCardCreator.createCard(title, effect);
+    public static CardInt createCard(int num) {
+        CardInt card = ConcreteToolCardCreator.createCard(num);
         return card;
     }
 
@@ -30,4 +31,11 @@ public class CardCreatorAC {
         CardInt card = ConcreteWindowPatternCardCreator.createCard(token, title, matrix);
         return card;
     }
+
+    public static CardInt createCard(Color color) {
+        CardInt card = ConcreteWindowFramePlayerBoardCreator.createCard(color);
+        return card;
+    }
+
+
 }

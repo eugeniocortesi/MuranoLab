@@ -2,7 +2,7 @@ package it.polimi.ingsw.LM26.Cards;
 
 import it.polimi.ingsw.LM26.Serialization.Matrix;
 
-public class ConcreteWindowPatternCardCreator {
+public class ConcreteWindowPatternCardCreator extends CardCreator {
 
         public static CardInt createCard(int token, String title, Matrix matrix){
 
