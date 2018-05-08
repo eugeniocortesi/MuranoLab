@@ -11,5 +11,6 @@ public class Effect4 extends Effect{
     public String getE(){
         return effect4;
     }
+
     protected void resolve(){}
 }

@@ -12,10 +12,7 @@ public class Effect3 extends Effect{
         this.type = "Effect3";
     }
 
-    public String getE() {
-
-        return "Shades " + shades;
-    }
+    public String getE() { return "Shades " + shades; }
 
     protected void resolve(){}
 }

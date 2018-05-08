@@ -10,6 +10,7 @@ public class Token {
     //attraverso il metodo setToken di Player il token creato viene assegnato al giocatore
 
     public Token(int token) {
+
         this.token = token;
     }
 
@@ -18,7 +19,11 @@ public class Token {
     }
 
     public void decrementToken(){
-        token++;
+
+        if(token == 0) System.out.println("Impossible, player has 0 tokens") ;
+
+        else token--;
+
         }
 
 

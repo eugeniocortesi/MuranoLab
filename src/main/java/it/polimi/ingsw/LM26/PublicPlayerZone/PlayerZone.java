@@ -32,11 +32,9 @@ public class PlayerZone implements PlayerZoneInt {
         this.playerState=PlayerState.STANDBY;
     }
 
-    public Token getToken() {
-        return token;
-    }
+        public Token getToken() { return token; }
 
-    public void setToken(Token token) {
+        public void setToken(Token token) {
             this.token = token;
         }
 
@@ -72,16 +70,32 @@ public class PlayerZone implements PlayerZoneInt {
         connected=true;
         }
 
-    public int getPrivatePoints() {
-        return privatePoints;
+        public int getPrivatePoints() { return privatePoints; }
+
+        public void setPrivatePoints(int privatePoints) { this.privatePoints = privatePoints; }
+
+        public ScoreMarker getScoreMarker() { return scoreMarker; }
+
+        public void setNumberPlayer(int numberPlayer) { this.numberPlayer = numberPlayer; }
+
+    public void setNamePlayer(String namePlayer) {
+        this.namePlayer = namePlayer;
     }
 
-    public void setPrivatePoints(int privatePoints) {
-        this.privatePoints = privatePoints;
+    public void setPlayerBoard(WindowFramePlayerBoard playerBoard) {
+        this.playerBoard = playerBoard;
     }
 
-    public ScoreMarker getScoreMarker() {
-        return scoreMarker;
+    public void setWindowPatternCard(WindowPatternCard windowPatternCard) {
+        this.windowPatternCard = windowPatternCard;
+    }
+
+    public void setPlayerState(PlayerState playerState) {
+        this.playerState = playerState;
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
     }
 
     //get carta obbiettivo privato

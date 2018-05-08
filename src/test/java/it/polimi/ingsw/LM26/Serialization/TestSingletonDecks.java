@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 public class TestSingletonDecks {
 
-    Decks decks;
+    private Decks decks;
 
     @Test
 
@@ -15,7 +15,7 @@ public class TestSingletonDecks {
 
         int i;
 
-        if(decks==null)System.out.println("ok, mazzo ancora da creare");
+        if(decks==null)System.out.println("ok, deck still to be created");
         decks=singletonDecks();
         if(decks!=null)System.out.println("ok");
 

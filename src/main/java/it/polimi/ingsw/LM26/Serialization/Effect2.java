@@ -22,5 +22,6 @@ public class Effect2 extends Effect {
     public String getE() {
         return "Different " + iscolorShades() + " everywhere";
     }
+
     protected void resolve(){}
 }
