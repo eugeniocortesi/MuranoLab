@@ -8,7 +8,7 @@ import static it.polimi.ingsw.LM26.Serialization.Elements.elements.*;
 public class ObjectivePrivateCard extends ObjectiveCardAC {
 
 
-    public elements colour= null;
+    private elements colour= null;
     int id;
 
     public ObjectivePrivateCard(int id, elements colour) {

@@ -6,9 +6,9 @@ import it.polimi.ingsw.LM26.Serialization.Elements.elements;
 
 public class WindowPatternCard implements CardInt {
 
-    public int token;
-    public String title;
-    public Matrix matrix;
+    private int token;
+    private String title;
+    private Matrix matrix;
 
 
 

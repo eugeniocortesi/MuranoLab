@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public class ObjectivePublicCard extends ObjectiveCardAC {
 
-    public int points;
+    private int points;
 
-    public Effect effect= null;
+    private Effect effect= null;
 
-    int id;
+    private int id;
 
     public ObjectivePublicCard(int id, Effect effect) {
 
