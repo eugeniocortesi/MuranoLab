@@ -8,21 +8,11 @@ import java.util.ArrayList;
 public class ScoreTrack implements ScoreTrackInt {
 
     private ArrayList<ScoreMarker> scoreMarkerList;
-    
-    private PlayerZone last=null;
 
     public ScoreTrack(){
 
         scoreMarkerList = new ArrayList<ScoreMarker>();
 
-    }
-
-    public PlayerZone getLast() {
-        return last;
-    }
-
-    public void setLast(PlayerZone last) {
-        this.last = last;
     }
 
     public int getScoreTrack(ScoreMarker sm) {
