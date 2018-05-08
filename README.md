@@ -1,5 +1,6 @@
 # MuranoLab
 Nome gruppo: MuranoLab
+Codice gruppo: LM26
 
 Progetto di Ingegneria del Software 2018. 
 
