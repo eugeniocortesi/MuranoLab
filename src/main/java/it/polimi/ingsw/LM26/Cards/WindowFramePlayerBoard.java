@@ -16,4 +16,8 @@ public class WindowFramePlayerBoard implements CardInt {
     public int getId() {
         return id;
     }
+
+    public Color getColor() {
+        return color;
+    }
 }

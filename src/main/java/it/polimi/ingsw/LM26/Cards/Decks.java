@@ -189,10 +189,10 @@ public class Decks {
                 VIOLET, YELLOW, EMPTY, EMPTY, DARK6,
                 YELLOW, EMPTY, EMPTY, DARK5, MEDIUMS3,
                 EMPTY, DARK5, MEDIUMS4, LIGHT2, LIGHT1));
-        WindowFramePlayerBoard Frame1 = new WindowFramePlayerBoard(1, ANSI_RED);
-        WindowFramePlayerBoard Frame2 = new WindowFramePlayerBoard(2, ANSI_GREEN);
-        WindowFramePlayerBoard Frame3 = new WindowFramePlayerBoard(3, ANSI_BLUE);
-        WindowFramePlayerBoard Frame4 = new WindowFramePlayerBoard(4, ANSI_PURPLE);
+        WindowFramePlayerBoard Frame1 = new WindowFramePlayerBoard(31, ANSI_RED);
+        WindowFramePlayerBoard Frame2 = new WindowFramePlayerBoard(32, ANSI_GREEN);
+        WindowFramePlayerBoard Frame3 = new WindowFramePlayerBoard(33, ANSI_BLUE);
+        WindowFramePlayerBoard Frame4 = new WindowFramePlayerBoard(34, ANSI_PURPLE);
 
         ToolCard tool1 = new ToolCard(1);
         ToolCard tool2 = new ToolCard(2);
