@@ -4,10 +4,7 @@ import it.polimi.ingsw.LM26.Cards.CardInt;
 import it.polimi.ingsw.LM26.Cards.Decks;
 import it.polimi.ingsw.LM26.Cards.ObjectivePublicCard;
 import it.polimi.ingsw.LM26.Cards.ToolCard;
-
 import java.util.ArrayList;
-
-import static it.polimi.ingsw.LM26.Serialization.Global.decks;
 
 public class OnBoardCards {
 

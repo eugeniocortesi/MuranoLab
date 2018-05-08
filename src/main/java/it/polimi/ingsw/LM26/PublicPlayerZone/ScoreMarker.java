@@ -53,7 +53,7 @@ public class ScoreMarker {
 
 }
 
-    public void flipScoreMarker(){
+    private void flipScoreMarker(){
         this.more50=true;
 
         }
