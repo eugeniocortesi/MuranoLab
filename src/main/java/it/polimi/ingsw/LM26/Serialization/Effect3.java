@@ -6,7 +6,7 @@ public class Effect3 extends Effect{
 
     private elements shades;
 
-    protected Effect3(elements shades) {
+    public Effect3(elements shades) {
 
         this.shades = shades;
         this.type = "Effect3";

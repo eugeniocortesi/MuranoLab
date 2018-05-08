@@ -4,7 +4,7 @@ public class Effect4 extends Effect{
 
     private String effect4="Colored diagonals";
 
-    protected Effect4() {
+    public Effect4() {
         this.type = "Effect4";
     }
 

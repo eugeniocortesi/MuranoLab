@@ -9,6 +9,7 @@ public class ToolCard implements CardInt  {
     public ToolCard(int num) {
 
         this.num=num;
+
     }
 
 }

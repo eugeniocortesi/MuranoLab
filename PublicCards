@@ -6,7 +6,8 @@
       "rowColomn": true,
       "effect1": "Different Colors - Rows",
       "type": "Effect1"
-    }
+    },
+    "id": 21
   },
   {
     "points": 5,
@@ -15,7 +16,8 @@
       "rowColomn": false,
       "effect1": "Different Colors - Columns",
       "type": "Effect1"
-    }
+    },
+    "id": 22
   },
   {
     "points": 5,
@@ -24,7 +26,8 @@
       "rowColomn": true,
       "effect1": "Different Shades - Rows",
       "type": "Effect1"
-    }
+    },
+    "id": 23
   },
   {
     "points": 4,
@@ -33,48 +36,55 @@
       "rowColomn": false,
       "effect1": "Different Shades - Columns",
       "type": "Effect1"
-    }
+    },
+    "id": 24
   },
   {
     "points": 2,
     "effect": {
       "shades": "LIGHT",
       "type": "Effect3"
-    }
+    },
+    "id": 25
   },
   {
     "points": 2,
     "effect": {
       "shades": "MEDIUMS",
       "type": "Effect3"
-    }
+    },
+    "id": 26
   },
   {
     "points": 2,
     "effect": {
       "shades": "DARK",
       "type": "Effect3"
-    }
+    },
+    "id": 27
   },
   {
     "points": 5,
     "effect": {
       "colorShades": true,
       "type": "Effect2"
-    }
+    },
+    "id": 28
   },
   {
     "points": 4,
     "effect": {
       "colorShades": false,
       "type": "Effect2"
-    }
+    },
+    "id": 29
   },
   {
     "points": 0,
     "effect": {
       "effect4": "Colored diagonals",
       "type": "Effect4"
-    }
+    },
+    "id": 210
   }
 ]

@@ -4,9 +4,9 @@ import it.polimi.ingsw.LM26.Serialization.Elements.elements;
 
 public class ConcreteObjectivePrivateCardCreator extends CardCreator {
 
-    public static CardInt createCard(elements colour){
+    public static CardInt createCard(int id, elements colour){
 
-        return new ObjectivePrivateCard(colour);
+        return new ObjectivePrivateCard(id, colour);
     }
 }
 

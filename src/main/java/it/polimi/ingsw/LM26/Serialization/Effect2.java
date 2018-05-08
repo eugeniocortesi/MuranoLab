@@ -7,7 +7,7 @@ public class Effect2 extends Effect {
 
     private boolean colorShades;
 
-    protected Effect2(boolean colorShades) {
+    public Effect2(boolean colorShades) {
 
         this.colorShades = colorShades;
         this.type = "Effect2";

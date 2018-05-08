@@ -9,7 +9,7 @@ public class Effect1 extends Effect{
     private boolean rowColomn;
     private String effect1=null;
 
-    protected Effect1(boolean colorShades, boolean rowColomn) {
+    public Effect1(boolean colorShades, boolean rowColomn) {
 
         this.colorShades = colorShades;
         this.rowColomn = rowColomn;

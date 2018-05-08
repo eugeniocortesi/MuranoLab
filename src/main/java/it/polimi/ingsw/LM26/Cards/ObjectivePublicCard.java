@@ -8,19 +8,20 @@ public class ObjectivePublicCard extends ObjectiveCardAC {
 
     public int points;
 
-    ArrayList<CardInt> PublicDeck;
-
     public Effect effect= null;
 
-    public ObjectivePublicCard(Effect effect) {
+    int id;
+
+    public ObjectivePublicCard(int id, Effect effect) {
 
         this.effect=effect;
+        this.id=id;
     }
 
-    public ObjectivePublicCard(int points, Effect effect) {
+    public ObjectivePublicCard(int id, int points, Effect effect) {
 
         this.points = points;
-
+        this.id=id;
         this.effect = effect;
 
     }
@@ -35,13 +36,7 @@ public class ObjectivePublicCard extends ObjectiveCardAC {
         return  effect.getE();
     }
 
-    public ArrayList<CardInt> getPublicDeck() {
-
-        return PublicDeck;
-    }
-
-    public void setPublicDeck(ArrayList<CardInt> aPublic) {
-
-        PublicDeck = aPublic;
+    public int getId() {
+        return id;
     }
 }

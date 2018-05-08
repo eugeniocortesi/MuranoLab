@@ -8,7 +8,7 @@ public class Matrix {
 
     private elements matrix[][]= new elements[4][5];
 
-    protected Matrix(elements matrix11, elements matrix12, elements matrix13, elements matrix14, elements matrix15,
+    public Matrix(elements matrix11, elements matrix12, elements matrix13, elements matrix14, elements matrix15,
                   elements matrix21, elements matrix22, elements matrix23, elements matrix24, elements matrix25,
                   elements matrix31, elements matrix32, elements matrix33, elements matrix34, elements matrix35,
                   elements matrix41, elements matrix42, elements matrix43, elements matrix44, elements matrix45) {

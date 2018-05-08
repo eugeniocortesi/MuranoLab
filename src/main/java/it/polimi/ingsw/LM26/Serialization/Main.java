@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.Serialization;
+/*package it.polimi.ingsw.LM26.Serialization;
 
 
 import com.google.gson.Gson;
@@ -24,161 +24,163 @@ public class Main {
 
     public static void main(String[] args) {
 
+
         try {
             serialize(decks);
             } catch (IOException e) {
         }
 
         deserialize(decks);
+        System.out.println(decks.getObjectivePublicCardDeck().get(0).getPoints());
+        it.polimi.ingsw.LM26.Main.main(args);
 
 
     }
 
     private static void serialize(Decks d) throws IOException {
 
-        CardCreator creator = new CardCreator();
 
         //carte private
-        CardInt private1 = creator.createCard(RED);
-        CardInt private2 = creator.createCard(YELLOW);
-        CardInt private3 = creator.createCard(GREEN);
-        CardInt private4 = creator.createCard(BLUE);
-        CardInt private5 = creator.createCard(VIOLET);
+        CardInt private1 = CardCreator.createCard(RED);
+        CardInt private2 = CardCreator.createCard(YELLOW);
+        CardInt private3 = CardCreator.createCard(GREEN);
+        CardInt private4 = CardCreator.createCard(BLUE);
+        CardInt private5 = CardCreator.createCard(VIOLET);
 
         //carte pubbliche
         //Colore, Riga = true
         //Sfumature, Colonna = false
-        CardInt public1 = creator.createCard(6, new Effect1(true, true));
-        CardInt public2 = creator.createCard(5, new Effect1(true, false));
-        CardInt public3 = creator.createCard(5, new Effect1(false, true));
-        CardInt public4 = creator.createCard(4, new Effect1(false, false));
-        CardInt public5 = creator.createCard(2, new Effect3(LIGHT));
-        CardInt public6 = creator.createCard(2, new Effect3(MEDIUMS));
-        CardInt public7 = creator.createCard(2, new Effect3(DARK));
-        CardInt public8 = creator.createCard(5, new Effect2(true));
-        CardInt public9 = creator.createCard(4, new Effect2(false));
-        CardInt public10 = creator.createCard(new Effect4());
+        CardInt public1 = CardCreator.createCard(6, new Effect1(true, true));
+        CardInt public2 = CardCreator.createCard(5, new Effect1(true, false));
+        CardInt public3 = CardCreator.createCard(5, new Effect1(false, true));
+        CardInt public4 = CardCreator.createCard(4, new Effect1(false, false));
+        CardInt public5 = CardCreator.createCard(2, new Effect3(LIGHT));
+        CardInt public6 = CardCreator.createCard(2, new Effect3(MEDIUMS));
+        CardInt public7 = CardCreator.createCard(2, new Effect3(DARK));
+        CardInt public8 = CardCreator.createCard(5, new Effect2(true));
+        CardInt public9 = CardCreator.createCard(4, new Effect2(false));
+        CardInt public10 = CardCreator.createCard(new Effect4());
 
         //carte schema
 
-        CardInt window1 = creator.createCard(3,"Sun Catcher", new Matrix(EMPTY, BLUE, LIGHT2, EMPTY, YELLOW,
+        CardInt window1 = CardCreator.createCard(3,"Sun Catcher", new Matrix(EMPTY, BLUE, LIGHT2, EMPTY, YELLOW,
                                                                                     EMPTY, MEDIUMS4, EMPTY, RED, EMPTY,
                                                                                     EMPTY, EMPTY, DARK5, YELLOW, EMPTY,
                                                                                     GREEN, MEDIUMS3, EMPTY, EMPTY, VIOLET));
 
-        CardInt window2 = creator.createCard(3,"Bellesguard", new Matrix(BLUE, DARK6, EMPTY, EMPTY, YELLOW,
+        CardInt window2 = CardCreator.createCard(3,"Bellesguard", new Matrix(BLUE, DARK6, EMPTY, EMPTY, YELLOW,
                                                                                     EMPTY, MEDIUMS3, BLUE, EMPTY, EMPTY,
                                                                                     EMPTY, DARK5, DARK6, LIGHT2, EMPTY,
                                                                                     EMPTY, MEDIUMS4, EMPTY, LIGHT1, GREEN));
 
-        CardInt window3 = creator.createCard(3, "Fractal Drops", new Matrix(EMPTY, MEDIUMS4, EMPTY, YELLOW, DARK6,
+        CardInt window3 = CardCreator.createCard(3, "Fractal Drops", new Matrix(EMPTY, MEDIUMS4, EMPTY, YELLOW, DARK6,
                                                                                         RED, EMPTY,LIGHT2, EMPTY, EMPTY,
                                                                                         EMPTY, EMPTY, RED, VIOLET, LIGHT1,
                                                                                         BLUE, YELLOW, EMPTY, EMPTY, EMPTY));
 
 
-        CardInt window4 = creator.createCard(3,"Lux Celestial", new Matrix(EMPTY, EMPTY, RED, DARK5, EMPTY,
+        CardInt window4 = CardCreator.createCard(3,"Lux Celestial", new Matrix(EMPTY, EMPTY, RED, DARK5, EMPTY,
                                                                                         VIOLET, MEDIUMS4, EMPTY, GREEN, MEDIUMS3,
                                                                                         DARK6, EMPTY, EMPTY, BLUE, EMPTY,
                                                                                         EMPTY, YELLOW, LIGHT2, EMPTY, EMPTY));
 
 
-        CardInt window5 = creator.createCard(4,"Kaleidoscopic Dream", new Matrix(   YELLOW, BLUE, EMPTY, EMPTY, LIGHT1,
+        CardInt window5 = CardCreator.createCard(4,"Kaleidoscopic Dream", new Matrix(   YELLOW, BLUE, EMPTY, EMPTY, LIGHT1,
                                                                                                 GREEN, EMPTY, DARK5, EMPTY, MEDIUMS4,
                                                                                                 MEDIUMS3,EMPTY, RED, EMPTY, GREEN,
                                                                                                 LIGHT2, EMPTY,EMPTY, BLUE, YELLOW));
 
-        CardInt window6 = creator.createCard(4,"Chromatic Splendor", new Matrix(EMPTY, EMPTY,GREEN, EMPTY,EMPTY,
+        CardInt window6 = CardCreator.createCard(4,"Chromatic Splendor", new Matrix(EMPTY, EMPTY,GREEN, EMPTY,EMPTY,
                                                                                             LIGHT2, YELLOW, DARK5,BLUE, LIGHT1,
                                                                                             EMPTY, RED, MEDIUMS3, VIOLET,EMPTY,
                                                                                             LIGHT1, EMPTY, DARK6,EMPTY, MEDIUMS4));
 
-        CardInt window7 = creator.createCard(4,"Via Lux", new Matrix(YELLOW, EMPTY, DARK6, EMPTY, EMPTY,
+        CardInt window7 = CardCreator.createCard(4,"Via Lux", new Matrix(YELLOW, EMPTY, DARK6, EMPTY, EMPTY,
                                                                                 EMPTY, LIGHT1, DARK5, EMPTY, LIGHT2,
                                                                                 MEDIUMS3, YELLOW, RED, VIOLET, EMPTY,
                                                                                 EMPTY, EMPTY, MEDIUMS4, MEDIUMS3, RED));
 
-        CardInt window8 = creator.createCard(4,"Aurora Sagradis", new Matrix(RED, EMPTY, BLUE, EMPTY, YELLOW,
+        CardInt window8 = CardCreator.createCard(4,"Aurora Sagradis", new Matrix(RED, EMPTY, BLUE, EMPTY, YELLOW,
                                                                                         MEDIUMS4, VIOLET, MEDIUMS3, GREEN, LIGHT2,
                                                                                         EMPTY, LIGHT1, EMPTY, DARK5, EMPTY,
                                                                                         EMPTY, EMPTY, DARK6, EMPTY, EMPTY));
 
-        CardInt window9 = creator.createCard(5,"Fulgor del Cielo", new Matrix(EMPTY,BLUE, RED, EMPTY, EMPTY,
+        CardInt window9 = CardCreator.createCard(5,"Fulgor del Cielo", new Matrix(EMPTY,BLUE, RED, EMPTY, EMPTY,
                                                                                             EMPTY, MEDIUMS4,DARK5, EMPTY, BLUE,
                                                                                             BLUE, LIGHT2, EMPTY, RED, DARK5,
                                                                                             DARK6, RED, MEDIUMS3, LIGHT1, EMPTY));
 
-        CardInt window10 = creator.createCard(5,"Virtus", new Matrix(   MEDIUMS4, EMPTY, LIGHT2, DARK5, GREEN,
+        CardInt window10 = CardCreator.createCard(5,"Virtus", new Matrix(   MEDIUMS4, EMPTY, LIGHT2, DARK5, GREEN,
                                                                                     EMPTY, EMPTY, DARK6, GREEN, LIGHT2,
                                                                                     EMPTY, MEDIUMS3, GREEN, MEDIUMS4, EMPTY,
                                                                                     DARK5, GREEN, LIGHT1, EMPTY, EMPTY));
 
-        CardInt window11 = creator.createCard(5,"Aurorae Magnificus", new Matrix(   DARK5, GREEN, BLUE, VIOLET, LIGHT2,
+        CardInt window11 = CardCreator.createCard(5,"Aurorae Magnificus", new Matrix(   DARK5, GREEN, BLUE, VIOLET, LIGHT2,
                                                                                                 VIOLET, EMPTY, EMPTY, EMPTY, YELLOW,
                                                                                                 YELLOW, EMPTY, DARK6, EMPTY, VIOLET,
                                                                                                 LIGHT1, EMPTY, EMPTY, GREEN, MEDIUMS4));
 
-        CardInt window12 = creator.createCard(5,"Firmitas", new Matrix(VIOLET, DARK6, EMPTY, EMPTY, MEDIUMS3,
+        CardInt window12 = CardCreator.createCard(5,"Firmitas", new Matrix(VIOLET, DARK6, EMPTY, EMPTY, MEDIUMS3,
                                                                                     DARK5, VIOLET, MEDIUMS3, EMPTY, EMPTY,
                                                                                     EMPTY, LIGHT2, VIOLET, LIGHT1, EMPTY,
                                                                                     EMPTY, LIGHT1, DARK5, VIOLET, MEDIUMS4));
 
-        CardInt window13 = creator.createCard(5,"Industria", new Matrix(LIGHT1, RED, MEDIUMS3, EMPTY, DARK6,
+        CardInt window13 = CardCreator.createCard(5,"Industria", new Matrix(LIGHT1, RED, MEDIUMS3, EMPTY, DARK6,
                                                                                     DARK5, MEDIUMS4, RED, LIGHT2, EMPTY,
                                                                                     EMPTY, EMPTY, DARK5, RED, LIGHT1,
                                                                                     EMPTY, EMPTY, EMPTY, MEDIUMS3, RED));
 
-        CardInt window14 = creator.createCard(5,"Shadow Thief", new Matrix(DARK6, VIOLET, EMPTY, EMPTY, DARK5,
+        CardInt window14 = CardCreator.createCard(5,"Shadow Thief", new Matrix(DARK6, VIOLET, EMPTY, EMPTY, DARK5,
                                                                                         DARK5, EMPTY, VIOLET, EMPTY, EMPTY,
                                                                                         RED, DARK6, EMPTY, VIOLET, EMPTY,
                                                                                         YELLOW, RED, DARK5, MEDIUMS4, MEDIUMS3));
 
-        CardInt window15 = creator.createCard(5,"Batllo", new Matrix(EMPTY, EMPTY, DARK6, EMPTY, EMPTY,
+        CardInt window15 = CardCreator.createCard(5,"Batllo", new Matrix(EMPTY, EMPTY, DARK6, EMPTY, EMPTY,
                                                                                 EMPTY, DARK5, BLUE, MEDIUMS4, EMPTY,
                                                                                 MEDIUMS3, GREEN, YELLOW, VIOLET, LIGHT2,
                                                                                 LIGHT1, MEDIUMS4, RED, DARK5, MEDIUMS3));
 
-        CardInt window16 = creator.createCard(5,"Gravitas", new Matrix( LIGHT1, EMPTY, MEDIUMS3, BLUE, EMPTY,
+        CardInt window16 = CardCreator.createCard(5,"Gravitas", new Matrix( LIGHT1, EMPTY, MEDIUMS3, BLUE, EMPTY,
                                                                                     EMPTY, LIGHT2, BLUE, EMPTY, EMPTY,
                                                                                     DARK6, BLUE, EMPTY, MEDIUMS4, EMPTY,
                                                                                     BLUE, DARK5,LIGHT2, EMPTY, LIGHT1));
 
-        CardInt window17 = creator.createCard(5,"Lux Astram", new Matrix(EMPTY, LIGHT1, GREEN, VIOLET, MEDIUMS4,
+        CardInt window17 = CardCreator.createCard(5,"Lux Astram", new Matrix(EMPTY, LIGHT1, GREEN, VIOLET, MEDIUMS4,
                                                                                     DARK6, VIOLET, LIGHT2, DARK5, GREEN,
                                                                                     LIGHT1, GREEN, DARK5, MEDIUMS3, VIOLET,
                                                                                     EMPTY,EMPTY, EMPTY, EMPTY, EMPTY));
 
-        CardInt window18 = creator.createCard(5,"Firelight", new Matrix(MEDIUMS3, MEDIUMS4, LIGHT1, DARK5, EMPTY,
+        CardInt window18 = CardCreator.createCard(5,"Firelight", new Matrix(MEDIUMS3, MEDIUMS4, LIGHT1, DARK5, EMPTY,
                                                                                     EMPTY, DARK6, LIGHT2, EMPTY, YELLOW,
                                                                                     EMPTY, EMPTY, EMPTY, YELLOW, RED,
                                                                                     DARK5, EMPTY, YELLOW, RED, DARK6));
 
-        CardInt window19 = creator.createCard(5,"Ripples of Light", new Matrix(EMPTY, EMPTY, EMPTY, RED, DARK5,
+        CardInt window19 = CardCreator.createCard(5,"Ripples of Light", new Matrix(EMPTY, EMPTY, EMPTY, RED, DARK5,
                                                                                             EMPTY, EMPTY, VIOLET, MEDIUMS4, BLUE,
                                                                                             EMPTY,BLUE, MEDIUMS3, YELLOW, DARK6,
                                                                                             YELLOW, LIGHT2, GREEN, LIGHT1, RED));
 
-        CardInt window20 = creator.createCard(5,"Comitas", new Matrix(  YELLOW, EMPTY, LIGHT2, EMPTY, DARK6,
+        CardInt window20 = CardCreator.createCard(5,"Comitas", new Matrix(  YELLOW, EMPTY, LIGHT2, EMPTY, DARK6,
                                                                                     EMPTY, MEDIUMS4, EMPTY, DARK5, YELLOW,
                                                                                     EMPTY, EMPTY, EMPTY, YELLOW, DARK5,
                                                                                     LIGHT1, LIGHT2, YELLOW, MEDIUMS3, EMPTY));
 
-        CardInt window21 = creator.createCard(6,"Symphony of Light", new Matrix(LIGHT2, EMPTY, DARK5, EMPTY, LIGHT1,
+        CardInt window21 = CardCreator.createCard(6,"Symphony of Light", new Matrix(LIGHT2, EMPTY, DARK5, EMPTY, LIGHT1,
                                                                                             YELLOW, DARK6, VIOLET, LIGHT2, RED,
                                                                                             EMPTY, BLUE, MEDIUMS4, GREEN, EMPTY,
                                                                                             EMPTY, MEDIUMS3, EMPTY, DARK5, EMPTY));
 
-        CardInt window22 = creator.createCard(6,"Water of Life", new Matrix(DARK6, BLUE, EMPTY, EMPTY, LIGHT1,
+        CardInt window22 = CardCreator.createCard(6,"Water of Life", new Matrix(DARK6, BLUE, EMPTY, EMPTY, LIGHT1,
                                                                                         EMPTY, DARK5, BLUE, EMPTY, EMPTY,
                                                                                         MEDIUMS4, RED, LIGHT2, BLUE, EMPTY,
                                                                                         GREEN, DARK6, YELLOW, MEDIUMS3, VIOLET));
 
-        CardInt window23 = creator.createCard(6,"Lux Mundi", new Matrix(EMPTY, EMPTY, LIGHT1, EMPTY, EMPTY,
+        CardInt window23 = CardCreator.createCard(6,"Lux Mundi", new Matrix(EMPTY, EMPTY, LIGHT1, EMPTY, EMPTY,
                                                                                     LIGHT1, GREEN, MEDIUMS3, BLUE, LIGHT2,
                                                                                     BLUE, DARK5, MEDIUMS4, DARK6, GREEN,
                                                                                     EMPTY, BLUE, DARK5, GREEN, EMPTY));
 
-        CardInt window24 = creator.createCard(6,"Sun Glory", new Matrix(LIGHT1, VIOLET, YELLOW, EMPTY, MEDIUMS4,
+        CardInt window24 = CardCreator.createCard(6,"Sun Glory", new Matrix(LIGHT1, VIOLET, YELLOW, EMPTY, MEDIUMS4,
                                                                                     VIOLET, YELLOW, EMPTY, EMPTY, DARK6,
                                                                                     YELLOW, EMPTY, EMPTY, DARK5, MEDIUMS3,
                                                                                     EMPTY, DARK5, MEDIUMS4, LIGHT2, LIGHT1));
@@ -317,11 +319,11 @@ public class Main {
 
             privateCards = gson.fromJson(br1, Private);
 
-            /*System.out.println(privateCards.get(0).getColour());
+            System.out.println(privateCards.get(0).getColour());
             System.out.println(privateCards.get(1).getColour());
             System.out.println(privateCards.get(2).getColour());
             System.out.println(privateCards.get(3).getColour());
-            System.out.println(privateCards.get(4).getColour());*/
+            System.out.println(privateCards.get(4).getColour());
 
 
             //Decks newprivatedeck= new Decks();
@@ -387,7 +389,15 @@ public class Main {
 
             //Decks newpublicdeck= new Decks();
             //newpublicdeck.setObjectivePublicCardDeck(publicCards);
+
+
+
+
+///////////////////////
+/*
             d.setObjectivePublicCardDeck(publicCards);
+
+            System.out.println(d.getObjectivePublicCardDeck().get(0).getPoints());
 
 
         } catch (IOException e) {
@@ -498,7 +508,11 @@ public class Main {
 
             //Decks windowdeckdeck= new Decks();
             //windowdeckdeck.setWindowPatternCardDeck(WindowCards);
-            d.setWindowPatternCardDeck(WindowCards);
+
+//////////
+
+           /* d.setWindowPatternCardDeck(WindowCards);
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -517,3 +531,4 @@ public class Main {
 
 
 }
+*/

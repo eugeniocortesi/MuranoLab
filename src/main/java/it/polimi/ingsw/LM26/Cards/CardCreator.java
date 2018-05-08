@@ -7,18 +7,18 @@ import it.polimi.ingsw.LM26.Serialization.Elements.elements;
 
 public class CardCreator {
 
-    public static CardInt createCard(elements colour) {
-        CardInt card = ConcreteObjectivePrivateCardCreator.createCard(colour);
+    public static CardInt createCard(int id, elements colour) {
+        CardInt card = ConcreteObjectivePrivateCardCreator.createCard(id, colour);
         return card;
     }
 
-    public static CardInt createCard(int points, Effect effect) {
-        CardInt card = ConcreteObjectivePublicCardCreator.createCard(points, effect);
+    public static CardInt createCard(int id, int points, Effect effect) {
+        CardInt card = ConcreteObjectivePublicCardCreator.createCard(id, points, effect);
         return card;
     }
 
-    public static CardInt createCard(Effect effect) {
-        CardInt card = ConcreteObjectivePublicCardCreator.createCard(effect);
+    public static CardInt createCard(int id, Effect effect) {
+        CardInt card = ConcreteObjectivePublicCardCreator.createCard(id, effect);
         return card;
     }
 
@@ -32,8 +32,8 @@ public class CardCreator {
         return card;
     }
 
-    public static CardInt createCard(Color color) {
-        CardInt card = ConcreteWindowFramePlayerBoardCreator.createCard(color);
+    public static CardInt createCard(int id, Color color) {
+        CardInt card = ConcreteWindowFramePlayerBoardCreator.createCard(id, color);
         return card;
     }
 

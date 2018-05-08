@@ -11,6 +11,7 @@ public class WindowPatternCard implements CardInt {
     public Matrix matrix;
 
 
+
     public WindowPatternCard(int token, String title, Matrix matrix) {
 
         this.token = token;
@@ -30,8 +31,7 @@ public class WindowPatternCard implements CardInt {
     public elements[][] getWindowPatter() {
 
         return matrix.getMatrix();
-
-    }
+        }
 
     public void printWindowPatter() {
 
