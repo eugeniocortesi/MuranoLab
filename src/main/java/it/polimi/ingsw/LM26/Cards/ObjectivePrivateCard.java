@@ -40,4 +40,11 @@ public class ObjectivePrivateCard extends ObjectiveCardAC {
         return id;
     }
 
+    public void printCard(){
+
+        System.out.println(getId());
+        System.out.println(getColour());
+    }
+
+
 }

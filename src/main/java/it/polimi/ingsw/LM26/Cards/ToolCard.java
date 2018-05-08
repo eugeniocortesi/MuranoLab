@@ -12,4 +12,14 @@ public class ToolCard implements CardInt  {
 
     }
 
+    public int getNum() {
+        return num;
+    }
+
+    public void printCard(){
+
+        System.out.println(getNum());
+
+    }
+
 }

@@ -4,10 +4,7 @@ package it.polimi.ingsw.LM26.Cards;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import it.polimi.ingsw.LM26.Cards.*;
 import it.polimi.ingsw.LM26.Serialization.*;
-
-import javax.smartcardio.Card;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -16,7 +13,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.Cards.Color.*;
-import static it.polimi.ingsw.LM26.Cards.ConcreteObjectivePublicCardCreator.createCard;
 import static it.polimi.ingsw.LM26.Serialization.Elements.elements.*;
 
 public class Decks {
@@ -283,12 +279,9 @@ public class Decks {
         tools.add(tool11);
         tools.add(tool12);
 
-        //Decks Toolsdeck= new Decks();
-        //Toolsdeck.setToolCardDeck(tools);
+
         ToolCardDeck = tools;
 
-        //Decks Framesdeck= new Decks();
-        //Framesdeck.setWindowFramePlayerBoardDeck(Frames);
         WindowFramePlayerBoardDeck = Frames;
 
 
@@ -299,8 +292,6 @@ public class Decks {
         FileWriter writer1 = new FileWriter("PrivateCards");
         FileWriter writer2 = new FileWriter("PublicCards");
         FileWriter writer3 = new FileWriter("WindowCards");
-
-        //4 file diversi
 
         gson.toJson(Private, writer1);
         gson.toJson(Public, writer2);
@@ -345,8 +336,6 @@ public class Decks {
             System.out.println(privateCards.get(4).getColour());*/
 
 
-            //Decks newprivatedeck= new Decks();
-            //newprivatedeck.setObjectivePrivateCardDeck(privateCards);
             ObjectivePrivateCardDeck=privateCards;
 
         } catch (IOException e) {
@@ -405,9 +394,6 @@ public class Decks {
             System.out.println(publicCards.get(8).getEffect());
             System.out.println(publicCards.get(9).getEffect());*/
 
-
-            //Decks newpublicdeck= new Decks();
-            //newpublicdeck.setObjectivePublicCardDeck(publicCards);
             ObjectivePublicCardDeck=publicCards;
 
 
@@ -440,7 +426,6 @@ public class Decks {
 
             Gson gson = new GsonBuilder()
                     .setPrettyPrinting()
-                    //.registerTypeAdapterFactory(runtimeTypeAdapterFactory1)
                     .create();
 
             WindowCards = gson.fromJson(br3, Window);
@@ -518,9 +503,6 @@ public class Decks {
             System.out.println(WindowCards.get(23).getToken());
             WindowCards.get(23).printWindowPatter();*/
 
-
-            //Decks windowdeckdeck= new Decks();
-            //windowdeckdeck.setWindowPatternCardDeck(WindowCards);
             WindowPatternCardDeck=WindowCards;
 
         } catch (IOException e) {

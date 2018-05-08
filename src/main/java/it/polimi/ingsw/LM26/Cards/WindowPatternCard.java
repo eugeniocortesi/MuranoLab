@@ -33,8 +33,10 @@ public class WindowPatternCard implements CardInt {
         return matrix.getMatrix();
         }
 
-    public void printWindowPatter() {
+    public void printCard() {
 
+        System.out.println(getTitle());
+        System.out.println(getToken());
         matrix.printMatrix();
 
     }

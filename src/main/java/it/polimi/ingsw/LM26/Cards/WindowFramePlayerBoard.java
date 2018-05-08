@@ -20,4 +20,11 @@ public class WindowFramePlayerBoard implements CardInt {
     public Color getColor() {
         return color;
     }
+
+    public void printCard(){
+
+        System.out.println(getId());
+        System.out.println(getColor());
+
+    }
 }

@@ -39,4 +39,12 @@ public class ObjectivePublicCard extends ObjectiveCardAC {
     public int getId() {
         return id;
     }
+
+    public void printCard(){
+
+        System.out.println(getId());
+        if(getId()!=10) System.out.println(getPoints());
+        System.out.println(getEffect());
+
+    }
 }

@@ -13,7 +13,7 @@ public class Token {
         this.token = token;
     }
 
-    public int getToken() {
+    public int getTokenNumber() {
         return token;
     }
 

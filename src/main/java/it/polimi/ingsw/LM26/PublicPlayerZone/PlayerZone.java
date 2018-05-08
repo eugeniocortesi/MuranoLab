@@ -32,9 +32,11 @@ public class PlayerZone implements PlayerZoneInt {
         this.playerState=PlayerState.STANDBY;
     }
 
-        //getToken è nella classe Token
+    public Token getToken() {
+        return token;
+    }
 
-        public void setToken(Token token) {
+    public void setToken(Token token) {
             this.token = token;
         }
 
