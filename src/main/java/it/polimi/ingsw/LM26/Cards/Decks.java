@@ -40,7 +40,17 @@ public class Decks {
         return ToolCardDeck;
     }
 
+    public ArrayList<ObjectivePrivateCard> getObjectivePrivateCardDeck() {
+        return ObjectivePrivateCardDeck;
+    }
 
+    public ArrayList<WindowPatternCard> getWindowPatternCardDeck() {
+        return WindowPatternCardDeck;
+    }
+
+    public ArrayList<WindowFramePlayerBoard> getWindowFramePlayerBoardDeck() {
+        return WindowFramePlayerBoardDeck;
+    }
 
     public void setup() throws IOException {
 

@@ -13,9 +13,7 @@ public class Main {
 
         OnBoardCards onBoardCards = new OnBoardCards(decks.getObjectivePublicCardDeck(), decks.getToolCardDeck());
 
-        System.out.println("card " + onBoardCards.getObjectivePublicCardList().get(0).getId());
-        System.out.println(onBoardCards.getObjectivePublicCardList().get(0).getPoints());
-        System.out.println(onBoardCards.getObjectivePublicCardList().get(0).getEffect());
+
 
     }
 }

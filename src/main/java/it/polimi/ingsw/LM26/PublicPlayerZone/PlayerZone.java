@@ -68,6 +68,10 @@ public class PlayerZone implements PlayerZoneInt {
         connected=true;
         }
 
-        //get carta obbiettivo privato
+    public ScoreMarker getScoreMarker() {
+        return scoreMarker;
+    }
+
+    //get carta obbiettivo privato
 }
 
