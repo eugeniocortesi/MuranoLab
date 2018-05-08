@@ -6,21 +6,23 @@ import it.polimi.ingsw.LM26.Cards.WindowPatternCard;
 public class PlayerZone implements PlayerZoneInt {
 
 
-        public String namePlayer;
+    private  String namePlayer;
 
-        int numberPlayer;
+    private  int numberPlayer;
 
-        public WindowFramePlayerBoard playerBoard;
+    private  WindowFramePlayerBoard playerBoard;
 
-        public WindowPatternCard windowPatternCard;
+    private WindowPatternCard windowPatternCard;
 
-        public PlayerState playerState;
+    private PlayerState playerState;
 
-        public Token token;
+    private Token token;
 
-        public ScoreMarker scoreMarker;
+    private ScoreMarker scoreMarker;
 
-        public boolean connected;
+    private boolean connected;
+
+    private int privatePoints;
 
 
     public PlayerZone(String namePlayer, int numberPlayer) {
@@ -67,6 +69,14 @@ public class PlayerZone implements PlayerZoneInt {
         public void connectPlayer(){
         connected=true;
         }
+
+    public int getPrivatePoints() {
+        return privatePoints;
+    }
+
+    public void setPrivatePoints(int privatePoints) {
+        this.privatePoints = privatePoints;
+    }
 
     public ScoreMarker getScoreMarker() {
         return scoreMarker;
