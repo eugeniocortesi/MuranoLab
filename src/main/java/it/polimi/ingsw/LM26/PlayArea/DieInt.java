@@ -7,4 +7,8 @@ public interface DieInt {
     public Color getColor();
 
     public void setColor(Color c);
+
+    public void roll();
+
+    public void dump();
 }

@@ -43,7 +43,7 @@ public class Die implements DieInt {
         return escape+"["+face+"]" + Color.RESET;
     }
 
-    void dump() {
+    public void dump() {
         System.out.println(this);
     }
 }

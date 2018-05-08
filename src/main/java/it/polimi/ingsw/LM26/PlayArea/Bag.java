@@ -39,14 +39,14 @@ public class Bag {
             }
     }
 
-    public Die Draw(){
+    public DieInt draw(){
 
             int count = inBag.size();
             if (count == 0)
                 return null;
             Random rand = new Random();
             int index = rand.nextInt(count);
-            Die d = (Die) inBag.get(index);
+            DieInt d = (DieInt) inBag.get(index);
             this.inBag.remove(d);
             if ( d.getColor().equals( Color.ANSI_BLUE )){
                 contBlue--;

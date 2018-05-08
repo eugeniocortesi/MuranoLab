@@ -13,7 +13,7 @@ public class TestBagSimple {
         bag.dump();
         System.out.println("--------");
         for (int i = 0; i <  90; i++) {
-            Die d = bag.Draw();
+            DieInt d = bag.draw();
             d.roll();
             System.out.println("d: " + d);
             //d.dump();
