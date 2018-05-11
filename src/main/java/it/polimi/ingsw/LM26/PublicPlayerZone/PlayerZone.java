@@ -10,6 +10,8 @@ public class PlayerZone implements PlayerZoneInt {
 
     private  int numberPlayer;
 
+    private int IDPlayer;
+
     private  WindowFramePlayerBoard playerBoard;
 
     private WindowPatternCard windowPatternCard;
@@ -33,6 +35,10 @@ public class PlayerZone implements PlayerZoneInt {
     }
 
         public Token getToken() { return token; }
+
+        public int getIDPlayer() { return IDPlayer; }
+
+        public void setIDPlayer(int IDPlayer) { this.IDPlayer = IDPlayer; }
 
         public void setToken(Token token) {
             this.token = token;
