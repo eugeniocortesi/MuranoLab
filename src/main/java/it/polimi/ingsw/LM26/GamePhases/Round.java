@@ -9,23 +9,26 @@ public class Round {
 
     private static final int[] t = {1, 2, 3, 4};
 
-    private int turnCounter = 0;
+    private static int turnCounter=0;
 
-    public Round(RoundTrack rTrack, ArrayList<PlayerZone> pZone, int[] turn, DraftPool dPool) {
-        this.assignTurn(rTrack, pZone);
+    public Round(RoundTrackInt rTrack, ArrayList<PlayerZone> pZone, int nrounds) {
+        this.assignTurn(rTrack, pZone, nrounds);
     }
 
 
-    //assegna l'ordine con cui si gioca all'interno di un turno
-    public void assignTurn(RoundTrack roundTrack, ArrayList<PlayerZone> playerList) { //roundtrack passata dalla centralPhase
+    //assegna l'ordine con cui si gioca all'interno di un turno e salva l'ordine dell'ultimo turno per la parità di punteggio
+    public void assignTurn(RoundTrackInt roundTrack, ArrayList<PlayerZone> playerList, int nrounds) { //roundtrack passata dalla centralPhase, l'nrounds da passare è la costante della centralPhase
         for (int i = 0; i < playerList.size(); i++) {
-            playerList.get(i).setNumberPlayer(t[(i + roundTrack.getCurrentTurn() - 1) %playerList.size()]); //mi aspetto che getcurrentturn dia numeri da 1 a 10
+            int j=t[(i + roundTrack.getCurrentTurn() - 1) %playerList.size()];
+            playerList.get(i).setNumberPlayer(j);
+            if(roundTrack.getCurrentTurn() == nrounds) playerList.get(i).setLastRoundTurn(j);
         }
     }
 
-    public PlayerZone nextPlayer(ArrayList<PlayerZone> player, int[] turn, int tCounter) throws IllegalArgumentException { //nextPlayer va usato dopo endAction, quando il contatore è già incrementato
+    //nextPlayer va usato dopo endAction, quando il contatore è già incrementato
+    public PlayerZone nextPlayer(ArrayList<PlayerZone> player, int[] turn) throws IllegalArgumentException {
       for(PlayerZone i : player){
-          if(i.getNumber()==tCounter) {
+          if(i.getNumber()==turn[turnCounter]) {
               i.setPlayerState(PlayerState.BEGINNING);
               return i;
           }
@@ -33,24 +36,19 @@ public class Round {
       throw new IllegalArgumentException("no player has the current turn");
     }
 
-    public void useToolCard(){
-
-    }
 
     //passa il turno al successivo, se è finito turno globale mette dadi nella casella della round track e ritorna FINISHED
-    public PhaseState endAction(int[] turn, RoundTrack roundTrack, DraftPool draftPool, PlayerZone actingPlayer) {
+    public RoundState endAction(int[] turn, RoundTrackInt roundTrack, DraftPool draftPool, PlayerZone actingPlayer) {
         actingPlayer.setPlayerState(PlayerState.ENDING);
         turnCounter++;
         int i;
-        i=roundTrack.getCurrentTurn();
+        i=turnCounter;
         if(turnCounter == turn.length) {
             roundTrack.addDice(draftPool.getInDraft());
             turnCounter=0;
-            return PhaseState.FINISHED;
+            return RoundState.FINISHED;
         }
-        return PhaseState.RUNNING;
+        return RoundState.RUNNING;
     }
-
-    //implementare metodo che prende l'ultimo giocatore per il pareggio
 
 }

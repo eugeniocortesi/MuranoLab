@@ -26,11 +26,12 @@ public class PlayerZone implements PlayerZoneInt {
 
     private int privatePoints;
 
+    private int lastRoundTurn;
 
-    public PlayerZone(String namePlayer, int numberPlayer) {
+    public PlayerZone(String namePlayer, int IDPlayer) {
 
         this.namePlayer=namePlayer;
-        this.numberPlayer=numberPlayer;
+        this.IDPlayer=IDPlayer;
         this.playerState=PlayerState.STANDBY;
     }
 
@@ -102,6 +103,14 @@ public class PlayerZone implements PlayerZoneInt {
 
     public void setConnected(boolean connected) {
         this.connected = connected;
+    }
+
+    public int getLastRoundTurn() {
+        return lastRoundTurn;
+    }
+
+    public void setLastRoundTurn(int lastRoundTurn) {
+        this.lastRoundTurn = lastRoundTurn;
     }
 
     //get carta obbiettivo privato

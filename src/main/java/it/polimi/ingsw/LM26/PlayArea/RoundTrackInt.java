@@ -2,11 +2,11 @@ package it.polimi.ingsw.LM26.PlayArea;
 
 import it.polimi.ingsw.LM26.PublicPlayerZone.PlayerZone;
 
+import java.util.ArrayList;
+
 public interface RoundTrackInt{
 
     public int getCurrentTurn();
 
-    public PlayerZone getLast();
-
-    public void setLast(PlayerZone last);
+    public void addDice( ArrayList<DieInt> ad);
 }

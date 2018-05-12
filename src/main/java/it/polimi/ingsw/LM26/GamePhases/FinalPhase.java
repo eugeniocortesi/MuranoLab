@@ -13,11 +13,8 @@ public class FinalPhase implements PhaseInt {
 
     private int maximum;
 
-    private int privateMaximum=-1;
 
-    private int tokenMaximum=-1;
-
-    public PlayerZone declareWinner(ArrayList<PlayerZone> players, RoundTrackInt roundTrack){
+    public PlayerZone declareWinner(ArrayList<PlayerZone> players, RoundTrackInt roundTrack) throws IllegalArgumentException{
         if(players.size()==1) return players.get(0);
         else{
             maximum=players.get(0).getScoreMarker().getRealPoints();
@@ -31,29 +28,42 @@ public class FinalPhase implements PhaseInt {
             }
             if(winners.size()==1) return winners.get(0);
             else{
+                maximum=-1;
                 for(PlayerZone i : winners){
-                    if(i.getPrivatePoints() > privateMaximum) {
-                        privateMaximum = i.getPrivatePoints();
+                    if(i.getPrivatePoints() > maximum) {
+                        maximum = i.getPrivatePoints();
                     }
                 }
                 for(PlayerZone j : winners){
-                    if(j.getPrivatePoints()!=privateMaximum) winners.remove(j);
+                    if(j.getPrivatePoints()!=maximum) winners.remove(j);
                 }
                 if(winners.size()==1) return winners.get(0);
                 else{
+                    maximum=-1;
                     for(PlayerZone i : winners){
-                        if(i.getToken().getTokenNumber()>tokenMaximum){
-                            tokenMaximum = i.getToken().getTokenNumber();
+                        if(i.getToken().getTokenNumber()>maximum){
+                           maximum = i.getToken().getTokenNumber();
                         }
                     }
                     for(PlayerZone j : winners){
-                        if(j.getToken().getTokenNumber()!=tokenMaximum) winners.remove(j);
+                        if(j.getToken().getTokenNumber()!=maximum) winners.remove(j);
                     }
                     if(winners.size()==1) return winners.get(0);
-                    else return roundTrack.getLast();
+                    else {
+                        maximum=-1;
+                        for(PlayerZone i : winners) {
+                            if (i.getLastRoundTurn() > maximum) {
+                                maximum = i.getLastRoundTurn();
+                            }
+                        }
+                        for(PlayerZone j : winners){
+                            if(j.getLastRoundTurn() == maximum) return j;
+                        }
+                    }
                 }
             }
         }
+        throw new IllegalArgumentException("players have no LastRoundTurn value");
     }
 
     public void doAction(Game game, ArrayList<PlayerZone> playerList) {

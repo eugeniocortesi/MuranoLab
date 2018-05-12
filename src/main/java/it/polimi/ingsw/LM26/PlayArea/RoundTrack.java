@@ -10,21 +10,11 @@ public class RoundTrack implements RoundTrackInt{
 
     private int currentTurn;
 
-    private PlayerZone last=null;
-
     public RoundTrack(){
 
         roundTrackTurnList = new ArrayList<RoundTrackTurn>();
 
         currentTurn = 1;
-    }
-
-    public PlayerZone getLast() {
-        return last;
-    }
-
-    public void setLast(PlayerZone last) {
-        this.last = last;
     }
 
     public int getCurrentTurn(){
