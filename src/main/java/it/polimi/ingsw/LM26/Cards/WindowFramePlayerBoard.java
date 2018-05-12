@@ -1,6 +1,6 @@
 package it.polimi.ingsw.LM26.Cards;
 
-public class WindowFramePlayerBoard implements CardInt {
+public class WindowFramePlayerBoard/* implements CardInt */{
 
     private Box BoardMatrix[][];
     private Color color;

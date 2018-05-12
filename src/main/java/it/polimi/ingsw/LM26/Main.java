@@ -17,5 +17,7 @@ public class Main {
         System.out.println(onBoardCards.getObjectivePublicCardList().get(0).getPoints());
         System.out.println(onBoardCards.getObjectivePublicCardList().get(0).getEffect());
 
+        //CAMBIA IL II PARAMENTRO DI ONBOARDCARDS IN TOOLCARDINT
+
     }
 }

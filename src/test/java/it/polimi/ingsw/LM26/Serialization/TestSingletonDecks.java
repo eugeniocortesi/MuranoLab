@@ -1,9 +1,7 @@
 package it.polimi.ingsw.LM26.Serialization;
 import org.junit.Test;
 import it.polimi.ingsw.LM26.Cards.Decks;
-
 import static it.polimi.ingsw.LM26.Serialization.SingletonDecks.singletonDecks;
-import static org.junit.Assert.*;
 
 public class TestSingletonDecks {
 
@@ -36,6 +34,7 @@ public class TestSingletonDecks {
         }
         for(i=0; i<=11; i++) {
             decks.getToolCardDeck().get(i).printCard();
+            decks.getToolCardDeck().get(i).Play();
         }
 
     }

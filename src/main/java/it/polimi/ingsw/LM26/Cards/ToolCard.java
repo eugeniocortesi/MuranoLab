@@ -1,8 +1,8 @@
 package it.polimi.ingsw.LM26.Cards;
 
-public class ToolCard implements CardInt  {
+public class ToolCard implements ToolCardInt  {
 
-    private String title= null;
+    //private String title= null;
     private int num;
 
 
@@ -13,12 +13,17 @@ public class ToolCard implements CardInt  {
     }
 
     public int getNum() {
+
         return num;
     }
 
     public void printCard(){
 
         System.out.println(getNum());
+
+    }
+
+    public void Play (){
 
     }
 

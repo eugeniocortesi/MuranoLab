@@ -25,14 +25,14 @@ public class Decks {
 
     private ArrayList<WindowFramePlayerBoard> WindowFramePlayerBoardDeck;
 
-    private ArrayList<ToolCard> ToolCardDeck;
+    private ArrayList<ToolCardInt> ToolCardDeck;
 
 
     public ArrayList<ObjectivePublicCard> getObjectivePublicCardDeck() {
         return ObjectivePublicCardDeck;
     }
 
-    public ArrayList<ToolCard> getToolCardDeck() {
+    public ArrayList<ToolCardInt> getToolCardDeck() {
         return ToolCardDeck;
     }
 
@@ -195,29 +195,31 @@ public class Decks {
                 VIOLET, YELLOW, EMPTY, EMPTY, DARK6,
                 YELLOW, EMPTY, EMPTY, DARK5, MEDIUMS3,
                 EMPTY, DARK5, MEDIUMS4, LIGHT2, LIGHT1));
+
         WindowFramePlayerBoard Frame1 = new WindowFramePlayerBoard(31, ANSI_RED);
         WindowFramePlayerBoard Frame2 = new WindowFramePlayerBoard(32, ANSI_GREEN);
         WindowFramePlayerBoard Frame3 = new WindowFramePlayerBoard(33, ANSI_BLUE);
         WindowFramePlayerBoard Frame4 = new WindowFramePlayerBoard(34, ANSI_PURPLE);
 
-        ToolCard tool1 = new ToolCard(1);
-        ToolCard tool2 = new ToolCard(2);
-        ToolCard tool3 = new ToolCard(3);
-        ToolCard tool4 = new ToolCard(4);
-        ToolCard tool5 = new ToolCard(5);
-        ToolCard tool6 = new ToolCard(6);
-        ToolCard tool7 = new ToolCard(7);
-        ToolCard tool8 = new ToolCard(8);
-        ToolCard tool9 = new ToolCard(9);
-        ToolCard tool10 = new ToolCard(10);
-        ToolCard tool11 = new ToolCard(11);
-        ToolCard tool12 = new ToolCard(12);
+        ToolCardInt tool1 = new Effect1Decorator( new ToolCard(1));
+        //ToolCard tool1 = new ToolCard(1);
+        ToolCardInt tool2 = new Effect2Decorator( new ToolCard(2));
+        ToolCardInt tool3 = new Effect3Decorator( new ToolCard(3));
+        ToolCardInt tool4 = new Effect4Decorator( new ToolCard(4));
+        ToolCardInt tool5 = new Effect5Decorator( new ToolCard(5));
+        ToolCardInt tool6 = new Effect6Decorator( new ToolCard(6));
+        ToolCardInt tool7 = new Effect7Decorator( new ToolCard(7));
+        ToolCardInt tool8 = new Effect8Decorator( new ToolCard(8));
+        ToolCardInt tool9 = new Effect9Decorator( new ToolCard(9));
+        ToolCardInt tool10 = new Effect10Decorator( new ToolCard(10));
+        ToolCardInt tool11 = new Effect11Decorator( new ToolCard(11));
+        ToolCardInt tool12 = new Effect12Decorator( new ToolCard(12));
 
         ArrayList<CardInt> Private = new ArrayList<CardInt>();
         ArrayList<CardInt> Public = new ArrayList<CardInt>();
         ArrayList<CardInt> Windows = new ArrayList<CardInt>();
         ArrayList<WindowFramePlayerBoard> Frames = new ArrayList<WindowFramePlayerBoard>();
-        ArrayList<ToolCard> tools = new ArrayList<ToolCard>();
+        ArrayList<ToolCardInt> tools = new ArrayList<ToolCardInt>();
 
         Private.add(private1);
         Private.add(private2);

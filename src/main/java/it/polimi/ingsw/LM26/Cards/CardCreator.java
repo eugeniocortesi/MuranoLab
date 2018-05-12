@@ -22,20 +22,20 @@ public class CardCreator {
         return card;
     }
 
-    public static CardInt createCard(int num) {
+    /*public static CardInt createCard(int num) {
         CardInt card = ConcreteToolCardCreator.createCard(num);
         return card;
-    }
+    }*/
 
     public static CardInt createCard(int token, String title, Matrix matrix) {
         CardInt card = ConcreteWindowPatternCardCreator.createCard(token, title, matrix);
         return card;
     }
 
-    public static CardInt createCard(int id, Color color) {
+    /*public static CardInt createCard(int id, Color color) {
         CardInt card = ConcreteWindowFramePlayerBoardCreator.createCard(id, color);
         return card;
-    }
+    }*/
 
 
 }

@@ -1,18 +1,16 @@
 package it.polimi.ingsw.LM26.PlayArea;
 
-import it.polimi.ingsw.LM26.Cards.CardInt;
-import it.polimi.ingsw.LM26.Cards.Decks;
-import it.polimi.ingsw.LM26.Cards.ObjectivePublicCard;
-import it.polimi.ingsw.LM26.Cards.ToolCard;
+import it.polimi.ingsw.LM26.Cards.*;
+
 import java.util.ArrayList;
 
 public class OnBoardCards {
 
     private ArrayList<ObjectivePublicCard>  objectivePublicCardList;
 
-    private ArrayList<ToolCard>  toolCardList;
+    private ArrayList<ToolCardInt>  toolCardList;
 
-    public OnBoardCards(ArrayList<ObjectivePublicCard> objectivePublicCardList,ArrayList<ToolCard> toolCardList) {
+    public OnBoardCards(ArrayList<ObjectivePublicCard> objectivePublicCardList,ArrayList<ToolCardInt> toolCardList) {
 
         this.objectivePublicCardList = objectivePublicCardList;
 
@@ -25,7 +23,7 @@ public class OnBoardCards {
 
     }
 
-    public ArrayList<ToolCard> getToolCardList() {
+    public ArrayList<ToolCardInt> getToolCardList() {
         return toolCardList;
     }
 }

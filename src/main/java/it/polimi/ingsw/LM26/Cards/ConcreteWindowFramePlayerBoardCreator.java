@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.Cards;
+/*package it.polimi.ingsw.LM26.Cards;
 
 public class ConcreteWindowFramePlayerBoardCreator extends CardCreator {
 
@@ -7,3 +7,4 @@ public class ConcreteWindowFramePlayerBoardCreator extends CardCreator {
         return new WindowFramePlayerBoard(id, color);
     }
 }
+*/

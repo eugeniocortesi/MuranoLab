@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.Cards;
+/*package it.polimi.ingsw.LM26.Cards;
 
 public class ConcreteToolCardCreator extends CardCreator {
 
@@ -7,3 +7,4 @@ public class ConcreteToolCardCreator extends CardCreator {
         return new ToolCard(num);
     }
 }
+*/
