@@ -507,6 +507,8 @@ public class Decks {
 
             WindowPatternCardDeck=WindowCards;
 
+            for(int i=0; i<WindowPatternCardDeck.size(); i++) WindowPatternCardDeck.get(i).createPattern();
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

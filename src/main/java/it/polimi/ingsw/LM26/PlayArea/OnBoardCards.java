@@ -28,7 +28,3 @@ public class OnBoardCards {
     }
 }
 
-//nel main
-// public OnBoardCards onBoardCards = new (decks.getObjectivePublicCardDeck(), decks.getToolCardDeck())
-
-

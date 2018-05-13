@@ -1,5 +1,7 @@
 package it.polimi.ingsw.LM26.Cards;
 
+import it.polimi.ingsw.LM26.PublicPlayerZone.PlayerZone;
+
 public class Effect6Decorator implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
@@ -17,12 +19,17 @@ public class Effect6Decorator implements ToolCardDecorator {
         toolcard.printCard();
     }
 
-    public void Play () {
+    public void play (PlayerZone player) {
+
+        //Die die=chooseFromTheDraft();
+        //die.roll();
+        //placeDie(player, die);
 
 
 
 
 
-        toolcard.Play();
+
+
     }
 }

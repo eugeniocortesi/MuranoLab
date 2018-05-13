@@ -28,6 +28,8 @@ public class PlayerZone implements PlayerZoneInt {
 
     private int lastRoundTurn;
 
+    private boolean secondDie= false;
+
     public PlayerZone(String namePlayer, int IDPlayer) {
 
         this.namePlayer=namePlayer;
@@ -35,17 +37,21 @@ public class PlayerZone implements PlayerZoneInt {
         this.playerState=PlayerState.STANDBY;
     }
 
-        public Token getToken() { return token; }
+    public boolean isSecondDie() { return secondDie; }
 
-        public int getIDPlayer() { return IDPlayer; }
+    public void setSecondDie(boolean secondDie) { this.secondDie = secondDie; }
 
-        public void setIDPlayer(int IDPlayer) { this.IDPlayer = IDPlayer; }
+    public Token getToken() { return token; }
 
-        public void setToken(Token token) {
+    public int getIDPlayer() { return IDPlayer; }
+
+    public void setIDPlayer(int IDPlayer) { this.IDPlayer = IDPlayer; }
+
+    public void setToken(Token token) {
             this.token = token;
         }
 
-        public void setScoreMarker(ScoreMarker scoreMarker) {
+    public void setScoreMarker(ScoreMarker scoreMarker) {
         this.scoreMarker = scoreMarker;
         }
 
@@ -83,7 +89,7 @@ public class PlayerZone implements PlayerZoneInt {
 
         public ScoreMarker getScoreMarker() { return scoreMarker; }
 
-        public void setNumberPlayer(int numberPlayer) { this.numberPlayer = numberPlayer; }
+    public void setNumberPlayer(int numberPlayer) { this.numberPlayer = numberPlayer; }
 
     public void setNamePlayer(String namePlayer) {
         this.namePlayer = namePlayer;
@@ -93,9 +99,7 @@ public class PlayerZone implements PlayerZoneInt {
         this.playerBoard = playerBoard;
     }
 
-    public void setWindowPatternCard(WindowPatternCard windowPatternCard) {
-        this.windowPatternCard = windowPatternCard;
-    }
+    public void setWindowPatternCard(WindowPatternCard windowPatternCard) { this.windowPatternCard = windowPatternCard; }
 
     public void setPlayerState(PlayerState playerState) {
         this.playerState = playerState;

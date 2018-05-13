@@ -1,4 +1,5 @@
 package it.polimi.ingsw.LM26.Serialization;
+import it.polimi.ingsw.LM26.PublicPlayerZone.PlayerZone;
 import org.junit.Test;
 import it.polimi.ingsw.LM26.Cards.Decks;
 import static it.polimi.ingsw.LM26.Serialization.SingletonDecks.singletonDecks;
@@ -34,7 +35,8 @@ public class TestSingletonDecks {
         }
         for(i=0; i<=11; i++) {
             decks.getToolCardDeck().get(i).printCard();
-            decks.getToolCardDeck().get(i).Play();
+            PlayerZone player =new PlayerZone("Jack", 1);
+            decks.getToolCardDeck().get(i).play(player);
         }
 
     }
