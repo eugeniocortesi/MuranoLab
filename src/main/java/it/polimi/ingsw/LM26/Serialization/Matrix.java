@@ -1,7 +1,11 @@
 package it.polimi.ingsw.LM26.Serialization;
 
 
+import it.polimi.ingsw.LM26.Cards.Color;
+import it.polimi.ingsw.LM26.Cards.PatternBox;
 import it.polimi.ingsw.LM26.Serialization.Elements.elements;
+
+import static it.polimi.ingsw.LM26.Serialization.Elements.elements.*;
 
 
 public class Matrix {
@@ -45,13 +49,59 @@ public class Matrix {
         return matrix;
     }
 
-    public void printMatrix() {
+    public void createPatternMatrix(PatternBox[][] patternMatrix){
 
-        int i=0, j=0;
-        for(i=0;i<4;i++){
-            for(j=0;j<5;j++)
+
+
+        for(int i=0;i<4;i++)
+            for(int j=0;j<5;j++){
+                if( matrix[i][j]==RED){
+                    patternMatrix[i][j].setColor(Color.ANSI_RED);
+                    patternMatrix[i][j].setColorBool(true);}
+                if( matrix[i][j]==GREEN){
+                    patternMatrix[i][j].setColor(Color.ANSI_GREEN);
+                    patternMatrix[i][j].setColorBool(true);}
+                if( matrix[i][j]==BLUE){
+                    patternMatrix[i][j].setColor(Color.ANSI_BLUE);
+                    patternMatrix[i][j].setColorBool(true);}
+                if( matrix[i][j]==VIOLET){
+                    patternMatrix[i][j].setColor(Color.ANSI_PURPLE);
+                    patternMatrix[i][j].setColorBool(true);}
+                if( matrix[i][j]==YELLOW){
+                    patternMatrix[i][j].setColor(Color.ANSI_YELLOW);
+                    patternMatrix[i][j].setColorBool(true);}
+                if( matrix[i][j]==EMPTY){
+                    patternMatrix[i][j].setColor(Color.WHITE);
+                    patternMatrix[i][j].setColorBool(true);}
+                if( matrix[i][j]==LIGHT1){
+                    patternMatrix[i][j].setValue(1);
+                    patternMatrix[i][j].setShadeBool(true);}
+                if( matrix[i][j]==LIGHT2){
+                    patternMatrix[i][j].setValue(2);
+                    patternMatrix[i][j].setShadeBool(true);}
+                if( matrix[i][j]==MEDIUMS3){
+                    patternMatrix[i][j].setValue(3);
+                    patternMatrix[i][j].setShadeBool(true);}
+                if( matrix[i][j]==MEDIUMS4){
+                    patternMatrix[i][j].setValue(4);
+                    patternMatrix[i][j].setShadeBool(true);}
+                if( matrix[i][j]==DARK5){
+                    patternMatrix[i][j].setValue(5);
+                    patternMatrix[i][j].setShadeBool(true);}
+                if( matrix[i][j]==DARK6){
+                    patternMatrix[i][j].setValue(6);
+                    patternMatrix[i][j].setShadeBool(true);}
+
+            }
+
+    }
+
+    /*public void printMatrix() {
+
+        for(int i=0;i<4;i++){
+            for(int j=0;j<5;j++)
                 System.out.println(matrix[i][j]);
             System.out.println();
         }
-    }
+    }*/
 }

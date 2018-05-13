@@ -25,6 +25,31 @@ public class Die implements DieInt {
         this.face = faces[index];
     }
 
+    public String getFace() {
+        return face;
+    }
+
+    public void setFace(String face) {
+        this.face = face;
+    }
+
+    public void increment(){
+        if(face=="\u2680")face="\u2681";
+        if(face=="\u2681")face="\u2682";
+        if(face=="\u2682")face="\u2683";
+        if(face=="\u2683")face="\u2684";
+        if(face=="\u2684")face="\u2685";
+    }
+
+    public void decrement(){
+        if(face=="\u2681")face="\u2680";
+        if(face=="\u2682")face="\u2681";
+        if(face=="\u2683")face="\u2682";
+        if(face=="\u2684")face="\u2683";
+        if(face=="\u2685")face="\u2684";
+
+    }
+
     public Die(Color color) {
         this.color = color;
     }
