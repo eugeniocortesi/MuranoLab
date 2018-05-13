@@ -35,6 +35,10 @@ public class RoundTrack implements RoundTrackInt{
 
     }
 
+    public ArrayList<DieInt> getRoundTrackTurn(int turn){
+        return roundTrackTurnList.get((turn-1)).getDiceList();
+    }
+
     public void dump(){
 
         for (int i = 0; i< roundTrackTurnList.size(); i++){

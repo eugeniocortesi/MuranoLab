@@ -9,7 +9,7 @@ public class Round {
 
     private static final int[] t = {1, 2, 3, 4};
 
-    private static int turnCounter=0;
+    private int turnCounter=0;
 
     public Round(RoundTrackInt rTrack, ArrayList<PlayerZone> pZone, int nrounds) {
         this.assignTurn(rTrack, pZone, nrounds);
@@ -41,8 +41,6 @@ public class Round {
     public RoundState endAction(int[] turn, RoundTrackInt roundTrack, DraftPool draftPool, PlayerZone actingPlayer) {
         actingPlayer.setPlayerState(PlayerState.ENDING);
         turnCounter++;
-        int i;
-        i=turnCounter;
         if(turnCounter == turn.length) {
             roundTrack.addDice(draftPool.getInDraft());
             turnCounter=0;

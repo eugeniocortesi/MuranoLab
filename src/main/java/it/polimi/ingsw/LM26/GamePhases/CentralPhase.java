@@ -16,21 +16,28 @@ public class CentralPhase implements PhaseInt{
 
     private Round round;
 
-    private static int[] turn; //stabilisce l'ordine dei giocatori all'interno del turno, es "12344321", "123321"..
+    private int[] turn; //stabilisce l'ordine dei giocatori all'interno del turno, es "12344321", "123321"..
 
     private ArrayList<PlayerZone> playerList;
 
-    public CentralPhase() {
+    public CentralPhase(ArrayList<PlayerZone> playerZones) {
+        playerList= new ArrayList<PlayerZone>();
         roundTrack= new RoundTrack();
         draftPool= new DraftPool();
+        playerList.addAll(playerZones);
         turn=setOrder(playerList.size());
 
     }
 
     //inizializza turn[
     public int[] setOrder(int nplayers) {
+        turn = new int[2*nplayers];
         for(int i=0; i<nplayers; i++) turn[i]=i+1;
         for(int i=nplayers, j=nplayers; j>0; i++, j--) turn[i]=j;
+        return turn;
+    }
+
+    public int[] getTurn() {
         return turn;
     }
 

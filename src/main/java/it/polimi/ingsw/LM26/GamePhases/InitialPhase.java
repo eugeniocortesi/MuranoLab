@@ -50,6 +50,6 @@ public class InitialPhase implements PhaseInt {
 
     public void doAction(Game game, ArrayList<PlayerZone> playerList) {
         //assegnare token, dare carte..
-        game.setPhase(new CentralPhase());
+        game.setPhase(new CentralPhase(playerList));
     }
 }

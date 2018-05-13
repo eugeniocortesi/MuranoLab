@@ -12,6 +12,7 @@ public class FinalPhase implements PhaseInt {
     private ArrayList<PlayerZone> winners= new ArrayList<PlayerZone>();
 
     private int maximum;
+    private int minimum;
 
 
     public PlayerZone declareWinner(ArrayList<PlayerZone> players, RoundTrackInt roundTrack) throws IllegalArgumentException{
@@ -50,14 +51,14 @@ public class FinalPhase implements PhaseInt {
                     }
                     if(winners.size()==1) return winners.get(0);
                     else {
-                        maximum=-1;
+                        minimum=-1;
                         for(PlayerZone i : winners) {
-                            if (i.getLastRoundTurn() > maximum) {
-                                maximum = i.getLastRoundTurn();
+                            if (i.getLastRoundTurn() < minimum) {
+                                minimum = i.getLastRoundTurn();
                             }
                         }
                         for(PlayerZone j : winners){
-                            if(j.getLastRoundTurn() == maximum) return j;
+                            if(j.getLastRoundTurn() == minimum) return j;
                         }
                     }
                 }

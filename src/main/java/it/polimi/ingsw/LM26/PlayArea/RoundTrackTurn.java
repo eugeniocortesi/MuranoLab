@@ -18,6 +18,10 @@ public class RoundTrackTurn {
         }
     }
 
+    public ArrayList<DieInt> getDiceList() {
+        return diceList;
+    }
+
     public void dump(){
 
         int count = diceList.size();
