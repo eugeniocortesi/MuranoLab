@@ -31,19 +31,18 @@ public class ToolCard implements ToolCardInt  {
         return token;
     }
 
-    public void setOneToken(){
+    public void setOneToken(PlayerZone player){
 
         if (token ==0) token=1;
-        //player.token=player.token+1
-
-
+        player.getToken().decrementToken();
 
     }
 
-    public void setTwoToken(){
+    public void setTwoToken(PlayerZone player){
 
         token=token +2 ;
-        //player.token=player.token+2
+        player.getToken().decrementToken();
+        player.getToken().decrementToken();
     }
 
 

@@ -12,7 +12,7 @@ public class WindowFramePlayerBoard/* implements CardInt */{
         BoardMatrix = new Box[4][5];
         for(int i=0; i<4; i++)
             for(int j=0; j<5; j++)
-                BoardMatrix[i][j]= new Box();
+                BoardMatrix[i][j]= new Box(i, j);
         this.color=color;
         this.id=id;
     }
@@ -40,6 +40,10 @@ public class WindowFramePlayerBoard/* implements CardInt */{
 
     public void setHasPatternCard(boolean hasPatternCard) {
         this.hasPatternCard = hasPatternCard;
+    }
+
+    public Box[][] getBoardMatrix() {
+        return BoardMatrix;
     }
 
     public void printCard(){

@@ -19,7 +19,14 @@ public class Effect9Decorator implements ToolCardDecorator {
         toolcard.printCard();
     }
 
-    public void play (PlayerZone player) {
+    public void play (PlayerZone player) { //piazza il dado in modo che non sia addiacente ad altri
+
+
+        //Die die1 =chooseFromTheDraft();
+        //Box toBox = askTheBok();
+
+        // se è il primo va messo su un bordo, senza altri controlli
+        //se non è ul primo piazzalo non addiacente ad altri
 
 
 

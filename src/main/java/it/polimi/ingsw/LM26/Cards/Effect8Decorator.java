@@ -22,7 +22,20 @@ public class Effect8Decorator implements ToolCardDecorator {
     public void play (PlayerZone player) {
 
 
+        //while(player.getLastTurn()<1){
+        //System.out.println("do first turn first");
+        //try {
+        //    wait();                                      //chiedi ???
+        //} catch (InterruptedException e) {
+        //    e.printStackTrace();
+        //}
+        //}
 
+        //if(plaver.getLastTurn()==1){
+        //Die newDie=draw();
+        //inDraft.add(newDie);
+        //player.setLastTurn(2);
+        //}
 
 
     }

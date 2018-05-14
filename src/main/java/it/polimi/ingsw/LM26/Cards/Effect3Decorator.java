@@ -24,15 +24,13 @@ public class Effect3Decorator implements ToolCardDecorator {
         //Box fromBox = askTheBox();
         //Box toBox = askTheBok();
         //Die die = fromBox.getDie();
-        //if (checkColorRestriction(fromBox, toBox)==True &&
-        //    checkNearByRestriction(player.getWindowPatternCard(),player.getPlayerBoard(), die.getColor(), die.getValue())==True )
-        //         toBox.setDie(die);
-        //fromBox.free();
+        //if (checkColorRestriction(die, toBox) &&  checkNearByRestriction(player, die, toBox)){
+        //MANCA: se è il primo dado devo rimetterlo in un bordo
+        //             toBox.setDie(die);
+        //             fromBox.free();
+        //              }
+        //       else System.Out.println("error");
 
-//public boolean checkColorRestriction(Box fromBox, Box toBox){
-        //if( toBox.getPatternBox().isValue()) return true;
-        // else if (toBox.getPatternBox().getColor()==fromBox.getDie().getColor() || toBox.getPatternBox().getColor()==WHITE) return true;
-        //}
 
     }
 }

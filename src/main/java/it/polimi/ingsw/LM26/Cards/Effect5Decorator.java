@@ -27,7 +27,9 @@ public class Effect5Decorator implements ToolCardDecorator {
         //diceList.add(diceList.index(die2), inDraft.remove(die1));
 
 
-//NOTA: quando i dadi vengono aggiunti alla inDraft devono gia essere stati rollati
+//NOTA: Creare all'inizio l'oggetto inDraft
+        //Creare all'inizio l'oggetto diceList
+
 
 
 

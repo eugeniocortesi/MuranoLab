@@ -10,6 +10,21 @@ public class Box {
 
     private boolean isPresent = false;
 
+    private int i=0, j=0;
+
+    public Box(int i, int j) {
+        this.i = i;
+        this.j = j;
+    }
+
+    public int getI() {
+        return i;
+    }
+
+    public int getJ() {
+        return j;
+    }
+
     public void setDie(DieInt die) {
         this.die = die;
         isPresent=true;

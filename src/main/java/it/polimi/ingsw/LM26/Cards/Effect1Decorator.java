@@ -27,14 +27,14 @@ public class Effect1Decorator implements ToolCardDecorator {
 
 
         //if (action=="increment")
-        //      while(die.getFace()=="\u2685"){
+        //      while(die.getValue()==6){
         //              System.out.println("error, choose a lower value"
         //              die=chooseFromTheDraft();
                         //}
         //      die.increment();
 
         //if (action=="decrement")
-        //      while(die.getFace()=="\u2680"){
+        //      while(die.getValue()==1){
         //            System.out.println("error, choose a higher value"
         //               die=chooseFromTheDraft();
         //       die.decrement();

@@ -25,13 +25,19 @@ public class Die implements DieInt {
         this.face = faces[index];
     }
 
-    public String getFace() {
-        return face;
+    public int getValue() {
+
+        int value=0;
+
+        if(face=="\u2680")value = 1;
+        if(face=="\u2681")value = 2;
+        if(face=="\u2682")value = 3;
+        if(face=="\u2683")value = 4;
+        if(face=="\u2684")value = 5;
+        if(face=="\u2685")value = 6;
+        return value;
     }
 
-    public void setFace(String face) {
-        this.face = face;
-    }
 
     public void increment(){
         if(face=="\u2680")face="\u2681";

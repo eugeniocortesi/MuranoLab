@@ -21,10 +21,23 @@ public class Effect4Decorator implements ToolCardDecorator {
 
     public void play (PlayerZone player) {
 
-        //Die die=askWhichDie()
-        //moveDie(player, die);
-        //die=askWhichDie()
-        //moveDie(player, die);
+        //Box fromBox;
+        //Box toBox;
+        //Die die;
+
+        //for (int i=0; i<2; i++){
+
+        //il primo dado del giocatore è gia stato pizzato, non serve restrizione sul bordo
+
+        //      fromBox = askTheBox();
+        //      toBox = askTheBok();
+        //      die = fromBox.getDie();
+        //      if(placeDie(die, toBox))  fromBox.free();
+        //      else System.Out.Println("error " + i+1);
+        //  }
+
+
+
 
 
 
