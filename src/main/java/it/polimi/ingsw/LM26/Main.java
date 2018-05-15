@@ -1,8 +1,8 @@
 package it.polimi.ingsw.LM26;
 
-import it.polimi.ingsw.LM26.Cards.Decks;
-import it.polimi.ingsw.LM26.PlayArea.OnBoardCards;
-import static it.polimi.ingsw.LM26.Serialization.SingletonDecks.singletonDecks;
+import it.polimi.ingsw.LM26.model.Cards.Decks;
+
+import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
 
 public class Main {
     public static void main(String[] args) {
