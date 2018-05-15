@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.model.PlayArea;
+package it.polimi.ingsw.LM26.model.PlayArea.diceObjects;
 
 import java.util.ArrayList;
 

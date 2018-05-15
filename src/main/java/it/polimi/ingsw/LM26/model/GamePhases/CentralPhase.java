@@ -1,8 +1,8 @@
 package it.polimi.ingsw.LM26.model.GamePhases;
 
-import it.polimi.ingsw.LM26.model.PlayArea.DraftPool;
-import it.polimi.ingsw.LM26.model.PlayArea.RoundTrack;
-import it.polimi.ingsw.LM26.model.PlayArea.RoundTrackInt;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
+import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
+import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import java.util.ArrayList;
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.model.Cards;
 
+import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import org.junit.Test;
 
 import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;

@@ -1,7 +1,5 @@
 package it.polimi.ingsw.LM26.model.Serialization;
 
-import it.polimi.ingsw.LM26.model.Cards.Decks;
-
 import java.io.IOException;
 
 public class SingletonDecks {

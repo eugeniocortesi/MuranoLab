@@ -1,5 +1,6 @@
-package it.polimi.ingsw.LM26.model.Cards;
+package it.polimi.ingsw.LM26.model.Cards.factory;
 
+import it.polimi.ingsw.LM26.model.Cards.CardInt;
 import it.polimi.ingsw.LM26.model.Serialization.Effect;
 import it.polimi.ingsw.LM26.model.Serialization.Matrix;
 import it.polimi.ingsw.LM26.model.Serialization.Elements.elements;

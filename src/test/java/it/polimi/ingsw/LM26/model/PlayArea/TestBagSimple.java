@@ -1,4 +1,6 @@
 package it.polimi.ingsw.LM26.model.PlayArea;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Bag;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import org.junit.Test;
 
 public class TestBagSimple {

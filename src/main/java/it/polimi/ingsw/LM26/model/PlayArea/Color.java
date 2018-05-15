@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.model.Cards;
+package it.polimi.ingsw.LM26.model.PlayArea;
 
 public enum Color{
 

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.LM26.model.PlayArea;
 
-import it.polimi.ingsw.LM26.model.Cards.Color;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import org.junit.Test;
 
 public class TestDiceSimple {

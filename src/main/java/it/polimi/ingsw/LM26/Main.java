@@ -1,6 +1,6 @@
 package it.polimi.ingsw.LM26;
 
-import it.polimi.ingsw.LM26.model.Cards.Decks;
+import it.polimi.ingsw.LM26.model.Serialization.Decks;
 
 import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
 

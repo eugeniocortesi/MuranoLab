@@ -1,4 +1,6 @@
-package it.polimi.ingsw.LM26.model.Cards;
+package it.polimi.ingsw.LM26.model.Cards.windowMatch;
+
+import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
 public class PatternBox {
 

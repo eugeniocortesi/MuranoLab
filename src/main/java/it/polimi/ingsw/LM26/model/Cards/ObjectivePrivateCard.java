@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.model.Cards;
 
+import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.Serialization.Elements.elements;
 
 import static it.polimi.ingsw.LM26.model.Serialization.Elements.elements.*;

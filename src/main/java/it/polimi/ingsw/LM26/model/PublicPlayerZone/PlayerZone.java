@@ -1,7 +1,7 @@
 package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 
-import it.polimi.ingsw.LM26.model.Cards.WindowFramePlayerBoard;
-import it.polimi.ingsw.LM26.model.Cards.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
 public class PlayerZone implements PlayerZoneInt {
 

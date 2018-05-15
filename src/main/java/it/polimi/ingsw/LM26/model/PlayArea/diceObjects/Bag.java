@@ -1,6 +1,6 @@
-package it.polimi.ingsw.LM26.model.PlayArea;
+package it.polimi.ingsw.LM26.model.PlayArea.diceObjects;
 
-import it.polimi.ingsw.LM26.model.Cards.Color;
+import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
 import java.util.ArrayList;
 import java.util.Random;

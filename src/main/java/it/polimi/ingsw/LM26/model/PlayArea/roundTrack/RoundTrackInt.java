@@ -1,4 +1,6 @@
-package it.polimi.ingsw.LM26.model.PlayArea;
+package it.polimi.ingsw.LM26.model.PlayArea.roundTrack;
+
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 
 import java.util.ArrayList;
 

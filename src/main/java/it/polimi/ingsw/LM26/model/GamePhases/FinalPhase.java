@@ -1,6 +1,6 @@
 package it.polimi.ingsw.LM26.model.GamePhases;
 
-import it.polimi.ingsw.LM26.model.PlayArea.RoundTrackInt;
+import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;

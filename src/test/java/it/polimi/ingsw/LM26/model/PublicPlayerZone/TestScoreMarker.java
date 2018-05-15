@@ -1,6 +1,6 @@
 package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 
-import it.polimi.ingsw.LM26.model.Cards.Color;
+import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import org.junit.Test;
 
 public class TestScoreMarker {
