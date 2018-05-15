@@ -1,16 +1,16 @@
 package it.polimi.ingsw.LM26.model.Serialization;
 
-public class Effect2 extends Effect {
+public class DifferentColorShade extends Effect {
 
     //Colore= true
     //Sfumature = false
 
     private boolean colorShades;
 
-    public Effect2(boolean colorShades) {
+    public DifferentColorShade(boolean colorShades) {
 
         this.colorShades = colorShades;
-        this.type = "Effect2";
+        this.type = "DifferentColorShade";
     }
 
     private String iscolorShades() {
