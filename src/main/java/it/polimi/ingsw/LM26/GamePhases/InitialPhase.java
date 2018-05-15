@@ -1,9 +1,6 @@
 package it.polimi.ingsw.LM26.GamePhases;
 
-import it.polimi.ingsw.LM26.Cards.Decks;
-import it.polimi.ingsw.LM26.Cards.ObjectivePublicCard;
-import it.polimi.ingsw.LM26.Cards.ToolCard;
-import it.polimi.ingsw.LM26.Cards.WindowPatternCard;
+import it.polimi.ingsw.LM26.Cards.*;
 import it.polimi.ingsw.LM26.PlayArea.OnBoardCards;
 import it.polimi.ingsw.LM26.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.PublicPlayerZone.Token;
@@ -13,39 +10,44 @@ import java.util.ArrayList;
 public class InitialPhase implements PhaseInt {
 
     private ArrayList<PlayerZone> playerList;
+    private ObjectivePublicCard objectivePublicCard;
 
-    private final int cardsOnBoardsize=3;
+    public InitialPhase(ArrayList<PlayerZone> playerList, Decks decks) {
+        this.playerList = playerList;
+
+    }
+
+    private final int cardsOnBoardsize=3; //se si ha tempo sarebbe meglio mettere questo limite nella "OnBoardCards"
+    //e quello di 10 nella RoundTrack (che invece è nella classe Round)
 
     private int index;
 
     private int cardId; //sostituisce temporaneamente
 
-//la deserializzazione e set dei deck va fatta qui?
 
-    public void setTokens(WindowPatternCard windowPatternCard, PlayerZone playerZone){ //da fare per ciascun giocatore
-        Token token= new Token(windowPatternCard.getToken());
-        playerZone.setToken(token);
-    }
 
-    /*public void setPublicCards(OnBoardCards onBoardCards, Decks decks){
-        ArrayList<ObjectivePublicCard> publicCardsOnBoard= new ArrayList<ObjectivePublicCard>();
-        ArrayList<ToolCard> ToolCardsOnBoard= new ArrayList<ToolCard>();
-        int i=0;
-        while(i<cardsOnBoardsize &&){
-            index=(((int)Math.random())%decks.getObjectivePublicCardDeck().size())-1;
-            decks.getObjectivePublicCardDeck().get(index)
-            publicCardsOnBoard.add();
-            i++;
+    //distribuisce i token a tutti i giocatori in base alla loro windowPatternCard
+    public void setTokens(ArrayList<PlayerZone> playerZones){
+        for(PlayerZone i : playerZones){
+            Token token= new Token(i.getWindowPatternCard().getToken());
+            i.setToken(token);
         }
 
-        do {
-            for(int i=0; i<cardsOnBoardsize; i++){
-                index=(((int)Math.random())%decks.getObjectivePublicCardDeck().size())-1;
-                ToolCardsOnBoard.add(decks.getToolCardDeck().get(index));
-            }
-        } while();
-    }*/
+    }
 
+    public void setPublicCards(OnBoardCards onBoardCards, Decks decks){
+        ArrayList<ObjectivePublicCard> publicCardsOnBoard= new ArrayList<ObjectivePublicCard>();
+        while(publicCardsOnBoard.size() <cardsOnBoardsize){
+            index=(((int)Math.random())%decks.getObjectivePublicCardDeck().size())-1;
+            objectivePublicCard = decks.getObjectivePublicCardDeck().get(index);
+            if(objectivePublicCard.isInUse() == false){
+                objectivePublicCard.setInUse(true);
+                publicCardsOnBoard.add(objectivePublicCard);
+            }
+        }
+        onBoardCards.setObjectivePublicCardList(publicCardsOnBoard);
+        onBoardCards.setToolCardList(decks.getToolCardDeck());
+    }
     //controller integra con distribuzione delle carte private nell'area dataprivate
 
     public void doAction(Game game, ArrayList<PlayerZone> playerList) {

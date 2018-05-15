@@ -14,6 +14,8 @@ public class CentralPhase implements PhaseInt{
 
     private final int nrounds=10;
 
+    private ArrayList<Round> rounds;
+
     private Round round;
 
     private int[] turn; //stabilisce l'ordine dei giocatori all'interno del turno, es "12344321", "123321"..
@@ -21,6 +23,7 @@ public class CentralPhase implements PhaseInt{
     private ArrayList<PlayerZone> playerList;
 
     public CentralPhase(ArrayList<PlayerZone> playerZones) {
+        round= new Round(roundTrack, playerZones, nrounds);
         playerList= new ArrayList<PlayerZone>();
         roundTrack= new RoundTrack();
         draftPool= new DraftPool();
@@ -29,7 +32,7 @@ public class CentralPhase implements PhaseInt{
 
     }
 
-    //inizializza turn[
+    //inizializza turn[]
     public int[] setOrder(int nplayers) {
         turn = new int[2*nplayers];
         for(int i=0; i<nplayers; i++) turn[i]=i+1;
@@ -41,7 +44,19 @@ public class CentralPhase implements PhaseInt{
         return turn;
     }
 
-    public void doAction (Game game, ArrayList<PlayerZone> playerList){
+    //questo metodo si chiama da dopo il secondo round fino a dopo il decimo (dove verrà creato il prossimo stato)
+    public void nextRound(Round round, Game game){
+        if(rounds.size()<nrounds && round.getRoundState() == RoundState.FINISHED){
+            rounds.add(new Round(roundTrack, playerList, nrounds));
+        }
+        else if(rounds.size() == nrounds) game.setPhase(new ScorePhase());
+    }
+
+    public ArrayList<Round> getRounds() {
+        return rounds;
+    }
+
+    /*public void doAction (Game game, ArrayList<PlayerZone> playerList){
         for(int i=0; i<nrounds; i++){
             while(playerList.size()>1){
                 round= new Round(roundTrack, playerList, nrounds);
@@ -52,5 +67,5 @@ public class CentralPhase implements PhaseInt{
             game.setPhase(new FinalPhase());
         }
         else game.setPhase(new ScorePhase());
-    }
+    }*/
 }

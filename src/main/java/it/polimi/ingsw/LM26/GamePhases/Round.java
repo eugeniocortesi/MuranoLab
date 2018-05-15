@@ -11,6 +11,8 @@ public class Round {
 
     private int turnCounter=0;
 
+    private RoundState roundState=RoundState.RUNNING;
+
     public Round(RoundTrackInt rTrack, ArrayList<PlayerZone> pZone, int nrounds) {
         this.assignTurn(rTrack, pZone, nrounds);
     }
@@ -25,12 +27,21 @@ public class Round {
         }
     }
 
-    //nextPlayer va usato dopo endAction, quando il contatore è già incrementato
-    public PlayerZone nextPlayer(ArrayList<PlayerZone> player, int[] turn) throws IllegalArgumentException {
+    //nextPlayer va usato dopo endAction, quando il contatore è già incrementato. plStandby passato è sempre 0
+    public PlayerZone nextPlayer(ArrayList<PlayerZone> player, int[] turn, int plStandby) throws IllegalArgumentException {
+        System.out.println("!");
+        turnCounter=turnCounter+plStandby;
       for(PlayerZone i : player){
+          for(int j=0; j<turnCounter; j++){
+              System.out.println("o");
+          }
+          System.out.println("g");
           if(i.getNumber()==turn[turnCounter]) {
-              i.setPlayerState(PlayerState.BEGINNING);
-              return i;
+              if(i.getPlayerState()!=PlayerState.STANDBY){
+                  i.setPlayerState(PlayerState.BEGINNING);
+                  return i;
+              }
+              else return nextPlayer(player, turn, ++plStandby);
           }
       }
       throw new IllegalArgumentException("no player has the current turn");
@@ -38,15 +49,22 @@ public class Round {
 
 
     //passa il turno al successivo, se è finito turno globale mette dadi nella casella della round track e ritorna FINISHED
-    public RoundState endAction(int[] turn, RoundTrackInt roundTrack, DraftPool draftPool, PlayerZone actingPlayer) {
+    public void endAction(int[] turn, RoundTrackInt roundTrack, DraftPool draftPool, PlayerZone actingPlayer) {
         actingPlayer.setPlayerState(PlayerState.ENDING);
         turnCounter++;
         if(turnCounter == turn.length) {
             roundTrack.addDice(draftPool.getInDraft());
             turnCounter=0;
-            return RoundState.FINISHED;
+            roundState= RoundState.FINISHED;
         }
-        return RoundState.RUNNING;
+        else roundState= RoundState.RUNNING;
+    }//aggiungere controlli e aggiornamenti di "second die/turn"
+
+    public RoundState getRoundState() {
+        return roundState;
     }
 
+    public int getTurnCounter() {
+        return turnCounter;
+    }
 }

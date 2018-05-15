@@ -10,14 +10,6 @@ public class OnBoardCards {
 
     private ArrayList<ToolCardInt>  toolCardList;
 
-    public OnBoardCards(ArrayList<ObjectivePublicCard> objectivePublicCardList,ArrayList<ToolCardInt> toolCardList) {
-
-        this.objectivePublicCardList = objectivePublicCardList;
-
-        this.toolCardList = toolCardList;
-
-    }
-
     public ArrayList<ObjectivePublicCard> getObjectivePublicCardList() {
         return objectivePublicCardList;
 
@@ -25,6 +17,14 @@ public class OnBoardCards {
 
     public ArrayList<ToolCardInt> getToolCardList() {
         return toolCardList;
+    }
+
+    public void setObjectivePublicCardList(ArrayList<ObjectivePublicCard> objectivePublicCardList) {
+        this.objectivePublicCardList = objectivePublicCardList;
+    }
+
+    public void setToolCardList(ArrayList<ToolCardInt> toolCardList) {
+        this.toolCardList = toolCardList;
     }
 }
 
