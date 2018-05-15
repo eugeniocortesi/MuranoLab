@@ -66,16 +66,16 @@ public class Decks {
         //carte pubbliche
         //Colore, Riga = true
         //Sfumature, Colonna = false
-        CardInt public1 = CardCreator.createCard(21, 6, new Effect1(true, true));
-        CardInt public2 = CardCreator.createCard(22, 5, new Effect1(true, false));
-        CardInt public3 = CardCreator.createCard(23, 5, new Effect1(false, true));
-        CardInt public4 = CardCreator.createCard(24, 4, new Effect1(false, false));
-        CardInt public5 = CardCreator.createCard(25, 2, new Effect3(LIGHT));
-        CardInt public6 = CardCreator.createCard(26, 2, new Effect3(MEDIUMS));
-        CardInt public7 = CardCreator.createCard(27, 2, new Effect3(DARK));
-        CardInt public8 = CardCreator.createCard(28, 5, new Effect2(true));
-        CardInt public9 = CardCreator.createCard(29, 4, new Effect2(false));
-        CardInt public10 = CardCreator.createCard(210, new Effect4());
+        CardInt public1 = CardCreator.createCard(21, 6, new DifferentColorShadeOnRowColomn(true, true));
+        CardInt public2 = CardCreator.createCard(22, 5, new DifferentColorShadeOnRowColomn(true, false));
+        CardInt public3 = CardCreator.createCard(23, 5, new DifferentColorShadeOnRowColomn(false, true));
+        CardInt public4 = CardCreator.createCard(24, 4, new DifferentColorShadeOnRowColomn(false, false));
+        CardInt public5 = CardCreator.createCard(25, 2, new Shades(LIGHT));
+        CardInt public6 = CardCreator.createCard(26, 2, new Shades(MEDIUMS));
+        CardInt public7 = CardCreator.createCard(27, 2, new Shades(DARK));
+        CardInt public8 = CardCreator.createCard(28, 5, new DifferentColorShade(true));
+        CardInt public9 = CardCreator.createCard(29, 4, new DifferentColorShade(false));
+        CardInt public10 = CardCreator.createCard(210, new ColoredDiagonals());
 
         //carte schema
 
@@ -206,19 +206,19 @@ public class Decks {
         WindowFramePlayerBoard Frame3 = new WindowFramePlayerBoard(33, ANSI_BLUE);
         WindowFramePlayerBoard Frame4 = new WindowFramePlayerBoard(34, ANSI_PURPLE);
 
-        ToolCardInt tool1 = new Effect1Decorator( new ToolCard(1));
+        ToolCardInt tool1 = new ChangeDieValue( new ToolCard(1));
         //ToolCard tool1 = new ToolCard(1);
-        ToolCardInt tool2 = new Effect2Decorator( new ToolCard(2));
-        ToolCardInt tool3 = new Effect3Decorator( new ToolCard(3));
-        ToolCardInt tool4 = new Effect4Decorator( new ToolCard(4));
-        ToolCardInt tool5 = new Effect5Decorator( new ToolCard(5));
-        ToolCardInt tool6 = new Effect6Decorator( new ToolCard(6));
-        ToolCardInt tool7 = new Effect7Decorator( new ToolCard(7));
-        ToolCardInt tool8 = new Effect8Decorator( new ToolCard(8));
-        ToolCardInt tool9 = new Effect9Decorator( new ToolCard(9));
-        ToolCardInt tool10 = new Effect10Decorator( new ToolCard(10));
-        ToolCardInt tool11 = new Effect11Decorator( new ToolCard(11));
-        ToolCardInt tool12 = new Effect12Decorator( new ToolCard(12));
+        ToolCardInt tool2 = new MoveWithNoColorRestriction( new ToolCard(2));
+        ToolCardInt tool3 = new MoveWithNoValueRestriction( new ToolCard(3));
+        ToolCardInt tool4 = new MoveTwoDice( new ToolCard(4));
+        ToolCardInt tool5 = new ChangeDieFromDraftToRoundTrack( new ToolCard(5));
+        ToolCardInt tool6 = new RollAgainADie( new ToolCard(6));
+        ToolCardInt tool7 = new RollAllDraftDice( new ToolCard(7));
+        ToolCardInt tool8 = new DrawOneMoreDie( new ToolCard(8));
+        ToolCardInt tool9 = new PlaceWithNotInProximities( new ToolCard(9));
+        ToolCardInt tool10 = new RollToTheOppositeFace( new ToolCard(10));
+        ToolCardInt tool11 = new ChangeDieWithTheBag( new ToolCard(11));
+        ToolCardInt tool12 = new MoveTwoDiceWithSameColor( new ToolCard(12));
 
         ArrayList<CardInt> Private = new ArrayList<CardInt>();
         ArrayList<CardInt> Public = new ArrayList<CardInt>();
@@ -296,9 +296,9 @@ public class Decks {
                 .setPrettyPrinting()
                 .create();
 
-        FileWriter writer1 = new FileWriter("/Users/Eugenio/UNIVERSITA/PROVAFINALE/nuovacartellavuota/MuranoLab/src/main/resources/PrivateCards");
-        FileWriter writer2 = new FileWriter("/Users/Eugenio/UNIVERSITA/PROVAFINALE/nuovacartellavuota/MuranoLab/src/main/resources/PublicCards");
-        FileWriter writer3 = new FileWriter("/Users/Eugenio/UNIVERSITA/PROVAFINALE/nuovacartellavuota/MuranoLab/src/main/resources/WindowCards");
+        FileWriter writer1 = new FileWriter("PrivateCards");
+        FileWriter writer2 = new FileWriter("PublicCards");
+        FileWriter writer3 = new FileWriter("WindowCards");
 
         gson.toJson(Private, writer1);
         gson.toJson(Public, writer2);
@@ -322,7 +322,7 @@ public class Decks {
         BufferedReader br1 = null, br2 = null, br3=null;
 
         try {
-            fr1 = new FileReader("/Users/Eugenio/UNIVERSITA/PROVAFINALE/nuovacartellavuota/MuranoLab/src/main/resources/PrivateCards");
+            fr1 = new FileReader("PrivateCards");
             br1 = new BufferedReader(fr1);
 
 
@@ -360,7 +360,7 @@ public class Decks {
 
 
         try {
-            fr2 = new FileReader("/Users/Eugenio/UNIVERSITA/PROVAFINALE/nuovacartellavuota/MuranoLab/src/main/resources/PublicCards");
+            fr2 = new FileReader("PublicCards");
             br2 = new BufferedReader(fr2);
 
             Type Public = new TypeToken<ArrayList<ObjectivePublicCard>>() {
@@ -369,10 +369,10 @@ public class Decks {
 
             RuntimeTypeAdapterFactory1<Effect> runtimeTypeAdapterFactory1 = RuntimeTypeAdapterFactory1
                     .of(Effect.class, "type")
-                    .registerSubtype(Effect1.class)
-                    .registerSubtype(Effect2.class)
-                    .registerSubtype(Effect3.class)
-                    .registerSubtype(Effect4.class);
+                    .registerSubtype(DifferentColorShadeOnRowColomn.class)
+                    .registerSubtype(DifferentColorShade.class)
+                    .registerSubtype(Shades.class)
+                    .registerSubtype(ColoredDiagonals.class);
 
             Gson gson = new GsonBuilder()
                     .setPrettyPrinting()
@@ -423,7 +423,7 @@ public class Decks {
 
 
         try {
-            fr3 = new FileReader("/Users/Eugenio/UNIVERSITA/PROVAFINALE/nuovacartellavuota/MuranoLab/src/main/resources/WindowCards");
+            fr3 = new FileReader("WindowCards");
             br3 = new BufferedReader(fr3);
 
 

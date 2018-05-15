@@ -3,12 +3,12 @@ package it.polimi.ingsw.LM26.model.Cards.decorator;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
-public class Effect12Decorator implements ToolCardDecorator {
+public class RollToTheOppositeFace implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
 
-    public Effect12Decorator(ToolCard toolcard) {
+    public RollToTheOppositeFace(ToolCard toolcard) {
         this.toolcard = toolcard;
     }
 
@@ -21,7 +21,6 @@ public class Effect12Decorator implements ToolCardDecorator {
     }
 
     public void play (PlayerZone player) {
-
 
 
 
