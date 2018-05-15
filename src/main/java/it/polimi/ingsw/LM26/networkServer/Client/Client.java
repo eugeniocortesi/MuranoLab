@@ -242,6 +242,7 @@ public class Client {
     public static void main(String[] args) throws IOException, InterruptedException
     {
         Client c=new Client();
+        String s = "Chiara";
     }
 
 }
