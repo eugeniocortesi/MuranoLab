@@ -11,11 +11,11 @@ public class Main {
 
         Decks decks=singletonDecks();
 
-        OnBoardCards onBoardCards = new OnBoardCards(decks.getObjectivePublicCardDeck(), decks.getToolCardDeck());
+        /*OnBoardCards onBoardCards = new OnBoardCards(decks.getObjectivePublicCardDeck(), decks.getToolCardDeck());
 
         System.out.println("card " + onBoardCards.getObjectivePublicCardList().get(0).getId());
         System.out.println(onBoardCards.getObjectivePublicCardList().get(0).getPoints());
-        System.out.println(onBoardCards.getObjectivePublicCardList().get(0).getEffect());
+        System.out.println(onBoardCards.getObjectivePublicCardList().get(0).getEffect());*/
 
         //CAMBIA IL II PARAMENTRO DI ONBOARDCARDS IN TOOLCARDINT
 

@@ -24,12 +24,13 @@ public class Effect3Decorator implements ToolCardDecorator {
         //Box fromBox = askTheBox();
         //Box toBox = askTheBok();
         //Die die = fromBox.getDie();
-        //if (checkColorRestriction(die, toBox) &&  checkNearByRestriction(player, die, toBox)){
+        //while( ! ( (checkColorRestriction(die, toBox) &&  checkNearByRestriction(player, die, toBox))){
+        //      System.Out.println("error");
+        //      toBox = askTheBok();
+        //}
+        //toBox.setDie(die);
+        //fromBox.free();
 
-        //             toBox.setDie(die);
-        //             fromBox.free();
-        //              }
-        //       else System.Out.println("error");
 
 
     }

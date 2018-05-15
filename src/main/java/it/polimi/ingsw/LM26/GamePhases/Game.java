@@ -4,9 +4,9 @@ public class Game {
 
     private PhaseInt phase;
 
-    public Game() {
+    /*public Game() {
         this.phase = new InitialPhase();
-    }
+    }*/
 
     public PhaseInt getPhase(){
         return  phase;

@@ -21,16 +21,18 @@ public class Effect7Decorator implements ToolCardDecorator {
 
     public void play (PlayerZone player) {
 
-        //if(player.isSecondDie=false && roundTrack.getLastRoundTurn==2)    //????????????????
+        //if(player.isDieUsed()=false && player.isSecondTurn=true) {
 
         //for(int i=0; i<inDraft.size(); i++)
         //inDraft.get(i).roll();
+        // }
+        //else System.out.println("you can't use this card now")
 
 
 
   //creare oggetto roundTrack
-  //ATTENZIONE: isSecondDie va mandato a false ogni volta che un gioctore finisce un turno,
-        // va mandato a true ogni volta che un giocatore lancia il secondo dado
+  //ATTENZIONE: isDieUsed va mandato a false ogni volta che un gioctore finisce un turno,
+        // va mandato a true ogni volta che un giocatore prende un dado dalla riserva
 
     }
 }

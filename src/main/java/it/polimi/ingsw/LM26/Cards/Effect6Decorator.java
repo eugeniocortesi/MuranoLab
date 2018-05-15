@@ -25,24 +25,23 @@ public class Effect6Decorator implements ToolCardDecorator {
         //Box toBox = askTheBok();
         //die.roll();
 
-        //MANCA: se è il primo dado devo rimetterlo in un bordo
-
-        //if ( ! placeDie(die, toBox)) {
+        //while ( ! placeDie(player, die, toBox)) {
         //          System.Out.Println("error");
-
-        //
-
+        //          toBox = askTheBok();
         //          }
-
-
-        // else    MANCA: togli il dado dalla riserva
+        // else  inDraft.remove(die);
 
 
 
 
 
 
-        //public void placeDie(Die die, Box toBox){      //ATTENZIONE: il controllo se non puoi piazzarlo va fatto fuori
+        //public void placeDie(player player Die die, Box toBox){      //ATTENZIONE: togli il dado dalla riserva va fatto fuori
+        // if (player.getPlayerBoard().isEmpty())
+        //            while(!(i==0 || i==3 || j==0 || j==4 )){
+        //                                 System.out.println("error: primo dado deve andare sul bordo");
+        //                                 Box toBox = askTheBok();
+        //                               }
         //if (checkColorRestriction(die, toBox) && checkValueRestriction(die, toBox) && checkNearByRestriction(player, die, toBox) ){
         //         toBox.setDie(die);
         //          return true;}

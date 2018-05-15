@@ -25,12 +25,13 @@ public class Effect2Decorator implements ToolCardDecorator {
         //Box fromBox = askTheBox();
         //Box toBox = askTheBok();
         //Die die = fromBox.getDie();
-        //if (checkValueRestriction(die, toBox) && checkNearByRestriction(player, die, toBox)==True ){
-
-        //         toBox.setDie(die);
-        //          fromBox.free();
+        //while (! ( checkValueRestriction(die, toBox) && checkNearByRestriction(player, die, toBox)) ){
+        //          System.Out.println("error");
+        //          toBox = askTheBok();
         //          }
-        //else System.Out.println("error");
+        //toBox.setDie(die);
+        //fromBox.free();
+
 
 
 

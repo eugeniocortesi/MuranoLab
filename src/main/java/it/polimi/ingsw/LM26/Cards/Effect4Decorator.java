@@ -21,8 +21,8 @@ public class Effect4Decorator implements ToolCardDecorator {
 
     public void play (PlayerZone player) {
 
-        //Box fromBox;
-        //Box toBox;
+        //Box fromBox = askTheBox();
+        //Box toBox = askTheBok();
         //Die die;
 
         //for (int i=0; i<2; i++){
@@ -30,9 +30,12 @@ public class Effect4Decorator implements ToolCardDecorator {
         //      fromBox = askTheBox();
         //      toBox = askTheBok();
         //      die = fromBox.getDie();
-        //      if(placeDie(die, toBox))  fromBox.free();
-        //      else System.Out.Println("error " + i+1);
-        //  }
+        //      while(!(placeDie(player, die, toBox))){
+        //          System.Out.Println("error " + i+1);
+        //          toBox = askTheBok();
+        //          }
+        //      fromBox.free();
+        //}
 
 
 

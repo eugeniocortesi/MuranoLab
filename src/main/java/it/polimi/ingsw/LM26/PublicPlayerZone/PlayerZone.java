@@ -28,7 +28,10 @@ public class PlayerZone implements PlayerZoneInt {
 
     private int lastRoundTurn;
 
-    private boolean secondDie= false;
+    private boolean dieUsed= false;
+
+    private boolean secondTurn= false;
+
 
     public PlayerZone(String namePlayer, int IDPlayer) {
 
@@ -37,9 +40,25 @@ public class PlayerZone implements PlayerZoneInt {
         this.playerState=PlayerState.STANDBY;
     }
 
-    public boolean isSecondDie() { return secondDie; }
+    public String getNamePlayer() {
+        return namePlayer;
+    }
 
-    public void setSecondDie(boolean secondDie) { this.secondDie = secondDie; }
+    public boolean isDieUsed() {
+        return dieUsed;
+    }
+
+    public void setDieUsed(boolean dieUsed) {
+        this.dieUsed = dieUsed;
+    }
+
+    public boolean isSecondTurn() {
+        return secondTurn;
+    }
+
+    public void setSecondTurn(boolean secondTurn) {
+        this.secondTurn = secondTurn;
+    }
 
     public Token getToken() { return token; }
 
