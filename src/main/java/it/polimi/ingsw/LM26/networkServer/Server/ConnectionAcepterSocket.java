@@ -10,6 +10,8 @@ import java.util.Vector;
 
 public class ConnectionAcepterSocket implements ConnectionAcepter {
 
+    Server server;
+
     private ServerSocket serverSocket;
     private  Vector<ClientInt> connections;
     private final static int PORT=3000;
@@ -25,9 +27,11 @@ public class ConnectionAcepterSocket implements ConnectionAcepter {
 
 
     //private Socket socket;
+    //TODO server da fare
 
-    public ConnectionAcepterSocket(){
+    public ConnectionAcepterSocket(Server server){
         connections = new Vector<ClientInt>();
+        this.server = server;
     }
 
 
