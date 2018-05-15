@@ -1,5 +1,6 @@
-package it.polimi.ingsw.LM26.model.Cards;
+package it.polimi.ingsw.LM26.model.Cards.decorator;
 
+import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 public class Effect5Decorator implements ToolCardDecorator {
