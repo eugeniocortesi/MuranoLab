@@ -1,11 +1,11 @@
 package it.polimi.ingsw.LM26.model.Serialization;
 
-public class Effect4 extends Effect{
+public class ColoredDiagonals extends Effect{
 
     private String effect4="Colored diagonals";
 
-    public Effect4() {
-        this.type = "Effect4";
+    public ColoredDiagonals() {
+        this.type = "ColoredDiagonals";
     }
 
     public String getE(){

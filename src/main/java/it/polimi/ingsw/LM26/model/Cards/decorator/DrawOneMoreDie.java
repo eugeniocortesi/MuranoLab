@@ -3,12 +3,12 @@ package it.polimi.ingsw.LM26.model.Cards.decorator;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
-public class Effect11Decorator implements ToolCardDecorator {
+public class DrawOneMoreDie implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
 
-    public Effect11Decorator(ToolCard toolcard) {
+    public DrawOneMoreDie(ToolCard toolcard) {
         this.toolcard = toolcard;
     }
 
@@ -24,7 +24,17 @@ public class Effect11Decorator implements ToolCardDecorator {
 
 
 
+        //if(!plaver.isSecondTurn() ){
+        //Die die=chooseFromTheDraft();
+        //Box fromBox = askTheBox();
 
+        //if ( ! placeDie(player, die, toBox)) {
+        //          System.Out.Println("error");
+        //          }
+        // else   inDraft.remove(die);
+
+        //player.setSecondTurn()=true;
+        //}
 
 
     }

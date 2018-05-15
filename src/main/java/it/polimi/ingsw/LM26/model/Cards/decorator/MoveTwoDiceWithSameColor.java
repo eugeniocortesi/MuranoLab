@@ -3,12 +3,12 @@ package it.polimi.ingsw.LM26.model.Cards.decorator;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
-public class Effect10Decorator implements ToolCardDecorator {
+public class MoveTwoDiceWithSameColor implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
 
-    public Effect10Decorator(ToolCard toolcard) {
+    public MoveTwoDiceWithSameColor(ToolCard toolcard) {
         this.toolcard = toolcard;
     }
 
@@ -21,6 +21,7 @@ public class Effect10Decorator implements ToolCardDecorator {
     }
 
     public void play (PlayerZone player) {
+
 
 
 

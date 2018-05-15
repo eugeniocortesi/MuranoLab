@@ -1,6 +1,6 @@
 package it.polimi.ingsw.LM26.model.Serialization;
 
-public class Effect1 extends Effect{
+public class DifferentColorShadeOnRowColomn extends Effect{
 
     //Colore, Riga = true
     //Sfumature, Colonna = false
@@ -9,11 +9,11 @@ public class Effect1 extends Effect{
     private boolean rowColomn;
     private String effect1=null;
 
-    public Effect1(boolean colorShades, boolean rowColomn) {
+    public DifferentColorShadeOnRowColomn(boolean colorShades, boolean rowColomn) {
 
         this.colorShades = colorShades;
         this.rowColomn = rowColomn;
-        this.type = "Effect1";
+        this.type = "DifferentColorShadeOnRowColomn";
         effect1="Different " + iscolorShades() + " - " + isrowColomn();
     }
 

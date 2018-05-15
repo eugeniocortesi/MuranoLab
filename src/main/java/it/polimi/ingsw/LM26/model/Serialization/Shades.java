@@ -2,14 +2,14 @@ package it.polimi.ingsw.LM26.model.Serialization;
 
 import it.polimi.ingsw.LM26.model.Serialization.Elements.elements;
 
-public class Effect3 extends Effect{
+public class Shades extends Effect{
 
     private elements shades;
 
-    public Effect3(elements shades) {
+    public Shades(elements shades) {
 
         this.shades = shades;
-        this.type = "Effect3";
+        this.type = "Shades";
     }
 
     public String getE() { return "Shades " + shades; }

@@ -3,12 +3,12 @@ package it.polimi.ingsw.LM26.model.Cards.decorator;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
-public class Effect2Decorator implements ToolCardDecorator {
+public class MoveWithNoColorRestriction implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
 
-    public Effect2Decorator(ToolCard toolcard) {
+    public MoveWithNoColorRestriction(ToolCard toolcard) {
         this.toolcard = toolcard;
     }
 
