@@ -23,7 +23,7 @@ public class ChangeDieFromDraftToRoundTrack implements ToolCardDecorator {
     public void play (PlayerZone player) {
 
         //Die die1 =chooseFromTheDraft();
-        //Die die2 =chooseFromRoundTrackTurn();
+        //Die die2 =chooseFromRoundTrack();
         //inDraft.add(die2);
         //diceList.add(diceList.index(die2), inDraft.remove(die1));
 
