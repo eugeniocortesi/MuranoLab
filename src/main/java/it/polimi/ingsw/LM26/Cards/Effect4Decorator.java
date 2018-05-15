@@ -27,8 +27,6 @@ public class Effect4Decorator implements ToolCardDecorator {
 
         //for (int i=0; i<2; i++){
 
-        //il primo dado del giocatore è gia stato pizzato, non serve restrizione sul bordo
-
         //      fromBox = askTheBox();
         //      toBox = askTheBok();
         //      die = fromBox.getDie();

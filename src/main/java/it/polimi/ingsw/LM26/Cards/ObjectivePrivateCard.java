@@ -9,6 +9,9 @@ public class ObjectivePrivateCard extends ObjectiveCardAC {
 
 
     private elements colour= null;
+
+    private boolean inUse= false;
+
     int id;
 
     public ObjectivePrivateCard(int id, elements colour) {
@@ -34,6 +37,14 @@ public class ObjectivePrivateCard extends ObjectiveCardAC {
             return Color.ANSI_YELLOW;
 
         else return null;
+    }
+
+    public boolean isInUse() {
+        return inUse;
+    }
+
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
     }
 
     public int getId() {

@@ -30,7 +30,7 @@ public class Effect6Decorator implements ToolCardDecorator {
         //if ( ! placeDie(die, toBox)) {
         //          System.Out.Println("error");
 
-        //          MANCA: se non puoi piazzarlo riponilo nella riserva
+        //
 
         //          }
 

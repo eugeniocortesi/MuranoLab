@@ -9,6 +9,7 @@ public class WindowPatternCard implements CardInt {
     private String title;
     private Matrix matrix;
     private PatternBox[][] patternMatrix;
+    private boolean inUse=false;
 
 
     public WindowPatternCard(int token, String title, Matrix matrix) {
@@ -27,6 +28,14 @@ public class WindowPatternCard implements CardInt {
         matrix.createPatternMatrix(patternMatrix);
         this.matrix= null;
         }
+
+    public boolean isInUse() {
+        return inUse;
+    }
+
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
+    }
 
     public String getTitle() {
         return title;

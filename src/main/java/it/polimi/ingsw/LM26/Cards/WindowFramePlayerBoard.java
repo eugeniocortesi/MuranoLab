@@ -6,6 +6,8 @@ public class WindowFramePlayerBoard/* implements CardInt */{
     private Color color;
     private int id;
     private boolean hasPatternCard = false;
+    private boolean empty= false;
+
 
     public WindowFramePlayerBoard(int id, Color color) {
 
@@ -15,6 +17,14 @@ public class WindowFramePlayerBoard/* implements CardInt */{
                 BoardMatrix[i][j]= new Box(i, j);
         this.color=color;
         this.id=id;
+    }
+
+    public boolean isEmpty() {
+        return empty;
+    }
+
+    public void setEmpty(boolean empty) {
+        this.empty = empty;
     }
 
     public int getId() {

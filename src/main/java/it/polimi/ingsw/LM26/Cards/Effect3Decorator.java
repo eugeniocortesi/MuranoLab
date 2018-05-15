@@ -25,7 +25,7 @@ public class Effect3Decorator implements ToolCardDecorator {
         //Box toBox = askTheBok();
         //Die die = fromBox.getDie();
         //if (checkColorRestriction(die, toBox) &&  checkNearByRestriction(player, die, toBox)){
-        //MANCA: se è il primo dado devo rimetterlo in un bordo
+
         //             toBox.setDie(die);
         //             fromBox.free();
         //              }

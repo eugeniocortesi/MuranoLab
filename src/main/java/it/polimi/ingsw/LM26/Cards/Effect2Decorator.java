@@ -26,7 +26,7 @@ public class Effect2Decorator implements ToolCardDecorator {
         //Box toBox = askTheBok();
         //Die die = fromBox.getDie();
         //if (checkValueRestriction(die, toBox) && checkNearByRestriction(player, die, toBox)==True ){
-        //MANCA: se è il primo dado devo rimetterlo in un bordo
+
         //         toBox.setDie(die);
         //          fromBox.free();
         //          }

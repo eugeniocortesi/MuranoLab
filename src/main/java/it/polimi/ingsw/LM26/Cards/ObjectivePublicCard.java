@@ -12,6 +12,8 @@ public class ObjectivePublicCard extends ObjectiveCardAC {
 
     private int id;
 
+    private boolean inUse= false;
+
     public ObjectivePublicCard(int id, Effect effect) {
 
         this.effect=effect;
@@ -34,6 +36,14 @@ public class ObjectivePublicCard extends ObjectiveCardAC {
     public String getEffect() {
 
         return  effect.getE();
+    }
+
+    public boolean isInUse() {
+        return inUse;
+    }
+
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
     }
 
     public int getId() {
