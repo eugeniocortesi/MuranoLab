@@ -1,22 +1,27 @@
 [
   {
     "colour": "RED",
+    "inUse": false,
     "id": 11
   },
   {
     "colour": "YELLOW",
+    "inUse": false,
     "id": 12
   },
   {
     "colour": "GREEN",
+    "inUse": false,
     "id": 13
   },
   {
     "colour": "BLUE",
+    "inUse": false,
     "id": 14
   },
   {
     "colour": "VIOLET",
+    "inUse": false,
     "id": 15
   }
 ]
