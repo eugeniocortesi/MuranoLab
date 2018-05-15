@@ -24,7 +24,7 @@ LoginMessage
 
 
 
-   `{ "operation" : "login" , "username" : " <username>"}`
+   `{ "method" : "login" , "username" : " <username>"}`
 
     
 

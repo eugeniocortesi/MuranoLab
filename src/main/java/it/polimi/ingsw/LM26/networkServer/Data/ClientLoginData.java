@@ -45,6 +45,6 @@ public class ClientLoginData extends MessageClass {
 
     public void execute() {
 
-        System.out.println("Operation " +this.method+ " Username " +this.username);
+        System.out.println("Method " +this.method+ " Username " +this.username);
     }
 }
