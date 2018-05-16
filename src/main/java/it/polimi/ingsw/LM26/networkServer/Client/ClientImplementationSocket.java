@@ -7,7 +7,7 @@ import java.net.*;
 import java.io.*;
 
 
-public class Client {
+public class ClientImplementationSocket {
     private final static int PORT = 3000;
     private final static int NUMSPAZI = 100;
     private final static int TempoFisso = 500;
@@ -21,8 +21,8 @@ public class Client {
     private BufferedReader inKeyboard;
     private PrintWriter outVideo;
 
-    public Client() {
-        System.out.println("Client avviato");
+    public ClientImplementationSocket() {
+        System.out.println("ClientImplementationSocket avviato");
 
         try {
             esegui();
@@ -50,7 +50,7 @@ public class Client {
             inKeyboard = new BufferedReader(new InputStreamReader(System.in));
             outVideo = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
 
-            System.out.println("Client connesso");
+            System.out.println("ClientImplementationSocket connesso");
         } catch (Exception e) {
             System.out.println("Exception: " + e);
             e.printStackTrace();
@@ -241,7 +241,7 @@ public class Client {
     //TODO remove
     public static void main(String[] args) throws IOException, InterruptedException
     {
-        Client c=new Client();
+        ClientImplementationSocket c=new ClientImplementationSocket();
         String s = "Chiara";
     }
 

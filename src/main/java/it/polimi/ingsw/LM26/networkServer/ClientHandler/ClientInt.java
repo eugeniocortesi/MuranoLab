@@ -1,7 +1,9 @@
 package it.polimi.ingsw.LM26.networkServer.ClientHandler;
 
 
-public interface ClientInt extends Runnable {
+import java.rmi.Remote;
+
+public interface ClientInt extends Runnable, Remote {
 
     public void sendMessage(String message);
 
