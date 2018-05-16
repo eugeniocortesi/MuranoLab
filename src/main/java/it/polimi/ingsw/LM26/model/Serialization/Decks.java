@@ -4,18 +4,18 @@ package it.polimi.ingsw.LM26.model.Serialization;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import it.polimi.ingsw.LM26.Main;
 import it.polimi.ingsw.LM26.model.Cards.*;
 import it.polimi.ingsw.LM26.model.Cards.decorator.*;
 import it.polimi.ingsw.LM26.model.Cards.factory.CardCreator;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import jdk.internal.util.xml.impl.Input;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import static it.polimi.ingsw.LM26.model.PlayArea.Color.*;
 import static it.polimi.ingsw.LM26.model.Serialization.Elements.elements.*;
@@ -324,6 +324,9 @@ public class Decks {
         try {
             fr1 = new FileReader("PrivateCards");
             br1 = new BufferedReader(fr1);
+
+            //TODO
+            //InputStream asdfghj = Main.class.getResourceAsStream("PrivateCards");
 
 
 

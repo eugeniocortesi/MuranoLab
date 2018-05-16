@@ -26,7 +26,7 @@ public class DrawOneMoreDie implements ToolCardDecorator {
 
         //if(!plaver.isSecondTurn() ){
         //Die die=chooseFromTheDraft();
-        //Box fromBox = askTheBox();
+        //Box toBox = askTheBox();
 
         //if ( ! placeDie(player, die, toBox)) {
         //          System.Out.Println("error");
