@@ -33,7 +33,7 @@ public class TestRound {
     //stampa l'ordine dei 4 giocatori nei 10 turni
     public void checkAssignment4Players(){
         for(int i=0; i<4; i++){
-            playerZones.add(new PlayerZone(name+"i", i));
+            playerZones.add(new PlayerZone(name, i));
         }
         round=new Round(roundTrack, playerZones, nrounds);
         for(int i=0; i<nrounds; i++){
