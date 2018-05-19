@@ -1,8 +1,11 @@
 package it.polimi.ingsw.LM26.model.GamePhases;
 
 import it.polimi.ingsw.LM26.model.Cards.*;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
+import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.Token;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import java.util.*;
@@ -33,7 +36,24 @@ public class InitialPhase implements PhaseInt {
 
     }
 
-    //set scoremarker..
+    /**
+     * this methods assigns to each player its coloured score marker and window frame board, according to its ID
+     * @param playerList
+     */
+    public void setScoreMarkerAndWindowFrame(ArrayList<PlayerZone> playerList){
+        playerList.get(0).setPlayerBoard(new WindowFramePlayerBoard(0, Color.ANSI_RED));
+        playerList.get(0).setScoreMarker(new ScoreMarker(Color.ANSI_RED));
+        playerList.get(1).setPlayerBoard(new WindowFramePlayerBoard(1, Color.ANSI_GREEN));
+        playerList.get(1).setScoreMarker(new ScoreMarker(Color.ANSI_GREEN));
+        if(playerList.size()>2){
+            playerList.get(2).setPlayerBoard(new WindowFramePlayerBoard(1, Color.ANSI_BLUE));
+            playerList.get(2).setScoreMarker(new ScoreMarker(Color.ANSI_BLUE));
+            if(playerList.size()==4){
+                playerList.get(3).setPlayerBoard(new WindowFramePlayerBoard(1, Color.ANSI_PURPLE));
+                playerList.get(3).setScoreMarker(new ScoreMarker(Color.ANSI_PURPLE));
+            }
+        }
+    }
 
     //distribuisce i token a tutti i giocatori in base alla loro windowPatternCard
     public void setTokens(ArrayList<PlayerZone> playerZones){
@@ -61,12 +81,12 @@ public class InitialPhase implements PhaseInt {
     /*public ArrayList<ObjectivePrivateCard> setPrivateCard(ArrayList<PlayerZone> playerList, Decks decks){
         ArrayList<ObjectivePrivateCard>
     }*/
-
+    //questo metodo va chiamato dopo aver assegnato la windowPatternCard
     public void doAction(Game game, ArrayList<PlayerZone> playerList) {
-
+        setScoreMarkerAndWindowFrame(playerList);
         setTokens(playerList);
         setPublicCards(onBoardCards, decks);
-
+        //private cards..
         game.setPhase(new CentralPhase(playerList));
     }
 }
