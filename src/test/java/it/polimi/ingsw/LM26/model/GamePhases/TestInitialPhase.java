@@ -18,8 +18,9 @@ public class TestInitialPhase {
 
     private Decks deck;
     private ArrayList<PlayerZone> playerList= new ArrayList<PlayerZone>();
-    private InitialPhase initialPhase = new InitialPhase(playerList,deck);
     private OnBoardCards onBoardCards = new OnBoardCards();
+    private InitialPhase initialPhase = new InitialPhase(playerList,deck, onBoardCards);
+
     @Before
     public void SetUpInitialPhase(){
         deck=singletonDecks();

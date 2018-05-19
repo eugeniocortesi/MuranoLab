@@ -5,19 +5,16 @@ import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.Token;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
-
+import java.util.*;
 import java.util.ArrayList;
 
 public class InitialPhase implements PhaseInt {
 
     private ArrayList<PlayerZone> playerList;
     private ObjectivePublicCard objectivePublicCard;
-
-    public InitialPhase(ArrayList<PlayerZone> playerList, Decks decks) {
-        this.playerList = playerList;
-
-    }
-
+    private Random random =new Random();
+    private OnBoardCards onBoardCards;
+    private Decks decks;
     private final int cardsOnBoardsize=3; //se si ha tempo sarebbe meglio mettere questo limite nella "OnBoardCards"
     //e quello di 10 nella RoundTrack (che invece è nella classe Round)
 
@@ -28,6 +25,15 @@ public class InitialPhase implements PhaseInt {
     public int getCardsOnBoardsize() {
         return cardsOnBoardsize;
     }
+
+    public InitialPhase(ArrayList<PlayerZone> playerList, Decks decks, OnBoardCards onBoardCards) {
+        this.playerList = playerList;
+        this.decks = decks;
+        this.onBoardCards = onBoardCards;
+
+    }
+
+    //set scoremarker..
 
     //distribuisce i token a tutti i giocatori in base alla loro windowPatternCard
     public void setTokens(ArrayList<PlayerZone> playerZones){
@@ -41,9 +47,9 @@ public class InitialPhase implements PhaseInt {
     public void setPublicCards(OnBoardCards onBoardCards, Decks decks){
         ArrayList<ObjectivePublicCard> publicCardsOnBoard= new ArrayList<ObjectivePublicCard>();
         while(publicCardsOnBoard.size() <cardsOnBoardsize){
-            index=(((int)Math.random())%decks.getObjectivePublicCardDeck().size())-1;
+            index=random.nextInt(decks.getObjectivePublicCardDeck().size()-1);
             objectivePublicCard = decks.getObjectivePublicCardDeck().get(index);
-            if(objectivePublicCard.isInUse() == false){
+            if(!objectivePublicCard.isInUse()){
                 objectivePublicCard.setInUse(true);
                 publicCardsOnBoard.add(objectivePublicCard);
             }
@@ -51,10 +57,16 @@ public class InitialPhase implements PhaseInt {
         onBoardCards.setObjectivePublicCardList(publicCardsOnBoard);
         onBoardCards.setToolCardList(decks.getToolCardDeck());
     }
-    //controller integra con distribuzione delle carte private nell'area dataprivate
+
+    /*public ArrayList<ObjectivePrivateCard> setPrivateCard(ArrayList<PlayerZone> playerList, Decks decks){
+        ArrayList<ObjectivePrivateCard>
+    }*/
 
     public void doAction(Game game, ArrayList<PlayerZone> playerList) {
-        //assegnare token, dare carte..
+
+        setTokens(playerList);
+        setPublicCards(onBoardCards, decks);
+
         game.setPhase(new CentralPhase(playerList));
     }
 }

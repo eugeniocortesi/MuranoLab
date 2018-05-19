@@ -12,8 +12,18 @@ public class FinalPhase implements PhaseInt {
     private int maximum;
     private int minimum;
 
-
-    public PlayerZone declareWinner(ArrayList<PlayerZone> players, RoundTrackInt roundTrack) throws IllegalArgumentException{
+    /**
+     * the method declares the winner: it is the one connected
+     * if there is only one player; else "The player with the highest Victory Point
+     *total is the winner. Ties are broken by most
+     *points from Private Objectives, most remaining
+     *Favor Tokens, then finally by reverse player
+     *order in the final round."
+     * @param players, the list of all players enrolled
+     * @return the winner
+     * @throws IllegalArgumentException when there are problems with players' LastTurnValue
+     */
+    public PlayerZone declareWinner(ArrayList<PlayerZone> players) throws IllegalArgumentException{
         if(players.size()==1) return players.get(0);
         else{
             maximum=players.get(0).getScoreMarker().getRealPoints();
@@ -33,8 +43,9 @@ public class FinalPhase implements PhaseInt {
                         maximum = i.getPrivatePoints();
                     }
                 }
-                for(PlayerZone j : winners){
-                    if(j.getPrivatePoints()!=maximum) winners.remove(j);
+                for(int j=0; j<winners.size();){
+                    if(winners.get(j).getPrivatePoints()!=maximum) winners.remove(j);
+                    else j++;
                 }
                 if(winners.size()==1) return winners.get(0);
                 else{
@@ -44,12 +55,13 @@ public class FinalPhase implements PhaseInt {
                            maximum = i.getToken().getTokenNumber();
                         }
                     }
-                    for(PlayerZone j : winners){
-                        if(j.getToken().getTokenNumber()!=maximum) winners.remove(j);
+                    for(int j=0; j<winners.size();){
+                        if(winners.get(j).getToken().getTokenNumber()!=maximum) winners.remove(j);
+                        else j++;
                     }
                     if(winners.size()==1) return winners.get(0);
                     else {
-                        minimum=-1;
+                        minimum=10;
                         for(PlayerZone i : winners) {
                             if (i.getLastRoundTurn() < minimum) {
                                 minimum = i.getLastRoundTurn();
