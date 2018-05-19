@@ -25,7 +25,9 @@ public class InitialPhase implements PhaseInt {
 
     private int cardId; //sostituisce temporaneamente
 
-
+    public int getCardsOnBoardsize() {
+        return cardsOnBoardsize;
+    }
 
     //distribuisce i token a tutti i giocatori in base alla loro windowPatternCard
     public void setTokens(ArrayList<PlayerZone> playerZones){

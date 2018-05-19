@@ -72,23 +72,38 @@ public class ClientSocket implements ClientInt {
     }
 
         public synchronized void disconnect(){
-        try{
-            socket.close();
-        }catch (Exception e){
-            System.out.println("Exception: " + e);
-            e.printStackTrace();
-        }
-        finally {
-            try{
-                socket.close();
-            }catch(IOException ex){
-                System.err.println("Socket not closed");
+
+            while(this.logged) {
+
+                System.out.println("Entrato nel ciclo disconnect");
+                String msg = receiveMessage();
+                System.out.println(msg);
+                ClientLoginData messageData = ClientLoginData.deserialize(msg);
+                System.out.println("username: " + messageData.getUsername());
+                this.user = messageData.getUsername();
+
+                //server.getConnectionAcepter.controluser
+                //server.getConnectionAcepter.addPlayer ???
+
+                sendMessage("Disconnected " + this.user);
+                this.setLogged(false);
+                try {
+                    socket.close();
+                } catch (Exception e) {
+                    System.out.println("ClienT socket: " + this.user + " not closed");
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        socket.close();
+                    } catch (IOException ex) {
+                        System.err.println("Socket not closed");
+                    }
+                }
             }
-        }
 
     }
 
-    public void run() {
+    public void run(){
 
         try {
             login();
@@ -111,7 +126,7 @@ public class ClientSocket implements ClientInt {
          System.out.println("Entrato in clientSocket");
         while(!this.logged){
 
-            System.out.println("Entrato nel ciclo");
+            System.out.println("Entrato nel ciclo login");
             /*ClientMessageData msg = new ClientMessageData("requested_login");
             String msg_str = msg.serialize();
             System.out.println(msg_str);

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.LM26.networkServer.ClientHandler;
 
+import it.polimi.ingsw.LM26.networkServer.Client.ClientImplementationRMI;
+
 import java.rmi.RemoteException;
 
 public class ClientRMI implements ClientInt {
@@ -33,7 +35,7 @@ public class ClientRMI implements ClientInt {
         ;
     }
 
-    public void login(String username) {
+    public void login(String username, ClientImplementationRMI clientImplRMI) {
 
         //TODO cerca id, color
 

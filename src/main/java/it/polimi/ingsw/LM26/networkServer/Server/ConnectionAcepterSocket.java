@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.networkServer.Server;
 
 import it.polimi.ingsw.LM26.networkServer.ClientHandler.ClientInt;
 import it.polimi.ingsw.LM26.networkServer.ClientHandler.ClientSocket;
+import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -14,7 +15,7 @@ public class ConnectionAcepterSocket implements ConnectionAcepter {
 
     private ServerSocket serverSocket;
     private  Vector<ClientInt> connections;
-    private final static int PORT=3000;
+    private static int SOCKETPORT;
 
     public Vector<ClientInt> getConnections() {
         return connections;
@@ -29,9 +30,10 @@ public class ConnectionAcepterSocket implements ConnectionAcepter {
     //private Socket socket;
     //TODO server da fare
 
-    public ConnectionAcepterSocket(Server server){
+    public ConnectionAcepterSocket(Server server, DataServerConfiguration dataServerConfiguration){
         connections = new Vector<ClientInt>();
         this.server = server;
+        this.SOCKETPORT = dataServerConfiguration.getSOCKETPORT();
     }
 
 
@@ -40,7 +42,7 @@ public class ConnectionAcepterSocket implements ConnectionAcepter {
 
         try {
             System.out.println("Acception Connection Socket");
-            ServerSocket serversocket = new ServerSocket(PORT);
+            ServerSocket serversocket = new ServerSocket(SOCKETPORT);
             System.out.println("Istanziata serversocket");
             while (true) {
                 System.out.println("Sono nel ciclo");

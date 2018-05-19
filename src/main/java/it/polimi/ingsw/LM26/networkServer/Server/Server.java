@@ -4,12 +4,16 @@ package it.polimi.ingsw.LM26.networkServer.Server;
 import it.polimi.ingsw.LM26.networkServer.ClientHandler.ClientInt;
 import it.polimi.ingsw.LM26.networkServer.Server.ConnectionAcepter;
 import it.polimi.ingsw.LM26.networkServer.Server.ConnectionAcepterSocket;
+import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
+import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerImplementation;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
 public class Server {
+
+    private DataServerImplementation dataServerImplementation;
 
     private ConnectionAcepter connectionAcepter;
 
@@ -28,14 +32,14 @@ public class Server {
         return connectionAcepter;
     }
 
-    public void setConnectionAcepter(ConnectionAcepter connectionAcepter) {
-        this.connectionAcepter = connectionAcepter;
-    }
-
 
     public Server(){
-        connectionAcepter = new ConnectionAcepterSocket(this);
+
+        dataServerImplementation = new DataServerImplementation();
+        DataServerConfiguration dataServerConfiguration = dataServerImplementation.implementation();
+        connectionAcepter = new ConnectionAcepterSocket(this, dataServerConfiguration);
         connectionAcepter.acceptConnection();
+        //TODO add RMI connection Acepter
     }
 
     //TODO remove
