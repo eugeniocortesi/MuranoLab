@@ -2,30 +2,32 @@ package it.polimi.ingsw.LM26.networkServer.Client;
 
 
 import it.polimi.ingsw.LM26.networkServer.Data.ClientLoginData;
+import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientImplementation;
 
 import java.net.*;
 import java.io.*;
 
 
 public class ClientImplementationSocket {
-    private final static int PORT = 3000;
-    private final static int NUMSPAZI = 100;
-    private final static int TempoFisso = 500;
-    private final static int TempoVariabile = 50;
-
+    private static int SOCKETPORT;
     private final static String address = "localhost";
-
+    private DataClientImplementation dataClientImplementation;
     private Socket socket;
     private BufferedReader inSocket;
     private PrintWriter outSocket;
     private BufferedReader inKeyboard;
     private PrintWriter outVideo;
+    private String username;
 
     public ClientImplementationSocket() {
         System.out.println("ClientImplementationSocket avviato");
+        this.dataClientImplementation = new DataClientImplementation();
+        DataClientConfiguration dataClientConfiguration = this.dataClientImplementation.implementation();
+        SOCKETPORT = dataClientConfiguration.getClientSOCKETPORT();
 
         try {
-            esegui();
+            executeBody();
         } catch (Exception e) {
             System.out.println("Exception: " + e);
             e.printStackTrace();
@@ -39,11 +41,11 @@ public class ClientImplementationSocket {
         }
     }
 
-    private void connetti() {
+    private void connect() {
         try {
             System.out.println("Il client tenta di connettersi");
 
-            socket = new Socket(address, PORT);
+            socket = new Socket(address, SOCKETPORT);
             //canali di comunicazione
             inSocket = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             outSocket = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
@@ -65,12 +67,13 @@ public class ClientImplementationSocket {
     }
 
 
-    private void esegui() {
+    private void executeBody() {
         try {
-            connetti();
+            connect();
             login();
+            waitTime();
             //gioca();
-            chiudi();
+            //close();
         } catch (Exception e) {
             System.out.println("Exception: " + e);
             e.printStackTrace();
@@ -84,7 +87,7 @@ public class ClientImplementationSocket {
         }
     }
 
-    private void gioca() {
+    /*private void gioca() {
         while (true) {
             outVideo.println("Scegliere cosa si vuol fare");
             outVideo.println("p --> partita");
@@ -180,11 +183,23 @@ public class ClientImplementationSocket {
     private void generaBianco() {
         for (int i = 0; i < NUMSPAZI; i++)
             outVideo.println();
-    }
+    }*/
 
-    private void chiudi() {
+    private void close() {
+
+        ClientLoginData disconnect = new ClientLoginData("disconnect", this.username);
+        String msg = disconnect.serializeLoginMessage();
+        this.outSocket.println(msg);
+
         try {
-            socket.close();
+            String messageDisconnected = inSocket.readLine();
+            System.out.println(messageDisconnected);
+            ClientLoginData disconnected = ClientLoginData.deserialize(messageDisconnected);
+            if(disconnected.getOperation().equals("disconnected"))
+                socket.close();
+            else{
+                System.out.println("Client " + disconnected.getUsername()+ " not disconnected yet");
+            }
         } catch (Exception e) {
             System.out.println("Exception: " + e);
             e.printStackTrace();
@@ -203,7 +218,7 @@ public class ClientImplementationSocket {
         try {
             boolean loggato = false;
 
-            while (!loggato) {
+            while (loggato == false) {
                 outVideo.println("Inserire login:");
                 String userPlayer = inKeyboard.readLine();
 
@@ -219,12 +234,13 @@ public class ClientImplementationSocket {
                 outSocket.println(username);
                 outSocket.flush();*/
 
+                //QUA TORNA UN TIPO MESSAGGIO!
+                loggato = checklogin ();
+                //loggato = Boolean.valueOf(inSocket.readLine()).booleanValue();
 
-                loggato = Boolean.valueOf(inSocket.readLine()).booleanValue();
-
-                if (loggato)
+                if (loggato == true) {
                     outVideo.println("Login effettuato correttamente");
-
+                }
             }
         } catch (Exception e) {
             System.out.println("Exception: " + e);
@@ -236,6 +252,33 @@ public class ClientImplementationSocket {
                 System.err.println("Socket not closed");
             }
         }
+    }
+
+    public boolean checklogin() {
+
+        try {
+            String serveranswer = this.inSocket.readLine();
+            System.out.println(serveranswer);
+            ClientLoginData messageData = ClientLoginData.deserialize(serveranswer);
+            System.out.println("username: " + messageData.getUsername());
+            if (messageData.getOperation().equals("not_logged"))
+                return false;
+            else {
+                System.out.println("Client recognized");
+                this.username = messageData.getUsername();
+                //prendi tutti i campi necessari al client
+                return true;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public void waitTime(){
+        while(true);
     }
 
     //TODO remove

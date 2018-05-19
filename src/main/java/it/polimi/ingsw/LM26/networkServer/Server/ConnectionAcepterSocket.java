@@ -14,24 +14,13 @@ public class ConnectionAcepterSocket implements ConnectionAcepter {
     Server server;
 
     private ServerSocket serverSocket;
-    private  Vector<ClientInt> connections;
     private static int SOCKETPORT;
-
-    public Vector<ClientInt> getConnections() {
-        return connections;
-    }
-
-    public void setConnections(Vector<ClientInt> connections) {
-        this.connections = connections;
-    }
-
 
 
     //private Socket socket;
     //TODO server da fare
 
     public ConnectionAcepterSocket(Server server, DataServerConfiguration dataServerConfiguration){
-        connections = new Vector<ClientInt>();
         this.server = server;
         this.SOCKETPORT = dataServerConfiguration.getSOCKETPORT();
     }
@@ -43,15 +32,15 @@ public class ConnectionAcepterSocket implements ConnectionAcepter {
         try {
             System.out.println("Acception Connection Socket");
             ServerSocket serversocket = new ServerSocket(SOCKETPORT);
-            System.out.println("Istanziata serversocket");
+            System.out.println("OK serversocket");
             while (true) {
-                System.out.println("Sono nel ciclo");
+                System.out.println("Server listening");
                 Socket socket = serversocket.accept();
-                ClientSocket clientSocket = new ClientSocket (socket);
+                ClientSocket clientSocket = new ClientSocket (socket, server);
                 clientSocket.start();
 
-                this.connections.add(clientSocket);
-                System.out.println("Sto aggiungendo" + connections.size() + "elemento" );
+                this.server.adderConnectionsClient(clientSocket);
+                System.out.println("I'm adding " + server.getConnectionsClient().size() + " elements" );
             }
         }
         catch (IOException e) {
@@ -59,11 +48,5 @@ public class ConnectionAcepterSocket implements ConnectionAcepter {
 
     }
 
-    public void notifyClientAddedNewPlayer(){
 
-        for( int i = 0; i< connections.size(); i++){
-
-            connections.get(i).sendMessage("Added new player in the game! ");
-        }
-    }
 }

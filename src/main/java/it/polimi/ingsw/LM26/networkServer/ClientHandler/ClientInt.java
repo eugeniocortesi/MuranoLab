@@ -18,4 +18,6 @@ public interface ClientInt extends Runnable, Remote {
     public void setLogged(boolean logged);
 
     public void run();
+
+    public String getUsername();
 }

@@ -51,6 +51,10 @@ public class ClientRMI implements ClientInt {
         }*/
     }
 
+    public String getUsername() {
+        return this.user;
+    }
+
     public void start() {
         run();
     }

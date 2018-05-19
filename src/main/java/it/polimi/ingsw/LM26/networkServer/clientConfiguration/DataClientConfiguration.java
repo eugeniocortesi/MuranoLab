@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.networkServer.serverConfiguration;
+package it.polimi.ingsw.LM26.networkServer.clientConfiguration;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -6,23 +6,12 @@ import com.google.gson.GsonBuilder;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class DataServerConfiguration {
+public class DataClientConfiguration {
 
-    private final static int ServerSOCKETPORT=3000;
+    private final static int ClientSOCKETPORT = 3000;
 
-    private final static int ServerRMIPORT=1099;
-
-    public DataServerConfiguration(){
-
-        ;
-    }
-
-    public static int getSOCKETPORT() {
-        return ServerSOCKETPORT;
-    }
-
-    public static int getRMIPORT() {
-        return ServerRMIPORT;
+    public int getClientSOCKETPORT() {
+        return ClientSOCKETPORT;
     }
 
     public void create(){
@@ -35,7 +24,7 @@ public class DataServerConfiguration {
 
         {
             try {
-                wr = new FileWriter("DataServerConfiguration");
+                wr = new FileWriter("DataClientConfiguration");
                 gson.toJson(this, wr);
                 wr.close();
             } catch (IOException e) {
@@ -43,6 +32,5 @@ public class DataServerConfiguration {
             }
         }
     }
-
 
 }
