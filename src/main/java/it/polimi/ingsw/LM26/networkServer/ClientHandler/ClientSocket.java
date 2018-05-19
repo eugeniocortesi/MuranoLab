@@ -144,10 +144,6 @@ public class ClientSocket implements ClientInt {
         while(!this.logged){
 
             System.out.println("Entrato nel ciclo login");
-            /*ClientMessageData msg = new ClientMessageData("requested_login");
-            String msg_str = msg.serialize();
-            System.out.println(msg_str);
-            this.sendMessage(msg_str);*/
 
             String msg = receiveMessage();
             System.out.println(msg);
