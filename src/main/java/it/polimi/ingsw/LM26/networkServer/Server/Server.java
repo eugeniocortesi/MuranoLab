@@ -1,6 +1,8 @@
 package it.polimi.ingsw.LM26.networkServer.Server;
 
 
+import it.polimi.ingsw.LM26.controller.Controller;
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.networkServer.ClientHandler.ClientInt;
 import it.polimi.ingsw.LM26.networkServer.Server.ConnectionAcepter;
 import it.polimi.ingsw.LM26.networkServer.Server.ConnectionAcepterSocket;
@@ -19,8 +21,45 @@ public class Server {
 
     private ArrayList<ClientInt> connectionsClient;
 
+    private Model model;
+
+    private Controller controller;
+
+    public Server(){
+
+        dataServerImplementation = new DataServerImplementation();
+        DataServerConfiguration dataServerConfiguration = dataServerImplementation.implementation();
+        this.connectionsClient = new ArrayList<ClientInt>();
+
+        this.model = new Model();
+        //LOOK AT CONSTRUCTOR
+        //AL CONTROLLER PASSERO' SOLO IL SERVER , PER CHIAMARE IL MODEL FARAI this.server.getModel();
+        // this.controller = new Controller(this);
+
+        connectionAcepter = new ConnectionAcepterSocket(this, dataServerConfiguration);
+        connectionAcepter.acceptConnection();
+        //TODO add RMI connection Acepter
+    }
+
+
     public ArrayList<ClientInt> getConnectionsClient() {
         return connectionsClient;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public Controller getController() {
+        return controller;
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
     }
 
     public ArrayList<ClientInt> adderConnectionsClient(ClientInt clientInt) {
@@ -59,16 +98,6 @@ public class Server {
         return connectionAcepter;
     }
 
-
-    public Server(){
-
-        dataServerImplementation = new DataServerImplementation();
-        DataServerConfiguration dataServerConfiguration = dataServerImplementation.implementation();
-        this.connectionsClient = new ArrayList<ClientInt>();
-        connectionAcepter = new ConnectionAcepterSocket(this, dataServerConfiguration);
-        connectionAcepter.acceptConnection();
-        //TODO add RMI connection Acepter
-    }
 
     //TODO remove
     public static void main(String[] args) throws IOException, InterruptedException
