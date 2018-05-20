@@ -35,8 +35,7 @@ public class TestSingletonDecks {
         }
         for(i=0; i<=11; i++) {
             decks.getToolCardDeck().get(i).printCard();
-            PlayerZone player =new PlayerZone("Jack", 1);
-            decks.getToolCardDeck().get(i).play(player);
+            
         }
 
     }
