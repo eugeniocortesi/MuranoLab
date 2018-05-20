@@ -3,12 +3,12 @@ package it.polimi.ingsw.LM26.model.Cards.decorator;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
-public class RollToTheOppositeFace implements ToolCardDecorator {
+public class MoveTwoDiceWithSameColor12 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
 
-    public RollToTheOppositeFace(ToolCard toolcard) {
+    public MoveTwoDiceWithSameColor12(ToolCard toolcard) {
         this.toolcard = toolcard;
     }
 
@@ -21,6 +21,7 @@ public class RollToTheOppositeFace implements ToolCardDecorator {
     }
 
     public void play (PlayerZone player) {
+
 
 
 

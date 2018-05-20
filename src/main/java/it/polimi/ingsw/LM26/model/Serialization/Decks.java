@@ -4,18 +4,15 @@ package it.polimi.ingsw.LM26.model.Serialization;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import it.polimi.ingsw.LM26.Main;
 import it.polimi.ingsw.LM26.model.Cards.*;
 import it.polimi.ingsw.LM26.model.Cards.decorator.*;
 import it.polimi.ingsw.LM26.model.Cards.factory.CardCreator;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
-import jdk.internal.util.xml.impl.Input;
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 import static it.polimi.ingsw.LM26.model.PlayArea.Color.*;
 import static it.polimi.ingsw.LM26.model.Serialization.Elements.elements.*;
@@ -206,19 +203,18 @@ public class Decks {
         WindowFramePlayerBoard Frame3 = new WindowFramePlayerBoard(33, ANSI_BLUE);
         WindowFramePlayerBoard Frame4 = new WindowFramePlayerBoard(34, ANSI_PURPLE);
 
-        ToolCardInt tool1 = new ChangeDieValue( new ToolCard(1));
-        //ToolCard tool1 = new ToolCard(1);
-        ToolCardInt tool2 = new MoveWithNoColorRestriction( new ToolCard(2));
-        ToolCardInt tool3 = new MoveWithNoValueRestriction( new ToolCard(3));
-        ToolCardInt tool4 = new MoveTwoDice( new ToolCard(4));
-        ToolCardInt tool5 = new ChangeDieFromDraftToRoundTrack( new ToolCard(5));
-        ToolCardInt tool6 = new RollAgainADie( new ToolCard(6));
-        ToolCardInt tool7 = new RollAllDraftDice( new ToolCard(7));
-        ToolCardInt tool8 = new DrawOneMoreDie( new ToolCard(8));
-        ToolCardInt tool9 = new PlaceWithNotInProximities( new ToolCard(9));
-        ToolCardInt tool10 = new RollToTheOppositeFace( new ToolCard(10));
-        ToolCardInt tool11 = new ChangeDieWithTheBag( new ToolCard(11));
-        ToolCardInt tool12 = new MoveTwoDiceWithSameColor( new ToolCard(12));
+        ToolCardInt tool1 = new ChangeDieValue1( new ToolCard(1));
+        ToolCardInt tool2 = new MoveWithNoColorRestriction2( new ToolCard(2));
+        ToolCardInt tool3 = new MoveWithNoValueRestriction3( new ToolCard(3));
+        ToolCardInt tool4 = new MoveTwoDice4( new ToolCard(4));
+        ToolCardInt tool5 = new ChangeDieFromDraftToRoundTrack5( new ToolCard(5));
+        ToolCardInt tool6 = new RollAgainADie6( new ToolCard(6));
+        ToolCardInt tool7 = new RollAllDraftDice7( new ToolCard(7));
+        ToolCardInt tool8 = new DrawOneMoreDie8( new ToolCard(8));
+        ToolCardInt tool9 = new PlaceWithNotInProximities9( new ToolCard(9));
+        ToolCardInt tool10 = new RollToTheOppositeFace10( new ToolCard(10));
+        ToolCardInt tool11 = new ChangeDieWithTheBag11( new ToolCard(11));
+        ToolCardInt tool12 = new MoveTwoDiceWithSameColor12( new ToolCard(12));
 
         ArrayList<CardInt> Private = new ArrayList<CardInt>();
         ArrayList<CardInt> Public = new ArrayList<CardInt>();

@@ -7,6 +7,7 @@ import it.polimi.ingsw.LM26.model.PlayArea.ScoreTrackInt;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Bag;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZoneInt;
 
 
@@ -16,7 +17,7 @@ public class Model {
 
     private OnBoardCards onBoardCards;
 
-    private ArrayList<PlayerZoneInt> playerZonesInt;
+    private ArrayList<PlayerZone> playerList;
 
     private ScoreTrackInt scoreTrackInt;
 
@@ -38,12 +39,12 @@ public class Model {
         this.onBoardCards = onBoardCards;
     }
 
-    public ArrayList<PlayerZoneInt> getPlayerZonesInt() {
-        return playerZonesInt;
+    public ArrayList<PlayerZone> getPlayerList() {
+        return playerList;
     }
 
-    public void setPlayerZonesInt(ArrayList<PlayerZoneInt> playerZonesInt) {
-        this.playerZonesInt = playerZonesInt;
+    public void setPlayerList(ArrayList<PlayerZone> playerList) {
+        this.playerList = playerList;
     }
 
     public ScoreTrackInt getScoreTrackInt() {

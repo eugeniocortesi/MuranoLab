@@ -3,12 +3,12 @@ package it.polimi.ingsw.LM26.model.Cards.decorator;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
-public class MoveWithNoValueRestriction implements ToolCardDecorator {
+public class MoveTwoDice4 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
 
-    public MoveWithNoValueRestriction(ToolCard toolcard) {
+    public MoveTwoDice4(ToolCard toolcard) {
         this.toolcard = toolcard;
     }
 
@@ -24,13 +24,23 @@ public class MoveWithNoValueRestriction implements ToolCardDecorator {
 
         //Box fromBox = askTheBox();
         //Box toBox = askTheBok();
-        //Die die = fromBox.getDie();
-        //while( ! ( (checkColorRestriction(die, toBox) &&  checkNearByRestriction(player, die, toBox))){
-        //      System.Out.println("error");
+        //Die die;
+
+        //for (int i=0; i<2; i++){
+
+        //      fromBox = askTheBox();
         //      toBox = askTheBok();
+        //      die = fromBox.getDie();
+        //      while(!(placeDie(player, die, toBox))){
+        //          System.Out.Println("error " + i+1);
+        //          toBox = askTheBok();
+        //          }
+        //      fromBox.free();
         //}
-        //toBox.setDie(die);
-        //fromBox.free();
+
+
+
+
 
 
 

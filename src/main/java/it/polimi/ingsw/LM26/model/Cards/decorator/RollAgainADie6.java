@@ -3,12 +3,12 @@ package it.polimi.ingsw.LM26.model.Cards.decorator;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
-public class RollAgainADie implements ToolCardDecorator {
+public class RollAgainADie6 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
 
-    public RollAgainADie(ToolCard toolcard) {
+    public RollAgainADie6(ToolCard toolcard) {
         this.toolcard = toolcard;
     }
 

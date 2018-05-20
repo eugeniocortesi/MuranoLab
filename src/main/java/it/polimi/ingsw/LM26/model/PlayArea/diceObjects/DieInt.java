@@ -11,4 +11,6 @@ public interface DieInt {
     public void roll();
 
     public void dump();
+
+    public int getValue();
 }

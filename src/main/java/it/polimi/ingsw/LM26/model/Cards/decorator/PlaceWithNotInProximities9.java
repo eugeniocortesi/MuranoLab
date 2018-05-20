@@ -3,12 +3,12 @@ package it.polimi.ingsw.LM26.model.Cards.decorator;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
-public class PlaceWithNotInProximities implements ToolCardDecorator {
+public class PlaceWithNotInProximities9 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
 
-    public PlaceWithNotInProximities(ToolCard toolcard) {
+    public PlaceWithNotInProximities9(ToolCard toolcard) {
         this.toolcard = toolcard;
     }
 

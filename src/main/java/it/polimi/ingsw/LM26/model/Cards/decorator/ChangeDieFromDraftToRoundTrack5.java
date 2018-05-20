@@ -3,12 +3,12 @@ package it.polimi.ingsw.LM26.model.Cards.decorator;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
-public class DrawOneMoreDie implements ToolCardDecorator {
+public class ChangeDieFromDraftToRoundTrack5 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
 
-    public DrawOneMoreDie(ToolCard toolcard) {
+    public ChangeDieFromDraftToRoundTrack5(ToolCard toolcard) {
         this.toolcard = toolcard;
     }
 
@@ -22,19 +22,16 @@ public class DrawOneMoreDie implements ToolCardDecorator {
 
     public void play (PlayerZone player) {
 
+        //Die die1 =chooseFromTheDraft();
+        //Die die2 =chooseFromRoundTrack();
+        //inDraft.add(die2);
+        //diceList.add(diceList.index(die2), inDraft.remove(die1));
 
 
-        //if(!plaver.isSecondTurn() ){
-        //Die die=chooseFromTheDraft();
-        //Box toBox = askTheBox();
+//NOTA: Creare all'inizio l'oggetto inDraft
+        //Creare all'inizio l'oggetto diceList
 
-        //if ( ! placeDie(player, die, toBox)) {
-        //          System.Out.Println("error");
-        //          }
-        // else   inDraft.remove(die);
 
-        //player.setSecondTurn()=true;
-        //}
 
 
     }
