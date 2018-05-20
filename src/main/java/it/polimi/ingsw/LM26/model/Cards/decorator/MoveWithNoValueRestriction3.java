@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.model.Cards.decorator;
 
+import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
@@ -22,27 +23,24 @@ public class MoveWithNoValueRestriction3 implements ToolCardDecorator {
         toolcard.printCard();
     }
 
-    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2){return false;}
-    public boolean play(Die dieFromDraft, Box toBox){return false;}
+    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}
+    public boolean play(Die dieFromDraft, Box toBox, int player){return false;}
     public boolean play(Die dieFromDraft, Die dieFromRoundTrack){return false;}
     public boolean play( Die dieFromDraft, String inDeCrement){return false;}
     public boolean play(Die dieFromDraft){return false;}
-    public boolean play(){return false;}
+    public boolean play(int player){return false;}
 
-    public boolean play (Box fromBox,Box toBox)  {
+    public boolean play (Box fromBox,Box toBox, int player)  {
 
-        return false;
-        //Box fromBox = askTheBox();
-        //Box toBox = askTheBok();
-        //Die die = fromBox.getDie();
-        //while( ! ( (checkColorRestriction(die, toBox) &&  checkNearByRestriction(player, die, toBox))){
-        //      System.Out.println("error");
-        //      toBox = askTheBok();
-        //}
-        //toBox.setDie(die);
-        //fromBox.free();
-
-
+        Die die = (Die) fromBox.getDie();
+        PlaceDie placement = new PlaceDie(die, toBox, player);
+        if (! ( placement.checkColorRestriction() && placement.checkNearByRestrictions()) ){
+            System.out.println("error");
+            return false;
+        }
+        toBox.setDie(die);
+        fromBox.free();
+        return true;
 
     }
 }

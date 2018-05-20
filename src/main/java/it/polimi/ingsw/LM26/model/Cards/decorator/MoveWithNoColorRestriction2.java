@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.model.Cards.decorator;
 
+import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
@@ -23,27 +24,35 @@ public class MoveWithNoColorRestriction2 implements ToolCardDecorator {
     }
 
 
-    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2){return false;}
-    public boolean play(Die dieFromDraft, Box toBox){return false;}
+    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}
+    public boolean play(Die dieFromDraft, Box toBox, int player){return false;}
     public boolean play(Die dieFromDraft, Die dieFromRoundTrack){return false;}
     public boolean play( Die dieFromDraft, String inDeCrement){return false;}
     public boolean play(Die dieFromDraft){return false;}
-    public boolean play(){return false;}
+    public boolean play( int player){return false;}
 
-    public boolean play (Box fromBox,Box toBox) {
+    public boolean play (Box fromBox,Box toBox, int player) {
 
-        return false;
-        //Die die = fromBox.getDie();
-        //while (! ( checkValueRestriction(die, toBox) && checkNearByRestriction(player, die, toBox)) ){
-        //          System.Out.println("error");
-        //          toBox = askTheBok();
-        //          }
-        //toBox.setDie(die);
-        //fromBox.free();
+
+        Die die = (Die) fromBox.getDie();
+        PlaceDie placement = new PlaceDie(die, toBox, player);
+        if (! ( placement.checkValueRestriction() && placement.checkNearByRestrictions()) ){
+                  System.out.println("error");
+                  return false;
+                  }
+        toBox.setDie(die);
+        fromBox.free();
+        return true;
 
 
     }
 }
+
+
+
+
+
+
 
 
         // public void checkNearByRestrictions(Player player, Die die, Box toBox){
@@ -118,7 +127,12 @@ public class MoveWithNoColorRestriction2 implements ToolCardDecorator {
         //else      //tutti i valori non di margine
         //          if(checlAll(box, i, j))return true;
         //return false;
-         //}
+
+
+
+
+
+         //return false;}
 
 
 

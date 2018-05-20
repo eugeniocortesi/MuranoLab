@@ -8,11 +8,11 @@ public interface ToolCardInt {
 
     public int getNum();
     public void printCard();
-    public boolean play(Box fromBox,Box toBox);
-    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2);
-    public boolean play(Die dieFromDraft, Box toBox);
+    public boolean play(Box fromBox,Box toBox, int player);
+    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player);
+    public boolean play(Die dieFromDraft, Box toBox, int player);
     public boolean play(Die dieFromDraft, Die dieFromRoundTrack);
     public boolean play( Die dieFromDraft, String inDeCrement);
     public boolean play(Die dieFromDraft);
-    public boolean play();
+    public boolean play(int player );
 }

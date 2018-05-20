@@ -9,15 +9,15 @@ import it.polimi.ingsw.LM26.model.Serialization.Decks;
 
 
 import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 
 public class Controller implements ControllerInt {
 
     private Model model;
-
     public Controller(Model model) {
 
-        this.model=model;
+        this.model = singletonModel();
     }
 
     public boolean check(Die dieFromDraft, Box toBox, int player){
@@ -35,7 +35,7 @@ public class Controller implements ControllerInt {
 
         if(checkToken(model.getPlayerList().get(player),twoThree))
 
-            if(twoThree.play(fromBox, toBox))
+            if(twoThree.play(fromBox, toBox, player))
                 return true;
 
         return false;
@@ -44,7 +44,7 @@ public class Controller implements ControllerInt {
 
         if(checkToken(model.getPlayerList().get(player),four))
 
-            if(four.play(fromBox1, toBox1, fromBox2, toBox2))
+            if(four.play(fromBox1, toBox1, fromBox2, toBox2, player))
                 return true;
 
         return false;
@@ -53,7 +53,7 @@ public class Controller implements ControllerInt {
 
         if(checkToken(model.getPlayerList().get(player),sixEightNine))
 
-            if(sixEightNine.play(dieFromDraft, toBox))
+            if(sixEightNine.play(dieFromDraft, toBox, player))
                 return true;
 
         return false;
@@ -89,7 +89,7 @@ public class Controller implements ControllerInt {
 
         if(checkToken(model.getPlayerList().get(player),seven))
 
-            if(seven.play())
+            if(seven.play(player))
                 return true;
 
         return false;

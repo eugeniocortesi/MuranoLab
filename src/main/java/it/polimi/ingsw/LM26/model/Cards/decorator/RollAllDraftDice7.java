@@ -2,8 +2,14 @@ package it.polimi.ingsw.LM26.model.Cards.decorator;
 
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+
+import java.util.ArrayList;
+
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class RollAllDraftDice7 implements ToolCardDecorator {
 
@@ -22,28 +28,29 @@ public class RollAllDraftDice7 implements ToolCardDecorator {
         toolcard.printCard();
     }
 
-    public boolean play(Box fromBox, Box toBox){return false;}
-    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2){return false;}
-    public boolean play(Die dieFromDraft, Box toBox){return false;}
+    public boolean play(Box fromBox, Box toBox, int player){return false;}
+    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player ){return false;}
+    public boolean play(Die dieFromDraft, Box toBox, int player){return false;}
     public boolean play(Die dieFromDraft, Die dieFromRoundTrack){return false;}
     public boolean play( Die dieFromDraft, String inDeCrement){return false;}
     public boolean play(Die dieFromDraft){return false;}
 
-    public boolean play () {
+    public boolean play (int pl ) {
 
-        //if(player.isDieUsed()=false && player.isSecondTurn=true) {
+        Model model = singletonModel();
+        PlayerZone player = model.getPlayerList().get(pl);
+        ArrayList<DieInt> inDraft = model.getDraftPool().getInDraft();
 
-        //for(int i=0; i<inDraft.size(); i++)
-        //inDraft.get(i).roll();
-        // }
-        //else System.out.println("you can't use this card now")
+        if(player.isDieUsed()==false && player.isSecondTurn()==true) {
 
+            for (int i = 0; i < inDraft.size(); i++)
+                inDraft.get(i).roll();
+            return true;
+        }
 
-
-  //creare oggetto roundTrack
-  //ATTENZIONE: isDieUsed va mandato a false ogni volta che un gioctore finisce un turno,
-        // va mandato a true ogni volta che un giocatore prende un dado dalla riserva
+        else System.out.println("you can't use this card now");
 
         return false;
+
     }
 }

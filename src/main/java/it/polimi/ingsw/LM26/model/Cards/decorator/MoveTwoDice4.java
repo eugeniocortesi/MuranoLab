@@ -1,8 +1,10 @@
 package it.polimi.ingsw.LM26.model.Cards.decorator;
 
+import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 public class MoveTwoDice4 implements ToolCardDecorator {
@@ -22,39 +24,35 @@ public class MoveTwoDice4 implements ToolCardDecorator {
         toolcard.printCard();
     }
 
-    public boolean play(Box fromBox, Box toBox){return false;}
-    public boolean play(Die dieFromDraft, Box toBox){return false;}
+    public boolean play(Box fromBox, Box toBox, int player){return false;}
+    public boolean play(Die dieFromDraft, Box toBox, int player){return false;}
     public boolean play(Die dieFromDraft, Die dieFromRoundTrack){return false;}
     public boolean play( Die dieFromDraft, String inDeCrement){return false;}
     public boolean play(Die dieFromDraft){return false;}
-    public boolean play(){return false;}
+    public boolean play(int player ){return false;}
 
-    public boolean play (Box fromBox1, Box toBox1, Box fromBox2, Box toBox2) {
-
-        return false;
+    public boolean play (Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player ) {
 
 
-        //        //
-        //        //      die = fromBox1.getDie();
-        //        //      while(!(placeDie(player, die, toBox1))){
-        //        //          System.Out.Println("error " + 1);
-                //              return null
-        //        //
-        //        //          }
-        //        //      fromBox1.free();
+        Die die = (Die) fromBox1.getDie();
+        Die die2 = (Die)fromBox2.getDie();
+        PlaceDie placement = new PlaceDie(die, toBox1, player);
 
+        if(!(placement.placeDie())){
+                       System.out.println("error " + 1);
+                       return false;
+                   }
 
+        placement = new PlaceDie(die2, toBox2, player);
+        if(!(placement.placeDie())){
+                        System.out.println("error " + 2);
+                        toBox1.free();
+                        return false;
 
-        //        //      die = fromBox2.getDie();
-        //        //      while(!(placeDie(player, die, toBox2))){
-        //        //          System.Out.Println("error " + 2);
-        //        //          return null
-        //        //          }
-        //        //      fromBox2.free();
-
-
-
-
+                    }
+        fromBox1.free();
+        fromBox2.free();
+        return true;
 
     }
 }

@@ -19,6 +19,10 @@ public class Bag {
 
     private int contPurple;
 
+    public ArrayList<DieInt> getInBag() {
+        return inBag;
+    }
+
     public Bag(){
 
         inBag = new ArrayList<DieInt>();

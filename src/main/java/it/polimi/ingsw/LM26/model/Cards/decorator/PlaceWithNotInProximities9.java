@@ -22,14 +22,14 @@ public class PlaceWithNotInProximities9 implements ToolCardDecorator {
         toolcard.printCard();
     }
 
-    public boolean play(Box fromBox, Box toBox){return false;}
-    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2){return false;}
+    public boolean play(Box fromBox, Box toBox, int player){return false;}
+    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}
     public boolean play(Die dieFromDraft, Die dieFromRoundTrack){return false;}
     public boolean play( Die dieFromDraft, String inDeCrement){return false;}
     public boolean play(Die dieFromDraft){return false;}
-    public boolean play(){return false;}
+    public boolean play( int player){return false;}
 
-    public boolean play (Die dieFromDraft, Box toBox) { //piazza il dado in modo che non sia addiacente ad altri
+    public boolean play (Die dieFromDraft, Box toBox, int player ) { //piazza il dado in modo che non sia addiacente ad altri
 
         return false;
         //Die die1 =chooseFromTheDraft();
