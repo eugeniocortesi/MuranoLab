@@ -59,4 +59,14 @@ public class TestInitialPhase {
         }
     }
 
+    @Test
+    //tests that every score marker has the same colour of its frame board
+    public void TestSetScoreMarkerAndWindowFrame(){
+        initialPhase.setScoreMarkerAndWindowFrame(playerList);
+        for(PlayerZone i : playerList){
+            assertEquals(i.getPlayerBoard().getColor(), i.getScoreMarker().getColor());
+            System.out.println(i.getIDPlayer());
+        }
+    }
+
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.model;
 
+import it.polimi.ingsw.LM26.model.GamePhases.Game;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
 import it.polimi.ingsw.LM26.model.PlayArea.ScoreTrack;
@@ -26,6 +27,16 @@ public class Model {
     private Bag bag;
 
     private DraftPool draftPool;
+
+    private Game game;
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 
     public Model(){
         ;
