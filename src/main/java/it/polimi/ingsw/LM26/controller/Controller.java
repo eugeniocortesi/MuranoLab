@@ -1,13 +1,12 @@
 package it.polimi.ingsw.LM26.controller;
 
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
-import it.polimi.ingsw.LM26.model.Serialization.SingletonDecks;
+
 
 import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
 
@@ -15,8 +14,6 @@ import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonD
 public class Controller implements ControllerInt {
 
     private Model model;
-
-    private Decks decks=singletonDecks();
 
     public Controller(Model model) {
 
@@ -32,66 +29,87 @@ public class Controller implements ControllerInt {
         else return false;
     }
 
-    public boolean check(int toolCard23, Box fromBox, Box toBox, int player){
+    public boolean check(ToolCard twoThree, Box fromBox, Box toBox, int player){
 
-        ToolCardInt toolcard23 = decks.getToolCardDeck().get(toolCard23);
 
-        if(checkToken(model.getPlayerList().get(player),toolcard23))
 
-            //if(toolCard23.play(fromBox, toBox))
+        if(checkToken(model.getPlayerList().get(player),twoThree))
+
+            if(twoThree.play(fromBox, toBox))
                 return true;
-
-        /*
-        play(Box fromBox,Box toBox)
-        play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2)
-        play(Die dieFromDraft, Box toBox)
-        play(Die dieFromDraft, Die dieFromRoundTrack)
-        play( Die dieFromDraft, String inDeCrement)
-        play(Die dieFromDraft)
-        play()
-         */
 
         return false;
     }
     public boolean check(ToolCard four, Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){
 
+        if(checkToken(model.getPlayerList().get(player),four))
+
+            if(four.play(fromBox1, toBox1, fromBox2, toBox2))
+                return true;
+
         return false;
     }
     public boolean check(ToolCard sixEightNine, Die dieFromDraft, Box toBox, int player){
+
+        if(checkToken(model.getPlayerList().get(player),sixEightNine))
+
+            if(sixEightNine.play(dieFromDraft, toBox))
+                return true;
 
         return false;
     }
     public boolean check(ToolCard five, Die dieFromDraft, Die dieFromRoundTrack, int player){
 
+        if(checkToken(model.getPlayerList().get(player),five))
+
+            if(five.play(dieFromDraft, dieFromRoundTrack))
+                return true;
+
         return false;
     }
     public boolean check(ToolCard one, Die dieFromDraft, String inDeCrement, int player){
+
+        if(checkToken(model.getPlayerList().get(player),one))
+
+            if(one.play(dieFromDraft, inDeCrement))
+                return true;
 
         return false;
     }
     public boolean check(ToolCard tenEleven, Die dieFromDraft, int player){
 
+        if(checkToken(model.getPlayerList().get(player),tenEleven))
+
+            if(tenEleven.play( dieFromDraft))
+                return true;
+
         return false;
     }
     public boolean check(ToolCard seven,  int player){
 
+        if(checkToken(model.getPlayerList().get(player),seven))
+
+            if(seven.play())
+                return true;
+
         return false;
     }
+
 
     public boolean check( String noAction, int player){
 
         return false;
     }
 
-    public boolean checkToken(PlayerZone player, ToolCardInt toolCard){
+    public boolean checkToken(PlayerZone player, ToolCard toolCard){
 
-       /* if(toolCard.getToken()>0)
+        if(toolCard.getToken()>0)
             if(player.getToken().getTokenNumber()>1){
                 toolCard.setTwoToken(player);
                 return true;}
         else if(player.getToken().getTokenNumber()>0){
         toolCard.setOneToken(player);
-        return true;}*/
+        return true;}
         return false;
     }
 

@@ -3,13 +3,12 @@ package it.polimi.ingsw.LM26.controller;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
-import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 public interface ControllerInt {
 
     public boolean check(Die dieFromDraft, Box toBox, int player);
 
-    public boolean check(int twoThree, Box fromBox, Box toBox, int player);
+    public boolean check(ToolCard twoThree, Box fromBox, Box toBox, int player);
     public boolean check(ToolCard four, Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player);
     public boolean check(ToolCard sixEightNine, Die dieFromDraft, Box toBox, int player);
     public boolean check(ToolCard five, Die dieFromDraft, Die dieFromRoundTrack, int player);
