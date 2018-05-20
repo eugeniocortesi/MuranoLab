@@ -37,7 +37,7 @@ public class InitialPhase implements PhaseInt {
     }
 
     /**
-     * this methods assigns to each player its coloured score marker and window frame board, according to its ID
+     * this methods assigns to each player his coloured score marker and window frame board, according to his ID
      * @param playerList
      */
     public void setScoreMarkerAndWindowFrame(ArrayList<PlayerZone> playerList){
@@ -46,10 +46,10 @@ public class InitialPhase implements PhaseInt {
         playerList.get(1).setPlayerBoard(new WindowFramePlayerBoard(1, Color.ANSI_GREEN));
         playerList.get(1).setScoreMarker(new ScoreMarker(Color.ANSI_GREEN));
         if(playerList.size()>2){
-            playerList.get(2).setPlayerBoard(new WindowFramePlayerBoard(1, Color.ANSI_BLUE));
+            playerList.get(2).setPlayerBoard(new WindowFramePlayerBoard(2, Color.ANSI_BLUE));
             playerList.get(2).setScoreMarker(new ScoreMarker(Color.ANSI_BLUE));
             if(playerList.size()==4){
-                playerList.get(3).setPlayerBoard(new WindowFramePlayerBoard(1, Color.ANSI_PURPLE));
+                playerList.get(3).setPlayerBoard(new WindowFramePlayerBoard(3, Color.ANSI_PURPLE));
                 playerList.get(3).setScoreMarker(new ScoreMarker(Color.ANSI_PURPLE));
             }
         }

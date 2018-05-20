@@ -13,12 +13,12 @@ public class FinalPhase implements PhaseInt {
     private int minimum;
 
     /**
-     * the method declares the winner: it is the one connected
+     * the method declares the winner: he's the one connected
      * if there is only one player; else "The player with the highest Victory Point
-     *total is the winner. Ties are broken by most
-     *points from Private Objectives, most remaining
-     *Favor Tokens, then finally by reverse player
-     *order in the final round."
+     * total is the winner. Ties are broken by most
+     * points from Private Objectives, most remaining
+     * Favor Tokens, then finally by reverse player
+     * order in the final round."
      * @param players, the list of all players enrolled
      * @return the winner
      * @throws IllegalArgumentException when there are problems with players' LastTurnValue
