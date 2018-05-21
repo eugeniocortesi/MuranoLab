@@ -54,6 +54,17 @@ NotLoggedMessage
 
 
    `{ "operation" : "not_logged", "username" : "<username>"}`
+   
+**server:**
+
+NotLoggedMessageTooManyUser
+
+> Field1 : operation : String
+
+> Field2: username : String
+
+
+   `{ "operation" : "too_many_users", "username" : "<username>"}`
 
  **client:**
 
