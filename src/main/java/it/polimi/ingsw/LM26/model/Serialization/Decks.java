@@ -292,9 +292,9 @@ public class Decks {
                 .setPrettyPrinting()
                 .create();
 
-        FileWriter writer1 = new FileWriter("PrivateCards");
-        FileWriter writer2 = new FileWriter("PublicCards");
-        FileWriter writer3 = new FileWriter("WindowCards");
+        FileWriter writer1 = new FileWriter("src/main/resources/PrivateCards");
+        FileWriter writer2 = new FileWriter("src/main/resources/PublicCards");
+        FileWriter writer3 = new FileWriter("src/main/resources/WindowCards");
 
         gson.toJson(Private, writer1);
         gson.toJson(Public, writer2);
@@ -318,7 +318,7 @@ public class Decks {
         BufferedReader br1 = null, br2 = null, br3=null;
 
         try {
-            fr1 = new FileReader("PrivateCards");
+            fr1 = new FileReader("src/main/resources/PrivateCards");
             br1 = new BufferedReader(fr1);
 
             //TODO
@@ -359,7 +359,7 @@ public class Decks {
 
 
         try {
-            fr2 = new FileReader("PublicCards");
+            fr2 = new FileReader("src/main/resources/PublicCards");
             br2 = new BufferedReader(fr2);
 
             Type Public = new TypeToken<ArrayList<ObjectivePublicCard>>() {
@@ -422,7 +422,7 @@ public class Decks {
 
 
         try {
-            fr3 = new FileReader("WindowCards");
+            fr3 = new FileReader("src/main/resources/WindowCards");
             br3 = new BufferedReader(fr3);
 
 

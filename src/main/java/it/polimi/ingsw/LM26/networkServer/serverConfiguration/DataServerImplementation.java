@@ -24,7 +24,7 @@ public class DataServerImplementation {
     public DataServerConfiguration implementation() {
 
         try {
-            FileReader fr = new FileReader("DataServerConfiguration");
+            FileReader fr = new FileReader("src/main/resources/DataServerConfiguration");
             BufferedReader br = new BufferedReader(fr);
 
             Gson gson = new GsonBuilder()

@@ -24,7 +24,7 @@ public class DataClientImplementation {
     public DataClientConfiguration implementation() {
 
         try {
-            FileReader fr = new FileReader("DataClientConfiguration");
+            FileReader fr = new FileReader("src/main/resources/DataClientConfiguration");
             BufferedReader br = new BufferedReader(fr);
 
             Gson gson = new GsonBuilder()

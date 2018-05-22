@@ -29,7 +29,7 @@ public class DataClientConfiguration {
 
         {
             try {
-                wr = new FileWriter("DataClientConfiguration");
+                wr = new FileWriter("src/main/resources/DataClientConfiguration");
                 gson.toJson(this, wr);
                 wr.close();
             } catch (IOException e) {
