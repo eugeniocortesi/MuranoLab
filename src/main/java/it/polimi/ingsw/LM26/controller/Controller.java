@@ -5,10 +5,6 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.model.Serialization.Decks;
-
-
-import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 
@@ -18,6 +14,9 @@ public class Controller implements ControllerInt {
     public Controller(Model model) {
 
         this.model = singletonModel();
+        //TODO
+        // new Server
+        //new central phase
     }
 
     public boolean check(Die dieFromDraft, Box toBox, int player){
