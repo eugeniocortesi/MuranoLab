@@ -38,7 +38,7 @@ public class Model {
         this.roundTrackInt = new RoundTrack();
         this.bag = new Bag();
         this.draftPool =new DraftPool();
-        //set playerList, scoreTrack
+        //set playerList, scoreTrack, onBoardCards
     }
 
     public Game getGame() {
