@@ -10,6 +10,7 @@ public class ClientRMI implements ClientInt {
     private boolean logged;
     private String user;
     private int id;
+    private VirtualViewInt virtualView;
 
     public boolean isLogged() {
         return false;
@@ -19,20 +20,12 @@ public class ClientRMI implements ClientInt {
 
     }
 
-    public void sendMessage(String message) {
-
-    }
-
-    public String receiveMessage() {
-        return null;
-    }
-
     public void disconnect() {
         ;
     }
 
     public void login() {
-        ;
+        //virtualView.showLoginScreen();
     }
 
     public void login(String username, ClientImplementationRMI clientImplRMI) {

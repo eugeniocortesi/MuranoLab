@@ -9,12 +9,12 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
 
-public class ConnectionAcepterSocket implements ConnectionAcepter {
+public class ConnectionAcepterSocket {
 
     Server server;
 
     private ServerSocket serverSocket;
-    private static int SOCKETPORT;
+    private int SOCKETPORT;
 
 
     //private Socket socket;

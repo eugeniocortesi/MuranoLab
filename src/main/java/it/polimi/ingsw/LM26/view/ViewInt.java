@@ -4,6 +4,12 @@ public interface ViewInt {
 
     void showLoginScreen();
 
+    void showTooManyUsersScreen();
+
+    void showDisconnectScreen();
+
+    void showAddedPlayer();
+
     void showTurnInitialPhase();
 
     void showPlaceDie();

@@ -136,7 +136,7 @@ public class ClientSocket implements ClientInt {
         }
     }
 
-
+    //TODO check 4 player in the server arraylist
 
     public synchronized void login(){
 
@@ -149,7 +149,7 @@ public class ClientSocket implements ClientInt {
             System.out.println(msg);
             ClientLoginData messageData = ClientLoginData.deserialize(msg);
             System.out.println("username: " + messageData.getUsername());
-            if( server.checkUsername(messageData.getUsername())){
+            if( server.checkUsername(messageData.getUsername()) && server.getConnectionsClient().size()<4){
                 this.user = messageData.getUsername();
                 ClientLoginData logged = new ClientLoginData("logged", this.user);
                 String anslogin = logged.serializeLoginMessage();
@@ -157,7 +157,7 @@ public class ClientSocket implements ClientInt {
                 this.setLogged(true);
             }
 
-            else{
+            else if ( server.checkUsername(messageData.getUsername())!= true){
 
                 System.out.println("This Username is already present");
                 ClientLoginData messageNotLogged = new ClientLoginData("not_logged", messageData.getUsername());
@@ -165,6 +165,14 @@ public class ClientSocket implements ClientInt {
                 System.out.println(answerNotLogged);
                 sendMessage(answerNotLogged);
 
+            }
+            else {
+
+                System.out.println("Already 4 players, please wait");
+                ClientLoginData messageNotLoggedTooManyUsers = new ClientLoginData("too_many_users", messageData.getUsername());
+                String answerNotLogged = messageNotLoggedTooManyUsers.serializeLoginMessage();
+                System.out.println(answerNotLogged);
+                sendMessage(answerNotLogged);
             }
         }
     }

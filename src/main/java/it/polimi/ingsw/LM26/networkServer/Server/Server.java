@@ -4,10 +4,11 @@ package it.polimi.ingsw.LM26.networkServer.Server;
 import it.polimi.ingsw.LM26.controller.Controller;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.networkServer.ClientHandler.ClientInt;
-import it.polimi.ingsw.LM26.networkServer.Server.ConnectionAcepter;
+import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
 import it.polimi.ingsw.LM26.networkServer.Server.ConnectionAcepterSocket;
 import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerImplementation;
+import it.polimi.ingsw.LM26.view.ViewInt;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,49 +18,47 @@ public class Server {
 
     private DataServerImplementation dataServerImplementation;
 
-    private ConnectionAcepter connectionAcepter;
+    private ConnectionAcepterSocket connectionAcepterSocket;
+
+    private ConnectionAcepterRMI connectionAcepterRMI;
 
     private ArrayList<ClientInt> connectionsClient;
 
-    private Model model;
+    private ViewInt view;
 
-    private Controller controller;
+    private VirtualControllerInt virtualController;
+
+    /*private Model model;
+
+    private Controller controller;*/
 
     public Server(){
 
+
+
         dataServerImplementation = new DataServerImplementation();
         DataServerConfiguration dataServerConfiguration = dataServerImplementation.implementation();
-        this.connectionsClient = new ArrayList<ClientInt>();
 
-        this.model = new Model();
+        this.connectionsClient = new ArrayList<ClientInt>();
+        this.view = new ViewList();
+        this.virtualController = new VirtualController();
+
+        //this.model = new Model();
+
         //LOOK AT CONSTRUCTOR
         //AL CONTROLLER PASSERO' SOLO IL SERVER , PER CHIAMARE IL MODEL FARAI this.server.getModel();
         // this.controller = new Controller(this);
 
-        connectionAcepter = new ConnectionAcepterSocket(this, dataServerConfiguration);
-        connectionAcepter.acceptConnection();
-        //TODO add RMI connection Acepter
+        connectionAcepterSocket = new ConnectionAcepterSocket(this, dataServerConfiguration);
+        connectionAcepterSocket.acceptConnection();
+
+        connectionAcepterRMI = new ConnectionAcepterRMI(this, dataServerConfiguration);
+
     }
 
 
     public ArrayList<ClientInt> getConnectionsClient() {
         return connectionsClient;
-    }
-
-    public Model getModel() {
-        return model;
-    }
-
-    public void setModel(Model model) {
-        this.model = model;
-    }
-
-    public Controller getController() {
-        return controller;
-    }
-
-    public void setController(Controller controller) {
-        this.controller = controller;
     }
 
     public ArrayList<ClientInt> adderConnectionsClient(ClientInt clientInt) {
@@ -86,7 +85,7 @@ public class Server {
 
         for( int i = 0; i< this.getConnectionsClient().size()-1; i++){
 
-            this.getConnectionsClient().get(i).sendMessage(" Added new player in the game! ");
+           // this.getConnectionsClient().get(i).sendMessage(" Added new player in the game! ");
         }
     }
 
@@ -94,10 +93,13 @@ public class Server {
         return this.connectionsClient.remove(clientInt);
     }
 
-    public ConnectionAcepter getConnectionAcepter() {
-        return connectionAcepter;
+    public ConnectionAcepterSocket getConnectionAcepterSocket() {
+        return connectionAcepterSocket;
     }
 
+    public ConnectionAcepterRMI getConnectionAcepterRMI() {
+        return connectionAcepterRMI;
+    }
 
     //TODO remove
     public static void main(String[] args) throws IOException, InterruptedException

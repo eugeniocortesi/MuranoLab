@@ -8,7 +8,12 @@ import java.io.IOException;
 
 public class DataClientConfiguration {
 
-    private final static int ClientSOCKETPORT = 3000;
+    private final int ClientSOCKETPORT = 3009;
+    private final int ClientRMIPORT=1009;
+
+    public int getClientRMIPORT() {
+        return ClientRMIPORT;
+    }
 
     public int getClientSOCKETPORT() {
         return ClientSOCKETPORT;

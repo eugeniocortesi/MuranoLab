@@ -10,7 +10,7 @@ import java.io.*;
 
 
 public class ClientImplementationSocket {
-    private static int SOCKETPORT;
+    private int SOCKETPORT;
     private final static String address = "localhost";
     private DataClientImplementation dataClientImplementation;
     private Socket socket;
@@ -261,8 +261,17 @@ public class ClientImplementationSocket {
             System.out.println(serveranswer);
             ClientLoginData messageData = ClientLoginData.deserialize(serveranswer);
             System.out.println("username: " + messageData.getUsername());
-            if (messageData.getOperation().equals("not_logged"))
+            if (messageData.getOperation().equals("not_logged")){
+                System.out.println("Name already present");
                 return false;
+            }
+            else if(messageData.getOperation().equals(("too_many_users"))){
+
+                System.out.println("Already 4 players!");
+                return false;
+
+            }
+
             else {
                 System.out.println("Client recognized");
                 this.username = messageData.getUsername();

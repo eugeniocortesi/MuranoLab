@@ -8,20 +8,20 @@ import java.io.IOException;
 
 public class DataServerConfiguration {
 
-    private final static int ServerSOCKETPORT=3000;
+    private final int ServerSOCKETPORT=3009;
 
-    private final static int ServerRMIPORT=1099;
+    private final int ServerRMIPORT=1009;
 
     public DataServerConfiguration(){
 
         ;
     }
 
-    public static int getSOCKETPORT() {
+    public int getSOCKETPORT() {
         return ServerSOCKETPORT;
     }
 
-    public static int getRMIPORT() {
+    public int getRMIPORT() {
         return ServerRMIPORT;
     }
 
