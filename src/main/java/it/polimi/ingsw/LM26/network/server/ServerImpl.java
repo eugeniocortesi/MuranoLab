@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class ServerImpl {
 
     private DataServerImplementation dataServerImplementation;
-    private HashMap<String, ClientHandlerInt> userConnections;
+    private HashMap<User, ClientHandlerInt> userConnections;
     private ArrayList<ClientHandlerSocketImpl> socketConnections;
     private ConnectionAcceptorRMIImpl connectionAcceptorRMI;
     private ConnectionAcceptorSocketImpl connectionAcceptorSocket;
@@ -20,7 +20,7 @@ public class ServerImpl {
     public ServerImpl(){
         dataServerImplementation = new DataServerImplementation();
         DataServerConfiguration dataServerConfiguration = dataServerImplementation.implementation();
-        userConnections = new HashMap<String, ClientHandlerInt>();
+        userConnections = new HashMap<User, ClientHandlerInt>();
         this.socketConnections = new ArrayList<ClientHandlerSocketImpl>();
         if(socketConnections == null) {
             System.err.println("socketConnection null");
@@ -36,7 +36,7 @@ public class ServerImpl {
         return socketConnections;
     }
 
-    public HashMap<String, ClientHandlerInt> getUserConnections() {
+    public HashMap<User, ClientHandlerInt> getUserConnections() {
         return userConnections;
     }
 
@@ -55,7 +55,12 @@ public class ServerImpl {
     }
 
     public boolean checkLogin(String username){
-        return !userConnections.containsKey("username");
+        if (!userConnections.isEmpty())
+            for( User u : userConnections.keySet() ) {
+                if (u.getName().equals(username))
+                    return false;
+            }
+        return true;
     }
 
     public boolean checkNumberUser(){
@@ -66,8 +71,10 @@ public class ServerImpl {
     }
 
     public void addUsername(String name, ClientHandlerInt clientHandlerInt){
-        if(checkLogin(name))
-            userConnections.put(name, clientHandlerInt);
+        if(checkLogin(name)) {
+            User u = new User(name, true);
+            userConnections.put(u, clientHandlerInt);
+        }
     }
 
 

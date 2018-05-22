@@ -9,7 +9,8 @@ import it.polimi.ingsw.LM26.networkServer.Server.ConnectionAcepterSocket;
 import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerImplementation;
 import it.polimi.ingsw.LM26.view.ViewInt;
-
+import java.net.UnknownHostException;
+import java.net.InetAddress;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -42,6 +43,12 @@ public class Server {
         this.connectionsClient = new ArrayList<ClientInt>();
         this.view = new ViewList();
         this.virtualController = new VirtualController();
+
+        try {
+            InetAddress ip = InetAddress.getLocalHost();
+            System.out.println(ip);
+
+        }catch(UnknownHostException he){}
 
         //this.model = new Model();
 
