@@ -8,9 +8,9 @@ import java.io.IOException;
 
 public class DataServerConfiguration {
 
-    private final int ServerSOCKETPORT=3009;
+    private final int ServerSOCKETPORT=3095;
 
-    private final int ServerRMIPORT=1009;
+    private final int ServerRMIPORT=1095;
 
     public DataServerConfiguration(){
 

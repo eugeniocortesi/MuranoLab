@@ -19,6 +19,7 @@ public class ClientHandlerRMIImpl implements ClientHandlerInt {
             System.out.println ("I'm adding " + myserver.getUserConnections().size() + " element");
             //TODO notify other players
 
+
         }
         else{
             System.out.println(username + " not logged");

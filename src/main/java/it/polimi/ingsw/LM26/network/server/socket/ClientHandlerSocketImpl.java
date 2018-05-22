@@ -103,7 +103,13 @@ public class ClientHandlerSocketImpl extends Thread implements ClientHandlerInt 
     //TODO SEND MESSAGE
     public void login(String username) {
 
-        while(!this.logged){
+        if(logged == true){
+            System.out.println("Already logged");
+            DataMessage message = new DataMessage("already_logged", username);
+            message.dump();
+            sendMessage(message.serializeDataMessage());
+        }
+        else{
             if(server.checkLogin(username) && server.checkNumberUser()){
                 server.getUserConnections().put(username, this);
                 System.out.println("Hashmap size : " +server.getUserConnections().size());

@@ -66,7 +66,8 @@ public class ServerImpl {
     }
 
     public void addUsername(String name, ClientHandlerInt clientHandlerInt){
-        userConnections.put(name, clientHandlerInt);
+        if(checkLogin(name))
+            userConnections.put(name, clientHandlerInt);
     }
 
 
