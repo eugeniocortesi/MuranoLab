@@ -7,6 +7,8 @@ public class SingletonModel {
 
     public static Model singletonModel(){
 
+        if(model==null) model = new Model();
+
         return model;
     }
 

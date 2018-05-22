@@ -7,12 +7,15 @@ import it.polimi.ingsw.LM26.model.PlayArea.ScoreTrack;
 import it.polimi.ingsw.LM26.model.PlayArea.ScoreTrackInt;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Bag;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
+import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZoneInt;
 
 
 import java.util.ArrayList;
+
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class Model {
 
@@ -30,16 +33,20 @@ public class Model {
 
     private Game game;
 
+    public Model() {
+
+        this.roundTrackInt = new RoundTrack();
+        this.bag = new Bag();
+        this.draftPool =new DraftPool();
+        //set playerList, scoreTrack
+    }
+
     public Game getGame() {
         return game;
     }
 
     public void setGame(Game game) {
         this.game = game;
-    }
-
-    public Model(){
-        ;
     }
 
     public OnBoardCards getOnBoardCards() {

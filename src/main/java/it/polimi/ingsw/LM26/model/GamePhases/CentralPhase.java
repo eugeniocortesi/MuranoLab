@@ -1,10 +1,13 @@
 package it.polimi.ingsw.LM26.model.GamePhases;
 
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import java.util.ArrayList;
+
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class CentralPhase implements PhaseInt{
 
@@ -23,11 +26,22 @@ public class CentralPhase implements PhaseInt{
     private ArrayList<PlayerZone> playerList;
 
     public CentralPhase(ArrayList<PlayerZone> playerZones) {
+
+        Model model = singletonModel();
+
         round= new Round(roundTrack, playerZones, nrounds);
+
         playerList= new ArrayList<PlayerZone>();
-        roundTrack= new RoundTrack();
+
+        /*roundTrack= new RoundTrack();
+        model.setRoundTrackInt(roundTrack);
+
         draftPool= new DraftPool();
+        model.setDraftPool(draftPool);*/
+
         playerList.addAll(playerZones);
+        model.setPlayerList(playerList);
+
         turn=setOrder(playerList.size());
 
     }
