@@ -6,6 +6,11 @@ public class DraftPool {
 
     private ArrayList<DieInt> inDraft;
 
+    public DraftPool() {
+
+        this.inDraft = new ArrayList<DieInt>();
+    }
+
     public ArrayList<DieInt> getInDraft() {
         return inDraft;
     }

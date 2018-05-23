@@ -11,6 +11,7 @@ import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 public class Controller implements ControllerInt {
 
     private Model model;
+
     public Controller(Model model) {
 
         this.model = singletonModel();
@@ -19,18 +20,38 @@ public class Controller implements ControllerInt {
         //new central phase
     }
 
+    public void sendEventToContoller( ActionEvent event){
+
+        if (event.getId()==1)
+            if(check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) update();
+        if (event.getId()==2)
+            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getPlayer())) update();
+        if (event.getId()==3)
+            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getFromBox2(), event.getToBox2(),event.getPlayer())) update();
+        if (event.getId()==4)
+            if(check(event.getCard(), event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) update();
+        if (event.getId()==5)
+            if(check(event.getCard(), event.getDieFromDraft(), event.getDieFromRoundTrack(), event.getPlayer())) update();
+        if (event.getId()==6)
+            if(check(event.getCard(), event.getDieFromDraft(), event.getInDeCrement(), event.getPlayer())) update();
+        if (event.getId()==7)
+            if(check(event.getCard(), event.getDieFromDraft(), event.getPlayer())) update();
+        if (event.getId()==8)
+            if(check(event.getCard(), event.getPlayer())) update();
+
+    }
+
     public boolean check(Die dieFromDraft, Box toBox, int player){
 
         PlaceDie placement = new PlaceDie(dieFromDraft, toBox, player);
         if(placement.placeDie()){
             model.getDraftPool().getInDraft().remove(dieFromDraft);
+            //esempio: model.accept(new UpdateX());
             return true;}
         else return false;
     }
 
     public boolean check(ToolCard twoThree, Box fromBox, Box toBox, int player){
-
-
 
         if(checkToken(model.getPlayerList().get(player),twoThree))
 

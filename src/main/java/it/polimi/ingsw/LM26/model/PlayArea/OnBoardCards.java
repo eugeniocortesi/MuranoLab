@@ -10,9 +10,15 @@ public class OnBoardCards {
 
     private ArrayList<ToolCardInt>  toolCardList;
 
+    public OnBoardCards() {
+
+        this.objectivePublicCardList =new ArrayList<ObjectivePublicCard>() ;
+
+        this.toolCardList = new ArrayList<ToolCardInt>();
+    }
+
     public ArrayList<ObjectivePublicCard> getObjectivePublicCardList() {
         return objectivePublicCardList;
-
     }
 
     public ArrayList<ToolCardInt> getToolCardList() {

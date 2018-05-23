@@ -8,18 +8,28 @@ public class ActionEvent {
 
     private int id;
     private int player;
-    private Box fromBox1;
-    private Box toBox1;
-    private Box fromBox2;
-    private Box toBox2;
-    private ToolCard card;
-    private Die dieFromDraft;
-    private Die dieFromRoundTrack;
-    private String inDeCrement;
+    private Box fromBox1=null;
+    private Box toBox1=null;
+    private Box fromBox2=null;
+    private Box toBox2=null;
+    private ToolCard card=null;
+    private Die dieFromDraft=null;
+    private Die dieFromRoundTrack=null;
+    private String inDeCrement=null;
 
-    public int getId() {
-        return id;
-    }
+
+        /*
+        event 1: place die. to set: DieFromDraf, ToBox1, Player.
+        event 2: use card 2, 3. to set: Card, FromBox1, ToBox1, Player.
+        event 3: use card 4. to set: Card, FromBox1, ToBox1, FromBox2, toBox2, Player.
+        event 4: use card 6,8,9. to set: Card, DieFromDraft, ToBox1, Player.
+        event 5: use card 5. to set: Card, DieFromDraft, DieFromRoundTrack, Player.
+        event 6: use card 1. to set: Card, DieFromDraft, InDeCrement, Player.
+        event 7: use card 10, 11. to set: Card, DieFromDraft, Player.
+        event 8: use card 7. to set: Card, Player.
+        */
+
+    public int getId() { return id; }
 
     public void setId(int id) {
         this.id = id;

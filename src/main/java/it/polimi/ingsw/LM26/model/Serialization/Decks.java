@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.ingsw.LM26.model.Cards.*;
-import it.polimi.ingsw.LM26.model.Cards.decorator.*;
+import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.*;
 import it.polimi.ingsw.LM26.model.Cards.factory.CardCreator;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;

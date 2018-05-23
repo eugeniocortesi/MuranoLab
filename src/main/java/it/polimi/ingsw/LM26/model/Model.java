@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.model;
 
+import it.polimi.ingsw.LM26.controller.Update.Update;
 import it.polimi.ingsw.LM26.model.GamePhases.Game;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
@@ -38,7 +39,14 @@ public class Model {
         this.roundTrackInt = new RoundTrack();
         this.bag = new Bag();
         this.draftPool =new DraftPool();
-        //set playerList, scoreTrack, onBoardCards
+        this.onBoardCards= new OnBoardCards();
+        //set playerList, scoreTrack
+    }
+
+    public void accept(Update update){
+
+        //check istanceof Update
+
     }
 
     public Game getGame() {

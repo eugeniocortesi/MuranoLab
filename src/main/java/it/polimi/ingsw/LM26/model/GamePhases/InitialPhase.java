@@ -79,8 +79,6 @@ public class InitialPhase implements PhaseInt {
         }
         onBoardCards.setObjectivePublicCardList(publicCardsOnBoard);
         onBoardCards.setToolCardList(decks.getToolCardDeck());
-        Model model = singletonModel();
-        model.setOnBoardCards(onBoardCards);
     }
 
     /*public ArrayList<ObjectivePrivateCard> setPrivateCard(ArrayList<PlayerZone> playerList, Decks decks){

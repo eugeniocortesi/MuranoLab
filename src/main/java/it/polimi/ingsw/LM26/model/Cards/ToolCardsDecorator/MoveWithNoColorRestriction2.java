@@ -1,10 +1,9 @@
-package it.polimi.ingsw.LM26.model.Cards.decorator;
+package it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator;
 
 import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
-import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 public class MoveWithNoColorRestriction2 implements ToolCardDecorator {
 
