@@ -70,16 +70,5 @@ public class CentralPhase implements PhaseInt{
         return rounds;
     }
 
-    /*public void doAction (Game game, ArrayList<PlayerZone> playerList){
-        for(int i=0; i<nrounds; i++){
-            while(playerList.size()>1){
-                round= new Round(roundTrack, playerList, nrounds);
-                //aggiungere azione del round (da coordinare con controller)
-            }
-        }
-        if (playerList.size()==1){
-            game.setPhase(new FinalPhase());
-        }
-        else game.setPhase(new ScorePhase());
-    }*/
+   
 }
