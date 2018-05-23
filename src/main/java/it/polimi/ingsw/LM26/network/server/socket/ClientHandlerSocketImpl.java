@@ -123,7 +123,10 @@ public class ClientHandlerSocketImpl extends Thread implements ClientHandlerInt 
 
             else if(!(server.checkLogin(username))){
                 System.out.println("Name already present!");
-                //
+
+                DataMessage message = new DataMessage("already_logged", username);
+                message.dump();
+                sendMessage(message.serializeDataMessage());
             }
             else{
                 System.out.println("Too many users!");

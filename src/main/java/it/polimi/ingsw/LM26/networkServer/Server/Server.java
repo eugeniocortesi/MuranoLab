@@ -1,11 +1,7 @@
 package it.polimi.ingsw.LM26.networkServer.Server;
 
 
-import it.polimi.ingsw.LM26.controller.Controller;
-import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.networkServer.ClientHandler.ClientInt;
-import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
-import it.polimi.ingsw.LM26.networkServer.Server.ConnectionAcepterSocket;
 import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerImplementation;
 import it.polimi.ingsw.LM26.view.ViewInt;
@@ -13,7 +9,7 @@ import java.net.UnknownHostException;
 import java.net.InetAddress;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Vector;
+
 
 public class Server {
 
@@ -29,13 +25,7 @@ public class Server {
 
     private VirtualControllerInt virtualController;
 
-    /*private Model model;
-
-    private Controller controller;*/
-
     public Server(){
-
-
 
         dataServerImplementation = new DataServerImplementation();
         DataServerConfiguration dataServerConfiguration = dataServerImplementation.implementation();
@@ -48,13 +38,9 @@ public class Server {
             InetAddress ip = InetAddress.getLocalHost();
             System.out.println(ip);
 
-        }catch(UnknownHostException he){}
-
-        //this.model = new Model();
-
-        //LOOK AT CONSTRUCTOR
-        //AL CONTROLLER PASSERO' SOLO IL SERVER , PER CHIAMARE IL MODEL FARAI this.server.getModel();
-        // this.controller = new Controller(this);
+        }catch(UnknownHostException he){
+            he.printStackTrace();
+        }
 
         connectionAcepterSocket = new ConnectionAcepterSocket(this, dataServerConfiguration);
         connectionAcepterSocket.acceptConnection();

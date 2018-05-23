@@ -6,13 +6,15 @@ import it.polimi.ingsw.LM26.network.server.socket.ConnectionAcceptorSocketImpl;
 import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerImplementation;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ServerImpl {
 
     private DataServerImplementation dataServerImplementation;
-    private HashMap<User, ClientHandlerInt> userConnections;
+    private HashMap<String, ClientHandlerInt> userConnections;
     private ArrayList<ClientHandlerSocketImpl> socketConnections;
     private ConnectionAcceptorRMIImpl connectionAcceptorRMI;
     private ConnectionAcceptorSocketImpl connectionAcceptorSocket;
@@ -20,7 +22,14 @@ public class ServerImpl {
     public ServerImpl(){
         dataServerImplementation = new DataServerImplementation();
         DataServerConfiguration dataServerConfiguration = dataServerImplementation.implementation();
-        userConnections = new HashMap<User, ClientHandlerInt>();
+        try {
+            InetAddress ip = InetAddress.getLocalHost();
+            System.out.println(ip);
+
+        }catch(UnknownHostException he){
+            he.printStackTrace();
+        }
+        userConnections = new HashMap<String, ClientHandlerInt>();
         this.socketConnections = new ArrayList<ClientHandlerSocketImpl>();
         if(socketConnections == null) {
             System.err.println("socketConnection null");
@@ -36,7 +45,7 @@ public class ServerImpl {
         return socketConnections;
     }
 
-    public HashMap<User, ClientHandlerInt> getUserConnections() {
+    public HashMap<String, ClientHandlerInt> getUserConnections() {
         return userConnections;
     }
 
@@ -55,12 +64,16 @@ public class ServerImpl {
     }
 
     public boolean checkLogin(String username){
-        if (!userConnections.isEmpty())
+        /*if (!userConnections.isEmpty())
             for( User u : userConnections.keySet() ) {
                 if (u.getName().equals(username))
                     return false;
             }
-        return true;
+        return true;*/
+        if (userConnections.get(username) == null ){
+            return true;
+        }
+        return false;
     }
 
     public boolean checkNumberUser(){
@@ -72,8 +85,7 @@ public class ServerImpl {
 
     public void addUsername(String name, ClientHandlerInt clientHandlerInt){
         if(checkLogin(name)) {
-            User u = new User(name, true);
-            userConnections.put(u, clientHandlerInt);
+            userConnections.put(name, clientHandlerInt);
         }
     }
 

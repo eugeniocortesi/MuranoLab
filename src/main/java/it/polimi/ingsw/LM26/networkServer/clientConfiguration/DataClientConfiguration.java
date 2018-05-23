@@ -5,11 +5,14 @@ import com.google.gson.GsonBuilder;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.InetAddress;
 
 public class DataClientConfiguration {
 
     private final int ClientSOCKETPORT = 3095;
     private final int ClientRMIPORT=1095;
+    private final String ip = "127.0.0.1";
+
 
     public int getClientRMIPORT() {
         return ClientRMIPORT;
