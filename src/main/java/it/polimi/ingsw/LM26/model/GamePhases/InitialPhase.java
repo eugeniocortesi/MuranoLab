@@ -43,7 +43,23 @@ public class InitialPhase implements PhaseInt {
      * this methods assigns to each player his coloured score marker and window frame board, according to his ID
      * @param playerList
      */
-    public void setScoreMarkerAndWindowFrame(ArrayList<PlayerZone> playerList){
+
+    public void setScoreMarkerAndWindowFrame(ArrayList<PlayerZone> playerList,  Decks decks ){
+        playerList.get(0).setPlayerBoard(decks.getWindowFramePlayerBoardDeck().get(0));
+        playerList.get(0).setScoreMarker(new ScoreMarker(Color.ANSI_RED));
+        playerList.get(1).setPlayerBoard(decks.getWindowFramePlayerBoardDeck().get(1));
+        playerList.get(1).setScoreMarker(new ScoreMarker(Color.ANSI_GREEN));
+        if(playerList.size()>2){
+            playerList.get(2).setPlayerBoard(decks.getWindowFramePlayerBoardDeck().get(2));
+            playerList.get(2).setScoreMarker(new ScoreMarker(Color.ANSI_BLUE));
+            if(playerList.size()==4){
+                playerList.get(3).setPlayerBoard(decks.getWindowFramePlayerBoardDeck().get(3));
+                playerList.get(3).setScoreMarker(new ScoreMarker(Color.ANSI_PURPLE));
+            }
+        }
+    }
+
+    /*public void setScoreMarkerAndWindowFrame(ArrayList<PlayerZone> playerList){
         playerList.get(0).setPlayerBoard(new WindowFramePlayerBoard(0, Color.ANSI_RED));
         playerList.get(0).setScoreMarker(new ScoreMarker(Color.ANSI_RED));
         playerList.get(1).setPlayerBoard(new WindowFramePlayerBoard(1, Color.ANSI_GREEN));
@@ -56,7 +72,7 @@ public class InitialPhase implements PhaseInt {
                 playerList.get(3).setScoreMarker(new ScoreMarker(Color.ANSI_PURPLE));
             }
         }
-    }
+    }*/
 
     //distribuisce i token a tutti i giocatori in base alla loro windowPatternCard
     public void setTokens(ArrayList<PlayerZone> playerZones){
@@ -86,10 +102,15 @@ public class InitialPhase implements PhaseInt {
     }*/
     //questo metodo va chiamato dopo aver assegnato la windowPatternCard
     public void doAction(Game game, ArrayList<PlayerZone> playerList) {
-        setScoreMarkerAndWindowFrame(playerList);
+        setScoreMarkerAndWindowFrame(playerList, decks);
         setTokens(playerList);
         setPublicCards(onBoardCards, decks);
         //private cards..
         game.setPhase(new CentralPhase(playerList));
+
+    }
+
+    public void doAction(ArrayList<PlayerZone> playerList) {
+
     }
 }

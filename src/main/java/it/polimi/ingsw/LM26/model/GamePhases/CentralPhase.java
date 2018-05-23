@@ -29,7 +29,13 @@ public class CentralPhase implements PhaseInt{
 
         Model model = singletonModel();
 
-        round= new Round(roundTrack, playerZones, nrounds);
+        this.roundTrack=model.getRoundTrackInt();
+
+        this.round= new Round(roundTrack, playerZones, nrounds);
+
+        rounds= new ArrayList<Round>();
+
+        rounds.add(round);
 
         playerList= new ArrayList<PlayerZone>();
 
@@ -40,7 +46,6 @@ public class CentralPhase implements PhaseInt{
         model.setDraftPool(draftPool);*/
 
         playerList.addAll(playerZones);
-        model.setPlayerList(playerList);
 
         turn=setOrder(playerList.size());
 
@@ -61,7 +66,8 @@ public class CentralPhase implements PhaseInt{
     //questo metodo si chiama da dopo il secondo round fino a dopo il decimo (dove verrà creato il prossimo stato)
     public void nextRound(Round round, Game game){
         if(rounds.size()<nrounds && round.getRoundState() == RoundState.FINISHED){
-            rounds.add(new Round(roundTrack, playerList, nrounds));
+            this.round=new Round(roundTrack, playerList, nrounds);
+            rounds.add(round);
         }
         else if(rounds.size() == nrounds) game.setPhase(new ScorePhase());
     }
@@ -70,5 +76,15 @@ public class CentralPhase implements PhaseInt{
         return rounds;
     }
 
-   
+    public Round getCurrentRound() { return round; }
+
+    public void doAction(Game game, ArrayList<PlayerZone> playerList) {
+
+    }
+
+    public void doAction( ArrayList<PlayerZone> playerList) {
+
+    }
+
+
 }

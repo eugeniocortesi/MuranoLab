@@ -37,7 +37,7 @@ public class PlayerZone implements PlayerZoneInt {
 
         this.namePlayer=namePlayer;
         this.IDPlayer=IDPlayer;
-        this.playerState=PlayerState.STANDBY;
+        this.playerState=PlayerState.WAIT;
     }
 
     public String getNamePlayer() {

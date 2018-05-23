@@ -2,22 +2,57 @@ package it.polimi.ingsw.LM26.controller;
 
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
+import it.polimi.ingsw.LM26.model.GamePhases.CentralPhase;
+import it.polimi.ingsw.LM26.model.GamePhases.Game;
+import it.polimi.ingsw.LM26.model.GamePhases.InitialPhase;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
+import it.polimi.ingsw.LM26.model.Serialization.Decks;
+
+import static it.polimi.ingsw.LM26.model.GamePhases.RoundState.FINISHED;
 
 
 public class Controller implements ControllerInt {
 
     private Model model;
+    private Decks decks;
+    PlayerZone playing;
+
+
 
     public Controller(Model model) {
 
-        this.model = singletonModel();
+        this.model = model;
+        Game game = new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());  //initialPhase
+        game.getPhase().doAction(game, model.getPlayerList());    //centralPhase
+        CentralPhase centralPhase = (CentralPhase) game.getPhase();
+
+
+        for(int i=0; i<10; i++){
+            //primo giocatore
+            playing =centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn(), 0);
+
+            while (centralPhase.getCurrentRound().getRoundState() != FINISHED) {
+
+            // x ciascun giocatore
+            //giocatore piazza dado o niente
+
+                System.out.println("sta giocando " + playing.getName());
+
+                centralPhase.getCurrentRound().endAction(centralPhase.getTurn(), model.getRoundTrackInt(), model.getDraftPool(), centralPhase.getCurrentRound().getCurrentPlayer());
+                playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn(), 0);
+            }
+
+            System.out.println("fine turno " + i);
+            //finiti i turni in un round
+
+            centralPhase.nextRound(centralPhase.getCurrentRound(), game);
+         }
+
+
         //TODO
-        // new Server
-        //new central phase
+        //new Server
     }
 
     public void sendEventToContoller( ActionEvent event){

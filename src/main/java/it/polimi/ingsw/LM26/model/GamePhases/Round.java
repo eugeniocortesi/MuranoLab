@@ -12,6 +12,8 @@ public class Round {
 
     private int turnCounter=0;
 
+    private PlayerZone currentPlayer;
+
     private RoundState roundState=RoundState.RUNNING;
 
     public Round(RoundTrackInt rTrack, ArrayList<PlayerZone> pZone, int nrounds) {
@@ -30,17 +32,19 @@ public class Round {
 
     //nextPlayer va usato dopo endAction, quando il contatore è già incrementato. plStandby passato è sempre 0
     public PlayerZone nextPlayer(ArrayList<PlayerZone> player, int[] turn, int plStandby) throws IllegalArgumentException {
-        System.out.println("!");
+        //System.out.println("!");
         turnCounter=turnCounter+plStandby;
-      for(PlayerZone i : player){
+      for(int i=0; i<player.size(); i++){
+          //System.out.println(player.get(i).getName());
           for(int j=0; j<turnCounter; j++){
-              System.out.println("o");
+              //System.out.println("o");
           }
-          System.out.println("g");
-          if(i.getNumber()==turn[turnCounter]) {
-              if(i.getPlayerState()!=PlayerState.STANDBY){
-                  i.setPlayerState(PlayerState.BEGINNING);
-                  return i;
+          //System.out.println("g");
+          if(player.get(i).getNumber()==turn[turnCounter]) {
+              if(player.get(i).getPlayerState()!=PlayerState.STANDBY){
+                  player.get(i).setPlayerState(PlayerState.BEGINNING);
+                  currentPlayer=player.get(i);
+                  return player.get(i);
               }
               else return nextPlayer(player, turn, ++plStandby);
           }
@@ -60,6 +64,8 @@ public class Round {
         }
         else roundState= RoundState.RUNNING;
     }//aggiungere controlli e aggiornamenti di "second die/turn"
+
+    public PlayerZone getCurrentPlayer() { return currentPlayer; }
 
     public RoundState getRoundState() {
         return roundState;

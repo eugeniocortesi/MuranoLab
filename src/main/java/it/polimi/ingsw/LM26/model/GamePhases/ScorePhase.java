@@ -10,4 +10,8 @@ public class ScorePhase implements PhaseInt{
 
         game.setPhase(new FinalPhase());
     }
+
+    public void doAction(ArrayList<PlayerZone> playerList) {
+
+    }
 }

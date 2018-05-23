@@ -12,10 +12,12 @@ import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZoneInt;
+import it.polimi.ingsw.LM26.model.Serialization.Decks;
 
 
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class Model {
@@ -34,20 +36,25 @@ public class Model {
 
     private Game game;
 
+    private Decks decks;
+
     public Model() {
 
         this.roundTrackInt = new RoundTrack();
         this.bag = new Bag();
         this.draftPool =new DraftPool();
         this.onBoardCards= new OnBoardCards();
+        this.decks=singletonDecks();
         //set playerList, scoreTrack
     }
 
-    public void accept(Update update){
+    /*public void accept(Update update){
 
         //check istanceof Update
 
-    }
+    }*/
+
+    public Decks getDecks() { return decks; }
 
     public Game getGame() {
         return game;
