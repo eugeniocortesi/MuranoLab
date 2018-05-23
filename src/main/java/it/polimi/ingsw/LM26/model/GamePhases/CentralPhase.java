@@ -22,10 +22,10 @@ public class CentralPhase implements PhaseInt{
 
     private ArrayList<PlayerZone> playerList;
 
-    public CentralPhase(ArrayList<PlayerZone> playerZones) {
+    public CentralPhase(ArrayList<PlayerZone> playerZones, RoundTrack roundTrack) {
+        this.roundTrack= roundTrack;
         round= new Round(roundTrack, playerZones, nrounds);
         playerList= new ArrayList<PlayerZone>();
-        roundTrack= new RoundTrack();
         draftPool= new DraftPool();
         playerList.addAll(playerZones);
         turn=setOrder(playerList.size());
@@ -44,7 +44,7 @@ public class CentralPhase implements PhaseInt{
         return turn;
     }
 
-    //questo metodo si chiama da dopo il secondo round fino a dopo il decimo (dove verrà creato il prossimo stato)
+    //questo metodo si chiama da dopo il secondo round fino a dopo il decimo (dove verrà creata la prossima fase di gioco)
     public void nextRound(Round round, Game game){
         if(rounds.size()<nrounds && round.getRoundState() == RoundState.FINISHED){
             rounds.add(new Round(roundTrack, playerList, nrounds));
@@ -56,16 +56,7 @@ public class CentralPhase implements PhaseInt{
         return rounds;
     }
 
-    /*public void doAction (Game game, ArrayList<PlayerZone> playerList){
-        for(int i=0; i<nrounds; i++){
-            while(playerList.size()>1){
-                round= new Round(roundTrack, playerList, nrounds);
-                //aggiungere azione del round (da coordinare con controller)
-            }
-        }
-        if (playerList.size()==1){
-            game.setPhase(new FinalPhase());
-        }
-        else game.setPhase(new ScorePhase());
-    }*/
+    public String toString(){
+        return "Central phase";
+    }
 }

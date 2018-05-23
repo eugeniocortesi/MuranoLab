@@ -4,6 +4,7 @@ import it.polimi.ingsw.LM26.model.Cards.*;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
+import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.Token;
@@ -82,11 +83,15 @@ public class InitialPhase implements PhaseInt {
         ArrayList<ObjectivePrivateCard>
     }*/
     //questo metodo va chiamato dopo aver assegnato la windowPatternCard
-    public void doAction(Game game, ArrayList<PlayerZone> playerList) {
+    public void doAction(Game game, ArrayList<PlayerZone> playerList, RoundTrack roundTrack) {
         setScoreMarkerAndWindowFrame(playerList);
         setTokens(playerList);
         setPublicCards(onBoardCards, decks);
         //private cards..
-        game.setPhase(new CentralPhase(playerList));
+        game.setPhase(new CentralPhase(playerList, roundTrack));
+    }
+
+    public String toString(){
+        return "Initial phase";
     }
 }

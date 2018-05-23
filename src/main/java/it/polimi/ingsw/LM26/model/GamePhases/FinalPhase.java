@@ -80,4 +80,8 @@ public class FinalPhase implements PhaseInt {
     public void doAction(Game game, ArrayList<PlayerZone> playerList) {
 
     }
+
+    public String toString(){
+        return "Final phase";
+    }
 }
