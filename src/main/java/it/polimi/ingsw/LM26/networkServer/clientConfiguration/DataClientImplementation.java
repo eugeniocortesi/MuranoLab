@@ -2,10 +2,14 @@ package it.polimi.ingsw.LM26.networkServer.clientConfiguration;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.LM26.Main;
 import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 
 public class DataClientImplementation {
 
@@ -14,7 +18,7 @@ public class DataClientImplementation {
     public DataClientImplementation(){
 
         this.dataClientConfiguration = new DataClientConfiguration();
-        this.dataClientConfiguration.create();
+        //this.dataClientConfiguration.create();
     }
 
     public DataClientConfiguration getDataClientConfiguration() {
@@ -24,8 +28,9 @@ public class DataClientImplementation {
     public DataClientConfiguration implementation() {
 
         try {
-            FileReader fr = new FileReader("DataClientConfiguration");
-            BufferedReader br = new BufferedReader(fr);
+            InputStream stream = Main.class.getResourceAsStream("DataClientConfiguration");
+            //FileReader fr = new FileReader("src/main/resources/DataClientConfiguration");
+            BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 
             Gson gson = new GsonBuilder()
                     .setPrettyPrinting()

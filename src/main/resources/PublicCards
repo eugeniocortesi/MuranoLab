@@ -5,7 +5,7 @@
       "colorShades": true,
       "rowColomn": true,
       "effect1": "Different Colors - Rows",
-      "type": "Effect1"
+      "type": "DifferentColorShadeOnRowColomn"
     },
     "id": 21,
     "inUse": false
@@ -16,7 +16,7 @@
       "colorShades": true,
       "rowColomn": false,
       "effect1": "Different Colors - Columns",
-      "type": "Effect1"
+      "type": "DifferentColorShadeOnRowColomn"
     },
     "id": 22,
     "inUse": false
@@ -27,7 +27,7 @@
       "colorShades": false,
       "rowColomn": true,
       "effect1": "Different Shades - Rows",
-      "type": "Effect1"
+      "type": "DifferentColorShadeOnRowColomn"
     },
     "id": 23,
     "inUse": false
@@ -38,7 +38,7 @@
       "colorShades": false,
       "rowColomn": false,
       "effect1": "Different Shades - Columns",
-      "type": "Effect1"
+      "type": "DifferentColorShadeOnRowColomn"
     },
     "id": 24,
     "inUse": false
@@ -47,7 +47,7 @@
     "points": 2,
     "effect": {
       "shades": "LIGHT",
-      "type": "Effect3"
+      "type": "Shades"
     },
     "id": 25,
     "inUse": false
@@ -56,7 +56,7 @@
     "points": 2,
     "effect": {
       "shades": "MEDIUMS",
-      "type": "Effect3"
+      "type": "Shades"
     },
     "id": 26,
     "inUse": false
@@ -65,7 +65,7 @@
     "points": 2,
     "effect": {
       "shades": "DARK",
-      "type": "Effect3"
+      "type": "Shades"
     },
     "id": 27,
     "inUse": false
@@ -74,7 +74,7 @@
     "points": 5,
     "effect": {
       "colorShades": true,
-      "type": "Effect2"
+      "type": "DifferentColorShade"
     },
     "id": 28,
     "inUse": false
@@ -83,7 +83,7 @@
     "points": 4,
     "effect": {
       "colorShades": false,
-      "type": "Effect2"
+      "type": "DifferentColorShade"
     },
     "id": 29,
     "inUse": false
@@ -92,7 +92,7 @@
     "points": 0,
     "effect": {
       "effect4": "Colored diagonals",
-      "type": "Effect4"
+      "type": "ColoredDiagonals"
     },
     "id": 210,
     "inUse": false

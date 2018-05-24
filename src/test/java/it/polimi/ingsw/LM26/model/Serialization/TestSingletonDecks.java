@@ -35,7 +35,7 @@ public class TestSingletonDecks {
         }
         for(i=0; i<=11; i++) {
             decks.getToolCardDeck().get(i).printCard();
-            
+
         }
 
     }

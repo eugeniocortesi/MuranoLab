@@ -1,23 +1,22 @@
-package it.polimi.ingsw.LM26.model.Cards.decorator;
+package it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator;
 
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
-import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class ChangeDieFromDraftToRoundTrack5 implements ToolCardDecorator {
+public class RollAllDraftDice7 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
 
-    public ChangeDieFromDraftToRoundTrack5(ToolCard toolcard) {
+    public RollAllDraftDice7(ToolCard toolcard) {
         this.toolcard = toolcard;
     }
 
@@ -30,23 +29,28 @@ public class ChangeDieFromDraftToRoundTrack5 implements ToolCardDecorator {
     }
 
     public boolean play(Box fromBox, Box toBox, int player){return false;}
-    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}
+    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player ){return false;}
     public boolean play(Die dieFromDraft, Box toBox, int player){return false;}
+    public boolean play(Die dieFromDraft, Die dieFromRoundTrack){return false;}
     public boolean play( Die dieFromDraft, String inDeCrement){return false;}
     public boolean play(Die dieFromDraft){return false;}
-    public boolean play( int player){return false;}
 
-    public boolean play (Die die1, Die die2) {
-
+    public boolean play (int pl ) {
 
         Model model = singletonModel();
+        PlayerZone player = model.getPlayerList().get(pl);
         ArrayList<DieInt> inDraft = model.getDraftPool().getInDraft();
-        ArrayList<DieInt> diceList = model.getBag().getInBag();
-        inDraft.add(die2);
-        diceList.add(diceList.indexOf(die2), die1 );
-        inDraft.remove(die1);
-        return true;
 
+        if(player.isDieUsed()==false && player.isSecondTurn()==true) {
+
+            for (int i = 0; i < inDraft.size(); i++)
+                inDraft.get(i).roll();
+            return true;
+        }
+
+        else System.out.println("you can't use this card now");
+
+        return false;
 
     }
 }

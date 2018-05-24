@@ -6,6 +6,8 @@ import it.polimi.ingsw.LM26.network.server.socket.ConnectionAcceptorSocketImpl;
 import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerImplementation;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,6 +22,13 @@ public class ServerImpl {
     public ServerImpl(){
         dataServerImplementation = new DataServerImplementation();
         DataServerConfiguration dataServerConfiguration = dataServerImplementation.implementation();
+        try {
+            InetAddress ip = InetAddress.getLocalHost();
+            System.out.println(ip);
+
+        }catch(UnknownHostException he){
+            he.printStackTrace();
+        }
         userConnections = new HashMap<String, ClientHandlerInt>();
         this.socketConnections = new ArrayList<ClientHandlerSocketImpl>();
         if(socketConnections == null) {
@@ -55,7 +64,16 @@ public class ServerImpl {
     }
 
     public boolean checkLogin(String username){
-        return !userConnections.containsKey("username");
+        /*if (!userConnections.isEmpty())
+            for( User u : userConnections.keySet() ) {
+                if (u.getName().equals(username))
+                    return false;
+            }
+        return true;*/
+        if (userConnections.get(username) == null ){
+            return true;
+        }
+        return false;
     }
 
     public boolean checkNumberUser(){
@@ -66,8 +84,9 @@ public class ServerImpl {
     }
 
     public void addUsername(String name, ClientHandlerInt clientHandlerInt){
-        if(checkLogin(name))
+        if(checkLogin(name)) {
             userConnections.put(name, clientHandlerInt);
+        }
     }
 
 

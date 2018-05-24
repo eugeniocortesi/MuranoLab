@@ -11,7 +11,7 @@ public class ScorePhase implements PhaseInt{
         game.setPhase(new FinalPhase());
     }
 
-    public String toString(){
-        return "Score phase";
+    public void doAction(ArrayList<PlayerZone> playerList) {
+
     }
 }

@@ -35,7 +35,7 @@ public class DataServerConfiguration {
 
         {
             try {
-                wr = new FileWriter("DataServerConfiguration");
+                wr = new FileWriter("src/main/resources/DataServerConfiguration");
                 gson.toJson(this, wr);
                 wr.close();
             } catch (IOException e) {

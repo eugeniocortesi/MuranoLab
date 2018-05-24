@@ -17,15 +17,15 @@ public class DataServerImplementation {
     public DataServerImplementation(){
 
         dataServerConfiguration = new DataServerConfiguration();
-        this.dataServerConfiguration.create();
+        //this.dataServerConfiguration.create();
 
     }
 
     public DataServerConfiguration implementation() {
 
         try {
-            FileReader fr = new FileReader("DataServerConfiguration");
-            BufferedReader br = new BufferedReader(fr);
+            InputStream stream = Main.class.getResourceAsStream("DataServerConfiguration");
+            BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 
             Gson gson = new GsonBuilder()
                     .setPrettyPrinting()

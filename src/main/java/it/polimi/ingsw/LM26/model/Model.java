@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.model;
 
+import it.polimi.ingsw.LM26.controller.Update.Update;
 import it.polimi.ingsw.LM26.model.GamePhases.Game;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
@@ -7,12 +8,17 @@ import it.polimi.ingsw.LM26.model.PlayArea.ScoreTrack;
 import it.polimi.ingsw.LM26.model.PlayArea.ScoreTrackInt;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Bag;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
+import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZoneInt;
+import it.polimi.ingsw.LM26.model.Serialization.Decks;
 
 
 import java.util.ArrayList;
+
+import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class Model {
 
@@ -30,16 +36,32 @@ public class Model {
 
     private Game game;
 
+    private Decks decks;
+
+    public Model() {
+
+        this.roundTrackInt = new RoundTrack();
+        this.bag = new Bag();
+        this.draftPool =new DraftPool();
+        this.onBoardCards= new OnBoardCards();
+        this.decks=singletonDecks();
+        //set playerList, scoreTrack
+    }
+
+    /*public void accept(Update update){
+
+        //check istanceof Update
+
+    }*/
+
+    public Decks getDecks() { return decks; }
+
     public Game getGame() {
         return game;
     }
 
     public void setGame(Game game) {
         this.game = game;
-    }
-
-    public Model(){
-        ;
     }
 
     public OnBoardCards getOnBoardCards() {

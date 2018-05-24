@@ -1,10 +1,14 @@
 package it.polimi.ingsw.LM26.model.GamePhases;
 
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import java.util.ArrayList;
+
+import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class Round {
 
@@ -12,10 +16,13 @@ public class Round {
 
     private int turnCounter=0;
 
+    private PlayerZone currentPlayer;
+
     private RoundState roundState=RoundState.RUNNING;
 
     public Round(RoundTrackInt rTrack, ArrayList<PlayerZone> pZone, int nrounds) {
         this.assignTurn(rTrack, pZone, nrounds);
+        pullDice();
     }
 
 
@@ -30,17 +37,19 @@ public class Round {
 
     //nextPlayer va usato dopo endAction, quando il contatore è già incrementato. plStandby passato è sempre 0
     public PlayerZone nextPlayer(ArrayList<PlayerZone> player, int[] turn, int plStandby) throws IllegalArgumentException {
-        System.out.println("!");
+        //System.out.println("!");
         turnCounter=turnCounter+plStandby;
-      for(PlayerZone i : player){
+      for(int i=0; i<player.size(); i++){
+          //System.out.println(player.get(i).getName());
           for(int j=0; j<turnCounter; j++){
-              System.out.println("o");
+              //System.out.println("o");
           }
-          System.out.println("g");
-          if(i.getNumber()==turn[turnCounter]) {
-              if(i.getPlayerState()!=PlayerState.STANDBY){
-                  i.setPlayerState(PlayerState.BEGINNING);
-                  return i;
+          //System.out.println("g");
+          if(player.get(i).getNumber()==turn[turnCounter]) {
+              if(player.get(i).getPlayerState()!= STANDBY){
+                  player.get(i).setPlayerState(PlayerState.BEGINNING);
+                  currentPlayer=player.get(i);
+                  return player.get(i);
               }
               else return nextPlayer(player, turn, ++plStandby);
           }
@@ -59,7 +68,34 @@ public class Round {
             roundState= RoundState.FINISHED;
         }
         else roundState= RoundState.RUNNING;
-    }//aggiungere controlli e aggiornamenti di "second die/turn"
+    }
+    //TODO
+    // aggiungere controlli e aggiornamenti di "second die/turn"
+
+    public void pullDice(){
+
+        Model model = singletonModel();
+
+        int contStandby=0;
+        int contDice=0;
+
+        for(int j=0; j<model.getPlayerList().size(); j++)
+            if(model.getPlayerList().get(j).getPlayerState()==STANDBY)
+                contStandby=contStandby+1;
+
+        contDice=model.getPlayerList().size()-contStandby;
+
+        for(int i=0; i<contDice; i++) {
+            model.getDraftPool().getInDraft().add(model.getBag().draw());
+            model.getDraftPool().getInDraft().add(model.getBag().draw());
+        }
+        model.getDraftPool().getInDraft().add(model.getBag().draw());
+
+
+
+    }
+
+    public PlayerZone getCurrentPlayer() { return currentPlayer; }
 
     public RoundState getRoundState() {
         return roundState;
@@ -68,4 +104,5 @@ public class Round {
     public int getTurnCounter() {
         return turnCounter;
     }
+
 }

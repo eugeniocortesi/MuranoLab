@@ -1,10 +1,13 @@
 package it.polimi.ingsw.LM26.model.GamePhases;
 
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import java.util.ArrayList;
+
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class CentralPhase implements PhaseInt{
 
@@ -22,12 +25,28 @@ public class CentralPhase implements PhaseInt{
 
     private ArrayList<PlayerZone> playerList;
 
-    public CentralPhase(ArrayList<PlayerZone> playerZones, RoundTrack roundTrack) {
-        this.roundTrack= roundTrack;
-        round= new Round(roundTrack, playerZones, nrounds);
+    public CentralPhase(ArrayList<PlayerZone> playerZones) {
+
+        Model model = singletonModel();
+
+        this.roundTrack=model.getRoundTrackInt();
+
+        this.round= new Round(roundTrack, playerZones, nrounds);
+
+        rounds= new ArrayList<Round>();
+
+        rounds.add(round);
+
         playerList= new ArrayList<PlayerZone>();
+
+        /*roundTrack= new RoundTrack();
+        model.setRoundTrackInt(roundTrack);
+
         draftPool= new DraftPool();
+        model.setDraftPool(draftPool);*/
+
         playerList.addAll(playerZones);
+
         turn=setOrder(playerList.size());
 
     }
@@ -44,10 +63,11 @@ public class CentralPhase implements PhaseInt{
         return turn;
     }
 
-    //questo metodo si chiama da dopo il secondo round fino a dopo il decimo (dove verrà creata la prossima fase di gioco)
+    //questo metodo si chiama da dopo il secondo round fino a dopo il decimo (dove verrà creato il prossimo stato)
     public void nextRound(Round round, Game game){
         if(rounds.size()<nrounds && round.getRoundState() == RoundState.FINISHED){
-            rounds.add(new Round(roundTrack, playerList, nrounds));
+            this.round=new Round(roundTrack, playerList, nrounds);
+            rounds.add(round);
         }
         else if(rounds.size() == nrounds) game.setPhase(new ScorePhase());
     }
@@ -56,7 +76,15 @@ public class CentralPhase implements PhaseInt{
         return rounds;
     }
 
-    public String toString(){
-        return "Central phase";
+    public Round getCurrentRound() { return round; }
+
+    public void doAction(Game game, ArrayList<PlayerZone> playerList) {
+
     }
+
+    public void doAction( ArrayList<PlayerZone> playerList) {
+
+    }
+
+
 }

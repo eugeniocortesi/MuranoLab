@@ -111,7 +111,7 @@ public class ClientHandlerSocketImpl extends Thread implements ClientHandlerInt 
         }
         else{
             if(server.checkLogin(username) && server.checkNumberUser()){
-                server.getUserConnections().put(username, this);
+                server.addUsername(username, this);
                 System.out.println("Hashmap size : " +server.getUserConnections().size());
                 System.out.println(username + " logged");
                 this.logged = true;
@@ -123,7 +123,10 @@ public class ClientHandlerSocketImpl extends Thread implements ClientHandlerInt 
 
             else if(!(server.checkLogin(username))){
                 System.out.println("Name already present!");
-                //
+
+                DataMessage message = new DataMessage("already_logged", username);
+                message.dump();
+                sendMessage(message.serializeDataMessage());
             }
             else{
                 System.out.println("Too many users!");
