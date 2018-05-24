@@ -1,0 +1,100 @@
+[
+  {
+    "points": 6,
+    "effect": {
+      "colorShades": true,
+      "rowColomn": true,
+      "effect1": "Different Colors - Rows",
+      "type": "DifferentColorShadeOnRowColomn"
+    },
+    "id": 21,
+    "inUse": false
+  },
+  {
+    "points": 5,
+    "effect": {
+      "colorShades": true,
+      "rowColomn": false,
+      "effect1": "Different Colors - Columns",
+      "type": "DifferentColorShadeOnRowColomn"
+    },
+    "id": 22,
+    "inUse": false
+  },
+  {
+    "points": 5,
+    "effect": {
+      "colorShades": false,
+      "rowColomn": true,
+      "effect1": "Different Shades - Rows",
+      "type": "DifferentColorShadeOnRowColomn"
+    },
+    "id": 23,
+    "inUse": false
+  },
+  {
+    "points": 4,
+    "effect": {
+      "colorShades": false,
+      "rowColomn": false,
+      "effect1": "Different Shades - Columns",
+      "type": "DifferentColorShadeOnRowColomn"
+    },
+    "id": 24,
+    "inUse": false
+  },
+  {
+    "points": 2,
+    "effect": {
+      "shades": "LIGHT",
+      "type": "Shades"
+    },
+    "id": 25,
+    "inUse": false
+  },
+  {
+    "points": 2,
+    "effect": {
+      "shades": "MEDIUMS",
+      "type": "Shades"
+    },
+    "id": 26,
+    "inUse": false
+  },
+  {
+    "points": 2,
+    "effect": {
+      "shades": "DARK",
+      "type": "Shades"
+    },
+    "id": 27,
+    "inUse": false
+  },
+  {
+    "points": 5,
+    "effect": {
+      "colorShades": true,
+      "type": "DifferentColorShade"
+    },
+    "id": 28,
+    "inUse": false
+  },
+  {
+    "points": 4,
+    "effect": {
+      "colorShades": false,
+      "type": "DifferentColorShade"
+    },
+    "id": 29,
+    "inUse": false
+  },
+  {
+    "points": 0,
+    "effect": {
+      "effect4": "Colored diagonals",
+      "type": "ColoredDiagonals"
+    },
+    "id": 210,
+    "inUse": false
+  }
+]
