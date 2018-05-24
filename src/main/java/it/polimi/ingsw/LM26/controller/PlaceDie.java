@@ -30,35 +30,56 @@ public class PlaceDie implements PlayerActionInt{
         this.board = player.getPlayerBoard().getBoardMatrix();
     }
 
+
+    //ATTENZIONE
+    //TODO
+    //CHECK IF IT'S FIRST DIE ASSIGN THE RIGHT BOOLEAN in tutti i piazzamenti
+
     public boolean placeDie(){      //ATTENZIONE: togli il dado dalla riserva va fatto fuori
 
         if (player.getPlayerBoard().isEmpty())
-                while(!(i==0 || i==3 || j==0 || j==4 )){
+                if(!(i==0 || i==3 || j==0 || j==4 )){
                                      System.out.println("error: primo dado deve andare sul bordo");
-                                     //come chiedere un'altra volta il dado???????
                                      return false;
                                    }
-        if (checkColorRestriction() && checkValueRestriction() && checkNearByRestrictions() ){
+                else {
+
+            //ATTEZIONE AL PRIMO DADO
+                    System.out.println("place first die ");
+                    if (checkColorRestriction() && checkValueRestriction() ){
+                        toBox.setDie(die);
+                        player.getPlayerBoard().setEmpty(false);
+                        return true;}
+                    else  System.out.println("error in place first die ");
+                    return false;
+                }
+
+        else if (checkColorRestriction() && checkValueRestriction() && checkNearByRestrictions() ){
+            die.toString();
              toBox.setDie(die);
-              return true;}
-    return false;
+             return true;}
+
+        System.out.println("error in general place die ");
+        return false;
     }
 
 
 
 
     public boolean checkColorRestriction(){
-      if( toBox.getPatternBox().isShade()) return true;
+      if( toBox.getPatternBox().isShade()) {System.out.println("ok color restriction"); return true;}
           else if (toBox.getPatternBox().getColor()==die.getColor() ||
-                   toBox.getPatternBox().getColor()==WHITE) return true;
-    return false;
+                   toBox.getPatternBox().getColor()==WHITE)  {System.out.println("ok color restriction"); return true;}
+          System.out.println("error in color restriction");
+        return false;
     }
 
 
 
     public boolean checkValueRestriction(){
-    if( toBox.getPatternBox().isColor()) return true;
-          else if (toBox.getPatternBox().getValue()==die.getValue()) return true;
+    if( toBox.getPatternBox().isColor())  {System.out.println("ok value restriction"); return true;}
+          else if (toBox.getPatternBox().getValue()==die.getValue()) {System.out.println("ok value restriction"); return true;}
+    System.out.println("error in value restriction");
     return false;
     }
 
@@ -130,8 +151,8 @@ public class PlaceDie implements PlayerActionInt{
 
     else      //tutti i valori non di margine
              if (checkAll()) return true;
-             return false;
          }
+         System.out.println("error in position restriction");
          return false;
 
      }

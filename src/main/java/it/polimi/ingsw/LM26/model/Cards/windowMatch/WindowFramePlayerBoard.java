@@ -8,7 +8,7 @@ public class WindowFramePlayerBoard/* implements CardInt */{
     private Color color;
     private int id;
     private boolean hasPatternCard = false;
-    private boolean empty= false;
+    private boolean empty= true;
 
 
     public WindowFramePlayerBoard(int id, Color color) {

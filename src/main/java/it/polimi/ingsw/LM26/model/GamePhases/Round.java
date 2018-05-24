@@ -1,6 +1,8 @@
 package it.polimi.ingsw.LM26.model.GamePhases;
 
 import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
@@ -78,6 +80,7 @@ public class Round {
 
         int contStandby=0;
         int contDice=0;
+        DieInt die=null;
 
         for(int j=0; j<model.getPlayerList().size(); j++)
             if(model.getPlayerList().get(j).getPlayerState()==STANDBY)
@@ -86,10 +89,17 @@ public class Round {
         contDice=model.getPlayerList().size()-contStandby;
 
         for(int i=0; i<contDice; i++) {
-            model.getDraftPool().getInDraft().add(model.getBag().draw());
-            model.getDraftPool().getInDraft().add(model.getBag().draw());
+            die=model.getBag().draw();
+            die.roll();
+            model.getDraftPool().getInDraft().add(die);
+            die=model.getBag().draw();
+            die.roll();
+            model.getDraftPool().getInDraft().add(die);
+
         }
-        model.getDraftPool().getInDraft().add(model.getBag().draw());
+        die=model.getBag().draw();
+        die.roll();
+        model.getDraftPool().getInDraft().add(die);
 
 
 

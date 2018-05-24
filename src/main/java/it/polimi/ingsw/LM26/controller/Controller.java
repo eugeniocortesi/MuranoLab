@@ -20,99 +20,14 @@ import static it.polimi.ingsw.LM26.model.GamePhases.RoundState.FINISHED;
 public class Controller implements ControllerInt {
 
     private Model model;
-    private Decks decks;
-    PlayerZone playing;
-
-
+    private Match match;
 
     public Controller(Model model) {
 
         this.model = model;
-        Game game = new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());  //initialPhase
-        game.getPhase().doAction(game, model.getPlayerList());    //centralPhase
-        CentralPhase centralPhase = (CentralPhase) game.getPhase();
 
+        newMatch(model, this );
 
-        for(int i=0; i<10; i++){
-            //primo giocatore
-            playing =centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn(), 0);
-
-            // x ciascun giocatore
-             while (centralPhase.getCurrentRound().getRoundState() != FINISHED) {
-
-                //event=askeventfromserver(); metodo da implementare sul server che restituisce il primo elemento della lista di eventi
-                //checkEvent(event);
-                //controllo che il giocatore dell'evento sia quello corrente
-
-                 System.out.println("sta giocando " + playing.getName());
-                 playing.getPlayerBoard().printCard();
-                 model.getDraftPool().printDraftPool();
-
-                 //prendi indice dado
-                 //prendi indici i j
-
-                 int line =0;
-                 System.out.println("inserisci riga");
-                 BufferedReader read=new BufferedReader(new InputStreamReader(System.in));
-                 try {
-                     line = Integer.parseInt(read.readLine());
-                 } catch (IOException e) {
-                     e.printStackTrace();
-                 }
-
-                 int col =0;
-                 System.out.println("inserisci colonna");
-                 read=new BufferedReader(new InputStreamReader(System.in));
-                 try {
-                     col =Integer.parseInt(read.readLine());
-                 } catch (IOException e) {
-                     e.printStackTrace();
-                 }
-
-                 int die=0;
-                 System.out.println("inserisci inserisci dado");
-                 read=new BufferedReader(new InputStreamReader(System.in));
-                 try {
-                     die =Integer.parseInt(read.readLine());
-                 } catch (IOException e) {
-                     e.printStackTrace();
-                 }
-
-                 //crea un nuovo evento di ID 1
-                 ActionEvent event = new ActionEvent();
-
-                 //prendi gli oggetti
-                 Box[][] board = playing.getPlayerBoard().getBoardMatrix();
-                 event.setId(1);
-                 event.setDieFromDraft((Die) model.getDraftPool().getInDraft().get(die-1));
-                 event.setToBox1(board[line-1][col-1]);
-                 event.setPlayer(playing.getNumber());
-
-                 if(checkEvent(event)) System.out.println("done");
-                 else System.out.println("error");
-
-                //TODO
-                 //se error deve rifare la mossa;
-
-                 //prendi l'evento
-                 //fai mossa
-                 //se ok end action e next player
-
-
-
-                centralPhase.getCurrentRound().endAction(centralPhase.getTurn(), model.getRoundTrackInt(), model.getDraftPool(), centralPhase.getCurrentRound().getCurrentPlayer());
-                playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn(), 0);
-            }
-
-            System.out.println("fine turno " + i);
-            //finiti i turni in un round
-
-            centralPhase.nextRound(centralPhase.getCurrentRound(), game);
-         }
-
-
-        //TODO
-        //new Server
     }
 
     public boolean checkEvent( ActionEvent event){
@@ -140,7 +55,7 @@ public class Controller implements ControllerInt {
         if (event.getId()==8)
             if(check(event.getCard(), event.getPlayer())) { update(); return true;}
             else return false;
-        if (event.getId()==9) return true;
+        if (event.getId()==9) { System.out.println("passo");return true;}
         return false;
 
     }
@@ -237,6 +152,11 @@ public class Controller implements ControllerInt {
         return false;
     }
 
+    public void newMatch(Model model, Controller controller){
+
+        this.match=new Match(model, controller);
+
+    }
     public void update(){
 
     }
