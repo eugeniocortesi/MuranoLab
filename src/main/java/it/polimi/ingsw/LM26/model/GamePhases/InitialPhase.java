@@ -106,6 +106,7 @@ public class InitialPhase implements PhaseInt {
                 temp.remove(index);
                 count=temp.size();
             }
+            //TODO
             //ask te server which of the four cards is choosen by th player
             //public WindowPatternCard askWhichCard(ArrayList<WindowPatterCard> four);
             //playerList.get(i).setWindowPatternCard(askWhichCard(four));
@@ -141,6 +142,7 @@ public class InitialPhase implements PhaseInt {
         setTokens(playerList);
         setPublicCards(onBoardCards, decks);
         setWindowPattern(decks, playerList);
+        //TODO
         //private cards..
         game.setPhase(new CentralPhase(playerList));
 

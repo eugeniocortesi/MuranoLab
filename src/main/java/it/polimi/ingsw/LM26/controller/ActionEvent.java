@@ -27,6 +27,7 @@ public class ActionEvent {
         event 6: use card 1. to set: Card, DieFromDraft, InDeCrement, Player.
         event 7: use card 10, 11. to set: Card, DieFromDraft, Player.
         event 8: use card 7. to set: Card, Player.
+        event 9: no action.
         */
 
     public int getId() { return id; }

@@ -68,7 +68,9 @@ public class Round {
             roundState= RoundState.FINISHED;
         }
         else roundState= RoundState.RUNNING;
-    }//aggiungere controlli e aggiornamenti di "second die/turn"
+    }
+    //TODO
+    // aggiungere controlli e aggiornamenti di "second die/turn"
 
     public void pullDice(){
 

@@ -10,6 +10,10 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import static it.polimi.ingsw.LM26.model.GamePhases.RoundState.FINISHED;
 
 
@@ -46,10 +50,53 @@ public class Controller implements ControllerInt {
 
                  //prendi indice dado
                  //prendi indici i j
-                 //prendi gli oggetti
-                 //crea un nuovo evento di ID 1 
 
-                //giocatore piazza dado o niente
+                 int line =0;
+                 System.out.println("inserisci riga");
+                 BufferedReader read=new BufferedReader(new InputStreamReader(System.in));
+                 try {
+                     line = Integer.parseInt(read.readLine());
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }
+
+                 int col =0;
+                 System.out.println("inserisci colonna");
+                 read=new BufferedReader(new InputStreamReader(System.in));
+                 try {
+                     col =Integer.parseInt(read.readLine());
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }
+
+                 int die=0;
+                 System.out.println("inserisci inserisci dado");
+                 read=new BufferedReader(new InputStreamReader(System.in));
+                 try {
+                     die =Integer.parseInt(read.readLine());
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }
+
+                 //crea un nuovo evento di ID 1
+                 ActionEvent event = new ActionEvent();
+
+                 //prendi gli oggetti
+                 Box[][] board = playing.getPlayerBoard().getBoardMatrix();
+                 event.setId(1);
+                 event.setDieFromDraft((Die) model.getDraftPool().getInDraft().get(die-1));
+                 event.setToBox1(board[line-1][col-1]);
+                 event.setPlayer(playing.getNumber());
+
+                 if(checkEvent(event)) System.out.println("done");
+                 else System.out.println("error");
+
+                //TODO
+                 //se error deve rifare la mossa;
+
+                 //prendi l'evento
+                 //fai mossa
+                 //se ok end action e next player
 
 
 
@@ -68,24 +115,33 @@ public class Controller implements ControllerInt {
         //new Server
     }
 
-    public void checkEvent( ActionEvent event){
+    public boolean checkEvent( ActionEvent event){
 
         if (event.getId()==1)
-            if(check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) update();
+            if (check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) { update(); return true; } else return false;
         if (event.getId()==2)
-            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getPlayer())) update();
+            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getPlayer())) { update(); return true;}
+            else return false;
         if (event.getId()==3)
-            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getFromBox2(), event.getToBox2(),event.getPlayer())) update();
+            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getFromBox2(), event.getToBox2(),event.getPlayer())) { update(); return true;}
+            else return false;
         if (event.getId()==4)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) update();
+            if(check(event.getCard(), event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) { update(); return true;}
+            else return false;
         if (event.getId()==5)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getDieFromRoundTrack(), event.getPlayer())) update();
+            if(check(event.getCard(), event.getDieFromDraft(), event.getDieFromRoundTrack(), event.getPlayer())) { update(); return true;}
+            else return false;
         if (event.getId()==6)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getInDeCrement(), event.getPlayer())) update();
+            if(check(event.getCard(), event.getDieFromDraft(), event.getInDeCrement(), event.getPlayer())) { update(); return true;}
+            else return false;
         if (event.getId()==7)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getPlayer())) update();
+            if(check(event.getCard(), event.getDieFromDraft(), event.getPlayer())) { update(); return true;}
+            else return false;
         if (event.getId()==8)
-            if(check(event.getCard(), event.getPlayer())) update();
+            if(check(event.getCard(), event.getPlayer())) { update(); return true;}
+            else return false;
+        if (event.getId()==9) return true;
+        return false;
 
     }
 
