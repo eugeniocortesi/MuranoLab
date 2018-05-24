@@ -33,12 +33,25 @@ public class Controller implements ControllerInt {
             //primo giocatore
             playing =centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn(), 0);
 
-            while (centralPhase.getCurrentRound().getRoundState() != FINISHED) {
-
             // x ciascun giocatore
-            //giocatore piazza dado o niente
+             while (centralPhase.getCurrentRound().getRoundState() != FINISHED) {
 
-                System.out.println("sta giocando " + playing.getName());
+                //event=askeventfromserver(); metodo da implementare sul server che restituisce il primo elemento della lista di eventi
+                //checkEvent(event);
+                //controllo che il giocatore dell'evento sia quello corrente
+
+                 System.out.println("sta giocando " + playing.getName());
+                 playing.getPlayerBoard().printCard();
+                 model.getDraftPool().printDraftPool();
+
+                 //prendi indice dado
+                 //prendi indici i j
+                 //prendi gli oggetti
+                 //crea un nuovo evento di ID 1 
+
+                //giocatore piazza dado o niente
+
+
 
                 centralPhase.getCurrentRound().endAction(centralPhase.getTurn(), model.getRoundTrackInt(), model.getDraftPool(), centralPhase.getCurrentRound().getCurrentPlayer());
                 playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn(), 0);
@@ -55,7 +68,7 @@ public class Controller implements ControllerInt {
         //new Server
     }
 
-    public void sendEventToContoller( ActionEvent event){
+    public void checkEvent( ActionEvent event){
 
         if (event.getId()==1)
             if(check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) update();

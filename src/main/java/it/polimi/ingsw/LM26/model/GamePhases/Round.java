@@ -1,10 +1,14 @@
 package it.polimi.ingsw.LM26.model.GamePhases;
 
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import java.util.ArrayList;
+
+import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class Round {
 
@@ -18,6 +22,7 @@ public class Round {
 
     public Round(RoundTrackInt rTrack, ArrayList<PlayerZone> pZone, int nrounds) {
         this.assignTurn(rTrack, pZone, nrounds);
+        pullDice();
     }
 
 
@@ -41,7 +46,7 @@ public class Round {
           }
           //System.out.println("g");
           if(player.get(i).getNumber()==turn[turnCounter]) {
-              if(player.get(i).getPlayerState()!=PlayerState.STANDBY){
+              if(player.get(i).getPlayerState()!= STANDBY){
                   player.get(i).setPlayerState(PlayerState.BEGINNING);
                   currentPlayer=player.get(i);
                   return player.get(i);
@@ -65,6 +70,29 @@ public class Round {
         else roundState= RoundState.RUNNING;
     }//aggiungere controlli e aggiornamenti di "second die/turn"
 
+    public void pullDice(){
+
+        Model model = singletonModel();
+
+        int contStandby=0;
+        int contDice=0;
+
+        for(int j=0; j<model.getPlayerList().size(); j++)
+            if(model.getPlayerList().get(j).getPlayerState()==STANDBY)
+                contStandby=contStandby+1;
+
+        contDice=model.getPlayerList().size()-contStandby;
+
+        for(int i=0; i<contDice; i++) {
+            model.getDraftPool().getInDraft().add(model.getBag().draw());
+            model.getDraftPool().getInDraft().add(model.getBag().draw());
+        }
+        model.getDraftPool().getInDraft().add(model.getBag().draw());
+
+
+
+    }
+
     public PlayerZone getCurrentPlayer() { return currentPlayer; }
 
     public RoundState getRoundState() {
@@ -74,4 +102,5 @@ public class Round {
     public int getTurnCounter() {
         return turnCounter;
     }
+
 }

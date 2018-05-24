@@ -18,6 +18,13 @@ public class DraftPool {
     public void setInDraft(ArrayList<DieInt> inDraft) {
         this.inDraft = inDraft;
     }
+
+    public void printDraftPool(){
+
+        for(int i=0; i<inDraft.size(); i++)
+            System.out.print("\t" + inDraft.get(i).toString() + " ");
+            System.out.println();
+    }
 }
 
 

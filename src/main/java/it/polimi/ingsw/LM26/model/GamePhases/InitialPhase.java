@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.model.GamePhases;
 
 import it.polimi.ingsw.LM26.model.Cards.*;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
@@ -59,6 +60,8 @@ public class InitialPhase implements PhaseInt {
         }
     }
 
+
+
     /*public void setScoreMarkerAndWindowFrame(ArrayList<PlayerZone> playerList){
         playerList.get(0).setPlayerBoard(new WindowFramePlayerBoard(0, Color.ANSI_RED));
         playerList.get(0).setScoreMarker(new ScoreMarker(Color.ANSI_RED));
@@ -80,6 +83,38 @@ public class InitialPhase implements PhaseInt {
             Token token= new Token(i.getWindowPatternCard().getToken());
             i.setToken(token);
         }
+
+    }
+
+    public void setWindowPattern(Decks decks, ArrayList<PlayerZone> playerList){
+
+        ArrayList<WindowPatternCard> temp = new ArrayList<WindowPatternCard>();
+        ArrayList<WindowPatternCard> four = new ArrayList<WindowPatternCard>();
+
+        temp.addAll(decks.getWindowPatternCardDeck());
+
+        int count= temp.size();
+
+
+        for(int i=0; i<playerList.size(); i++) {
+
+            for(int j=0; j<4; j++) {
+
+                Random rand = new Random();
+                int index = rand.nextInt(count);
+                four.add(temp.get(index));
+                temp.remove(index);
+                count=temp.size();
+            }
+            //ask te server which of the four cards is choosen by th player
+            //public WindowPatternCard askWhichCard(ArrayList<WindowPatterCard> four);
+            //playerList.get(i).setWindowPatternCard(askWhichCard(four));
+            //TEMPORANEAMENTE
+            playerList.get(i).setWindowPatternCard(temp.get(i));
+            playerList.get(i).getPlayerBoard().insertPatternIntoBoard(playerList.get(i).getWindowPatternCard().getWindowPatter());
+            for(int k=0; k<4; k++)four.remove(0);
+        }
+
 
     }
 
@@ -105,6 +140,7 @@ public class InitialPhase implements PhaseInt {
         setScoreMarkerAndWindowFrame(playerList, decks);
         setTokens(playerList);
         setPublicCards(onBoardCards, decks);
+        setWindowPattern(decks, playerList);
         //private cards..
         game.setPhase(new CentralPhase(playerList));
 
