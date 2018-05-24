@@ -24,17 +24,17 @@ public class CentralPhaseTest {
         for(int i=0; i<2; i++){
             playerZones.add(new PlayerZone(name, i));
         }
-        CentralPhase centralPhase = new CentralPhase(playerZones, roundTrack);
+        CentralPhase centralPhase = new CentralPhase(playerZones);
         assertArrayEquals(centralPhase.getTurn(), v2);
         System.out.println(Arrays.toString(centralPhase.getTurn()));
         System.out.println("\n");
         playerZones.add(new PlayerZone(name, 2));
-        CentralPhase centralPhase2 = new CentralPhase(playerZones, roundTrack);
+        CentralPhase centralPhase2 = new CentralPhase(playerZones);
         assertArrayEquals(centralPhase2.getTurn(), v3);
         System.out.println(Arrays.toString(centralPhase2.getTurn()));
         System.out.println("\n");
         playerZones.add(new PlayerZone(name, 3));
-        CentralPhase centralPhase3 = new CentralPhase(playerZones, roundTrack);
+        CentralPhase centralPhase3 = new CentralPhase(playerZones);
         assertArrayEquals(centralPhase3.getTurn(), v4);
         System.out.println(Arrays.toString(centralPhase3.getTurn()));
     }
