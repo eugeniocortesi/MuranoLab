@@ -21,7 +21,7 @@ public class View implements ViewInt{
     }
 
     public void showAlreadyLoggedScreen() {
-        
+
     }
 
     public void  showCentralPhaseScreen() {

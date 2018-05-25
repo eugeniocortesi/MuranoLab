@@ -4,7 +4,7 @@ import it.polimi.ingsw.LM26.network.server.ClientHandlerInt;
 import it.polimi.ingsw.LM26.network.server.ServerImpl;
 import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
 
-public class ClientHandlerRMIImpl implements ClientHandlerInt {
+public class ClientHandlerRMIImpl extends ClientHandlerInt {
 
     private ServerImpl myserver;
 

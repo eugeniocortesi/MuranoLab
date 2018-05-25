@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.networkServer.ClientHandler;
 
 import java.rmi.RemoteException;
+import java.util.Observable;
 
 public class VirtualView implements VirtualViewInt {
 
@@ -42,6 +43,10 @@ public class VirtualView implements VirtualViewInt {
     }
 
     public void showPoints() throws RemoteException {
+
+    }
+
+    public void update(Observable o, Object arg) {
 
     }
 
