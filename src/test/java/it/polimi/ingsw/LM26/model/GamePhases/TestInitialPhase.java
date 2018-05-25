@@ -1,9 +1,9 @@
 package it.polimi.ingsw.LM26.model.GamePhases;
 
+import it.polimi.ingsw.LM26.controller.GamePhases.InitialPhase;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZoneInt;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;

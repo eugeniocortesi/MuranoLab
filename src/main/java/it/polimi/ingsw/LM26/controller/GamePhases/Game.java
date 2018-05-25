@@ -1,9 +1,8 @@
-package it.polimi.ingsw.LM26.model.GamePhases;
+package it.polimi.ingsw.LM26.controller.GamePhases;
 
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
-import javafx.print.PageLayout;
 
 import java.util.ArrayList;
 

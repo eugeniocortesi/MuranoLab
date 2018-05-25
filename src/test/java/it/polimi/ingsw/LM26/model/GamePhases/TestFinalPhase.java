@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.model.GamePhases;
 
+import it.polimi.ingsw.LM26.controller.GamePhases.FinalPhase;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;

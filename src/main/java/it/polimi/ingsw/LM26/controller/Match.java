@@ -1,8 +1,8 @@
 package it.polimi.ingsw.LM26.controller;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
-import it.polimi.ingsw.LM26.model.GamePhases.CentralPhase;
-import it.polimi.ingsw.LM26.model.GamePhases.Game;
+import it.polimi.ingsw.LM26.controller.GamePhases.CentralPhase;
+import it.polimi.ingsw.LM26.controller.GamePhases.Game;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
@@ -11,7 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static it.polimi.ingsw.LM26.model.GamePhases.RoundState.FINISHED;
+import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
 
 public class Match {
 

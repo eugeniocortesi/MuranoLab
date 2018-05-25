@@ -16,7 +16,7 @@ public class Controller implements ControllerInt {
     public Controller(Model model) {
 
         this.model = model;
-
+        // Server server = new Server();
         newMatch(model, this );
 
     }

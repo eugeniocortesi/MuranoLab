@@ -1,5 +1,7 @@
 package it.polimi.ingsw.LM26.model.GamePhases;
 
+import it.polimi.ingsw.LM26.controller.GamePhases.Round;
+import it.polimi.ingsw.LM26.controller.GamePhases.RoundState;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Bag;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
