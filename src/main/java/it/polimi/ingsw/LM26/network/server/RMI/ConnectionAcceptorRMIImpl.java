@@ -7,6 +7,9 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+// Creates stub, binds server in the registry
+//
+
 public class ConnectionAcceptorRMIImpl {
 
     private int RMIPORT;
@@ -18,8 +21,8 @@ public class ConnectionAcceptorRMIImpl {
         this.RMIPORT = dataServerConfiguration.getRMIPORT();
 
         try{
-            ClientHandlerRMIInt clientHandlerRMIRemote = new ClientHandlerRMIRemoteImpl(server);
-            ClientHandlerRMIInt stub = (ClientHandlerRMIInt) UnicastRemoteObject.exportObject(clientHandlerRMIRemote, RMIPORT);
+            ClientHandlerRMIRemoteInt clientHandlerRMIRemote = new ClientHandlerRMIRemoteImpl(server);
+            ClientHandlerRMIRemoteInt stub = (ClientHandlerRMIRemoteInt) UnicastRemoteObject.exportObject(clientHandlerRMIRemote, RMIPORT);
             Registry registry = LocateRegistry.createRegistry(RMIPORT);
             registry.bind("ClientHandlerRMI",  stub);
             System.err.println("Server ready");

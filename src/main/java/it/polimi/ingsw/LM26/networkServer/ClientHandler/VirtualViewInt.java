@@ -9,6 +9,8 @@ public interface VirtualViewInt extends Remote, Observer {
 
     void showLoginScreen() throws RemoteException;
 
+    void showLoggedScreen() throws RemoteException;
+
     void showAlreadyLoggedScreen() throws RemoteException;
 
     void showTooManyUsersScreen() throws RemoteException;

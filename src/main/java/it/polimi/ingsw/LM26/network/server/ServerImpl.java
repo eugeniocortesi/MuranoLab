@@ -11,10 +11,18 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//Implements configuration RMI and Socket
+//Creates Connection Acceptor RMI and Socket
+//Creates userConnections and socketConnections to store future ClientHandler
+
 public class ServerImpl {
 
+
+    //TODO add lobby
+
     private DataServerImplementation dataServerImplementation;
-    private HashMap<String, ClientHandlerInt> userConnections;
+    //private HashMap<String, ClientHandlerInt> userConnections;
+    private ConnectionToController userConnections;
     private ArrayList<ClientHandlerSocketImpl> socketConnections;
     private ConnectionAcceptorRMIImpl connectionAcceptorRMI;
     private ConnectionAcceptorSocketImpl connectionAcceptorSocket;
@@ -29,7 +37,8 @@ public class ServerImpl {
         }catch(UnknownHostException he){
             he.printStackTrace();
         }
-        userConnections = new HashMap<String, ClientHandlerInt>();
+        //userConnections = new HashMap<String, ClientHandlerInt>();
+        userConnections = new ConnectionToController(this);
         this.socketConnections = new ArrayList<ClientHandlerSocketImpl>();
         if(socketConnections == null) {
             System.err.println("socketConnection null");
@@ -45,9 +54,14 @@ public class ServerImpl {
         return socketConnections;
     }
 
-    public HashMap<String, ClientHandlerInt> getUserConnections() {
+    public ConnectionToController getUserConnections() {
         return userConnections;
     }
+
+    /*
+     public HashMap<String, ClientHandlerInt> getUserConnections() {
+        return userConnections;
+    }*/
 
     public ConnectionAcceptorRMIImpl getConnectionAcceptorRMI() {
         return connectionAcceptorRMI;
@@ -70,10 +84,13 @@ public class ServerImpl {
                     return false;
             }
         return true;*/
-        if (userConnections.get(username) == null ){
+        /*if (userConnections.get(username) == null ){
             return true;
         }
-        return false;
+        return false;*/
+        if (userConnections.getConnections(username))
+            return false;
+        return true;
     }
 
     public boolean checkNumberUser(){
@@ -85,7 +102,7 @@ public class ServerImpl {
 
     public void addUsername(String name, ClientHandlerInt clientHandlerInt){
         if(checkLogin(name)) {
-            userConnections.put(name, clientHandlerInt);
+            userConnections.add(name, clientHandlerInt);
         }
     }
 

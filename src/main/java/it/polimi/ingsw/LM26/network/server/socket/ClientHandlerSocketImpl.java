@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
+// Connects Server to clientSocket
 
-//TODO it has to extends Thread!
 public class ClientHandlerSocketImpl extends ClientHandlerInt {
 
     private boolean logged;
@@ -64,6 +64,7 @@ public class ClientHandlerSocketImpl extends ClientHandlerInt {
         else return messageReceived;
     }
 
+    //listening and receive messages
     public void run(){
 
         try {
@@ -88,6 +89,7 @@ public class ClientHandlerSocketImpl extends ClientHandlerInt {
         }
     }
 
+    //parsing of messages
     public void recognize(String message){
 
         if (message == null)
@@ -117,7 +119,7 @@ public class ClientHandlerSocketImpl extends ClientHandlerInt {
                 System.out.println("Hashmap size : " +server.getUserConnections().size());
                 System.out.println(username + " logged");
                 this.logged = true;
-                //
+
                 DataMessage message = new DataMessage("logged", username);
                 message.dump();
                 sendMessage(message.serializeDataMessage());
@@ -132,8 +134,11 @@ public class ClientHandlerSocketImpl extends ClientHandlerInt {
             }
             else{
                 System.out.println("Too many users!");
-                //
+                DataMessage message = new DataMessage("too_many_users", username);
+                message.dump();
+                sendMessage(message.serializeDataMessage());
             }
+            //TODO notify other players
         }
 
     }

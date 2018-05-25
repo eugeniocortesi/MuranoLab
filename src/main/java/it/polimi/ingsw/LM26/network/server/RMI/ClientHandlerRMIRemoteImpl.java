@@ -4,7 +4,7 @@ import it.polimi.ingsw.LM26.network.server.ServerImpl;
 
 import java.rmi.RemoteException;
 
-public class ClientHandlerRMIRemoteImpl implements ClientHandlerRMIInt {
+public class ClientHandlerRMIRemoteImpl implements ClientHandlerRMIRemoteInt {
 
     ClientHandlerRMIImpl clientHandlerRMI;
 

@@ -21,6 +21,10 @@ public class VirtualViewRMIImpl implements VirtualViewInt {
         concreteView.showLoginScreen();
     }
 
+    public void showLoggedScreen() throws RemoteException {
+        //concreteView.showLoggedScreen();
+    }
+
     public void showAlreadyLoggedScreen() {
         concreteView.showAlreadyLoggedScreen();
     }

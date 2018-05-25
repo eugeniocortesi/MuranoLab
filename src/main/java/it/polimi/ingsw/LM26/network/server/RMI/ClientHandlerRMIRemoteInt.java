@@ -6,7 +6,7 @@ import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface ClientHandlerRMIInt extends Remote {
+public interface ClientHandlerRMIRemoteInt extends Remote {
 
     void login (String username) throws RemoteException;
 
