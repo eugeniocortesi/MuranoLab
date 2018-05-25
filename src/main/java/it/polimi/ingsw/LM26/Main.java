@@ -17,10 +17,10 @@ public class Main {
 
         Model model = singletonModel();
 
-        PlayerZone player1 = new PlayerZone("Eugenio", 1);
-        PlayerZone player2 = new PlayerZone("Chiara", 2);
-        PlayerZone player3 = new PlayerZone( "Claudia", 3);
-        PlayerZone player4 = new PlayerZone("Tommaso", 4);
+        PlayerZone player1 = new PlayerZone("Eugenio", 0);
+        PlayerZone player2 = new PlayerZone("Chiara", 1);
+        PlayerZone player3 = new PlayerZone( "Claudia", 2);
+        PlayerZone player4 = new PlayerZone("Tommaso", 3);
 
         //ogni player sceglierà dalla view la windowpatterncard che vuole
 
@@ -29,10 +29,10 @@ public class Main {
         player3.setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(2));
         player4.setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(3));
 
-        player1.setNumberPlayer(1);
-        player2.setNumberPlayer(2);
-        player3.setNumberPlayer(3);
-        player4.setNumberPlayer(4);
+        player1.setNumberPlayer(0);
+        player2.setNumberPlayer(1);
+        player3.setNumberPlayer(2);
+        player4.setNumberPlayer(3);
 
         ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
         playerList.add(player1);

@@ -96,7 +96,7 @@ public class Match {
                         event.setId(id);
                         event.setDieFromDraft((Die) model.getDraftPool().getInDraft().get(die - 1));
                         event.setToBox1(board[line - 1][col - 1]);
-                        event.setPlayer(playing.getNumber());
+                        event.setPlayer(playing.getIDPlayer());
                     }
                     event.setId(id);
 

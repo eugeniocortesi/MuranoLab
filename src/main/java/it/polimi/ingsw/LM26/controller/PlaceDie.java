@@ -87,75 +87,85 @@ public class PlaceDie implements PlayerActionInt{
 
          if (i == 0) {
 
-             if (j == 0) //angolo alto a sinistra
+             if (j == 0) { //angolo alto a sinistra
 
+                 if (checkRight()){
+                     if (checkRightDie()) return true;}
+                     else if (checkDown()) return true;
+                     else if (checkRightDown()) return true;
+
+                     else if (j == 4)  //angolo in alto a destra
+                         if (checkLeft())
+                             if (checkLeftDie()) return true;
+                             else if (checkDown()) return true;
+                             else if (checkLeftDown()) return true;
+             }
+             else {      //tutti gli altri valori prima riga
+                 if (checkRight()){
+                     if (checkRightDie()) return true;}
+                 else if (checkLeft())
+                         if (checkLeftDie()) return true;
+                         else if (checkDown()) return true;
+                         else if (checkRightDown()) return true;
+                         else if (checkLeftDown()) return true;
+             }
+         }
+         else if(i ==3) {
+             if (j == 0) { //angolo in basso a sinistra
+                 if (checkRight()) {
+                     if (checkRightDie()) return true;
+                 }
+                 else if (checkUp()) return true;
+                 else if (checkRightUp()) return true;
+             }
+             else if (j == 4) {   // angolo in basso a destra
+                 if (checkLeft()) {
+                     if (checkLeftDie()) return true;
+                 } else if (checkUp()) return true;
+                 else if (checkLeftUp()) return true;
+             }
+
+
+            else {   //tutti gli altri valori ultima riga
+                 if (checkRight()) {
+                     if (checkRightDie()) return true;
+                 } else if (checkLeft())
+                     if (checkLeftDie()) return true;
+                     else if (checkUp()) return true;
+                     else if (checkRightUp()) return true;
+                     else if (checkLeftUp()) return true;
+             }
+         }
+
+         else if(j == 0) {         //tutti gli altri valori prima colonna
+             if (i != 0 && i != 3) {
                  if (checkRight())
                      if (checkRightDie()) return true;
-             else if(checkDown()) return true;
-             else if(checkRightDown()) return true;
+             } else if (checkRightUp()) return true;
+             else if (checkRightDown()) return true;
+             else if (checkUp()) return true;
+             else if (checkDown()) return true;
+         }
 
-             else if(j == 4)  //angolo in alto a destra
-             if (checkLeft())
-                 if (checkLeftDie()) return true;
-             else if(checkDown()) return true;
-             else if(checkLeftDown()) return true;
-
-          else       //tutti gli altri valori prima riga
-             if (checkRight())
-                 if (checkRightDie()) return true;
-             else if(checkLeft())
-             if (checkLeftDie()) return true;
-             else if(checkDown()) return true;
-             else if(checkRightDown()) return true;
-             else if(checkLeftDown()) return true;
-
-             else if(i ==3)
-             if (j == 0)  //angolo in basso a sinistra
-                 if (checkRight())
-                     if (checkRightDie()) return true;
-             else if(checkUp()) return true;
-             else if(checkRightUp()) return true;
-
-             else if(j == 4)    // angolo in basso a destra
-             if (checkLeft())
-                 if (checkLeftDie()) return true;
-             else if(checkUp()) return true;
-             else if(checkLeftUp()) return true;
-
-                  else     //tutti gli altri valori ultima riga
-             if (checkRight())
-                 if (checkRightDie()) return true;
-             else if(checkLeft())
-             if (checkLeftDie()) return true;
-             else if(checkUp()) return true;
-             else if(checkRightUp()) return true;
-             else if(checkLeftUp()) return true;
-
-             else if(j == 0)              //tutti gli altri valori prima colonna
-             if (i != 0 && i != 3)
-                 if (checkRight())
-                     if (checkRightDie()) return true;
-             else if(checkRightUp()) return true;
-             else if(checkRightDown()) return true;
-             else if(checkUp()) return true;
-             else if(checkDown()) return true;
-
-             else if(j == 4)            //tutti gli altri valori ultima colonna
-             if (i != 0 && i != 3)
+         else if(j == 4) {          //tutti gli altri valori ultima colonna
+             if (i != 0 && i != 3) {
                  if (checkLeft())
                      if (checkLeftDie()) return true;
-             else if(checkLeftUp()) return true;
-             else if(checkLeftDown()) return true;
-             else if(checkUp()) return true;
-             else if(checkDown()) return true;
-
-    else      //tutti i valori non di margine
-             if (checkAll()) return true;
+             } else if (checkLeftUp()) return true;
+             else if (checkLeftDown()) return true;
+             else if (checkUp()) return true;
+             else if (checkDown()) return true;
          }
+
+        else      //tutti i valori non di margine
+             if (checkAll()) return true;
+
          System.out.println("error in position restriction");
          return false;
+         }
 
-     }
+
+
 
 
 

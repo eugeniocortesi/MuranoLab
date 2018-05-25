@@ -70,7 +70,7 @@ public class WindowFramePlayerBoard/* implements CardInt */{
                 if (BoardMatrix[i][j].getPatternBox().isShade() == true)
                     System.out.print("\t"+BoardMatrix[i][j].getPatternBox().getValue() + " ");
                 if(BoardMatrix[i][j].isIsPresent())
-                    System.out.print("\t has "+BoardMatrix[j][j].getDie().toString() + " ") ;
+                    System.out.print("\t has "+BoardMatrix[i][j].getDie().toString() + " ") ;
                 else System.out.print("\t is empty ");
             }
             System.out.println();

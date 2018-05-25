@@ -78,9 +78,7 @@ public class PlayerZone implements PlayerZoneInt {
             return namePlayer;
         }
 
-        public int getNumber() {
-            return numberPlayer;
-        }
+        public int getNumber() { return numberPlayer; }
 
         public WindowFramePlayerBoard getPlayerBoard() {
             return playerBoard;
