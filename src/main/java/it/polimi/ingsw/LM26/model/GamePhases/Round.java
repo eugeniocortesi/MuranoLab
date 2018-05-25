@@ -66,6 +66,7 @@ public class Round {
         turnCounter++;
         if(turnCounter == turn.length) {
             roundTrack.addDice(draftPool.getInDraft());
+            draftPool.removeAllDice();
             turnCounter=0;
             roundState= RoundState.FINISHED;
         }
@@ -80,7 +81,7 @@ public class Round {
 
         int contStandby=0;
         int contDice=0;
-        DieInt die=null;
+        Die die=null;
 
         for(int j=0; j<model.getPlayerList().size(); j++)
             if(model.getPlayerList().get(j).getPlayerState()==STANDBY)
@@ -89,17 +90,17 @@ public class Round {
         contDice=model.getPlayerList().size()-contStandby;
 
         for(int i=0; i<contDice; i++) {
-            die=model.getBag().draw();
+            die=(Die)model.getBag().draw();
             die.roll();
-            model.getDraftPool().getInDraft().add(die);
-            die=model.getBag().draw();
+            model.getDraftPool().addDie(die);
+            die=(Die)model.getBag().draw();
             die.roll();
-            model.getDraftPool().getInDraft().add(die);
+            model.getDraftPool().addDie(die);
 
         }
-        die=model.getBag().draw();
+        die=(Die)model.getBag().draw();
         die.roll();
-        model.getDraftPool().getInDraft().add(die);
+        model.getDraftPool().addDie(die);
 
 
 
