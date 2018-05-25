@@ -110,11 +110,7 @@ public class Model extends Observable{
     }
 
     @Override
-
-    public void notifyObservers() {
-
-        super.notifyObservers();
-    }
+    public void notifyObservers() { super.notifyObservers(); }
 
     @Override
     public synchronized void addObserver(Observer o) {

@@ -5,6 +5,7 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.view.ViewInt;
 
 import java.util.Observable;
 
@@ -12,11 +13,15 @@ public class Controller implements ControllerInt {
 
     private Model model;
     private Match match;
+    private ViewInt view;
 
-    public Controller(Model model) {
+    public Controller(Model model, ViewInt view) {
 
         this.model = model;
-        // Server server = new Server();
+        this.view=view;
+
+        //model.addObservers(view);
+
         newMatch(model, this );
 
     }
@@ -24,7 +29,8 @@ public class Controller implements ControllerInt {
     public boolean checkEvent( ActionEvent event){
 
         if (event.getId()==1)
-            if (check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) { return true; }
+            if (check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) { // model.notifyObservers();
+            return true; }
             else return false;
         if (event.getId()==2)
             if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getPlayer())) {  return true;}
@@ -154,6 +160,8 @@ public class Controller implements ControllerInt {
 
         //server.virtualview.haschenged
     }
+
+
 
 
     public void close(){

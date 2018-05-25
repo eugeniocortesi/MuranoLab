@@ -4,6 +4,10 @@ import it.polimi.ingsw.LM26.controller.Controller;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
+import it.polimi.ingsw.LM26.network.networkTesting.ConcreteViewTest;
+import it.polimi.ingsw.LM26.view.MainView;
+import it.polimi.ingsw.LM26.view.View;
+import it.polimi.ingsw.LM26.view.ViewInt;
 
 import java.util.ArrayList;
 
@@ -44,7 +48,12 @@ public class Main {
 
         model.getRoundTrackInt().getCurrentTurn();
 
-        Controller controller = new Controller(model);
+        ViewInt view = new ConcreteViewTest();
+
+        // Server server = new Server();
+        // view = server.getView();
+
+        Controller controller = new Controller(model, view);
         
 
 
