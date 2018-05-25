@@ -13,14 +13,17 @@ import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZoneInt;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
+import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
 
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class Model {
+public class Model extends Observable{
 
     private OnBoardCards onBoardCards;
 
@@ -110,5 +113,22 @@ public class Model {
 
     public void setDraftPool(DraftPool draftPool) {
         this.draftPool = draftPool;
+    }
+
+    @Override
+
+    public void notifyObservers() {
+
+        super.notifyObservers();
+    }
+
+    @Override
+    public synchronized void addObserver(Observer o) {
+        super.addObserver(o);
+    }
+
+    @Override
+    public synchronized boolean hasChanged() {
+        return super.hasChanged();
     }
 }

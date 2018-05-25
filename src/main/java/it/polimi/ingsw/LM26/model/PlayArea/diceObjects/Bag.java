@@ -36,11 +36,39 @@ public class Bag {
 
     private void fill(){
 
-        for (int i = 0; i < 90 / 5; i++)
-            for (Color c : Color.values()) {
-                Die d = new Die(c);
-                this.inBag.add(d);
-            }
+        Color c;
+        Die d;
+        for (int i = 0; i < 90 / 5; i++) {
+
+            c =Color.ANSI_BLUE;
+            d = new Die(c);
+            this.inBag.add(d);
+
+            c =Color.ANSI_GREEN;
+            d = new Die(c);
+            this.inBag.add(d);
+
+            c =Color.ANSI_RED;
+            d = new Die(c);
+            this.inBag.add(d);
+
+            c =Color.ANSI_YELLOW;
+            d = new Die(c);
+            this.inBag.add(d);
+
+            c =Color.ANSI_PURPLE;
+            d = new Die(c);
+            this.inBag.add(d);
+
+
+           /* for (Color c : Color.values()) {
+
+                    Die d = new Die(c);
+                    this.inBag.add(d);
+
+            }*/
+        }
+
     }
 
     public DieInt draw(){

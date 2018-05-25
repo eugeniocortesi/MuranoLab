@@ -110,6 +110,7 @@ public class Match {
 
                 centralPhase.getCurrentRound().endAction(centralPhase.getTurn(), model.getRoundTrackInt(), model.getDraftPool(), centralPhase.getCurrentRound().getCurrentPlayer());
                 playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn(), 0);
+                model.getRoundTrackInt().dump();
                 result=false;
             }
 

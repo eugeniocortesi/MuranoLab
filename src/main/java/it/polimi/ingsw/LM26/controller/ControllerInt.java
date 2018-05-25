@@ -4,7 +4,10 @@ import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 
-public interface ControllerInt {
+import java.util.Observable;
+import java.util.Observer;
+
+public interface ControllerInt extends Observer {
 
     public boolean check(Die dieFromDraft, Box toBox, int player);
 
@@ -15,7 +18,10 @@ public interface ControllerInt {
     public boolean check(ToolCard one, Die dieFromDraft, String inDecrement, int player);
     public boolean check(ToolCard tenEleven, Die dieFromDraft, int player);
     public boolean check(ToolCard seven,  int player);
+    //TODO
     //ecc.. manca la 12
 
-    public boolean check( String noAction, int player);
+    void update(Observable o, Object arg);
+
+    public boolean check(String noAction, int player);
 }

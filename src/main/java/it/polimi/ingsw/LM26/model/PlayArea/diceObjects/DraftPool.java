@@ -25,6 +25,21 @@ public class DraftPool {
             System.out.print("\t" + inDraft.get(i).toString() + " ");
             System.out.println();
     }
+
+    //TODO to test
+
+    public void addDie(Die d){
+
+        inDraft.add(d);
+    }
+
+
+    public void removeAllDice(){
+
+        int dim= inDraft.size();
+        for( int i = 0; i<dim ; i++)
+            inDraft.remove(0);
+    }
 }
 
 
