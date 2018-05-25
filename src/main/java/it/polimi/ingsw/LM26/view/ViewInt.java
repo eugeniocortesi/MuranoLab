@@ -4,6 +4,8 @@ public interface ViewInt {
 
     void showLoginScreen();
 
+    void showAlreadyLoggedScreen();
+
     void showTooManyUsersScreen();
 
     void showDisconnectScreen();

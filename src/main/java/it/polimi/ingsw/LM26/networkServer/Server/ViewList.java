@@ -36,6 +36,10 @@ public class ViewList implements ViewInt {
 
     }
 
+    public void showAlreadyLoggedScreen() {
+
+    }
+
     public void showTooManyUsersScreen() {
 
     }

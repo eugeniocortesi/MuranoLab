@@ -12,7 +12,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-public class ClientHandlerSocketImpl extends Thread implements ClientHandlerInt {
+
+//TODO it has to extends Thread!
+public class ClientHandlerSocketImpl extends ClientHandlerInt {
 
     private boolean logged;
     private Socket socket;
@@ -138,5 +140,6 @@ public class ClientHandlerSocketImpl extends Thread implements ClientHandlerInt 
 
     public void disconnect(String username) {
 
+        return;
     }
 }

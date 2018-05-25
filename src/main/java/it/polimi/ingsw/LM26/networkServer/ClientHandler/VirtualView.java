@@ -9,6 +9,22 @@ public class VirtualView implements VirtualViewInt {
 
     }
 
+    public void showAlreadyLoggedScreen() {
+
+    }
+
+    public void showTooManyUsersScreen() {
+
+    }
+
+    public void showDisconnectScreen() {
+
+    }
+
+    public void showAddedPlayer() {
+
+    }
+
     public void showTurnInitialPhase() throws RemoteException {
 
     }

@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.network.server.RMI;
 
 import it.polimi.ingsw.LM26.network.server.ClientHandlerInt;
 import it.polimi.ingsw.LM26.network.server.ServerImpl;
+import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
 
 public class ClientHandlerRMIImpl implements ClientHandlerInt {
 
@@ -10,6 +11,7 @@ public class ClientHandlerRMIImpl implements ClientHandlerInt {
     public ClientHandlerRMIImpl(ServerImpl server){
         this.myserver = server;
     }
+
 
     public void login(String username) {
 

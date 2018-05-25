@@ -107,8 +107,8 @@ public class InitialPhase implements PhaseInt {
                 count=temp.size();
             }
             //TODO
-            //ask te server which of the four cards is choosen by th player
-            //public WindowPatternCard askWhichCard(ArrayList<WindowPatterCard> four);
+            //ask te server which of the fpublic WindowPatternCard askWhichCard(ArrayList<WindowPatterCard> four);our cards is choosen by th player
+            //
             //playerList.get(i).setWindowPatternCard(askWhichCard(four));
             //TEMPORANEAMENTE
             playerList.get(i).setWindowPatternCard(temp.get(i));
