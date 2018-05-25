@@ -2,20 +2,11 @@ package it.polimi.ingsw.LM26.controller;
 
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
-import it.polimi.ingsw.LM26.model.GamePhases.CentralPhase;
-import it.polimi.ingsw.LM26.model.GamePhases.Game;
-import it.polimi.ingsw.LM26.model.GamePhases.InitialPhase;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.model.Serialization.Decks;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import static it.polimi.ingsw.LM26.model.GamePhases.RoundState.FINISHED;
-
+import java.util.Observable;
 
 public class Controller implements ControllerInt {
 
@@ -33,27 +24,28 @@ public class Controller implements ControllerInt {
     public boolean checkEvent( ActionEvent event){
 
         if (event.getId()==1)
-            if (check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) { update(); return true; } else return false;
+            if (check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) { return true; }
+            else return false;
         if (event.getId()==2)
-            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getPlayer())) { update(); return true;}
+            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getPlayer())) {  return true;}
             else return false;
         if (event.getId()==3)
-            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getFromBox2(), event.getToBox2(),event.getPlayer())) { update(); return true;}
+            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getFromBox2(), event.getToBox2(),event.getPlayer())) {  return true;}
             else return false;
         if (event.getId()==4)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) { update(); return true;}
+            if(check(event.getCard(), event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {  return true;}
             else return false;
         if (event.getId()==5)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getDieFromRoundTrack(), event.getPlayer())) { update(); return true;}
+            if(check(event.getCard(), event.getDieFromDraft(), event.getDieFromRoundTrack(), event.getPlayer())) {  return true;}
             else return false;
         if (event.getId()==6)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getInDeCrement(), event.getPlayer())) { update(); return true;}
+            if(check(event.getCard(), event.getDieFromDraft(), event.getInDeCrement(), event.getPlayer())) { return true;}
             else return false;
         if (event.getId()==7)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getPlayer())) { update(); return true;}
+            if(check(event.getCard(), event.getDieFromDraft(), event.getPlayer())) {  return true;}
             else return false;
         if (event.getId()==8)
-            if(check(event.getCard(), event.getPlayer())) { update(); return true;}
+            if(check(event.getCard(), event.getPlayer())) { return true;}
             else return false;
         if (event.getId()==9) { System.out.println("passo");return true;}
         return false;
@@ -157,9 +149,12 @@ public class Controller implements ControllerInt {
         this.match=new Match(model, controller);
 
     }
-    public void update(){
 
+    public void update(Observable o, Object arg){
+
+        //server.virtualview.haschenged
     }
+
 
     public void close(){
 

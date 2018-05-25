@@ -89,72 +89,94 @@ public class PlaceDie implements PlayerActionInt{
 
              if (j == 0) { //angolo alto a sinistra
 
-                 if (checkRight()){
-                     if (checkRightDie()) return true;}
-                     else if (checkDown()) return true;
-                     else if (checkRightDown()) return true;
-
-                     else if (j == 4)  //angolo in alto a destra
-                         if (checkLeft())
-                             if (checkLeftDie()) return true;
-                             else if (checkDown()) return true;
-                             else if (checkLeftDown()) return true;
+                 if (checkRight()) {
+                     if (checkRightDie()) return true;
+                     else return false;
+                 }
+                 if (checkDown()) return true;
+                 if (checkRightDown()) return true;
              }
+
+             if (j == 4) { //angolo in alto a destra
+
+                 if (checkLeft()){
+                     if (checkLeftDie()) return true;
+                     else return false;
+                 }
+                 if (checkDown()) return true;
+                 if (checkLeftDown()) return true;
+             }
+
              else {      //tutti gli altri valori prima riga
                  if (checkRight()){
-                     if (checkRightDie()) return true;}
-                 else if (checkLeft())
+                     if (checkRightDie()) return true;
+                     else return false;
+                 }
+                 if (checkLeft()){
                          if (checkLeftDie()) return true;
-                         else if (checkDown()) return true;
-                         else if (checkRightDown()) return true;
-                         else if (checkLeftDown()) return true;
+                         else return false;
+                 }
+                 if (checkDown()) return true;
+                 if (checkRightDown()) return true;
+                 if (checkLeftDown()) return true;
              }
          }
          else if(i ==3) {
              if (j == 0) { //angolo in basso a sinistra
                  if (checkRight()) {
                      if (checkRightDie()) return true;
+                     else return false;
                  }
-                 else if (checkUp()) return true;
-                 else if (checkRightUp()) return true;
+                 if (checkUp()) return true;
+                 if (checkRightUp()) return true;
              }
-             else if (j == 4) {   // angolo in basso a destra
+             if (j == 4) {   // angolo in basso a destra
                  if (checkLeft()) {
                      if (checkLeftDie()) return true;
-                 } else if (checkUp()) return true;
-                 else if (checkLeftUp()) return true;
+                     else return false;
+                 }
+                 if (checkUp()) return true;
+                 if (checkLeftUp()) return true;
              }
 
 
             else {   //tutti gli altri valori ultima riga
                  if (checkRight()) {
-                     if (checkRightDie()) return true;
-                 } else if (checkLeft())
-                     if (checkLeftDie()) return true;
-                     else if (checkUp()) return true;
-                     else if (checkRightUp()) return true;
-                     else if (checkLeftUp()) return true;
+                            if (checkRightDie()) return true;
+                            else return false;}
+                 if (checkLeft()){
+                            if (checkLeftDie()) return true;
+                            else return false;}
+                 if (checkUp()) return true;
+                 if (checkRightUp()) return true;
+                 if (checkLeftUp()) return true;
              }
          }
 
          else if(j == 0) {         //tutti gli altri valori prima colonna
              if (i != 0 && i != 3) {
-                 if (checkRight())
+                 if (checkRight()) {
                      if (checkRightDie()) return true;
-             } else if (checkRightUp()) return true;
-             else if (checkRightDown()) return true;
-             else if (checkUp()) return true;
-             else if (checkDown()) return true;
+                     else return false;
+                 }
+                 if (checkRightUp()) return true;
+                 if (checkRightDown()) return true;
+                 if (checkUp()) return true;
+                 if (checkDown()) return true;
+             }
          }
 
          else if(j == 4) {          //tutti gli altri valori ultima colonna
              if (i != 0 && i != 3) {
-                 if (checkLeft())
+                 if (checkLeft()) {
                      if (checkLeftDie()) return true;
-             } else if (checkLeftUp()) return true;
-             else if (checkLeftDown()) return true;
-             else if (checkUp()) return true;
-             else if (checkDown()) return true;
+                     else return false;
+                 }
+                 if (checkLeftUp()) return true;
+                 if (checkLeftDown()) return true;
+                 if (checkUp()) return true;
+                 if (checkDown()) return true;
+             }
          }
 
         else      //tutti i valori non di margine
@@ -171,8 +193,10 @@ public class PlaceDie implements PlayerActionInt{
 
 
     public boolean checkAll(){
-    if(checkRight()) if  (checkRightDie() ) return true;
-    if(checkLeft()) if  (checkLeftDie() ) return true;
+    if(checkRight()){ if  (checkRightDie() ) return true;
+                        else return false; }
+    if(checkLeft()){  if  (checkLeftDie() ) return true;
+                        else return false; }
      if( checkUp())  return true;
       if(checkDown()) return true;
       if(checkRightUp())  return true;
