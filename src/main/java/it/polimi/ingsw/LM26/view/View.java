@@ -20,7 +20,11 @@ public class View implements ViewInt{
        });
     }
 
-   public void  showCentralPhaseScreen() {
+    public void showAlreadyLoggedScreen() {
+        
+    }
+
+    public void  showCentralPhaseScreen() {
         Platform.runLater(new Runnable() {
             public void run() {
                 displayableStage2.show(stage);
