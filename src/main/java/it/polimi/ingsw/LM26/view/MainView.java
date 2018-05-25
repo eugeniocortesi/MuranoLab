@@ -20,5 +20,6 @@ public class MainView extends Application {
 
         view = new View(primaryStage);
         view.showLoginScreen();
+        //view.showCentralPhaseScreen();
     }
 }

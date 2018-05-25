@@ -1,6 +1,6 @@
 package it.polimi.ingsw.LM26.view;
 
-public class LoginController {
+public class LoginController implements ViewControllerInt{
 
 
 

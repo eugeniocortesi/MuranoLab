@@ -12,7 +12,7 @@ public class DisplayableStage {
     private Pane pane;
 
     public DisplayableStage(String name) {
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource(name));
+        FXMLLoader fxmlLoader = new FXMLLoader(DisplayableStage.class.getResource(name));
         try {
             pane = fxmlLoader.load();
         } catch (IOException e) {
