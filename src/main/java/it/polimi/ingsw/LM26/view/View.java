@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 
 public class View implements ViewInt{
     private DisplayableStage displayableStage1 = new DisplayableStage("LogIn.fxml");
-    //private DisplayableStage displayableStage2 = new DisplayableStage(".fxml");
+    private DisplayableStage displayableStage2 = new DisplayableStage("MyPlayerZone.fxml");
     private Stage stage;
 
     public View(Stage stage) {
@@ -18,6 +18,14 @@ public class View implements ViewInt{
                displayableStage1.show(stage);
            }
        });
+    }
+
+   public void  showCentralPhaseScreen() {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                displayableStage2.show(stage);
+            }
+        });
     }
 
     public void showTooManyUsersScreen() {
