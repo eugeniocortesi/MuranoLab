@@ -29,5 +29,7 @@ public interface VirtualViewInt extends Remote, Observer {
 
     void showPoints() throws RemoteException;
 
+    void start() throws RemoteException;
+
     void update(Observable o, Object arg);
 }

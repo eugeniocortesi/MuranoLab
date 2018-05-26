@@ -20,11 +20,6 @@ public class ViewList implements ViewInt {
 
     }
 
-    @Override
-    public void start() {
-        
-    }
-
     public boolean removeView(VirtualViewInt v){
         return viewSet.remove(v);
 
@@ -77,6 +72,11 @@ public class ViewList implements ViewInt {
     }
 
     public void showPoints() {
+
+    }
+
+    @Override
+    public void start() {
 
     }
 }

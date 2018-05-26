@@ -1,38 +1,63 @@
 package it.polimi.ingsw.LM26.network.networkTesting;
 
 import it.polimi.ingsw.LM26.network.client.ClientRMIImpl;
+import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
 import it.polimi.ingsw.LM26.view.ViewInt;
+
+import java.io.*;
 
 public class ConcreteViewTest implements ViewInt{
 
+    private BufferedReader inKeyboard;
+    private PrintWriter outVideo;
+    private ClientRMIImpl clientRMI;
+
+
+    public ConcreteViewTest(){
+        inKeyboard = new BufferedReader(new InputStreamReader(System.in));
+        outVideo = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
+
+        //from client to server
+        clientRMI = new ClientRMIImpl(this);
+
+    }
+
+    public void start(){
+        clientRMI.connected((VirtualViewInt) this);
+    }
+
 
     public void showLoginScreen() {
-        System.out.println (" Insert username for login ");
+        outVideo.println (" Insert username for login ");
+        try{
+            String s1  = inKeyboard.readLine();
+            clientRMI.login(s1);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void showLoggedScreen() {
-        System.out.println("Logged with username inserted");
+        outVideo.println(" Logged with username inserted ");
     }
 
-    @Override
-    public void start() {
-
-    }
 
     public void showAlreadyLoggedScreen() {
-        System.out.println(" Already logged with this name ");
+        outVideo.println(" Already logged with this name ");
     }
 
     public void showTooManyUsersScreen() {
-        System.out.println(" Too many users logged, wait... ");
+        outVideo.println(" Too many users logged, wait... ");
     }
 
     public void showDisconnectScreen() {
-        System.out.println(" You are not logged anymore! ");
+        outVideo.println(" You are not logged anymore! ");
     }
 
     public void showAddedPlayer() {
-        System.out.println(" Added new player ");
+        outVideo.println(" Added new player ");
     }
 
     public void showTurnInitialPhase() {
@@ -62,8 +87,8 @@ public class ConcreteViewTest implements ViewInt{
         ViewInt c = new ConcreteViewTest();
         //VirtualViewRMIImpl virtualViewRMI = new VirtualViewRMIImpl(c);
 
-        //from client to server
-        ClientRMIImpl concreteClientRMI = new ClientRMIImpl(c);
+        c.start();
+        c.showLoginScreen();
     }
 
 }

@@ -58,6 +58,11 @@ public class ConnectionFromServer implements VirtualViewInt {
         view.showPoints();
     }
 
+    @Override
+    public void start() throws RemoteException {
+        view.start();
+    }
+
     public void update(Observable o, Object arg) {
         //TODO
     }

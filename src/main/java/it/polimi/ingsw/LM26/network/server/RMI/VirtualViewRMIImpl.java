@@ -61,6 +61,11 @@ public class VirtualViewRMIImpl implements VirtualViewInt {
         concreteView.showPoints();
     }
 
+    @Override
+    public void start() throws RemoteException {
+        concreteView.start();
+    }
+
     public void update(Observable o, Object arg) {
 
        /* model = o;

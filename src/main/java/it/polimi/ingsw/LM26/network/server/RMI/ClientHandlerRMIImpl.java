@@ -12,6 +12,11 @@ public class ClientHandlerRMIImpl extends ClientHandlerInt {
         this.myserver = server;
     }
 
+    public void connected(VirtualViewInt virtualViewInt) {
+        System.out.println(" Client RMI connected ");
+        myserver.addView(virtualViewInt);
+    }
+
 
     public void login(String username) {
 
@@ -31,4 +36,5 @@ public class ClientHandlerRMIImpl extends ClientHandlerInt {
     public void disconnect(String username) {
 
     }
+
 }

@@ -3,8 +3,11 @@ package it.polimi.ingsw.LM26.network.server;
 import it.polimi.ingsw.LM26.network.server.RMI.ConnectionAcceptorRMIImpl;
 import it.polimi.ingsw.LM26.network.server.socket.ClientHandlerSocketImpl;
 import it.polimi.ingsw.LM26.network.server.socket.ConnectionAcceptorSocketImpl;
+import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
+import it.polimi.ingsw.LM26.networkServer.Server.ViewList;
 import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerImplementation;
+import it.polimi.ingsw.LM26.view.ViewInt;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -26,6 +29,7 @@ public class ServerImpl {
     private ArrayList<ClientHandlerSocketImpl> socketConnections;
     private ConnectionAcceptorRMIImpl connectionAcceptorRMI;
     private ConnectionAcceptorSocketImpl connectionAcceptorSocket;
+    private ViewList viewList;
 
     public ServerImpl(){
         dataServerImplementation = new DataServerImplementation();
@@ -38,6 +42,7 @@ public class ServerImpl {
             he.printStackTrace();
         }
         //userConnections = new HashMap<String, ClientHandlerInt>();
+        viewList = new ViewList();
         userConnections = new ConnectionToController(this);
         this.socketConnections = new ArrayList<ClientHandlerSocketImpl>();
         if(socketConnections == null) {
@@ -106,5 +111,8 @@ public class ServerImpl {
         }
     }
 
+    public void addView(VirtualViewInt virtualView){
+        viewList.addView(virtualView);
+    }
 
 }

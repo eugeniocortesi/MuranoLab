@@ -7,6 +7,7 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.network.server.ClientHandlerInt;
 import it.polimi.ingsw.LM26.network.server.RMI.ClientHandlerRMIRemoteInt;
 import it.polimi.ingsw.LM26.network.server.ServerImpl;
+import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
 import it.polimi.ingsw.LM26.networkServer.Server.VirtualControllerInt;
 
 import java.rmi.RemoteException;
@@ -20,8 +21,21 @@ public class ConnectionToServer extends ClientHandlerInt implements ControllerIn
         this.clientHandlerRMIRemote = clientHandlerRMIRemote;
     }
 
-    public void login(String username){
+    public void connected(VirtualViewInt virtualViewInt) {
 
+        try {
+            clientHandlerRMIRemote.connected(virtualViewInt);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void login(String username){
+        try {
+            clientHandlerRMIRemote.login(username);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     public void disconnect(String username){
@@ -68,4 +82,6 @@ public class ConnectionToServer extends ClientHandlerInt implements ControllerIn
     public boolean check(String noAction, int player) {
         return false;
     }
+
+
 }

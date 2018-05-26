@@ -50,6 +50,11 @@ public class VirtualView implements VirtualViewInt {
 
     }
 
+    @Override
+    public void start() throws RemoteException {
+
+    }
+
     public void update(Observable o, Object arg) {
 
     }
