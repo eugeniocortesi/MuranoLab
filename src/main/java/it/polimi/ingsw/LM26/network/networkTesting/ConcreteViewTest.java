@@ -1,7 +1,6 @@
 package it.polimi.ingsw.LM26.network.networkTesting;
 
-import it.polimi.ingsw.LM26.network.client.ConcreteClientRMIImpl;
-import it.polimi.ingsw.LM26.network.server.RMI.VirtualViewRMIImpl;
+import it.polimi.ingsw.LM26.network.client.ClientRMIImpl;
 import it.polimi.ingsw.LM26.view.ViewInt;
 
 public class ConcreteViewTest implements ViewInt{
@@ -9,8 +8,12 @@ public class ConcreteViewTest implements ViewInt{
 
     public void showLoginScreen() {
         System.out.println (" Insert username for login ");
-
     }
+
+    public void showLoggedScreen() {
+        System.out.println("Logged with username inserted");
+    }
+
 
     public void showAlreadyLoggedScreen() {
         System.out.println(" Already logged with this name ");
@@ -52,11 +55,11 @@ public class ConcreteViewTest implements ViewInt{
 
 
         //from server to client
-        ConcreteViewTest c = new ConcreteViewTest();
-        VirtualViewRMIImpl virtualViewRMI = new VirtualViewRMIImpl(c);
+        ViewInt c = new ConcreteViewTest();
+        //VirtualViewRMIImpl virtualViewRMI = new VirtualViewRMIImpl(c);
 
         //from client to server
-        ConcreteClientRMIImpl concreteClientRMI = new ConcreteClientRMIImpl();
+        ClientRMIImpl concreteClientRMI = new ClientRMIImpl(c);
     }
 
 }

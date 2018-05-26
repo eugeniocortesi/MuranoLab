@@ -1,8 +1,6 @@
 package it.polimi.ingsw.LM26.network.server;
 
-
-import java.util.Observable;
-import java.util.Observer;
+//For each connection
 
 public abstract class ClientHandlerInt extends Thread {
 

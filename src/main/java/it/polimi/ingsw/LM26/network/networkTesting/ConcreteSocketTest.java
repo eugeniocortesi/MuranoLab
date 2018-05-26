@@ -167,4 +167,21 @@ public class ConcreteSocketTest {
     {
         ConcreteSocketTest socketTest = new ConcreteSocketTest();
     }
+
+    private void close()  {
+
+        try{
+            socket.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                socket.close();
+            } catch (IOException ex) {
+                System.err.println("Socket not closed");
+            }
+        }
+    }
 }

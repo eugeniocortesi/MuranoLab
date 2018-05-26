@@ -10,6 +10,10 @@ public class VirtualView implements VirtualViewInt {
 
     }
 
+    public void showLoggedScreen() throws RemoteException {
+
+    }
+
     public void showAlreadyLoggedScreen() {
 
     }

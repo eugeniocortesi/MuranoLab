@@ -9,7 +9,12 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+// Creates new ConnectionAcceptor Socket and accepts new socket connections
+// Creates a new ClientHandler for each connection
+// Adds every connections to server ( in socketConnections and userConnection )
+
 public class ConnectionAcceptorSocketImpl {
+
     ServerImpl server;
 
     private ServerSocket serverSocket;
