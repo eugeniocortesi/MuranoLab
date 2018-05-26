@@ -30,6 +30,11 @@ public class ActionEvent {
         event 9: no action.
         */
 
+        //TODO
+    // ID=1 di default
+    // setta l'impostazione degli in ID in setCard,
+    //ID=9 se viene settato no action
+
     public int getId() { return id; }
 
     public void setId(int id) {

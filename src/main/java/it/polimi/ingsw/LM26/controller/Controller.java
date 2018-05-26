@@ -22,6 +22,12 @@ public class Controller implements ControllerInt {
 
         //model.addObservers(view);
 
+        //FOR4
+        view.showLoginScreen();
+        //how do i get the player name?
+        //create new player
+        view.showAddedPlayer();
+
         newMatch(model, this );
 
     }
@@ -29,34 +35,40 @@ public class Controller implements ControllerInt {
     public boolean checkEvent( ActionEvent event){
 
         if (event.getId()==1)
-            if (check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) { // model.notifyObservers();
+            if (check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {  model.hasChanged(); model.notifyObservers();
             return true; }
             else return false;
         if (event.getId()==2)
-            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getPlayer())) {  return true;}
+            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getPlayer())) {   model.hasChanged(); model.notifyObservers(); return true;}
             else return false;
         if (event.getId()==3)
-            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getFromBox2(), event.getToBox2(),event.getPlayer())) {  return true;}
+            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getFromBox2(), event.getToBox2(),event.getPlayer())) {
+            model.hasChanged(); model.notifyObservers();  return true;}
             else return false;
         if (event.getId()==4)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {  return true;}
+            if(check(event.getCard(), event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {   model.hasChanged(); model.notifyObservers(); return true;}
             else return false;
         if (event.getId()==5)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getDieFromRoundTrack(), event.getPlayer())) {  return true;}
+            if(check(event.getCard(), event.getDieFromDraft(), event.getDieFromRoundTrack(), event.getPlayer())) {   model.hasChanged(); model.notifyObservers(); return true;}
             else return false;
         if (event.getId()==6)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getInDeCrement(), event.getPlayer())) { return true;}
+            if(check(event.getCard(), event.getDieFromDraft(), event.getInDeCrement(), event.getPlayer())) {  model.hasChanged(); model.notifyObservers(); return true;}
             else return false;
         if (event.getId()==7)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getPlayer())) {  return true;}
+            if(check(event.getCard(), event.getDieFromDraft(), event.getPlayer())) {   model.hasChanged(); model.notifyObservers(); return true;}
             else return false;
         if (event.getId()==8)
-            if(check(event.getCard(), event.getPlayer())) { return true;}
+            if(check(event.getCard(), event.getPlayer())) { model.hasChanged(); model.notifyObservers();  return true;}
             else return false;
-        if (event.getId()==9) { System.out.println("passo");return true;}
+        if (event.getId()==9) { System.out.println("i'll pass ");return true;}
         return false;
 
     }
+
+    //TODO
+    //OGNI CHECK DEVE CHIAMARE IL METODO checkNotSameAction() CHE CONTROLLA CHE NON VENGANO RICEVUTI DUE EVENTI UGUALI PER QUEL GIOCATORE IN QUEL TURNO
+    //metti nei player dei boolean per sapere se hanno scelto una carta o piazzato un dado, alla fine del turno settali a false cosi
+    //che rifunzionino per il secondo turno di quel giocatore in quel round
 
     public boolean check(Die dieFromDraft, Box toBox, int player){
 
@@ -150,6 +162,10 @@ public class Controller implements ControllerInt {
         return false;
     }
 
+    public void checkNotSameAction(){
+
+    }
+
     public void newMatch(Model model, Controller controller){
 
         this.match=new Match(model, controller);
@@ -158,10 +174,19 @@ public class Controller implements ControllerInt {
 
     public void update(Observable o, Object arg){
 
-        //server.virtualview.haschenged
+        //i parametri sono viewInt, actionEvent
+
+       setActionEvent((ActionEvent)arg);
+
     }
 
+    public ViewInt getView() {
+        return view;
+    }
 
+    public void setActionEvent(ActionEvent newEvent ){
+        match.setActionEvent(newEvent);
+    }
 
 
     public void close(){
