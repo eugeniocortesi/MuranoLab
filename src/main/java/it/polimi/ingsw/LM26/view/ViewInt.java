@@ -7,6 +7,8 @@ public interface ViewInt {
     //TODO Remove comment
     //void showLoggedScreen();
 
+    //void start();
+
     void showAlreadyLoggedScreen();
 
     void showTooManyUsersScreen();
@@ -24,4 +26,6 @@ public interface ViewInt {
     void showTurnEndPhase();
 
     void showPoints();
+
+
 }
