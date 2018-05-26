@@ -77,4 +77,8 @@ public class Die implements DieInt {
     public void dump() {
         System.out.println(this);
     }
+
+    public String getFace() {
+        return face;
+    }
 }
