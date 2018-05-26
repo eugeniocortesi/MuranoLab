@@ -1,11 +1,8 @@
 package it.polimi.ingsw.LM26.network.server.socket;
 
-import com.sun.deploy.util.SessionState;
 import it.polimi.ingsw.LM26.network.server.ClientHandlerInt;
 import it.polimi.ingsw.LM26.network.server.ServerImpl;
 import it.polimi.ingsw.LM26.network.server.socket.dataProtocolSocket.DataMessage;
-import it.polimi.ingsw.LM26.networkServer.Data.ClientLoginData;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
