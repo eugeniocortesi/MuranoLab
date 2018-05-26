@@ -20,6 +20,16 @@ public class View implements ViewInt{
        });
     }
 
+    @Override
+    public void showLoggedScreen() {
+
+    }
+
+    @Override
+    public void start() {
+
+    }
+
     public void showAlreadyLoggedScreen() {
 
     }

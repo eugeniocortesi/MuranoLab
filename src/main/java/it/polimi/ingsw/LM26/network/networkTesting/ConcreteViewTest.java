@@ -14,6 +14,10 @@ public class ConcreteViewTest implements ViewInt{
         System.out.println("Logged with username inserted");
     }
 
+    @Override
+    public void start() {
+
+    }
 
     public void showAlreadyLoggedScreen() {
         System.out.println(" Already logged with this name ");
