@@ -12,6 +12,7 @@ import it.polimi.ingsw.LM26.model.Serialization.Decks;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -34,6 +35,8 @@ public class Model extends Observable{
     private Game game;
 
     private Decks decks;
+
+    private List<Observer> list = new ArrayList<Observer>();
 
     public Model() {
 
@@ -110,7 +113,13 @@ public class Model extends Observable{
     }
 
     @Override
-    public void notifyObservers() { super.notifyObservers(); }
+    public void notifyObservers() {
+
+        super.notifyObservers();
+        //TODO
+        // deve pare observer.update() per ogni observer della lista
+
+    }
 
     @Override
     public synchronized void addObserver(Observer o) {
