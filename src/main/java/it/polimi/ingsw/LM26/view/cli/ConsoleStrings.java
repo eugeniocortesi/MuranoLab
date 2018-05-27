@@ -1,5 +1,7 @@
-package it.polimi.ingsw.LM26.view;
+package it.polimi.ingsw.LM26.view.cli;
 
+import it.polimi.ingsw.LM26.controller.ActionEvent;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.MoveTwoDice4;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.PatternBox;
@@ -10,24 +12,39 @@ import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.view.ViewInt;
+
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
-import java.io.BufferedReader;
-import java.io.Console;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
+import static org.fusesource.jansi.Ansi.Color.*;
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class ConsoleStrings implements ViewInt {
 
 
-    Model model;
+    static Model model;
+    private ConsoleTools consoleTools = new ConsoleTools();
 
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    //virtualview avrà una coda di actionevent
+    private ActionEvent actionEvent = new ActionEvent();
+    private ArrayList<ActionEvent> events = new ArrayList<ActionEvent>();
+    private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private String s= "";
 
     public static void main(String[] args) {
+            ConsoleStrings consoleStrings =new ConsoleStrings();
+            //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            //String s=consoleStrings.initialScreen();
+            //String f=consoleStrings.showLogin();
+            //System.out.println(f);
+
+
        /* AnsiConsole.systemInstall();
 
         Color c = Color.ANSI_YELLOW;
@@ -47,27 +64,42 @@ public class ConsoleStrings implements ViewInt {
          //System.out.println("\u00AF"+"\u2310"+"\u00AC"+"\u2319"+"\u2310");
     }
 
-    public String faces(int val){
-        switch (val){
-            case 1:
-                return "\u2680";
-            case 2:
-                return "\u2681";
-            case 3:
-                return "\u2682";
-            case 4:
-                return "\u2683";
-            case 5:
-                return "\u2684";
-            case 6:
-                return "\u2685";
-            default:
-                return null;
+
+
+    /**
+     * first screen of the program: it asks for authentication method
+     */
+    public String initialScreen(){
+        System.out.print(ansi().a("  Benvenuti in\n    ").fg(RED).a("S").fg(YELLOW).a("A").fg(MAGENTA).a("G").fg(GREEN).a("R").fg(BLUE).a("A").fg(YELLOW).a("D").fg(GREEN).a("A\n\n").reset());
+        System.out.flush();
+        System.out.println("Scegli uno tra i seguenti metodi di connessione:\nSocket: s\nRMI: r");
+        while(!(s.equalsIgnoreCase("r") || s.equalsIgnoreCase("s"))){
+            try{
+                s = br.readLine();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
         }
+        return s;
     }
 
-    public void test(){
+    /**
+     * it shows login screen and asks for it
+     */
 
+    @Override
+    public void showLoginScreen() {
+    }
+
+    public String showLogin(){
+        AnsiConsole.out().print("Utente: ");
+        System.out.flush();
+        try{
+            s = br.readLine();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return s;
     }
 
     @Override
@@ -75,22 +107,12 @@ public class ConsoleStrings implements ViewInt {
         AnsiConsole.out().println("Utente iscritto con successo");
     }
 
+
     @Override
     public void start() {
 
     }
 
-    @Override
-    public void showLoginScreen() {
-        AnsiConsole.out().print("Utente: ");
-        System.out.flush();
-        try{
-            String s = br.readLine();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-    }
 
     @Override
     public void showAlreadyLoggedScreen() {
@@ -134,64 +156,38 @@ public class ConsoleStrings implements ViewInt {
     }
 
 
-    /**
-     * it only shows the frame board withits dice and its  window pattern card
-     */
-    public void printFrameBoard(PlayerZone pl){
-        WindowFramePlayerBoard frame = pl.getPlayerBoard();
-        //AnsiConsole.systemInstall();
-        String escape= pl.getPlayerBoard().getColor().escape();
-        System.out.println(escape+"\u2588\u2588 "+pl.getName().toUpperCase()+" \u2588\u2588"+Color.RESET);
-        for(int i=0; i<4; i++){
-            for(int j=0; j<5; j++){
-                Box box=frame.getBoardMatrix()[i][j];
-                if(box.isIsPresent()){
-                    System.out.print(box.getDie()+"|");
-                    System.out.flush();
-                }
-               else printPatternBox(box.getPatternBox());
-            }
-            System.out.println();
-        }
-        //AnsiConsole.systemUninstall();
-    }
-
-    public void printPatternBox(PatternBox p){
-        if(p.isColor()){
-            String escape=p.getColor().escape();
-            System.out.print(escape+"\u25A0"+"|");
-            System.out.flush();
-        }
-        else if(p.isShade()){
-            System.out.print(faces(p.getValue())+"|");
-            System.out.flush();
-        }
-        else System.out.print(" |");
-    }
-
-    public void printPatternCard(String nameCard) throws IllegalArgumentException{
-        WindowPatternCard windowPatternCard=null;
-        for (WindowPatternCard i : model.getDecks().getWindowPatternCardDeck()) {
-            if (i.getTitle().equals(nameCard)) windowPatternCard = i;
-            }
-        if(windowPatternCard==null) throw new IllegalArgumentException("Wrong name of window pattern card");
-        System.out.println(nameCard.toUpperCase()+": "+windowPatternCard.getToken()+" tokens");
-        for(int i=0;i<4;i++){
-            for(int j=0;j<5;j++) {
-               printPatternBox(windowPatternCard.getWindowPatter()[i][j]);
-            }
-            System.out.println();
-        }
-    }
-
     @Override
     public void showChooseCard() {
 
     }
 
+
+
     @Override
     public void showTurnEndPhase() {
+    }
 
+    /**
+     * it shows the frame board updated at the end of the current player's turn
+     */
+    public void showTurnEnd(int id) {
+        System.out.println("La tua area di gioco: ");
+        consoleTools.printFrameBoard(model.getPlayerList().get(id));
+        for(int i=0; i< model.getPlayerList().get(id).getToken().getTokenNumber();i++){
+            System.out.print("\u25CB ");
+            System.out.flush();
+        }
+        System.out.println();
+    }
+
+    public void showOtherPlayer(int id){
+        System.out.println("Area di gioco di "+model.getPlayerList().get(id).getName());
+        consoleTools.printFrameBoard(model.getPlayerList().get(id));
+        for(int i=0; i< model.getPlayerList().get(id).getToken().getTokenNumber();i++){
+            System.out.print("\u25CB ");
+            System.out.flush();
+        }
+        System.out.println();
     }
 
     @Override
