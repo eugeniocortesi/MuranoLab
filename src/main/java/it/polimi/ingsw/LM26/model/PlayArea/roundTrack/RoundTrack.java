@@ -47,4 +47,7 @@ public class RoundTrack implements RoundTrackInt{
         }
     }
 
+    public ArrayList<RoundTrackTurn> getRoundTrackTurnList() {
+        return roundTrackTurnList;
+    }
 }
