@@ -8,13 +8,13 @@ import java.io.IOException;
 
 public class DataServerConfiguration {
 
-    private final int ServerSOCKETPORT=3095;
+    private int ServerSOCKETPORT=3095;
 
-    private final int ServerRMIPORT=7095;
+    private int ServerRMIPORT=7095;
 
-    private final int ClientRMIPORT = 1095;
+    private int ClientRMIPORT = 1095;
 
-    private final String ip = "127.0.0.1";
+    private String ip = "127.0.0.1";
 
     public DataServerConfiguration(){
 

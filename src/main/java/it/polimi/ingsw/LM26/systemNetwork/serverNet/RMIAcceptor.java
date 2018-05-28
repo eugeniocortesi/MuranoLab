@@ -1,0 +1,56 @@
+package it.polimi.ingsw.LM26.systemNetwork.serverNet;
+
+import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+
+public class RMIAcceptor {
+
+    private ServerBase myserver;
+    private int RMIPORTServer;
+    private int RMIPORTClient;
+    private String address;
+    private ClientManagerRemote stub;
+
+    public RMIAcceptor(ServerBase serverBase, DataServerConfiguration data){
+        myserver = serverBase;
+        this.RMIPORTClient = data.getClientRMIPORT();
+        this.RMIPORTServer = data.getServerRMIPORT();
+        this.address = data.getIp();
+        bind();
+    }
+
+    private void bind(){
+
+
+        //Creates stub
+
+        try{
+            ClientManager clientManagerRMI = new ClientManagerRMI(myserver, this.RMIPORTServer, this.RMIPORTClient, address);
+            ClientManagerRemote clientManagerRemote = new ClientManagerRMIRemote(clientManagerRMI);
+            stub = (ClientManagerRemote) UnicastRemoteObject.exportObject(clientManagerRemote, RMIPORTServer);
+            Registry registry = LocateRegistry.createRegistry(RMIPORTServer);
+            registry.bind("ClientManagerRemote",  stub);
+            System.err.println("Server ready, stub created");
+
+        }catch (Exception e){
+            System.err.println("Server exception: " + e.toString());
+            e.printStackTrace();
+        }
+
+       /* try {
+            // Getting the registry
+            Registry registry = LocateRegistry.getRegistry(address, RMIPORTClient);
+            //Looking up the registry for the remote object
+            ClientViewRemote skeleton = (ClientViewRemote) registry.lookup("ClientViewRemote");
+            myserver.addView(skeleton);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        }*/
+    }
+}
