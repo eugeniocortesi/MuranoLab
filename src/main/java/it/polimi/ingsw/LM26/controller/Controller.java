@@ -7,7 +7,10 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.view.ViewInt;
 
+import java.util.ArrayList;
 import java.util.Observable;
+
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class Controller implements ControllerInt {
 
@@ -15,19 +18,17 @@ public class Controller implements ControllerInt {
     private Match match;
     private ViewInt view;
 
-    public Controller(Model model, ViewInt view) {
+    public Controller() {
 
-        this.model = model;
-        this.view=view;
+        this.model = singletonModel();
+        //this.view=view;
 
         //model.addObservers(view);
 
         //FOR4
-        view.showLoginScreen();
-        //how do i get the player name?
-        //create new player
-        view.showAddedPlayer();
+        //view.showLoginScreen();
 
+        setupPlayers();
         newMatch(model, this );
 
     }
@@ -164,6 +165,41 @@ public class Controller implements ControllerInt {
 
     public void checkNotSameAction(){
 
+    }
+
+    public void showLogin(){
+
+        //view.showLogin()
+    }
+
+    public void setupPlayers(){
+
+        String[] names;
+        //server.playersName();
+        //for(int i=0; i<names;i++){
+        //create new player
+        //view.showAddedPlayer();
+        // }
+
+        //TODO DELETE PLAYERS
+
+        PlayerZone player1 = new PlayerZone("Eugenio", 0);
+        PlayerZone player2 = new PlayerZone("Chiara", 1);
+        PlayerZone player3 = new PlayerZone( "Claudia", 2);
+        PlayerZone player4 = new PlayerZone("Tommaso", 3);
+
+        player1.setNumberPlayer(0);
+        player2.setNumberPlayer(1);
+        player3.setNumberPlayer(2);
+        player4.setNumberPlayer(3);
+
+        ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
+        playerList.add(player1);
+        playerList.add(player2);
+        playerList.add(player3);
+        playerList.add(player4);
+
+        model.setPlayerList(playerList);
     }
 
     public void newMatch(Model model, Controller controller){

@@ -62,6 +62,8 @@ public class Round {
     //passa il turno al successivo, se è finito turno globale mette dadi nella casella della round track e ritorna FINISHED
     public void endAction(int[] turn, RoundTrackInt roundTrack, DraftPool draftPool, PlayerZone actingPlayer) {
         actingPlayer.setPlayerState(PlayerState.ENDING);
+        //TODO
+        //actingPlayer.deletePlayerHistory();
         turnCounter++;
         if(turnCounter == turn.length) {
             roundTrack.addDice(draftPool.getInDraft());

@@ -44,7 +44,7 @@ public class DrawOneMoreDie8 implements ToolCardDecorator {
         ArrayList<DieInt> inDraft = model.getDraftPool().getInDraft();
         PlaceDie placement = new PlaceDie(die, toBox, pl);
         PlayerZone player = model.getPlayerList().get(pl);
-        if(!player.isSecondTurn() ){
+        if(!player.getActionHistory().isSecondTurn() ){
 
 
         // ANCHE PIAZZAMENTO?
@@ -55,7 +55,7 @@ public class DrawOneMoreDie8 implements ToolCardDecorator {
                   }
          else   {
             inDraft.remove(die);
-            player.setSecondTurn(true);
+            player.getActionHistory().setSecondTurn(true);
             return true;
             }
         }
