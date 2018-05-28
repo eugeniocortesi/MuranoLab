@@ -9,18 +9,23 @@ import java.net.InetAddress;
 
 public class DataClientConfiguration {
 
-    private final int ClientSOCKETPORT = 3095;
-    private final int ClientRMIPORT=1095;
-    private final String ip = "127.0.0.1";
+    private int ClientSOCKETPORT = 3095;
+    private int ServerRMIPORT=7095;
+    private int ClientRMIPORT = 1095;
+    private String ip = "127.0.0.1";
 
 
     public int getClientRMIPORT() {
         return ClientRMIPORT;
     }
 
+    public int getServerRMIPORT(){ return ServerRMIPORT;}
+
     public int getClientSOCKETPORT() {
         return ClientSOCKETPORT;
     }
+
+    public String getIp(){ return ip;}
 
     public void create(){
 

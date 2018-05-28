@@ -1,17 +1,33 @@
 package it.polimi.ingsw.LM26.network.client;
 
+import it.polimi.ingsw.LM26.network.server.RMI.ClientHandlerRMIRemoteImpl;
+import it.polimi.ingsw.LM26.network.server.RMI.ClientHandlerRMIRemoteInt;
+import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualView;
 import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
 import it.polimi.ingsw.LM26.view.ViewInt;
 
+import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Observable;
 
 public class ConnectionFromServer implements VirtualViewInt {
 
     ViewInt view;
 
-    public ConnectionFromServer(ViewInt view){
+    public ConnectionFromServer(ViewInt view, Registry registry, int PORT){
         this.view = view;
+        try {
+            VirtualViewInt skeleton = (VirtualViewInt) UnicastRemoteObject.exportObject(this, PORT);
+            registry.bind("client", skeleton);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (AlreadyBoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showLoginScreen() throws RemoteException {
@@ -63,7 +79,4 @@ public class ConnectionFromServer implements VirtualViewInt {
         view.start();
     }
 
-    public void update(Observable o, Object arg) {
-        //TODO
-    }
 }

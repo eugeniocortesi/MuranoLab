@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.Observable;
 import java.util.Observer;
 
-public interface VirtualViewInt extends Remote, Observer {
+public interface VirtualViewInt extends Remote {
 
     void showLoginScreen() throws RemoteException;
 
@@ -30,6 +30,4 @@ public interface VirtualViewInt extends Remote, Observer {
     void showPoints() throws RemoteException;
 
     void start() throws RemoteException;
-
-    void update(Observable o, Object arg);
 }

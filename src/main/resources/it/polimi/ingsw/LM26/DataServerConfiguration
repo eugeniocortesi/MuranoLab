@@ -1,4 +1,6 @@
 {
   "ServerSOCKETPORT": 3095,
-  "ServerRMIPORT": 1095
+  "ServerRMIPORT": 7095,
+  "ClientRMIPORT": 1096;
+  "ip": "127.0.0.1"
 }

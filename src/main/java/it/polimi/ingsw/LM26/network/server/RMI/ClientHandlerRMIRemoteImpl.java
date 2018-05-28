@@ -13,8 +13,8 @@ public class ClientHandlerRMIRemoteImpl implements ClientHandlerRMIRemoteInt {
         clientHandlerRMI = new ClientHandlerRMIImpl(server);
     }
 
-    public void connected(VirtualViewInt virtualViewInt) throws RemoteException {
-        clientHandlerRMI.connected(virtualViewInt);
+    public void connected(String id) throws RemoteException {
+        clientHandlerRMI.connected(id);
     }
 
     public void login(String username) throws RemoteException {

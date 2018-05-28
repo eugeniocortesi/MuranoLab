@@ -2,19 +2,44 @@ package it.polimi.ingsw.LM26.network.server.RMI;
 
 import it.polimi.ingsw.LM26.network.server.ClientHandlerInt;
 import it.polimi.ingsw.LM26.network.server.ServerImpl;
+import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualView;
 import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
+import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientImplementation;
+
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 public class ClientHandlerRMIImpl extends ClientHandlerInt {
 
     private ServerImpl myserver;
+    private  static int PORT ;
 
     public ClientHandlerRMIImpl(ServerImpl server){
         this.myserver = server;
     }
 
-    public void connected(VirtualViewInt virtualViewInt) {
+    public void connected(String id) {
+
+        DataClientImplementation dataClientImplementation = new DataClientImplementation();
+        DataClientConfiguration dataClientConfiguration = dataClientImplementation.implementation();
+
         System.out.println(" Client RMI connected ");
-        myserver.addView(virtualViewInt);
+
+        PORT = dataClientConfiguration.getClientRMIPORT();
+        try {
+            // Getting the registry
+            Registry registry = LocateRegistry.getRegistry("127.0.0.1", PORT);
+            //Looking up the registry for the remote object
+            VirtualView skeleton = (VirtualView) registry.lookup(id);
+            myserver.addView(skeleton);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
