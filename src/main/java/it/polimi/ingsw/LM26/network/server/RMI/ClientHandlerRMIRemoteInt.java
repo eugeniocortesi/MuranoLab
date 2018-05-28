@@ -12,5 +12,5 @@ public interface ClientHandlerRMIRemoteInt extends Remote {
 
     void disconnect(String username) throws RemoteException;
 
-    void connected(VirtualViewInt virtualViewInt) throws RemoteException;
+    void connected(String id) throws RemoteException;
 }

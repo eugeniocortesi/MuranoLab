@@ -22,7 +22,7 @@ public class ConnectionAcepterRMI implements Remote {
     public ConnectionAcepterRMI(Server server, DataServerConfiguration dataServerConfiguration){
 
         this.server = server;
-        RMIPORT = dataServerConfiguration.getRMIPORT();
+        RMIPORT = dataServerConfiguration.getServerRMIPORT();
         //TODO clientHandler RMI
         //clientHandlerRMI = new ClientRMI();
 

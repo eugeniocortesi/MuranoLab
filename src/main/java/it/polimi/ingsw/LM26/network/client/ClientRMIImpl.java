@@ -27,8 +27,6 @@ public class ClientRMIImpl {
             this.dataClientImplementation = new DataClientImplementation();
             DataClientConfiguration dataClientConfiguration = this.dataClientImplementation.implementation();
 
-            this.connectionFromServer = new ConnectionFromServer(concreteView);
-
             PORT = dataClientConfiguration.getClientRMIPORT();
             // Getting the registry
             Registry registry = LocateRegistry.getRegistry("127.0.0.1", PORT);
@@ -38,6 +36,7 @@ public class ClientRMIImpl {
             //System.out.println("Insert login username: ");
 
             this.connectionToServer = new ConnectionToServer(stub);
+            this.connectionFromServer = new ConnectionFromServer(concreteView, registry, 1100);
 
             this.concreteView = concreteView;
 

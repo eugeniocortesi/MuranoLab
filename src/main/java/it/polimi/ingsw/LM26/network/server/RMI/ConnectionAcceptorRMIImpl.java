@@ -18,7 +18,7 @@ public class ConnectionAcceptorRMIImpl {
     public ConnectionAcceptorRMIImpl(ServerImpl server, DataServerConfiguration dataServerConfiguration){
 
         this.server= server;
-        this.RMIPORT = dataServerConfiguration.getRMIPORT();
+        this.RMIPORT = dataServerConfiguration.getServerRMIPORT();
 
         try{
             ClientHandlerRMIRemoteInt clientHandlerRMIRemote = new ClientHandlerRMIRemoteImpl(server);

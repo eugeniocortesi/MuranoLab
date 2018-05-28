@@ -10,7 +10,11 @@ public class DataServerConfiguration {
 
     private final int ServerSOCKETPORT=3095;
 
-    private final int ServerRMIPORT=1095;
+    private final int ServerRMIPORT=7095;
+
+    private final int ClientRMIPORT = 1095;
+
+    private final String ip = "127.0.0.1";
 
     public DataServerConfiguration(){
 
@@ -21,9 +25,16 @@ public class DataServerConfiguration {
         return ServerSOCKETPORT;
     }
 
-    public int getRMIPORT() {
+    public int getServerRMIPORT() {
         return ServerRMIPORT;
     }
+
+    public int getClientRMIPORT() {
+        return ClientRMIPORT;
+    }
+
+    public String getIp(){ return ip;}
+
 
     public void create(){
 

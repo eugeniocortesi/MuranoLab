@@ -24,7 +24,7 @@ public class ConnectionToServer extends ClientHandlerInt implements ControllerIn
     public void connected(VirtualViewInt virtualViewInt) {
 
         try {
-            clientHandlerRMIRemote.connected(virtualViewInt);
+            clientHandlerRMIRemote.connected("client");
         } catch (RemoteException e) {
             e.printStackTrace();
         }
