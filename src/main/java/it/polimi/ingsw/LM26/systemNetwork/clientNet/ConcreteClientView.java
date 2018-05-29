@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ConcreteClientView implements ViewInterface {
+public class ConcreteClientView extends ViewInterface {
 
     private ClientView clientView;
     private BufferedReader inKeyboard;

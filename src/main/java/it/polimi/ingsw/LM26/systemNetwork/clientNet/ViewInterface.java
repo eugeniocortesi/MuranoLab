@@ -1,14 +1,22 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
-public interface ViewInterface {
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
-    void showNetChoise();
+import java.util.ArrayList;
+import java.util.Observable;
 
-    void showLoginScreen();
+public abstract class ViewInterface extends Observable {
 
-    void showLoggedScreen();
+    public abstract void showNetChoise();
 
-    void showAlreadyLoggedScreen();
+    public abstract void showLoginScreen();
 
-    void showTooManyUsersScreen();
+    public abstract void showLoggedScreen();
+
+    public abstract void showAlreadyLoggedScreen();
+
+    public abstract void showTooManyUsersScreen();
+
+    //public abstract void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck);
+
 }
