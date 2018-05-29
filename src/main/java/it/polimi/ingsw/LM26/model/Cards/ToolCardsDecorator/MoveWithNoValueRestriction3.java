@@ -3,7 +3,11 @@ package it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator;
 import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class MoveWithNoValueRestriction3 implements ToolCardDecorator {
 
@@ -29,9 +33,11 @@ public class MoveWithNoValueRestriction3 implements ToolCardDecorator {
     public boolean play(Die dieFromDraft){return false;}
     public boolean play(int player){return false;}
 
-    public boolean play (Box fromBox,Box toBox, int player)  {
+    public boolean play (Box fromBox,Box toBox, int pl)  {
 
+        Model model = singletonModel();
         Die die = (Die) fromBox.getDie();
+        PlayerZone player = model.getPlayerList().get(pl);
         PlaceDie placement = new PlaceDie(die, toBox, player);
         if (! ( placement.checkColorRestriction() && placement.checkNearByRestrictions()) ){
             System.out.println("error");

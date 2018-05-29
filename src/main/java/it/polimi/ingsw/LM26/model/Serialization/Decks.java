@@ -52,7 +52,7 @@ public class Decks {
 
     public void setup() throws IOException {
 
-
+/*
         //carte private
         CardInt private1 = CardCreator.createCard(11, RED);
         CardInt private2 = CardCreator.createCard(12, YELLOW);
@@ -198,29 +198,9 @@ public class Decks {
                 YELLOW, EMPTY, EMPTY, DARK5, MEDIUMS3,
                 EMPTY, DARK5, MEDIUMS4, LIGHT2, LIGHT1));
 
-        WindowFramePlayerBoard Frame1 = new WindowFramePlayerBoard(31, ANSI_RED);
-        WindowFramePlayerBoard Frame2 = new WindowFramePlayerBoard(32, ANSI_GREEN);
-        WindowFramePlayerBoard Frame3 = new WindowFramePlayerBoard(33, ANSI_BLUE);
-        WindowFramePlayerBoard Frame4 = new WindowFramePlayerBoard(34, ANSI_PURPLE);
-
-        ToolCardInt tool1 = new ChangeDieValue1( new ToolCard(1));
-        ToolCardInt tool2 = new MoveWithNoColorRestriction2( new ToolCard(2));
-        ToolCardInt tool3 = new MoveWithNoValueRestriction3( new ToolCard(3));
-        ToolCardInt tool4 = new MoveTwoDice4( new ToolCard(4));
-        ToolCardInt tool5 = new ChangeDieFromDraftToRoundTrack5( new ToolCard(5));
-        ToolCardInt tool6 = new RollAgainADie6( new ToolCard(6));
-        ToolCardInt tool7 = new RollAllDraftDice7( new ToolCard(7));
-        ToolCardInt tool8 = new DrawOneMoreDie8( new ToolCard(8));
-        ToolCardInt tool9 = new PlaceWithNotInProximities9( new ToolCard(9));
-        ToolCardInt tool10 = new RollToTheOppositeFace10( new ToolCard(10));
-        ToolCardInt tool11 = new ChangeDieWithTheBag11( new ToolCard(11));
-        ToolCardInt tool12 = new MoveTwoDiceWithSameColor12( new ToolCard(12));
-
         ArrayList<CardInt> Private = new ArrayList<CardInt>();
         ArrayList<CardInt> Public = new ArrayList<CardInt>();
         ArrayList<CardInt> Windows = new ArrayList<CardInt>();
-        ArrayList<WindowFramePlayerBoard> Frames = new ArrayList<WindowFramePlayerBoard>();
-        ArrayList<ToolCardInt> tools = new ArrayList<ToolCardInt>();
 
         Private.add(private1);
         Private.add(private2);
@@ -264,6 +244,47 @@ public class Decks {
         Windows.add(window23);
         Windows.add(window24);
 
+         Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+
+        FileWriter writer1 = new FileWriter("src/main/resources/PrivateCards");
+        FileWriter writer2 = new FileWriter("src/main/resources/PublicCards");
+        FileWriter writer3 = new FileWriter("src/main/resources/WindowCards");
+
+        gson.toJson(Private, writer1);
+        gson.toJson(Public, writer2);
+        gson.toJson(Windows, writer3);
+        try {
+            writer1.close();
+            writer2.close();
+            writer3.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
+
+        WindowFramePlayerBoard Frame1 = new WindowFramePlayerBoard(31, ANSI_RED);
+        WindowFramePlayerBoard Frame2 = new WindowFramePlayerBoard(32, ANSI_GREEN);
+        WindowFramePlayerBoard Frame3 = new WindowFramePlayerBoard(33, ANSI_BLUE);
+        WindowFramePlayerBoard Frame4 = new WindowFramePlayerBoard(34, ANSI_PURPLE);
+
+        ToolCardInt tool1 = new ChangeDieValue1( new ToolCard(1));
+        ToolCardInt tool2 = new MoveWithNoColorRestriction2( new ToolCard(2));
+        ToolCardInt tool3 = new MoveWithNoValueRestriction3( new ToolCard(3));
+        ToolCardInt tool4 = new MoveTwoDice4( new ToolCard(4));
+        ToolCardInt tool5 = new ChangeDieFromDraftToRoundTrack5( new ToolCard(5));
+        ToolCardInt tool6 = new RollAgainADie6( new ToolCard(6));
+        ToolCardInt tool7 = new RollAllDraftDice7( new ToolCard(7));
+        ToolCardInt tool8 = new DrawOneMoreDie8( new ToolCard(8));
+        ToolCardInt tool9 = new PlaceWithNotInProximities9( new ToolCard(9));
+        ToolCardInt tool10 = new RollToTheOppositeFace10( new ToolCard(10));
+        ToolCardInt tool11 = new ChangeDieWithTheBag11( new ToolCard(11));
+        ToolCardInt tool12 = new MoveTwoDiceWithSameColor12( new ToolCard(12));
+
+        ArrayList<WindowFramePlayerBoard> Frames = new ArrayList<WindowFramePlayerBoard>();
+        ArrayList<ToolCardInt> tools = new ArrayList<ToolCardInt>();
+
         Frames.add(Frame1);
         Frames.add(Frame2);
         Frames.add(Frame3);
@@ -287,25 +308,6 @@ public class Decks {
 
         WindowFramePlayerBoardDeck = Frames;
 
-
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-
-        FileWriter writer1 = new FileWriter("src/main/resources/PrivateCards");
-        FileWriter writer2 = new FileWriter("src/main/resources/PublicCards");
-        FileWriter writer3 = new FileWriter("src/main/resources/WindowCards");
-
-        gson.toJson(Private, writer1);
-        gson.toJson(Public, writer2);
-        gson.toJson(Windows, writer3);
-        try {
-            writer1.close();
-            writer2.close();
-            writer3.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 

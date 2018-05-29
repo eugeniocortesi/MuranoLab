@@ -82,9 +82,15 @@ public class InitialPhase implements PhaseInt {
 
                 Random rand = new Random();
                 int index = rand.nextInt(count);
-                four.add(temp.get(index));
-                temp.remove(index);
-                count=temp.size();
+                while (temp.get(index).isInUse() == true) {
+                    rand = new Random();
+                    index = rand.nextInt(count);
+                }
+
+
+                    four.add(temp.get(index));
+                    temp.remove(index);
+                    count = temp.size();
             }
             //TODO
             //ask te server which of the four cards is choosen by th player

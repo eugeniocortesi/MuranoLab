@@ -6,6 +6,7 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
 
@@ -39,7 +40,8 @@ public class RollAgainADie6 implements ToolCardDecorator {
 
         Model model = singletonModel();
         ArrayList<DieInt> inDraft = model.getDraftPool().getInDraft();
-        PlaceDie placement = new PlaceDie(die, toBox, pl);
+        PlayerZone player = model.getPlayerList().get(pl);
+        PlaceDie placement = new PlaceDie(die, toBox, player);
 
         die.roll();
 

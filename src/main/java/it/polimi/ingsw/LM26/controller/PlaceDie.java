@@ -19,13 +19,13 @@ public class PlaceDie implements PlayerActionInt{
     private int i, j;
     private Box[][] board;
 
-    public PlaceDie(Die dieFromDraft, Box toBox, int idPlayer) {
+    public PlaceDie(Die dieFromDraft, Box toBox, PlayerZone player) {
 
         this.die=dieFromDraft;
         this.toBox=toBox;
         this.i = toBox.getI();
         this.j = toBox.getJ();
-        player=model.getPlayerList().get(idPlayer);
+        this.player=player;
 
         this.board = player.getPlayerBoard().getBoardMatrix();
     }
@@ -39,7 +39,7 @@ public class PlaceDie implements PlayerActionInt{
 
         if (player.getPlayerBoard().isEmpty())
                 if(!(i==0 || i==3 || j==0 || j==4 )){
-                                     System.out.println("error: primo dado deve andare sul bordo");
+                                     System.out.println("error: first die must be placed on the edge");
                                      return false;
                                    }
                 else {
@@ -57,6 +57,7 @@ public class PlaceDie implements PlayerActionInt{
         else if (checkColorRestriction() && checkValueRestriction() && checkNearByRestrictions() ){
             die.toString();
              toBox.setDie(die);
+             player.getActionHistory().setDieUsed(true);
              return true;}
 
         System.out.println("error in general place die ");

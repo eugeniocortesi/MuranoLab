@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.model.Cards;
+package it.polimi.ingsw.LM26.model.Cards.windowMatch;
 
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import org.junit.Test;

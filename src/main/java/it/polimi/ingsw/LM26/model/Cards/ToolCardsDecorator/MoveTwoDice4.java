@@ -3,7 +3,11 @@ package it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator;
 import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class MoveTwoDice4 implements ToolCardDecorator {
 
@@ -29,9 +33,10 @@ public class MoveTwoDice4 implements ToolCardDecorator {
     public boolean play(Die dieFromDraft){return false;}
     public boolean play(int player ){return false;}
 
-    public boolean play (Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player ) {
+    public boolean play (Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int pl ) {
 
-
+        Model model = singletonModel();
+        PlayerZone player = model.getPlayerList().get(pl);
         Die die = (Die) fromBox1.getDie();
         Die die2 = (Die)fromBox2.getDie();
         PlaceDie placement = new PlaceDie(die, toBox1, player);

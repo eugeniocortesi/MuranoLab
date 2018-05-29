@@ -41,7 +41,7 @@ public class RollAllDraftDice7 implements ToolCardDecorator {
         PlayerZone player = model.getPlayerList().get(pl);
         ArrayList<DieInt> inDraft = model.getDraftPool().getInDraft();
 
-        if(player.getActionHistory().getDiceAvailable()==1 && player.getActionHistory().isFirstTurn()==false ) {
+        if(!player.getActionHistory().isDieUsed() && player.getActionHistory().isFirstTurn()==false ) {
 
             for (int i = 0; i < inDraft.size(); i++)
                 inDraft.get(i).roll();

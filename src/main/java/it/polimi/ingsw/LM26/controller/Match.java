@@ -6,12 +6,9 @@ import it.polimi.ingsw.LM26.controller.GamePhases.Game;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
 
@@ -68,6 +65,7 @@ public class Match {
                 //TODO DELETE
                 System.out.println(playing.getName()+" is playing "  );
                 playing.getPlayerBoard().printCard();
+                System.out.println("DraftPool");
                 model.getDraftPool().printDraftPool();
 
 
@@ -149,7 +147,8 @@ public class Match {
         BufferedReader read;
 
 
-            System.out.println("insert id 1 o 9");
+            System.out.println("Insert 1 to place a die");
+            System.out.println("Insert 9 to pass the turn");
             read = new BufferedReader(new InputStreamReader(System.in));
             try {
                 id = Integer.parseInt(read.readLine());

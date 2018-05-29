@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.model.Cards.windowMatch;
 
 import it.polimi.ingsw.LM26.model.Cards.CardInt;
+import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.Serialization.Matrix;
 
 
@@ -55,13 +56,15 @@ public class WindowPatternCard implements CardInt {
 
         System.out.println(getTitle());
         System.out.println(getToken());
-
+        String escape;
         for(int i=0;i<4;i++){
             for(int j=0;j<5;j++) {
-                if (patternMatrix[i][j].isColor() == true)
-                    System.out.println(patternMatrix[i][j].getColor());
-                if (patternMatrix[i][j].isShade() == true)
-                    System.out.println(patternMatrix[i][j].getValue());
+                if (patternMatrix[i][j].isColor() == true){
+                    escape =patternMatrix[i][j].getColor().escape();
+                    System.out.print(escape +"\u25A0" + Color.RESET + " " );
+                }
+                else if (patternMatrix[i][j].isShade() == true)
+                    System.out.print(patternMatrix[i][j].getValue() + " ");
             }
             System.out.println();
         }
