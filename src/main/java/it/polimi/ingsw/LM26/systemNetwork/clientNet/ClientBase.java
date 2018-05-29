@@ -31,4 +31,7 @@ public class ClientBase {
         clientView.connect();*/
     }
 
+    public void setConnection(boolean connection) {
+        this.connection = connection;
+    }
 }

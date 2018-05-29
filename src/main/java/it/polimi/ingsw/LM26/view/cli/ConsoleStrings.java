@@ -13,6 +13,8 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientBase;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
 import it.polimi.ingsw.LM26.view.ViewInt;
 
 import org.fusesource.jansi.Ansi;
@@ -27,10 +29,12 @@ import java.util.Scanner;
 import static org.fusesource.jansi.Ansi.Color.*;
 import static org.fusesource.jansi.Ansi.ansi;
 
-public class ConsoleStrings extends Observable implements ViewInt {
+public class ConsoleStrings extends ViewInterface {
 
 
     static Model model;
+    private ClientBase clientBase;
+
     private ConsoleTools consoleTools = new ConsoleTools();
     private int id;
     //virtualview avrà una coda di actionevent
@@ -74,18 +78,30 @@ public class ConsoleStrings extends Observable implements ViewInt {
 
     }*/
 
-    @Override
+
+
+    /*@Override
     public void notifyObservers() {
         observer.update(this, event);
     }
 
     public void addObserver(Observer observer){
         this.observer=observer;
+    }*/
+
+    public ConsoleStrings(ClientBase clientBase) {
+        this.clientBase = clientBase;
     }
+
+    @Override
+    public void showNetChoise() {
+      //cose di initialScreen
+    }
+
     /**
      * first screen of the program: it asks for authentication method
      */
-    public String initialScreen(){
+    public void initialScreen(){
         System.out.print(ansi().a("  Benvenuti in\n    ").fg(RED).a("S").fg(YELLOW).a("A").fg(MAGENTA).a("G").fg(GREEN).a("R").fg(BLUE).a("A").fg(YELLOW).a("D").fg(GREEN).a("A\n\n").reset());
         System.out.flush();
         System.out.println("Scegli uno tra i seguenti metodi di connessione:\nSocket: s\nRMI: r");
@@ -97,7 +113,8 @@ public class ConsoleStrings extends Observable implements ViewInt {
             }
             if(!(s.equalsIgnoreCase("r") || s.equalsIgnoreCase("s"))) System.out.println("r o s!!");
         }
-        return s;
+        if(s.equalsIgnoreCase("R")) clientBase.setConnection(true);
+        else clientBase.setConnection(false);
     }
 
     /**
@@ -125,13 +142,10 @@ public class ConsoleStrings extends Observable implements ViewInt {
     }
 
 
-    @Override
-    public void start() {
-
-    }
 
 
-    @Override
+
+
     public void showAlreadyLoggedScreen() {
         AnsiConsole.out().println("È già presente un giocatore col tuo nome utente, scegline un altro");
     }
@@ -141,25 +155,12 @@ public class ConsoleStrings extends Observable implements ViewInt {
         AnsiConsole.out().println("Nella partita corrente ci sono già quattro giocatori");
     }
 
-    @Override
+
     public void showDisconnectScreen() {
-        AnsiConsole.out().println(); //è il messaggio che viene a tutti?
+        AnsiConsole.out().println(); //è il messaggio che viene a tutti i connessi
     }
 
-    @Override
-    public void showAddedPlayer() {
 
-    }
-
-    @Override
-    public void showTurnInitialPhase() {
-
-    }
-
-    @Override
-    public void showPlaceDie() {
-
-    }
 
     /**
      * it shows the draft pool, the player zone
@@ -252,18 +253,7 @@ public class ConsoleStrings extends Observable implements ViewInt {
             event.setPlayer(playing.getIDPlayer());
         }
         event.setId(id);
-        notifyObservers();
-    }
-
-    @Override
-    public void showChooseCard() {
-
-    }
-
-
-
-    @Override
-    public void showTurnEndPhase() {
+        //notifyObservers();
     }
 
     /**
@@ -295,10 +285,5 @@ public class ConsoleStrings extends Observable implements ViewInt {
             System.out.flush();
         }
         System.out.println();
-    }
-
-    @Override
-    public void showPoints() {
-
     }
 }
