@@ -20,12 +20,14 @@ import org.fusesource.jansi.AnsiConsole;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 
 import static org.fusesource.jansi.Ansi.Color.*;
 import static org.fusesource.jansi.Ansi.ansi;
 
-public class ConsoleStrings implements ViewInt {
+public class ConsoleStrings extends Observable implements ViewInt {
 
 
     static Model model;
@@ -37,6 +39,7 @@ public class ConsoleStrings implements ViewInt {
     private ArrayList<ActionEvent> events = new ArrayList<ActionEvent>();
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private String s= "";
+    private Observer observer;
 
     public static void main(String[] args) {
             //ConsoleStrings consoleStrings =new ConsoleStrings();
@@ -69,6 +72,14 @@ public class ConsoleStrings implements ViewInt {
         this.model=model;
     }
 
+    @Override
+    public void notifyObservers() {
+        observer.update(this, event);
+    }
+
+    public void addObserver(Observer observer){
+        this.observer=observer;
+    }
     /**
      * first screen of the program: it asks for authentication method
      */
@@ -240,7 +251,7 @@ public class ConsoleStrings implements ViewInt {
             event.setPlayer(playing.getIDPlayer());
         }
         event.setId(id);
-
+        notifyObservers();
     }
 
     @Override
