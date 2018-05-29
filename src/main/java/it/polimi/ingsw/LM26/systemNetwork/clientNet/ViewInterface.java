@@ -17,6 +17,8 @@ public abstract class ViewInterface extends Observable {
 
     public abstract void showTooManyUsersScreen();
 
-    //public abstract void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck);
+    public abstract void showInitialScreen (String name, int id);
+
+    public abstract void showWindowPattern(int id, ArrayList<WindowPatternCard> windowDeck);
 
 }

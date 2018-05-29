@@ -163,13 +163,36 @@ public class ConsoleStrings extends ViewInterface {
     }
 
     public void showAlreadyLoggedScreen() {
-        AnsiConsole.out().println("Ãˆ giÃ  presente un giocatore col tuo nome utente, scegline un altro");
+        AnsiConsole.out().println("E' gia'  presente un giocatore col tuo nome utente, scegline un altro");
         showLoginScreen();
     }
 
     @Override
     public void showTooManyUsersScreen() {
         AnsiConsole.out().println("Nella partita corrente ci sono giÃ  quattro giocatori");
+    }
+
+    @Override
+    public void showInitialScreen(String name, int id) {
+
+    }
+
+    @Override
+    public void showWindowPattern(int id, ArrayList<WindowPatternCard> windowDeck) {
+        int n=-1;
+        for(WindowPatternCard i : windowDeck){
+            consoleTools.printPatternCard(i.getTitle());
+        }
+        System.out.println("scegli una di queste carte mappa con un indice da 1 a 4");
+        while(n<1 && n>4){
+            try{
+                n=Integer.parseInt(br.readLine());
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            if(n<1 && n>4) System.out.println("Indice tra 1 e 4!!");
+        }
+        clientView.chosedWindow(windowDeck.get(n-1));
     }
 
 

@@ -1,6 +1,8 @@
 
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
+import it.polimi.ingsw.LM26.controller.ActionEvent;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
@@ -109,5 +111,15 @@ public class ClientViewSocket implements ClientView {
     @Override
     public void disconnect() {
         concreteClientView.showDisconnectScreen();
+    }
+
+    @Override
+    public void chosedWindow(WindowPatternCard windowPatternCard) {
+
+    }
+
+    @Override
+    public void placedDie(ActionEvent actionEvent) {
+
     }
 }
