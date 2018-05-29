@@ -32,7 +32,7 @@ public class ConsoleStrings extends Observable implements ViewInt {
 
     static Model model;
     private ConsoleTools consoleTools = new ConsoleTools();
-
+    private int id;
     //virtualview avrà una coda di actionevent
     private ActionEvent actionEvent = new ActionEvent();
     private ActionEvent event;
@@ -68,8 +68,10 @@ public class ConsoleStrings extends Observable implements ViewInt {
          //System.out.println("\u00AF"+"\u2310"+"\u00AC"+"\u2319"+"\u2310");
     }
 
-    public ConsoleStrings(Model model) {
+    public ConsoleStrings(Model model, int id) {
         this.model=model;
+        this.id=id;
+
     }
 
     @Override
@@ -161,11 +163,10 @@ public class ConsoleStrings extends Observable implements ViewInt {
 
     /**
      * it shows the draft pool, the player zone
-     * @param id this player id
      */
-    public void showPlacementDice(int id){
+    public void showPlacementDice(){
         consoleTools.printDraftPool();
-        this.showYourplayerZone(id);
+        this.showYourplayerZone();
     }
 
     public void askForDie(){
@@ -268,7 +269,12 @@ public class ConsoleStrings extends Observable implements ViewInt {
     /**
      * it shows the frame board updated at the end of the current player's turn
      */
-    public void showYourplayerZone(int id) {
+    public void showYourplayerZone() {
+        /*int id=-1;
+        for(PlayerZone i : model.getPlayerList()){
+            if(i.getPlayerState()==PlayerState.BEGINNING) id=i.getIDPlayer();
+        }
+        if(id==-1) throw new IllegalArgumentException("no player is BEGINNING his turn");*/
         System.out.println("La tua area di gioco: ");
         consoleTools.printFrameBoard(model.getPlayerList().get(id));
         for(int i=0; i< model.getPlayerList().get(id).getToken().getTokenNumber();i++){

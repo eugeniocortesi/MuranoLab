@@ -20,6 +20,7 @@ public class ConsoleTools {
 
 
 
+
     public String faces(int val){
         switch (val){
             case 1:
