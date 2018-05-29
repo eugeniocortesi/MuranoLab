@@ -163,7 +163,7 @@ public class ConsoleStrings extends ViewInterface {
     }
 
     public void showAlreadyLoggedScreen() {
-        AnsiConsole.out().println("Ãˆ giÃ  presente un giocatore col tuo nome utente, scegline un altro");
+        AnsiConsole.out().println("E' gia'  presente un giocatore col tuo nome utente, scegline un altro");
         showLoginScreen();
     }
 
@@ -177,7 +177,23 @@ public class ConsoleStrings extends ViewInterface {
         AnsiConsole.out().println(); //Ã¨ il messaggio che viene a tutti i connessi
     }
 
+    public void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck){
+        int n=-1;
+        for(WindowPatternCard i : windowDeck){
+            consoleTools.printPatternCard(i.getTitle());
+        }
+        System.out.println("scegli una di queste carte mappa con un indice da 1 a 4");
+        while(n<1 && n>4){
+            try{
+                n=Integer.parseInt(br.readLine());
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            if(n<1 && n>4) System.out.println("Indice tra 1 e 4!!");
+        }
+        //clientView.chosedWindow(windowDeck(n-1));
 
+    }
 
     /**
      * it shows the draft pool, the player zone
