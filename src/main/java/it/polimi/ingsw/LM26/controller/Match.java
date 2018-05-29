@@ -6,9 +6,12 @@ import it.polimi.ingsw.LM26.controller.GamePhases.Game;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
 
@@ -21,6 +24,8 @@ public class Match {
     private CentralPhase centralPhase;
     private Game game;
     private Controller controller;
+
+
 
     public Match(Model model, Controller controller ) {
 
@@ -40,7 +45,7 @@ public class Match {
 
             //primo giocatore
             playing =centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn(), 0);
-
+            int k=playing.getIDPlayer();
             // x ciascun giocatore
             while (centralPhase.getCurrentRound().getRoundState() != FINISHED) {         //1
 
@@ -60,6 +65,10 @@ public class Match {
                 //while (event== null )
                 // ovvero aspetto che la view faccia update
 
+                //TODO DELETE
+                System.out.println(playing.getName()+" is playing "  );
+                playing.getPlayerBoard().printCard();
+                model.getDraftPool().printDraftPool();
 
 
 
@@ -68,18 +77,12 @@ public class Match {
                 //if(event.getPlayer().getName() == playing.getName()) ){
 
 
-                //TODO DELETE
-                System.out.println(playing.getName()+" is playing "  );
-                playing.getPlayerBoard().printCard();
-                model.getDraftPool().printDraftPool();
-
-
                 while (!result) {
 
 
                     //while (event == null )    //ASPETTA DI NUOVO L?EVENTO
 
-                    //TODo DELETE
+                    //TODO DELETE
                     setActionEvent(event);
 
                     if (controller.checkEvent(event)) {
@@ -123,7 +126,7 @@ public class Match {
 
     public void setActionEvent(ActionEvent newEvent) {
 
-        //this.event = newEvent;
+        this.event = newEvent;
 
 
 
@@ -195,6 +198,7 @@ public class Match {
         }
         event.setId(id);
         ///////////////////////////////////////////
+
 
 
 

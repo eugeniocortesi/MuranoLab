@@ -65,14 +65,17 @@ public class WindowFramePlayerBoard/* implements CardInt */{
         if (hasPatternCard)
         for(int i=0;i<4;i++){
             for(int j=0;j<5;j++) {
-                if (BoardMatrix[i][j].getPatternBox().isColor() == true)
-                    System.out.print("\t"+BoardMatrix[i][j].getPatternBox().getColor().toString() + " ");
-                if (BoardMatrix[i][j].getPatternBox().isShade() == true)
-                    System.out.print("\t"+BoardMatrix[i][j].getPatternBox().getValue() + " ");
                 if(BoardMatrix[i][j].isIsPresent())
-                    System.out.print("\t has "+BoardMatrix[i][j].getDie().toString() + " ") ;
-                else System.out.print("\t is empty ");
+                    System.out.print("\t"+BoardMatrix[i][j].getDie().toString() ) ;
+                else {
+                    if (BoardMatrix[i][j].getPatternBox().isColor() == true){
+                        String escape =BoardMatrix[i][j].getPatternBox().getColor().escape();
+                        System.out.print("\t"+escape +"\u25A0" + Color.RESET + " " );}
+                    if (BoardMatrix[i][j].getPatternBox().isShade() == true)
+                        System.out.print("\t"+BoardMatrix[i][j].getPatternBox().getValue() + " ");
+                }
             }
+
             System.out.println();
         }
 
