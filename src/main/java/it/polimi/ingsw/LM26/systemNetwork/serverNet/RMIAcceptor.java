@@ -1,8 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
-import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfiguration;
 
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;

@@ -2,8 +2,8 @@ package it.polimi.ingsw.LM26.networkServer.Client;
 
 
 import it.polimi.ingsw.LM26.networkServer.Data.ClientLoginData;
-import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientConfiguration;
-import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientImplementation;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
 
 import java.net.*;
 import java.io.*;

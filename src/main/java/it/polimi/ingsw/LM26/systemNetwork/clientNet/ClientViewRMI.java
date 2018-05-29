@@ -1,6 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
-import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManagerRemote;
 
 import java.rmi.NotBoundException;
@@ -89,7 +89,10 @@ public class ClientViewRMI implements ClientView {
 
     @Override
     public void logged(Boolean l, String name) {
-        concreteClientView.showLoggedScreen();
+        if (l== true)
+            concreteClientView.showLoggedScreen();
+        else
+            concreteClientView.showAlreadyLoggedScreen();
     }
 
     @Override

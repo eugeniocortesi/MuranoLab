@@ -1,7 +1,7 @@
 package it.polimi.ingsw.LM26.network.server.RMI;
 
 import it.polimi.ingsw.LM26.network.server.ServerImpl;
-import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfiguration;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;

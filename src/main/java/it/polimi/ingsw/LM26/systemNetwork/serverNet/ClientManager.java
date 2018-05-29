@@ -1,16 +1,18 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
-public interface ClientManager {
+public abstract class ClientManager extends Thread {
 
-    void connect();
+    public abstract void connect();
 
-    int getAvailableId();
+    public abstract int getAvailableId();
 
-    void requestedLogin();
+    public abstract void requestedLogin();
 
-    void login(String name);
+    public abstract void login(String name);
 
-    void logged(Boolean l, String name);
+    public abstract void logged(Boolean l, String name);
 
-    void disconnect();
+    public abstract void disconnect();
+
+    public abstract void run();
 }

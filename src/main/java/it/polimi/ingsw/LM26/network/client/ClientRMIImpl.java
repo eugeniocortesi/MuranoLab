@@ -2,13 +2,10 @@ package it.polimi.ingsw.LM26.network.client;
 
 import it.polimi.ingsw.LM26.network.server.RMI.ClientHandlerRMIRemoteInt;
 import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
-import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientConfiguration;
-import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientImplementation;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
 import it.polimi.ingsw.LM26.view.ViewInt;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 

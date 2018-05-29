@@ -1,12 +1,10 @@
-package it.polimi.ingsw.LM26.networkServer.clientConfiguration;
+package it.polimi.ingsw.LM26.systemNetwork.clientConfiguration;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.LM26.Main;
-import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 

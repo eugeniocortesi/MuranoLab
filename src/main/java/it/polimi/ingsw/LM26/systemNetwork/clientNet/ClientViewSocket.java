@@ -1,7 +1,8 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
-import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientConfiguration;
-import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientImplementation;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 
 import java.io.*;
 import java.net.Socket;
@@ -19,28 +20,15 @@ public class ClientViewSocket implements ClientView {
     private BufferedReader inKeyboard;
     private PrintWriter outVideo;
     private String username;
+    private int id;
 
     public ClientViewSocket(ConcreteClientView concreteClientView, DataClientConfiguration data){
-        listenerClientView = new ListenerClientView();
+
         this.concreteClientView = concreteClientView;
         SOCKETPORT = data.getClientSOCKETPORT();
         address = data.getIp();
 
-        try {
-            connect();
-        } catch (Exception e) {
-            System.out.println("Exception: " + e);
-            e.printStackTrace();
-        } finally {
-            // Always close it:
-            try {
-                socket.close();
-            } catch (IOException e) {
-                System.err.println("Socket not closed");
-            }
-        }
-
-
+        //listenerClientView.listen();
     }
 
     @Override
@@ -55,6 +43,9 @@ public class ClientViewSocket implements ClientView {
             outSocket = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
             inKeyboard = new BufferedReader(new InputStreamReader(System.in));
             outVideo = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
+            listenerClientView = new ListenerClientView(this, socket);
+            connected();
+            listenerClientView.listen();
 
             System.out.println("ClientImplementationSocket connected");
         } catch (Exception e) {
@@ -70,24 +61,47 @@ public class ClientViewSocket implements ClientView {
         }
     }
 
+    public void connected(){
+        System.out.println("Client connected");
+        ConnectMessage connectMessage = new ConnectMessage("connected", 0);
+        connectMessage.dump();
+        outSocket.println(connectMessage.serializeConnectMessage());
+    }
+
+    public void getAvailableId(int id){
+        this.id= id;
+        requestedLogin();
+    }
+
+
     @Override
     public void requestedLogin() {
+        concreteClientView.showLoginScreen();
 
     }
 
     @Override
     public void login(String name) {
-
+        DataMessage message = new DataMessage("login", name);
+        message.dump();
+        outSocket.println(message.serializeDataMessage());
+        listenerClientView.listen();
     }
 
     @Override
     public void logged(Boolean l, String name) {
-
+        if (l==true){
+        this.username = name;
+        concreteClientView.showLoggedScreen();
+        }
+        else{
+        concreteClientView.showAlreadyLoggedScreen();
+        }
     }
 
     @Override
     public void tooManyUsers() {
-
+        concreteClientView.showTooManyUsersScreen();
     }
 
     @Override

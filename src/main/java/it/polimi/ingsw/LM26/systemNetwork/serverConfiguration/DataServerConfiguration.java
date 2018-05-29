@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.networkServer.serverConfiguration;
+package it.polimi.ingsw.LM26.systemNetwork.serverConfiguration;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -3,9 +3,8 @@ package it.polimi.ingsw.LM26.network.server.RMI;
 import it.polimi.ingsw.LM26.network.server.ClientHandlerInt;
 import it.polimi.ingsw.LM26.network.server.ServerImpl;
 import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualView;
-import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
-import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientConfiguration;
-import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientImplementation;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;

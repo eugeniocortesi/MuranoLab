@@ -2,8 +2,8 @@ package it.polimi.ingsw.LM26.networkServer.Server;
 
 
 import it.polimi.ingsw.LM26.networkServer.ClientHandler.ClientInt;
-import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
-import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerImplementation;
+import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerImplementation;
 import it.polimi.ingsw.LM26.view.ViewInt;
 import java.net.UnknownHostException;
 import java.net.InetAddress;

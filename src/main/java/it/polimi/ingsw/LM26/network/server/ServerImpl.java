@@ -5,14 +5,12 @@ import it.polimi.ingsw.LM26.network.server.socket.ClientHandlerSocketImpl;
 import it.polimi.ingsw.LM26.network.server.socket.ConnectionAcceptorSocketImpl;
 import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
 import it.polimi.ingsw.LM26.networkServer.Server.ViewList;
-import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
-import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerImplementation;
-import it.polimi.ingsw.LM26.view.ViewInt;
+import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerImplementation;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 //Implements configuration RMI and Socket
 //Creates Connection Acceptor RMI and Socket

@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
 import java.rmi.registry.LocateRegistry;
 
-public class ClientManagerRMI implements ClientManager {
+public class ClientManagerRMI extends ClientManager {
 
     private ServerBase myserver;
     private int RMIPORTServer;
@@ -90,6 +90,11 @@ public class ClientManagerRMI implements ClientManager {
 
     @Override
     public void disconnect() {
+
+    }
+
+    @Override
+    public void run() {
 
     }
 }

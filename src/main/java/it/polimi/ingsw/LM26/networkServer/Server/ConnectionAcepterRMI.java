@@ -1,14 +1,9 @@
 package it.polimi.ingsw.LM26.networkServer.Server;
 
-import it.polimi.ingsw.LM26.networkServer.ClientHandler.*;
-import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfiguration;
 
-import java.rmi.NotBoundException;
 import java.rmi.Remote;
-import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
-import java.rmi.server.RemoteObject;
-import java.util.Vector;
 
 import static java.rmi.registry.LocateRegistry.createRegistry;
 

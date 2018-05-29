@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.network.server.socket.dataProtocolSocket;
+package it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -7,21 +7,20 @@ import com.google.gson.stream.JsonToken;
 import java.io.IOException;
 import java.io.StringReader;
 
-public class DataMessage {
+public class ConnectMessage {
+    String op;
+    int field1;
 
-    String operation;
-    String field1;
-
-    public DataMessage(String op, String name){
-        this.operation = op;
+    public ConnectMessage(String op, int name){
+        this.op = op;
         this.field1 = name;
     }
 
     public String getOperation() {
-        return operation;
+        return op;
     }
 
-    public String getField1() {
+    public int getField1() {
         return field1;
     }
 
@@ -48,21 +47,23 @@ public class DataMessage {
         return null;
     }
 
-    public String serializeDataMessage(){
+    public String serializeConnectMessage(){
 
         Gson gson = new Gson();
         String msgJson = gson.toJson(this);
         return msgJson;
     }
 
-    static public DataMessage deserializeDataMessage(String protocolJson){
+    static public ConnectMessage deserializeConnectMessage(String protocolJson){
         Gson gson = new Gson();
-        DataMessage message= gson.fromJson(protocolJson, DataMessage.class);
+        ConnectMessage message= gson.fromJson(protocolJson, ConnectMessage.class);
         return message;
     }
     public void dump() {
 
-        System.out.println("Operation " +this.operation+ " Field1 " +this.field1);
+        System.out.println("Operation " +this.op+ " Field1 " +this.field1);
     }
 }
+
+
 

@@ -2,7 +2,7 @@ package it.polimi.ingsw.LM26.network.server.socket;
 
 import it.polimi.ingsw.LM26.network.server.ClientHandlerInt;
 import it.polimi.ingsw.LM26.network.server.ServerImpl;
-import it.polimi.ingsw.LM26.network.server.socket.dataProtocolSocket.DataMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;

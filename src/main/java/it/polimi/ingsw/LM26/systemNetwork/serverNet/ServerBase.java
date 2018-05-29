@@ -1,8 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
-import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
-import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerImplementation;
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientViewRemote;
+import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerImplementation;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -58,7 +57,7 @@ public class ServerBase {
     }
 
     public boolean checkNumberUsers(){
-        if (clientManagerListSize()>4)
+        if (clientManagerListSize()<4)
             return true;
         return false;
     }

@@ -8,5 +8,7 @@ public interface ViewInterface {
 
     void showLoggedScreen();
 
+    void showAlreadyLoggedScreen();
+
     void showTooManyUsersScreen();
 }

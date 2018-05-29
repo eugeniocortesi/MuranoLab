@@ -1,9 +1,7 @@
 package it.polimi.ingsw.LM26.network.server.socket;
 
 import it.polimi.ingsw.LM26.network.server.ServerImpl;
-import it.polimi.ingsw.LM26.networkServer.ClientHandler.ClientSocket;
-import it.polimi.ingsw.LM26.networkServer.Server.Server;
-import it.polimi.ingsw.LM26.networkServer.serverConfiguration.DataServerConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfiguration;
 
 import java.io.IOException;
 import java.net.ServerSocket;

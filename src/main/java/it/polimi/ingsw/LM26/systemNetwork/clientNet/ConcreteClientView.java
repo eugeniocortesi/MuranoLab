@@ -1,7 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
-import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientConfiguration;
-import it.polimi.ingsw.LM26.networkServer.clientConfiguration.DataClientImplementation;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -57,6 +57,12 @@ public class ConcreteClientView implements ViewInterface {
     @Override
     public void showLoggedScreen() {
         System.out.println("You logged successfully!");
+    }
+
+    @Override
+    public void showAlreadyLoggedScreen() {
+        System.out.println(" The username was already token ");
+        showLoginScreen();
     }
 
     @Override
