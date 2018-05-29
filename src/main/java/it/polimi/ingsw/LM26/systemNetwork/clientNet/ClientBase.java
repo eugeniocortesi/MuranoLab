@@ -7,22 +7,22 @@ import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 public class ClientBase {
 
     ConsoleStrings cli;
-    ClientView clientView;
-    private DataClientImplementation dataClientImplementation;
-    private DataClientConfiguration dataClientConfiguration;
+    ConsoleStrings concreteClientView;
 
     boolean connection; //true for RMI, false for Socket
+    String username;
 
     public ClientBase(){
 
-        dataClientImplementation = new DataClientImplementation();
-        dataClientConfiguration = dataClientImplementation.implementation();
-        System.out.println("SocketPort " +dataClientConfiguration.getClientSOCKETPORT()+ " ClientRMI " + dataClientConfiguration.getClientRMIPORT()
-                + " ServerRMI "+ dataClientConfiguration.getServerRMIPORT());
 
-        /*cli = new ConsoleStrings(this);
+
+        cli = new ConsoleStrings(this);
+        /*concreteClientView = new ConcreteClientView(cli);
+
+        //Warning now is initialScreen()
         cli.showNetChoise();
         if (connection == true){
+            //ClientView has to take ClientBase
             clientView = new ClientViewRMI(this, dataClientConfiguration);
         }
 
@@ -31,7 +31,22 @@ public class ClientBase {
         clientView.connect();*/
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public boolean isConnection() {
+        return connection;
+    }
+
     public void setConnection(boolean connection) {
         this.connection = connection;
     }
+
+
+
 }

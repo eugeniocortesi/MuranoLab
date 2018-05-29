@@ -1,8 +1,10 @@
+
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 
 import java.io.*;
 import java.net.Socket;
@@ -10,7 +12,7 @@ import java.net.Socket;
 public class ClientViewSocket implements ClientView {
 
     private ListenerClientView listenerClientView;
-    private ConcreteClientView concreteClientView;
+    private ConsoleStrings concreteClientView;
     private int SOCKETPORT;
 
     private static String address;
@@ -22,7 +24,7 @@ public class ClientViewSocket implements ClientView {
     private String username;
     private int id;
 
-    public ClientViewSocket(ConcreteClientView concreteClientView, DataClientConfiguration data){
+    public ClientViewSocket(ConsoleStrings concreteClientView, DataClientConfiguration data){
 
         this.concreteClientView = concreteClientView;
         SOCKETPORT = data.getClientSOCKETPORT();
@@ -91,11 +93,11 @@ public class ClientViewSocket implements ClientView {
     @Override
     public void logged(Boolean l, String name) {
         if (l==true){
-        this.username = name;
-        concreteClientView.showLoggedScreen();
+            this.username = name;
+            concreteClientView.showLoggedScreen();
         }
         else{
-        concreteClientView.showAlreadyLoggedScreen();
+            concreteClientView.showAlreadyLoggedScreen();
         }
     }
 
@@ -106,6 +108,6 @@ public class ClientViewSocket implements ClientView {
 
     @Override
     public void disconnect() {
-
+        concreteClientView.showDisconnectScreen();
     }
 }

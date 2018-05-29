@@ -1,7 +1,9 @@
+
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManagerRemote;
+import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -11,14 +13,14 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class ClientViewRMI implements ClientView {
 
-    private ConcreteClientView concreteClientView;
+    private ConsoleStrings concreteClientView;
     private int RMIPORTServer;
     private int RMIPORTClient;
     private String address;
     private int id;
     private ClientManagerRemote stub;
 
-    public ClientViewRMI(ConcreteClientView concreteClientView, DataClientConfiguration data){
+    public ClientViewRMI(ConsoleStrings concreteClientView, DataClientConfiguration data){
 
         this.concreteClientView = concreteClientView;
         RMIPORTServer = data.getServerRMIPORT();
@@ -102,6 +104,6 @@ public class ClientViewRMI implements ClientView {
 
     @Override
     public void disconnect() {
-
+        concreteClientView.showDisconnectScreen();
     }
 }

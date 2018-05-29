@@ -1,3 +1,4 @@
+
 package it.polimi.ingsw.LM26.view.cli;
 
 import it.polimi.ingsw.LM26.controller.ActionEvent;
@@ -13,8 +14,9 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientBase;
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.*;
 import it.polimi.ingsw.LM26.view.ViewInt;
 
 import org.fusesource.jansi.Ansi;
@@ -34,10 +36,15 @@ public class ConsoleStrings extends ViewInterface {
 
     static Model model;
     private ClientBase clientBase;
+    private ClientView clientView;
+
+
+    DataClientImplementation dataClientImplementation;
+    DataClientConfiguration dataClientConfiguration;
 
     private ConsoleTools consoleTools = new ConsoleTools();
     private int id;
-    //virtualview avrà una coda di actionevent
+    //virtualview avrÃ  una coda di actionevent
     private ActionEvent actionEvent = new ActionEvent();
     private ActionEvent event;
     private ArrayList<ActionEvent> events = new ArrayList<ActionEvent>();
@@ -46,11 +53,11 @@ public class ConsoleStrings extends ViewInterface {
     private Observer observer;
 
     public static void main(String[] args) {
-            //ConsoleStrings consoleStrings =new ConsoleStrings();
-            //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            //String s=consoleStrings.initialScreen();
-            //String f=consoleStrings.showLogin();
-            //System.out.println(f);
+        //ConsoleStrings consoleStrings =new ConsoleStrings();
+        //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //String s=consoleStrings.initialScreen();
+        //String f=consoleStrings.showLogin();
+        //System.out.println(f);
 
 
        /* AnsiConsole.systemInstall();
@@ -69,7 +76,7 @@ public class ConsoleStrings extends ViewInterface {
         String outputD = escape+"["+d.getFace()+"]" + Color.RESET;
         AnsiConsole.out().println(outputD);
         AnsiConsole.systemUninstall();*/
-         //System.out.println("\u00AF"+"\u2310"+"\u00AC"+"\u2319"+"\u2310");
+        //System.out.println("\u00AF"+"\u2310"+"\u00AC"+"\u2319"+"\u2310");
     }
 
    /* public ConsoleStrings(Model model, int id) {
@@ -90,7 +97,13 @@ public class ConsoleStrings extends ViewInterface {
     }*/
 
     public ConsoleStrings(ClientBase clientBase) {
+
         this.clientBase = clientBase;
+        dataClientImplementation = new DataClientImplementation();
+        dataClientConfiguration = dataClientImplementation.implementation();
+        System.out.println("SocketPort " +dataClientConfiguration.getClientSOCKETPORT()+ " ClientRMI " + dataClientConfiguration.getClientRMIPORT()
+                + " ServerRMI "+ dataClientConfiguration.getServerRMIPORT());
+        showNetChoise();
     }
 
     /**
@@ -109,8 +122,16 @@ public class ConsoleStrings extends ViewInterface {
             }
             if(!(s.equalsIgnoreCase("r") || s.equalsIgnoreCase("s"))) System.out.println("r o s!!");
         }
-        if(s.equalsIgnoreCase("R")) clientBase.setConnection(true);
-        else clientBase.setConnection(false);
+        if(s.equalsIgnoreCase("R")) {
+            //TODO ricorda di cambiare i costruttori ai clientView e attributo di tipo consolestring
+            clientView = new ClientViewRMI(this, dataClientConfiguration );
+            clientBase.setConnection(true);
+        }
+        else {
+            clientView = new ClientViewSocket(this, dataClientConfiguration);
+            clientBase.setConnection(false);
+        }
+        clientView.connect();
     }
 
 
@@ -128,10 +149,12 @@ public class ConsoleStrings extends ViewInterface {
         System.out.flush();
         try{
             s = br.readLine();
+            clientView.login(s);
+            clientBase.setUsername(s);
         } catch (IOException e){
             e.printStackTrace();
         }
-       // clientBase.setUsername(s);
+
     }
 
     @Override
@@ -140,17 +163,18 @@ public class ConsoleStrings extends ViewInterface {
     }
 
     public void showAlreadyLoggedScreen() {
-        AnsiConsole.out().println("È già presente un giocatore col tuo nome utente, scegline un altro");
+        AnsiConsole.out().println("Ãˆ giÃ  presente un giocatore col tuo nome utente, scegline un altro");
+        showLoginScreen();
     }
 
     @Override
     public void showTooManyUsersScreen() {
-        AnsiConsole.out().println("Nella partita corrente ci sono già quattro giocatori");
+        AnsiConsole.out().println("Nella partita corrente ci sono giÃ  quattro giocatori");
     }
 
 
     public void showDisconnectScreen() {
-        AnsiConsole.out().println(); //è il messaggio che viene a tutti i connessi
+        AnsiConsole.out().println(); //Ã¨ il messaggio che viene a tutti i connessi
     }
 
 
