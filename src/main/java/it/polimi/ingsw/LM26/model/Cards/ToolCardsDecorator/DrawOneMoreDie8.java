@@ -42,8 +42,8 @@ public class DrawOneMoreDie8 implements ToolCardDecorator {
 
         Model model = singletonModel();
         ArrayList<DieInt> inDraft = model.getDraftPool().getInDraft();
-        PlaceDie placement = new PlaceDie(die, toBox, pl);
         PlayerZone player = model.getPlayerList().get(pl);
+        PlaceDie placement = new PlaceDie(die, toBox, player);
         if(!player.getActionHistory().isSecondTurn() ){
 
 

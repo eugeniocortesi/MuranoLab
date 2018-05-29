@@ -78,76 +78,108 @@ public class Controller implements ControllerInt {
     //che rifunzionino per il secondo turno di quel giocatore in quel round
     //ATTENZIONE prima di ogni piazzamento controllare che non abbia gia piazzato dadi in quel turno, esempio con una toolcard
 
-    public boolean check(Die dieFromDraft, Box toBox, int player){
+    public boolean check(Die dieFromDraft, Box toBox, int pl){
 
+        PlayerZone player=model.getPlayerList().get(pl);
+        if( player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) return false;
         PlaceDie placement = new PlaceDie(dieFromDraft, toBox, player);
         if(placement.placeDie()){
             model.getDraftPool().getInDraft().remove(dieFromDraft);
             //esempio: model.accept(new UpdateX());
+            player.getActionHistory().setPlacement(true);
             return true;}
         else return false;
     }
 
     public boolean check(ToolCard twoThree, Box fromBox, Box toBox, int player){
 
+        PlayerZone pl=model.getPlayerList().get(player);
+        if ( pl.getActionHistory().isCardUsed()|| pl.getActionHistory().isDieUsed()) return false;
+
         if(checkToken(model.getPlayerList().get(player),twoThree))
 
-            if(twoThree.play(fromBox, toBox, player))
-                return true;
+            if(twoThree.play(fromBox, toBox, player)){
+                pl.getActionHistory().setCardUsed(true);
+                return true;}
 
         return false;
     }
     public boolean check(ToolCard four, Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){
 
+        PlayerZone pl=model.getPlayerList().get(player);
+        if ( pl.getActionHistory().isCardUsed() || pl.getActionHistory().isDieUsed()) return false;
+
         if(checkToken(model.getPlayerList().get(player),four))
 
-            if(four.play(fromBox1, toBox1, fromBox2, toBox2, player))
-                return true;
+            if(four.play(fromBox1, toBox1, fromBox2, toBox2, player)){
+                pl.getActionHistory().setCardUsed(true);
+                return true;}
 
         return false;
     }
     public boolean check(ToolCard sixEightNine, Die dieFromDraft, Box toBox, int player){
 
+        PlayerZone pl=model.getPlayerList().get(player);
+        if ( pl.getActionHistory().isCardUsed() || pl.getActionHistory().isDieUsed()) return false;
+
         if(checkToken(model.getPlayerList().get(player),sixEightNine))
 
-            if(sixEightNine.play(dieFromDraft, toBox, player))
-                return true;
+            if(sixEightNine.play(dieFromDraft, toBox, player)){
+                pl.getActionHistory().setCardUsed(true);
+                return true;}
 
         return false;
     }
     public boolean check(ToolCard five, Die dieFromDraft, Die dieFromRoundTrack, int player){
 
+        PlayerZone pl=model.getPlayerList().get(player);
+        if ( pl.getActionHistory().isCardUsed() || pl.getActionHistory().isDieUsed()) return false;
+
         if(checkToken(model.getPlayerList().get(player),five))
 
-            if(five.play(dieFromDraft, dieFromRoundTrack))
-                return true;
+            if(five.play(dieFromDraft, dieFromRoundTrack)){
+                pl.getActionHistory().setCardUsed(true);
+                return true; }
 
         return false;
     }
     public boolean check(ToolCard one, Die dieFromDraft, String inDeCrement, int player){
 
+        PlayerZone pl=model.getPlayerList().get(player);
+        if ( pl.getActionHistory().isCardUsed() || pl.getActionHistory().isDieUsed()) return false;
+
         if(checkToken(model.getPlayerList().get(player),one))
 
-            if(one.play(dieFromDraft, inDeCrement))
-                return true;
+            if(one.play(dieFromDraft, inDeCrement)) {
+            pl.getActionHistory().setCardUsed(true);
+            return true;
+        }
 
         return false;
     }
     public boolean check(ToolCard tenEleven, Die dieFromDraft, int player){
 
+        PlayerZone pl=model.getPlayerList().get(player);
+        if ( pl.getActionHistory().isCardUsed() || pl.getActionHistory().isDieUsed()) return false;
+
         if(checkToken(model.getPlayerList().get(player),tenEleven))
 
-            if(tenEleven.play( dieFromDraft))
-                return true;
+            if(tenEleven.play( dieFromDraft)){
+                pl.getActionHistory().setCardUsed(true);
+                return true; }
 
         return false;
     }
     public boolean check(ToolCard seven,  int player){
 
+        PlayerZone pl=model.getPlayerList().get(player);
+        if ( pl.getActionHistory().isCardUsed() || pl.getActionHistory().isDieUsed()) return false;
+
         if(checkToken(model.getPlayerList().get(player),seven))
 
-            if(seven.play(player))
-                return true;
+            if(seven.play(player)){
+                pl.getActionHistory().setCardUsed(true);
+                return true; }
 
         return false;
     }
@@ -168,10 +200,6 @@ public class Controller implements ControllerInt {
         toolCard.setOneToken(player);
         return true;}
         return false;
-    }
-
-    public void checkNotSameAction(){
-
     }
 
     public void showLogin(){

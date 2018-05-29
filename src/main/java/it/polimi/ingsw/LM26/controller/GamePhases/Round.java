@@ -63,12 +63,13 @@ public class Round {
     public void endAction(int[] turn, RoundTrackInt roundTrack, DraftPool draftPool, PlayerZone actingPlayer) {
         actingPlayer.setPlayerState(PlayerState.ENDING);
         //TODO
-        //actingPlayer.deletePlayerHistory();
+        actingPlayer.getActionHistory().setDieUsed(false);
         turnCounter++;
         if(turnCounter == turn.length) {
             roundTrack.addDice(draftPool.getInDraft());
             draftPool.removeAllDice();
             turnCounter=0;
+            actingPlayer.getActionHistory().deletePlayerHistory();
             roundState= RoundState.FINISHED;
         }
         else roundState= RoundState.RUNNING;

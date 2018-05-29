@@ -9,8 +9,9 @@ public class TestToken {
     @Test
     public void checkToken() {
 
-
+        System.out.println(newToken.getTokenNumber());
         newToken.decrementToken();
+        System.out.println(newToken.getTokenNumber());
         newToken.decrementToken();
 
     }

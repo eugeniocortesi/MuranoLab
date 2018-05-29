@@ -6,7 +6,7 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 
 public class ActionEvent {
 
-    private int id;
+    private int ID=1;
     private int player;
     private Box fromBox1=null;
     private Box toBox1=null;
@@ -16,6 +16,7 @@ public class ActionEvent {
     private Die dieFromDraft=null;
     private Die dieFromRoundTrack=null;
     private String inDeCrement=null;
+    private Boolean noAction=false;
 
 
         /*
@@ -35,10 +36,10 @@ public class ActionEvent {
     // setta l'impostazione degli in ID in setCard,
     //ID=9 se viene settato no action
 
-    public int getId() { return id; }
+    public int getId() { return ID; }
 
     public void setId(int id) {
-        this.id = id;
+        this.ID = id;
     }
 
     public int getPlayer() {
@@ -86,6 +87,14 @@ public class ActionEvent {
     }
 
     public void setCard(ToolCard card) {
+
+            if(card.getNum()==1)  ID=6 ;
+            if(card.getNum()==2 ||card.getNum()==3 )  ID=2 ;
+            if(card.getNum()==4)  ID= 3;
+            if(card.getNum()==5)  ID=5 ;
+            if(card.getNum()==10 || card.getNum()==11 )  ID= 7;
+            if(card.getNum()==7)  ID= 8;
+            if(card.getNum()==6 || card.getNum()==8 || card.getNum()==9)  ID= 4;
         this.card = card;
     }
 
@@ -111,5 +120,14 @@ public class ActionEvent {
 
     public void setInDeCrement(String inDeCrement) {
         this.inDeCrement = inDeCrement;
+    }
+
+    public Boolean getNoAction() { return noAction; }
+
+    public void setNoAction(Boolean noAction) {
+
+        this.noAction = noAction;
+
+        if(noAction==false) ID=9;
     }
 }

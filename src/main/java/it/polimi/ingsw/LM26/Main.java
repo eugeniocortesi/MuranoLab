@@ -19,15 +19,7 @@ public class Main {
 
         System.out.println("Hello");
 
-        //ViewInt view = new ConcreteViewTest();
-        // Server server = new Server();
-        // view = server.getView();
-
         Controller controller = new Controller();
-        
-
-
-
 
     }
 }

@@ -31,7 +31,9 @@ public class RoundTrackTurn {
         System.out.println(count);
         for (DieInt d : diceList){
 
-            System.out.println (d);
+            System.out.print (d);
+
         }
+        System.out.println("\n");
     }
 }

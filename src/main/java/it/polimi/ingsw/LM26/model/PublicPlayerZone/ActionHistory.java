@@ -2,23 +2,15 @@ package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 
 public class ActionHistory {
 
-    private int diceAvailable= 2;
+    private boolean dieUsed=false;
 
     private boolean firstTurn=false;
 
     private boolean secondTurn= false;
 
-    private boolean diePlaced=false;
+    private boolean placement=false;
 
     private boolean cardUsed=false;
-
-    public int getDiceAvailable() {
-        return diceAvailable;
-    }
-
-    public void setDiceAvailable(int diceAvailable) {
-        this.diceAvailable = diceAvailable;
-    }
 
     public boolean isFirstTurn() {
         return firstTurn;
@@ -36,12 +28,12 @@ public class ActionHistory {
         this.secondTurn = secondTurn;
     }
 
-    public boolean isDiePlaced() {
-        return diePlaced;
+    public boolean isPlacement() {
+        return placement;
     }
 
-    public void setDiePlaced(boolean diePlaced) {
-        this.diePlaced = diePlaced;
+    public void setPlacement(boolean diePlaced) {
+        this.placement = diePlaced;
     }
 
     public boolean isCardUsed() {
@@ -52,16 +44,19 @@ public class ActionHistory {
         this.cardUsed = cardUsed;
     }
 
-    public void dletePlayerHistory() {
+    public boolean isDieUsed() { return dieUsed; }
 
+    public void setDieUsed(boolean dieUsed) { this.dieUsed = dieUsed; }
 
-       diceAvailable= 2;
+    public void deletePlayerHistory() {
 
        firstTurn=false;
 
+       dieUsed=false;
+
        secondTurn= false;
 
-       diePlaced=false;
+       placement=false;
 
        cardUsed=false;
 
