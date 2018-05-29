@@ -22,42 +22,23 @@ public class PlayerZone implements PlayerZoneInt {
 
     private ScoreMarker scoreMarker;
 
-    private boolean connected;
-
     private int privatePoints;
 
     private int lastRoundTurn;
 
-    private boolean dieUsed= false;
-
-    private boolean secondTurn= false;
+    private ActionHistory actionHistory;
 
 
     public PlayerZone(String namePlayer, int IDPlayer) {
 
         this.namePlayer=namePlayer;
         this.IDPlayer=IDPlayer;
-        this.playerState=PlayerState.WAIT;
+        this.playerState=PlayerState.ENDING;
+        this.actionHistory = new ActionHistory();
     }
 
     public String getNamePlayer() {
         return namePlayer;
-    }
-
-    public boolean isDieUsed() {
-        return dieUsed;
-    }
-
-    public void setDieUsed(boolean dieUsed) {
-        this.dieUsed = dieUsed;
-    }
-
-    public boolean isSecondTurn() {
-        return secondTurn;
-    }
-
-    public void setSecondTurn(boolean secondTurn) {
-        this.secondTurn = secondTurn;
     }
 
     public Token getToken() { return token; }
@@ -92,15 +73,7 @@ public class PlayerZone implements PlayerZoneInt {
             return playerState;
         }
 
-        public boolean isConnected() {
-            return connected;
-        }
-
-        public void connectPlayer(){
-        connected=true;
-        }
-
-        public int getPrivatePoints() { return privatePoints; }
+    public int getPrivatePoints() { return privatePoints; }
 
         public void setPrivatePoints(int privatePoints) { this.privatePoints = privatePoints; }
 
@@ -122,10 +95,6 @@ public class PlayerZone implements PlayerZoneInt {
         this.playerState = playerState;
     }
 
-    public void setConnected(boolean connected) {
-        this.connected = connected;
-    }
-
     public int getLastRoundTurn() {
         return lastRoundTurn;
     }
@@ -133,6 +102,8 @@ public class PlayerZone implements PlayerZoneInt {
     public void setLastRoundTurn(int lastRoundTurn) {
         this.lastRoundTurn = lastRoundTurn;
     }
+
+    public ActionHistory getActionHistory() { return actionHistory; }
 
     //get carta obbiettivo privato
 }

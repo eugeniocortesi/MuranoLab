@@ -11,6 +11,7 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.view.ViewInt;
 
@@ -19,26 +20,29 @@ import org.fusesource.jansi.AnsiConsole;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 
 import static org.fusesource.jansi.Ansi.Color.*;
 import static org.fusesource.jansi.Ansi.ansi;
 
-public class ConsoleStrings implements ViewInt {
+public class ConsoleStrings extends Observable implements ViewInt {
 
 
     static Model model;
     private ConsoleTools consoleTools = new ConsoleTools();
-
-
+    private int id;
     //virtualview avrà una coda di actionevent
     private ActionEvent actionEvent = new ActionEvent();
+    private ActionEvent event;
     private ArrayList<ActionEvent> events = new ArrayList<ActionEvent>();
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private String s= "";
+    private Observer observer;
 
     public static void main(String[] args) {
-            ConsoleStrings consoleStrings =new ConsoleStrings();
+            //ConsoleStrings consoleStrings =new ConsoleStrings();
             //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             //String s=consoleStrings.initialScreen();
             //String f=consoleStrings.showLogin();
@@ -64,8 +68,20 @@ public class ConsoleStrings implements ViewInt {
          //System.out.println("\u00AF"+"\u2310"+"\u00AC"+"\u2319"+"\u2310");
     }
 
+   /* public ConsoleStrings(Model model, int id) {
+        this.model=model;
+        this.id=id;
 
+    }*/
 
+    @Override
+    public void notifyObservers() {
+        observer.update(this, event);
+    }
+
+    public void addObserver(Observer observer){
+        this.observer=observer;
+    }
     /**
      * first screen of the program: it asks for authentication method
      */
@@ -79,6 +95,7 @@ public class ConsoleStrings implements ViewInt {
             } catch (IOException e){
                 e.printStackTrace();
             }
+            if(!(s.equalsIgnoreCase("r") || s.equalsIgnoreCase("s"))) System.out.println("r o s!!");
         }
         return s;
     }
@@ -142,19 +159,101 @@ public class ConsoleStrings implements ViewInt {
     @Override
     public void showPlaceDie() {
 
-        AnsiConsole.systemInstall();
-
-        System.out.println( ansi().eraseScreen().bold().a("RISERVA").boldOff());
-        for(DieInt d : model.getDraftPool().getInDraft()){
-            System.out.print(d+"\n");
-        }
-        System.out.println();
-
-        AnsiConsole.systemUninstall();
-        AnsiConsole.out().println("Scegli un dado tra quelli della riserva e inseriscilo nella tua plancia vetrata");
-
     }
 
+    /**
+     * it shows the draft pool, the player zone
+     */
+    public void showPlacementDice(){
+        consoleTools.printDraftPool();
+        this.showYourplayerZone();
+    }
+
+    public void askForDie(){
+        int r, c;
+        PlayerZone playing=null;
+        for(PlayerZone i : model.getPlayerList()){
+            if(i.getPlayerState()== PlayerState.BEGINNING) playing=i;
+        }
+        boolean dieOk=false;
+        char[] string={};
+       /* ArrayList<String> diceTranslations = new ArrayList<String>();
+        AnsiConsole.out().println("Scegli un dado tra quelli della riserva e inseriscilo nella tua plancia vetrata");
+        for(int i=0; i<model.getDraftPool().getInDraft().size(); i++){
+            diceTranslations.add(consoleTools.diceTranslate(model.getDraftPool().getInDraft().get(i)));
+        }
+
+        while(!dieOk){
+            //consoleTools.showInstructionsForPlacement();
+            System.out.println("Scegli dado numero: ");
+            try{
+                s = br.readLine();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            for(int i=0; i<diceTranslations.size(); i++){
+                if(s.equalsIgnoreCase(diceTranslations.get(i))) {
+                    dieOk=true;
+                    s.getChars(0,s.length()-1, string, 0);
+                }
+            }
+        }*/
+        event = new ActionEvent();
+        int id=0;
+        BufferedReader read;
+
+
+        System.out.println("insert id 1 o 9");
+        read = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            id = Integer.parseInt(read.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        if(id!=9) {
+
+            //prendi indice dado
+            //prendi indici i j
+
+            int line = 0;
+            System.out.println("insert line");
+            read = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                line = Integer.parseInt(read.readLine());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            int col = 0;
+            System.out.println("insert col");
+            read = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                col = Integer.parseInt(read.readLine());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            int die = 0;
+            System.out.println("insert die");
+            read = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                die = Integer.parseInt(read.readLine());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //prendi gli oggetti
+            Box[][] board = playing.getPlayerBoard().getBoardMatrix();
+            event.setId(id);
+            event.setDieFromDraft((Die) model.getDraftPool().getInDraft().get(die - 1));
+            event.setToBox1(board[line - 1][col - 1]);
+            event.setPlayer(playing.getIDPlayer());
+        }
+        event.setId(id);
+        notifyObservers();
+    }
 
     @Override
     public void showChooseCard() {
@@ -170,7 +269,12 @@ public class ConsoleStrings implements ViewInt {
     /**
      * it shows the frame board updated at the end of the current player's turn
      */
-    public void showTurnEnd(int id) {
+    public void showYourplayerZone() {
+        /*int id=-1;
+        for(PlayerZone i : model.getPlayerList()){
+            if(i.getPlayerState()==PlayerState.BEGINNING) id=i.getIDPlayer();
+        }
+        if(id==-1) throw new IllegalArgumentException("no player is BEGINNING his turn");*/
         System.out.println("La tua area di gioco: ");
         consoleTools.printFrameBoard(model.getPlayerList().get(id));
         for(int i=0; i< model.getPlayerList().get(id).getToken().getTokenNumber();i++){
@@ -178,11 +282,14 @@ public class ConsoleStrings implements ViewInt {
             System.out.flush();
         }
         System.out.println();
+        //mettere carta privata
     }
 
-    public void showOtherPlayer(int id){
+    public void showAnotherPlayer(int id){
         System.out.println("Area di gioco di "+model.getPlayerList().get(id).getName());
         consoleTools.printFrameBoard(model.getPlayerList().get(id));
+        System.out.print("Segnalini favore: ");
+        System.out.flush();
         for(int i=0; i< model.getPlayerList().get(id).getToken().getTokenNumber();i++){
             System.out.print("\u25CB ");
             System.out.flush();

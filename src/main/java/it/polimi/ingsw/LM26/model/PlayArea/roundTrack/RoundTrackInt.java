@@ -10,5 +10,9 @@ public interface RoundTrackInt{
 
     public void addDice( ArrayList<DieInt> ad);
 
+    public ArrayList<DieInt> getRoundTrackTurn(int turn);
+
+    public ArrayList<RoundTrackTurn> getRoundTrackTurnList();
+
     public void dump();
 }
