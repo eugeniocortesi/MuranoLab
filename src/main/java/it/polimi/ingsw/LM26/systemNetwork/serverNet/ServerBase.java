@@ -61,4 +61,11 @@ public class ServerBase {
             return true;
         return false;
     }
+
+    public void showUsersPlayers(){
+        if(clientManagerListSize()==4){
+            //update();
+        }
+    }
 }
+
