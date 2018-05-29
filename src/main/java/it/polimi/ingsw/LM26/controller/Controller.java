@@ -5,7 +5,9 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.view.ViewInt;
+import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -16,20 +18,24 @@ public class Controller implements ControllerInt {
 
     private Model model;
     private Match match;
-    private ViewInt view;
+    private ServerBase server;
 
     public Controller() {
 
+        //server= new ServerBase();
         this.model = singletonModel();
-        //this.view=view;
 
-        //model.addObservers(view);
 
-        //FOR4
-        //view.showLoginScreen();
+
+        //view.addObserver(this);
+
 
         setupPlayers();
-        newMatch(model, this );
+        /*for(int i=0; i<model.getPlayerList().size(); i++){
+
+            c.showLoginScreen
+        }*/
+        newMatch(model, this);
 
     }
 
@@ -70,6 +76,7 @@ public class Controller implements ControllerInt {
     //OGNI CHECK DEVE CHIAMARE IL METODO checkNotSameAction() CHE CONTROLLA CHE NON VENGANO RICEVUTI DUE EVENTI UGUALI PER QUEL GIOCATORE IN QUEL TURNO
     //metti nei player dei boolean per sapere se hanno scelto una carta o piazzato un dado, alla fine del turno settali a false cosi
     //che rifunzionino per il secondo turno di quel giocatore in quel round
+    //ATTENZIONE prima di ogni piazzamento controllare che non abbia gia piazzato dadi in quel turno, esempio con una toolcard
 
     public boolean check(Die dieFromDraft, Box toBox, int player){
 
@@ -202,7 +209,7 @@ public class Controller implements ControllerInt {
         model.setPlayerList(playerList);
     }
 
-    public void newMatch(Model model, Controller controller){
+    public void newMatch(Model model, Controller controller/*, ArrayList<ConsoleStrings> console*/){
 
         this.match=new Match(model, controller);
 
@@ -216,9 +223,6 @@ public class Controller implements ControllerInt {
 
     }
 
-    public ViewInt getView() {
-        return view;
-    }
 
     public void setActionEvent(ActionEvent newEvent ){
         match.setActionEvent(newEvent);

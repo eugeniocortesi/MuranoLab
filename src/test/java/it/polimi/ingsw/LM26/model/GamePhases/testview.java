@@ -3,6 +3,7 @@ package it.polimi.ingsw.LM26.model.GamePhases;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
+import it.polimi.ingsw.LM26.model.Serialization.SingletonDecks;
 import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 import it.polimi.ingsw.LM26.view.cli.ConsoleTools;
 import org.junit.Before;
@@ -19,7 +20,7 @@ public class testview {
 
     private Decks deck=singletonDecks();
 
-    PlayerZone playerZone = new PlayerZone("n", 1);
+   /* PlayerZone playerZone = new PlayerZone("n", 1);
 
     private ConsoleStrings consoleStrings= new ConsoleStrings();
     private ConsoleTools consoleTools = new ConsoleTools();
@@ -47,5 +48,5 @@ public class testview {
         for(ObjectivePublicCard i : deck.getObjectivePublicCardDeck()){
             i.printCard();
         }
-    }
+    }*/
 }

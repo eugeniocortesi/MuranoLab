@@ -33,7 +33,7 @@ public class PlayerZone implements PlayerZoneInt {
 
         this.namePlayer=namePlayer;
         this.IDPlayer=IDPlayer;
-        this.playerState=PlayerState.WAIT;
+        this.playerState=PlayerState.ENDING;
         this.actionHistory = new ActionHistory();
     }
 
