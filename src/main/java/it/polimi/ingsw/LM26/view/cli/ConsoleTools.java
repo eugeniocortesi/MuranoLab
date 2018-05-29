@@ -78,14 +78,13 @@ public class ConsoleTools {
     public void printPatternBox(PatternBox p){
         if(p.isColor()){
             String escape=p.getColor().escape();
-            System.out.print(escape+"\u25A0"+"|");
+            System.out.print(escape+"\u25A0"+"|"+Color.RESET);
             System.out.flush();
         }
         else if(p.isShade()){
             System.out.print(faces(p.getValue())+"|");
             System.out.flush();
         }
-        else System.out.print(" |");
     }
 
     public void printPatternCard(String nameCard) throws IllegalArgumentException{

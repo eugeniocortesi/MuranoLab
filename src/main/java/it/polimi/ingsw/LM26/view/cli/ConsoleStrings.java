@@ -68,11 +68,11 @@ public class ConsoleStrings extends Observable implements ViewInt {
          //System.out.println("\u00AF"+"\u2310"+"\u00AC"+"\u2319"+"\u2310");
     }
 
-    public ConsoleStrings(Model model, int id) {
+   /* public ConsoleStrings(Model model, int id) {
         this.model=model;
         this.id=id;
 
-    }
+    }*/
 
     @Override
     public void notifyObservers() {
@@ -288,6 +288,8 @@ public class ConsoleStrings extends Observable implements ViewInt {
     public void showAnotherPlayer(int id){
         System.out.println("Area di gioco di "+model.getPlayerList().get(id).getName());
         consoleTools.printFrameBoard(model.getPlayerList().get(id));
+        System.out.print("Segnalini favore: ");
+        System.out.flush();
         for(int i=0; i< model.getPlayerList().get(id).getToken().getTokenNumber();i++){
             System.out.print("\u25CB ");
             System.out.flush();
