@@ -87,6 +87,7 @@ public class Match {
 
                     if (controller.checkEvent(event)) {
                         System.out.println("done");
+                        playing.getPlayerBoard().printCard();
                         // view.showOK()
                         result = true;
                     } else

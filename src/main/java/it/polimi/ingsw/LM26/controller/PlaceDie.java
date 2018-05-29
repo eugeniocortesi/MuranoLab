@@ -67,18 +67,22 @@ public class PlaceDie implements PlayerActionInt{
 
 
     public boolean checkColorRestriction(){
-      if( toBox.getPatternBox().isShade()) {System.out.println("ok color restriction"); return true;}
+        if( toBox.getPatternBox().isShade()) {//System.out.println("ok color restriction");
+            return true;}
           else if (toBox.getPatternBox().getColor()==die.getColor() ||
-                   toBox.getPatternBox().getColor()==WHITE)  {System.out.println("ok color restriction"); return true;}
-          System.out.println("error in color restriction");
+                   toBox.getPatternBox().getColor()==WHITE)  {//System.out.println("ok color restriction");
+                   return true;}
+        System.out.println("error in color restriction");
         return false;
     }
 
 
 
     public boolean checkValueRestriction(){
-    if( toBox.getPatternBox().isColor())  {System.out.println("ok value restriction"); return true;}
-          else if (toBox.getPatternBox().getValue()==die.getValue()) {System.out.println("ok value restriction"); return true;}
+        if( toBox.getPatternBox().isColor())  {//System.out.println("ok value restriction");
+            return true;}
+          else if (toBox.getPatternBox().getValue()==die.getValue()) {//System.out.println("ok value restriction");
+          return true;}
     System.out.println("error in value restriction");
     return false;
     }
