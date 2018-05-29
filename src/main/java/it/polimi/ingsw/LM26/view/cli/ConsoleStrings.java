@@ -172,13 +172,12 @@ public class ConsoleStrings extends ViewInterface {
         AnsiConsole.out().println("Nella partita corrente ci sono giÃ  quattro giocatori");
     }
 
-    @Override
-    public void showInitialScreen(String name, int id) {
 
+    public void showDisconnectScreen() {
+        AnsiConsole.out().println(); //Ã¨ il messaggio che viene a tutti i connessi
     }
 
-    @Override
-    public void showWindowPattern(int id, ArrayList<WindowPatternCard> windowDeck) {
+    public void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck){
         int n=-1;
         for(WindowPatternCard i : windowDeck){
             consoleTools.printPatternCard(i.getTitle());
@@ -192,15 +191,9 @@ public class ConsoleStrings extends ViewInterface {
             }
             if(n<1 && n>4) System.out.println("Indice tra 1 e 4!!");
         }
-        clientView.chosedWindow(windowDeck.get(n-1));
+        //clientView.chosedWindow(windowDeck(n-1));
+
     }
-
-
-    public void showDisconnectScreen() {
-        AnsiConsole.out().println(); //Ã¨ il messaggio che viene a tutti i connessi
-    }
-
-
 
     /**
      * it shows the draft pool, the player zone
