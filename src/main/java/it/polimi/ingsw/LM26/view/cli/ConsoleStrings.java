@@ -93,15 +93,11 @@ public class ConsoleStrings extends ViewInterface {
         this.clientBase = clientBase;
     }
 
-    @Override
-    public void showNetChoise() {
-      //cose di initialScreen
-    }
-
     /**
      * first screen of the program: it asks for authentication method
      */
-    public void initialScreen(){
+    @Override
+    public void showNetChoise() {
         System.out.print(ansi().a("  Benvenuti in\n    ").fg(RED).a("S").fg(YELLOW).a("A").fg(MAGENTA).a("G").fg(GREEN).a("R").fg(BLUE).a("A").fg(YELLOW).a("D").fg(GREEN).a("A\n\n").reset());
         System.out.flush();
         System.out.println("Scegli uno tra i seguenti metodi di connessione:\nSocket: s\nRMI: r");
@@ -117,15 +113,17 @@ public class ConsoleStrings extends ViewInterface {
         else clientBase.setConnection(false);
     }
 
+
+    public void initialScreen(){
+
+    }
+
     /**
      * it shows login screen and asks for it
      */
 
     @Override
     public void showLoginScreen() {
-    }
-
-    public String showLogin(){
         AnsiConsole.out().print("Utente: ");
         System.out.flush();
         try{
@@ -133,18 +131,13 @@ public class ConsoleStrings extends ViewInterface {
         } catch (IOException e){
             e.printStackTrace();
         }
-        return s;
+       // clientBase.setUsername(s);
     }
 
     @Override
     public void showLoggedScreen() {
         AnsiConsole.out().println("Utente iscritto con successo");
     }
-
-
-
-
-
 
     public void showAlreadyLoggedScreen() {
         AnsiConsole.out().println("È già presente un giocatore col tuo nome utente, scegline un altro");
