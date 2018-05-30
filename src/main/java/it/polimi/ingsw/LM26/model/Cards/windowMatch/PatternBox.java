@@ -2,7 +2,9 @@ package it.polimi.ingsw.LM26.model.Cards.windowMatch;
 
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
-public class PatternBox {
+import java.io.Serializable;
+
+public class PatternBox  implements Serializable{
 
     private Color color =null;
     private boolean isColor=false;

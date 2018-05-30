@@ -5,6 +5,7 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,14 @@ public class ChangeDieFromDraftToRoundTrack5 implements ToolCardDecorator {
     public void printCard(){
         toolcard.printCard();
     }
+
+    public int getToken(){
+        return toolcard.getToken();
+    }
+
+    public void setOneToken(PlayerZone player){}
+
+    public void setTwoToken(PlayerZone player){}
 
     public boolean play(Box fromBox, Box toBox, int player){return false;}
     public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}

@@ -9,6 +9,8 @@ public class WindowFramePlayerBoard/* implements CardInt */{
     private int id;
     private boolean hasPatternCard = false;
     private boolean empty= true;
+    private int numDice=0;
+
 
 
     public WindowFramePlayerBoard(int id, Color color) {
@@ -58,6 +60,17 @@ public class WindowFramePlayerBoard/* implements CardInt */{
         return BoardMatrix;
     }
 
+    public int getNumDice() {
+        return numDice;
+    }
+
+    public void setNumDice(int numDice) {
+        this.numDice = numDice;
+    }
+
+    public void incrementNumDice(){
+        numDice=numDice+1;
+    }
     public void printCard(){
 
         String escape = color.escape();

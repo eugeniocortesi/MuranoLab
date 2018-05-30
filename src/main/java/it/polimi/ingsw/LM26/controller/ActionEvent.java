@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.controller;
 
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
+import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 
@@ -12,7 +13,7 @@ public class ActionEvent {
     private Box toBox1=null;
     private Box fromBox2=null;
     private Box toBox2=null;
-    private ToolCard card=null;
+    private ToolCardInt card=null;
     private Die dieFromDraft=null;
     private Die dieFromRoundTrack=null;
     private String inDeCrement=null;
@@ -82,11 +83,11 @@ public class ActionEvent {
         this.toBox2 = toBox2;
     }
 
-    public ToolCard getCard() {
+    public ToolCardInt getCard() {
         return card;
     }
 
-    public void setCard(ToolCard card) {
+    public void setCard(ToolCardInt card) {
 
             if(card.getNum()==1)  ID=6 ;
             if(card.getNum()==2 ||card.getNum()==3 )  ID=2 ;

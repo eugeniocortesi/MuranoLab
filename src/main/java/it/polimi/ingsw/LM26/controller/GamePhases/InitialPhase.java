@@ -62,6 +62,7 @@ public class InitialPhase implements PhaseInt {
         for(PlayerZone i : playerZones){
             Token token= new Token(i.getWindowPatternCard().getToken());
             i.setToken(token);
+
         }
 
     }

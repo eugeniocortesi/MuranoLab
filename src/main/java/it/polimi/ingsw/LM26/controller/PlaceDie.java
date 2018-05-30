@@ -37,41 +37,43 @@ public class PlaceDie implements PlayerActionInt{
 
     public boolean placeDie(){      //ATTENZIONE: togli il dado dalla riserva va fatto fuori
 
-        if (player.getPlayerBoard().isEmpty())
-                if(!(i==0 || i==3 || j==0 || j==4 )){
-                                     System.out.println("error: first die must be placed on the edge");
-                                     return false;
-                                   }
-                else {
-
-            //ATTEZIONE AL PRIMO DADO
-                    System.out.println("place first die ");
-                    if (checkColorRestriction() && checkValueRestriction() ){
-                        toBox.setDie(die);
-                        player.getPlayerBoard().setEmpty(false);
-                        return true;}
-                    else  System.out.println("error in place first die ");
-                    return false;
-                }
-
+        if (player.getPlayerBoard().isEmpty()) {
+            if (checkEdgeRestrictions()) {
+                //ATTEZIONE AL PRIMO DADO
+                System.out.println("place first die ");
+                if (checkColorRestriction() && checkValueRestriction()) {
+                    toBox.setDie(die);
+                    player.getPlayerBoard().setEmpty(false);
+                    return true;
+                } else System.out.println("error in place first die ");
+                return false;
+            } else return false;
+        }
         else if (checkColorRestriction() && checkValueRestriction() && checkNearByRestrictions() ){
             die.toString();
              toBox.setDie(die);
-             player.getActionHistory().setDieUsed(true);
              return true;}
 
         System.out.println("error in general place die ");
         return false;
     }
 
+public boolean checkEdgeRestrictions(){
 
+        if(!(i==0 || i==3 || j==0 || j==4 )){
+            System.out.println("error: first die must be placed on the edge");
+            return false;
+        }
+        return true;
+
+}
 
 
     public boolean checkColorRestriction(){
-        if( toBox.getPatternBox().isShade()) {//System.out.println("ok color restriction");
+        if( toBox.getPatternBox().isShade()) {System.out.println("ok color restriction");
             return true;}
           else if (toBox.getPatternBox().getColor()==die.getColor() ||
-                   toBox.getPatternBox().getColor()==WHITE)  {//System.out.println("ok color restriction");
+                   toBox.getPatternBox().getColor()==WHITE)  {System.out.println("ok color restriction");
                    return true;}
         System.out.println("error in color restriction");
         return false;
@@ -80,9 +82,9 @@ public class PlaceDie implements PlayerActionInt{
 
 
     public boolean checkValueRestriction(){
-        if( toBox.getPatternBox().isColor())  {//System.out.println("ok value restriction");
+        if( toBox.getPatternBox().isColor())  {System.out.println("ok value restriction");
             return true;}
-          else if (toBox.getPatternBox().getValue()==die.getValue()) {//System.out.println("ok value restriction");
+          else if (toBox.getPatternBox().getValue()==die.getValue()) {System.out.println("ok value restriction");
           return true;}
     System.out.println("error in value restriction");
     return false;

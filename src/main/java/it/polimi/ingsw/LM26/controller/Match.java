@@ -1,5 +1,8 @@
 package it.polimi.ingsw.LM26.controller;
 
+import com.sun.javafx.iio.ios.IosDescriptor;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.controller.GamePhases.CentralPhase;
 import it.polimi.ingsw.LM26.controller.GamePhases.Game;
@@ -95,11 +98,40 @@ public class Match {
                     //view.showReduAction()      //IMPORTANT
 
                 }
-
                 //set the correct number of turn 1 0 2
+                playing.getActionHistory().setFirstTurn(true);
+
 
                 //}
                 // else view.showWrongPlayer(); e rientra nel while 2
+
+                //ripeti il controllo utente
+
+                result=false;
+
+                while (!result) {
+
+
+                    //while (event == null )    //ASPETTA DI NUOVO L?EVENTO
+
+                    //TODO DELETE
+                    setActionEvent(event);
+
+                    if (controller.checkEvent(event)) {
+                        System.out.println("done");
+                        playing.getPlayerBoard().printCard();
+                        // view.showOK()
+                        result = true;
+                    } else
+                        System.out.println("error");
+
+                    //view.showNO()
+                    //view.showReduAction()      //IMPORTANT
+
+                }
+                //set the correct number of turn 1 0 2
+                playing.getActionHistory().setSecondTurn(true);
+
 
                 //}chiudi while 2
 
@@ -149,6 +181,7 @@ public class Match {
 
             System.out.println("Insert 1 to place a die");
             System.out.println("Insert 9 to pass the turn");
+            System.out.println("Insert 2 for cards 2 and 3");
             read = new BufferedReader(new InputStreamReader(System.in));
             try {
                 id = Integer.parseInt(read.readLine());
@@ -156,38 +189,19 @@ public class Match {
                 e.printStackTrace();
             }
 
-
-        if(id!=9) {
+        int line = 0;
+        int col = 0;
+        int die = 0;
+        int card=0;
+        if(id==1) {
 
             //prendi indice dado
             //prendi indici i j
 
-            int line = 0;
-            System.out.println("insert line");
-            read = new BufferedReader(new InputStreamReader(System.in));
-            try {
-                line = Integer.parseInt(read.readLine());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
-            int col = 0;
-            System.out.println("insert col");
-            read = new BufferedReader(new InputStreamReader(System.in));
-            try {
-                col = Integer.parseInt(read.readLine());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            int die = 0;
-            System.out.println("insert die");
-            read = new BufferedReader(new InputStreamReader(System.in));
-            try {
-                die = Integer.parseInt(read.readLine());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            line= askLine();
+            col=askCol();
+            die=askDie();
 
             //prendi gli oggetti
             Box[][] board = playing.getPlayerBoard().getBoardMatrix();
@@ -196,7 +210,29 @@ public class Match {
             event.setToBox1(board[line - 1][col - 1]);
             event.setPlayer(playing.getIDPlayer());
         }
-        event.setId(id);
+        if (id==2){
+
+            System.out.println("card 2 or 3?");
+            card=askCard();
+
+            line= askLine();
+            col=askCol();
+
+
+            Box[][] board = playing.getPlayerBoard().getBoardMatrix();
+            event.setId(id);
+            event.setCard(model.getDecks().getToolCardDeck().get(card-1));
+            event.setFromBox1(board[line - 1][col - 1]);
+            event.setPlayer(playing.getIDPlayer());
+
+            line= askLine();
+            col=askCol();
+
+            event.setToBox1(board[line - 1][col - 1]);
+
+        }
+
+        if(id==9) event.setId(id);
         ///////////////////////////////////////////
 
 
@@ -204,5 +240,71 @@ public class Match {
 
     }
 
+    /////TODO DELETE
+
+    public int askLine() {
+
+        BufferedReader read;
+        int line = 0;
+
+        System.out.println("insert line");
+        read = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            line = Integer.parseInt(read.readLine());
+            return line;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public int askCol() {
+
+        BufferedReader read;
+        int col = 0;
+
+        System.out.println("insert col");
+        read = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            col = Integer.parseInt(read.readLine());
+            return col;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
+
+    }
+
+    public int askDie() {
+
+        BufferedReader read;
+        int die = 0;
+
+        System.out.println("insert die");
+        read = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            die = Integer.parseInt(read.readLine());
+            return die;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public int askCard (){
+
+        BufferedReader read;
+        int card = 0;
+
+        read = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            card = Integer.parseInt(read.readLine());
+            return card;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
+
+    }
 
 }

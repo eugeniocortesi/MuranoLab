@@ -26,6 +26,14 @@ public class MoveWithNoValueRestriction3 implements ToolCardDecorator {
         toolcard.printCard();
     }
 
+    public int getToken(){
+        return toolcard.getToken();
+    }
+
+    public void setOneToken(PlayerZone player){}
+
+    public void setTwoToken(PlayerZone player){}
+
     public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}
     public boolean play(Die dieFromDraft, Box toBox, int player){return false;}
     public boolean play(Die dieFromDraft, Die dieFromRoundTrack){return false;}
@@ -39,12 +47,14 @@ public class MoveWithNoValueRestriction3 implements ToolCardDecorator {
         Die die = (Die) fromBox.getDie();
         PlayerZone player = model.getPlayerList().get(pl);
         PlaceDie placement = new PlaceDie(die, toBox, player);
+        fromBox.free();
         if (! ( placement.checkColorRestriction() && placement.checkNearByRestrictions()) ){
             System.out.println("error");
+            toBox.setDie(die);
             return false;
         }
         toBox.setDie(die);
-        fromBox.free();
+
         return true;
 
     }

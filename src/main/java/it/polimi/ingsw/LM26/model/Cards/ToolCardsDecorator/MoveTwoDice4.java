@@ -26,6 +26,14 @@ public class MoveTwoDice4 implements ToolCardDecorator {
         toolcard.printCard();
     }
 
+    public int getToken(){
+        return toolcard.getToken();
+    }
+
+    public void setOneToken(PlayerZone player){}
+
+    public void setTwoToken(PlayerZone player){}
+
     public boolean play(Box fromBox, Box toBox, int player){return false;}
     public boolean play(Die dieFromDraft, Box toBox, int player){return false;}
     public boolean play(Die dieFromDraft, Die dieFromRoundTrack){return false;}

@@ -26,6 +26,14 @@ public class MoveWithNoColorRestriction2 implements ToolCardDecorator {
         toolcard.printCard();
     }
 
+    public int getToken(){
+        return toolcard.getToken();
+    }
+
+    public void setOneToken(PlayerZone player){}
+
+    public void setTwoToken(PlayerZone player){}
+
 
     public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}
     public boolean play(Die dieFromDraft, Box toBox, int player){return false;}
@@ -39,15 +47,23 @@ public class MoveWithNoColorRestriction2 implements ToolCardDecorator {
         Model model = singletonModel();
         PlayerZone player = model.getPlayerList().get(pl);
         Die die = (Die) fromBox.getDie();
+        if(!fromBox.isIsPresent())return false;                      //added controller
         PlaceDie placement = new PlaceDie(die, toBox, player);
-        if (! ( placement.checkValueRestriction() && placement.checkNearByRestrictions()) ){
-                  System.out.println("error");
-                  return false;
-                  }
-        toBox.setDie(die);
         fromBox.free();
-        return true;
+        if(player.getPlayerBoard().getNumDice()==1) {
+            if (placement.checkValueRestriction() && placement.checkEdgeRestrictions()) {
+                toBox.setDie(die);
+                return true;
+            }
+        }
+        else if (placement.checkValueRestriction() && placement.checkNearByRestrictions() ){
 
+            return true;
+        }  //problemi: se è il primo devo ripiazzarlo sui bordi
+
+        System.out.println("error card 2");
+        fromBox.setDie(die);
+        return false;
 
     }
 }
