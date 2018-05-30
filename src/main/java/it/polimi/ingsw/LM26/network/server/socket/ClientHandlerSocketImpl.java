@@ -108,7 +108,7 @@ public class ClientHandlerSocketImpl extends ClientHandlerInt {
             System.out.println("Already logged");
             DataMessage message = new DataMessage("already_logged", username);
             message.dump();
-            sendMessage(message.serializeDataMessage());
+            sendMessage(message.serializeClassMessage());
         }
         else{
             if(server.checkLogin(username) && server.checkNumberUser()){
@@ -119,7 +119,7 @@ public class ClientHandlerSocketImpl extends ClientHandlerInt {
 
                 DataMessage message = new DataMessage("logged", username);
                 message.dump();
-                sendMessage(message.serializeDataMessage());
+                sendMessage(message.serializeClassMessage());
             }
 
             else if(!(server.checkLogin(username))){
@@ -127,13 +127,13 @@ public class ClientHandlerSocketImpl extends ClientHandlerInt {
 
                 DataMessage message = new DataMessage("already_logged", username);
                 message.dump();
-                sendMessage(message.serializeDataMessage());
+                sendMessage(message.serializeClassMessage());
             }
             else{
                 System.out.println("Too many users!");
                 DataMessage message = new DataMessage("too_many_users", username);
                 message.dump();
-                sendMessage(message.serializeDataMessage());
+                sendMessage(message.serializeClassMessage());
             }
             //TODO notify other players
         }

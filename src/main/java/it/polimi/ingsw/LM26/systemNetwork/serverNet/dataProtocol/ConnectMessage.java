@@ -7,7 +7,7 @@ import com.google.gson.stream.JsonToken;
 import java.io.IOException;
 import java.io.StringReader;
 
-public class ConnectMessage {
+public class ConnectMessage extends ClassMessage {
     String op;
     int field1;
 
@@ -24,7 +24,7 @@ public class ConnectMessage {
         return field1;
     }
 
-    public String parserFirstElement(String s){
+    /*public String parserFirstElement(String s){
         JsonReader jsonReader = new JsonReader(new StringReader(s));
         try{
             while(jsonReader.hasNext()) {
@@ -52,7 +52,7 @@ public class ConnectMessage {
         Gson gson = new Gson();
         String msgJson = gson.toJson(this);
         return msgJson;
-    }
+    }*/
 
     static public ConnectMessage deserializeConnectMessage(String protocolJson){
         Gson gson = new Gson();

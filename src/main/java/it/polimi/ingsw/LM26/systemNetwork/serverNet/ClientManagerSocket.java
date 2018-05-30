@@ -1,11 +1,13 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ClientManagerSocket extends ClientManager {
 
@@ -57,6 +59,8 @@ public class ClientManagerSocket extends ClientManager {
         connect();
     }
 
+
+
     @Override
     public void connect() {
         System.out.println("Server connected");
@@ -72,7 +76,7 @@ public class ClientManagerSocket extends ClientManager {
         id = getAvailableId();
         ConnectMessage message = new ConnectMessage("connected", id );
         message.dump();
-        sendMessage(message.serializeConnectMessage());
+        sendMessage(message.serializeClassMessage());
         listenerClientManager.listen();
     }
 
@@ -85,7 +89,7 @@ public class ClientManagerSocket extends ClientManager {
     @Override
     public void requestedLogin() {
         DataMessage dataMessage = new DataMessage("requested_login","Server");
-        String message = dataMessage.serializeDataMessage();
+        String message = dataMessage.serializeClassMessage();
         sendMessage(message);
         listenerClientManager.listen();
     }
@@ -95,20 +99,22 @@ public class ClientManagerSocket extends ClientManager {
         if (!server.checkNumberUsers()) {
             System.out.println("Too many users logged");
             DataMessage dataMessage = new DataMessage("too_many_users", name);
-            sendMessage(dataMessage.serializeDataMessage());
+            sendMessage(dataMessage.serializeClassMessage());
 
         } else {
             boolean result = server.addView(name, this);
             if (result == false) {
                 System.out.println("not logged");
                 DataMessage dataMessage = new DataMessage("not_logged", name);
-                sendMessage(dataMessage.serializeDataMessage());
+                sendMessage(dataMessage.serializeClassMessage());
                 listenerClientManager.listen();
             }else {
                 System.out.println("Logged");
+
                 DataMessage dataMessage = new DataMessage("logged", name);
                 dataMessage.dump();
-                sendMessage(dataMessage.serializeDataMessage());
+                this.user= name;
+                sendMessage(dataMessage.serializeClassMessage());
             }
         }
         //listenerClientManager.listen();
@@ -122,5 +128,16 @@ public class ClientManagerSocket extends ClientManager {
     @Override
     public void disconnect() {
 
+    }
+
+    @Override
+    public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
+
+    }
+
+    @Override
+    public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
+
+        System.out.println("I have received one windowcard from "+user);
     }
 }

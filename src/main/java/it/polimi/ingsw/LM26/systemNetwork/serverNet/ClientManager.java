@@ -1,5 +1,9 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+
+import java.util.ArrayList;
+
 public abstract class ClientManager extends Thread {
 
     public abstract void connect();
@@ -15,4 +19,8 @@ public abstract class ClientManager extends Thread {
     public abstract void disconnect();
 
     public abstract void run();
+
+    public abstract void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck);
+
+    public abstract void chosenWindowPattern(String user, WindowPatternCard windowcard);
 }

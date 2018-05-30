@@ -1,6 +1,7 @@
 
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManagerRemote;
 import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
@@ -10,6 +11,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class ClientViewRMI implements ClientView {
 
@@ -105,5 +107,22 @@ public class ClientViewRMI implements ClientView {
     @Override
     public void disconnect() {
         concreteClientView.showDisconnectScreen();
+    }
+
+    @Override
+    public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
+        this.id = id;
+        concreteClientView.showWindowPattern(user, id, windowDeck);
+
+    }
+
+    @Override
+    public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
+
+        try {
+            stub.chosenWindowPattern(user,windowcard);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 }
