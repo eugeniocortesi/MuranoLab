@@ -147,7 +147,7 @@ public class ConsoleStrings extends ViewInterface {
             }
             if(n<1 && n>4) System.out.println("Indice tra 1 e 4!!");
         }
-        //clientView.chosedWindow(windowDeck.get(n-1));
+        clientView.chosedWindow(windowDeck.get(n-1));
     }
 
 
