@@ -10,9 +10,12 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackTurn;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import org.fusesource.jansi.AnsiConsole;
 
-;import java.util.ArrayList;
+;import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
@@ -21,7 +24,7 @@ public class ConsoleTools {
 
 
 
-    public String faces(int val){
+    /*public String faces(int val){
         switch (val){
             case 1:
                 return "\u2680";
@@ -38,7 +41,7 @@ public class ConsoleTools {
             default:
                 return null;
         }
-    }
+    }*/
 
     /**
      * @return the size of the longest list of dice in the round track
@@ -75,6 +78,41 @@ public class ConsoleTools {
         //AnsiConsole.systemUninstall();
     }
 
+    /**
+     * it shows the frame board updated at the end of the current player's turn
+     */
+    public void showYourplayerZone(int myid) {
+        System.out.println("La tua area di gioco: ");
+        this.printFrameBoard(ConsoleStrings.model.getPlayerList().get(myid));
+        for(int i=0; i< ConsoleStrings.model.getPlayerList().get(myid).getToken().getTokenNumber();i++){
+            System.out.print("\u25CB ");
+            System.out.flush();
+        }
+        System.out.println();
+
+        //show private card!!
+    }
+
+    public void showAnotherPlayer(int id){
+        System.out.println("Area di gioco di "+ConsoleStrings.model.getPlayerList().get(id).getName());
+        this.printFrameBoard(ConsoleStrings.model.getPlayerList().get(id));
+        System.out.print("Segnalini favore: ");
+        System.out.flush();
+        for(int i=0; i< ConsoleStrings.model.getPlayerList().get(id).getToken().getTokenNumber();i++){
+            System.out.print("\u25CB ");
+            System.out.flush();
+        }
+        System.out.println();
+    }
+
+    /**
+     * it shows the draft pool, the player zone
+     */
+    public void showPlacementDice(int myid){
+        this.printDraftPool();
+        this.showYourplayerZone(myid);
+    }
+
     public void printPatternBox(PatternBox p){
         if(p.isColor()){
             String escape=p.getColor().escape();
@@ -82,7 +120,7 @@ public class ConsoleTools {
             System.out.flush();
         }
         else if(p.isShade()){
-            System.out.print(faces(p.getValue())+"|");
+            System.out.print((p.getValue())+"|");
             System.out.flush();
         }
     }
@@ -219,4 +257,89 @@ public class ConsoleTools {
                 "Colori: rosso R, blu B, giallo G, verde VE, viola VI\n" +
                 "Valori da 1 a 6");
     }
+
+    /*public void askForDie(){
+        int r, c;
+        PlayerZone playing=null;
+        for(PlayerZone i : model.getPlayerList()){
+            if(i.getPlayerState()== PlayerState.BEGINNING) playing=i;
+        }
+        boolean dieOk=false;
+        char[] string={};
+        ArrayList<String> diceTranslations = new ArrayList<String>();
+        AnsiConsole.out().println("Scegli un dado tra quelli della riserva e inseriscilo nella tua plancia vetrata");
+        for(int i=0; i<model.getDraftPool().getInDraft().size(); i++){
+            diceTranslations.add(consoleTools.diceTranslate(model.getDraftPool().getInDraft().get(i)));
+        }
+
+        while(!dieOk){
+            //consoleTools.showInstructionsForPlacement();
+            System.out.println("Scegli dado numero: ");
+            try{
+                s = br.readLine();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            for(int i=0; i<diceTranslations.size(); i++){
+                if(s.equalsIgnoreCase(diceTranslations.get(i))) {
+                    dieOk=true;
+                    s.getChars(0,s.length()-1, string, 0);
+                }
+            }
+        }*/
+        /*event = new ActionEvent();
+        int id=0;
+        BufferedReader read;
+
+
+        System.out.println("insert id 1 o 9");
+        read = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            id = Integer.parseInt(read.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        if(id!=9) {
+
+            //prendi indice dado
+            //prendi indici i j
+
+            int line = 0;
+            System.out.println("insert line");
+            read = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                line = Integer.parseInt(read.readLine());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            int col = 0;
+            System.out.println("insert col");
+            read = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                col = Integer.parseInt(read.readLine());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            int die = 0;
+            System.out.println("insert die");
+            read = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                die = Integer.parseInt(read.readLine());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //prendi gli oggetti
+            Box[][] board = playing.getPlayerBoard().getBoardMatrix();
+            event.setId(id);
+            event.setDieFromDraft((Die) model.getDraftPool().getInDraft().get(die - 1));
+            event.setToBox1(board[line - 1][col - 1]);
+            event.setPlayer(playing.getIDPlayer());
+        }
+        event.setId(id);
+    }*/
 }
