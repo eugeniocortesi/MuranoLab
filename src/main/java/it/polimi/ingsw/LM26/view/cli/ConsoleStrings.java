@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.view.cli;
 
 import it.polimi.ingsw.LM26.controller.ActionEvent;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.MoveTwoDice4;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
@@ -34,6 +35,8 @@ public class ConsoleStrings extends ViewInterface {
 
 
     static Model model;
+    static int id;
+    static ObjectivePrivateCard objectivePrivateCard;
     private ClientBase clientBase;
     private ClientView clientView;
 
@@ -42,7 +45,6 @@ public class ConsoleStrings extends ViewInterface {
     DataClientConfiguration dataClientConfiguration;
 
     private ConsoleTools consoleTools = new ConsoleTools();
-    private int id;
     //virtualview avrÃ  una coda di actionevent
     private ActionEvent actionEvent = new ActionEvent();
     private ActionEvent event;
@@ -69,7 +71,7 @@ public class ConsoleStrings extends ViewInterface {
      * first screen of the program: it asks for authentication method
      */
     @Override
-    public void showNetChoise() {
+    public void showNetChoise(){
         System.out.println("Scegli uno tra i seguenti metodi di connessione:\nSocket: s\nRMI: r");
         while(!(s.equalsIgnoreCase("r") || s.equalsIgnoreCase("s"))){
             try{
@@ -147,7 +149,7 @@ public class ConsoleStrings extends ViewInterface {
             }
             if(n<1 && n>4) System.out.println("Indice tra 1 e 4!!");
         }
-        clientView.chosedWindow(windowDeck.get(n-1));
+        clientView.chosenWindowPattern(user, windowDeck.get(n-1));
     }
 
 

@@ -14,14 +14,17 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import org.fusesource.jansi.AnsiConsole;
 
-;import java.io.IOException;
+;import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class ConsoleTools {
 
-
+    private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String input;
 
 
     /*public String faces(int val){
@@ -170,6 +173,8 @@ public class ConsoleTools {
         else System.out.println("tanti punti quanti i dadi che formano una diagonale");
     }
 
+   
+
     /**
      * it shows the updated round track table, with the first die of the stack for every turn
      */
@@ -220,6 +225,23 @@ public class ConsoleTools {
             case 6: return(c+6);
             default: {
                 throw new IllegalArgumentException("die without face");
+            }
+        }
+    }
+
+    public void showCards(){
+        boolean flag=false;
+        System.out.println("'PR' per vedere la tua carta privata\n" +
+                "'PU' per vedere quelle pubbliche\n" +
+                "'U' per vedere le carte utensile");
+        while(!flag){
+            try{
+                input = br.readLine();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            if(input.equalsIgnoreCase("PR")){
+
             }
         }
     }
