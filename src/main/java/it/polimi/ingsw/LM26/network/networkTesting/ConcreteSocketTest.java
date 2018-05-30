@@ -97,7 +97,7 @@ public class ConcreteSocketTest {
 
                 DataMessage msg = new DataMessage("login", userPlayer);
                 msg.dump();
-                String msg_str = msg.serializeDataMessage();
+                String msg_str = msg.serializeClassMessage();
                 System.out.println(msg_str);
                 this.outSocket.println(msg_str);
                 /*outSocket.println("login");

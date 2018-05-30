@@ -1,12 +1,14 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
 
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientViewRemote;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
 import java.rmi.registry.LocateRegistry;
+import java.util.ArrayList;
 
 public class ClientManagerRMI extends ClientManager {
 
@@ -15,6 +17,7 @@ public class ClientManagerRMI extends ClientManager {
     private int RMIPORTClient;
     private String address;
     private ClientViewRemote skeleton;
+    private String user;
 
     public ClientManagerRMI(ServerBase serverBase, int RMIPORTServer, int RMIPORTClient, String address){
 
@@ -63,6 +66,7 @@ public class ClientManagerRMI extends ClientManager {
         System.out.println("User tries to connect with username : " + name);
         if (myserver.checkNumberUsers()){
             boolean result = myserver.addView(name, this);
+            if(result) this.user = name;
             System.out.println("The add reult value: " + result);
             try {
                 skeleton.logged(result, name);
@@ -95,6 +99,22 @@ public class ClientManagerRMI extends ClientManager {
 
     @Override
     public void run() {
+
+    }
+
+    @Override
+    public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
+        try {
+            skeleton.choseWindowPattern(user, id, windowDeck);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
+
+        System.out.println("I have received one windowcard from "+user);
 
     }
 }

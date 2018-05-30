@@ -1,13 +1,16 @@
 
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowAnswerMessage;
 import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ClientViewSocket implements ClientView {
 
@@ -67,7 +70,7 @@ public class ClientViewSocket implements ClientView {
         System.out.println("Client connected");
         ConnectMessage connectMessage = new ConnectMessage("connected", 0);
         connectMessage.dump();
-        outSocket.println(connectMessage.serializeConnectMessage());
+        outSocket.println(connectMessage.serializeClassMessage());
     }
 
     public void getAvailableId(int id){
@@ -86,7 +89,7 @@ public class ClientViewSocket implements ClientView {
     public void login(String name) {
         DataMessage message = new DataMessage("login", name);
         message.dump();
-        outSocket.println(message.serializeDataMessage());
+        outSocket.println(message.serializeClassMessage());
         listenerClientView.listen();
     }
 
@@ -109,5 +112,20 @@ public class ClientViewSocket implements ClientView {
     @Override
     public void disconnect() {
         concreteClientView.showDisconnectScreen();
+    }
+
+    @Override
+    public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
+        this.id = id;
+        //concreteClientView.showWindowPattern(user, id, windowDeck);
+
+    }
+
+    @Override
+    public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
+        WindowAnswerMessage message = new WindowAnswerMessage("send_windowcard", windowcard);
+        message.dump();
+        outSocket.println(message.serializeClassMessage());
+        listenerClientView.listen();
     }
 }

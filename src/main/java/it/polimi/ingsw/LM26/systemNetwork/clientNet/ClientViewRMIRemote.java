@@ -1,6 +1,9 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class ClientViewRMIRemote implements ClientViewRemote {
 
@@ -28,6 +31,11 @@ public class ClientViewRMIRemote implements ClientViewRemote {
     @Override
     public void tooManyUsers() throws RemoteException {
         clientViewRMI.tooManyUsers();
+    }
+
+    @Override
+    public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) throws RemoteException {
+        clientViewRMI.choseWindowPattern(user, id, windowDeck);
     }
 
 

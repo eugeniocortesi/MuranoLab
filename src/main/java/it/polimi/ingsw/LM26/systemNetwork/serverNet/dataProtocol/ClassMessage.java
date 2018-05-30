@@ -7,25 +7,9 @@ import com.google.gson.stream.JsonToken;
 import java.io.IOException;
 import java.io.StringReader;
 
-public class DataMessage extends ClassMessage {
+public abstract class ClassMessage {
 
-    String operation;
-    String field1;
-
-    public DataMessage(String op, String name){
-        this.operation = op;
-        this.field1 = name;
-    }
-
-    public String getOperation() {
-        return operation;
-    }
-
-    public String getField1() {
-        return field1;
-    }
-
-    /*public String parserFirstElement(String s){
+    public String parserFirstElement(String s){
         JsonReader jsonReader = new JsonReader(new StringReader(s));
         try{
             while(jsonReader.hasNext()) {
@@ -48,23 +32,15 @@ public class DataMessage extends ClassMessage {
         return null;
     }
 
-    public String serializeDataMessage(){
+    public String serializeClassMessage(){
 
         Gson gson = new Gson();
         String msgJson = gson.toJson(this);
         return msgJson;
-    }*/
-
-    static public DataMessage deserializeDataMessage(String protocolJson){
-        Gson gson = new Gson();
-        DataMessage message= gson.fromJson(protocolJson, DataMessage.class);
-        return message;
     }
 
-    public void dump() {
-
-        System.out.println("Operation " +this.operation+ " Field1 " +this.field1);
+    @Override
+    public String toString(){
+        return this.serializeClassMessage();
     }
-
 }
-
