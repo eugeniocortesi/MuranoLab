@@ -38,12 +38,11 @@ public class ChangeDieFromDraftToRoundTrack5 implements ToolCardDecorator {
 
     public boolean play(Box fromBox, Box toBox, int player){return false;}
     public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}
-    public boolean play(Die dieFromDraft, Box toBox, int player){return false;}
-    public boolean play( Die dieFromDraft, String inDeCrement){return false;}
-    public boolean play(Die dieFromDraft){return false;}
+    public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}
+    public boolean play( DieInt dieFromDraft, String inDeCrement){return false;}
+    public boolean play(DieInt dieFromDraft){return false;}
     public boolean play( int player){return false;}
-
-    public boolean play (Die die1, Die die2) {
+    public boolean play (DieInt die1, DieInt die2) {
 
 
         Model model = singletonModel();

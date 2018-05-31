@@ -5,6 +5,7 @@ import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.view.ViewInt;
@@ -79,7 +80,7 @@ public class Controller implements ControllerInt {
     //che rifunzionino per il secondo turno di quel giocatore in quel round
     //ATTENZIONE prima di ogni piazzamento controllare che non abbia gia piazzato dadi in quel turno, esempio con una toolcard
 
-    public boolean check(Die dieFromDraft, Box toBox, int pl){
+    public boolean check(DieInt dieFromDraft, Box toBox, int pl){
 
         PlayerZone player=model.getPlayerList().get(pl);
         if( player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) return false;
@@ -125,7 +126,7 @@ public class Controller implements ControllerInt {
 
         return false;
     }
-    public boolean check(ToolCardInt sixEightNine, Die dieFromDraft, Box toBox, int player){
+    public boolean check(ToolCardInt sixEightNine, DieInt dieFromDraft, Box toBox, int player){
 
         PlayerZone pl=model.getPlayerList().get(player);
         if ( pl.getActionHistory().isCardUsed()) return false;
@@ -138,7 +139,7 @@ public class Controller implements ControllerInt {
 
         return false;
     }
-    public boolean check(ToolCardInt five, Die dieFromDraft, Die dieFromRoundTrack, int player){
+    public boolean check(ToolCardInt five, DieInt dieFromDraft, DieInt dieFromRoundTrack, int player){
 
         PlayerZone pl=model.getPlayerList().get(player);
         if ( pl.getActionHistory().isCardUsed() ) return false;
@@ -151,7 +152,7 @@ public class Controller implements ControllerInt {
 
         return false;
     }
-    public boolean check(ToolCardInt one, Die dieFromDraft, String inDeCrement, int player){
+    public boolean check(ToolCardInt one, DieInt dieFromDraft, String inDeCrement, int player){
 
         PlayerZone pl=model.getPlayerList().get(player);
         if ( pl.getActionHistory().isCardUsed() ) return false;
@@ -165,7 +166,7 @@ public class Controller implements ControllerInt {
 
         return false;
     }
-    public boolean check(ToolCardInt tenEleven, Die dieFromDraft, int player){
+    public boolean check(ToolCardInt tenEleven, DieInt dieFromDraft, int player){
 
         PlayerZone pl=model.getPlayerList().get(player);
         if ( pl.getActionHistory().isCardUsed() ) return false;

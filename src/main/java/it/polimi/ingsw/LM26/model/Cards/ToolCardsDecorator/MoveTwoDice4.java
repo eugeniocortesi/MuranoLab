@@ -5,6 +5,7 @@ import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
@@ -35,18 +36,18 @@ public class MoveTwoDice4 implements ToolCardDecorator {
     public void setTwoToken(PlayerZone player){}
 
     public boolean play(Box fromBox, Box toBox, int player){return false;}
-    public boolean play(Die dieFromDraft, Box toBox, int player){return false;}
-    public boolean play(Die dieFromDraft, Die dieFromRoundTrack){return false;}
-    public boolean play( Die dieFromDraft, String inDeCrement){return false;}
-    public boolean play(Die dieFromDraft){return false;}
+    public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}
+    public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
+    public boolean play( DieInt dieFromDraft, String inDeCrement){return false;}
+    public boolean play(DieInt dieFromDraft){return false;}
     public boolean play(int player ){return false;}
 
     public boolean play (Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int pl ) {
 
         Model model = singletonModel();
         PlayerZone player = model.getPlayerList().get(pl);
-        Die die = (Die) fromBox1.getDie();
-        Die die2 = (Die)fromBox2.getDie();
+        DieInt die = fromBox1.getDie();
+        DieInt die2 =fromBox2.getDie();
         PlaceDie placement = new PlaceDie(die, toBox1, player);
 
         if(!(placement.placeDie())){

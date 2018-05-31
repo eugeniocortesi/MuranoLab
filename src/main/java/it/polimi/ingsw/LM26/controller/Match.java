@@ -206,7 +206,7 @@ public class Match {
             //prendi gli oggetti
             Box[][] board = playing.getPlayerBoard().getBoardMatrix();
             event.setId(id);
-            event.setDieFromDraft((Die) model.getDraftPool().getInDraft().get(die - 1));
+            event.setDieFromDraft( model.getDraftPool().getInDraft().get(die - 1));
             event.setToBox1(board[line - 1][col - 1]);
             event.setPlayer(playing.getIDPlayer());
         }

@@ -13,4 +13,8 @@ public interface DieInt {
     public void dump();
 
     public int getValue();
+
+    public void increment();
+
+    public void decrement();
 }

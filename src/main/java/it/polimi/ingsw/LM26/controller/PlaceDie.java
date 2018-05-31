@@ -13,13 +13,13 @@ import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 public class PlaceDie implements PlayerActionInt{
 
     Model model = singletonModel();
-    private Die die;
+    private DieInt die;
     private Box toBox;
     private PlayerZone player;
     private int i, j;
     private Box[][] board;
 
-    public PlaceDie(Die dieFromDraft, Box toBox, PlayerZone player) {
+    public PlaceDie(DieInt dieFromDraft, Box toBox, PlayerZone player) {
 
         this.die=dieFromDraft;
         this.toBox=toBox;

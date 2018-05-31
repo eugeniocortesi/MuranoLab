@@ -4,6 +4,7 @@ import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 
 public class ActionEvent {
 
@@ -14,10 +15,11 @@ public class ActionEvent {
     private Box fromBox2=null;
     private Box toBox2=null;
     private ToolCardInt card=null;
-    private Die dieFromDraft=null;
-    private Die dieFromRoundTrack=null;
+    private DieInt dieFromDraft=null;
+    private DieInt dieFromRoundTrack=null;
     private String inDeCrement=null;
     private Boolean noAction=false;
+    private Boolean menu=false;
 
 
         /*
@@ -29,7 +31,8 @@ public class ActionEvent {
         event 6: use card 1. to set: Card, DieFromDraft, InDeCrement, Player.
         event 7: use card 10, 11. to set: Card, DieFromDraft, Player.
         event 8: use card 7. to set: Card, Player.
-        event 9: no action.
+        event 9: no action: set boolean.
+        event 10: ask menu: set boolean.
         */
 
         //TODO
@@ -99,21 +102,19 @@ public class ActionEvent {
         this.card = card;
     }
 
-    public Die getDieFromDraft() {
+    public DieInt getDieFromDraft() {
         return dieFromDraft;
     }
 
-    public void setDieFromDraft(Die dieFromDraft) {
-        this.dieFromDraft = dieFromDraft;
+    public void setDieFromDraft(DieInt dieFromDraft) {
+        this.dieFromDraft =dieFromDraft;
     }
 
-    public Die getDieFromRoundTrack() {
+    public DieInt getDieFromRoundTrack() {
         return dieFromRoundTrack;
     }
 
-    public void setDieFromRoundTrack(Die dieFromRoundTrack) {
-        this.dieFromRoundTrack = dieFromRoundTrack;
-    }
+    public void setDieFromRoundTrack(DieInt dieFromRoundTrack) { this.dieFromRoundTrack = dieFromRoundTrack; }
 
     public String getInDeCrement() {
         return inDeCrement;
@@ -122,6 +123,10 @@ public class ActionEvent {
     public void setInDeCrement(String inDeCrement) {
         this.inDeCrement = inDeCrement;
     }
+
+    public Boolean getMenu() { return menu; }
+
+    public void setMenu(Boolean menu) { this.menu = menu; }
 
     public Boolean getNoAction() { return noAction; }
 
