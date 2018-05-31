@@ -60,7 +60,7 @@ public class MoveWithNoColorRestriction2 implements ToolCardDecorator {
         else if (placement.checkValueRestriction() && placement.checkNearByRestrictions() ){
 
             return true;
-        }  //problemi: se è il primo devo ripiazzarlo sui bordi
+        }
 
         System.out.println("error card 2");
         fromBox.setDie(die);

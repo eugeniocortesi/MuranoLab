@@ -89,10 +89,12 @@ public class Match {
                     if (controller.checkEvent(event)) {
                         System.out.println("done");
                         playing.getPlayerBoard().printCard();
+                        System.out.println("DraftPool");
+                        model.getDraftPool().printDraftPool();
                         // view.showOK()
                         result = true;
                     } else
-                        System.out.println("error");
+                        System.out.println("match error 1 ");
 
                     //view.showNO()
                     //view.showReduAction()      //IMPORTANT
@@ -120,10 +122,12 @@ public class Match {
                     if (controller.checkEvent(event)) {
                         System.out.println("done");
                         playing.getPlayerBoard().printCard();
+                        System.out.println("DraftPool");
+                        model.getDraftPool().printDraftPool();
                         // view.showOK()
                         result = true;
                     } else
-                        System.out.println("error");
+                        System.out.println("match error 2 ");
 
                     //view.showNO()
                     //view.showReduAction()      //IMPORTANT
@@ -182,6 +186,8 @@ public class Match {
             System.out.println("Insert 1 to place a die");
             System.out.println("Insert 9 to pass the turn");
             System.out.println("Insert 2 for cards 2 and 3");
+            System.out.println("insert 3 to for card 4");
+            System.out.println("insert 4 to for card 6,8 or 9");
             read = new BufferedReader(new InputStreamReader(System.in));
             try {
                 id = Integer.parseInt(read.readLine());
@@ -228,6 +234,48 @@ public class Match {
             line= askLine();
             col=askCol();
 
+            event.setToBox1(board[line - 1][col - 1]);
+
+        }
+
+        if (id==3){
+
+            card=4;
+            Box[][] board = playing.getPlayerBoard().getBoardMatrix();
+            event.setId(id);
+            event.setCard(model.getDecks().getToolCardDeck().get(card-1));
+            event.setPlayer(playing.getIDPlayer());
+            line= askLine();
+            col=askCol();
+            event.setFromBox1(board[line - 1][col - 1]);
+            line= askLine();
+            col=askCol();
+            event.setToBox1(board[line - 1][col - 1]);
+            line= askLine();
+            col=askCol();
+            event.setFromBox2(board[line - 1][col - 1]);
+            line= askLine();
+            col=askCol();
+            event.setToBox2(board[line - 1][col - 1]);
+
+        }
+
+        if (id==4){
+
+            System.out.println("card 6,8 or 9?");
+            card=askCard();
+
+            Box[][] board = playing.getPlayerBoard().getBoardMatrix();
+            event.setId(id);
+            event.setCard(model.getDecks().getToolCardDeck().get(card-1));
+            event.setPlayer(playing.getIDPlayer());
+
+            die=askDie();
+            event.setDieFromDraft( model.getDraftPool().getInDraft().get(die - 1));
+
+            //NOTA BENE: DOVREBBE ARRIVARE CON UN ALTRO EVENTO LA SCELTA DELLA CASELLA
+            line= askLine();
+            col=askCol();
             event.setToBox1(board[line - 1][col - 1]);
 
         }

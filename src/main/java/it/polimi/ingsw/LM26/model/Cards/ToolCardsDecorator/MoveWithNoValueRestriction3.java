@@ -45,18 +45,25 @@ public class MoveWithNoValueRestriction3 implements ToolCardDecorator {
     public boolean play (Box fromBox,Box toBox, int pl)  {
 
         Model model = singletonModel();
-        DieInt die = fromBox.getDie();
         PlayerZone player = model.getPlayerList().get(pl);
+        DieInt die = fromBox.getDie();
+        if(!fromBox.isIsPresent())return false;                      //added controller
         PlaceDie placement = new PlaceDie(die, toBox, player);
         fromBox.free();
-        if (! ( placement.checkColorRestriction() && placement.checkNearByRestrictions()) ){
-            System.out.println("error");
-            toBox.setDie(die);
-            return false;
+        if(player.getPlayerBoard().getNumDice()==1) {
+            if (placement.checkColorRestriction() && placement.checkEdgeRestrictions()) {
+                toBox.setDie(die);
+                return true;
+            }
         }
-        toBox.setDie(die);
+        else if (placement.checkColorRestriction() && placement.checkNearByRestrictions() ){
 
-        return true;
+            return true;
+        }
+
+        System.out.println("error card 2");
+        fromBox.setDie(die);
+        return false;
 
     }
 }

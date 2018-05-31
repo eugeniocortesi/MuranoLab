@@ -126,7 +126,7 @@ public class ActionEvent {
 
     public Boolean getMenu() { return menu; }
 
-    public void setMenu(Boolean menu) { this.menu = menu; }
+    public void setMenu(Boolean menu) { this.menu = menu; ID=10; }
 
     public Boolean getNoAction() { return noAction; }
 

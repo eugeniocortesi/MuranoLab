@@ -51,17 +51,20 @@ public class RollAgainADie6 implements ToolCardDecorator {
         PlaceDie placement = new PlaceDie(die, toBox, player);
 
         die.roll();
+        die.dump();
 
-        if (!placement.placeDie()) {
-            System.out.println("error");
-            return false;
+        if(player.getActionHistory().isDieUsed())
+            System.out.println("you can't place the die");
+
+        else {
+            if (placement.placeDie()) {
+                inDraft.remove(die);
+                player.getActionHistory().setDieUsed(true);
+
+            }
+            System.out.println("error in placement");
         }
-        inDraft.remove(die);
         return true;
-
-
-    }
-
-
+        }
 
 }

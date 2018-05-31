@@ -48,23 +48,25 @@ public class MoveTwoDice4 implements ToolCardDecorator {
         PlayerZone player = model.getPlayerList().get(pl);
         DieInt die = fromBox1.getDie();
         DieInt die2 =fromBox2.getDie();
+
         PlaceDie placement = new PlaceDie(die, toBox1, player);
 
-        if(!(placement.placeDie())){
-                       System.out.println("error " + 1);
-                       return false;
-                   }
-
-        placement = new PlaceDie(die2, toBox2, player);
-        if(!(placement.placeDie())){
-                        System.out.println("error " + 2);
-                        toBox1.free();
-                        return false;
-
-                    }
         fromBox1.free();
-        fromBox2.free();
-        return true;
+
+         if (placement.placeDie() ) {
+
+             placement = new PlaceDie(die2, toBox2, player);
+             fromBox2.free();
+             if(!(placement.placeDie())){
+                 System.out.println("error 2 placement");
+                 fromBox2.setDie(die);
+                 return false;
+             }
+             return true;
+         }
+        System.out.println("error 1 placement ");
+        fromBox1.setDie(die);
+        return false;
 
     }
 }

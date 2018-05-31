@@ -28,7 +28,7 @@ public class DraftPool {
 
     //TODO to test
 
-    public void addDie(Die d){
+    public void addDie(DieInt d){
 
         inDraft.add(d);
     }

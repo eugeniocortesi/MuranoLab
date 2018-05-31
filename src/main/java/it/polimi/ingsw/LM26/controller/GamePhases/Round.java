@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.controller.GamePhases;
 
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
@@ -62,6 +63,7 @@ public class Round {
     //passa il turno al successivo, se è finito turno globale mette dadi nella casella della round track e ritorna FINISHED
     public void endAction(int[] turn, RoundTrackInt roundTrack, DraftPool draftPool, PlayerZone actingPlayer) {
         actingPlayer.setPlayerState(PlayerState.ENDING);
+        actingPlayer.getActionHistory().deletePlayerHistory();
         //TODO
         actingPlayer.getActionHistory().setDieUsed(false);
         turnCounter++;
@@ -69,7 +71,6 @@ public class Round {
             roundTrack.addDice(draftPool.getInDraft());
             draftPool.removeAllDice();
             turnCounter=0;
-            actingPlayer.getActionHistory().deletePlayerHistory();
             roundState= RoundState.FINISHED;
         }
         else roundState= RoundState.RUNNING;
@@ -83,7 +84,7 @@ public class Round {
 
         int contStandby=0;
         int contDice=0;
-        Die die=null;
+        DieInt die=null;
 
         for(int j=0; j<model.getPlayerList().size(); j++)
             if(model.getPlayerList().get(j).getPlayerState()==STANDBY)
@@ -92,15 +93,15 @@ public class Round {
         contDice=model.getPlayerList().size()-contStandby;
 
         for(int i=0; i<contDice; i++) {
-            die=(Die)model.getBag().draw();
+            die=model.getBag().draw();
             die.roll();
             model.getDraftPool().addDie(die);
-            die=(Die)model.getBag().draw();
+            die=model.getBag().draw();
             die.roll();
             model.getDraftPool().addDie(die);
 
         }
-        die=(Die)model.getBag().draw();
+        die=model.getBag().draw();
         die.roll();
         model.getDraftPool().addDie(die);
 

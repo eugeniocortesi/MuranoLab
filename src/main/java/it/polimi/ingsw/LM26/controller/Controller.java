@@ -70,6 +70,7 @@ public class Controller implements ControllerInt {
             if(check(event.getCard(), event.getPlayer())) { model.hasChanged(); model.notifyObservers();  return true;}
             else return false;
         if (event.getId()==9) { System.out.println("i'll pass ");return true;}
+        if (event.getId()==10) return false;
         return false;
 
     }
@@ -83,7 +84,10 @@ public class Controller implements ControllerInt {
     public boolean check(DieInt dieFromDraft, Box toBox, int pl){
 
         PlayerZone player=model.getPlayerList().get(pl);
-        if( player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) return false;
+        if( player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) {
+            System.out.println("action expired");
+            return false;
+        }
 
         PlaceDie placement = new PlaceDie(dieFromDraft, toBox, player);
         if(placement.placeDie()){
@@ -93,7 +97,9 @@ public class Controller implements ControllerInt {
             player.getActionHistory().setDieUsed(true);
             player.getActionHistory().setPlacement(true);
             return true;}
-        else return false;
+        else { System.out.println("check not passed");
+                return false;
+        }
     }
 
     //ATTENZIONE ALL'ITERNO DI OGNI CARTA NON PERMETTO UN PIAZZAMENTO SE DADO è GIA ALREADY USED
@@ -127,7 +133,8 @@ public class Controller implements ControllerInt {
         return false;
     }
     public boolean check(ToolCardInt sixEightNine, DieInt dieFromDraft, Box toBox, int player){
-
+//potrei creare un altro evento es 41 che con solo un paio di coordinate, il check passa l'id dell'evento e il check prova afare il piazzamento controllando
+// solo che abbia un dado dispobile e non se ha gia fatto un piazzamento. retun true si che il piazzamento avvenga che no
         PlayerZone pl=model.getPlayerList().get(player);
         if ( pl.getActionHistory().isCardUsed()) return false;
 
@@ -233,19 +240,19 @@ public class Controller implements ControllerInt {
 
         PlayerZone player1 = new PlayerZone("Eugenio", 0);
         PlayerZone player2 = new PlayerZone("Chiara", 1);
-        PlayerZone player3 = new PlayerZone( "Claudia", 2);
-        PlayerZone player4 = new PlayerZone("Tommaso", 3);
+       // PlayerZone player3 = new PlayerZone( "Claudia", 2);
+       // PlayerZone player4 = new PlayerZone("Tommaso", 3);
 
         player1.setNumberPlayer(0);
         player2.setNumberPlayer(1);
-        player3.setNumberPlayer(2);
-        player4.setNumberPlayer(3);
+       // player3.setNumberPlayer(2);
+       // player4.setNumberPlayer(3);
 
         ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
         playerList.add(player1);
         playerList.add(player2);
-        playerList.add(player3);
-        playerList.add(player4);
+        //playerList.add(player3);
+        //playerList.add(player4);
 
         model.setPlayerList(playerList);
     }
