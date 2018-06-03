@@ -40,11 +40,12 @@ public class Die implements DieInt {
 
 
     public void increment(){
-        if(face=="\u2680")face="\u2681";
-        if(face=="\u2681")face="\u2682";
-        if(face=="\u2682")face="\u2683";
-        if(face=="\u2683")face="\u2684";
         if(face=="\u2684")face="\u2685";
+        if(face=="\u2683")face="\u2684";
+        if(face=="\u2682")face="\u2683";
+        if(face=="\u2681")face="\u2682";
+        if(face=="\u2680")face="\u2681";
+
     }
 
     public void decrement(){

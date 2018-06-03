@@ -35,7 +35,7 @@ public class ChangeDieValue1 implements ToolCardDecorator {
     public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}
     public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
-    public boolean play(DieInt dieFromDraft){return false;}
+    public boolean play(DieInt dieFromDraft, int pl){return false;}
     public boolean play( int player){return false;}
 
     public boolean play (DieInt die, String inDeCrement) {
@@ -47,6 +47,7 @@ public class ChangeDieValue1 implements ToolCardDecorator {
                 return false;
             }
             die.increment();
+            die.dump();
             return true;
         }
 
@@ -56,6 +57,7 @@ public class ChangeDieValue1 implements ToolCardDecorator {
                 return false;
             }
             die.decrement();
+            die.dump();
             return true;
         }
 

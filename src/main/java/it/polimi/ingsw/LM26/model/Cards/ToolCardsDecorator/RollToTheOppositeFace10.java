@@ -30,6 +30,7 @@ public class RollToTheOppositeFace10 implements ToolCardDecorator {
     public void setOneToken(PlayerZone player){}
 
     public void setTwoToken(PlayerZone player){}
+
     public boolean play(Box fromBox, Box toBox, int player){return false;}
     public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}
     public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}
@@ -37,7 +38,7 @@ public class RollToTheOppositeFace10 implements ToolCardDecorator {
     public boolean play(DieInt dieFromDraft, String inDeCrement){return false;}
     public boolean play(int player){return false;}
 
-    public boolean play (DieInt dieFromDraft) {
+    public boolean play (DieInt dieFromDraft, int pl) {
 
 
     return false;

@@ -26,10 +26,10 @@ public class ActionEvent {
         event 1: place die. to set: DieFromDraf, ToBox1, Player.
         event 2: use card 2, 3. to set: Card, FromBox1, ToBox1, Player.
         event 3: use card 4. to set: Card, FromBox1, ToBox1, FromBox2, toBox2, Player.
-        event 4: use card 6,8,9. to set: Card, DieFromDraft, ToBox1, Player.
+        event 4: use card 8,9. to set: Card, DieFromDraft, ToBox1, Player.
         event 5: use card 5. to set: Card, DieFromDraft, DieFromRoundTrack, Player.
         event 6: use card 1. to set: Card, DieFromDraft, InDeCrement, Player.
-        event 7: use card 10, 11. to set: Card, DieFromDraft, Player.
+        event 7: use card 6, 10, 11. to set: Card, DieFromDraft, Player.
         event 8: use card 7. to set: Card, Player.
         event 9: no action: set boolean.
         event 10: ask menu: set boolean.
@@ -96,9 +96,9 @@ public class ActionEvent {
             if(card.getNum()==2 ||card.getNum()==3 )  ID=2 ;
             if(card.getNum()==4)  ID= 3;
             if(card.getNum()==5)  ID=5 ;
-            if(card.getNum()==10 || card.getNum()==11 )  ID= 7;
+            if(card.getNum()==6 || card.getNum()==10 || card.getNum()==11 )  ID= 7;
             if(card.getNum()==7)  ID= 8;
-            if(card.getNum()==6 || card.getNum()==8 || card.getNum()==9)  ID= 4;
+            if(card.getNum()==8 || card.getNum()==9)  ID= 4;
         this.card = card;
     }
 

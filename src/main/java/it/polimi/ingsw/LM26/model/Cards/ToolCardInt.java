@@ -14,7 +14,7 @@ public interface ToolCardInt {
     public boolean play(DieInt dieFromDraft, Box toBox, int player);
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack);
     public boolean play( DieInt dieFromDraft, String inDeCrement);
-    public boolean play(DieInt dieFromDraft);
+    public boolean play(DieInt dieFromDraft, int pl);
     public boolean play(int player );
 
     public int getToken();
@@ -22,4 +22,5 @@ public interface ToolCardInt {
     public void setOneToken(PlayerZone player);
 
     public void setTwoToken(PlayerZone player);
+
 }

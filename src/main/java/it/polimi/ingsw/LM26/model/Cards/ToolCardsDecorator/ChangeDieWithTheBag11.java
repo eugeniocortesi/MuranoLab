@@ -38,7 +38,7 @@ public class ChangeDieWithTheBag11 implements ToolCardDecorator {
     public boolean play(DieInt dieFromDraft, String inDeCrement){return false;}
     public boolean play( int player){return false;}
 
-    public boolean play (DieInt dieFromDraft) {
+    public boolean play (DieInt dieFromDraft, int pl) {
 
 
         return false;

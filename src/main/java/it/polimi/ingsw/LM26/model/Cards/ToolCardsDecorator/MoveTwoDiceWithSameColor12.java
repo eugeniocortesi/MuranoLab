@@ -36,7 +36,7 @@ public class MoveTwoDiceWithSameColor12 implements ToolCardDecorator {
     public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
     public boolean play(DieInt dieFromDraft, String inDeCrement){return false;}
-    public boolean play(DieInt dieFromDraft){return false;}
+    public boolean play(DieInt dieFromDraft, int pl){return false;}
     public boolean play(int player){return false;}
 
     public boolean  play (PlayerZone player) {

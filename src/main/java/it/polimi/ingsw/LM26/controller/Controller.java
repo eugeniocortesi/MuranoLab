@@ -2,6 +2,8 @@ package it.polimi.ingsw.LM26.controller;
 
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
+import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.RollAgainADie6;
+import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.ToolCardDecorator;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
@@ -84,21 +86,36 @@ public class Controller implements ControllerInt {
     public boolean check(DieInt dieFromDraft, Box toBox, int pl){
 
         PlayerZone player=model.getPlayerList().get(pl);
-        if( player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) {
+        RollAgainADie6 tool6=(RollAgainADie6)model.getDecks().getToolCardDeck().get(5);
+
+        if(tool6.isNeedPlacement()){
+
+            if(dieFromDraft.equals(tool6.getDieCard6()))
+                tool6.setNeedPlacement(false);
+            else {
+                System.out.println("must use the rolled die");
+                return false;
+            }
+
+        }
+        if (player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) {
             System.out.println("action expired");
             return false;
         }
 
         PlaceDie placement = new PlaceDie(dieFromDraft, toBox, player);
-        if(placement.placeDie()){
+
+        if (placement.placeDie()) {
             model.getDraftPool().getInDraft().remove(dieFromDraft);
             player.getPlayerBoard().incrementNumDice();
             //esempio: model.accept(new UpdateX());
             player.getActionHistory().setDieUsed(true);
             player.getActionHistory().setPlacement(true);
-            return true;}
-        else { System.out.println("check not passed");
-                return false;
+            return true;
+            }
+        else{
+            System.out.println("check not passed");
+            return false;
         }
     }
 
@@ -132,15 +149,15 @@ public class Controller implements ControllerInt {
 
         return false;
     }
-    public boolean check(ToolCardInt sixEightNine, DieInt dieFromDraft, Box toBox, int player){
+    public boolean check(ToolCardInt EightNine, DieInt dieFromDraft, Box toBox, int player){
 //potrei creare un altro evento es 41 che con solo un paio di coordinate, il check passa l'id dell'evento e il check prova afare il piazzamento controllando
 // solo che abbia un dado dispobile e non se ha gia fatto un piazzamento. retun true si che il piazzamento avvenga che no
         PlayerZone pl=model.getPlayerList().get(player);
         if ( pl.getActionHistory().isCardUsed()) return false;
 
-        if(checkToken(model.getPlayerList().get(player),sixEightNine))
+        if(checkToken(model.getPlayerList().get(player),EightNine))
 
-            if(sixEightNine.play(dieFromDraft, toBox, player)){
+            if(EightNine.play(dieFromDraft, toBox, player)){
                 pl.getActionHistory().setCardUsed(true);
                 return true;}
 
@@ -173,17 +190,16 @@ public class Controller implements ControllerInt {
 
         return false;
     }
-    public boolean check(ToolCardInt tenEleven, DieInt dieFromDraft, int player){
+    public boolean check(ToolCardInt sixTenEleven, DieInt dieFromDraft, int player){
 
         PlayerZone pl=model.getPlayerList().get(player);
         if ( pl.getActionHistory().isCardUsed() ) return false;
 
-        if(checkToken(model.getPlayerList().get(player),tenEleven))
+        if(checkToken(model.getPlayerList().get(player),sixTenEleven))
 
-            if(tenEleven.play( dieFromDraft)){
+            if(sixTenEleven.play( dieFromDraft,player)){
                 pl.getActionHistory().setCardUsed(true);
                 return true; }
-
         return false;
     }
     public boolean check(ToolCardInt seven,  int player){
@@ -281,5 +297,7 @@ public class Controller implements ControllerInt {
 
     }
 
+
 }
+
 

@@ -15,56 +15,89 @@ import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 public class RollAgainADie6 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
+    private boolean needPlacement=false;
+    private DieInt die;
 
 
     public RollAgainADie6(ToolCard toolcard) {
         this.toolcard = toolcard;
     }
 
-    public int getNum(){
+    public int getNum() {
         return toolcard.getNum();
     }
 
-    public void printCard(){
+    public void printCard() {
         toolcard.printCard();
     }
-    public int getToken(){
+
+    public int getToken() {
         return toolcard.getToken();
     }
 
-    public void setOneToken(PlayerZone player){}
+    public void setOneToken(PlayerZone player) {
+    }
 
-    public void setTwoToken(PlayerZone player){}
+    public void setTwoToken(PlayerZone player) {
+    }
 
-    public boolean play(Box fromBox, Box toBox, int player){return false;}
-    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}
-    public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
-    public boolean play( DieInt dieFromDraft, String inDeCrement){return false;}
-    public boolean play(DieInt dieFromDraft){return false;}
-    public boolean play( int player){return false;}
+    public boolean play(Box fromBox, Box toBox, int player) {
+        return false;
+    }
 
-    public boolean play (DieInt die, Box toBox,  int pl) {
+    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player) {
+        return false;
+    }
+
+    public boolean play(DieInt die, Box toBox, int pl) {
+        return false;
+    }
+
+
+    public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack) {
+        return false;
+    }
+
+    public boolean play(DieInt dieFromDraft, String inDeCrement) {
+        return false;
+    }
+
+
+    public boolean play(int player) {
+        return false;
+    }
+
+    public boolean play(DieInt dieFromDraft, int pl) {
 
         Model model = singletonModel();
         ArrayList<DieInt> inDraft = model.getDraftPool().getInDraft();
         PlayerZone player = model.getPlayerList().get(pl);
-        PlaceDie placement = new PlaceDie(die, toBox, player);
 
-        die.roll();
-        die.dump();
 
-        if(player.getActionHistory().isDieUsed())
+        dieFromDraft.roll();
+        dieFromDraft.dump();
+
+        if (player.getActionHistory().isDieUsed() || player.getActionHistory().isPlacement())
             System.out.println("you can't place the die");
 
-        else {
-            if (placement.placeDie()) {
-                inDraft.remove(die);
-                player.getActionHistory().setDieUsed(true);
 
-            }
-            System.out.println("error in placement");
+        else {
+            setNeedPlacement(true);
+            this.die = dieFromDraft;
+
         }
         return true;
-        }
+    }
 
+    public DieInt getDieCard6() {
+        return die;
+    }
+
+    public boolean isNeedPlacement() {
+        return needPlacement;
+    }
+
+    public void setNeedPlacement(boolean needPlacement) {
+        this.needPlacement = needPlacement;
+    }
 }

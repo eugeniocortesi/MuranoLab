@@ -3,11 +3,13 @@ package it.polimi.ingsw.LM26.controller;
 import com.sun.javafx.iio.ios.IosDescriptor;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
+import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.RollAgainADie6;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.controller.GamePhases.CentralPhase;
 import it.polimi.ingsw.LM26.controller.GamePhases.Game;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -93,8 +95,16 @@ public class Match {
                         model.getDraftPool().printDraftPool();
                         // view.showOK()
                         result = true;
-                    } else
-                        System.out.println("match error 1 ");
+                    } else {
+
+                        RollAgainADie6 tool6=(RollAgainADie6)model.getDecks().getToolCardDeck().get(5);
+
+                        if(tool6.isNeedPlacement()){
+                            System.out.println("place rolled die  ");
+                        }
+
+                        else System.out.println("match error 1 ");
+                    }
 
                     //view.showNO()
                     //view.showReduAction()      //IMPORTANT
@@ -180,20 +190,16 @@ public class Match {
 
         event = new ActionEvent();
         int id=0;
-        BufferedReader read;
 
 
             System.out.println("Insert 1 to place a die");
-            System.out.println("Insert 9 to pass the turn");
             System.out.println("Insert 2 for cards 2 and 3");
             System.out.println("insert 3 to for card 4");
-            System.out.println("insert 4 to for card 6,8 or 9");
-            read = new BufferedReader(new InputStreamReader(System.in));
-            try {
-                id = Integer.parseInt(read.readLine());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            System.out.println("insert 6 to for card 1");
+            System.out.println("insert 7 to for card 6,10 or 11");
+            System.out.println("Insert 9 to pass the turn");
+
+            id=askId();
 
         int line = 0;
         int col = 0;
@@ -260,26 +266,58 @@ public class Match {
 
         }
 
-        if (id==4){
+        if (id==7){
 
-            System.out.println("card 6,8 or 9?");
+            System.out.println("card 6,10 or 11?");
+            event.setId(id);
             card=askCard();
 
-            Box[][] board = playing.getPlayerBoard().getBoardMatrix();
-            event.setId(id);
             event.setCard(model.getDecks().getToolCardDeck().get(card-1));
             event.setPlayer(playing.getIDPlayer());
 
             die=askDie();
             event.setDieFromDraft( model.getDraftPool().getInDraft().get(die - 1));
 
-            //NOTA BENE: DOVREBBE ARRIVARE CON UN ALTRO EVENTO LA SCELTA DELLA CASELLA
-            line= askLine();
-            col=askCol();
-            event.setToBox1(board[line - 1][col - 1]);
 
         }
 
+        if (id==6){
+
+            event.setId(id);
+            event.setPlayer(playing.getIDPlayer());
+            event.setCard(model.getDecks().getToolCardDeck().get(0));
+
+            die=askDie();
+            event.setDieFromDraft( model.getDraftPool().getInDraft().get(die - 1));
+            System.out.println("insert 1 to increment, 2 to decrement");
+            id=askId();
+
+            if(id==1)event.setInDeCrement("increment");
+            if(id==2)event.setInDeCrement("decrement");
+
+
+        }
+
+        if (id==5){
+
+            event.setId(id);
+            event.setPlayer(playing.getIDPlayer());
+            event.setCard(model.getDecks().getToolCardDeck().get(4));
+
+            die=askDie();
+            event.setDieFromDraft( model.getDraftPool().getInDraft().get(die - 1));
+
+            System.out.println("insert number of turn");
+            id=askId();
+
+            while(id>model.getRoundTrackInt().getRoundTrackTurnList().size())
+                id=askId();
+            die=askDie();
+
+            event.setDieFromRoundTrack( model.getRoundTrackInt().getRoundTrackTurnList().get(id-1).getDiceList().get(die-1));
+
+
+        }
         if(id==9) event.setId(id);
         ///////////////////////////////////////////
 
@@ -289,6 +327,20 @@ public class Match {
     }
 
     /////TODO DELETE
+
+    public int askId(){
+
+        BufferedReader read;
+        int id = 0;
+        read = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            id = Integer.parseInt(read.readLine());
+            return id;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 
     public int askLine() {
 
