@@ -67,6 +67,7 @@ public class ServerBase extends ViewGameInterface {
     public boolean checkNumberUsers(){
         if (clientManagerListSize()<4)
             return true;
+        //TODO change it
         else if (!playing) {
             Model model = SingletonModel.singletonModel();
             System.out.println("Inserisci nome: ");
