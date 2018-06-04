@@ -3,6 +3,7 @@ package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowInitialMessage;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -45,7 +46,7 @@ public class ClientManagerSocket extends ClientManager {
         }
         try{
             //TODO CHANGE SOMETHING
-            this.writer.writeBytes(messageSent + "\n");
+            this.writer.writeBytes(messageSent  + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -98,6 +99,7 @@ public class ClientManagerSocket extends ClientManager {
     public void login(String name) {
         if (!server.checkNumberUsers()) {
             System.out.println("Too many users logged");
+
             DataMessage dataMessage = new DataMessage("too_many_users", name);
             sendMessage(dataMessage.serializeClassMessage());
 
@@ -133,11 +135,15 @@ public class ClientManagerSocket extends ClientManager {
     @Override
     public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
 
+        System.out.println("server is asking a window pattern");
+        WindowInitialMessage windowInitialMessage= new WindowInitialMessage("send_windowlist", user, id, windowDeck);
+        sendMessage(windowInitialMessage.serializeClassMessage());
     }
 
     @Override
     public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
 
         System.out.println("I have received one windowcard from "+user);
+        //notifyController();
     }
 }

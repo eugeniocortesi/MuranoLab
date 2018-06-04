@@ -13,7 +13,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-public class ServerBase implements ViewGameInterface {
+public class ServerBase extends ViewGameInterface {
 
     private RMIAcceptor rmiAcceptor;
     private SocketAcceptor socketAcceptor;
@@ -73,6 +73,7 @@ public class ServerBase implements ViewGameInterface {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             try {
                 String nome = br.readLine();
+                System.out.println("Name preso");
                 showWindowPattern(nome, 0, model.getDecks().getWindowPatternCardDeck());
             } catch (IOException e) {
                 e.printStackTrace();

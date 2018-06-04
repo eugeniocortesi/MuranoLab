@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowAnswerMessage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,13 +46,11 @@ public class ListenerClientManager {
     public void listen() {
         try {
             String message = null;
-            //while (message == null) {
-
+            while (message == null)
                 message = receiveMessage();
-                if (message!= null){
-                    System.out.println("Message " + message);
-                    recognize(message);
-                //}
+            if (message!= null){
+                System.out.println("Message " + message);
+                recognize(message);
 
                 message = null;
             }
@@ -81,9 +80,14 @@ public class ListenerClientManager {
             DataMessage message1 = DataMessage.deserializeDataMessage(message);
             clientManagerSocket.login(message1.getField1());
         }
-        if (op.equals("connected")){
+        else if (op.equals("connected")){
             System.out.println("In get id body");
             clientManagerSocket.sendAvailableId();
+        }
+        else if(op.equals("send_windowcard")){
+            System.out.println("In send window card body");
+            WindowAnswerMessage answerMessage = WindowAnswerMessage.deserializeDataMessage(message);
+            clientManagerSocket.chosenWindowPattern(clientManagerSocket.getName(), answerMessage.getWindowcard());
         }
 
     }

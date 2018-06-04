@@ -1,13 +1,17 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
 import it.polimi.ingsw.LM26.systemNetwork.DataEvent;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowAnswerMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowInitialMessage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ListenerClientView {
 
@@ -36,7 +40,6 @@ public class ListenerClientView {
 
             messageReceived = (String) this.reader.readLine();
             if (messageReceived == null){
-
                 return null;
             }
         } catch (IOException e) {
@@ -51,8 +54,9 @@ public class ListenerClientView {
         System.out.println("I'm listening");
         String message = null;
         //while (message == null) {
+            //while(message == null)
+                message = receiveMessage();
 
-            message = receiveMessage();
             if (message!= null){
                 System.out.println("Message " + message);
                 recognize(message);
@@ -89,7 +93,15 @@ public class ListenerClientView {
             ConnectMessage connectMessage = ConnectMessage.deserializeConnectMessage(message);
             int id = connectMessage.getField1();
             clientView.getAvailableId(id);
-        } else {
+        }else if(op.equals("send_windowlist")){
+            WindowInitialMessage windowInitialMessage = WindowInitialMessage.deserializeWindowInitialMessage(message);
+            String user= windowInitialMessage.getUser();
+            int id = windowInitialMessage.getId();
+            ArrayList<WindowPatternCard> windowPatternCards = windowInitialMessage.getWindowlist();
+            clientView.choseWindowPattern(user, id, windowPatternCards);
+        }
+
+        else {
             System.out.println("Message not recognized");
         }
 

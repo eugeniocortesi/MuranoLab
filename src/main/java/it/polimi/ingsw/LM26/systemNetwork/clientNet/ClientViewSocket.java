@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ClientViewSocket implements ClientView {
 
     private ListenerClientView listenerClientView;
-    private ConsoleStrings concreteClientView;
+    private ViewInterface concreteClientView;
     private int SOCKETPORT;
 
     private static String address;
@@ -27,7 +27,7 @@ public class ClientViewSocket implements ClientView {
     private String username;
     private int id;
 
-    public ClientViewSocket(ConsoleStrings concreteClientView, DataClientConfiguration data){
+    public ClientViewSocket(ViewInterface concreteClientView, DataClientConfiguration data){
 
         this.concreteClientView = concreteClientView;
         SOCKETPORT = data.getClientSOCKETPORT();
@@ -102,6 +102,7 @@ public class ClientViewSocket implements ClientView {
         else{
             concreteClientView.showAlreadyLoggedScreen();
         }
+        listenerClientView.listen();
     }
 
     @Override
@@ -117,7 +118,7 @@ public class ClientViewSocket implements ClientView {
     @Override
     public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
         this.id = id;
-        //concreteClientView.showWindowPattern(user, id, windowDeck);
+        concreteClientView.showWindowPattern(user, id, windowDeck);
 
     }
 

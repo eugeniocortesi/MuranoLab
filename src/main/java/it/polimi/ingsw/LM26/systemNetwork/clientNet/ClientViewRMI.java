@@ -15,14 +15,14 @@ import java.util.ArrayList;
 
 public class ClientViewRMI implements ClientView {
 
-    private ConsoleStrings concreteClientView;
+    private ViewInterface concreteClientView;
     private int RMIPORTServer;
     private int RMIPORTClient;
     private String address;
     private int id;
     private ClientManagerRemote stub;
 
-    public ClientViewRMI(ConsoleStrings concreteClientView, DataClientConfiguration data){
+    public ClientViewRMI(ViewInterface concreteClientView, DataClientConfiguration data){
 
         this.concreteClientView = concreteClientView;
         RMIPORTServer = data.getServerRMIPORT();
@@ -112,6 +112,7 @@ public class ClientViewRMI implements ClientView {
     @Override
     public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
         this.id = id;
+        System.out.println("server is asking a window pattern");
         concreteClientView.showWindowPattern(user, id, windowDeck);
 
     }
@@ -119,6 +120,7 @@ public class ClientViewRMI implements ClientView {
     @Override
     public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
 
+        System.out.println(user+" is answering windowpattern");
         try {
             stub.chosenWindowPattern(user,windowcard);
         } catch (RemoteException e) {

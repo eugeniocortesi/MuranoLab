@@ -6,7 +6,7 @@ import it.polimi.ingsw.LM26.systemNetwork.serverNet.ViewGameInterface;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public abstract class ViewInterface extends Observable implements ViewGameInterface {
+public abstract class ViewInterface extends ViewGameInterface {
 
     public abstract void showNetChoise();
 
@@ -17,5 +17,10 @@ public abstract class ViewInterface extends Observable implements ViewGameInterf
     public abstract void showAlreadyLoggedScreen();
 
     public abstract void showTooManyUsersScreen();
+
+    public abstract void showDisconnectScreen();
+
+    @Override
+    public abstract void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck);
 
 }

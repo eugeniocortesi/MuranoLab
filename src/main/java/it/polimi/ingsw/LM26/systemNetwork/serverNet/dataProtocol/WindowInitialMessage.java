@@ -8,17 +8,23 @@ import java.util.ArrayList;
 public class WindowInitialMessage extends ClassMessage {
 
     private String meth;
+    private String user;
     private int id;
     private ArrayList<WindowPatternCard> windowlist;
 
-    public WindowInitialMessage(String op, int id, ArrayList<WindowPatternCard> four){
+    public WindowInitialMessage(String op, String s, int id, ArrayList<WindowPatternCard> four){
         this.meth = op;
+        this.user= s;
         this.id = id;
         this.windowlist = four;
     }
 
     public String getMeth() {
         return meth;
+    }
+
+    public String getUser() {
+        return user;
     }
 
     public int getId() {
@@ -29,7 +35,7 @@ public class WindowInitialMessage extends ClassMessage {
         return windowlist;
     }
 
-    static public WindowInitialMessage deserializeDataMessage(String protocolJson){
+    static public WindowInitialMessage deserializeWindowInitialMessage(String protocolJson){
         Gson gson = new Gson();
         WindowInitialMessage message= gson.fromJson(protocolJson, WindowInitialMessage.class);
         return message;
@@ -37,6 +43,6 @@ public class WindowInitialMessage extends ClassMessage {
 
     public void dump() {
 
-        System.out.println("Operation " +this.meth+ " id " +this.id+ " windowlist " +this.windowlist);
+        System.out.println("Operation " +this.meth+ " user "+ user+" id " +this.id+ " windowlist " +this.windowlist);
     }
 }

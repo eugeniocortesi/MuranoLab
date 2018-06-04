@@ -4,10 +4,13 @@ package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientViewRemote;
 
+import java.net.InetAddress;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.server.RemoteServer;
+import java.rmi.server.ServerNotActiveException;
 import java.util.ArrayList;
 
 public class ClientManagerRMI extends ClientManager {
@@ -33,7 +36,8 @@ public class ClientManagerRMI extends ClientManager {
         try {
             // Getting the registry
            // Registry registry = LocateRegistry.getRegistry(address, RMIPORTClient);
-            Registry registry = LocateRegistry.getRegistry(address, RMIPORTServer);
+            String addr= RemoteServer.getClientHost();
+            Registry registry = LocateRegistry.getRegistry(addr, RMIPORTServer);
             //Looking up the registry for the remote object
             skeleton = (ClientViewRemote) registry.lookup("ClientViewRemote"+getAvailableId());
             System.out.println("Took Skeleton");
@@ -42,6 +46,8 @@ public class ClientManagerRMI extends ClientManager {
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
+            e.printStackTrace();
+        } catch (ServerNotActiveException e) {
             e.printStackTrace();
         }
     }
@@ -67,7 +73,7 @@ public class ClientManagerRMI extends ClientManager {
         if (myserver.checkNumberUsers()){
             boolean result = myserver.addView(name, this);
             if(result) this.user = name;
-            System.out.println("The add reult value: " + result);
+            System.out.println("The add result value: " + result);
             try {
                 skeleton.logged(result, name);
             } catch (RemoteException e) {
@@ -105,6 +111,7 @@ public class ClientManagerRMI extends ClientManager {
     @Override
     public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
         try {
+            System.out.println("Asking window card");
             skeleton.choseWindowPattern(user, id, windowDeck);
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -115,6 +122,6 @@ public class ClientManagerRMI extends ClientManager {
     public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
 
         System.out.println("I have received one windowcard from "+user);
-
+        //notifyController();
     }
 }
