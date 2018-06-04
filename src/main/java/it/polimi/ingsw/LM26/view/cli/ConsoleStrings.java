@@ -2,18 +2,10 @@ package it.polimi.ingsw.LM26.view.cli;
 
 import it.polimi.ingsw.LM26.controller.ActionEvent;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.MoveTwoDice4;
-import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
-import it.polimi.ingsw.LM26.model.Cards.windowMatch.PatternBox;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.model.PlayArea.Color;
-import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
-import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
-import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
-import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.*;
@@ -28,25 +20,22 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
+import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
 import static org.fusesource.jansi.Ansi.Color.*;
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class ConsoleStrings extends ViewInterface {
 
 
-    static Model model;
-    static int id;
-    static ObjectivePrivateCard objectivePrivateCard;
+
     private ClientBase clientBase;
     private ClientView clientView;
-
 
     DataClientImplementation dataClientImplementation;
     DataClientConfiguration dataClientConfiguration;
 
     private ConsoleTools consoleTools = new ConsoleTools();
-    //virtualview avrÃ  una coda di actionevent
-    private ActionEvent actionEvent = new ActionEvent();
+    PlayerMenuInt playerMenu;
     private ActionEvent event;
     private ArrayList<ActionEvent> events = new ArrayList<ActionEvent>();
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -55,10 +44,16 @@ public class ConsoleStrings extends ViewInterface {
 
     public static void main(String[] args) {
         //System.out.println("\u00AF"+"\u2310"+"\u00AC"+"\u2319"+"\u2310");
+        /*Decks deck=singletonDecks();
+        ArrayList<WindowPatternCard> wList= new ArrayList<WindowPatternCard>();
+        for(int i=0; i<4; i++){
+            wList.add( deck.getWindowPatternCardDeck().get(i));
+        }
+        ConsoleStrings cs;
+        cs.showWindowPattern("string", 1, wList);*/
     }
 
     public ConsoleStrings(ClientBase clientBase) {
-
         this.clientBase = clientBase;
         dataClientImplementation = new DataClientImplementation();
         dataClientConfiguration = dataClientImplementation.implementation();
@@ -138,19 +133,26 @@ public class ConsoleStrings extends ViewInterface {
     public void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck){
         int n=-1;
         for(WindowPatternCard i : windowDeck){
-            consoleTools.printPatternCard(i.getTitle());
+            consoleTools.printPatternCard(i);
         }
         System.out.println("scegli una di queste carte mappa con un indice da 1 a 4");
-        while(n<1 && n>4){
+        while(n<1 || n>4){
             try{
                 n=Integer.parseInt(br.readLine());
             } catch (IOException e){
                 e.printStackTrace();
             }
-            if(n<1 && n>4) System.out.println("Indice tra 1 e 4!!");
+            if(n<1 || n>4) System.out.println("Indice tra 1 e 4!!");
         }
         clientView.chosenWindowPattern(user, windowDeck.get(n-1));
     }
 
+    public void setPlayerMenu(PlayerMenuInt playerMenu) {
+        this.playerMenu = playerMenu;
+    }
+
+    public void currentMenu(){
+        playerMenu.showMenu();
+    }
 
 }

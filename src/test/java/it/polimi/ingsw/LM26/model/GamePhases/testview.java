@@ -18,20 +18,22 @@ import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonD
 
 public class testview {
 
-    private Decks deck=singletonDecks();
+    //private Decks deck=singletonDecks();
 
-   /* PlayerZone playerZone = new PlayerZone("n", 1);
+    PlayerZone playerZone = new PlayerZone("n", 1);
 
-    private ConsoleStrings consoleStrings= new ConsoleStrings();
+    //private ConsoleStrings consoleStrings= new ConsoleStrings();
     private ConsoleTools consoleTools = new ConsoleTools();
 
-    @Before
+    /*@Before
     public void setup(){
         playerZone.setWindowPatternCard(deck.getWindowPatternCardDeck().get(0));
         playerZone.setPlayerBoard(deck.getWindowFramePlayerBoardDeck().get(0));
-    }
+    }*/
 
-    @Test
+
+
+   /* @Test
     public void frameboardtest(){
         consoleTools.printFrameBoard(playerZone);
     }
