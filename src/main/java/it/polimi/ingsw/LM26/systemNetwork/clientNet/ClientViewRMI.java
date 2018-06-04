@@ -12,6 +12,10 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientViewRMI implements ClientView {
 
@@ -22,6 +26,8 @@ public class ClientViewRMI implements ClientView {
     private int id;
     private ClientManagerRemote stub;
 
+    private static final Logger LOGGER = Logger.getLogger(ClientViewRMI.class.getName());
+
     public ClientViewRMI(ViewInterface concreteClientView, DataClientConfiguration data){
 
         this.concreteClientView = concreteClientView;
@@ -29,6 +35,12 @@ public class ClientViewRMI implements ClientView {
         RMIPORTClient =data.getClientRMIPORT();
         address = data.getIp();
         id = 0;
+        
+        Handler handlerObj = new ConsoleHandler();
+        handlerObj.setLevel(Level.ALL);
+        LOGGER.addHandler(handlerObj);
+        LOGGER.setLevel(Level.ALL);
+        LOGGER.setUseParentHandlers(false);
         getStub();
     }
 
@@ -46,7 +58,7 @@ public class ClientViewRMI implements ClientView {
             //Registry registry = LocateRegistry.createRegistry(RMIPORTClient);
             Registry registry = LocateRegistry.getRegistry(address, RMIPORTServer );
             registry.bind("ClientViewRemote"+id,  skeleton);
-            System.err.println("Client ready, created skeleton");
+            LOGGER.log(Level.WARNING,"Client ready, created skeleton");
             stub.connect();
 
         }catch (Exception e){
@@ -65,7 +77,7 @@ public class ClientViewRMI implements ClientView {
             registry = LocateRegistry.getRegistry(address, RMIPORTServer);
             //Looking up the registry for the remote object
             stub = (ClientManagerRemote) registry.lookup("ClientManagerRemote");
-            System.out.println("Took the stub");
+            LOGGER.log(Level.SEVERE,"Took the stub");
             id = stub.getAvailableId();
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -77,7 +89,7 @@ public class ClientViewRMI implements ClientView {
 
     @Override
     public void requestedLogin() {
-        System.out.println("Now you are connected in RMI to Server");
+        LOGGER.log(Level.SEVERE,"Now you are connected in RMI to Server");
         concreteClientView.showLoginScreen();
 
     }
@@ -112,7 +124,7 @@ public class ClientViewRMI implements ClientView {
     @Override
     public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
         this.id = id;
-        System.out.println("server is asking a window pattern");
+        LOGGER.log(Level.SEVERE,"server is asking a window pattern");
         concreteClientView.showWindowPattern(user, id, windowDeck);
 
     }
@@ -120,7 +132,7 @@ public class ClientViewRMI implements ClientView {
     @Override
     public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
 
-        System.out.println(user+" is answering windowpattern");
+        LOGGER.log(Level.SEVERE,user+" is answering windowpattern");
         try {
             stub.chosenWindowPattern(user,windowcard);
         } catch (RemoteException e) {

@@ -12,6 +12,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ListenerClientView {
 
@@ -19,6 +23,9 @@ public class ListenerClientView {
     private BufferedReader reader;
     private ClientViewSocket clientView;
     private Socket socket;
+
+    private static final Logger LOGGER = Logger.getLogger(ListenerClientView.class.getName());
+
 
     public ListenerClientView(ClientViewSocket clientView, Socket socket) {
 
@@ -31,6 +38,12 @@ public class ListenerClientView {
         } catch (IOException e) {
 
         }
+
+        Handler handlerObj = new ConsoleHandler();
+        handlerObj.setLevel(Level.ALL);
+        LOGGER.addHandler(handlerObj);
+        LOGGER.setLevel(Level.ALL);
+        LOGGER.setUseParentHandlers(false);
     }
 
     public String receiveMessage(){
@@ -51,14 +64,14 @@ public class ListenerClientView {
     }
 
     public void listen() {
-        System.out.println("I'm listening");
+        LOGGER.log(Level.SEVERE,"I'm listening");
         String message = null;
         //while (message == null) {
-            //while(message == null)
+            while(message == null)
                 message = receiveMessage();
 
             if (message!= null){
-                System.out.println("Message " + message);
+                LOGGER.log(Level.INFO,"Message " + message);
                 recognize(message);
             }
             message = null;
@@ -73,15 +86,15 @@ public class ListenerClientView {
         DataMessage dataMessage = new DataMessage(null,null);
         String op = dataMessage.parserFirstElement(message);
         if (op.equals("requested_login")){
-            System.out.println("In login body");
+            LOGGER.log(Level.SEVERE,"In login body");
             clientView.requestedLogin();
         }
         else if(op.equals("logged")){
-            System.out.println("In logged body");
+            LOGGER.log(Level.SEVERE,"In logged body");
             clientView.logged(true,dataMessage.getField1());
         }
         else if(op.equals("not_logged")){
-            System.out.println("In not logged body");
+            LOGGER.log(Level.SEVERE,"In not logged body");
             clientView.logged(false,dataMessage.getField1());
         }
         else if(op.equals(("too_many_users"))){
@@ -89,11 +102,12 @@ public class ListenerClientView {
             clientView.tooManyUsers();
         }
         else if(op.equals("connected")){
-            System.out.println("In client connected body");
+            LOGGER.log(Level.SEVERE,"In client connected body");
             ConnectMessage connectMessage = ConnectMessage.deserializeConnectMessage(message);
             int id = connectMessage.getField1();
             clientView.getAvailableId(id);
         }else if(op.equals("send_windowlist")){
+            LOGGER.log(Level.SEVERE, "In send window list body");
             WindowInitialMessage windowInitialMessage = WindowInitialMessage.deserializeWindowInitialMessage(message);
             String user= windowInitialMessage.getUser();
             int id = windowInitialMessage.getId();
@@ -102,7 +116,7 @@ public class ListenerClientView {
         }
 
         else {
-            System.out.println("Message not recognized");
+            LOGGER.log(Level.WARNING,"Message not recognized");
         }
 
     }

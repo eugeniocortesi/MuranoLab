@@ -11,6 +11,10 @@ import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientViewSocket implements ClientView {
 
@@ -27,11 +31,20 @@ public class ClientViewSocket implements ClientView {
     private String username;
     private int id;
 
+    private static final Logger LOGGER = Logger.getLogger(ClientViewSocket.class.getName());
+
+
     public ClientViewSocket(ViewInterface concreteClientView, DataClientConfiguration data){
 
         this.concreteClientView = concreteClientView;
         SOCKETPORT = data.getClientSOCKETPORT();
         address = data.getIp();
+
+        Handler handlerObj = new ConsoleHandler();
+        handlerObj.setLevel(Level.ALL);
+        LOGGER.addHandler(handlerObj);
+        LOGGER.setLevel(Level.ALL);
+        LOGGER.setUseParentHandlers(false);
 
         //listenerClientView.listen();
     }
@@ -40,7 +53,7 @@ public class ClientViewSocket implements ClientView {
     public void connect() {
 
         try {
-            System.out.println("I'm trying to connect");
+            LOGGER.log(Level.SEVERE, "I'm trying to connect");
 
             socket = new Socket(address, SOCKETPORT);
             //canali di comunicazione
@@ -52,7 +65,7 @@ public class ClientViewSocket implements ClientView {
             connected();
             listenerClientView.listen();
 
-            System.out.println("ClientImplementationSocket connected");
+            LOGGER.log(Level.SEVERE,"ClientImplementationSocket connected");
         } catch (Exception e) {
             System.out.println("Exception: " + e);
             e.printStackTrace();
@@ -67,7 +80,7 @@ public class ClientViewSocket implements ClientView {
     }
 
     public void connected(){
-        System.out.println("Client connected");
+        LOGGER.log(Level.SEVERE,"Client connected");
         ConnectMessage connectMessage = new ConnectMessage("connected", 0);
         connectMessage.dump();
         outSocket.println(connectMessage.serializeClassMessage());
@@ -117,6 +130,7 @@ public class ClientViewSocket implements ClientView {
 
     @Override
     public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
+        LOGGER.log(Level.SEVERE,"server is asking a window pattern");
         this.id = id;
         concreteClientView.showWindowPattern(user, id, windowDeck);
 

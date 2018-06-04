@@ -12,6 +12,10 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.RemoteServer;
 import java.rmi.server.ServerNotActiveException;
 import java.util.ArrayList;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientManagerRMI extends ClientManager {
 
@@ -21,6 +25,8 @@ public class ClientManagerRMI extends ClientManager {
     private String address;
     private ClientViewRemote skeleton;
     private String user;
+    private static final Logger LOGGER = Logger.getLogger(ClientManagerRMI.class.getName());
+
 
     public ClientManagerRMI(ServerBase serverBase, int RMIPORTServer, int RMIPORTClient, String address){
 
@@ -28,6 +34,11 @@ public class ClientManagerRMI extends ClientManager {
         this.RMIPORTServer = RMIPORTServer;
         this.RMIPORTClient = RMIPORTClient;
         this.address = address;
+        Handler handlerObj = new ConsoleHandler();
+        handlerObj.setLevel(Level.ALL);
+        LOGGER.addHandler(handlerObj);
+        LOGGER.setLevel(Level.ALL);
+        LOGGER.setUseParentHandlers(false);
     }
 
     public void connect(){
@@ -40,7 +51,7 @@ public class ClientManagerRMI extends ClientManager {
             Registry registry = LocateRegistry.getRegistry(addr, RMIPORTServer);
             //Looking up the registry for the remote object
             skeleton = (ClientViewRemote) registry.lookup("ClientViewRemote"+getAvailableId());
-            System.out.println("Took Skeleton");
+            LOGGER.log(Level.WARNING, "Took Skeleton");
             myserver.addClientManager(this);
             skeleton.requestedLogin();
         } catch (RemoteException e) {
@@ -58,7 +69,7 @@ public class ClientManagerRMI extends ClientManager {
 
     @Override
     public void requestedLogin() {
-        System.out.println("The client RMI is connected. He tries to login");
+        LOGGER.log(Level.SEVERE,"The client RMI is connected. He tries to login");
         /*try {
             skeleton.login(null);
         } catch (RemoteException e) {
@@ -69,11 +80,11 @@ public class ClientManagerRMI extends ClientManager {
 
     @Override
     public void login(String name) {
-        System.out.println("User tries to connect with username : " + name);
+        LOGGER.log(Level.SEVERE,"User tries to connect with username : " + name);
         if (myserver.checkNumberUsers()){
             boolean result = myserver.addView(name, this);
             if(result) this.user = name;
-            System.out.println("The add result value: " + result);
+            LOGGER.log(Level.INFO,"The add result value: " + result);
             try {
                 skeleton.logged(result, name);
             } catch (RemoteException e) {
@@ -111,7 +122,7 @@ public class ClientManagerRMI extends ClientManager {
     @Override
     public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
         try {
-            System.out.println("Asking window card");
+            LOGGER.log(Level.SEVERE,"Asking window card");
             skeleton.choseWindowPattern(user, id, windowDeck);
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -121,7 +132,7 @@ public class ClientManagerRMI extends ClientManager {
     @Override
     public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
 
-        System.out.println("I have received one windowcard from "+user);
+        LOGGER.log(Level.SEVERE,"I have received one windowcard from "+user);
         //notifyController();
     }
 }

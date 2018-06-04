@@ -5,6 +5,10 @@ import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfigur
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class SocketAcceptor {
@@ -12,20 +16,30 @@ public class SocketAcceptor {
     private ServerBase myserver;
     private int SOCKETPORT;
 
+    private static final Logger LOGGER = Logger.getLogger(SocketAcceptor.class.getName());
+
+
     public SocketAcceptor(ServerBase serverBase, DataServerConfiguration dataServerConfiguration){
         myserver = serverBase;
         this.SOCKETPORT = dataServerConfiguration.getSOCKETPORT();
+
+        Handler handlerObj = new ConsoleHandler();
+        handlerObj.setLevel(Level.ALL);
+        LOGGER.addHandler(handlerObj);
+        LOGGER.setLevel(Level.ALL);
+        LOGGER.setUseParentHandlers(false);
+
         accept();
     }
 
     public void accept(){
 
         try {
-            System.out.println("Acception Connection Socket");
+            LOGGER.log(Level.WARNING,"Acception Connection Socket");
             ServerSocket serversocket = new ServerSocket(SOCKETPORT);
-            System.out.println("OK serversocket");
+            LOGGER.log(Level.SEVERE,"serversocket created");
             while (true) {
-                System.out.println("Server listening");
+                LOGGER.log(Level.SEVERE,"Server listening");
                 Socket socket = serversocket.accept();
                 ClientManager clientSocket = new ClientManagerSocket (socket, myserver);
                 /*myserver.addClientManager(clientSocket);

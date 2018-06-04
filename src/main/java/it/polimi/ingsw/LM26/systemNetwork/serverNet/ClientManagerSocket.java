@@ -9,6 +9,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientManagerSocket extends ClientManager {
 
@@ -18,8 +22,8 @@ public class ClientManagerSocket extends ClientManager {
     private boolean logged;
     private String user;
     private int id;
-
     private DataOutputStream writer;
+    private static final Logger LOGGER = Logger.getLogger(ClientManagerSocket.class.getName());
 
     public ClientManagerSocket(Socket socket, ServerBase server){
 
@@ -35,6 +39,12 @@ public class ClientManagerSocket extends ClientManager {
         }catch (IOException e) {
 
         }
+
+        Handler handlerObj = new ConsoleHandler();
+        handlerObj.setLevel(Level.ALL);
+        LOGGER.addHandler(handlerObj);
+        LOGGER.setLevel(Level.ALL);
+        LOGGER.setUseParentHandlers(false);
 
         listenerClientManager = new ListenerClientManager(this, socket);
     }
@@ -64,7 +74,7 @@ public class ClientManagerSocket extends ClientManager {
 
     @Override
     public void connect() {
-        System.out.println("Server connected");
+        LOGGER.log(Level.WARNING,"Server connected");
         listenerClientManager.listen();
         //sendAvailableId();
         //requestedLogin();
@@ -73,7 +83,7 @@ public class ClientManagerSocket extends ClientManager {
     public void sendAvailableId(){
 
         server.addClientManager(this);
-        System.out.println("I'm adding " + server.lobbySize() + " elements" );
+        LOGGER.log(Level.SEVERE,"I'm adding " + server.lobbySize() + " elements" );
         id = getAvailableId();
         ConnectMessage message = new ConnectMessage("connected", id );
         message.dump();
@@ -98,7 +108,7 @@ public class ClientManagerSocket extends ClientManager {
     @Override
     public void login(String name) {
         if (!server.checkNumberUsers()) {
-            System.out.println("Too many users logged");
+            LOGGER.log(Level.SEVERE,"Too many users logged");
 
             DataMessage dataMessage = new DataMessage("too_many_users", name);
             sendMessage(dataMessage.serializeClassMessage());
@@ -106,12 +116,12 @@ public class ClientManagerSocket extends ClientManager {
         } else {
             boolean result = server.addView(name, this);
             if (result == false) {
-                System.out.println("not logged");
+                LOGGER.log(Level.SEVERE,"not logged");
                 DataMessage dataMessage = new DataMessage("not_logged", name);
                 sendMessage(dataMessage.serializeClassMessage());
                 listenerClientManager.listen();
             }else {
-                System.out.println("Logged");
+                LOGGER.log(Level.SEVERE,"Logged");
 
                 DataMessage dataMessage = new DataMessage("logged", name);
                 dataMessage.dump();
@@ -135,7 +145,7 @@ public class ClientManagerSocket extends ClientManager {
     @Override
     public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
 
-        System.out.println("server is asking a window pattern");
+        LOGGER.log(Level.SEVERE,"server is asking a window pattern");
         WindowInitialMessage windowInitialMessage= new WindowInitialMessage("send_windowlist", user, id, windowDeck);
         sendMessage(windowInitialMessage.serializeClassMessage());
     }
@@ -143,7 +153,7 @@ public class ClientManagerSocket extends ClientManager {
     @Override
     public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
 
-        System.out.println("I have received one windowcard from "+user);
+        LOGGER.log(Level.SEVERE,"I have received one windowcard from "+user);
         //notifyController();
     }
 }

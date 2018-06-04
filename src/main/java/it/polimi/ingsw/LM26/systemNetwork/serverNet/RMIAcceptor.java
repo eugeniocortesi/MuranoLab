@@ -5,6 +5,10 @@ import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfigur
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RMIAcceptor {
 
@@ -14,11 +18,20 @@ public class RMIAcceptor {
     private String address;
     private ClientManagerRemote stub;
 
+    private static final Logger LOGGER = Logger.getLogger(RMIAcceptor.class.getName());
+
     public RMIAcceptor(ServerBase serverBase, DataServerConfiguration data){
         myserver = serverBase;
         this.RMIPORTClient = data.getClientRMIPORT();
         this.RMIPORTServer = data.getServerRMIPORT();
         this.address = data.getIp();
+
+        Handler handlerObj = new ConsoleHandler();
+        handlerObj.setLevel(Level.ALL);
+        LOGGER.addHandler(handlerObj);
+        LOGGER.setLevel(Level.ALL);
+        LOGGER.setUseParentHandlers(false);
+
         bind();
     }
 
@@ -33,7 +46,7 @@ public class RMIAcceptor {
             stub = (ClientManagerRemote) UnicastRemoteObject.exportObject(clientManagerRemote, RMIPORTServer);
             Registry registry = LocateRegistry.createRegistry(RMIPORTServer);
             registry.bind("ClientManagerRemote",  stub);
-            System.err.println("Server ready, stub created");
+            LOGGER.log(Level.WARNING,"Server ready, stub created");
 
         }catch (Exception e){
             System.err.println("Server exception: " + e.toString());
