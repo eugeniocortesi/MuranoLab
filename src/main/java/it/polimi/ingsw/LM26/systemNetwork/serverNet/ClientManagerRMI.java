@@ -12,6 +12,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.RemoteServer;
 import java.rmi.server.ServerNotActiveException;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -34,11 +35,7 @@ public class ClientManagerRMI extends ClientManager {
         this.RMIPORTServer = RMIPORTServer;
         this.RMIPORTClient = RMIPORTClient;
         this.address = address;
-        Handler handlerObj = new ConsoleHandler();
-        handlerObj.setLevel(Level.ALL);
-        LOGGER.addHandler(handlerObj);
-        LOGGER.setLevel(Level.ALL);
-        LOGGER.setUseParentHandlers(false);
+
     }
 
     public void connect(){
@@ -53,6 +50,7 @@ public class ClientManagerRMI extends ClientManager {
             skeleton = (ClientViewRemote) registry.lookup("ClientViewRemote"+getAvailableId());
             LOGGER.log(Level.WARNING, "Took Skeleton");
             myserver.addClientManager(this);
+
             skeleton.requestedLogin();
         } catch (RemoteException e) {
             e.printStackTrace();

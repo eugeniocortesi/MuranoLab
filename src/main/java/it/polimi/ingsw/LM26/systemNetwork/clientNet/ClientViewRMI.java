@@ -36,11 +36,7 @@ public class ClientViewRMI implements ClientView {
         address = data.getIp();
         id = 0;
         
-        Handler handlerObj = new ConsoleHandler();
-        handlerObj.setLevel(Level.ALL);
-        LOGGER.addHandler(handlerObj);
-        LOGGER.setLevel(Level.ALL);
-        LOGGER.setUseParentHandlers(false);
+
         getStub();
     }
 

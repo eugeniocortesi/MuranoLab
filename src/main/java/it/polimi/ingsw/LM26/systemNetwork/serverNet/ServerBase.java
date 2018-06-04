@@ -26,7 +26,7 @@ public class ServerBase extends ViewGameInterface {
     public ServerBase(){
 
         playing = false;
-        clientManagerList = new ClientManagerList();
+
         lobby = new ArrayList<ClientManager>();
         dataServerImplementation = new DataServerImplementation();
         DataServerConfiguration dataServerConfiguration = dataServerImplementation.implementation();
@@ -41,18 +41,21 @@ public class ServerBase extends ViewGameInterface {
         }catch(UnknownHostException he){
             he.printStackTrace();
         }
+
+        clientManagerList = new ClientManagerList(this);
+
         rmiAcceptor = new RMIAcceptor(this, dataServerConfiguration);
         socketAcceptor = new SocketAcceptor(this, dataServerConfiguration);
 
     }
 
-    public boolean addView(String s, ClientManager clientManager){
+    public synchronized boolean addView(String s, ClientManager clientManager){
         if(checkNumberUsers())
             return clientManagerList.addClientManager(s, clientManager);
         return false;
     }
 
-    public void addClientManager(ClientManager clientManager){
+    public synchronized void addClientManager(ClientManager clientManager){
         lobby.add(clientManager);
     }
 

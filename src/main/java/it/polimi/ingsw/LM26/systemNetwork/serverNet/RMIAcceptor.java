@@ -26,12 +26,6 @@ public class RMIAcceptor {
         this.RMIPORTServer = data.getServerRMIPORT();
         this.address = data.getIp();
 
-        Handler handlerObj = new ConsoleHandler();
-        handlerObj.setLevel(Level.ALL);
-        LOGGER.addHandler(handlerObj);
-        LOGGER.setLevel(Level.ALL);
-        LOGGER.setUseParentHandlers(false);
-
         bind();
     }
 
@@ -42,6 +36,8 @@ public class RMIAcceptor {
 
         try{
             ClientManager clientManagerRMI = new ClientManagerRMI(myserver, this.RMIPORTServer, this.RMIPORTClient, address);
+            Thread t = new Thread(clientManagerRMI);
+            t.start();
             ClientManagerRemote clientManagerRemote = new ClientManagerRMIRemote(clientManagerRMI);
             stub = (ClientManagerRemote) UnicastRemoteObject.exportObject(clientManagerRemote, RMIPORTServer);
             Registry registry = LocateRegistry.createRegistry(RMIPORTServer);

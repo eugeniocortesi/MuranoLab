@@ -22,13 +22,6 @@ public class SocketAcceptor {
     public SocketAcceptor(ServerBase serverBase, DataServerConfiguration dataServerConfiguration){
         myserver = serverBase;
         this.SOCKETPORT = dataServerConfiguration.getSOCKETPORT();
-
-        Handler handlerObj = new ConsoleHandler();
-        handlerObj.setLevel(Level.ALL);
-        LOGGER.addHandler(handlerObj);
-        LOGGER.setLevel(Level.ALL);
-        LOGGER.setUseParentHandlers(false);
-
         accept();
     }
 
@@ -42,10 +35,10 @@ public class SocketAcceptor {
                 LOGGER.log(Level.SEVERE,"Server listening");
                 Socket socket = serversocket.accept();
                 ClientManager clientSocket = new ClientManagerSocket (socket, myserver);
-                /*myserver.addClientManager(clientSocket);
-                System.out.println("I'm adding " + myserver.lobbySize() + " elements" );*/
+                Thread t = new Thread(clientSocket);
 
-                clientSocket.start();
+                t.start();
+                //clientSocket.start();
 
             }
         }

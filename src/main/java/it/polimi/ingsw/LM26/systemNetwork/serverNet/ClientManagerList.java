@@ -1,12 +1,19 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
-import java.util.HashMap;
 
-public class ClientManagerList {
+import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
+
+public class ClientManagerList{
 
     private HashMap<String, ClientManager> managerHashMap;
+    private ServerBase myserver;
 
-    public ClientManagerList(){
+
+    public ClientManagerList(ServerBase serverBase){
+
+        myserver = serverBase;
         managerHashMap = new HashMap<String, ClientManager>();
     }
 
@@ -15,6 +22,8 @@ public class ClientManagerList {
             return false;
         else{
             managerHashMap.put(name, clientManager);
+            /*if(size()>=4)
+                clientManager.;*/
             return true;
         }
 
@@ -34,4 +43,5 @@ public class ClientManagerList {
     public int size(){
         return managerHashMap.size();
     }
+
 }

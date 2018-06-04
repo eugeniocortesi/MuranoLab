@@ -40,20 +40,20 @@ public class ClientManagerSocket extends ClientManager {
 
         }
 
-        Handler handlerObj = new ConsoleHandler();
-        handlerObj.setLevel(Level.ALL);
-        LOGGER.addHandler(handlerObj);
-        LOGGER.setLevel(Level.ALL);
-        LOGGER.setUseParentHandlers(false);
-
         listenerClientManager = new ListenerClientManager(this, socket);
+    }
+
+    public String getName(){
+        return this.user;
     }
 
     public void sendMessage(String messageSent) {
 
+
         if(messageSent == null ){
             return;
         }
+        //LOGGER.log(Level.WARNING, messageSent);
         try{
             //TODO CHANGE SOMETHING
             this.writer.writeBytes(messageSent  + "\n");
@@ -83,6 +83,7 @@ public class ClientManagerSocket extends ClientManager {
     public void sendAvailableId(){
 
         server.addClientManager(this);
+
         LOGGER.log(Level.SEVERE,"I'm adding " + server.lobbySize() + " elements" );
         id = getAvailableId();
         ConnectMessage message = new ConnectMessage("connected", id );
@@ -119,7 +120,7 @@ public class ClientManagerSocket extends ClientManager {
                 LOGGER.log(Level.SEVERE,"not logged");
                 DataMessage dataMessage = new DataMessage("not_logged", name);
                 sendMessage(dataMessage.serializeClassMessage());
-                listenerClientManager.listen();
+
             }else {
                 LOGGER.log(Level.SEVERE,"Logged");
 
@@ -129,7 +130,8 @@ public class ClientManagerSocket extends ClientManager {
                 sendMessage(dataMessage.serializeClassMessage());
             }
         }
-        //listenerClientManager.listen();
+
+        listenerClientManager.listen();
     }
 
     @Override
@@ -155,5 +157,6 @@ public class ClientManagerSocket extends ClientManager {
 
         LOGGER.log(Level.SEVERE,"I have received one windowcard from "+user);
         //notifyController();
+        listenerClientManager.listen();
     }
 }

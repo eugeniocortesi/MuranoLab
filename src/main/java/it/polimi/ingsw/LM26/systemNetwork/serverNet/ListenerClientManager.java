@@ -29,12 +29,6 @@ public class ListenerClientManager {
         }catch (IOException e) {
 
         }
-
-        Handler handlerObj = new ConsoleHandler();
-        handlerObj.setLevel(Level.ALL);
-        LOGGER.addHandler(handlerObj);
-        LOGGER.setLevel(Level.ALL);
-        LOGGER.setUseParentHandlers(false);
     }
 
     public String receiveMessage() {
@@ -56,28 +50,15 @@ public class ListenerClientManager {
     }
 
     public void listen() {
-        try {
-            String message = null;
-            while (message == null)
-                message = receiveMessage();
-            if (message!= null){
-                LOGGER.log(Level.SEVERE,"Message " + message);
-                recognize(message);
+        String message = null;
+        while (message == null)
+            message = receiveMessage();
+        if (message!= null){
+            LOGGER.log(Level.SEVERE,"Message " + message);
+            recognize(message);
 
-                message = null;
-            }
-
-
-        } catch (Exception e) {
-        } finally {
-
-            try {
-                socket.close();
-            } catch (IOException e) {
-                System.err.println("Socket not closed");
-            }
+            message = null;
         }
-
     }
 
     //parsing of messages

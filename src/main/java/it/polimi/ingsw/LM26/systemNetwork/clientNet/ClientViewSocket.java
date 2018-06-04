@@ -40,11 +40,11 @@ public class ClientViewSocket implements ClientView {
         SOCKETPORT = data.getClientSOCKETPORT();
         address = data.getIp();
 
-        Handler handlerObj = new ConsoleHandler();
+       /* Handler handlerObj = new ConsoleHandler();
         handlerObj.setLevel(Level.ALL);
         LOGGER.addHandler(handlerObj);
         LOGGER.setLevel(Level.ALL);
-        LOGGER.setUseParentHandlers(false);
+        LOGGER.setUseParentHandlers(false);*/
 
         //listenerClientView.listen();
     }
@@ -139,7 +139,6 @@ public class ClientViewSocket implements ClientView {
     @Override
     public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
         WindowAnswerMessage message = new WindowAnswerMessage("send_windowcard", windowcard);
-        message.dump();
         outSocket.println(message.serializeClassMessage());
         listenerClientView.listen();
     }

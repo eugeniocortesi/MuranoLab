@@ -38,12 +38,6 @@ public class ListenerClientView {
         } catch (IOException e) {
 
         }
-
-        Handler handlerObj = new ConsoleHandler();
-        handlerObj.setLevel(Level.ALL);
-        LOGGER.addHandler(handlerObj);
-        LOGGER.setLevel(Level.ALL);
-        LOGGER.setUseParentHandlers(false);
     }
 
     public String receiveMessage(){
@@ -67,9 +61,10 @@ public class ListenerClientView {
         LOGGER.log(Level.SEVERE,"I'm listening");
         String message = null;
         //while (message == null) {
-            while(message == null)
+            while(message == null) {
+                //LOGGER.log(Level.INFO,"Message null: " + message);
                 message = receiveMessage();
-
+            }
             if (message!= null){
                 LOGGER.log(Level.INFO,"Message " + message);
                 recognize(message);
