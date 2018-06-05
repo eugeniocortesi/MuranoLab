@@ -2,10 +2,11 @@ package it.polimi.ingsw.LM26.model.PlayArea.diceObjects;
 
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Bag {
+public class Bag implements Serializable{
 
     private ArrayList<DieInt> inBag;
 

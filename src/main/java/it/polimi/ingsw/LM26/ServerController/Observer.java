@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.systemNetwork.ServerController;
+package it.polimi.ingsw.LM26.ServerController;
 
 public interface Observer<T> {
 

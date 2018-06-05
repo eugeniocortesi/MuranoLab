@@ -3,9 +3,10 @@ package it.polimi.ingsw.LM26.model.PlayArea;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class OnBoardCards {
+public class OnBoardCards implements Serializable {
 
     private ArrayList<ObjectivePublicCard>  objectivePublicCardList;
 

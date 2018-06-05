@@ -2,9 +2,10 @@ package it.polimi.ingsw.LM26.model.PlayArea.roundTrack;
 
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public interface RoundTrackInt{
+public interface RoundTrackInt extends Serializable{
 
     public int getCurrentTurn();
 

@@ -2,7 +2,9 @@ package it.polimi.ingsw.LM26.model.Cards.windowMatch;
 
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 
-public class Box {
+import java.io.Serializable;
+
+public class Box implements Serializable{
 
     private PatternBox patternBox = null;
 

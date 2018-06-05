@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.systemNetwork.ServerController;
+package it.polimi.ingsw.LM26.ServerController;
 
 import java.util.ArrayList;
 import java.util.List;

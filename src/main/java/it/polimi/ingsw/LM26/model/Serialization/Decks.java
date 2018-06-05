@@ -15,12 +15,13 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.PlayArea.Color.*;
 
-public class Decks {
+public class Decks implements Serializable {
 
     private ArrayList<ObjectivePublicCard> ObjectivePublicCardDeck;
 

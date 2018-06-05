@@ -1,4 +1,6 @@
 package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 
-public interface PlayerZoneInt {
+import java.io.Serializable;
+
+public interface PlayerZoneInt extends Serializable {
 }

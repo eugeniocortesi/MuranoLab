@@ -1,8 +1,9 @@
 package it.polimi.ingsw.LM26.model.PlayArea.diceObjects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DraftPool {
+public class DraftPool implements Serializable {
 
     private ArrayList<DieInt> inDraft;
 

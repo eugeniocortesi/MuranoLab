@@ -4,7 +4,9 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
-public interface ToolCardInt {
+import java.io.Serializable;
+
+public interface ToolCardInt extends Serializable{
 
     public int getNum();
     public void printCard();

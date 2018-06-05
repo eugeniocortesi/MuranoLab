@@ -1,10 +1,12 @@
-package it.polimi.ingsw.LM26.controller;
+package it.polimi.ingsw.LM26.ServerController;
 
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 
-public class ActionEvent {
+import java.io.Serializable;
+
+public class ActionEvent implements Serializable {
 
     private int ID=1;
     private int player;

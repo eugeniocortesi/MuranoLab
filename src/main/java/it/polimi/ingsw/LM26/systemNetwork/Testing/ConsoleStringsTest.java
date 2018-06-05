@@ -1,6 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.Testing;
 
-import it.polimi.ingsw.LM26.controller.ActionEvent;
+import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;

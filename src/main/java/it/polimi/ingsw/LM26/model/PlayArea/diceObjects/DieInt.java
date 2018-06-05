@@ -2,7 +2,9 @@ package it.polimi.ingsw.LM26.model.PlayArea.diceObjects;
 
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
-public interface DieInt {
+import java.io.Serializable;
+
+public interface DieInt extends Serializable{
 
     public Color getColor();
 
