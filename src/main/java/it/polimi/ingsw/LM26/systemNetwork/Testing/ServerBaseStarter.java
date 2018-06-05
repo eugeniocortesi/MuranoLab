@@ -11,7 +11,7 @@ import java.util.Observer;
 
 public class ServerBaseStarter {
 
-    public static void main(String[] args){
+   /* public static void main(String[] args){
         ServerBase server = new ServerBase();
         Model model = SingletonModel.singletonModel();
         Observer ct = new ControllerBaseTest(model, server);
@@ -25,5 +25,5 @@ public class ServerBaseStarter {
             e.printStackTrace();
         }
 
-    }
+    }*/
 }

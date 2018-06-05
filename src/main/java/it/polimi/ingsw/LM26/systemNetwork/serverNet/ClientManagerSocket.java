@@ -125,6 +125,7 @@ public class ClientManagerSocket extends ClientManager {
                 DataMessage dataMessage = new DataMessage("logged", name);
                 dataMessage.dump();
                 this.user= name;
+                server.checkPlayers();
                 sendMessage(dataMessage.serializeClassMessage());
             }
         }

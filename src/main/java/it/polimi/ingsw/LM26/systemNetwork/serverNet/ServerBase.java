@@ -1,5 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
+import it.polimi.ingsw.LM26.ServerController.Observer;
+import it.polimi.ingsw.LM26.controller.ControllerInt;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.SingletonModel;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 
 public class ServerBase extends ViewGameInterface {
 
+    private Observer controller;
     private RMIAcceptor rmiAcceptor;
     private SocketAcceptor socketAcceptor;
     private ClientManagerList clientManagerList;
@@ -23,8 +26,9 @@ public class ServerBase extends ViewGameInterface {
 
     private DataServerImplementation dataServerImplementation;
 
-    public ServerBase(){
+    public ServerBase(Observer controllerInt){
 
+        controller = controllerInt;
         playing = false;
 
         lobby = new ArrayList<ClientManager>();
@@ -47,6 +51,10 @@ public class ServerBase extends ViewGameInterface {
         rmiAcceptor = new RMIAcceptor(this, dataServerConfiguration);
         socketAcceptor = new SocketAcceptor(this, dataServerConfiguration);
 
+    }
+
+    public Observer getController() {
+        return controller;
     }
 
     public synchronized boolean addView(String s, ClientManager clientManager){
@@ -86,8 +94,14 @@ public class ServerBase extends ViewGameInterface {
         return false;
     }
 
+    public void checkPlayers(){
+        clientManagerList.checkNumberLogged();
+    }
+
     @Override
     public void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
+        System.out.println("called");
         clientManagerList.getClientManager(user).choseWindowPattern(user, id, windowDeck);
+
     }
 }
