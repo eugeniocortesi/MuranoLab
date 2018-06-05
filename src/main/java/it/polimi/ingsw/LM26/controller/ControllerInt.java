@@ -1,5 +1,7 @@
 package it.polimi.ingsw.LM26.controller;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEvent;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -17,6 +19,8 @@ public interface ControllerInt extends it.polimi.ingsw.LM26.ServerController.Obs
     //TODO
     //ecc.. manca la 12
     public boolean check(String noAction, int player);*/
+
+    public boolean checkEvent(ActionEvent actionEvent);
 
 
 }

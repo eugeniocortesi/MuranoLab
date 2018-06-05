@@ -93,4 +93,9 @@ public class ConnectionToServer extends ClientHandlerInt implements ControllerIn
     public void updateAction(ActionEvent actionEvent) {
 
     }
+
+    @Override
+    public boolean checkEvent(ActionEvent actionEvent) {
+        return false;
+    }
 }

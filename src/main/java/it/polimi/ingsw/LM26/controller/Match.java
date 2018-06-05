@@ -22,11 +22,11 @@ public class Match {
     private ActionEvent event;
     private CentralPhase centralPhase;
     private Game game;
-    private Controller controller;
+    private ControllerInt controller;
 
 
 
-    public Match(Model model, Controller controller ) {
+    public Match(Model model, ControllerInt controller ) {
 
         this.controller=controller;
         this.game = new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());  //initialPhase
