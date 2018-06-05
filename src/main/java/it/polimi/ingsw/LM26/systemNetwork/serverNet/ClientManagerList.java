@@ -7,6 +7,7 @@ public class ClientManagerList{
 
     private HashMap<String, ClientManager> managerHashMap;
     private ServerBase myserver;
+    private ObservableQueue controllerObservables;
 
 
     public ClientManagerList(ServerBase serverBase){
