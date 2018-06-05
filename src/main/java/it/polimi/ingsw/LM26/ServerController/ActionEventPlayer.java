@@ -9,6 +9,11 @@ public class ActionEventPlayer implements Serializable {
 
     private ArrayList<String> users;
 
+    public ActionEventPlayer(String m, ArrayList<String> u){
+        methodPlayer = m;
+        users = u;
+    }
+
     public String getMethodPlayer() {
         return methodPlayer;
     }
