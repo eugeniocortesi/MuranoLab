@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.controller;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEvent;
+import it.polimi.ingsw.LM26.ServerController.ActionEventPlayer;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.RollAgainADie6;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
@@ -239,18 +240,34 @@ public class Controller implements ControllerInt {
         //view.showLogin()
     }
 
-    public void setupPlayers(){
+   /* public void setupPlayers(ArrayList<String> names){
 
-        String[] names;
+        //String[] names;
         //server.playersName();
         //for(int i=0; i<names;i++){
         //create new player
         //view.showAddedPlayer();
         // }
 
+        ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
+        int i=names.size();
+
+        for(int j=0; j<i; j++){
+            PlayerZone player = new PlayerZone(names.get(j), j);
+            player.setNumberPlayer(j);
+            playerList.add(player);
+
+        }
+
+        model.setPlayerList(playerList);
+    }*/
+
+
         //TODO DELETE PLAYERS
 
-        PlayerZone player1 = new PlayerZone("Eugenio", 0);
+    public void setupPlayers(){
+
+        PlayerZone player1 = new PlayerZone("eugenio", 0);
         PlayerZone player2 = new PlayerZone("Chiara", 1);
        // PlayerZone player3 = new PlayerZone( "Claudia", 2);
        // PlayerZone player4 = new PlayerZone("Tommaso", 3);
@@ -261,6 +278,7 @@ public class Controller implements ControllerInt {
        // player4.setNumberPlayer(3);
 
         ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
+
         playerList.add(player1);
         playerList.add(player2);
         //playerList.add(player3);
@@ -275,14 +293,6 @@ public class Controller implements ControllerInt {
 
     }
 
-    public void update(Observable o, Object arg){
-
-        //i parametri sono viewInt, actionEvent
-
-       setActionEvent((ActionEvent)arg);
-
-    }
-
 
     public void setActionEvent(ActionEvent newEvent ){
         match.setActionEvent(newEvent);
@@ -294,6 +304,20 @@ public class Controller implements ControllerInt {
     }
 
 
+    @Override
+    public void updatePlayers(ActionEventPlayer actionEventPlayer) {
+
+        /*if(actionEventPlayer.getMethodPlayer().equals("ready"))
+
+            setupPlayers(actionEventPlayer.getUsers());*/
+    }
+
+    @Override
+    public void updateAction(ActionEvent actionEvent) {
+
+        setActionEvent(actionEvent);
+
+    }
 }
 
 

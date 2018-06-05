@@ -1,5 +1,7 @@
 package it.polimi.ingsw.LM26.network.client;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEvent;
+import it.polimi.ingsw.LM26.ServerController.ActionEventPlayer;
 import it.polimi.ingsw.LM26.controller.ControllerInt;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
@@ -82,4 +84,13 @@ public class ConnectionToServer extends ClientHandlerInt implements ControllerIn
     }
 
 
+    @Override
+    public void updatePlayers(ActionEventPlayer actionEventPlayer) {
+
+    }
+
+    @Override
+    public void updateAction(ActionEvent actionEvent) {
+
+    }
 }

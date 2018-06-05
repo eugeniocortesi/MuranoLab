@@ -3,7 +3,7 @@ package it.polimi.ingsw.LM26.controller;
 import java.util.Observable;
 import java.util.Observer;
 
-public interface ControllerInt extends Observer {
+public interface ControllerInt extends it.polimi.ingsw.LM26.ServerController.Observer {
 
     /*public boolean check(Die dieFromDraft, Box toBox, int player);
 
@@ -17,8 +17,6 @@ public interface ControllerInt extends Observer {
     //TODO
     //ecc.. manca la 12
     public boolean check(String noAction, int player);*/
-
-    void update(Observable o, Object arg);
 
 
 }

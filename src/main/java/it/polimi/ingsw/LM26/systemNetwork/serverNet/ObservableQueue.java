@@ -1,5 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEvent;
+import it.polimi.ingsw.LM26.ServerController.ActionEventPlayer;
 import it.polimi.ingsw.LM26.ServerController.Observable;
 import it.polimi.ingsw.LM26.ServerController.Observer;
 
@@ -19,7 +21,12 @@ public class ObservableQueue extends Observable {
     }
 
     @Override
-    protected void notify(Object message) {
+    protected void notify(ActionEvent message) {
+        super.notify(message);
+    }
+
+    @Override
+    protected void notify(ActionEventPlayer message) {
         super.notify(message);
     }
 }
