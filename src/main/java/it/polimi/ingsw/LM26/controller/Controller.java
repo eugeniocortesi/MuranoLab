@@ -1,17 +1,12 @@
 package it.polimi.ingsw.LM26.controller;
 
-import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.RollAgainADie6;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.ToolCardDecorator;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
-import it.polimi.ingsw.LM26.view.ViewInt;
-import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 
 import java.util.ArrayList;
 import java.util.Observable;

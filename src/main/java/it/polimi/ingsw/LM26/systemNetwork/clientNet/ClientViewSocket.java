@@ -2,17 +2,14 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
-import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowAnswerMessage;
-import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -121,6 +118,7 @@ public class ClientViewSocket implements ClientView {
     @Override
     public void tooManyUsers() {
         concreteClientView.showTooManyUsersScreen();
+        listenerClientView.listen();
     }
 
     @Override

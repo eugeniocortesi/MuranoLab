@@ -1,7 +1,6 @@
 package it.polimi.ingsw.LM26.network.networkTesting;
 
 import it.polimi.ingsw.LM26.network.client.ClientRMIImpl;
-import it.polimi.ingsw.LM26.network.client.ConnectionFromServer;
 import it.polimi.ingsw.LM26.network.server.RMI.VirtualViewRMIImpl;
 import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
 import it.polimi.ingsw.LM26.view.ViewInt;

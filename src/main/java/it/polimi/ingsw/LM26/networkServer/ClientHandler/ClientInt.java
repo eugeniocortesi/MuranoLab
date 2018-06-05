@@ -1,8 +1,6 @@
 package it.polimi.ingsw.LM26.networkServer.ClientHandler;
 
 
-import java.rmi.Remote;
-
 public interface ClientInt extends Runnable {
 
     public void disconnect();

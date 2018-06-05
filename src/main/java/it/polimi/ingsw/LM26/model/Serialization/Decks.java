@@ -4,18 +4,21 @@ package it.polimi.ingsw.LM26.model.Serialization;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import it.polimi.ingsw.LM26.model.Cards.*;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
+import it.polimi.ingsw.LM26.model.Cards.ToolCard;
+import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.*;
-import it.polimi.ingsw.LM26.model.Cards.factory.CardCreator;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.PlayArea.Color.*;
-import static it.polimi.ingsw.LM26.model.Serialization.Elements.elements.*;
 
 public class Decks {
 

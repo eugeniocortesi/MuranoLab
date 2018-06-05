@@ -1,8 +1,8 @@
 package it.polimi.ingsw.LM26.network.networkTesting;
 
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
 
 import java.io.*;
 import java.net.Socket;

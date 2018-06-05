@@ -2,7 +2,6 @@ package it.polimi.ingsw.LM26.systemNetwork.Testing;
 
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.SingletonModel;
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientBase;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 
 import java.io.BufferedReader;

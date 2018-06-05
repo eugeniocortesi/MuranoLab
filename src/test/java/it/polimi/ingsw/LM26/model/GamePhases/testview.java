@@ -1,18 +1,7 @@
 package it.polimi.ingsw.LM26.model.GamePhases;
 
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.model.Serialization.Decks;
-import it.polimi.ingsw.LM26.model.Serialization.SingletonDecks;
-import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 import it.polimi.ingsw.LM26.view.cli.ConsoleTools;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
-import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
 
 
 

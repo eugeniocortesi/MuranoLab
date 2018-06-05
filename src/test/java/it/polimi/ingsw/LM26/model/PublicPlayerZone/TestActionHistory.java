@@ -2,10 +2,6 @@ package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 
 import org.junit.Test;
 
-import javax.swing.*;
-
-import static org.junit.Assert.*;
-
 public class TestActionHistory {
 
     ActionHistory action = new ActionHistory();

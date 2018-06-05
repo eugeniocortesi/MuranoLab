@@ -1,8 +1,5 @@
 package it.polimi.ingsw.LM26.network.server.RMI;
 
-import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualView;
-import it.polimi.ingsw.LM26.networkServer.ClientHandler.VirtualViewInt;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

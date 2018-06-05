@@ -1,5 +1,5 @@
 package it.polimi.ingsw.LM26.model.Serialization;
-import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+
 import org.junit.Test;
 
 import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;

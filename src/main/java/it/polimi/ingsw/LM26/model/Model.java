@@ -10,7 +10,6 @@ import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;

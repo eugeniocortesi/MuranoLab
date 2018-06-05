@@ -7,9 +7,9 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.Token;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 

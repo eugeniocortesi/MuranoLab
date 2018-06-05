@@ -2,8 +2,6 @@ package it.polimi.ingsw.LM26.networkServer.ClientHandler;
 
 import it.polimi.ingsw.LM26.networkServer.Client.ClientImplementationRMI;
 
-import java.rmi.RemoteException;
-
 public class ClientRMI implements ClientInt {
 
     //scrittura su RMI bloccante per il client che chiede al server

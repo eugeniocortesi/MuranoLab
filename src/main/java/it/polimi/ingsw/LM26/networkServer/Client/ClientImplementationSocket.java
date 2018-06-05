@@ -5,8 +5,8 @@ import it.polimi.ingsw.LM26.networkServer.Data.ClientLoginData;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
 
-import java.net.*;
 import java.io.*;
+import java.net.Socket;
 
 
 public class ClientImplementationSocket {

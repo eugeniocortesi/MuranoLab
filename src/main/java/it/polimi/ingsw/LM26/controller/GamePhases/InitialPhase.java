@@ -1,6 +1,6 @@
 package it.polimi.ingsw.LM26.controller.GamePhases;
 
-import it.polimi.ingsw.LM26.model.Cards.*;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
@@ -8,8 +8,9 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.Token;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
-import java.util.*;
+
 import java.util.ArrayList;
+import java.util.Random;
 
 public class InitialPhase implements PhaseInt {
 

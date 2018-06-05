@@ -1,11 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol;
 
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
-
-import java.io.IOException;
-import java.io.StringReader;
 
 public class ConnectMessage extends ClassMessage {
     String op;

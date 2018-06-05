@@ -3,7 +3,6 @@ package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
 public abstract class ClientManager implements Runnable {
 

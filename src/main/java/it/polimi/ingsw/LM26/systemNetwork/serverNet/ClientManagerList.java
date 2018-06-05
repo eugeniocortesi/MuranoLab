@@ -2,8 +2,6 @@ package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
 
 import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
 
 public class ClientManagerList{
 

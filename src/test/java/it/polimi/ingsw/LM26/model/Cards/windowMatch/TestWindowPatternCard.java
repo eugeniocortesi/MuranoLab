@@ -1,11 +1,9 @@
 package it.polimi.ingsw.LM26.model.Cards.windowMatch;
 
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
-import it.polimi.ingsw.LM26.model.Serialization.SingletonDecks;
 import org.junit.Test;
 
 import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
-import static org.junit.Assert.*;
 
 public class TestWindowPatternCard {
 

@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.InetAddress;
 
 public class DataClientConfiguration {
 

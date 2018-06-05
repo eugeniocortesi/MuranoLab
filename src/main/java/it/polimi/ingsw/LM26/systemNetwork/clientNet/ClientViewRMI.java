@@ -4,7 +4,6 @@ package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManagerRemote;
-import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -12,8 +11,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

@@ -2,8 +2,6 @@ package it.polimi.ingsw.LM26.model.PlayArea.diceObjects;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class TestDraftPool {
 
     DraftPool draftPool = new DraftPool();

@@ -5,8 +5,6 @@ import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfigur
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

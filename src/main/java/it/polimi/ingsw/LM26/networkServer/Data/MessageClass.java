@@ -1,7 +1,5 @@
 package it.polimi.ingsw.LM26.networkServer.Data;
 
-import com.google.gson.Gson;
-
 public abstract class MessageClass {
 
     private String operation;

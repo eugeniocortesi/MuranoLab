@@ -2,8 +2,6 @@ package it.polimi.ingsw.LM26.networkServer.ClientHandler;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.Observable;
-import java.util.Observer;
 
 public interface VirtualViewInt extends Remote {
 

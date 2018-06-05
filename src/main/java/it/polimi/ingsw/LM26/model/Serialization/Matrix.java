@@ -1,8 +1,8 @@
 package it.polimi.ingsw.LM26.model.Serialization;
 
 
-import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.PatternBox;
+import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.Serialization.Elements.elements;
 
 import static it.polimi.ingsw.LM26.model.Serialization.Elements.elements.*;

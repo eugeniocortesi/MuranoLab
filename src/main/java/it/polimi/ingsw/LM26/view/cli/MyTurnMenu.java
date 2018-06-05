@@ -1,8 +1,6 @@
 package it.polimi.ingsw.LM26.view.cli;
 
 
-import it.polimi.ingsw.LM26.view.cli.PlayerMenuInt;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
