@@ -77,7 +77,10 @@ public class ClientManagerRMI extends ClientManager {
         LOGGER.log(Level.SEVERE,"User tries to connect with username : " + name);
         if (myserver.checkNumberUsers()){
             boolean result = myserver.addView(name, this);
-            if(result) this.user = name;
+            if(result){
+                this.user = name;
+                myserver.checkPlayers();
+            }
             LOGGER.log(Level.INFO,"The add result value: " + result);
             try {
                 skeleton.logged(result, name);

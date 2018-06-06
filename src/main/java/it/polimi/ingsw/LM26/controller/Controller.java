@@ -2,16 +2,21 @@ package it.polimi.ingsw.LM26.controller;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.ServerController.ActionEventPlayer;
+import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.RollAgainADie6;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.ViewGameInterface;
+import it.polimi.ingsw.LM26.view.ViewInt;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Random;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
@@ -19,7 +24,7 @@ public class Controller implements ControllerInt {
 
     private Model model;
     private Match match;
-    private ServerBase server;
+    private ViewGameInterface server;
 
     public Controller() {
 
@@ -44,6 +49,7 @@ public class Controller implements ControllerInt {
 
     public void startServer(){
         server= new ServerBase(this);
+        server.startAcceptor();
     }
 
     public boolean checkEvent( ActionEvent event){
@@ -270,20 +276,63 @@ public class Controller implements ControllerInt {
         if(playerList== null)
             System.out.println("qualcosa è nullo");
         model.setPlayerList(playerList);
-        //newMatch(model, this);
+
         setupWindowCard();
 
     }
 
 
     public void setupWindowCard(){
+
+        ArrayList<WindowPatternCard> windowlist = createWindowPattern();
+
         for(int i=0; i< model.getPlayerList().size(); i++){
             if(model.getPlayerList().get(i).getName() == null)
                     System.out.println("name null");
             else if(model.getDecks().getWindowPatternCardDeck()== null)
                 System.out.println("cards null");
-            server.showWindowPattern(model.getPlayerList().get(i).getName(), model.getPlayerList().get(i).getIDPlayer(), model.getDecks().getWindowPatternCardDeck());
+            if(server== null)
+                System.out.println("server: " + server);
+            server.showWindowPattern(model.getPlayerList().get(i).getName(), model.getPlayerList().get(i).getIDPlayer(), windowlist);
+
         }
+        //newMatch(model, this);
+    }
+
+    public void assignWindowCard(String name, WindowPatternCard windowPatternCard){
+
+        //TODO SOMETHING
+        model.getPlayer(name).setWindowPatternCard(windowPatternCard);
+        model.getPlayer(name).getWindowPatternCard().printCard();
+    }
+
+    public ArrayList<WindowPatternCard> createWindowPattern(){
+        ArrayList<WindowPatternCard> temp = new ArrayList<WindowPatternCard>();
+        ArrayList<WindowPatternCard> four = new ArrayList<WindowPatternCard>();
+
+        temp.addAll(model.getDecks().getWindowPatternCardDeck());
+
+        int count= temp.size();
+
+
+        for(int i=0; i<model.getPlayerList().size(); i++) {
+
+            for (int j = 0; j < 4; j++) {
+
+                Random rand = new Random();
+                int index = rand.nextInt(count);
+                while (temp.get(index).isInUse() == true) {
+                    rand = new Random();
+                    index = rand.nextInt(count);
+                }
+
+
+                four.add(temp.get(index));
+                temp.remove(index);
+                count = temp.size();
+            }
+        }
+        return four;
     }
 
         //TODO DELETE PLAYERS
@@ -340,6 +389,12 @@ public class Controller implements ControllerInt {
 
         //setActionEvent(actionEvent);
 
+    }
+
+    @Override
+    public void updateWindowPattern(ActionEventWindow actionEventWindow) {
+        //assegna ogni carta al player
+        assignWindowCard(actionEventWindow.getName(), actionEventWindow.getWindowPatternCard());
     }
 }
 

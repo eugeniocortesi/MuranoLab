@@ -112,6 +112,22 @@ public class Model extends Observable implements Serializable {
         this.draftPool = draftPool;
     }
 
+    public PlayerZone getPlayer(String name){
+        for(int i=0; i<playerList.size(); i++){
+            if(playerList.get(i).getName().equals(name))
+                return playerList.get(i);
+        }
+        return null;
+    }
+
+    public PlayerZone getPlayer(int id){
+        for(int i=0; i<playerList.size(); i++){
+            if(playerList.get(i).getIDPlayer()== id)
+                return playerList.get(i);
+        }
+        return null;
+    }
+
     @Override
     public void notifyObservers() {
 

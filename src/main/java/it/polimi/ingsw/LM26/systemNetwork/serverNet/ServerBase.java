@@ -25,6 +25,7 @@ public class ServerBase extends ViewGameInterface {
     private boolean playing;
 
     private DataServerImplementation dataServerImplementation;
+    private DataServerConfiguration dataServerConfiguration;
 
     public ServerBase(Observer controllerInt){
 
@@ -33,7 +34,7 @@ public class ServerBase extends ViewGameInterface {
 
         lobby = new ArrayList<ClientManager>();
         dataServerImplementation = new DataServerImplementation();
-        DataServerConfiguration dataServerConfiguration = dataServerImplementation.implementation();
+        dataServerConfiguration = dataServerImplementation.implementation();
 
         System.out.println("SocketPort " +dataServerConfiguration.getSOCKETPORT()+ " ClientRMI " + dataServerConfiguration.getClientRMIPORT()
                 + " ServerRMI "+ dataServerConfiguration.getServerRMIPORT());
@@ -48,9 +49,12 @@ public class ServerBase extends ViewGameInterface {
 
         clientManagerList = new ClientManagerList(this);
 
+
+    }
+
+    public void startAcceptor(){
         rmiAcceptor = new RMIAcceptor(this, dataServerConfiguration);
         socketAcceptor = new SocketAcceptor(this, dataServerConfiguration);
-
     }
 
     public Observer getController() {

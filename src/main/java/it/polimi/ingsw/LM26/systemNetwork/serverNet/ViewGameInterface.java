@@ -9,4 +9,6 @@ public abstract class ViewGameInterface extends Observable {
 
     public abstract void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck);
 
+    public abstract void startAcceptor();
+
 }

@@ -6,4 +6,6 @@ public interface Observer<T> {
     void updatePlayers(ActionEventPlayer actionEventPlayer);
 
     void updateAction(ActionEvent actionEvent);
+
+    void updateWindowPattern(ActionEventWindow actionEventWindow);
 }

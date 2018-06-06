@@ -148,4 +148,9 @@ public class ConsoleStringsTest extends ViewInterface {
         clientView.chosenWindowPattern(user, windowDeck.get(n-1));
     }
 
+    @Override
+    public void startAcceptor() {
+
+    }
+
 }
