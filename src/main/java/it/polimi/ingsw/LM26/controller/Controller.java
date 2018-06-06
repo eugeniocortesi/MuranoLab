@@ -23,7 +23,8 @@ public class Controller implements ControllerInt {
 
     public Controller() {
 
-        //server= new ServerBase();
+
+
         this.model = singletonModel();
 
 
@@ -31,13 +32,18 @@ public class Controller implements ControllerInt {
         //view.addObserver(this);
 
 
-        setupPlayers();
+        //setupPlayers();
         /*for(int i=0; i<model.getPlayerList().size(); i++){
 
             c.showLoginScreen
         }*/
-        newMatch(model, this);
+        //newMatch(model, this);
+        startServer();
 
+    }
+
+    public void startServer(){
+        server= new ServerBase(this);
     }
 
     public boolean checkEvent( ActionEvent event){
@@ -240,7 +246,7 @@ public class Controller implements ControllerInt {
         //view.showLogin()
     }
 
-   /* public void setupPlayers(ArrayList<String> names){
+    public void setupPlayers(ArrayList<String> names){
 
         //String[] names;
         //server.playersName();
@@ -250,22 +256,39 @@ public class Controller implements ControllerInt {
         // }
 
         ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
+        PlayerZone player;
         int i=names.size();
+        System.out.println("Dimensione: " +i);
 
         for(int j=0; j<i; j++){
-            PlayerZone player = new PlayerZone(names.get(j), j);
+            player = new PlayerZone(names.get(j), j);
             player.setNumberPlayer(j);
             playerList.add(player);
+            System.out.println(player.getName() + player.getIDPlayer());
 
-        }
-
+            }
+        if(playerList== null)
+            System.out.println("qualcosa è nullo");
         model.setPlayerList(playerList);
-    }*/
+        //newMatch(model, this);
+        setupWindowCard();
 
+    }
+
+
+    public void setupWindowCard(){
+        for(int i=0; i< model.getPlayerList().size(); i++){
+            if(model.getPlayerList().get(i).getName() == null)
+                    System.out.println("name null");
+            else if(model.getDecks().getWindowPatternCardDeck()== null)
+                System.out.println("cards null");
+            server.showWindowPattern(model.getPlayerList().get(i).getName(), model.getPlayerList().get(i).getIDPlayer(), model.getDecks().getWindowPatternCardDeck());
+        }
+    }
 
         //TODO DELETE PLAYERS
 
-    public void setupPlayers(){
+ /*   public void setupPlayers(){
 
         PlayerZone player1 = new PlayerZone("eugenio", 0);
         PlayerZone player2 = new PlayerZone("Chiara", 1);
@@ -286,7 +309,7 @@ public class Controller implements ControllerInt {
 
         model.setPlayerList(playerList);
     }
-
+*/
     public void newMatch(Model model, Controller controller/*, ArrayList<ConsoleStrings> console*/){
 
         this.match=new Match(model, controller);
@@ -307,15 +330,15 @@ public class Controller implements ControllerInt {
     @Override
     public void updatePlayers(ActionEventPlayer actionEventPlayer) {
 
-        /*if(actionEventPlayer.getMethodPlayer().equals("ready"))
+        if(actionEventPlayer.getMethodPlayer().equals("ready"))
 
-            setupPlayers(actionEventPlayer.getUsers());*/
+            setupPlayers(actionEventPlayer.getUsers());
     }
 
     @Override
     public void updateAction(ActionEvent actionEvent) {
 
-        setActionEvent(actionEvent);
+        //setActionEvent(actionEvent);
 
     }
 }
