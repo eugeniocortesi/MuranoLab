@@ -57,4 +57,9 @@ public class TestConsoleTools {
         cTools.printRoundTrack();
     }
 
+    @Test
+    public void TestSearchDie(){
+
+    }
+
 }
