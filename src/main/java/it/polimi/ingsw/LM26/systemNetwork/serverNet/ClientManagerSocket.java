@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
@@ -152,10 +153,11 @@ public class ClientManagerSocket extends ClientManager {
     }
 
     @Override
-    public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
+    public void chosenWindowPattern(ActionEventWindow actionEventWindow) {
 
         LOGGER.log(Level.SEVERE,"I have received one windowcard from "+user);
-        //notifyController();
+        //TODO ATTENTION LISTEN!
+        server.sendToObservable(actionEventWindow);
         listenerClientManager.listen();
     }
 }

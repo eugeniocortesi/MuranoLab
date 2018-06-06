@@ -34,4 +34,12 @@ public class Observable<T> {
             }
         }
     }
+
+    protected void notify(ActionEventWindow actionPlayerWindow){
+        synchronized (observers) {
+            for(Observer<T> observer : observers){
+                observer.updateWindowPattern(actionPlayerWindow);
+            }
+        }
+    }
 }

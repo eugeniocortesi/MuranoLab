@@ -284,9 +284,11 @@ public class Controller implements ControllerInt {
 
     public void setupWindowCard(){
 
-        ArrayList<WindowPatternCard> windowlist = createWindowPattern();
+
 
         for(int i=0; i< model.getPlayerList().size(); i++){
+            ArrayList<WindowPatternCard> windowlist = createWindowPattern();
+            System.out.println(windowlist.size());
             if(model.getPlayerList().get(i).getName() == null)
                     System.out.println("name null");
             else if(model.getDecks().getWindowPatternCardDeck()== null)
@@ -294,6 +296,7 @@ public class Controller implements ControllerInt {
             if(server== null)
                 System.out.println("server: " + server);
             server.showWindowPattern(model.getPlayerList().get(i).getName(), model.getPlayerList().get(i).getIDPlayer(), windowlist);
+            windowlist.clear();
 
         }
         //newMatch(model, this);
@@ -314,23 +317,19 @@ public class Controller implements ControllerInt {
 
         int count= temp.size();
 
+        for (int j = 0; j < 4; j++) {
 
-        for(int i=0; i<model.getPlayerList().size(); i++) {
-
-            for (int j = 0; j < 4; j++) {
-
-                Random rand = new Random();
-                int index = rand.nextInt(count);
-                while (temp.get(index).isInUse() == true) {
-                    rand = new Random();
-                    index = rand.nextInt(count);
-                }
-
-
-                four.add(temp.get(index));
-                temp.remove(index);
-                count = temp.size();
+            Random rand = new Random();
+            int index = rand.nextInt(count);
+            while (temp.get(index).isInUse() == true) {
+                rand = new Random();
+                index = rand.nextInt(count);
             }
+
+
+            four.add(temp.get(index));
+            temp.remove(index);
+            count = temp.size();
         }
         return four;
     }

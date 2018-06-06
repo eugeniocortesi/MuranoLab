@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
 
+import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientViewRemote;
 
@@ -127,9 +128,9 @@ public class ClientManagerRMI extends ClientManager {
     }
 
     @Override
-    public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
+    public void chosenWindowPattern(ActionEventWindow actionEventWindow) {
 
         LOGGER.log(Level.SEVERE,"I have received one windowcard from "+user);
-        //notifyController();
+        myserver.sendToObservable(actionEventWindow);
     }
 }

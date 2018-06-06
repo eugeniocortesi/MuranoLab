@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
 import java.rmi.RemoteException;
@@ -33,8 +34,8 @@ public class ClientManagerRMIRemote implements ClientManagerRemote {
     }
 
     @Override
-    public void chosenWindowPattern(String user, WindowPatternCard windowcard) throws RemoteException {
-        clientManagerRMI.chosenWindowPattern(user, windowcard);
+    public void chosenWindowPattern(ActionEventWindow actionEventWindow) throws RemoteException {
+        clientManagerRMI.chosenWindowPattern(actionEventWindow);
     }
 
 

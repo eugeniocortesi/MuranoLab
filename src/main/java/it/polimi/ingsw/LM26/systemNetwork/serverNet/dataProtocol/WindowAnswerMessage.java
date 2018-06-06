@@ -1,25 +1,25 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
 public class WindowAnswerMessage extends ClassMessage {
 
     private String cod;
 
-    private WindowPatternCard windowcard;
+    private ActionEventWindow actionEventWindow;
 
-    public WindowAnswerMessage(String cod, WindowPatternCard windowPatternCard){
+    public WindowAnswerMessage(String cod, ActionEventWindow actionEventWindow){
         this.cod = cod;
-        windowcard = windowPatternCard;
+        this.actionEventWindow = actionEventWindow;
     }
 
     public String getCod() {
         return cod;
     }
 
-    public WindowPatternCard getWindowcard() {
-        return windowcard;
+    public ActionEventWindow getActionEventWindow(){ return actionEventWindow;
     }
 
     static public WindowAnswerMessage deserializeDataMessage(String protocolJson){
@@ -30,6 +30,6 @@ public class WindowAnswerMessage extends ClassMessage {
 
     public void dump() {
 
-        System.out.println("Operation " +this.cod+ "card " +this.windowcard);
+        System.out.println("Operation " +this.cod+ " name " +this.actionEventWindow.getName()+ " card " + this.actionEventWindow.getWindowPatternCard());
     }
 }

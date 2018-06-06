@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
 
 import it.polimi.ingsw.LM26.ServerController.ActionEventPlayer;
+import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,6 +20,10 @@ public class ClientManagerList{
         myserver = serverBase;
         managerHashMap = new HashMap<String, ClientManager>();
         controllerObservables = new ObservableQueue();
+    }
+
+    public ObservableQueue getControllerObservables() {
+        return controllerObservables;
     }
 
     public boolean addClientManager(String name, ClientManager clientManager){
@@ -57,7 +62,11 @@ public class ClientManagerList{
             controllerObservables.notify(players);
 
         }
+    }
 
+    public void sendWindow(ActionEventWindow actionEventWindow){
+
+        controllerObservables.notify(actionEventWindow);
     }
 
 }

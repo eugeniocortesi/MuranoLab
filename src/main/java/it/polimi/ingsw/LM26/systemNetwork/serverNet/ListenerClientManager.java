@@ -78,7 +78,7 @@ public class ListenerClientManager {
         else if(op.equals("send_windowcard")){
             LOGGER.log(Level.SEVERE,"In send window card body");
             WindowAnswerMessage answerMessage = WindowAnswerMessage.deserializeDataMessage(message);
-            clientManagerSocket.chosenWindowPattern(clientManagerSocket.getName(), answerMessage.getWindowcard());
+            clientManagerSocket.chosenWindowPattern(answerMessage.getActionEventWindow());
         }
 
     }

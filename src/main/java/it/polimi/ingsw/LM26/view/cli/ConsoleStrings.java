@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.view.cli;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEvent;
+import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
@@ -51,7 +52,7 @@ public class ConsoleStrings extends ViewInterface {
         dataClientConfiguration = dataClientImplementation.implementation();
         System.out.println("SocketPort " +dataClientConfiguration.getClientSOCKETPORT()+ " ClientRMI " + dataClientConfiguration.getClientRMIPORT()
                 + " ServerRMI "+ dataClientConfiguration.getServerRMIPORT());
-        showNetChoise();
+        //showNetChoise();
     }
 
     /**
@@ -59,6 +60,7 @@ public class ConsoleStrings extends ViewInterface {
      */
     @Override
     public void showNetChoise(){
+        initialScreen();
         System.out.println("Scegli uno tra i seguenti metodi di connessione:\nSocket: s\nRMI: r");
         while(!(s.equalsIgnoreCase("r") || s.equalsIgnoreCase("s"))){
             try{
@@ -136,7 +138,8 @@ public class ConsoleStrings extends ViewInterface {
             }
             if(n<1 || n>4) System.out.println("Indice tra 1 e 4!!");
         }
-        clientView.chosenWindowPattern(user, windowDeck.get(n-1));
+        ActionEventWindow actionEventWindow = new ActionEventWindow(user, windowDeck.get(n-1));
+        clientView.chosenWindowPattern(actionEventWindow);
     }
 
     @Override

@@ -1,10 +1,11 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
 import it.polimi.ingsw.LM26.systemNetwork.Testing.ConsoleStringsTest;
+import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 
 public class ClientBase {
 
-    private ConsoleStringsTest cli;
+    private ConsoleStrings cli;
     //ConsoleStrings concreteClientView;
 
     private boolean connection; //true for RMI, false for Socket
@@ -14,10 +15,10 @@ public class ClientBase {
 
 
         //cli = new ConsoleStrings(this);
-        cli = new ConsoleStringsTest(this);
+        cli = new ConsoleStrings(this);
 
         //Warning now is initialScreen()
-        cli.initialScreen();
+
         cli.showNetChoise();
         /*
         if (connection == true){

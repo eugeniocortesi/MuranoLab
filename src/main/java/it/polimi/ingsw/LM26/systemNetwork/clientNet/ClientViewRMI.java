@@ -1,6 +1,7 @@
 
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManagerRemote;
@@ -123,11 +124,11 @@ public class ClientViewRMI implements ClientView {
     }
 
     @Override
-    public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
+    public void chosenWindowPattern(ActionEventWindow actionEventWindow) {
 
-        LOGGER.log(Level.SEVERE,user+" is answering windowpattern");
+        LOGGER.log(Level.SEVERE,actionEventWindow.getName()+" is answering windowpattern");
         try {
-            stub.chosenWindowPattern(user,windowcard);
+            stub.chosenWindowPattern(actionEventWindow);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

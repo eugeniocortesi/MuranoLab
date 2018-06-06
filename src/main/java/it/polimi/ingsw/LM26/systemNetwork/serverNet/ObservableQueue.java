@@ -1,9 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
-import it.polimi.ingsw.LM26.ServerController.ActionEvent;
-import it.polimi.ingsw.LM26.ServerController.ActionEventPlayer;
-import it.polimi.ingsw.LM26.ServerController.Observable;
-import it.polimi.ingsw.LM26.ServerController.Observer;
+import it.polimi.ingsw.LM26.ServerController.*;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -28,5 +25,10 @@ public class ObservableQueue extends Observable {
     @Override
     protected void notify(ActionEventPlayer message) {
         super.notify(message);
+    }
+
+    @Override
+    protected void notify(ActionEventWindow actionPlayerWindow) {
+        super.notify(actionPlayerWindow);
     }
 }

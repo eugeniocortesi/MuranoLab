@@ -1,6 +1,7 @@
 
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
@@ -135,8 +136,8 @@ public class ClientViewSocket implements ClientView {
     }
 
     @Override
-    public void chosenWindowPattern(String user, WindowPatternCard windowcard) {
-        WindowAnswerMessage message = new WindowAnswerMessage("send_windowcard", windowcard);
+    public void chosenWindowPattern(ActionEventWindow actionEventWindow) {
+        WindowAnswerMessage message = new WindowAnswerMessage("send_windowcard", actionEventWindow);
         outSocket.println(message.serializeClassMessage());
         listenerClientView.listen();
     }

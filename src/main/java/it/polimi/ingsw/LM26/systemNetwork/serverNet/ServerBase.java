@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.ServerController.Observer;
 import it.polimi.ingsw.LM26.controller.ControllerInt;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
@@ -83,7 +84,7 @@ public class ServerBase extends ViewGameInterface {
         if (clientManagerListSize()<4)
             return true;
         //TODO change it
-        else if (!playing) {
+        /*else if (!playing) {
             Model model = SingletonModel.singletonModel();
             System.out.println("Inserisci nome: ");
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -94,12 +95,17 @@ public class ServerBase extends ViewGameInterface {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         return false;
     }
 
     public void checkPlayers(){
         clientManagerList.checkNumberLogged();
+    }
+
+    public void sendToObservable(ActionEventWindow actionEventWindow){
+
+        clientManagerList.sendWindow(actionEventWindow);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
 import java.util.ArrayList;
@@ -20,5 +21,5 @@ public interface ClientView {
 
     void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck);
 
-    void chosenWindowPattern(String user, WindowPatternCard windowcard);
+    void chosenWindowPattern(ActionEventWindow actionEventWindow);
 }

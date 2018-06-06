@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.Testing;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEvent;
+import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
@@ -145,7 +146,8 @@ public class ConsoleStringsTest extends ViewInterface {
         }*/
         //TODO erase it, delete comment
         n=2;
-        clientView.chosenWindowPattern(user, windowDeck.get(n-1));
+        ActionEventWindow actionEventWindow = new ActionEventWindow(user, windowDeck.get(n-1));
+        clientView.chosenWindowPattern(actionEventWindow);
     }
 
     @Override

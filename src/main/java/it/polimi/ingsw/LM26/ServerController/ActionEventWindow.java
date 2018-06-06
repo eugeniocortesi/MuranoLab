@@ -2,7 +2,9 @@ package it.polimi.ingsw.LM26.ServerController;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
-public class ActionEventWindow {
+import java.io.Serializable;
+
+public class ActionEventWindow implements Serializable{
     private String name;
     private WindowPatternCard windowPatternCard;
 
