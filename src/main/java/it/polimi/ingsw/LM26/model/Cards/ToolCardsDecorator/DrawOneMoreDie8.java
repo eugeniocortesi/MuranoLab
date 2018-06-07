@@ -14,6 +14,8 @@ import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 public class DrawOneMoreDie8 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
+    private boolean needPlacement=false;
+    private boolean currentPlacement=false;
 
 
     public DrawOneMoreDie8(ToolCard toolcard) {
@@ -42,31 +44,55 @@ public class DrawOneMoreDie8 implements ToolCardDecorator {
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
     public boolean play( DieInt dieFromDraft, String inDeCrement){return false;}
     public boolean play(DieInt dieFromDraft, int pl){return false;}
-    public boolean play( int player){return false;}
+    public boolean play (DieInt die, Box toBox, int pl){return false;}
 
-    public boolean play (DieInt die, Box toBox, int pl) {
+    public boolean play ( int pl) {
 
 
         Model model = singletonModel();
-        ArrayList<DieInt> inDraft = model.getDraftPool().getInDraft();
         PlayerZone player = model.getPlayerList().get(pl);
-        PlaceDie placement = new PlaceDie(die, toBox, player);
-        if(!player.getActionHistory().isSecondTurn() ){
 
 
-        // ANCHE PIAZZAMENTO?
+        if(player.getActionHistory().isFirstTurn()  &&  !player.getActionHistory().isSecondTurn()) {
 
-        if ( ! placement.placeDie()) {
-                  System.out.println("error");
-                  return false;
-                  }
-         else   {
-            inDraft.remove(die);
-            player.getActionHistory().setSecondTurn(true);
+            //dopo questo primo turno (di due) il giocatore viene congelato: oltre che saltare il secondo tutrno, in questo turno non otrà piu fare azioni.
+            //Ciò è corretto perchè sicuramente gli è stato già permesso di compierle:
+            //se ha piazzato un dado come prima azione, quinidi sceglie la carta ora gli viene permesso un ulteriore piazzamento con il dado scelto
+            //per un totale di due azioni standard piu una extra
+            //nel caso in cui non avesse scelto il piazzamento come prima azione (o avesse passato la prima azione), ora scelgie la carta
+            //e fa il piazzamento extra per un totale di due azioni,
+            // una standard e una extra
+
+            setNeedPlacement(true);
             return true;
-            }
+
+                //problemi:
+                // come gli faccio fare una tera mossa?? faccio ritornare false
+                //come gli faccio saltare il secondo turno???
+                // non deve poter scegliere questa carta come prima azione
+
         }
+        else
+                System.out.println("you can't use this card in second turn ");
+
         return false;
 
+    }
+
+
+    public boolean isNeedPlacement() {
+        return needPlacement;
+    }
+
+    public void setNeedPlacement(boolean needPlacement) {
+        this.needPlacement = needPlacement;
+    }
+
+    public boolean isCurrentPlacement() {
+        return currentPlacement;
+    }
+
+    public void setCurrentPlacement(boolean currentPlacement) {
+        this.currentPlacement = currentPlacement;
     }
 }

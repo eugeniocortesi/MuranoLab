@@ -8,9 +8,12 @@ public class TestActionHistory {
 
     @Test
     public void checkActionReset(){
-        action.deletePlayerHistory();
-        if(action.isDieUsed()==false && action.isFirstTurn()==false && action.isSecondTurn()==false && action.isPlacement()==false &&
+        action.deleteTurnHistory();
+        if(action.isDieUsed()==false &&  action.isPlacement()==false &&
                 action.isCardUsed()==false) System.out.println("ok");
+        action.deleteRoundHistory();
+        if(action.isDieUsed()==false && action.isFirstTurn()==false && action.isSecondTurn()==false && action.isPlacement()==false &&
+                action.isCardUsed()==false && action.isFreezed()==false) System.out.println("ok");
     }
 
 }

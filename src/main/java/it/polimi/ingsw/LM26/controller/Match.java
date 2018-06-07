@@ -3,6 +3,8 @@ package it.polimi.ingsw.LM26.controller;
 import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.controller.GamePhases.CentralPhase;
 import it.polimi.ingsw.LM26.controller.GamePhases.Game;
+import it.polimi.ingsw.LM26.controller.Testing.ControllerTest;
+import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.DrawOneMoreDie8;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.RollAgainADie6;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
@@ -22,17 +24,24 @@ public class Match {
     private ActionEvent event;
     private CentralPhase centralPhase;
     private Game game;
-    private ControllerInt controller;
+    //TODO STATIC TYPE CONTROLLER INT
+    //private ControllerInt controller;
+    private ControllerTest controller;
 
 
 
     public Match(Model model, ControllerInt controller ) {
 
-        this.controller=controller;
+        //TODO DELETE CAST AND ADD HANDLER METHOD TO INT
+
+        //this.controller=controller;
+
+        this.controller=(ControllerTest) controller;
         this.game = new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());  //initialPhase
         game.getPhase().doAction(game, model.getPlayerList());    //centralPhase
         this.centralPhase = (CentralPhase) game.getPhase();
         this.model=model;
+
 
         play();
 
@@ -76,7 +85,10 @@ public class Match {
 
                 //if(event.getPlayer().getName() == playing.getName()) ){
 
-
+                if(playing.getActionHistory().isFreezed()){
+                    result = true;
+                    System.out.println("this turn you are freezed");
+                }
                 while (!result) {
 
 
@@ -85,30 +97,23 @@ public class Match {
                     //TODO DELETE
                     setActionEvent(event);
 
-                    if (controller.checkEvent(event)) {
+                    if (controller.handler(event)) {
                         System.out.println("done");
                         playing.getPlayerBoard().printCard();
                         System.out.println("DraftPool");
                         model.getDraftPool().printDraftPool();
                         // view.showOK()
                         result = true;
-                    } else {
-
-                        RollAgainADie6 tool6=(RollAgainADie6)model.getDecks().getToolCardDeck().get(5);
-
-                        if(tool6.isNeedPlacement()){
-                            System.out.println("place rolled die  ");
-                        }
+                    }
 
                         else System.out.println("match error 1 ");
-                    }
+
 
                     //view.showNO()
                     //view.showReduAction()      //IMPORTANT
 
                 }
                 //set the correct number of turn 1 0 2
-                playing.getActionHistory().setFirstTurn(true);
 
 
                 //}
@@ -118,6 +123,11 @@ public class Match {
 
                 result=false;
 
+                if(playing.getActionHistory().isFreezed()){
+                    result = true;
+                    System.out.println("this turn you are freezed");
+                }
+
                 while (!result) {
 
 
@@ -126,13 +136,23 @@ public class Match {
                     //TODO DELETE
                     setActionEvent(event);
 
-                    if (controller.checkEvent(event)) {
+                    if (controller.handler(event)) {
                         System.out.println("done");
                         playing.getPlayerBoard().printCard();
                         System.out.println("DraftPool");
                         model.getDraftPool().printDraftPool();
                         // view.showOK()
-                        result = true;
+                        DrawOneMoreDie8 tool8=(DrawOneMoreDie8) model.getDecks().getToolCardDeck().get(7);
+                        if(tool8.isNeedPlacement() ){
+                            playing.getActionHistory().setPlacement(false);
+                            playing.getActionHistory().setDieUsed(false);
+                            tool8.setCurrentPlacement(true);
+                            playing.getActionHistory().setFreezed(true);
+                            System.out.println("choose another die");
+
+
+                        }
+                        else result = true;
                     } else
                         System.out.println("match error 2 ");
 
@@ -141,7 +161,6 @@ public class Match {
 
                 }
                 //set the correct number of turn 1 0 2
-                playing.getActionHistory().setSecondTurn(true);
 
 
                 //}chiudi while 2
@@ -193,6 +212,7 @@ public class Match {
             System.out.println("Insert 2 for cards 2 and 3");
             System.out.println("insert 3 to for card 4");
             System.out.println("insert 6 to for card 1");
+            System.out.println("insert 8 to for card 7 or 8");
             System.out.println("insert 7 to for card 6,10 or 11");
             System.out.println("Insert 9 to pass the turn");
 
@@ -312,6 +332,17 @@ public class Match {
             die=askDie();
 
             event.setDieFromRoundTrack( model.getRoundTrackInt().getRoundTrackTurnList().get(id-1).getDiceList().get(die-1));
+
+
+        }
+
+        if (id==8){
+
+            System.out.println("card 7 or 8?");
+            event.setId(id);
+            card=askCard();
+            event.setCard(model.getDecks().getToolCardDeck().get(card-1));
+            event.setPlayer(playing.getIDPlayer());
 
 
         }

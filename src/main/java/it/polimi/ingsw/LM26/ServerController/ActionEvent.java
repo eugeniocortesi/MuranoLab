@@ -97,8 +97,8 @@ public class ActionEvent implements Serializable {
             if(card.getNum()==4)  ID= 3;
             if(card.getNum()==5)  ID=5 ;
             if(card.getNum()==6 || card.getNum()==10 || card.getNum()==11 )  ID= 7;
-            if(card.getNum()==7)  ID= 8;
-            if(card.getNum()==8 || card.getNum()==9)  ID= 4;
+            if(card.getNum()==7 || card.getNum()==8 )  ID= 8;
+            if(card.getNum()==9)  ID= 4;
         this.card = card;
     }
 

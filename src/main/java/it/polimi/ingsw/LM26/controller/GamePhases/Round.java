@@ -50,6 +50,12 @@ public class Round {
           if(player.get(i).getNumber()==turn[turnCounter]) {
               if(player.get(i).getPlayerState()!= STANDBY){
                   player.get(i).setPlayerState(PlayerState.BEGINNING);
+                  if (turnCounter > 0) {
+                      if(turn[turnCounter]==turn[turnCounter-1]) {
+                          player.get(i).getActionHistory().setFirstTurn(false);
+                          player.get(i).getActionHistory().setSecondTurn(true);
+                      }else player.get(i).getActionHistory().setFirstTurn(true);
+                  }else player.get(i).getActionHistory().setFirstTurn(true);
                   currentPlayer=player.get(i);
                   return player.get(i);
               }
@@ -63,13 +69,14 @@ public class Round {
     //passa il turno al successivo, se è finito turno globale mette dadi nella casella della round track e ritorna FINISHED
     public void endAction(int[] turn, RoundTrackInt roundTrack, DraftPool draftPool, PlayerZone actingPlayer) {
         actingPlayer.setPlayerState(PlayerState.ENDING);
-        actingPlayer.getActionHistory().deletePlayerHistory();
+        actingPlayer.getActionHistory().deleteTurnHistory();
         //TODO
         actingPlayer.getActionHistory().setDieUsed(false);
         turnCounter++;
         if(turnCounter == turn.length) {
             roundTrack.addDice(draftPool.getInDraft());
             draftPool.removeAllDice();
+            actingPlayer.getActionHistory().deleteRoundHistory();
             turnCounter=0;
             roundState= RoundState.FINISHED;
         }

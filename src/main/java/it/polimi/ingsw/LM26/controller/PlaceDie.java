@@ -35,25 +35,36 @@ public class PlaceDie implements PlayerActionInt{
 
     public boolean placeDie(){      //ATTENZIONE: togli il dado dalla riserva va fatto fuori
 
-        if (player.getPlayerBoard().isEmpty()) {
-            if (checkEdgeRestrictions()) {
-                //ATTEZIONE AL PRIMO DADO
-                System.out.println("place first die ");
-                if (checkColorRestriction() && checkValueRestriction()) {
-                    toBox.setDie(die);
-                    player.getPlayerBoard().setEmpty(false);
-                    return true;
-                } else System.out.println("error in place first die ");
-                return false;
-            } else return false;
+        if (player.getPlayerBoard().isEmpty()) return placeFirstDie();
+
+        if(toBox.isIsPresent()){
+            System.out.println("a die is already present here ");
+            return false;
         }
-        else if (checkColorRestriction() && checkValueRestriction() && checkNearByRestrictions() ){
+
+        if (checkColorRestriction() && checkValueRestriction() && checkNearByRestrictions() ){
             die.toString();
              toBox.setDie(die);
              return true;}
 
         System.out.println("error in general place die ");
         return false;
+    }
+
+
+    public boolean placeFirstDie() {
+
+        if (checkEdgeRestrictions()) {
+
+            if (checkColorRestriction() && checkValueRestriction()) {
+                toBox.setDie(die);
+                player.getPlayerBoard().setEmpty(false);
+                return true;
+            } else System.out.println("error in place first die ");
+            return false;
+
+
+        }return false; //edge restrictions not respected
     }
 
 public boolean checkEdgeRestrictions(){

@@ -12,6 +12,8 @@ public class ActionHistory {
 
     private boolean cardUsed=false;
 
+    private boolean freezed=false;
+
     public boolean isFirstTurn() {
         return firstTurn;
     }
@@ -48,17 +50,31 @@ public class ActionHistory {
 
     public void setDieUsed(boolean dieUsed) { this.dieUsed = dieUsed; }
 
-    public void deletePlayerHistory() {
+    public boolean isFreezed() { return freezed; }
 
-       firstTurn=false;
+    public void setFreezed(boolean freezed) { this.freezed = freezed; }
+
+    public void deleteTurnHistory() {
 
        dieUsed=false;
-
-       secondTurn= false;
 
        placement=false;
 
        cardUsed=false;
+
+
+
+    }
+
+    public void deleteRoundHistory(){
+
+        freezed= false;
+
+        firstTurn=false;
+
+        secondTurn= false;
+
+        deleteTurnHistory();
 
     }
 

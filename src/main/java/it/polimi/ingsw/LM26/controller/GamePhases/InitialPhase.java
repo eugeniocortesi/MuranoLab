@@ -108,6 +108,12 @@ public class InitialPhase implements PhaseInt {
 
     }
 
+   /* public void setWindowPattern(Decks decks, ArrayList<PlayerZone> playerList) {
+
+    playerList.get(i).getPlayerBoard().insertPatternIntoBoard(playerList.get(i).getWindowPatternCard().getWindowPatter());
+    }
+    */
+
     public void setPublicCards(OnBoardCards onBoardCards, Decks decks){
         ArrayList<ObjectivePublicCard> publicCardsOnBoard= new ArrayList<ObjectivePublicCard>();
         while(publicCardsOnBoard.size() <cardsOnBoardsize){
@@ -122,6 +128,8 @@ public class InitialPhase implements PhaseInt {
         onBoardCards.setToolCardList(decks.getToolCardDeck());
     }
 
+
+    //TODO
     /*public ArrayList<ObjectivePrivateCard> setPrivateCard(ArrayList<PlayerZone> playerList, Decks decks){
         ArrayList<ObjectivePrivateCard>
     }*/
