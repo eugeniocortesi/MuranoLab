@@ -1,6 +1,8 @@
-package it.polimi.ingsw.LM26.systemNetwork.serverNet;
+package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket;
 
 import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -9,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class SocketAcceptor {
+public class SocketAcceptor extends Thread{
 
     private ServerBase myserver;
     private int SOCKETPORT;
@@ -20,7 +22,7 @@ public class SocketAcceptor {
     public SocketAcceptor(ServerBase serverBase, DataServerConfiguration dataServerConfiguration){
         myserver = serverBase;
         this.SOCKETPORT = dataServerConfiguration.getSOCKETPORT();
-        accept();
+
     }
 
     public void accept(){
@@ -32,7 +34,7 @@ public class SocketAcceptor {
             while (true) {
                 LOGGER.log(Level.SEVERE,"Server listening");
                 Socket socket = serversocket.accept();
-                ClientManager clientSocket = new ClientManagerSocket (socket, myserver);
+                ClientManager clientSocket = new ClientManagerSocket(socket, myserver);
                 Thread t = new Thread(clientSocket);
 
                 t.start();
@@ -42,5 +44,9 @@ public class SocketAcceptor {
         }
         catch (IOException e) {
         }
+    }
+
+    public void run(){
+        accept();
     }
 }

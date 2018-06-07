@@ -1,7 +1,9 @@
-package it.polimi.ingsw.LM26.systemNetwork.serverNet;
+package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowInitialMessage;
@@ -23,6 +25,7 @@ public class ClientManagerSocket extends ClientManager {
     private int id;
     private DataOutputStream writer;
     private static final Logger LOGGER = Logger.getLogger(ClientManagerSocket.class.getName());
+
 
     public ClientManagerSocket(Socket socket, ServerBase server){
 
@@ -156,8 +159,10 @@ public class ClientManagerSocket extends ClientManager {
     public void chosenWindowPattern(ActionEventWindow actionEventWindow) {
 
         LOGGER.log(Level.SEVERE,"I have received one windowcard from "+user);
+
+        server.getQueueController().pushMessage(actionEventWindow);
         //TODO ATTENTION LISTEN!
-        server.sendToObservable(actionEventWindow);
+        //server.sendToObservable(actionEventWindow);
         listenerClientManager.listen();
     }
 }

@@ -8,6 +8,8 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.*;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRMI;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket.ClientViewSocket;
 import it.polimi.ingsw.LM26.view.cli.ConsoleTools;
 import org.fusesource.jansi.AnsiConsole;
 

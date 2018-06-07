@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.LM26.ServerController.VisitorInt;
 
 public class DataMessage extends ClassMessage {
 
@@ -20,36 +21,6 @@ public class DataMessage extends ClassMessage {
         return field1;
     }
 
-    /*public String parserFirstElement(String s){
-        JsonReader jsonReader = new JsonReader(new StringReader(s));
-        try{
-            while(jsonReader.hasNext()) {
-                JsonToken nextToken = jsonReader.peek();
-                System.out.println(nextToken);
-                if (JsonToken.BEGIN_OBJECT.equals(nextToken)) {
-                    jsonReader.beginObject();
-                } else if (JsonToken.NAME.equals(nextToken)) {
-                    String name = jsonReader.nextName();
-                    System.out.println(name);
-                } else if (JsonToken.STRING.equals(nextToken)) {
-                    String value = jsonReader.nextString();
-                    System.out.println(value);
-                    return value;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public String serializeDataMessage(){
-
-        Gson gson = new Gson();
-        String msgJson = gson.toJson(this);
-        return msgJson;
-    }*/
-
     static public DataMessage deserializeDataMessage(String protocolJson){
         Gson gson = new Gson();
         DataMessage message= gson.fromJson(protocolJson, DataMessage.class);
@@ -61,5 +32,9 @@ public class DataMessage extends ClassMessage {
         System.out.println("Operation " +this.operation+ " Field1 " +this.field1);
     }
 
+    @Override
+    public void accept(VisitorInt visitorInt) {
+        visitorInt.visitDataMessage(this);
+    }
 }
 

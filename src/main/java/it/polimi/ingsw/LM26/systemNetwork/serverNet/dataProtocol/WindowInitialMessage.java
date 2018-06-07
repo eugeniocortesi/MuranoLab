@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.LM26.ServerController.VisitorInt;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
 import java.util.ArrayList;
@@ -44,5 +45,10 @@ public class WindowInitialMessage extends ClassMessage {
     public void dump() {
 
         System.out.println("Operation " +this.meth+ " user "+ user+" id " +this.id+ " windowlist " +this.windowlist);
+    }
+
+    @Override
+    public void accept(VisitorInt visitorInt) {
+        visitorInt.visitWindowInitialMessage(this);
     }
 }

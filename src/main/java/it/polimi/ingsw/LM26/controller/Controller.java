@@ -43,7 +43,7 @@ public class Controller implements ControllerInt {
             c.showLoginScreen
         }*/
         //newMatch(model, this);
-        startServer();
+        //startServer();
 
     }
 
@@ -307,7 +307,9 @@ public class Controller implements ControllerInt {
         //TODO SOMETHING
         model.getPlayer(name).setWindowPatternCard(windowPatternCard);
         model.getPlayer(name).getWindowPatternCard().printCard();
+        System.out.println("Assigned card to player "+name);
     }
+
 
     public ArrayList<WindowPatternCard> createWindowPattern(){
         ArrayList<WindowPatternCard> temp = new ArrayList<WindowPatternCard>();
@@ -393,6 +395,7 @@ public class Controller implements ControllerInt {
     @Override
     public void updateWindowPattern(ActionEventWindow actionEventWindow) {
         //assegna ogni carta al player
+        System.out.println("Notify window arrived");
         assignWindowCard(actionEventWindow.getName(), actionEventWindow.getWindowPatternCard());
     }
 }

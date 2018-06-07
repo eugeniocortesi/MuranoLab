@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.systemNetwork.serverNet;
+package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;

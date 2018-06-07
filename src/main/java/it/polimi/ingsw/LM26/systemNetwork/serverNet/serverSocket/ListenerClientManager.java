@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.systemNetwork.serverNet;
+package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket;
 
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowAnswerMessage;

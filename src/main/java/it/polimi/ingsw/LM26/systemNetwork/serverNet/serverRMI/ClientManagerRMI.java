@@ -1,9 +1,11 @@
-package it.polimi.ingsw.LM26.systemNetwork.serverNet;
+package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI;
 
 
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientViewRemote;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRemote;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -24,7 +26,6 @@ public class ClientManagerRMI extends ClientManager {
     private ClientViewRemote skeleton;
     private String user;
     private static final Logger LOGGER = Logger.getLogger(ClientManagerRMI.class.getName());
-
 
     public ClientManagerRMI(ServerBase serverBase, int RMIPORTServer, int RMIPORTClient, String address){
 
@@ -80,6 +81,7 @@ public class ClientManagerRMI extends ClientManager {
             boolean result = myserver.addView(name, this);
             if(result){
                 this.user = name;
+
                 myserver.checkPlayers();
             }
             LOGGER.log(Level.INFO,"The add result value: " + result);
@@ -131,6 +133,8 @@ public class ClientManagerRMI extends ClientManager {
     public void chosenWindowPattern(ActionEventWindow actionEventWindow) {
 
         LOGGER.log(Level.SEVERE,"I have received one windowcard from "+user);
-        myserver.sendToObservable(actionEventWindow);
+        myserver.getQueueController().pushMessage(actionEventWindow);
+
+        //this.getObserver().accept(actionEventWindow);
     }
 }

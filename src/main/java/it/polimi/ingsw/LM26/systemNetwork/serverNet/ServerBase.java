@@ -1,17 +1,12 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
-import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
-import it.polimi.ingsw.LM26.ServerController.Observer;
-import it.polimi.ingsw.LM26.controller.ControllerInt;
+import it.polimi.ingsw.LM26.ServerController.*;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
-import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.model.SingletonModel;
 import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerImplementation;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.RMIAcceptor;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket.SocketAcceptor;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -25,13 +20,19 @@ public class ServerBase extends ViewGameInterface {
     private ArrayList<ClientManager> lobby;
     private boolean playing;
 
+    private Receiver receiver;
+    private MessageQueue queueController;
+    private VisitorInt visitor;
+
     private DataServerImplementation dataServerImplementation;
     private DataServerConfiguration dataServerConfiguration;
 
     public ServerBase(Observer controllerInt){
 
+
         controller = controllerInt;
         playing = false;
+
 
         lobby = new ArrayList<ClientManager>();
         dataServerImplementation = new DataServerImplementation();
@@ -50,12 +51,30 @@ public class ServerBase extends ViewGameInterface {
 
         clientManagerList = new ClientManagerList(this);
 
+        queueController = new MessageQueue();
+        visitor = new VisitorMessage();
+        receiver = new Receiver(queueController, visitor);
+
+
+
 
     }
 
     public void startAcceptor(){
         rmiAcceptor = new RMIAcceptor(this, dataServerConfiguration);
         socketAcceptor = new SocketAcceptor(this, dataServerConfiguration);
+        socketAcceptor.start();
+        receiver.getVisitorInt().getObservable().register(controller);
+        System.out.println("Registered Observer");
+        receiver.start();
+    }
+
+    public Receiver getReceiver() {
+        return receiver;
+    }
+
+    public MessageQueue getQueueController() {
+        return queueController;
     }
 
     public Observer getController() {
@@ -63,8 +82,12 @@ public class ServerBase extends ViewGameInterface {
     }
 
     public synchronized boolean addView(String s, ClientManager clientManager){
-        if(checkNumberUsers())
+        if(checkNumberUsers()){
+
+            //clientManager.setObservable(receiver);
             return clientManagerList.addClientManager(s, clientManager);
+
+        }
         return false;
     }
 
@@ -103,10 +126,6 @@ public class ServerBase extends ViewGameInterface {
         clientManagerList.checkNumberLogged();
     }
 
-    public void sendToObservable(ActionEventWindow actionEventWindow){
-
-        clientManagerList.sendWindow(actionEventWindow);
-    }
 
     @Override
     public void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {

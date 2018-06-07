@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.systemNetwork.clientNet;
+package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.DataEvent;

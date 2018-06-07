@@ -3,10 +3,11 @@ package it.polimi.ingsw.LM26.ServerController;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ClassMessage;
 
 import java.io.Serializable;
 
-public class ActionEvent implements Serializable {
+public class ActionEvent extends ClassMessage implements Serializable {
 
     private int ID=1;
     private int player;
@@ -135,5 +136,10 @@ public class ActionEvent implements Serializable {
         this.noAction = noAction;
 
         if(noAction==false) ID=9;
+    }
+
+    @Override
+    public void accept(VisitorInt visitorInt) {
+        visitorInt.visitActionEvent(this);
     }
 }

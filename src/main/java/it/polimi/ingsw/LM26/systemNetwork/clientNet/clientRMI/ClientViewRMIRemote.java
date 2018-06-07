@@ -1,6 +1,8 @@
-package it.polimi.ingsw.LM26.systemNetwork.clientNet;
+package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRMI;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRemote;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;

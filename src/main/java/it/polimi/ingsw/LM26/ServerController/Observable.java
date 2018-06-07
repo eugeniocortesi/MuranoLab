@@ -1,5 +1,10 @@
 package it.polimi.ingsw.LM26.ServerController;
 
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowAnswerMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowInitialMessage;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,11 +40,25 @@ public class Observable<T> {
         }
     }
 
-    protected void notify(ActionEventWindow actionPlayerWindow){
+    protected void notify(ActionEventWindow actionEventWindow){
         synchronized (observers) {
             for(Observer<T> observer : observers){
-                observer.updateWindowPattern(actionPlayerWindow);
+                observer.updateWindowPattern(actionEventWindow);
             }
         }
+    }
+
+    protected void notify(ConnectMessage connectMessage){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    protected void notify(DataMessage dataMessage){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    protected void notify(WindowInitialMessage windowInitialMessage){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    protected void notify(WindowAnswerMessage windowAnswerMessage) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

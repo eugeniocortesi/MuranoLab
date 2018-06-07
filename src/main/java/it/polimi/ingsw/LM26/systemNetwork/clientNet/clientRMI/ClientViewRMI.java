@@ -1,10 +1,12 @@
 
-package it.polimi.ingsw.LM26.systemNetwork.clientNet;
+package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManagerRemote;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.ClientManagerRemote;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;

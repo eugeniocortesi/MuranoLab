@@ -3,6 +3,7 @@ package it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
+import it.polimi.ingsw.LM26.ServerController.VisitorInt;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -57,4 +58,6 @@ public abstract class ClassMessage {
     public String toString(){
         return this.serializeClassMessage();
     }
+
+    public abstract void accept(VisitorInt visitorInt);
 }
