@@ -3,6 +3,7 @@ package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.ServerController.Observable;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.Model;
 
 import java.util.ArrayList;
 
@@ -25,5 +26,7 @@ public abstract class ClientManager implements Runnable {
     public abstract void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck);
 
     public abstract void chosenWindowPattern(ActionEventWindow actionEventWindow);
+
+    public abstract void sendModel(Model m);
 
 }

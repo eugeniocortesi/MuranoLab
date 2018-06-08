@@ -3,6 +3,7 @@ package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRemote;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
@@ -136,5 +137,10 @@ public class ClientManagerRMI extends ClientManager {
         myserver.getQueueController().pushMessage(actionEventWindow);
 
         //this.getObserver().accept(actionEventWindow);
+    }
+
+    @Override
+    public void sendModel(Model m) {
+        skeleton.sendModel(m);
     }
 }

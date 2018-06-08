@@ -1,6 +1,8 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.modelView.ModelMessage;
 import it.polimi.ingsw.LM26.systemNetwork.DataEvent;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
@@ -105,6 +107,12 @@ public class ListenerClientView {
             int id = windowInitialMessage.getId();
             ArrayList<WindowPatternCard> windowPatternCards = windowInitialMessage.getWindowlist();
             clientView.choseWindowPattern(user, id, windowPatternCards);
+        }
+        else if(op.equals("send_model")){
+            LOGGER.log(Level.SEVERE, "In send model body");
+            ModelMessage modelMessage = ModelMessage.deserializeModelMessage(message);
+            Model model= modelMessage.getModel();
+            clientView.sendModel(model);
         }
 
         else {

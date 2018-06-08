@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRMI;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRemote;
 
@@ -38,6 +39,11 @@ public class ClientViewRMIRemote implements ClientViewRemote {
     @Override
     public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) throws RemoteException {
         clientViewRMI.choseWindowPattern(user, id, windowDeck);
+    }
+
+    @Override
+    public void sendModel(Model m) {
+        clientViewRMI.sendModel(m);
     }
 
 

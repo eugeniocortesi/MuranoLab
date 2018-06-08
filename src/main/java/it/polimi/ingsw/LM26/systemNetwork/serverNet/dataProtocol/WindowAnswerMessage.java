@@ -23,7 +23,7 @@ public class WindowAnswerMessage extends ClassMessage {
     public ActionEventWindow getActionEventWindow(){ return actionEventWindow;
     }
 
-    static public WindowAnswerMessage deserializeDataMessage(String protocolJson){
+    static public WindowAnswerMessage deserializeWindowAnswerMessage(String protocolJson){
         Gson gson = new Gson();
         WindowAnswerMessage message= gson.fromJson(protocolJson, WindowAnswerMessage.class);
         return message;

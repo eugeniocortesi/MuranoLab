@@ -2,6 +2,8 @@ package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.modelView.ModelMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
@@ -163,6 +165,14 @@ public class ClientManagerSocket extends ClientManager {
         server.getQueueController().pushMessage(actionEventWindow);
         //TODO ATTENTION LISTEN!
         //server.sendToObservable(actionEventWindow);
+        listenerClientManager.listen();
+    }
+
+    @Override
+    public void sendModel(Model m) {
+        ModelMessage modelMessage = new ModelMessage("send_model", m);
+        String s = modelMessage.serializeClassMessage();
+        sendMessage(s);
         listenerClientManager.listen();
     }
 }

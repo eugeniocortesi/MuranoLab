@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.Model;
 
 import java.util.ArrayList;
 
@@ -22,4 +23,6 @@ public interface ClientView {
     void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck);
 
     void chosenWindowPattern(ActionEventWindow actionEventWindow);
+
+    void sendModel(Model m);
 }
