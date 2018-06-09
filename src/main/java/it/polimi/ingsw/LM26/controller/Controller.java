@@ -28,12 +28,14 @@ public class Controller implements ControllerInt{
     private Match match;
     private ViewGameInterface server;
     private UpdatesHandler updatesHandler;
+    private Boolean gameIsGoing;
 
     public Controller() {
 
 
         updatesHandler = new UpdatesHandler(this);
         this.model = singletonModel();
+        gameIsGoing = false;
 
 
 
@@ -285,7 +287,7 @@ public class Controller implements ControllerInt{
                 rand = new Random();
                 index = rand.nextInt(count);
             }
-                model.getDecks().getObjectivePrivateCardDeck().get(index).setInUse(true);
+            model.getDecks().getObjectivePrivateCardDeck().get(index).setInUse(true);
                 server.showPrivateCard(model.getPlayerList().get(j).getName(), model.getDecks().getObjectivePrivateCardDeck().get(index));
             }
     }
@@ -310,9 +312,31 @@ public class Controller implements ControllerInt{
 
     public void assignWindowCard(String name, WindowPatternCard windowPatternCard){
 
+        windowPatternCard.printCard();
+
         model.getPlayer(name).setWindowPatternCard(windowPatternCard);
         model.getPlayer(name).getWindowPatternCard().printCard();
         System.out.println("Assigned card to player "+name);
+        playersReady();
+    }
+
+    private void playersReady() {
+
+        gameIsGoing = true;
+
+        for(int i = 0; i< model.getPlayerList().size(); i++){
+
+            if(model.getPlayerList().get(i).getWindowPatternCard()== null && model.getPlayerList().get(i)!= null);{
+
+                System.out.println("window pattern is null from " +model.getPlayerList().get(i).getName());
+                gameIsGoing = false;
+            }
+
+        }
+
+        if(gameIsGoing== true){
+            newMatch(model, this);
+        }
     }
 
 

@@ -91,30 +91,25 @@ public class InitialPhase implements PhaseInt {
                     index = rand.nextInt(count);
                 }
 
-
                     four.add(temp.get(index));
                     temp.remove(index);
                     count = temp.size();
             }
-            //TODO
-            //ask te server which of the four cards is choosen by th player
-            //public WindowPatternCard askWhichWindowPatternCard(ArrayList<WindowPatterCard> four);
-            //playerList.get(i).setWindowPatternCard(askWhichCard(four));
-            //TEMPORANEAMENTE
+
             playerList.get(i).setWindowPatternCard(temp.get(i));
 
             playerList.get(i).getPlayerBoard().insertPatternIntoBoard(playerList.get(i).getWindowPatternCard().getWindowPatter());
             for(int k=0; k<4; k++)four.remove(0);
         }
 
-
     }
 
-   /* public void setWindowPattern(Decks decks, ArrayList<PlayerZone> playerList) {
+    /*public void setWindowPattern(Decks decks, ArrayList<PlayerZone> playerList) {
 
-    playerList.get(i).getPlayerBoard().insertPatternIntoBoard(playerList.get(i).getWindowPatternCard().getWindowPatter());
-    }
-    */
+        for(int i=0; i<playerList.size(); i++)
+            playerList.get(i).getPlayerBoard().insertPatternIntoBoard(playerList.get(i).getWindowPatternCard().getWindowPatter());
+    }*/
+
 
     public void setPublicCards(OnBoardCards onBoardCards, Decks decks){
         ArrayList<ObjectivePublicCard> publicCardsOnBoard= new ArrayList<ObjectivePublicCard>();
@@ -142,8 +137,12 @@ public class InitialPhase implements PhaseInt {
             }
 
             three.add(decks.getToolCardDeck().get(index));
+
         }
+        System.out.println(" ON BOARD TOOL CARDS " );
         onBoardCards.setToolCardList(three);
+        for(int j=0; j<three.size(); j++)
+        System.out.print(three.get(j).getNum());
     }
 
 

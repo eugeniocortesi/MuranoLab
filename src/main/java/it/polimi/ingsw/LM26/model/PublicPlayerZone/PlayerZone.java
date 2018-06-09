@@ -35,6 +35,13 @@ public class PlayerZone implements PlayerZoneInt {
         this.IDPlayer=IDPlayer;
         this.playerState=PlayerState.ENDING;
         this.actionHistory = new ActionHistory();
+        this.playerBoard= null;
+        this.windowPatternCard = null;
+        this.token = null;
+        this.scoreMarker= null;
+        this.privatePoints= 0;
+        this.lastRoundTurn= 0;
+
     }
 
     public String getNamePlayer() {

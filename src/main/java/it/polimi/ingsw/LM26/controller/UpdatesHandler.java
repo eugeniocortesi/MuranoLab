@@ -23,6 +23,8 @@ public class UpdatesHandler implements Observer {
 
     @Override
     public void updateAction(ActionEvent actionEvent) {
+
+        //TODO
         //setActionEvent(actionEvent);
 
     }
@@ -30,7 +32,6 @@ public class UpdatesHandler implements Observer {
     @Override
     public void updateWindowPattern(ActionEventWindow actionEventWindow) {
 
-        //assegna ogni carta al player
         System.out.println("Notify window arrived");
         controller.assignWindowCard(actionEventWindow.getName(), actionEventWindow.getWindowPatternCard());
     }
@@ -41,7 +42,6 @@ public class UpdatesHandler implements Observer {
         controller.setupWindowCard();
         controller.setupPrivateCard();
 
-        //TODO create new match
     }
 
     @Override
