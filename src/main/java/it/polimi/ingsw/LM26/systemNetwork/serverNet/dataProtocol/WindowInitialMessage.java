@@ -1,7 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.LM26.ServerController.VisitorInt;
+import it.polimi.ingsw.LM26.observers.serverController.VisitorInt;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
 import java.util.ArrayList;

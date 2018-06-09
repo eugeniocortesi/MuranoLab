@@ -1,15 +1,16 @@
 package it.polimi.ingsw.LM26.controller.Testing;
 
-import it.polimi.ingsw.LM26.ServerController.ActionEventTimerEnd;
-import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
-import it.polimi.ingsw.LM26.ServerController.ActionEvent;
-import it.polimi.ingsw.LM26.ServerController.ActionEventPlayer;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.controller.ControllerInt;
+import it.polimi.ingsw.LM26.controller.controllerHandler.EventHandler;
 import it.polimi.ingsw.LM26.controller.Match;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
+import java.util.Random;
+
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class ControllerTest implements ControllerInt {
@@ -46,6 +47,11 @@ public class ControllerTest implements ControllerInt {
         return handler.getResult();
     }
 
+    @Override
+    public void playersReady() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 
     public void showLogin(){
 
@@ -60,7 +66,7 @@ public class ControllerTest implements ControllerInt {
 
     //TODO DELETE PLAYERS
 
-    public void setupPlayers(){
+    public void setupPlayers() {
 
         PlayerZone player1 = new PlayerZone("eugenio", 0);
         PlayerZone player2 = new PlayerZone("Chiara", 1);
@@ -80,8 +86,35 @@ public class ControllerTest implements ControllerInt {
         //playerList.add(player4);
 
         model.setPlayerList(playerList);
-    }
 
+
+        ArrayList<WindowPatternCard> temp = new ArrayList<WindowPatternCard>();
+        ArrayList<WindowPatternCard> four = new ArrayList<WindowPatternCard>();
+
+        temp.addAll(model.getDecks().getWindowPatternCardDeck());
+
+        int count = temp.size();
+
+
+        for (int i = 0; i < playerList.size(); i++) {
+
+            for (int j = 0; j < 4; j++) {
+
+                Random rand = new Random();
+                int index = rand.nextInt(count);
+                while (temp.get(index).isInUse() == true) {
+                    rand = new Random();
+                    index = rand.nextInt(count);
+                }
+
+                four.add(temp.get(index));
+                temp.remove(index);
+                count = temp.size();
+            }
+
+            playerList.get(i).setWindowPatternCard(temp.get(i));
+        }
+    }
 
     public void newMatch(Model model, ControllerTest controller){
 

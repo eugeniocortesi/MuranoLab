@@ -1,12 +1,8 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
 
-import it.polimi.ingsw.LM26.ServerController.*;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.BeginGameMessage;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 public class ClientManagerList{

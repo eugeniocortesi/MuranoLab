@@ -1,9 +1,9 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI;
 
 
-import it.polimi.ingsw.LM26.ServerController.ActionEvent;
-import it.polimi.ingsw.LM26.ServerController.ActionEventPlayer;
-import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventPlayer;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;

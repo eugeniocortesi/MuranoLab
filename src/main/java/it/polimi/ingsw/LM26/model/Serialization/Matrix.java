@@ -5,10 +5,12 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.PatternBox;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.Serialization.Elements.elements;
 
+import java.io.Serializable;
+
 import static it.polimi.ingsw.LM26.model.Serialization.Elements.elements.*;
 
 
-public class Matrix {
+public class Matrix implements Serializable {
 
     private elements matrix[][]= new elements[4][5];
 

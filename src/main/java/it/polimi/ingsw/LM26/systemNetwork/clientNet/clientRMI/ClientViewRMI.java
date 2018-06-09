@@ -1,8 +1,8 @@
 
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI;
 
-import it.polimi.ingsw.LM26.ServerController.ActionEvent;
-import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
@@ -147,7 +147,7 @@ public class ClientViewRMI extends ClientView {
     @Override
     public void sendPrivateCard(ObjectivePrivateCard privateCard) {
         privateCard.printCard();
-        concreteClientView.showPrivateCard(username, privateCard);
+        //concreteClientView.showPrivateCard(username, privateCard);
     }
 
     @Override

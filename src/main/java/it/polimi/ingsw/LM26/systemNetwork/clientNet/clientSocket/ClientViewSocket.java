@@ -1,8 +1,8 @@
 
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket;
 
-import it.polimi.ingsw.LM26.ServerController.ActionEvent;
-import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
@@ -153,7 +153,7 @@ public class ClientViewSocket extends ClientView {
     public void sendPrivateCard(ObjectivePrivateCard privateCard) {
         //TODO remove it
         privateCard.printCard();
-        concreteClientView.showPrivateCard(username, privateCard);
+        //concreteClientView.showPrivateCard(username, privateCard);
 
     }
 

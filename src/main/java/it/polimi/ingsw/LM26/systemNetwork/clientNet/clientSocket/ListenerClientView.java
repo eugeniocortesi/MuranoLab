@@ -1,10 +1,9 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket;
 
-import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.modelView.ModelMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ModelMessage;
 import it.polimi.ingsw.LM26.systemNetwork.DataEvent;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.*;
 

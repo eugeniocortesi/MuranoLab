@@ -1,11 +1,10 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
-import it.polimi.ingsw.LM26.ServerController.*;
+import it.polimi.ingsw.LM26.observers.serverController.*;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
-import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.modelView.ObservableSimple;
-import it.polimi.ingsw.LM26.modelView.ObserverSimple;
+import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
+import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
 import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.RMIAcceptor;
@@ -14,7 +13,6 @@ import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket.SocketAcceptor;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 

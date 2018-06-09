@@ -1,9 +1,8 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI;
 
-import it.polimi.ingsw.LM26.ServerController.ActionEvent;
-import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.ClientManagerRemote;
 
 import java.rmi.RemoteException;
 

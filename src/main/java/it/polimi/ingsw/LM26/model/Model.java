@@ -9,13 +9,12 @@ import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
-import it.polimi.ingsw.LM26.modelView.ObservableSimple;
-import it.polimi.ingsw.LM26.modelView.ObserverSimple;
+import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
+import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.Observer;
 
 import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
@@ -37,8 +36,6 @@ public class Model extends ObservableSimple implements Serializable {
     private Game game;
 
     private Decks decks;
-
-    private List<Observer> list = new ArrayList<Observer>();
 
     public Model() {
 

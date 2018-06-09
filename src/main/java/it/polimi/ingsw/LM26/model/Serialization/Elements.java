@@ -1,6 +1,8 @@
 package it.polimi.ingsw.LM26.model.Serialization;
 
-public class Elements {
+import java.io.Serializable;
+
+public class Elements implements Serializable {
 
     public enum elements {  GREEN, YELLOW, BLUE, VIOLET, RED,
                             LIGHT, MEDIUMS, DARK,

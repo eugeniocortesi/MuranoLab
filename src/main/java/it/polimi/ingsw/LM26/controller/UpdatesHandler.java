@@ -1,6 +1,6 @@
 package it.polimi.ingsw.LM26.controller;
 
-import it.polimi.ingsw.LM26.ServerController.*;
+import it.polimi.ingsw.LM26.observers.serverController.*;
 
 public class UpdatesHandler implements Observer {
 
@@ -14,7 +14,7 @@ public class UpdatesHandler implements Observer {
 
         if(actionEventPlayer.isConnection())
 
-            controller.setupPlayers(actionEventPlayer.getNamePlayer());
+            controller.getSetupHandler().setupPlayers(actionEventPlayer.getNamePlayer());
         else
 
             controller.setStandbyPlayer(actionEventPlayer.getNamePlayer());
@@ -33,7 +33,7 @@ public class UpdatesHandler implements Observer {
     public void updateWindowPattern(ActionEventWindow actionEventWindow) {
 
         System.out.println("Notify window arrived");
-        controller.assignWindowCard(actionEventWindow.getName(), actionEventWindow.getWindowPatternCard());
+        controller.getSetupHandler().assignWindowCard(actionEventWindow.getName(), actionEventWindow.getWindowPatternCard());
     }
 
     @Override

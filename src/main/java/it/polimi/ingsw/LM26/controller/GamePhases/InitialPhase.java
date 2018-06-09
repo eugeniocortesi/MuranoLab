@@ -70,7 +70,7 @@ public class InitialPhase implements PhaseInt {
 
     }
 
-    public void setWindowPattern(Decks decks, ArrayList<PlayerZone> playerList){
+    /*public void setWindowPattern(Decks decks, ArrayList<PlayerZone> playerList){
 
         ArrayList<WindowPatternCard> temp = new ArrayList<WindowPatternCard>();
         ArrayList<WindowPatternCard> four = new ArrayList<WindowPatternCard>();
@@ -103,12 +103,12 @@ public class InitialPhase implements PhaseInt {
         }
 
     }
-
-    /*public void setWindowPattern(Decks decks, ArrayList<PlayerZone> playerList) {
+*/
+    public void setWindowPattern(Decks decks, ArrayList<PlayerZone> playerList) {
 
         for(int i=0; i<playerList.size(); i++)
             playerList.get(i).getPlayerBoard().insertPatternIntoBoard(playerList.get(i).getWindowPatternCard().getWindowPatter());
-    }*/
+    }
 
 
     public void setPublicCards(OnBoardCards onBoardCards, Decks decks){
@@ -142,7 +142,7 @@ public class InitialPhase implements PhaseInt {
         System.out.println(" ON BOARD TOOL CARDS " );
         onBoardCards.setToolCardList(three);
         for(int j=0; j<three.size(); j++)
-        System.out.print(three.get(j).getNum());
+        System.out.print(three.get(j).getNum()+  " ");
     }
 
 

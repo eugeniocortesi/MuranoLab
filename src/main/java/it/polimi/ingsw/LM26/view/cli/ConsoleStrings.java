@@ -1,13 +1,13 @@
 package it.polimi.ingsw.LM26.view.cli;
 
-import it.polimi.ingsw.LM26.ServerController.ActionEvent;
-import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.modelView.ObservableSimple;
+import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.*;
@@ -152,7 +152,7 @@ public class ConsoleStrings extends ViewInterface {
     }
 
     @Override
-    public void startAcceptor(it.polimi.ingsw.LM26.ServerController.Observer observer, ObservableSimple model) {
+    public void startAcceptor(it.polimi.ingsw.LM26.observers.serverController.Observer observer, ObservableSimple model) {
         //Necessary for Server
         throw new UnsupportedOperationException("not supported yet");
     }
