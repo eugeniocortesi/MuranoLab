@@ -334,7 +334,7 @@ public class ConsoleTools {
         int[] result={0,0};
         for(int i=0; i<model.getRoundTrackInt().getRoundTrackTurnList().size(); i++){
             n=searchDie(ch, model.getRoundTrackInt().getRoundTrackTurnList().get(i).getDiceList());
-            if(n!=-1) {
+            if(n!=-1 && n!=-2) {
                 result[0]=n;
                 result[1]=i;
                 return result;
@@ -347,6 +347,8 @@ public class ConsoleTools {
     public int searchDie(char[] chars, ArrayList<DieInt> dieList){
         ArrayList<Integer> dcolored = new ArrayList<Integer>();
         char c=0;
+        if(dieList.size()==0) return -2;
+        if(!(chars.length==2 || chars.length==3)){ return -1; }
             switch (chars[0]){
                 case 'B': for(int i=0; i<dieList.size(); i++){
                     if(dieList.get(i).getColor().equals(Color.ANSI_BLUE)){
@@ -377,33 +379,36 @@ public class ConsoleTools {
                         }
                     } break;
                 }
-                default: { return -1;}//if chars is wrong
+                default: { return -1; }//if chars is wrong
 
             }
             int n=Character.getNumericValue(c);
-            if(n==0){return -2;} //if chars==NULL
+            if(n==-1 || n==-2){ return -1;} //if chars doesn't have an integer
             else{
                 switch(n){
                     case 1: for(int i : dcolored){
-                        if(model.getDraftPool().getInDraft().get(i).getValue()==1) return i;
-                    }
+                        if(dieList.get(i).getValue()==1) return i;
+                    }  break;
                     case 2:for(int i : dcolored){
-                        if(model.getDraftPool().getInDraft().get(i).getValue()==2) return i;
-                    }
+                        if(dieList.get(i).getValue()==2) return i;
+                    }  break;
                     case 3:for(int i : dcolored){
-                        if(model.getDraftPool().getInDraft().get(i).getValue()==3) return i;
-                    }
+                        if(dieList.get(i).getValue()==3) return i;
+                    }  break;
                     case 4:for(int i : dcolored){
-                        if(model.getDraftPool().getInDraft().get(i).getValue()==4) return i;
-                    }
+                        if(dieList.get(i).getValue()==4) return i;
+                    }  break;
                     case 5:for(int i : dcolored){
-                        if(model.getDraftPool().getInDraft().get(i).getValue()==5) return i;
-                    }
+                        if(dieList.get(i).getValue()==5) return i;
+                    }  break;
                     case 6:for(int i : dcolored){
-                        if(model.getDraftPool().getInDraft().get(i).getValue()==6) return i;
+                        if(dieList.get(i).getValue()==6) return i;
+                    } break;
+                    default:{System.out.println("err4");
+                        return -1;//if the number is 0 or >6
                     }
-                    default: return -1;//if chars is wrong
                 }
+                return -1;// if the chosen die have the right color but wrong number
             }
     }
 
