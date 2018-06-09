@@ -3,6 +3,7 @@ package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ClientViewSocket implements ClientView {
+public class ClientViewSocket extends ClientView {
 
     private ListenerClientView listenerClientView;
     private ViewInterface concreteClientView;
@@ -43,6 +44,7 @@ public class ClientViewSocket implements ClientView {
         SOCKETPORT = data.getClientSOCKETPORT();
         address = data.getIp();
 
+        register(concreteClientView);
        /* Handler handlerObj = new ConsoleHandler();
         handlerObj.setLevel(Level.ALL);
         LOGGER.addHandler(handlerObj);
@@ -118,13 +120,13 @@ public class ClientViewSocket implements ClientView {
         else{
             concreteClientView.showAlreadyLoggedScreen();
         }
-        listenerClientView.listen();
+
     }
 
     @Override
     public void tooManyUsers() {
         concreteClientView.showTooManyUsersScreen();
-        listenerClientView.listen();
+
     }
 
     @Override
@@ -144,15 +146,17 @@ public class ClientViewSocket implements ClientView {
     public void chosenWindowPattern(ActionEventWindow actionEventWindow) {
         WindowAnswerMessage message = new WindowAnswerMessage("send_windowcard", actionEventWindow);
         outSocket.println(message.serializeClassMessage());
-        listenerClientView.listen();
+
     }
 
     @Override
-    public void sendModel(Model m) {
-        //TODO remove comment
-        //concreteClientView.update(m);
+    public void sendPrivateCard(ObjectivePrivateCard privateCard) {
+        //TODO remove it
+        privateCard.printCard();
+        concreteClientView.showPrivateCard(username, privateCard);
 
     }
+
 
     @Override
     public void sendActionEventFromView(ActionEvent actionEvent) {
@@ -164,8 +168,11 @@ public class ClientViewSocket implements ClientView {
     @Override
     public void sendAnswerFromController(String answer) {
         concreteClientView.showAnswerFromController(answer);
-        listenerClientView.listen();
+
     }
 
-
+    @Override
+    protected void notify(Model m) {
+        super.notify(m);
+    }
 }

@@ -24,6 +24,11 @@ public class VisitorMessage implements VisitorInt {
     }
 
     @Override
+    public void visitBeginGame(Boolean connection) {
+        observable.notify(connection);
+    }
+
+    @Override
     public void visitActionEvent(ActionEvent actionEvent) {
         observable.notify(actionEvent);
     }

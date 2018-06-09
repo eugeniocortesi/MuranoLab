@@ -1,16 +1,15 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEvent;
+import it.polimi.ingsw.LM26.ServerController.ActionEventPlayer;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.modelView.ModelMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.EventMessage;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowInitialMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.*;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -133,7 +132,12 @@ public class ClientManagerSocket extends ClientManager {
                 DataMessage dataMessage = new DataMessage("logged", name);
                 dataMessage.dump();
                 this.user= name;
+
+
+                ActionEventPlayer actionEventPlayer = new ActionEventPlayer(name, true);
+                server.getQueueController().pushMessage(actionEventPlayer);
                 server.checkPlayers();
+
                 sendMessage(dataMessage.serializeClassMessage());
             }
         }
@@ -168,6 +172,14 @@ public class ClientManagerSocket extends ClientManager {
         //TODO ATTENTION LISTEN!
         //server.sendToObservable(actionEventWindow);
         listenerClientManager.listen();
+    }
+
+    @Override
+    public void sendPrivateCard(ObjectivePrivateCard card) {
+
+        PrivateCardMessage privateCardMessage = new PrivateCardMessage("send_privatecard", card);
+        String s = privateCardMessage.serializeClassMessage();
+        sendMessage(s);
     }
 
     @Override

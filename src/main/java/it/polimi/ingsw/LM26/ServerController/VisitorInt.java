@@ -17,4 +17,6 @@ public interface VisitorInt {
     public Observable getObservable();
 
     void visitActionEventTimerEnd(ActionEventTimerEnd actionEventTimerEnd);
+
+    void visitBeginGame(Boolean connection);
 }

@@ -1,14 +1,12 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEvent;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.modelView.ModelMessage;
 import it.polimi.ingsw.LM26.systemNetwork.DataEvent;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.EventMessage;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowInitialMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -114,7 +112,7 @@ public class ListenerClientView {
             LOGGER.log(Level.SEVERE, "In send model body");
             ModelMessage modelMessage = ModelMessage.deserializeModelMessage(message);
             Model model= modelMessage.getModel();
-            clientView.sendModel(model);
+            clientView.notify(model);
         }
         else if(op.equals("send_answer_from_controller")){
 
@@ -123,10 +121,17 @@ public class ListenerClientView {
             String field1 = dataMessage1.getField1();
             clientView.sendAnswerFromController(field1);
         }
+        else if(op.equals("send_privatecard")){
+            LOGGER.log(Level.SEVERE, "In send private card body");
+            PrivateCardMessage privateCardMessage = PrivateCardMessage.deserializeEventMessage(message);
+            ObjectivePrivateCard objectivePrivateCard = privateCardMessage.getPrivateCard();
+            clientView.sendPrivateCard(objectivePrivateCard);
+        }
 
         else {
             LOGGER.log(Level.WARNING,"Message not recognized");
         }
 
+        listen();
     }
 }

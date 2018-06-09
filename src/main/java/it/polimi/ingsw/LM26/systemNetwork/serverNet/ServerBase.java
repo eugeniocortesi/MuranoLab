@@ -76,15 +76,10 @@ public class ServerBase extends ViewGameInterface {
         socketAcceptor.start();
         receiver.getVisitorInt().getObservable().register(controller);
         System.out.println("Registered Observer");
-        model.register(observerSimple);
-
+        this.model = model;
         receiver.start();
     }
 
-    @Override
-    public void showPrivateCard(String name, ObjectivePrivateCard privateCard) {
-        //TODO Something
-    }
 
     public ClientManagerList getClientManagerList() {
         return clientManagerList;
@@ -127,8 +122,7 @@ public class ServerBase extends ViewGameInterface {
     public boolean checkNumberUsers(){
         if (clientManagerListSize()<4)
             return true;
-        //TODO beginning game -> send notify to to controller
-        registerModel();
+
 
         /*else if (!playing) {
             Model model = SingletonModel.singletonModel();
@@ -151,8 +145,14 @@ public class ServerBase extends ViewGameInterface {
         while(iterator.hasNext()){
             Map.Entry couple = (Map.Entry)iterator.next();
             System.out.println(couple.getKey());
-            //TODO ask???
-            model.register((ObserverSimple) couple.getValue());
+
+            if (model == null) System.out.println("Model null");
+            if((ObserverSimple) couple.getValue()!= null){
+                model.register((ObserverSimple) couple.getValue());
+            }
+            else{
+                System.out.println("Client manager null");
+            }
         }
     }
 
@@ -163,8 +163,15 @@ public class ServerBase extends ViewGameInterface {
 
     @Override
     public void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
-        System.out.println("called");
+        System.out.println("called windows");
         clientManagerList.getClientManager(user).choseWindowPattern(user, id, windowDeck);
 
     }
+
+    @Override
+    public void showPrivateCard(String name, ObjectivePrivateCard privateCard) {
+        System.out.println("called private cards");
+        clientManagerList.getClientManager(name).sendPrivateCard(privateCard);
+    }
+
 }

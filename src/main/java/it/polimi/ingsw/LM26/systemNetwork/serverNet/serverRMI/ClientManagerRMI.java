@@ -2,7 +2,9 @@ package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI;
 
 
 import it.polimi.ingsw.LM26.ServerController.ActionEvent;
+import it.polimi.ingsw.LM26.ServerController.ActionEventPlayer;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRemote;
@@ -83,6 +85,8 @@ public class ClientManagerRMI extends ClientManager {
             boolean result = myserver.addView(name, this);
             if(result){
                 this.user = name;
+                ActionEventPlayer actionEventPlayer = new ActionEventPlayer(name, true);
+                myserver.getQueueController().pushMessage(actionEventPlayer);
 
                 myserver.checkPlayers();
             }
@@ -138,6 +142,17 @@ public class ClientManagerRMI extends ClientManager {
         myserver.getQueueController().pushMessage(actionEventWindow);
 
         //this.getObserver().accept(actionEventWindow);
+    }
+
+    @Override
+    public void sendPrivateCard(ObjectivePrivateCard card) {
+
+        try {
+            LOGGER.log(Level.SEVERE,"Sending private card");
+            skeleton.sendPrivateCard(card);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

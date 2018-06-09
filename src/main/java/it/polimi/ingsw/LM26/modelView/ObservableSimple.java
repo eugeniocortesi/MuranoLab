@@ -6,7 +6,7 @@ import it.polimi.ingsw.LM26.model.Model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObservableSimple<T> {
+public abstract class ObservableSimple<T> {
 
     private final List<ObserverSimple<T>> observers = new ArrayList<>();
 
