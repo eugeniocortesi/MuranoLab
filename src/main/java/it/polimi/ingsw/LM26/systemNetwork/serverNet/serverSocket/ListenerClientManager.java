@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket;
 
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.EventMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowAnswerMessage;
 
 import java.io.BufferedReader;
@@ -79,6 +80,12 @@ public class ListenerClientManager {
             LOGGER.log(Level.SEVERE,"In send window card body");
             WindowAnswerMessage answerMessage = WindowAnswerMessage.deserializeWindowAnswerMessage(message);
             clientManagerSocket.chosenWindowPattern(answerMessage.getActionEventWindow());
+        }
+        else if(op.equals("send_actionevent_from_view")){
+
+            LOGGER.log(Level.SEVERE,"In send actionevent from view body");
+            EventMessage eventMessage = EventMessage.deserializeEventMessage(message);
+            clientManagerSocket.sendActionEventFromView(eventMessage.getActionEvent());
         }
 
     }

@@ -1,11 +1,13 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.modelView.ModelMessage;
 import it.polimi.ingsw.LM26.systemNetwork.DataEvent;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.EventMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowInitialMessage;
 
 import java.io.BufferedReader;
@@ -113,6 +115,13 @@ public class ListenerClientView {
             ModelMessage modelMessage = ModelMessage.deserializeModelMessage(message);
             Model model= modelMessage.getModel();
             clientView.sendModel(model);
+        }
+        else if(op.equals("send_answer_from_controller")){
+
+            LOGGER.log(Level.SEVERE, "In send answer from controller body");
+            DataMessage dataMessage1 = DataMessage.deserializeDataMessage(message);
+            String field1 = dataMessage1.getField1();
+            clientView.sendAnswerFromController(field1);
         }
 
         else {

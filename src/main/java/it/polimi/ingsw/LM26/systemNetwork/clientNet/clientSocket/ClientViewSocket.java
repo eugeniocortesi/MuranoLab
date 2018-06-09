@@ -1,6 +1,7 @@
 
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
@@ -9,6 +10,7 @@ import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.EventMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowAnswerMessage;
 
 import java.io.*;
@@ -151,4 +153,19 @@ public class ClientViewSocket implements ClientView {
         //concreteClientView.update(m);
 
     }
+
+    @Override
+    public void sendActionEventFromView(ActionEvent actionEvent) {
+        EventMessage message = new EventMessage("send_actionevent_from_view", actionEvent);
+        outSocket.println(message.serializeClassMessage());
+        listenerClientView.listen();
+    }
+
+    @Override
+    public void sendAnswerFromController(String answer) {
+        concreteClientView.showAnswerFromController(answer);
+        listenerClientView.listen();
+    }
+
+
 }

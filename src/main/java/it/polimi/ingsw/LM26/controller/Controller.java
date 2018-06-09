@@ -22,7 +22,7 @@ import java.util.Random;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class Controller implements ControllerInt {
+public class Controller implements ControllerInt{
 
     private Model model;
     private Match match;
@@ -32,7 +32,7 @@ public class Controller implements ControllerInt {
     public Controller() {
 
 
-
+        updatesHandler = new UpdatesHandler(this);
         this.model = singletonModel();
 
 
@@ -52,37 +52,38 @@ public class Controller implements ControllerInt {
     }
 
     public void startServer(){
-        server= new ServerBase(this);
-        server.startAcceptor();
+        server= new ServerBase(updatesHandler);
+        server.startAcceptor(updatesHandler, model);
     }
+
 
     public boolean checkEvent( ActionEvent event){
 
         if (event.getId()==1)
-            if (check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {  model.hasChanged(); model.notifyObservers();
+            if (check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {  model.hasChanged();
             return true; }
             else return false;
         if (event.getId()==2)
-            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getPlayer())) {   model.hasChanged(); model.notifyObservers(); return true;}
+            if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getPlayer())) {   model.hasChanged(); return true;}
             else return false;
         if (event.getId()==3)
             if(check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getFromBox2(), event.getToBox2(),event.getPlayer())) {
-            model.hasChanged(); model.notifyObservers();  return true;}
+            model.hasChanged(); return true;}
             else return false;
         if (event.getId()==4)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {   model.hasChanged(); model.notifyObservers(); return true;}
+            if(check(event.getCard(), event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {   model.hasChanged();  return true;}
             else return false;
         if (event.getId()==5)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getDieFromRoundTrack(), event.getPlayer())) {   model.hasChanged(); model.notifyObservers(); return true;}
+            if(check(event.getCard(), event.getDieFromDraft(), event.getDieFromRoundTrack(), event.getPlayer())) {   model.hasChanged(); return true;}
             else return false;
         if (event.getId()==6)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getInDeCrement(), event.getPlayer())) {  model.hasChanged(); model.notifyObservers(); return true;}
+            if(check(event.getCard(), event.getDieFromDraft(), event.getInDeCrement(), event.getPlayer())) {  model.hasChanged(); return true;}
             else return false;
         if (event.getId()==7)
-            if(check(event.getCard(), event.getDieFromDraft(), event.getPlayer())) {   model.hasChanged(); model.notifyObservers(); return true;}
+            if(check(event.getCard(), event.getDieFromDraft(), event.getPlayer())) {   model.hasChanged(); return true;}
             else return false;
         if (event.getId()==8)
-            if(check(event.getCard(), event.getPlayer())) { model.hasChanged(); model.notifyObservers();  return true;}
+            if(check(event.getCard(), event.getPlayer())) { model.hasChanged(); return true;}
             else return false;
         if (event.getId()==9) { System.out.println("i'll pass ");return true;}
         if (event.getId()==10) return false;
@@ -259,23 +260,6 @@ public class Controller implements ControllerInt {
     public void setupPlayers(String name){
 
 
-
-        /*ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
-        PlayerZone player;
-        int i=names.size();
-        System.out.println("Dimensione: " +i);
-
-        for(int j=0; j<i; j++){
-            player = new PlayerZone(names.get(j), j);
-            player.setNumberPlayer(j);
-            playerList.add(player);
-            System.out.println(player.getName() + player.getIDPlayer());
-
-            }
-        if(playerList== null)
-            System.out.println("qualcosa è nullo");
-        model.setPlayerList(playerList);*/
-
         if(model.getPlayer(name)==null){
             PlayerZone player = new PlayerZone(name, model.getPlayerList().size());
             player.setNumberPlayer(model.getPlayerList().size());
@@ -290,7 +274,7 @@ public class Controller implements ControllerInt {
 
     }
 
-    private void setupPrivateCard() {
+    public void setupPrivateCard() {
 
         //TODO
         //server.showPrivateCard(nome, card);
@@ -375,7 +359,7 @@ public class Controller implements ControllerInt {
         model.setPlayerList(playerList);
     }
 */
-    public void newMatch(Model model, Controller controller/*, ArrayList<ConsoleStrings> console*/){
+    public void newMatch(Model model, ControllerInt controller/*, ArrayList<ConsoleStrings> console*/){
 
         this.match=new Match(model, controller);
 
@@ -391,52 +375,11 @@ public class Controller implements ControllerInt {
 
     }
 
-
-    @Override
-    public void updatePlayers(ActionEventPlayer actionEventPlayer) {
-
-        if(actionEventPlayer.isConnection())
-
-            setupPlayers(actionEventPlayer.getNamePlayer());
-        else
-
-            setStandbyPlayer(actionEventPlayer.getNamePlayer());
-    }
-
-    private void setStandbyPlayer(String namePlayer) {
+    public void setStandbyPlayer(String namePlayer) {
 
         model.getPlayer(namePlayer).setPlayerState(PlayerState.STANDBY);
     }
 
-    @Override
-    public void updateAction(ActionEvent actionEvent) {
-
-        //setActionEvent(actionEvent);
-
-    }
-
-    @Override
-    public void updateWindowPattern(ActionEventWindow actionEventWindow) {
-        //assegna ogni carta al player
-        System.out.println("Notify window arrived");
-        assignWindowCard(actionEventWindow.getName(), actionEventWindow.getWindowPatternCard());
-    }
-
-    @Override
-    public void updateBeginGame(Boolean beginGame) {
-
-        setupWindowCard();
-        setupPrivateCard();
-
-        //TODO create new match
-    }
-
-    @Override
-    public void updateActionEventTimerEnd(ActionEventTimerEnd timerEnd) {
-
-        //TODO esci dal while e passa il turno
-        //timerEnd.getName(); nome di chi ha finito il tempo per la mossa
-    }
 }
 
 

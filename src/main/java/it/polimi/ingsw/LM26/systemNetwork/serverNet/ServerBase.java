@@ -3,6 +3,9 @@ package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 import it.polimi.ingsw.LM26.ServerController.*;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.modelView.ObservableSimple;
+import it.polimi.ingsw.LM26.modelView.ObserverSimple;
 import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.RMIAcceptor;
@@ -11,9 +14,14 @@ import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket.SocketAcceptor;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class ServerBase extends ViewGameInterface {
 
+    private ObservableSimple model;
+    private ObserverSimple observerSimple;
     private Observer controller;
     private RMIAcceptor rmiAcceptor;
     private SocketAcceptor socketAcceptor;
@@ -52,6 +60,7 @@ public class ServerBase extends ViewGameInterface {
 
         clientManagerList = new ClientManagerList(this);
 
+
         queueController = new MessageQueue();
         visitor = new VisitorMessage();
         receiver = new Receiver(queueController, visitor);
@@ -61,18 +70,24 @@ public class ServerBase extends ViewGameInterface {
 
     }
 
-    public void startAcceptor(){
+    public void startAcceptor(Observer controller, ObservableSimple model){
         rmiAcceptor = new RMIAcceptor(this, dataServerConfiguration);
         socketAcceptor = new SocketAcceptor(this, dataServerConfiguration);
         socketAcceptor.start();
         receiver.getVisitorInt().getObservable().register(controller);
         System.out.println("Registered Observer");
+        model.register(observerSimple);
+
         receiver.start();
     }
 
     @Override
     public void showPrivateCard(String name, ObjectivePrivateCard privateCard) {
         //TODO Something
+    }
+
+    public ClientManagerList getClientManagerList() {
+        return clientManagerList;
     }
 
     public Receiver getReceiver() {
@@ -112,7 +127,9 @@ public class ServerBase extends ViewGameInterface {
     public boolean checkNumberUsers(){
         if (clientManagerListSize()<4)
             return true;
-        //TODO change it
+        //TODO beginning game -> send notify to to controller
+        registerModel();
+
         /*else if (!playing) {
             Model model = SingletonModel.singletonModel();
             System.out.println("Inserisci nome: ");
@@ -126,6 +143,17 @@ public class ServerBase extends ViewGameInterface {
             }
         }*/
         return false;
+    }
+
+    public void registerModel(){
+
+        Iterator iterator = clientManagerList.getManagerHashMap().entrySet().iterator();
+        while(iterator.hasNext()){
+            Map.Entry couple = (Map.Entry)iterator.next();
+            System.out.println(couple.getKey());
+            //TODO ask???
+            model.register((ObserverSimple) couple.getValue());
+        }
     }
 
     public void checkPlayers(){

@@ -2,9 +2,9 @@ package it.polimi.ingsw.LM26.controller.Testing;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEventTimerEnd;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
-import it.polimi.ingsw.LM26.controller.ControllerInt;
 import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.ServerController.ActionEventPlayer;
+import it.polimi.ingsw.LM26.controller.ControllerInt;
 import it.polimi.ingsw.LM26.controller.Match;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
@@ -83,7 +83,7 @@ public class ControllerTest implements ControllerInt {
     }
 
 
-    public void newMatch(Model model, ControllerInt controller){
+    public void newMatch(Model model, ControllerTest controller){
 
         this.match=new Match(model,controller);
 
@@ -101,33 +101,5 @@ public class ControllerTest implements ControllerInt {
     }
 
 
-    @Override
-    public void updatePlayers(ActionEventPlayer actionEventPlayer) {
 
-        /*if(actionEventPlayer.getMethodPlayer().equals("ready"))
-
-            setupPlayers(actionEventPlayer.getUsers());*/
-    }
-
-    @Override
-    public void updateAction(ActionEvent actionEvent) {
-
-        match.setActionEvent(actionEvent);
-
-    }
-
-    @Override
-    public void updateWindowPattern(ActionEventWindow actionEventWindow) {
-
-    }
-
-    @Override
-    public void updateBeginGame(Boolean beginGame) {
-
-    }
-
-    @Override
-    public void updateActionEventTimerEnd(ActionEventTimerEnd timerEnd) {
-
-    }
 }

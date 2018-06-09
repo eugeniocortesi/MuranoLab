@@ -1,6 +1,7 @@
 
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
@@ -143,4 +144,22 @@ public class ClientViewRMI implements ClientView {
         //TODO ADD update(m) in ViewInterface
         //concreteClientView.update(m);
     }
+
+    @Override
+    public void sendActionEventFromView(ActionEvent actionEvent) {
+
+        LOGGER.log(Level.SEVERE,"sending amd action event from view");
+        try {
+            stub.sendActionEventFromView(actionEvent);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void sendAnswerFromController(String answer) {
+        concreteClientView.showAnswerFromController(answer);
+    }
+
+
 }

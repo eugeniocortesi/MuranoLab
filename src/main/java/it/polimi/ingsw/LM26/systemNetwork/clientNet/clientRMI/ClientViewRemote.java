@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 
@@ -18,5 +19,7 @@ public interface ClientViewRemote extends Remote {
 
     void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) throws RemoteException;
 
-    void sendModel(Model m);
+    void sendModel(Model m) throws RemoteException;
+
+    void sendAnswerFromController(String answer) throws RemoteException;
 }

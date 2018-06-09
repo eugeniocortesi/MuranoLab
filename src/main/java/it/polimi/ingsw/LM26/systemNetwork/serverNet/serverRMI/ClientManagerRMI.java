@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI;
 
 
+import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
@@ -141,6 +142,33 @@ public class ClientManagerRMI extends ClientManager {
 
     @Override
     public void sendModel(Model m) {
-        skeleton.sendModel(m);
+        try {
+            LOGGER.log(Level.SEVERE,"Sending model");
+            skeleton.sendModel(m);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void sendActionEventFromView(ActionEvent actionEvent) {
+        LOGGER.log(Level.SEVERE,"I have received one actionEvent from " +user);
+        myserver.getQueueController().pushMessage(actionEvent);
+    }
+
+    @Override
+    public void sendAnswerFromController(String answer) {
+
+        try {
+            LOGGER.log(Level.SEVERE,"Sending actionEvent");
+            skeleton.sendAnswerFromController(answer);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void update(Model m) {
+        sendModel(m);
     }
 }

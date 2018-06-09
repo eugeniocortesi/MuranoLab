@@ -1,13 +1,15 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.ServerController.Observable;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.modelView.ObserverSimple;
 
 import java.util.ArrayList;
 
-public abstract class ClientManager implements Runnable {
+public abstract class ClientManager implements Runnable, ObserverSimple {
 
     public abstract void connect();
 
@@ -28,5 +30,9 @@ public abstract class ClientManager implements Runnable {
     public abstract void chosenWindowPattern(ActionEventWindow actionEventWindow);
 
     public abstract void sendModel(Model m);
+
+    public abstract void sendActionEventFromView(ActionEvent actionEvent);
+
+    public abstract void sendAnswerFromController(String message);
 
 }

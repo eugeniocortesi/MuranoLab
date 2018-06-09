@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.ClientManagerRemote;
@@ -37,6 +38,11 @@ public class ClientManagerRMIRemote implements ClientManagerRemote {
     @Override
     public void chosenWindowPattern(ActionEventWindow actionEventWindow) throws RemoteException {
         clientManagerRMI.chosenWindowPattern(actionEventWindow);
+    }
+
+    @Override
+    public void sendActionEventFromView(ActionEvent actionEvent) throws RemoteException {
+        clientManagerRMI.sendActionEventFromView(actionEvent);
     }
 
 

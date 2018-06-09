@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
@@ -17,4 +18,6 @@ public interface ClientManagerRemote extends Remote {
     void disconnect() throws RemoteException;
 
     void chosenWindowPattern(ActionEventWindow actionEventWindow) throws RemoteException;
+
+    void sendActionEventFromView(ActionEvent actionEvent) throws RemoteException;
 }

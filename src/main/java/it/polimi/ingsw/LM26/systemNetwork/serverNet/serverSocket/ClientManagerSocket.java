@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
@@ -8,6 +9,7 @@ import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.EventMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowInitialMessage;
 
 import java.io.DataOutputStream;
@@ -174,5 +176,29 @@ public class ClientManagerSocket extends ClientManager {
         String s = modelMessage.serializeClassMessage();
         sendMessage(s);
         listenerClientManager.listen();
+    }
+
+    @Override
+    public void sendActionEventFromView(ActionEvent actionEvent) {
+        LOGGER.log(Level.SEVERE,"I have received one actionEvent from "+user);
+
+        server.getQueueController().pushMessage(actionEvent);
+        listenerClientManager.listen();
+    }
+
+    @Override
+    public void sendAnswerFromController(String message) {
+
+        LOGGER.log(Level.SEVERE,"server is answering a message");
+        DataMessage dataMessage = new DataMessage("send_answer_from_controller", message);
+        String s = dataMessage.serializeClassMessage();
+        sendMessage(s);
+        listenerClientManager.listen();
+    }
+
+
+    @Override
+    public void update(Model m) {
+        sendModel(m);
     }
 }

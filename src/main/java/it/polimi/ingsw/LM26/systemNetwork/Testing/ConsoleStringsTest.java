@@ -154,6 +154,11 @@ public class ConsoleStringsTest extends ViewInterface {
     }
 
     @Override
+    public void startAcceptor(it.polimi.ingsw.LM26.ServerController.Observer observer) {
+
+    }
+
+    @Override
     public void showSetPlayerMenu(String name, PlayerZone player) {
 
     }
@@ -165,11 +170,6 @@ public class ConsoleStringsTest extends ViewInterface {
 
     @Override
     public void showEndGame(String name, Object score) {
-
-    }
-
-    @Override
-    public void startAcceptor() {
 
     }
 

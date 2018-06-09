@@ -20,6 +20,10 @@ public class ClientManagerList{
 
     }
 
+    public HashMap<String, ClientManager> getManagerHashMap() {
+        return managerHashMap;
+    }
+
     public boolean addClientManager(String name, ClientManager clientManager){
         if(managerHashMap.get(name) != null)
             return false;

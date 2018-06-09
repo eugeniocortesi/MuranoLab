@@ -19,7 +19,7 @@ public class ConnectionToServer extends ClientHandlerInt implements ControllerIn
 
     ClientHandlerRMIRemoteInt clientHandlerRMIRemote;
 
-    public ConnectionToServer(ClientHandlerRMIRemoteInt clientHandlerRMIRemote){
+    public ConnectionToServer(ClientHandlerRMIRemoteInt clientHandlerRMIRemote) {
         this.clientHandlerRMIRemote = clientHandlerRMIRemote;
     }
 
@@ -32,7 +32,7 @@ public class ConnectionToServer extends ClientHandlerInt implements ControllerIn
         }
     }
 
-    public void login(String username){
+    public void login(String username) {
         try {
             clientHandlerRMIRemote.login(username);
         } catch (RemoteException e) {
@@ -40,7 +40,7 @@ public class ConnectionToServer extends ClientHandlerInt implements ControllerIn
         }
     }
 
-    public void disconnect(String username){
+    public void disconnect(String username) {
 
     }
 
@@ -85,34 +85,4 @@ public class ConnectionToServer extends ClientHandlerInt implements ControllerIn
         return false;
     }
 
-
-    @Override
-    public void updatePlayers(ActionEventPlayer actionEventPlayer) {
-
-    }
-
-    @Override
-    public void updateAction(ActionEvent actionEvent) {
-
-    }
-
-    @Override
-    public void updateWindowPattern(ActionEventWindow actionEventWindow) {
-
-    }
-
-    @Override
-    public void updateBeginGame(Boolean beginGame) {
-
-    }
-
-    @Override
-    public void updateActionEventTimerEnd(ActionEventTimerEnd timerEnd) {
-
-    }
-
-    @Override
-    public boolean checkEvent(ActionEvent actionEvent) {
-        return false;
-    }
 }

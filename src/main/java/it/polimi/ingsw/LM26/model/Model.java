@@ -9,6 +9,8 @@ import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
+import it.polimi.ingsw.LM26.modelView.ObservableSimple;
+import it.polimi.ingsw.LM26.modelView.ObserverSimple;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ import java.util.Observer;
 
 import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
 
-public class Model extends Observable implements Serializable {
+public class Model extends ObservableSimple implements Serializable {
 
     private OnBoardCards onBoardCards;
 
@@ -129,4 +131,16 @@ public class Model extends Observable implements Serializable {
         return null;
     }
 
+    public void setRegister(ObserverSimple observer){
+        this.register(observer);
+    }
+
+    public void notifyObservers(){
+        this.notify(this);
+    }
+
+    public void hasChanged(){
+        notifyObservers();
+    }
 }
+
