@@ -1,34 +1,34 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
-import it.polimi.ingsw.LM26.ServerController.ActionEvent;
-import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
-import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
 
 import java.util.ArrayList;
 
-public interface ClientView {
+public abstract class ClientView extends ObservableSimple{
 
-    void connect();
+    public abstract void connect();
 
-    void requestedLogin();
+    public abstract void requestedLogin();
 
-    void login ( String name );
+    public abstract void login ( String name );
 
-    void logged ( Boolean l, String name );
+    public abstract void logged ( Boolean l, String name );
 
-    void tooManyUsers();
+    public abstract void tooManyUsers();
 
-    void disconnect();
+    public abstract void disconnect();
 
-    void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck);
+    public abstract void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck);
 
-    void chosenWindowPattern(ActionEventWindow actionEventWindow);
+    public abstract void chosenWindowPattern(ActionEventWindow actionEventWindow);
 
-    void sendModel(Model m);
+    public abstract void sendPrivateCard(ObjectivePrivateCard privateCard);
 
-    void sendActionEventFromView(ActionEvent actionEvent);
+    public abstract void sendActionEventFromView(ActionEvent actionEvent);
 
-    //TODO remove
-    void sendAnswerFromController(String answer);
+    public abstract void sendAnswerFromController(String answer);
 }

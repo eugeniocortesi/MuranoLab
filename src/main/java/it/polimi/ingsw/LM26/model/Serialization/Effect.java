@@ -1,6 +1,8 @@
 package it.polimi.ingsw.LM26.model.Serialization;
 
-public abstract class Effect {
+import java.io.Serializable;
+
+public abstract class Effect implements Serializable {
 
      protected String type;
 

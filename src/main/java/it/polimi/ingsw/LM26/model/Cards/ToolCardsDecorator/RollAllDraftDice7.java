@@ -35,6 +35,16 @@ public class RollAllDraftDice7 implements ToolCardDecorator {
 
     public void setTwoToken(PlayerZone player){}
 
+    @Override
+    public boolean isInUse() {
+        return false;
+    }
+
+    @Override
+    public void setInUse(boolean inUse) {
+
+    }
+
     public boolean play(Box fromBox, Box toBox, int player){return false;}
     public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player ){return false;}
     public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.LM26.controller.GamePhases;
 
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
+import it.polimi.ingsw.LM26.model.Cards.ToolCard;
+import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
@@ -68,7 +70,7 @@ public class InitialPhase implements PhaseInt {
 
     }
 
-    public void setWindowPattern(Decks decks, ArrayList<PlayerZone> playerList){
+    /*public void setWindowPattern(Decks decks, ArrayList<PlayerZone> playerList){
 
         ArrayList<WindowPatternCard> temp = new ArrayList<WindowPatternCard>();
         ArrayList<WindowPatternCard> four = new ArrayList<WindowPatternCard>();
@@ -89,30 +91,25 @@ public class InitialPhase implements PhaseInt {
                     index = rand.nextInt(count);
                 }
 
-
                     four.add(temp.get(index));
                     temp.remove(index);
                     count = temp.size();
             }
-            //TODO
-            //ask te server which of the four cards is choosen by th player
-            //public WindowPatternCard askWhichWindowPatternCard(ArrayList<WindowPatterCard> four);
-            //playerList.get(i).setWindowPatternCard(askWhichCard(four));
-            //TEMPORANEAMENTE
+
             playerList.get(i).setWindowPatternCard(temp.get(i));
 
             playerList.get(i).getPlayerBoard().insertPatternIntoBoard(playerList.get(i).getWindowPatternCard().getWindowPatter());
             for(int k=0; k<4; k++)four.remove(0);
         }
 
+    }
+*/
+    public void setWindowPattern(Decks decks, ArrayList<PlayerZone> playerList) {
 
+        for(int i=0; i<playerList.size(); i++)
+            playerList.get(i).getPlayerBoard().insertPatternIntoBoard(playerList.get(i).getWindowPatternCard().getWindowPatter());
     }
 
-   /* public void setWindowPattern(Decks decks, ArrayList<PlayerZone> playerList) {
-
-    playerList.get(i).getPlayerBoard().insertPatternIntoBoard(playerList.get(i).getWindowPatternCard().getWindowPatter());
-    }
-    */
 
     public void setPublicCards(OnBoardCards onBoardCards, Decks decks){
         ArrayList<ObjectivePublicCard> publicCardsOnBoard= new ArrayList<ObjectivePublicCard>();
@@ -124,25 +121,37 @@ public class InitialPhase implements PhaseInt {
                 publicCardsOnBoard.add(objectivePublicCard);
             }
         }
-        //TODO SET 3 TOOL CARD
+
         onBoardCards.setObjectivePublicCardList(publicCardsOnBoard);
-        onBoardCards.setToolCardList(decks.getToolCardDeck());
+
+        int count = decks.getToolCardDeck().size();
+        ArrayList<ToolCardInt> three= new ArrayList<ToolCardInt>();
+
+        for (int j = 0; j <3; j++) {
+
+            Random rand = new Random();
+            int index = rand.nextInt(count);
+            while (decks.getToolCardDeck().get(index).isInUse() == true) {
+                rand = new Random();
+                index = rand.nextInt(count);
+            }
+
+            three.add(decks.getToolCardDeck().get(index));
+
+        }
+        System.out.println(" ON BOARD TOOL CARDS " );
+        onBoardCards.setToolCardList(three);
+        for(int j=0; j<three.size(); j++)
+        System.out.print(three.get(j).getNum()+  " ");
     }
 
 
-    //TODO
-    /*public ArrayList<ObjectivePrivateCard> setPrivateCard(ArrayList<PlayerZone> playerList, Decks decks){
-        ArrayList<ObjectivePrivateCard>
-    }*/
     //questo metodo va chiamato dopo aver assegnato la windowPatternCard
     public void doAction(Game game, ArrayList<PlayerZone> playerList) {
         setScoreMarkerAndWindowFrame(playerList, decks);
         setWindowPattern(decks, playerList);
         setTokens(playerList);
         setPublicCards(onBoardCards, decks);
-
-        //TODO
-        //private cards..
         game.setPhase(new CentralPhase(playerList));
 
     }

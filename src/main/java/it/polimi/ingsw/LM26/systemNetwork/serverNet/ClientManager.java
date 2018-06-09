@@ -1,11 +1,11 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
-import it.polimi.ingsw.LM26.ServerController.ActionEvent;
-import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
-import it.polimi.ingsw.LM26.ServerController.Observable;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.modelView.ObserverSimple;
+import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
 
 import java.util.ArrayList;
 
@@ -28,6 +28,8 @@ public abstract class ClientManager implements Runnable, ObserverSimple {
     public abstract void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck);
 
     public abstract void chosenWindowPattern(ActionEventWindow actionEventWindow);
+
+    public abstract void sendPrivateCard(ObjectivePrivateCard card);
 
     public abstract void sendModel(Model m);
 

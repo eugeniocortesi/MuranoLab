@@ -6,7 +6,7 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 public class ToolCard implements ToolCardInt  {
 
-    //private String title= null;
+    private boolean inUse=false;
     private int num;
     private int token=0;
 
@@ -19,6 +19,14 @@ public class ToolCard implements ToolCardInt  {
     public int getNum() {
 
         return num;
+    }
+
+    public boolean isInUse() {
+        return inUse;
+    }
+
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
     }
 
     public void printCard(){

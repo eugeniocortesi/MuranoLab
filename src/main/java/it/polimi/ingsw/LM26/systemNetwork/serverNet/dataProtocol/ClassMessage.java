@@ -3,7 +3,7 @@ package it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
-import it.polimi.ingsw.LM26.ServerController.VisitorInt;
+import it.polimi.ingsw.LM26.observers.serverController.VisitorInt;
 
 import java.io.IOException;
 import java.io.StringReader;

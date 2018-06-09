@@ -1,10 +1,8 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
 
-import it.polimi.ingsw.LM26.ServerController.*;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.BeginGameMessage;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 public class ClientManagerList{
@@ -53,7 +51,13 @@ public class ClientManagerList{
 
     public void checkNumberLogged(){
         if(size()>= 4){
-            
+
+            System.out.println("4 players logged");
+            //TODO beginning game -> send notify to to controller
+            myserver.registerModel();
+            System.out.println("REGISTERED OBSERVER");
+            BeginGameMessage beginGameMessage = new BeginGameMessage("begin_game", true);
+            myserver.getQueueController().pushMessage(beginGameMessage);
 
             /*ArrayList<String> users= Collections.list(Collections.enumeration(managerHashMap.keySet()));
             ActionEventPlayer players = new ActionEventPlayer("ready", users);

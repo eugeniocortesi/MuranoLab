@@ -1,8 +1,9 @@
 package it.polimi.ingsw.LM26.model.Serialization;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class SingletonDecks {
+public class SingletonDecks implements Serializable{
 
     private static Decks decks;
 

@@ -24,4 +24,8 @@ public interface ToolCardInt extends Serializable{
 
     public void setTwoToken(PlayerZone player);
 
+    public boolean isInUse();
+
+    public void setInUse(boolean inUse);
+
 }

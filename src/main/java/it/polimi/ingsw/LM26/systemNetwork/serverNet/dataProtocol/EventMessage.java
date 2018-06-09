@@ -1,8 +1,8 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.LM26.ServerController.ActionEvent;
-import it.polimi.ingsw.LM26.ServerController.VisitorInt;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.VisitorInt;
 
 public class EventMessage extends ClassMessage {
 

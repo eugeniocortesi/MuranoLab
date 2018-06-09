@@ -2,7 +2,9 @@ package it.polimi.ingsw.LM26.model.Serialization;
 
 import it.polimi.ingsw.LM26.model.Serialization.Elements.elements;
 
-public class Shades extends Effect{
+import java.io.Serializable;
+
+public class Shades extends Effect implements Serializable{
 
     private elements shades;
 

@@ -1,11 +1,9 @@
 package it.polimi.ingsw.LM26.controller;
 
-import it.polimi.ingsw.LM26.ServerController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.controller.GamePhases.CentralPhase;
 import it.polimi.ingsw.LM26.controller.GamePhases.Game;
-import it.polimi.ingsw.LM26.controller.Testing.ControllerTest;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.DrawOneMoreDie8;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.RollAgainADie6;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
@@ -26,7 +24,7 @@ public class Match {
     private Game game;
     //TODO STATIC TYPE CONTROLLER INT
     //private ControllerInt controller;
-    private ControllerTest controller;
+    private ControllerInt controller;
 
 
 
@@ -36,12 +34,18 @@ public class Match {
 
         //this.controller=controller;
 
-        this.controller=(ControllerTest) controller;
+        this.controller=controller;
+        System.out.println("new match built1");
         this.game = new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());  //initialPhase
+        System.out.println("new match built2");
         game.getPhase().doAction(game, model.getPlayerList());    //centralPhase
+        System.out.println("new match built3");
         this.centralPhase = (CentralPhase) game.getPhase();
+        System.out.println("new match built4");
         this.model=model;
 
+
+        System.out.println("new match built");
 
         play();
 
@@ -195,8 +199,6 @@ public class Match {
     public void setActionEvent(ActionEvent newEvent) {
 
         this.event = newEvent;
-
-
 
 
 

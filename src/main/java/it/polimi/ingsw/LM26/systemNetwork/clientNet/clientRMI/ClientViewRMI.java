@@ -1,8 +1,9 @@
 
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI;
 
-import it.polimi.ingsw.LM26.ServerController.ActionEvent;
-import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ClientViewRMI implements ClientView {
+public class ClientViewRMI extends ClientView {
 
     private ViewInterface concreteClientView;
     private int RMIPORTServer;
@@ -27,6 +28,7 @@ public class ClientViewRMI implements ClientView {
     private String address;
     private int id;
     private ClientManagerRemote stub;
+    private String username;
 
     private static final Logger LOGGER = Logger.getLogger(ClientViewRMI.class.getName());
 
@@ -37,6 +39,7 @@ public class ClientViewRMI implements ClientView {
         RMIPORTClient =data.getClientRMIPORT();
         address = data.getIp();
         id = 0;
+        register(concreteClientView);
         
 
         getStub();
@@ -103,8 +106,11 @@ public class ClientViewRMI implements ClientView {
 
     @Override
     public void logged(Boolean l, String name) {
-        if (l== true)
+        if (l== true){
+            username = name;
             concreteClientView.showLoggedScreen();
+        }
+
         else
             concreteClientView.showAlreadyLoggedScreen();
     }
@@ -139,10 +145,14 @@ public class ClientViewRMI implements ClientView {
     }
 
     @Override
-    public void sendModel(Model m) {
+    public void sendPrivateCard(ObjectivePrivateCard privateCard) {
+        privateCard.printCard();
+        //concreteClientView.showPrivateCard(username, privateCard);
+    }
 
-        //TODO ADD update(m) in ViewInterface
-        //concreteClientView.update(m);
+    @Override
+    protected void notify(Model m) {
+        super.notify(m);
     }
 
     @Override

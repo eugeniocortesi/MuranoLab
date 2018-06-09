@@ -1,6 +1,6 @@
 package it.polimi.ingsw.LM26.view.cli;
 
-import it.polimi.ingsw.LM26.ServerController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 

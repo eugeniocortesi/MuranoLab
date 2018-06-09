@@ -1,6 +1,6 @@
 package it.polimi.ingsw.LM26.controller;
 
-import it.polimi.ingsw.LM26.ServerController.*;
+import it.polimi.ingsw.LM26.observers.serverController.*;
 
 public class UpdatesHandler implements Observer {
 
@@ -14,7 +14,7 @@ public class UpdatesHandler implements Observer {
 
         if(actionEventPlayer.isConnection())
 
-            controller.setupPlayers(actionEventPlayer.getNamePlayer());
+            controller.getSetupHandler().setupPlayers(actionEventPlayer.getNamePlayer());
         else
 
             controller.setStandbyPlayer(actionEventPlayer.getNamePlayer());
@@ -23,6 +23,8 @@ public class UpdatesHandler implements Observer {
 
     @Override
     public void updateAction(ActionEvent actionEvent) {
+
+        //TODO
         //setActionEvent(actionEvent);
 
     }
@@ -30,9 +32,8 @@ public class UpdatesHandler implements Observer {
     @Override
     public void updateWindowPattern(ActionEventWindow actionEventWindow) {
 
-        //assegna ogni carta al player
         System.out.println("Notify window arrived");
-        controller.assignWindowCard(actionEventWindow.getName(), actionEventWindow.getWindowPatternCard());
+        controller.getSetupHandler().assignWindowCard(actionEventWindow.getName(), actionEventWindow.getWindowPatternCard());
     }
 
     @Override
@@ -41,7 +42,6 @@ public class UpdatesHandler implements Observer {
         controller.setupWindowCard();
         controller.setupPrivateCard();
 
-        //TODO create new match
     }
 
     @Override

@@ -34,6 +34,16 @@ public class MoveTwoDice4 implements ToolCardDecorator {
 
     public void setTwoToken(PlayerZone player){}
 
+    @Override
+    public boolean isInUse() {
+        return false;
+    }
+
+    @Override
+    public void setInUse(boolean inUse) {
+
+    }
+
     public boolean play(Box fromBox, Box toBox, int player){return false;}
     public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
