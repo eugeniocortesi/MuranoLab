@@ -106,7 +106,7 @@ public class ControllerTest implements ControllerInt {
                     rand = new Random();
                     index = rand.nextInt(count);
                 }
-
+                temp.get(index).setInUse(true);
                 four.add(temp.get(index));
                 temp.remove(index);
                 count = temp.size();
