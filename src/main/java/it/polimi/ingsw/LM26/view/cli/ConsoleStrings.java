@@ -5,7 +5,9 @@ import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.modelView.ObservableSimple;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.*;
@@ -52,6 +54,7 @@ public class ConsoleStrings extends ViewInterface {
     }
 
     public ConsoleStrings(ClientBase clientBase) {
+        playerMenu=null;
         this.clientBase = clientBase;
         dataClientImplementation = new DataClientImplementation();
         dataClientConfiguration = dataClientImplementation.implementation();
@@ -131,6 +134,7 @@ public class ConsoleStrings extends ViewInterface {
 
     public void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck){
         int n=-1;
+        ConsoleTools.setId(id);
         for(WindowPatternCard i : windowDeck){
             consoleTools.printPatternCard(i);
         }
@@ -148,13 +152,23 @@ public class ConsoleStrings extends ViewInterface {
     }
 
     @Override
+    public void startAcceptor(it.polimi.ingsw.LM26.ServerController.Observer observer, ObservableSimple model) {
+        //Necessary for Server
+        throw new UnsupportedOperationException("not supported yet");
+    }
+
+    @Override
     public void showSetPlayerMenu(String name, PlayerZone player) {
+        if (player.getPlayerState().equals(PlayerState.BEGINNING)) {
+            this.setPlayerMenu(new MyTurnMenu());
+        }
+        else this.setPlayerMenu(new NotMyTurnMenu());
 
     }
 
     @Override
     public void showAnswerFromController(String answer) {
-
+        System.out.println(answer);
     }
 
     @Override
@@ -162,21 +176,17 @@ public class ConsoleStrings extends ViewInterface {
 
     }
 
-    @Override
-    public void startAcceptor() {
-        //Necessary for Server
-        throw new UnsupportedOperationException("not supported yet");
-    }
-
-    @Override
-    public void showPrivateCard(String name, ObjectivePrivateCard privateCard) {
-        //TODO something
-    }
-
+    /**
+     * this method, currentMenù and the attribute playerMenu make the "Context" class of StatePattern
+     * @param playerMenu is the current player's menù
+     */
     public void setPlayerMenu(PlayerMenuInt playerMenu) {
         this.playerMenu = playerMenu;
     }
 
+    /**
+     * called by controller to show one of the two possible menùs
+     */
     public void currentMenu(){
         playerMenu.showMenu();
     }
@@ -184,6 +194,11 @@ public class ConsoleStrings extends ViewInterface {
 
     @Override
     public void update(Model m) {
-        //TODO aggiorna
+        ConsoleTools.setModel(m);
+    }
+
+    @Override
+    public void showPrivateCard(String name, ObjectivePrivateCard privateCard) {
+        ConsoleTools.setPrivateCard(privateCard);
     }
 }

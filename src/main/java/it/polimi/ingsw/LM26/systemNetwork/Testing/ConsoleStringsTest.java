@@ -6,6 +6,7 @@ import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.modelView.ObservableSimple;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.*;
@@ -154,7 +155,7 @@ public class ConsoleStringsTest extends ViewInterface {
     }
 
     @Override
-    public void startAcceptor(it.polimi.ingsw.LM26.ServerController.Observer observer) {
+    public void startAcceptor(it.polimi.ingsw.LM26.ServerController.Observer observer, ObservableSimple model) {
 
     }
 

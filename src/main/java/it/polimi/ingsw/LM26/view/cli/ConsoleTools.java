@@ -30,7 +30,14 @@ public class ConsoleTools {
     static int id;
     static ObjectivePrivateCard privateCard=null;
 
-   /* private Decks deck=singletonDecks();
+    public static void setId(int id) {
+        ConsoleTools.id = id;
+    }
+
+    public static void setPrivateCard(ObjectivePrivateCard privateCard) {
+        ConsoleTools.privateCard = privateCard;
+    }
+/* private Decks deck=singletonDecks();
 
     public static void main(String[] args) {
         ConsoleTools cTools = new ConsoleTools();
