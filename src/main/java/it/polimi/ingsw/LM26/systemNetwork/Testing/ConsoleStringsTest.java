@@ -5,6 +5,7 @@ import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.*;
@@ -153,8 +154,32 @@ public class ConsoleStringsTest extends ViewInterface {
     }
 
     @Override
+    public void showSetPlayerMenu(String name, PlayerZone player) {
+
+    }
+
+    @Override
+    public void showAnswerFromController(String answer) {
+
+    }
+
+    @Override
+    public void showEndGame(String name, Object score) {
+
+    }
+
+    @Override
     public void startAcceptor() {
 
     }
 
+    @Override
+    public void showPrivateCard(String name, ObjectivePrivateCard privateCard) {
+
+    }
+
+    @Override
+    public void update(Model m) {
+
+    }
 }

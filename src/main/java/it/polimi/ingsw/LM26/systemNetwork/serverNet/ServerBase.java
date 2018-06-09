@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
 import it.polimi.ingsw.LM26.ServerController.*;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerImplementation;
@@ -67,6 +68,11 @@ public class ServerBase extends ViewGameInterface {
         receiver.getVisitorInt().getObservable().register(controller);
         System.out.println("Registered Observer");
         receiver.start();
+    }
+
+    @Override
+    public void showPrivateCard(String name, ObjectivePrivateCard privateCard) {
+        //TODO Something
     }
 
     public Receiver getReceiver() {
