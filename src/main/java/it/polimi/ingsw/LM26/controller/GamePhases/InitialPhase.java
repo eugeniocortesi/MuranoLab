@@ -1,6 +1,8 @@
 package it.polimi.ingsw.LM26.controller.GamePhases;
 
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
+import it.polimi.ingsw.LM26.model.Cards.ToolCard;
+import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
@@ -124,25 +126,33 @@ public class InitialPhase implements PhaseInt {
                 publicCardsOnBoard.add(objectivePublicCard);
             }
         }
-        //TODO SET 3 TOOL CARD
+
         onBoardCards.setObjectivePublicCardList(publicCardsOnBoard);
-        onBoardCards.setToolCardList(decks.getToolCardDeck());
+
+        int count = decks.getToolCardDeck().size();
+        ArrayList<ToolCardInt> three= new ArrayList<ToolCardInt>();
+
+        for (int j = 0; j <3; j++) {
+
+            Random rand = new Random();
+            int index = rand.nextInt(count);
+            while (decks.getToolCardDeck().get(index).isInUse() == true) {
+                rand = new Random();
+                index = rand.nextInt(count);
+            }
+
+            three.add(decks.getToolCardDeck().get(index));
+        }
+        onBoardCards.setToolCardList(three);
     }
 
 
-    //TODO
-    /*public ArrayList<ObjectivePrivateCard> setPrivateCard(ArrayList<PlayerZone> playerList, Decks decks){
-        ArrayList<ObjectivePrivateCard>
-    }*/
     //questo metodo va chiamato dopo aver assegnato la windowPatternCard
     public void doAction(Game game, ArrayList<PlayerZone> playerList) {
         setScoreMarkerAndWindowFrame(playerList, decks);
         setWindowPattern(decks, playerList);
         setTokens(playerList);
         setPublicCards(onBoardCards, decks);
-
-        //TODO
-        //private cards..
         game.setPhase(new CentralPhase(playerList));
 
     }

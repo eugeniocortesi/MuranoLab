@@ -39,6 +39,16 @@ public class RollAgainADie6 implements ToolCardDecorator {
     public void setTwoToken(PlayerZone player) {
     }
 
+    @Override
+    public boolean isInUse() {
+        return false;
+    }
+
+    @Override
+    public void setInUse(boolean inUse) {
+
+    }
+
     public boolean play(Box fromBox, Box toBox, int player) {
         return false;
     }

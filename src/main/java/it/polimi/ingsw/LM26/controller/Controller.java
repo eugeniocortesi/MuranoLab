@@ -270,20 +270,28 @@ public class Controller implements ControllerInt{
             model.getPlayer(name).setPlayerState(PlayerState.ENDING);
         }
 
-
-
     }
+
 
     public void setupPrivateCard() {
 
-        //TODO
-        //server.showPrivateCard(nome, card);
+        int count = model.getDecks().getObjectivePrivateCardDeck().size();
+
+        for (int j = 0; j < model.getPlayerList().size(); j++) {
+
+            Random rand = new Random();
+            int index = rand.nextInt(count);
+            while (model.getDecks().getObjectivePrivateCardDeck().get(index).isInUse() == true) {
+                rand = new Random();
+                index = rand.nextInt(count);
+            }
+                model.getDecks().getObjectivePrivateCardDeck().get(index).setInUse(true);
+                server.showPrivateCard(model.getPlayerList().get(j).getName(), model.getDecks().getObjectivePrivateCardDeck().get(index));
+            }
     }
 
 
     public void setupWindowCard(){
-
-
 
         for(int i=0; i< model.getPlayerList().size(); i++){
             ArrayList<WindowPatternCard> windowlist = createWindowPattern();
@@ -298,12 +306,10 @@ public class Controller implements ControllerInt{
             windowlist.clear();
 
         }
-        //newMatch(model, this);
     }
 
     public void assignWindowCard(String name, WindowPatternCard windowPatternCard){
 
-        //TODO SOMETHING
         model.getPlayer(name).setWindowPatternCard(windowPatternCard);
         model.getPlayer(name).getWindowPatternCard().printCard();
         System.out.println("Assigned card to player "+name);
@@ -326,8 +332,7 @@ public class Controller implements ControllerInt{
                 rand = new Random();
                 index = rand.nextInt(count);
             }
-
-
+            temp.get(index).setInUse(true);
             four.add(temp.get(index));
             temp.remove(index);
             count = temp.size();
@@ -335,30 +340,7 @@ public class Controller implements ControllerInt{
         return four;
     }
 
-        //TODO DELETE PLAYERS
 
- /*   public void setupPlayers(){
-
-        PlayerZone player1 = new PlayerZone("eugenio", 0);
-        PlayerZone player2 = new PlayerZone("Chiara", 1);
-       // PlayerZone player3 = new PlayerZone( "Claudia", 2);
-       // PlayerZone player4 = new PlayerZone("Tommaso", 3);
-
-        player1.setNumberPlayer(0);
-        player2.setNumberPlayer(1);
-       // player3.setNumberPlayer(2);
-       // player4.setNumberPlayer(3);
-
-        ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
-
-        playerList.add(player1);
-        playerList.add(player2);
-        //playerList.add(player3);
-        //playerList.add(player4);
-
-        model.setPlayerList(playerList);
-    }
-*/
     public void newMatch(Model model, ControllerInt controller/*, ArrayList<ConsoleStrings> console*/){
 
         this.match=new Match(model, controller);
