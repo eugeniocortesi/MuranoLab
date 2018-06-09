@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.controller.Testing;
 
+import it.polimi.ingsw.LM26.ServerController.ActionEventTimerEnd;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.controller.ControllerInt;
 import it.polimi.ingsw.LM26.ServerController.ActionEvent;
@@ -117,6 +118,16 @@ public class ControllerTest implements ControllerInt {
 
     @Override
     public void updateWindowPattern(ActionEventWindow actionEventWindow) {
+
+    }
+
+    @Override
+    public void updateBeginGame(Boolean beginGame) {
+
+    }
+
+    @Override
+    public void updateActionEventTimerEnd(ActionEventTimerEnd timerEnd) {
 
     }
 }

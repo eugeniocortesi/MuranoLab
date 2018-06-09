@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.network.client;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.ServerController.ActionEventPlayer;
+import it.polimi.ingsw.LM26.ServerController.ActionEventTimerEnd;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.controller.ControllerInt;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
@@ -97,6 +98,16 @@ public class ConnectionToServer extends ClientHandlerInt implements ControllerIn
 
     @Override
     public void updateWindowPattern(ActionEventWindow actionEventWindow) {
+
+    }
+
+    @Override
+    public void updateBeginGame(Boolean beginGame) {
+
+    }
+
+    @Override
+    public void updateActionEventTimerEnd(ActionEventTimerEnd timerEnd) {
 
     }
 

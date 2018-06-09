@@ -1,6 +1,8 @@
 package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 
-public enum PlayerState {
+import java.io.Serializable;
+
+public enum PlayerState implements Serializable {
 
     STANDBY, //non sta giocando
     WAIT, //non è il tuo turno

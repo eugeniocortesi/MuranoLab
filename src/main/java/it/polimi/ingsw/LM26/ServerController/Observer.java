@@ -8,4 +8,9 @@ public interface Observer<T> {
     void updateAction(ActionEvent actionEvent);
 
     void updateWindowPattern(ActionEventWindow actionEventWindow);
+
+    void updateBeginGame(Boolean beginGame);
+
+    void updateActionEventTimerEnd(ActionEventTimerEnd timerEnd);
+
 }

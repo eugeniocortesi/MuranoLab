@@ -19,6 +19,11 @@ public class VisitorMessage implements VisitorInt {
     }
 
     @Override
+    public void visitActionEventTimerEnd(ActionEventTimerEnd actionEventTimerEnd) {
+        observable.notify(actionEventTimerEnd);
+    }
+
+    @Override
     public void visitActionEvent(ActionEvent actionEvent) {
         observable.notify(actionEvent);
     }

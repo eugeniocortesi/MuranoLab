@@ -16,4 +16,5 @@ public interface VisitorInt {
     void visitWindowInitialMessage(WindowInitialMessage windowInitialMessage);
     public Observable getObservable();
 
+    void visitActionEventTimerEnd(ActionEventTimerEnd actionEventTimerEnd);
 }

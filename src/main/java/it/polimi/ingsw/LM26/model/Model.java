@@ -45,6 +45,7 @@ public class Model extends Observable implements Serializable {
         this.draftPool =new DraftPool();
         this.onBoardCards= new OnBoardCards();
         this.decks=singletonDecks();
+        this.playerList=new ArrayList<PlayerZone>();
         //set playerList, scoreTrack
     }
 
@@ -128,22 +129,4 @@ public class Model extends Observable implements Serializable {
         return null;
     }
 
-    @Override
-    public void notifyObservers() {
-
-        super.notifyObservers();
-        //TODO
-        // deve pare observer.update() per ogni observer della lista
-
-    }
-
-    @Override
-    public synchronized void addObserver(Observer o) {
-        super.addObserver(o);
-    }
-
-    @Override
-    public synchronized boolean hasChanged() {
-        return super.hasChanged();
-    }
 }

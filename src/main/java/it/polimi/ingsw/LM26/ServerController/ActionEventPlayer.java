@@ -7,29 +7,30 @@ import java.util.ArrayList;
 
 public class ActionEventPlayer extends ClassMessage implements Serializable {
 
-    private String methodPlayer;
+    private String namePlayer;
 
-    private ArrayList<String> users;
+    private boolean connection;
 
-    public ActionEventPlayer(String m, ArrayList<String> u){
-        methodPlayer = m;
-        users = u;
+
+    public ActionEventPlayer(String m, boolean connection){
+        this.namePlayer=m;
+        this.connection=connection;
     }
 
-    public String getMethodPlayer() {
-        return methodPlayer;
+    public String getNamePlayer() {
+        return namePlayer;
     }
 
-    public void setMethodPlayer(String methodPlayer) {
-        this.methodPlayer = methodPlayer;
+    public void setNamePlayer(String namePlayer) {
+        this.namePlayer = namePlayer;
     }
 
-    public ArrayList<String> getUsers() {
-        return users;
+    public boolean isConnection() {
+        return connection;
     }
 
-    public void setUsers(ArrayList<String> users) {
-        this.users = users;
+    public void setConnection(boolean connection) {
+        this.connection = connection;
     }
 
     @Override

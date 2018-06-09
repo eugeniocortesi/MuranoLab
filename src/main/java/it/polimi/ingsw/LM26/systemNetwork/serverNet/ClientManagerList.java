@@ -49,15 +49,16 @@ public class ClientManagerList{
 
     public void checkNumberLogged(){
         if(size()>= 4){
+            
 
-            ArrayList<String> users= Collections.list(Collections.enumeration(managerHashMap.keySet()));
+            /*ArrayList<String> users= Collections.list(Collections.enumeration(managerHashMap.keySet()));
             ActionEventPlayer players = new ActionEventPlayer("ready", users);
             System.out.println("REGISTERED OBSERVER");
 
             System.out.println("4 players logged");
             myserver.getQueueController().pushMessage(players);
 
-            //notify(players);
+            //notify(players);*/
 
         }
     }

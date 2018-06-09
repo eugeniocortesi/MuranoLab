@@ -61,4 +61,20 @@ public class Observable<T> {
     protected void notify(WindowAnswerMessage windowAnswerMessage) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public void notify(ActionEventTimerEnd actionEventTimerEnd) {
+        synchronized (observers) {
+            for(Observer<T> observer : observers){
+                observer.updateActionEventTimerEnd(actionEventTimerEnd);
+            }
+        }
+    }
+
+    public void notify(Boolean beginGame) {
+        synchronized (observers) {
+            for(Observer<T> observer : observers){
+                observer.updateBeginGame(beginGame);
+            }
+        }
+    }
 }

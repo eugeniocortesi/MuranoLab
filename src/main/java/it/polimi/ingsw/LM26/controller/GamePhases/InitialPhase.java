@@ -124,6 +124,7 @@ public class InitialPhase implements PhaseInt {
                 publicCardsOnBoard.add(objectivePublicCard);
             }
         }
+        //TODO SET 3 TOOL CARD
         onBoardCards.setObjectivePublicCardList(publicCardsOnBoard);
         onBoardCards.setToolCardList(decks.getToolCardDeck());
     }

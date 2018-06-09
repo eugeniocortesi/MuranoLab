@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.controller;
 
 import it.polimi.ingsw.LM26.ServerController.ActionEvent;
 import it.polimi.ingsw.LM26.ServerController.ActionEventPlayer;
+import it.polimi.ingsw.LM26.ServerController.ActionEventTimerEnd;
 import it.polimi.ingsw.LM26.ServerController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.RollAgainADie6;
@@ -9,6 +10,7 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ViewGameInterface;
@@ -25,12 +27,14 @@ public class Controller implements ControllerInt {
     private Model model;
     private Match match;
     private ViewGameInterface server;
+    private UpdatesHandler updatesHandler;
 
     public Controller() {
 
 
 
         this.model = singletonModel();
+
 
 
 
@@ -252,16 +256,11 @@ public class Controller implements ControllerInt {
         //view.showLogin()
     }
 
-    public void setupPlayers(ArrayList<String> names){
+    public void setupPlayers(String name){
 
-        //String[] names;
-        //server.playersName();
-        //for(int i=0; i<names;i++){
-        //create new player
-        //view.showAddedPlayer();
-        // }
 
-        ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
+
+        /*ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
         PlayerZone player;
         int i=names.size();
         System.out.println("Dimensione: " +i);
@@ -275,10 +274,26 @@ public class Controller implements ControllerInt {
             }
         if(playerList== null)
             System.out.println("qualcosa è nullo");
-        model.setPlayerList(playerList);
+        model.setPlayerList(playerList);*/
 
-        setupWindowCard();
+        if(model.getPlayer(name)==null){
+            PlayerZone player = new PlayerZone(name, model.getPlayerList().size());
+            player.setNumberPlayer(model.getPlayerList().size());
+            model.getPlayerList().add(player);
+            System.out.println(player.getName() + player.getIDPlayer());
+        }
+        else{
+            model.getPlayer(name).setPlayerState(PlayerState.ENDING);
+        }
 
+
+
+    }
+
+    private void setupPrivateCard() {
+
+        //TODO
+        //server.showPrivateCard(nome, card);
     }
 
 
@@ -380,9 +395,17 @@ public class Controller implements ControllerInt {
     @Override
     public void updatePlayers(ActionEventPlayer actionEventPlayer) {
 
-        if(actionEventPlayer.getMethodPlayer().equals("ready"))
+        if(actionEventPlayer.isConnection())
 
-            setupPlayers(actionEventPlayer.getUsers());
+            setupPlayers(actionEventPlayer.getNamePlayer());
+        else
+
+            setStandbyPlayer(actionEventPlayer.getNamePlayer());
+    }
+
+    private void setStandbyPlayer(String namePlayer) {
+
+        model.getPlayer(namePlayer).setPlayerState(PlayerState.STANDBY);
     }
 
     @Override
@@ -397,6 +420,22 @@ public class Controller implements ControllerInt {
         //assegna ogni carta al player
         System.out.println("Notify window arrived");
         assignWindowCard(actionEventWindow.getName(), actionEventWindow.getWindowPatternCard());
+    }
+
+    @Override
+    public void updateBeginGame(Boolean beginGame) {
+
+        setupWindowCard();
+        setupPrivateCard();
+
+        //TODO create new match
+    }
+
+    @Override
+    public void updateActionEventTimerEnd(ActionEventTimerEnd timerEnd) {
+
+        //TODO esci dal while e passa il turno
+        //timerEnd.getName(); nome di chi ha finito il tempo per la mossa
     }
 }
 

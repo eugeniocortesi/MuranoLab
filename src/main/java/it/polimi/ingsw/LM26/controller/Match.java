@@ -64,6 +64,8 @@ public class Match {
                         //se ha scleto una carta    controller.getView().showPlaceDie();
                         //se ha piazato un dado     controller.getView().showChooseCard();
 
+                //TODO
+                // X4 setPlayerMenu(String name, PlayerZone player)
 
                 //la view crea l'evento e fa notifyall che all'interno ha update
 
@@ -103,6 +105,7 @@ public class Match {
                         System.out.println("DraftPool");
                         model.getDraftPool().printDraftPool();
                         // view.showOK()
+                        //update model
                         result = true;
                     }
 
@@ -149,10 +152,14 @@ public class Match {
                             tool8.setCurrentPlacement(true);
                             playing.getActionHistory().setFreezed(true);
                             System.out.println("choose another die");
+                            //update model
 
 
                         }
-                        else result = true;
+                        else {
+                            result = true;
+                            //update model
+                        }
                     } else
                         System.out.println("match error 2 ");
 
