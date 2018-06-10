@@ -135,14 +135,15 @@ public class InitialPhase implements PhaseInt {
                 rand = new Random();
                 index = rand.nextInt(count);
             }
-
+            decks.getToolCardDeck().get(index).setInUse(true);
             three.add(decks.getToolCardDeck().get(index));
 
         }
-        System.out.println(" ON BOARD TOOL CARDS " );
+        System.out.print("On boards Tool cards: " );
         onBoardCards.setToolCardList(three);
         for(int j=0; j<three.size(); j++)
         System.out.print(three.get(j).getNum()+  " ");
+        System.out.print("\n");
     }
 
 

@@ -50,6 +50,7 @@ public class ChangeDieWithTheBag11 implements ToolCardDecorator {
     public boolean play (DieInt dieFromDraft, int pl) {
 
 
+
         return false;
 
 

@@ -22,30 +22,19 @@ public class Match {
     private ActionEvent event;
     private CentralPhase centralPhase;
     private Game game;
-    //TODO STATIC TYPE CONTROLLER INT
-    //private ControllerInt controller;
     private ControllerInt controller;
 
 
 
     public Match(Model model, ControllerInt controller ) {
 
-        //TODO DELETE CAST AND ADD HANDLER METHOD TO INT
-
-        //this.controller=controller;
-
         this.controller=controller;
-        System.out.println("new match built1");
         this.game = new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());  //initialPhase
-        System.out.println("new match built2");
         game.getPhase().doAction(game, model.getPlayerList());    //centralPhase
-        System.out.println("new match built3");
         this.centralPhase = (CentralPhase) game.getPhase();
-        System.out.println("new match built4");
         this.model=model;
 
-
-        System.out.println("new match built");
+        System.out.println("START");
 
         play();
 

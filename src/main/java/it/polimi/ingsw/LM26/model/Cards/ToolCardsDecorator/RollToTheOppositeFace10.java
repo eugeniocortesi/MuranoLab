@@ -49,7 +49,21 @@ public class RollToTheOppositeFace10 implements ToolCardDecorator {
 
     public boolean play (DieInt dieFromDraft, int pl) {
 
+        //6  1
+        //5  2
+        //4  3
 
-    return false;
+        int count=0;
+        int val=0;
+        if(dieFromDraft.getValue()==1 || dieFromDraft.getValue()==4)val=5;
+        if(dieFromDraft.getValue()==2 || dieFromDraft.getValue()==5)val=3;
+        if(dieFromDraft.getValue()==3 || dieFromDraft.getValue()==6)val=1;
+
+        for(int i=0; i<val; i++)
+            dieFromDraft.increment();
+
+        dieFromDraft.dump();
+
+    return true ;
     }
 }
