@@ -109,8 +109,7 @@ public class ListenerClientView {
         }
         else if(op.equals("send_model")){
             LOGGER.log(Level.SEVERE, "In send model body");
-            ModelMessage modelMessage = ModelMessage.deserializeModelMessage(message);
-            Model model= modelMessage.getModel();
+            Model model = ModelMessage.deserializeModelMessage(message);
             clientView.notify(model);
         }
         else if(op.equals("send_answer_from_controller")){

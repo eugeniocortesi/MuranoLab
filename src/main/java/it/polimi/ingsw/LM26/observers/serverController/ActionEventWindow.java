@@ -6,6 +6,7 @@ import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ClassMessage;
 import java.io.Serializable;
 
 public class ActionEventWindow extends ClassMessage implements Serializable{
+
     private String name;
     private WindowPatternCard windowPatternCard;
 

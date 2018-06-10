@@ -18,6 +18,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.RemoteServer;
 import java.rmi.server.ServerNotActiveException;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,7 +54,20 @@ public class ClientManagerRMI extends ClientManager {
             LOGGER.log(Level.WARNING, "Took Skeleton");
             myserver.addClientManager(this);
 
-            skeleton.requestedLogin();
+            Thread t = new Thread(new Runnable(){
+
+                public void run() {
+                    try {
+                        skeleton.requestedLogin();
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            });
+            t.start();
+
+            //skeleton.requestedLogin();
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
@@ -91,24 +105,32 @@ public class ClientManagerRMI extends ClientManager {
                 myserver.checkPlayers();
             }
             LOGGER.log(Level.INFO,"The add result value: " + result);
-            try {
+            Thread t = new Thread(new MyRunnableLogged(user, result));
+            t.start();
+
+            /*try {
                 skeleton.logged(result, name);
             } catch (RemoteException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
         else {
-            try {
-                skeleton.tooManyUsers();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+            Thread t = new Thread(new Runnable(){
+
+                public void run() {
+                    try {
+                        skeleton.tooManyUsers();
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            });
+            t.start();
+
         }
-
-
-
-
     }
+
 
     @Override
     public void logged(Boolean l, String name) {
@@ -127,12 +149,8 @@ public class ClientManagerRMI extends ClientManager {
 
     @Override
     public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
-        try {
-            LOGGER.log(Level.SEVERE,"Asking window card");
-            skeleton.choseWindowPattern(user, id, windowDeck);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+        Thread t = new Thread(new MyRunnableWindow(user, id, (ArrayList<WindowPatternCard>) windowDeck.clone()));
+        t.start();
     }
 
     @Override
@@ -147,22 +165,30 @@ public class ClientManagerRMI extends ClientManager {
     @Override
     public void sendPrivateCard(ObjectivePrivateCard card) {
 
-        try {
+        Thread t = new Thread(new MyRunnablePrivateCard(card));
+        t.start();
+
+        /*try {
             LOGGER.log(Level.SEVERE,"Sending private card");
             skeleton.sendPrivateCard(card);
         } catch (RemoteException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
     public void sendModel(Model m) {
-        try {
+
+        Thread t = new Thread(new MyRunnableModel(m));
+        t.start();
+
+
+        /*try {
             LOGGER.log(Level.SEVERE,"Sending model");
             skeleton.sendModel(m);
         } catch (RemoteException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
@@ -174,16 +200,130 @@ public class ClientManagerRMI extends ClientManager {
     @Override
     public void sendAnswerFromController(String answer) {
 
-        try {
+        Thread t = new Thread(new MyRunnableAnswer(answer));
+        t.start();
+
+        /*try {
             LOGGER.log(Level.SEVERE,"Sending actionEvent");
             skeleton.sendAnswerFromController(answer);
         } catch (RemoteException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
     public void update(Model m) {
         sendModel(m);
     }
+
+
+
+    public class MyRunnableWindow implements Runnable{
+
+        volatile String user;
+        volatile int id;
+        volatile ArrayList<WindowPatternCard> windowDeck;
+
+        public MyRunnableWindow(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
+            this.user = user;
+            this.id = id;
+            this.windowDeck = windowDeck;
+        }
+
+        @Override
+        public void run() {
+            try {
+                LOGGER.log(Level.SEVERE,"Asking window card");
+                LOGGER.log(Level.SEVERE, windowDeck.toString());
+                skeleton.choseWindowPattern(user, id, windowDeck);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public class MyRunnableLogged implements Runnable{
+
+        volatile String user;
+        volatile boolean result;
+
+        public MyRunnableLogged(String user, boolean result) {
+            this.user = user;
+            this.result = result;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+                skeleton.logged(result, user);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class MyRunnablePrivateCard implements Runnable {
+
+        volatile ObjectivePrivateCard card;
+
+        public MyRunnablePrivateCard(ObjectivePrivateCard privateCard) {
+
+            card= privateCard;
+        }
+
+        @Override
+        public void run(){
+
+            try {
+                LOGGER.log(Level.SEVERE,"Sending private card");
+                skeleton.sendPrivateCard(card);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class MyRunnableModel implements Runnable {
+
+        volatile Model m;
+
+        public MyRunnableModel(Model m) {
+
+            this.m = m;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+                LOGGER.log(Level.SEVERE,"Sending model");
+                skeleton.sendModel(m);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class MyRunnableAnswer implements Runnable {
+
+        volatile String answer;
+
+        public MyRunnableAnswer(String answer) {
+            this.answer = answer;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+                LOGGER.log(Level.SEVERE,"Sending actionEvent");
+                skeleton.sendAnswerFromController(answer);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
+
+

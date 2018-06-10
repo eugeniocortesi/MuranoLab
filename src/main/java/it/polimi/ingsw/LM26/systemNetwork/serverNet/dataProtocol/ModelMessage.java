@@ -28,19 +28,13 @@ public class ModelMessage extends ClassMessage{
         return model;
     }
 
-    static public ModelMessage deserializeModelMessage(String protocolJson){
+    static public Model deserializeModelMessage(String protocolJson){
 
 
         Gson gson = new Gson();
-        ModelMessage message= gson.fromJson(protocolJson, ModelMessage.class);
-        return message;
-    }
 
-    public void executeDeserialization(){
-
-        Type Public = new TypeToken<ArrayList<ObjectivePublicCard>>() {
+        Type modelType = new TypeToken<Model>() {
         }.getType();
-        ArrayList<ObjectivePublicCard> publicCards = new ArrayList<ObjectivePublicCard>();
 
         RuntimeTypeAdapterFactory1<Effect> runtimeTypeAdapterFactory1 = RuntimeTypeAdapterFactory1
                 .of(Effect.class, "type")
@@ -49,7 +43,10 @@ public class ModelMessage extends ClassMessage{
                 .registerSubtype(Shades.class)
                 .registerSubtype(ColoredDiagonals.class);
 
+        Model model= gson.fromJson(protocolJson, modelType);
+        return model;
     }
+
 
     @Override
     public void accept(VisitorInt visitorInt) {

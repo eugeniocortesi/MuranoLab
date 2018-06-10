@@ -173,6 +173,7 @@ public class ClientViewSocket extends ClientView {
 
     @Override
     protected void notify(Model m) {
+        LOGGER.log(Level.SEVERE,"Model is arrived from Controller");
         super.notify(m);
     }
 }

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import it.polimi.ingsw.LM26.observers.serverController.VisitorInt;
 
 public class BeginGameMessage extends ClassMessage {
+
     private String op;
     private Boolean connection;
 
