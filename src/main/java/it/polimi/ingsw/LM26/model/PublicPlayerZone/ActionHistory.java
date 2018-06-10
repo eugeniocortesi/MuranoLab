@@ -1,6 +1,8 @@
 package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 
-public class ActionHistory {
+import java.io.Serializable;
+
+public class ActionHistory implements Serializable{
 
     private boolean dieUsed=false;
 

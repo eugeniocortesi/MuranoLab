@@ -2,7 +2,9 @@ package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
-public class ScoreMarker {
+import java.io.Serializable;
+
+public class ScoreMarker implements Serializable {
 
     private Color color;
 

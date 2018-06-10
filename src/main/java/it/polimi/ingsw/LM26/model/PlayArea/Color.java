@@ -1,6 +1,8 @@
 package it.polimi.ingsw.LM26.model.PlayArea;
 
-public enum Color{
+import java.io.Serializable;
+
+public enum Color implements Serializable{
 
 
         ANSI_RED("\u001B[31m"),

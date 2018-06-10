@@ -1,6 +1,8 @@
 package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 
-public class Token {
+import java.io.Serializable;
+
+public class Token implements Serializable {
 
     private int token;
 

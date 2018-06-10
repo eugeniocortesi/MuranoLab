@@ -152,13 +152,14 @@ public class ClientViewRMI extends ClientView {
 
     @Override
     protected void notify(Model m) {
+        LOGGER.log(Level.SEVERE,"Arrived Model from Controller");
         super.notify(m);
     }
 
     @Override
     public void sendActionEventFromView(ActionEvent actionEvent) {
 
-        LOGGER.log(Level.SEVERE,"sending amd action event from view");
+        LOGGER.log(Level.SEVERE,"sending an action event from view");
         try {
             stub.sendActionEventFromView(actionEvent);
         } catch (RemoteException e) {

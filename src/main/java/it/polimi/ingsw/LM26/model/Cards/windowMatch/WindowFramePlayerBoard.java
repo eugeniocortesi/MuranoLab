@@ -2,7 +2,9 @@ package it.polimi.ingsw.LM26.model.Cards.windowMatch;
 
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
-public class WindowFramePlayerBoard/* implements CardInt */{
+import java.io.Serializable;
+
+public class WindowFramePlayerBoard implements Serializable{
 
     private Box BoardMatrix[][];
     private Color color;
