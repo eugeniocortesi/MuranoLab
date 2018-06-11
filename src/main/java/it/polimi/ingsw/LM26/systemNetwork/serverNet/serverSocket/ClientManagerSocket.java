@@ -156,6 +156,7 @@ public class ClientManagerSocket extends ClientManager {
 
         LOGGER.log(Level.SEVERE,"server is disconnecting " + user);
         DataMessage dataMessage = new DataMessage("disconnected", user);
+        server.getClientManagerList().removeClientManager(user);
         sendMessage(dataMessage.serializeClassMessage());
     }
 

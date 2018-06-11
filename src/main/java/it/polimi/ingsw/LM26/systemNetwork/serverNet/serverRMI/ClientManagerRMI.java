@@ -133,6 +133,7 @@ public class ClientManagerRMI extends ClientManager {
     public void disconnected() {
 
         LOGGER.log(Level.SEVERE,user+ " client RMI is disconnected");
+        myserver.getClientManagerList().removeClientManager(user);
         Thread t = new Thread(new Runnable(){
 
             public void run() {

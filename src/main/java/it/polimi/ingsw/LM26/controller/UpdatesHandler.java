@@ -47,7 +47,20 @@ public class UpdatesHandler implements Observer {
     @Override
     public void updateActionEventTimerEnd(ActionEventTimerEnd timerEnd) {
 
-        //TODO esci dal while e passa il turno
-        //timerEnd.getName(); nome di chi ha finito il tempo per la mossa
+        //There are 2 players and timer end -> begin game
+        if(timerEnd.getName().equals("ready") && timerEnd.getTimerEnd()){
+
+            System.out.println("Game start!");
+        }
+        //A player has end his time to do the action
+        else if(timerEnd.getTimerEnd()){
+            System.out.println(timerEnd.getName()+ " client has finished his time");
+            //The current player has finished  his time
+            //TODO esci dal while e passa il turno
+            //timerEnd.getName(); nome di chi ha finito il tempo per la mossa
+        }
+        else{
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
     }
 }

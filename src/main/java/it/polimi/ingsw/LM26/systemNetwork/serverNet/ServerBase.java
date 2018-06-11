@@ -34,6 +34,8 @@ public class ServerBase extends ViewGameInterface {
     private DataServerImplementation dataServerImplementation;
     private DataServerConfiguration dataServerConfiguration;
 
+    TimerPlayers timerPlayers;
+
     public ServerBase(Observer controllerInt){
 
 
@@ -97,7 +99,9 @@ public class ServerBase extends ViewGameInterface {
 
     public synchronized boolean addView(String s, ClientManager clientManager){
         if(checkNumberUsers()){
-
+            if(clientManagerListSize()== 1){
+                timerPlayers = new TimerPlayers(this);
+            }
             //clientManager.setObservable(receiver);
             return clientManagerList.addClientManager(s, clientManager);
 
