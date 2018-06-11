@@ -122,8 +122,20 @@ public class ClientViewRMI extends ClientView {
     }
 
     @Override
-    public void disconnect() {
+    public void disconnected() {
+        LOGGER.log(Level.SEVERE,"Client disconnected");
         concreteClientView.showDisconnectScreen();
+    }
+
+    @Override
+    public void disconnect() {
+
+        try {
+            stub.disconnect(username);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -147,8 +159,8 @@ public class ClientViewRMI extends ClientView {
 
     @Override
     public void sendPrivateCard(ObjectivePrivateCard privateCard) {
-        privateCard.printCard();
-        //concreteClientView.showPrivateCard(username, privateCard);
+        //privateCard.printCard();
+        concreteClientView.showPrivateCard(username, privateCard);
     }
 
     @Override

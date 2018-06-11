@@ -14,7 +14,7 @@ public interface ClientManagerRemote extends Remote {
 
     void login(String name) throws RemoteException;
 
-    void disconnect() throws RemoteException;
+    void disconnect(String s) throws RemoteException;
 
     void chosenWindowPattern(ActionEventWindow actionEventWindow) throws RemoteException;
 

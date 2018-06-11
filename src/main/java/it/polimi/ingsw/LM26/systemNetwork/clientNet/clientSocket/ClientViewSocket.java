@@ -132,6 +132,16 @@ public class ClientViewSocket extends ClientView {
 
     @Override
     public void disconnect() {
+
+        LOGGER.log(Level.SEVERE,"Client connected");
+        DataMessage dataMessage = new DataMessage("disconnect", username);
+        outSocket.println(dataMessage.serializeClassMessage());
+
+    }
+
+    @Override
+    public void disconnected() {
+        LOGGER.log(Level.SEVERE,"Client disconnected");
         concreteClientView.showDisconnectScreen();
     }
 
@@ -153,8 +163,8 @@ public class ClientViewSocket extends ClientView {
     @Override
     public void sendPrivateCard(ObjectivePrivateCard privateCard) {
         //TODO remove it
-        privateCard.printCard();
-        //concreteClientView.showPrivateCard(username, privateCard);
+        //privateCard.printCard();
+        concreteClientView.showPrivateCard(username, privateCard);
 
     }
 

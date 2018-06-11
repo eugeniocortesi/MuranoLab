@@ -87,6 +87,12 @@ public class ListenerClientManager {
             EventMessage eventMessage = EventMessage.deserializeEventMessage(message);
             clientManagerSocket.sendActionEventFromView(eventMessage.getActionEvent());
         }
+        else if(op.equals("disconnect")){
+
+            LOGGER.log(Level.SEVERE,"In disconnect client body");
+            DataMessage dataMessage1 = DataMessage.deserializeDataMessage(message);
+            clientManagerSocket.disconnect(dataMessage1.getField1());
+        }
 
     }
 

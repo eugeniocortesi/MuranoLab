@@ -22,7 +22,9 @@ public abstract class ClientManager implements Runnable, ObserverSimple {
 
     public abstract void logged(Boolean l, String name);
 
-    public abstract void disconnect();
+    public abstract void disconnected();
+
+    public abstract void disconnect(String s );
 
     public abstract void run();
 

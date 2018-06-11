@@ -23,6 +23,8 @@ public abstract class ClientView extends ObservableSimple{
 
     public abstract void disconnect();
 
+    public abstract void disconnected();
+
     public abstract void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck);
 
     public abstract void chosenWindowPattern(ActionEventWindow actionEventWindow);

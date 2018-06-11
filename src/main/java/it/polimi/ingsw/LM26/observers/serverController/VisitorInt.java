@@ -15,7 +15,7 @@ public interface VisitorInt {
 
     void visitActionEventTimerEnd(ActionEventTimerEnd actionEventTimerEnd);
 
-    void visitBeginGame(Boolean connection);
-
     void visitBeginTurnMessage(BeginTurnMessage beginTurnMessage);
+
+    void visitPlayerConnectionMessage(Boolean connection);
 }

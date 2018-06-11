@@ -27,4 +27,6 @@ public interface ClientViewRemote extends Remote {
     void sendPrivateCard(ObjectivePrivateCard privateCard) throws RemoteException;
 
     void sendBeginTurnMessage(String name, PlayerZone playerZone) throws RemoteException;
+
+    void disconnected() throws RemoteException;
 }

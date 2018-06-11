@@ -21,7 +21,7 @@ public class VisitorMessage implements VisitorInt {
     }
 
     @Override
-    public void visitBeginGame(Boolean connection) {
+    public void visitPlayerConnectionMessage(Boolean connection) {
         observable.notify(connection);
     }
 
@@ -29,6 +29,7 @@ public class VisitorMessage implements VisitorInt {
     public void visitBeginTurnMessage(BeginTurnMessage beginTurnMessage) {
         throw new UnsupportedOperationException("Not supported yet");
     }
+
 
     @Override
     public void visitActionEvent(ActionEvent actionEvent) {

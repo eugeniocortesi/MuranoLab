@@ -30,8 +30,8 @@ public class ClientManagerRMIRemote implements ClientManagerRemote {
     }
 
     @Override
-    public void disconnect() throws RemoteException {
-        clientManagerRMI.disconnect();
+    public void disconnect(String s) throws RemoteException {
+        clientManagerRMI.disconnect(s);
     }
 
     @Override

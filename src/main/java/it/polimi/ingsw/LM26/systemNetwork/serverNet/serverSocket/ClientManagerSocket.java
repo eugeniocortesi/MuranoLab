@@ -152,8 +152,21 @@ public class ClientManagerSocket extends ClientManager {
     }
 
     @Override
-    public void disconnect() {
+    public void disconnected() {
 
+        LOGGER.log(Level.SEVERE,"server is disconnecting " + user);
+        DataMessage dataMessage = new DataMessage("disconnected", user);
+        sendMessage(dataMessage.serializeClassMessage());
+    }
+
+    @Override
+    public void disconnect(String s) {
+
+        LOGGER.log(Level.SEVERE,s +" client is disconnecting ");
+        ActionEventPlayer actionEventPlayer=  new ActionEventPlayer(s, false);
+        server.getQueueController().pushMessage(actionEventPlayer);
+        //TODO CHECK LISTEN!
+        disconnected();
     }
 
     @Override

@@ -61,5 +61,10 @@ public class ClientViewRMIRemote implements ClientViewRemote {
         clientViewRMI.sendBeginTurn(name, playerZone);
     }
 
+    @Override
+    public void disconnected() throws RemoteException {
+        clientViewRMI.disconnected();
+    }
+
 
 }

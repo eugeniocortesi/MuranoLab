@@ -11,6 +11,7 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRemote;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.PlayerConnectionMessage;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -129,8 +130,31 @@ public class ClientManagerRMI extends ClientManager {
     }
 
     @Override
-    public void disconnect() {
+    public void disconnected() {
 
+        LOGGER.log(Level.SEVERE,user+ " client RMI is disconnected");
+        Thread t = new Thread(new Runnable(){
+
+            public void run() {
+                try {
+                    skeleton.disconnected();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+        t.start();
+
+    }
+
+    @Override
+    public void disconnect(String s) {
+
+        LOGGER.log(Level.SEVERE,"User " + s + " tries to disconnect");
+        ActionEventPlayer actionEventPlayer = new ActionEventPlayer(s, false);
+        myserver.getQueueController().pushMessage(actionEventPlayer);
+        disconnected();
     }
 
     @Override

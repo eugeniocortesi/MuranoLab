@@ -132,6 +132,11 @@ public class ListenerClientView {
             String name = beginTurnMessage.getUsername();
             clientView.sendBeginTurn(name, playerZone);
         }
+        else if(op.equals("disconnected")){
+
+            LOGGER.log(Level.SEVERE, "In send disconnected message body");
+            clientView.disconnected();
+        }
 
         else {
             LOGGER.log(Level.WARNING,"Message not recognized");
