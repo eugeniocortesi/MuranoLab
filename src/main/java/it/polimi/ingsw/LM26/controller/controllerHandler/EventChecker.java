@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.controller.controllerHandler;
 
 import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
+import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.ChangeDieWithTheBag11;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.DrawOneMoreDie8;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.RollAgainADie6;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
@@ -31,14 +32,19 @@ public class EventChecker {
         PlayerZone player=model.getPlayerList().get(pl);
         RollAgainADie6 tool6=(RollAgainADie6)model.getDecks().getToolCardDeck().get(5);
         DrawOneMoreDie8 tool8=(DrawOneMoreDie8) model.getDecks().getToolCardDeck().get(7);
+        ChangeDieWithTheBag11 tool11=(ChangeDieWithTheBag11) model.getDecks().getToolCardDeck().get(10);
 
         if(tool6.isNeedPlacement()){
-
             if(!dieFromDraft.equals(tool6.getDieCard6())){
                 System.out.println("must use the rolled die");
                 return false;
             }
-
+        }
+        if(tool11.isNeedPlacement()){
+            if(!dieFromDraft.equals(tool11.getDieCard11())){
+                System.out.println("must use the rolled die");
+                return false;
+            }
         }
 
         if (player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) {
@@ -54,11 +60,18 @@ public class EventChecker {
             player.getActionHistory().setDieUsed(true);
             player.getActionHistory().setPlacement(true);
 
-            if(tool6.isNeedPlacement())
+            if(tool6.isNeedPlacement()) {
                 tool6.setNeedPlacement(false);
+                tool6.removeDie();
+            }
             if(tool8.isCurrentPlacement()) {
                 tool8.setNeedPlacement(false);
                 tool8.setCurrentPlacement(false);
+            }
+            if(tool11.isNeedPlacement()) {
+                tool11.setNeedPlacement(false);
+                tool11.removeDie();
+                tool11.noFirstPart();
             }
 
             return true;
@@ -143,8 +156,11 @@ public class EventChecker {
     public boolean check(ToolCardInt sixTenEleven, DieInt dieFromDraft, int player){
 
         PlayerZone pl=model.getPlayerList().get(player);
-        if ( pl.getActionHistory().isCardUsed() ) return false;
 
+        if (pl.getActionHistory().isPlacement() || pl.getActionHistory().isDieUsed() || pl.getActionHistory().isCardUsed()) {
+            System.out.println("action expired");
+            return false;
+        }
         if(checkToken(model.getPlayerList().get(player),sixTenEleven))
 
             if(sixTenEleven.play( dieFromDraft,player)){
@@ -152,6 +168,18 @@ public class EventChecker {
                 return true; }
         return false;
     }
+
+     public boolean check(ToolCardInt eleven, int number, Box toBox, int player){
+
+        PlayerZone pl=model.getPlayerList().get(player);
+
+         if(eleven.play(number, toBox, player)){
+             pl.getActionHistory().setCardUsed(true);
+             return true; }
+         return false;
+
+    }
+
     public boolean check(ToolCardInt sevenEight,  int player){
 
         PlayerZone pl=model.getPlayerList().get(player);

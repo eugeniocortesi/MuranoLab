@@ -49,6 +49,13 @@ public class MoveTwoDice4 implements ToolCardDecorator {
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
     public boolean play( DieInt dieFromDraft, String inDeCrement){return false;}
     public boolean play(DieInt dieFromDraft, int pl){return false;}
+
+    @Override
+    public boolean play(int number, Box toBox, int pl) {
+        return false;
+    }
+
+
     public boolean play(int player ){return false;}
 
     public boolean play (Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int pl ) {

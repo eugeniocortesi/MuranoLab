@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.controller;
 
+import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.ChangeDieWithTheBag11;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.controller.GamePhases.CentralPhase;
 import it.polimi.ingsw.LM26.controller.GamePhases.Game;
@@ -137,8 +138,9 @@ public class Match {
                         playing.getPlayerBoard().printCard();
                         System.out.println("DraftPool");
                         model.getDraftPool().printDraftPool();
-                        // view.showOK()
+
                         DrawOneMoreDie8 tool8=(DrawOneMoreDie8) model.getDecks().getToolCardDeck().get(7);
+
                         if(tool8.isNeedPlacement() ){
                             playing.getActionHistory().setPlacement(false);
                             playing.getActionHistory().setDieUsed(false);
@@ -212,7 +214,8 @@ public class Match {
             System.out.println("insert 6 to for card 1");
             System.out.println("insert 8 to for card 7 or 8");
             System.out.println("insert 7 to for card 6,10 or 11");
-            System.out.println("Insert 9 to pass the turn");
+            System.out.println("Insert 9 to continue with card 11 ");
+            System.out.println("Insert 10 to pass the turn");
 
             id=askId();
 
@@ -344,7 +347,25 @@ public class Match {
 
 
         }
-        if(id==9) event.setId(id);
+
+
+        if (id==9){
+
+            event.setId(id);
+            event.setCard(model.getDecks().getToolCardDeck().get(10));
+            event.setPlayer(playing.getIDPlayer());
+            System.out.println("insert number to set on the die ");
+            id=askId();
+            event.setNumber(id);
+            die=askDie();
+            event.setDieFromDraft( model.getDraftPool().getInDraft().get(die - 1));
+
+
+
+        }
+        if(id==10) event.setId(id);
+
+        if(id==11) event.setId(id);
         ///////////////////////////////////////////
 
 

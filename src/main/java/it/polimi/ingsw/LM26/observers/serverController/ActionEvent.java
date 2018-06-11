@@ -11,6 +11,7 @@ public class ActionEvent extends ClassMessage implements Serializable {
 
     private int ID=1;
     private int player;
+    private int number;
     private Box fromBox1=null;
     private Box toBox1=null;
     private Box fromBox2=null;
@@ -32,8 +33,9 @@ public class ActionEvent extends ClassMessage implements Serializable {
         event 6: use card 1. to set: Card, DieFromDraft, InDeCrement, Player.
         event 7: use card 6, 10, 11. to set: Card, DieFromDraft, Player.
         event 8: use card 7. to set: Card, Player.
-        event 9: no action: set boolean.
-        event 10: ask menu: set boolean.
+        event 9: use card 11. to set: Card, number, toBox1; (second action pf card 11)
+        event 10: no action: set boolean.
+        event 11: ask menu: set boolean.
         */
 
         //TODO
@@ -91,17 +93,7 @@ public class ActionEvent extends ClassMessage implements Serializable {
         return card;
     }
 
-    public void setCard(ToolCardInt card) {
-
-            if(card.getNum()==1)  ID=6 ;
-            if(card.getNum()==2 ||card.getNum()==3 )  ID=2 ;
-            if(card.getNum()==4)  ID= 3;
-            if(card.getNum()==5)  ID=5 ;
-            if(card.getNum()==6 || card.getNum()==10 || card.getNum()==11 )  ID= 7;
-            if(card.getNum()==7 || card.getNum()==8 )  ID= 8;
-            if(card.getNum()==9)  ID= 4;
-        this.card = card;
-    }
+    public void setCard(ToolCardInt card) { this.card = card; }
 
     public DieInt getDieFromDraft() {
         return dieFromDraft;
@@ -127,15 +119,19 @@ public class ActionEvent extends ClassMessage implements Serializable {
 
     public Boolean getMenu() { return menu; }
 
-    public void setMenu(Boolean menu) { this.menu = menu; ID=10; }
+    public void setMenu(Boolean menu) { this.menu = menu; ID=11; }
 
     public Boolean getNoAction() { return noAction; }
+
+    public int getNumber() { return number; }
+
+    public void setNumber(int number) { this.number = number; }
 
     public void setNoAction(Boolean noAction) {
 
         this.noAction = noAction;
 
-        if(noAction==false) ID=9;
+        if(noAction==false) ID=10;
     }
 
     @Override

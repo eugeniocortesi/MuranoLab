@@ -60,6 +60,17 @@ public class Die implements DieInt {
 
     }
 
+    public void setRoll(int value){
+
+        if(value==1)face="\u2680";
+        if(value==2)face="\u2681";
+        if(value==3)face="\u2682";
+        if(value==4)face="\u2683";
+        if(value==5)face="\u2684";
+        if(value==6)face="\u2685";
+
+    }
+
     public Die(Color color) {
         this.color = color;
     }

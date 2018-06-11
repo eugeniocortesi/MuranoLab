@@ -66,4 +66,10 @@ public class RollToTheOppositeFace10 implements ToolCardDecorator {
 
     return true ;
     }
+
+    @Override
+    public boolean play(int number, Box toBox, int pl) {
+        return false;
+    }
+
 }

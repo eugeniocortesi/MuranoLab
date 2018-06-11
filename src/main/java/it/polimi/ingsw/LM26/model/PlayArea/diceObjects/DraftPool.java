@@ -41,6 +41,11 @@ public class DraftPool implements Serializable {
         for( int i = 0; i<dim ; i++)
             inDraft.remove(0);
     }
+
+    public void remove(DieInt d){
+
+            inDraft.remove(d);
+    }
 }
 
 

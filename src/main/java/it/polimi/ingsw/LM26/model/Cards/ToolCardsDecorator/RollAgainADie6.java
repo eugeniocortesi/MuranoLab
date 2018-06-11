@@ -97,9 +97,16 @@ public class RollAgainADie6 implements ToolCardDecorator {
         return true;
     }
 
+    @Override
+    public boolean play(int number, Box toBox, int pl) {
+        return false;
+    }
+
     public DieInt getDieCard6() {
         return die;
     }
+
+    public void removeDie() { this.die = null; }
 
     public boolean isNeedPlacement() {
         return needPlacement;

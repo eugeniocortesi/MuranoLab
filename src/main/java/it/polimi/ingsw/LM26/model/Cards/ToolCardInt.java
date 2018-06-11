@@ -16,6 +16,7 @@ public interface ToolCardInt extends Serializable{
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack);
     public boolean play( DieInt dieFromDraft, String inDeCrement);
     public boolean play(DieInt dieFromDraft, int pl);
+    public boolean play(int number, Box toBox, int pl);
     public boolean play(int player );
 
     public int getToken();

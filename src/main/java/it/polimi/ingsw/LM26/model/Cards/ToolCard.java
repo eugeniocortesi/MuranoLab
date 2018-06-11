@@ -60,6 +60,9 @@ public class ToolCard implements ToolCardInt  {
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
     public boolean play( DieInt dieFromDraft, String inDeCrement){return false;}
     public boolean play(DieInt dieFromDraft, int pl){return false;}
+    public boolean play(int number, Box toBox, int pl) {
+        return false;
+    }
     public boolean play(int player){return false;}
 
 

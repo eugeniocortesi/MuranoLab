@@ -52,6 +52,11 @@ public class RollAllDraftDice7 implements ToolCardDecorator {
     public boolean play( DieInt dieFromDraft, String inDeCrement){return false;}
     public boolean play(DieInt dieFromDraft, int pl){return false;}
 
+    @Override
+    public boolean play(int number, Box toBox, int pl) {
+        return false;
+    }
+
     public boolean play (int pl ) {
 
         Model model = singletonModel();

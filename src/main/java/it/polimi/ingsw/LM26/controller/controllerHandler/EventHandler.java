@@ -1,5 +1,7 @@
 package it.polimi.ingsw.LM26.controller.controllerHandler;
 
+import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.ChangeDieWithTheBag11;
+import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.DrawOneMoreDie8;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.RollAgainADie6;
 import it.polimi.ingsw.LM26.model.Model;
@@ -51,17 +53,24 @@ public class EventHandler{
         if (event.getId()==8)
             if(eventChecker.check(event.getCard(), event.getPlayer())) { model.hasChanged();     return true;}
             else return false;
-        if (event.getId()==9) {
+        if (event.getId()==9)
+            if(eventChecker.check(event.getCard(), event.getNumber(), event.getToBox1(), event.getPlayer())) {   model.hasChanged();    return true;}
+            else return false;
+        if (event.getId()==10) {
 
             System.out.println("i'll pass ");
 
             RollAgainADie6 tool6=(RollAgainADie6)model.getDecks().getToolCardDeck().get(5);
             if(tool6.isNeedPlacement()) tool6.setNeedPlacement(false);
+            DrawOneMoreDie8 tool8=(DrawOneMoreDie8)model.getDecks().getToolCardDeck().get(7);
+            if(tool8.isNeedPlacement()) tool6.setNeedPlacement(false);
+            if(tool8.isCurrentPlacement()) tool6.setNeedPlacement(false);
+            ChangeDieWithTheBag11 tool11=(ChangeDieWithTheBag11)model.getDecks().getToolCardDeck().get(10);
+            if(tool11.isNeedPlacement()) tool6.setNeedPlacement(false);
 
-            //TODO PASSA IL PIAZZAMENTO OBBLIGATO DALLA 8
             return true;
         }
-        if (event.getId()==10)
+        if (event.getId()==11)
             //view.showmenu;
             return false;
         return false;
