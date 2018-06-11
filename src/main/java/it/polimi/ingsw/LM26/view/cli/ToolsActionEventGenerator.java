@@ -80,4 +80,20 @@ public class ToolsActionEventGenerator {
         Box rc= new Box(r,c);
         return rc;
     }
+
+    public boolean askEndMove(){
+        boolean toMenu=false;
+        while(!toMenu){
+            System.out.println("'OK' per tornare al menù");
+            try{
+                input = br.readLine();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            if(input.equalsIgnoreCase("OK")){
+                toMenu=true;
+            }
+        }
+        return true;
+    }
 }

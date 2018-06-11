@@ -3,6 +3,7 @@ package it.polimi.ingsw.LM26.view.cli;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class ActionEventGenerator {
     /**
      * it asks for a die to put into the frame board, but the player can also return to the menù
      */
-    public void askForDiePlacing(){
+    public ActionEvent askForDiePlacing(){
         Box rc;
         DieInt d=null;
         ActionEvent actionEvent = new ActionEvent();
@@ -26,20 +27,25 @@ public class ActionEventGenerator {
         rc=tceGenerator.askForRowCol();
         actionEvent.setToBox1(rc);
         actionEvent.setPlayer(ConsoleTools.id);
+        return  actionEvent;
     }
 
-    public void loseTurn(){
+    public ActionEvent loseTurn(){
         ActionEvent ae=new ActionEvent();
         ae.setNoAction(true);
+        return ae;
     }
+
 
     /**
      *it asks for the current menù screen
      */
-    public void askForMenu(){
+    public ActionEvent askForMenu(){
+        while(!tceGenerator.askEndMove()){}
         ActionEvent a= new ActionEvent();
         a.setId(10);
         a.setMenu(true);
+        return a;
     }
 
     //controlli roundtrack vuota e frameboard vuota

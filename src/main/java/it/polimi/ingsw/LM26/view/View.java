@@ -16,7 +16,7 @@ public class View extends ViewInterface{
     private DisplayableStage displayableStage1 = new DisplayableStage("Login.fxml");
     //private DisplayableStage displayableStage2 = new DisplayableStage("MyPlayerzone.fxml");
     private DisplayableStage displayableStageNetChioce = new DisplayableStage("NetChioce.fxml");
-    private DisplayableStage displayableStageWPattern = new DisplayableStage("windowPattern.fxml");
+    private DisplayableStage displayableStageWPattern = new DisplayableStage("WindowPattern.fxml");
     private Stage stage;
 
     public View(Stage stage) {
@@ -67,9 +67,8 @@ public class View extends ViewInterface{
         Platform.runLater(new Runnable() {
             public void run() {
                 FXMLLoader fLoader=displayableStageWPattern.getFxmlLoader();
-                windowPatternController wpController=fLoader.getController();
-                //wpController.setCardLable(windowDeck);
-                wpController.setLable("wella");
+                WindowPatternController wpController=fLoader.getController();
+                wpController.setCardLable(windowDeck);
                 displayableStageWPattern.show(stage);
             }
         });

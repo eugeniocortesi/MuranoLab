@@ -160,9 +160,9 @@ public class ConsoleStrings extends ViewInterface {
     @Override
     public void showSetPlayerMenu(String name, PlayerZone player) {
         if (player.getPlayerState().equals(PlayerState.BEGINNING)) {
-            this.setPlayerMenu(new MyTurnMenu());
+            this.setPlayerMenu(new MyTurnMenu(clientView));
         }
-        else this.setPlayerMenu(new NotMyTurnMenu());
+        else this.setPlayerMenu(new NotMyTurnMenu(clientView));
 
     }
 

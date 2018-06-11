@@ -24,8 +24,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class ConsoleTools {
 
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    String input;
-    ActionEventGenerator ae= new ActionEventGenerator();
+    private String input;
     static Model model;
     static int id;
     static ObjectivePrivateCard privateCard=null;
@@ -75,22 +74,6 @@ public class ConsoleTools {
             }
         }
         return maxsize;
-    }
-
-    public void askEndMove(){
-        boolean toMenu=false;
-        while(!toMenu){
-            System.out.println("'OK' per tornare al menù");
-            try{
-                input = br.readLine();
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-            if(input.equalsIgnoreCase("OK")){
-                ae.askForMenu();
-                toMenu=true;
-            }
-        }
     }
 
     /**

@@ -1,5 +1,8 @@
 package it.polimi.ingsw.LM26.view.cli;
 
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,6 +14,13 @@ public class NotMyTurnMenu implements PlayerMenuInt {
     String input;
     ConsoleTools consoleTools= new ConsoleTools();
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private ClientView clientView;
+    private ActionEventGenerator ae= new ActionEventGenerator();
+    private ActionEvent actionEvent;
+
+    public NotMyTurnMenu(ClientView clientView) {
+        this.clientView = clientView;
+    }
 
     @Override
     public void showMenu(){
@@ -39,7 +49,8 @@ public class NotMyTurnMenu implements PlayerMenuInt {
         else if(input.equalsIgnoreCase("C")){
             consoleTools.showCards();
         }
-        consoleTools.askEndMove();
+        actionEvent=ae.askForMenu();
+        clientView.sendActionEventFromView(actionEvent);
     }
 
 
