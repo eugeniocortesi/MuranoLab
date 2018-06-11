@@ -215,6 +215,12 @@ public class ClientManagerRMI extends ClientManager {
     }
 
     @Override
+    public void sendAddedPlayer(String name) {
+        Thread t = new Thread(new MyRunnableAddedPlayer(name));
+        t.start();
+    }
+
+    @Override
     public void update(Model m) {
         sendModel(m);
     }
@@ -344,6 +350,24 @@ public class ClientManagerRMI extends ClientManager {
             try {
                 LOGGER.log(Level.SEVERE,"Sending player zone");
                 skeleton.sendBeginTurnMessage(name, playerZone);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class MyRunnableAddedPlayer implements Runnable {
+        volatile String username;
+        public MyRunnableAddedPlayer(String name) {
+            username = name;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+                LOGGER.log(Level.SEVERE,"Sending player zone");
+                skeleton.sendAddedPlayer(username);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }

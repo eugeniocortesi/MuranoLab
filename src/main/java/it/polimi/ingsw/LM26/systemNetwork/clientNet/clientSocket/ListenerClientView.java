@@ -137,6 +137,12 @@ public class ListenerClientView {
             LOGGER.log(Level.SEVERE, "In send disconnected message body");
             clientView.disconnected();
         }
+        else if(op.equals("added_player")){
+
+            LOGGER.log(Level.SEVERE, "In added player message body");
+            DataMessage dataMessage1 = DataMessage.deserializeDataMessage(message);
+            clientView.sendAddedPlayer(dataMessage1.getField1());
+        }
 
         else {
             LOGGER.log(Level.WARNING,"Message not recognized");

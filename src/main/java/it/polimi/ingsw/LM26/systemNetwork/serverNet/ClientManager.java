@@ -42,4 +42,6 @@ public abstract class ClientManager implements Runnable, ObserverSimple {
 
     public abstract void sendBeginTurnMessage(String name, PlayerZone playerZone);
 
+    public abstract void sendAddedPlayer(String name);
+
 }

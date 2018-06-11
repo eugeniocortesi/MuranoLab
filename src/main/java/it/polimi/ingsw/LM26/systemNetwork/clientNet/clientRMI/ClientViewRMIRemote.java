@@ -66,5 +66,10 @@ public class ClientViewRMIRemote implements ClientViewRemote {
         clientViewRMI.disconnected();
     }
 
+    @Override
+    public void sendAddedPlayer(String name) throws RemoteException {
+        clientViewRMI.sendAddedPlayer(name);
+    }
+
 
 }

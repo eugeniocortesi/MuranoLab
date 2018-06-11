@@ -9,6 +9,9 @@ import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfigur
 import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.RMIAcceptor;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket.SocketAcceptor;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerImplementation;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerPlayers;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -33,6 +36,8 @@ public class ServerBase extends ViewGameInterface {
 
     private DataServerImplementation dataServerImplementation;
     private DataServerConfiguration dataServerConfiguration;
+    private TimerImplementation timerImplementation;
+    private TimerConfiguration timerConfiguration;
 
     TimerPlayers timerPlayers;
 
@@ -46,6 +51,8 @@ public class ServerBase extends ViewGameInterface {
         lobby = new ArrayList<ClientManager>();
         dataServerImplementation = new DataServerImplementation();
         dataServerConfiguration = dataServerImplementation.implementation();
+        timerImplementation = new TimerImplementation();
+        timerConfiguration = timerImplementation.implentation();
 
         System.out.println("SocketPort " +dataServerConfiguration.getSOCKETPORT()+ " ClientRMI " + dataServerConfiguration.getClientRMIPORT()
                 + " ServerRMI "+ dataServerConfiguration.getServerRMIPORT());
@@ -99,11 +106,30 @@ public class ServerBase extends ViewGameInterface {
 
     public synchronized boolean addView(String s, ClientManager clientManager){
         if(checkNumberUsers()){
-            if(clientManagerListSize()== 1){
-                timerPlayers = new TimerPlayers(this);
+
+            if(clientManagerListSize()>0){
+                Iterator iterator = clientManagerList.getManagerHashMap().entrySet().iterator();
+                while(iterator.hasNext()){
+                    Map.Entry couple = (Map.Entry)iterator.next();
+                    System.out.println(couple.getKey());
+
+                    if(couple.getValue()!= null){
+                        ClientManager cm = (ClientManager) couple.getValue();
+                        cm.sendAddedPlayer(s);
+                    }
+                    else{
+                        System.out.println("Client manager null");
+                    }
+                }
             }
+
             //clientManager.setObservable(receiver);
-            return clientManagerList.addClientManager(s, clientManager);
+            boolean b = clientManagerList.addClientManager(s, clientManager);
+            if(clientManagerListSize()== 2){
+                System.out.println("Timer start!");
+                timerPlayers = new TimerPlayers(this, timerConfiguration);
+            }
+            return b;
 
         }
         return false;
@@ -122,6 +148,7 @@ public class ServerBase extends ViewGameInterface {
     }
 
     public boolean checkNumberUsers(){
+
         if (clientManagerListSize()<4)
             return true;
 

@@ -190,5 +190,11 @@ public class ClientViewRMI extends ClientView {
         concreteClientView.showSetPlayerMenu(name, playerZone);
     }
 
+    @Override
+    public void sendAddedPlayer(String field1) {
+        //concreteClientView.showAddedPlayer();
+        System.out.println("Added new player " +field1 );
+    }
+
 
 }

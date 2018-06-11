@@ -36,4 +36,6 @@ public abstract class ClientView extends ObservableSimple{
     public abstract void sendAnswerFromController(String answer);
 
     public abstract void sendBeginTurn(String name, PlayerZone playerZone);
+
+    public abstract void sendAddedPlayer(String field1);
 }

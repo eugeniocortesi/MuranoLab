@@ -188,6 +188,12 @@ public class ClientViewSocket extends ClientView {
     }
 
     @Override
+    public void sendAddedPlayer(String field1) {
+        //concreteClientView.showAddedPlayer();
+        System.out.println("Added new player " +field1 );
+    }
+
+    @Override
     protected void notify(Model m) {
         LOGGER.log(Level.SEVERE,"Model is arrived from Controller");
         super.notify(m);
