@@ -214,8 +214,21 @@ public class ClientManagerRMI extends ClientManager {
 
     @Override
     public void sendBeginTurnMessage(String name, PlayerZone playerZone) {
-        Thread t = new Thread(new MyRunnableBeginTurnMessage(name, playerZone));
-        t.start();
+        //Thread t = new Thread(new MyRunnableBeginTurnMessage(name, playerZone));
+        //t.start();
+
+        new Thread(() ->
+        {
+            try
+            {
+                LOGGER.log(Level.SEVERE,"Sending player zone");
+                skeleton.sendBeginTurnMessage(name, playerZone);
+            }
+            catch (RemoteException e)
+            {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     @Override
