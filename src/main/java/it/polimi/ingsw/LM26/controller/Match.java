@@ -357,9 +357,10 @@ public class Match {
             System.out.println("insert number to set on the die ");
             id=askId();
             event.setNumber(id);
-            die=askDie();
-            event.setDieFromDraft( model.getDraftPool().getInDraft().get(die - 1));
-
+            Box[][] board = playing.getPlayerBoard().getBoardMatrix();
+            line= askLine();
+            col=askCol();
+            event.setToBox1(board[line - 1][col - 1]);
 
 
         }

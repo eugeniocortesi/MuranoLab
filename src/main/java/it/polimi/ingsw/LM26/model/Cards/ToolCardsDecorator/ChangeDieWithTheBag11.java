@@ -66,7 +66,7 @@ public class ChangeDieWithTheBag11 implements ToolCardDecorator {
         model.getBag().add(dieFromDraft);
         model.getDraftPool().remove(dieFromDraft);
         die = model.getBag().draw();
-        System.out.println("you got a " + dieFromDraft.getColor() + " die ");
+        System.out.println("you got a " + die.getColor() + " die ");
         firstPart=true;
         return true;
 
