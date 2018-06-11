@@ -188,7 +188,7 @@ public class ClientManagerSocket extends ClientManager {
         ModelMessage modelMessage = new ModelMessage("send_model", m);
         String s = modelMessage.serializeClassMessage();
         sendMessage(s);
-        listenerClientManager.listen();
+        //listenerClientManager.listen();
     }
 
     @Override

@@ -132,12 +132,8 @@ public class Model extends ObservableSimple implements Serializable {
         this.register(observer);
     }
 
-    public void notifyObservers(){
-        this.notify(this);
-    }
-
     public void hasChanged(){
-        notifyObservers();
+        this.notify(this);
     }
 }
 

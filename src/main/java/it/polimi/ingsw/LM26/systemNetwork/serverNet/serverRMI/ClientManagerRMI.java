@@ -85,11 +85,6 @@ public class ClientManagerRMI extends ClientManager {
     @Override
     public void requestedLogin() {
         LOGGER.log(Level.SEVERE,"The client RMI is connected. He tries to login");
-        /*try {
-            skeleton.login(null);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }*/
 
     }
 
@@ -109,11 +104,6 @@ public class ClientManagerRMI extends ClientManager {
             Thread t = new Thread(new MyRunnableLogged(user, result));
             t.start();
 
-            /*try {
-                skeleton.logged(result, name);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }*/
         }
         else {
             Thread t = new Thread(new Runnable(){
@@ -169,12 +159,6 @@ public class ClientManagerRMI extends ClientManager {
         Thread t = new Thread(new MyRunnablePrivateCard(card));
         t.start();
 
-        /*try {
-            LOGGER.log(Level.SEVERE,"Sending private card");
-            skeleton.sendPrivateCard(card);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }*/
     }
 
     @Override
@@ -183,13 +167,6 @@ public class ClientManagerRMI extends ClientManager {
         Thread t = new Thread(new MyRunnableModel(m));
         t.start();
 
-
-        /*try {
-            LOGGER.log(Level.SEVERE,"Sending model");
-            skeleton.sendModel(m);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }*/
     }
 
     @Override
@@ -204,31 +181,12 @@ public class ClientManagerRMI extends ClientManager {
         Thread t = new Thread(new MyRunnableAnswer(answer));
         t.start();
 
-        /*try {
-            LOGGER.log(Level.SEVERE,"Sending actionEvent");
-            skeleton.sendAnswerFromController(answer);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }*/
     }
 
     @Override
     public void sendBeginTurnMessage(String name, PlayerZone playerZone) {
-        //Thread t = new Thread(new MyRunnableBeginTurnMessage(name, playerZone));
-        //t.start();
-
-        new Thread(() ->
-        {
-            try
-            {
-                LOGGER.log(Level.SEVERE,"Sending player zone");
-                skeleton.sendBeginTurnMessage(name, playerZone);
-            }
-            catch (RemoteException e)
-            {
-                e.printStackTrace();
-            }
-        }).start();
+        Thread t = new Thread(new MyRunnableBeginTurnMessage(name, playerZone));
+        t.start();
     }
 
     @Override
@@ -262,12 +220,12 @@ public class ClientManagerRMI extends ClientManager {
         }
     }
 
-    public class MyRunnableLogged implements Runnable{
+    private class MyRunnableLogged implements Runnable{
 
         volatile String user;
         volatile boolean result;
 
-        public MyRunnableLogged(String user, boolean result) {
+        private MyRunnableLogged(String user, boolean result) {
             this.user = user;
             this.result = result;
         }
@@ -287,7 +245,7 @@ public class ClientManagerRMI extends ClientManager {
 
         volatile ObjectivePrivateCard card;
 
-        public MyRunnablePrivateCard(ObjectivePrivateCard privateCard) {
+        private MyRunnablePrivateCard(ObjectivePrivateCard privateCard) {
 
             card= privateCard;
         }
@@ -308,7 +266,7 @@ public class ClientManagerRMI extends ClientManager {
 
         volatile Model m;
 
-        public MyRunnableModel(Model m) {
+        private MyRunnableModel(Model m) {
 
             this.m = m;
         }
@@ -329,7 +287,7 @@ public class ClientManagerRMI extends ClientManager {
 
         volatile String answer;
 
-        public MyRunnableAnswer(String answer) {
+        private MyRunnableAnswer(String answer) {
             this.answer = answer;
         }
 
@@ -349,7 +307,7 @@ public class ClientManagerRMI extends ClientManager {
 
         volatile String name;
         volatile PlayerZone playerZone;
-        public MyRunnableBeginTurnMessage(String name, PlayerZone playerZone) {
+        private MyRunnableBeginTurnMessage(String name, PlayerZone playerZone) {
 
             this.name = name;
             this.playerZone = playerZone;
