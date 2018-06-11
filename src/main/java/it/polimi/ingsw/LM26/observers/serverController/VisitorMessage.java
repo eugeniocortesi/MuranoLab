@@ -1,9 +1,6 @@
 package it.polimi.ingsw.LM26.observers.serverController;
 
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowAnswerMessage;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowInitialMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.*;
 
 public class VisitorMessage implements VisitorInt {
 
@@ -26,6 +23,11 @@ public class VisitorMessage implements VisitorInt {
     @Override
     public void visitBeginGame(Boolean connection) {
         observable.notify(connection);
+    }
+
+    @Override
+    public void visitBeginTurnMessage(BeginTurnMessage beginTurnMessage) {
+        throw new UnsupportedOperationException("Not supported yet");
     }
 
     @Override

@@ -1,7 +1,7 @@
-package it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol;
+package it.polimi.ingsw.LM26.observers.serverController;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.LM26.observers.serverController.VisitorInt;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ClassMessage;
 
 public class BeginGameMessage extends ClassMessage {
 
@@ -17,16 +17,8 @@ public class BeginGameMessage extends ClassMessage {
         return op;
     }
 
-    public void setOp(String op) {
-        this.op = op;
-    }
-
     public Boolean getConnection() {
         return connection;
-    }
-
-    public void setConnection(Boolean connection) {
-        this.connection = connection;
     }
 
     static public BeginGameMessage deserializeEventMessage(String protocolJson){

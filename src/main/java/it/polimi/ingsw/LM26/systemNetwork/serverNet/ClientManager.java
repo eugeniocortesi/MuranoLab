@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
@@ -36,5 +37,7 @@ public abstract class ClientManager implements Runnable, ObserverSimple {
     public abstract void sendActionEventFromView(ActionEvent actionEvent);
 
     public abstract void sendAnswerFromController(String message);
+
+    public abstract void sendBeginTurnMessage(String name, PlayerZone playerZone);
 
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket;
 
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventPlayer;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
@@ -205,6 +206,15 @@ public class ClientManagerSocket extends ClientManager {
         DataMessage dataMessage = new DataMessage("send_answer_from_controller", message);
         String s = dataMessage.serializeClassMessage();
         sendMessage(s);
+        listenerClientManager.listen();
+    }
+
+    @Override
+    public void sendBeginTurnMessage(String name, PlayerZone playerZone) {
+
+        LOGGER.log(Level.SEVERE,"server is sending playerzone of " + name);
+        BeginTurnMessage beginTurnMessage = new BeginTurnMessage("send_beginturnmessage", name, playerZone);
+        sendMessage(beginTurnMessage.serializeClassMessage());
         listenerClientManager.listen();
     }
 

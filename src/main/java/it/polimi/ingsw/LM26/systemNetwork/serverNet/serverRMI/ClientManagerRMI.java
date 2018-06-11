@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI;
 
 
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventPlayer;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
@@ -212,6 +213,12 @@ public class ClientManagerRMI extends ClientManager {
     }
 
     @Override
+    public void sendBeginTurnMessage(String name, PlayerZone playerZone) {
+        Thread t = new Thread(new MyRunnableBeginTurnMessage(name, playerZone));
+        t.start();
+    }
+
+    @Override
     public void update(Model m) {
         sendModel(m);
     }
@@ -319,6 +326,28 @@ public class ClientManagerRMI extends ClientManager {
             try {
                 LOGGER.log(Level.SEVERE,"Sending actionEvent");
                 skeleton.sendAnswerFromController(answer);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class MyRunnableBeginTurnMessage implements Runnable {
+
+        volatile String name;
+        volatile PlayerZone playerZone;
+        public MyRunnableBeginTurnMessage(String name, PlayerZone playerZone) {
+
+            this.name = name;
+            this.playerZone = playerZone;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+                LOGGER.log(Level.SEVERE,"Sending player zone");
+                skeleton.sendBeginTurnMessage(name, playerZone);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }

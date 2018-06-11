@@ -1,6 +1,7 @@
 
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI;
 
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
@@ -170,6 +171,11 @@ public class ClientViewRMI extends ClientView {
     @Override
     public void sendAnswerFromController(String answer) {
         concreteClientView.showAnswerFromController(answer);
+    }
+
+    @Override
+    public void sendBeginTurn(String name, PlayerZone playerZone) {
+        concreteClientView.showSetPlayerMenu(name, playerZone);
     }
 
 

@@ -1,6 +1,7 @@
 
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket;
 
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
@@ -169,6 +170,11 @@ public class ClientViewSocket extends ClientView {
     public void sendAnswerFromController(String answer) {
         concreteClientView.showAnswerFromController(answer);
 
+    }
+
+    @Override
+    public void sendBeginTurn(String name, PlayerZone playerZone) {
+        concreteClientView.showSetPlayerMenu(name, playerZone);
     }
 
     @Override

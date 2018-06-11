@@ -3,6 +3,7 @@ package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -24,4 +25,6 @@ public interface ClientViewRemote extends Remote {
     void sendAnswerFromController(String answer) throws RemoteException;
 
     void sendPrivateCard(ObjectivePrivateCard privateCard) throws RemoteException;
+
+    void sendBeginTurnMessage(String name, PlayerZone playerZone) throws RemoteException;
 }

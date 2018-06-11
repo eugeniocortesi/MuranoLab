@@ -3,8 +3,8 @@ package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ModelMessage;
-import it.polimi.ingsw.LM26.systemNetwork.DataEvent;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.*;
 
 import java.io.BufferedReader;
@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 
 public class ListenerClientView {
 
-    DataEvent dataEvent;
     private BufferedReader reader;
     private ClientViewSocket clientView;
     private Socket socket;
@@ -124,6 +123,14 @@ public class ListenerClientView {
             PrivateCardMessage privateCardMessage = PrivateCardMessage.deserializeEventMessage(message);
             ObjectivePrivateCard objectivePrivateCard = privateCardMessage.getPrivateCard();
             clientView.sendPrivateCard(objectivePrivateCard);
+        }
+
+        else if(op.equals("send_beginturnmessage")){
+            LOGGER.log(Level.SEVERE, "In send begin turn message body");
+            BeginTurnMessage beginTurnMessage = BeginTurnMessage.deserializeDataMessage(message);
+            PlayerZone playerZone = beginTurnMessage.getPlayerZone();
+            String name = beginTurnMessage.getUsername();
+            clientView.sendBeginTurn(name, playerZone);
         }
 
         else {

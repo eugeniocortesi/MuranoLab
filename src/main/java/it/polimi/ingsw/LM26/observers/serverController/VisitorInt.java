@@ -1,9 +1,6 @@
 package it.polimi.ingsw.LM26.observers.serverController;
 
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowAnswerMessage;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowInitialMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.*;
 
 public interface VisitorInt {
 
@@ -19,4 +16,6 @@ public interface VisitorInt {
     void visitActionEventTimerEnd(ActionEventTimerEnd actionEventTimerEnd);
 
     void visitBeginGame(Boolean connection);
+
+    void visitBeginTurnMessage(BeginTurnMessage beginTurnMessage);
 }

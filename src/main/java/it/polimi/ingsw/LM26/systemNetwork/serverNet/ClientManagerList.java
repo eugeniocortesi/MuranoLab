@@ -1,7 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
 
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.BeginGameMessage;
+import it.polimi.ingsw.LM26.observers.serverController.BeginGameMessage;
 
 import java.util.HashMap;
 
