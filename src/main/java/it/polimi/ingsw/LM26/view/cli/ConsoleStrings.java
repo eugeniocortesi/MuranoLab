@@ -200,5 +200,6 @@ public class ConsoleStrings extends ViewInterface {
     @Override
     public void showPrivateCard(String name, ObjectivePrivateCard privateCard) {
         ConsoleTools.setPrivateCard(privateCard);
+        consoleTools.printPrivateCard();
     }
 }
