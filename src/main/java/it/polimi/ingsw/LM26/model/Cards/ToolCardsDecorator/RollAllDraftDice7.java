@@ -46,7 +46,11 @@ public class RollAllDraftDice7 implements ToolCardDecorator {
     }
 
     public boolean play(Box fromBox, Box toBox, int player){return false;}
-    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player ){return false;}
+
+    @Override
+    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
+        return false;
+    }
     public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
     public boolean play( DieInt dieFromDraft, String inDeCrement){return false;}
@@ -74,6 +78,11 @@ public class RollAllDraftDice7 implements ToolCardDecorator {
 
         return false;
 
+    }
+
+    @Override
+    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
+        return false;
     }
 }
 //player.isDieUsed()==false

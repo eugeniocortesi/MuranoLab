@@ -6,6 +6,7 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ClassMessage;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ActionEvent extends ClassMessage implements Serializable {
 
@@ -14,8 +15,13 @@ public class ActionEvent extends ClassMessage implements Serializable {
     private int number;
     private Box fromBox1=null;
     private Box toBox1=null;
+
+    //TODO DELETE
     private Box fromBox2=null;
     private Box toBox2=null;
+
+    private ArrayList<Box> fromBoxList=null;
+    private ArrayList<Box> toBoxList=null;
     private ToolCardInt card=null;
     private DieInt dieFromDraft=null;
     private DieInt dieFromRoundTrack=null;
@@ -27,15 +33,16 @@ public class ActionEvent extends ClassMessage implements Serializable {
         /*
         event 1: place die. to set: DieFromDraf, ToBox1, Player.
         event 2: use card 2, 3. to set: Card, FromBox1, ToBox1, Player.
-        event 3: use card 4. to set: Card, FromBox1, ToBox1, FromBox2, toBox2, Player.
-        event 4: use card 8,9. to set: Card, DieFromDraft, ToBox1, Player.
+        event 3: use card 4. to set: Card,  ArrayList FromBox, ArrayList ToBox Player.
+        event 4: use card 9. to set: Card, DieFromDraft, ToBox1, Player.
         event 5: use card 5. to set: Card, DieFromDraft, DieFromRoundTrack, Player.
         event 6: use card 1. to set: Card, DieFromDraft, InDeCrement, Player.
         event 7: use card 6, 10, 11. to set: Card, DieFromDraft, Player.
-        event 8: use card 7. to set: Card, Player.
+        event 8: use card 7,8. to set: Card, Player.
         event 9: use card 11. to set: Card, number, toBox1; (second action pf card 11)
-        event 10: no action: set boolean.
-        event 11: ask menu: set boolean.
+        event 10: use card 12. to set: Card, DieFromRoundTrack, ArrayList FromBox, ArrayList ToBox
+        event 11: no action: set boolean.
+        event 12: ask menu: set boolean.
         */
 
         //TODO
@@ -126,6 +133,22 @@ public class ActionEvent extends ClassMessage implements Serializable {
     public int getNumber() { return number; }
 
     public void setNumber(int number) { this.number = number; }
+
+    public ArrayList<Box> getFromBoxList() {
+        return fromBoxList;
+    }
+
+    public void setFromBoxList(ArrayList<Box> fromBoxList) {
+        this.fromBoxList = fromBoxList;
+    }
+
+    public ArrayList<Box> getToBoxList() {
+        return toBoxList;
+    }
+
+    public void setToBoxList(ArrayList<Box> toBoxList) {
+        this.toBoxList = toBoxList;
+    }
 
     public void setNoAction(Boolean noAction) {
 

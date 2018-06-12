@@ -10,6 +10,8 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
+import java.util.ArrayList;
+
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class EventChecker {
@@ -99,14 +101,14 @@ public class EventChecker {
 
         return false;
     }
-    public boolean check(ToolCardInt four, Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){
+    public boolean check(ToolCardInt four, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player){
 
         PlayerZone pl=model.getPlayerList().get(player);
         if ( pl.getActionHistory().isCardUsed() ) return false;
 
         if(checkToken(model.getPlayerList().get(player),four))
 
-            if(four.play(fromBox1, toBox1, fromBox2, toBox2, player)){
+            if(four.play( fromBoxList,toBoxList, player)){
                 pl.getActionHistory().setCardUsed(true);
                 return true;}
 
@@ -157,10 +159,8 @@ public class EventChecker {
 
         PlayerZone pl=model.getPlayerList().get(player);
 
-        if (pl.getActionHistory().isPlacement() || pl.getActionHistory().isDieUsed() || pl.getActionHistory().isCardUsed()) {
-            System.out.println("action expired");
-            return false;
-        }
+        if ( pl.getActionHistory().isCardUsed() ) return false;
+
         if(checkToken(model.getPlayerList().get(player),sixTenEleven))
 
             if(sixTenEleven.play( dieFromDraft,player)){
@@ -190,6 +190,23 @@ public class EventChecker {
             if(sevenEight.play(player)){
                 pl.getActionHistory().setCardUsed(true);
                 return true; }
+        return false;
+    }
+
+    public boolean check(ToolCardInt eleven, DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player){
+
+        PlayerZone pl=model.getPlayerList().get(player);
+        if ( pl.getActionHistory().isCardUsed()) {
+            System.out.println("Action already done ");
+            return false;}
+        if(model.getRoundTrackInt().getRoundTrackTurnList().size()<1)return false;
+
+        if(checkToken(model.getPlayerList().get(player),eleven))
+
+            if(eleven.play(fromRoundTrack, fromBoxList, toBoxList, player)){
+                pl.getActionHistory().setCardUsed(true);
+                return true;}
+
         return false;
     }
 

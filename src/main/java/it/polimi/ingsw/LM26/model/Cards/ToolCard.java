@@ -4,6 +4,8 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
+import java.util.ArrayList;
+
 public class ToolCard implements ToolCardInt  {
 
     private boolean inUse=false;
@@ -55,6 +57,12 @@ public class ToolCard implements ToolCardInt  {
 
 
     public boolean play(Box fromBox,Box toBox, int player){return false;}
+
+    @Override
+    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
+        return false;
+    }
+
     public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}
     public boolean play(DieInt dieFromDraft, Box toBox, int player ){return false;}
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
@@ -64,6 +72,11 @@ public class ToolCard implements ToolCardInt  {
         return false;
     }
     public boolean play(int player){return false;}
+
+    @Override
+    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
+        return false;
+    }
 
 
 }

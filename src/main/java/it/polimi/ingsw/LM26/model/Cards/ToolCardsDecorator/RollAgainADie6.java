@@ -53,7 +53,8 @@ public class RollAgainADie6 implements ToolCardDecorator {
         return false;
     }
 
-    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player) {
+    @Override
+    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
         return false;
     }
 
@@ -72,6 +73,11 @@ public class RollAgainADie6 implements ToolCardDecorator {
 
 
     public boolean play(int player) {
+        return false;
+    }
+
+    @Override
+    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
         return false;
     }
 

@@ -7,6 +7,8 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
+import java.util.ArrayList;
+
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class MoveWithNoValueRestriction3 implements ToolCardDecorator {
@@ -43,8 +45,6 @@ public class MoveWithNoValueRestriction3 implements ToolCardDecorator {
     public void setInUse(boolean inUse) {
 
     }
-
-    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}
     public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
     public boolean play( DieInt dieFromDraft, String inDeCrement){return false;}
@@ -57,6 +57,11 @@ public class MoveWithNoValueRestriction3 implements ToolCardDecorator {
 
 
     public boolean play(int player){return false;}
+
+    @Override
+    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
+        return false;
+    }
 
     public boolean play (Box fromBox,Box toBox, int pl)  {
 
@@ -81,5 +86,10 @@ public class MoveWithNoValueRestriction3 implements ToolCardDecorator {
         fromBox.setDie(die);
         return false;
 
+    }
+
+    @Override
+    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
+        return false;
     }
 }
