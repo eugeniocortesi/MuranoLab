@@ -10,7 +10,7 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.LM26.view.SquareController">
    <children>
-      <Rectangle fx:id="square" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="47.0" stroke="BLACK" width="47.0" />
+      <Rectangle fx:id="square" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="40.0" stroke="BLACK" width="40.0" />
       <Label fx:id="label" />
    </children>
 </StackPane>

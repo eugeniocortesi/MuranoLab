@@ -81,7 +81,6 @@ public class ConsoleTools {
      */
     public void printFrameBoard(PlayerZone pl){
         WindowFramePlayerBoard frame = pl.getPlayerBoard();
-        //AnsiConsole.systemInstall();
         String escape= pl.getPlayerBoard().getColor().escape();
         System.out.println(escape+"\u2588\u2588 "+pl.getName().toUpperCase()+" \u2588\u2588"+ Color.RESET);
         for(int i=0; i<4; i++){
@@ -95,7 +94,6 @@ public class ConsoleTools {
             }
             System.out.println();
         }
-        //AnsiConsole.systemUninstall();
     }
 
     /**
@@ -245,6 +243,7 @@ public class ConsoleTools {
     public void printPrivateCard() throws IllegalArgumentException{
         if(privateCard==null) throw new IllegalArgumentException("private card not initialized");
         else{
+            System.out.println("CARTA PRIVATA");
             String escape=privateCard.getColour().escape();
             System.out.println("Somma dei valori su tutti i dadi di colore "+escape+"\u25A0"+Color.RESET);
         }

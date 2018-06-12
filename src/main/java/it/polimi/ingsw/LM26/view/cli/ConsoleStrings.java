@@ -54,6 +54,8 @@ public class ConsoleStrings extends ViewInterface {
     }
 
     public ConsoleStrings(ClientBase clientBase) {
+        System.setProperty("jansi.passthrough", "true");
+        AnsiConsole.systemInstall();
         playerMenu=null;
         this.clientBase = clientBase;
         dataClientImplementation = new DataClientImplementation();
@@ -68,6 +70,7 @@ public class ConsoleStrings extends ViewInterface {
      */
     @Override
     public void showNetChoise(){
+
         initialScreen();
         System.out.println("Scegli uno tra i seguenti metodi di connessione:\nSocket: s\nRMI: r");
         while(!(s.equalsIgnoreCase("r") || s.equalsIgnoreCase("s"))){
@@ -88,6 +91,7 @@ public class ConsoleStrings extends ViewInterface {
             clientBase.setConnection(false);
         }
         clientView.connect();
+
     }
 
 

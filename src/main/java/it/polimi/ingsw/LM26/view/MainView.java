@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.view;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -25,10 +26,12 @@ public class MainView extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         view = new View(primaryStage);
-        for(int i=0; i<4; i++){
+        /*for(int i=0; i<4; i++){
             testarray.add(deck.getWindowPatternCardDeck().get(i));
         }
-        view.showWindowPattern("we", 1, testarray);
+        view.showWindowPattern("we", 1, testarray);*/
+
+        view.showSetPlayerMenu("n", new PlayerZone("n", 1));
 
 
         //view.showCentralPhaseScreen();
