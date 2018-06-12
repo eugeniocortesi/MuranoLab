@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.LM26.view.WindowPatternController">
+   <top>
+      <Label text="Scegli una tra le seguenti carte schema" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="40.0" right="40.0" top="40.0" />
+         </BorderPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <TilePane maxHeight="180.0" prefHeight="200.0" prefTileHeight="180.0" prefTileWidth="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <fx:include fx:id="card1" source="CardRectangle.fxml" />
+            <fx:include fx:id="card2" source="CardRectangle.fxml" />
+            <fx:include fx:id="card3" source="CardRectangle.fxml" />
+            <fx:include fx:id="card4" source="CardRectangle.fxml" />
+         </children>
+      </TilePane>
+   </center>
+   <bottom>
+      <VBox alignment="CENTER">
+         <children>
+            <TilePane maxHeight="50.0" prefHeight="200.0" prefTileWidth="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ToggleButton mnemonicParsing="false" prefWidth="50.0" text="1">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="choice" />
+                     </toggleGroup>
+                  </ToggleButton>
+                  <ToggleButton mnemonicParsing="false" prefWidth="50.0" text="2" toggleGroup="$choice" />
+                  <ToggleButton mnemonicParsing="false" prefWidth="50.0" text="3" toggleGroup="$choice" />
+                  <ToggleButton mnemonicParsing="false" prefWidth="50.0" text="4" toggleGroup="$choice" />
+               </children>
+            </TilePane>
+            <Button fx:id="ok" alignment="CENTER" mnemonicParsing="false" onAction="#cardChoice" prefWidth="40.0" text="Ok">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="10.0" right="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </bottom>
+</BorderPane>
