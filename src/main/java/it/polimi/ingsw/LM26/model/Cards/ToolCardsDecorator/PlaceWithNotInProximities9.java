@@ -1,9 +1,15 @@
 package it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator;
 
+import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+
+import java.util.ArrayList;
+
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class PlaceWithNotInProximities9 implements ToolCardDecorator {
 
@@ -41,7 +47,11 @@ public class PlaceWithNotInProximities9 implements ToolCardDecorator {
     }
 
     public boolean play(Box fromBox, Box toBox, int player){return false;}
-    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}
+
+    @Override
+    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
+        return false;
+    }
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
     public boolean play( DieInt dieFromDraft, String inDeCrement){return false;}
     public boolean play(DieInt dieFromDraft, int pl){return false;}
@@ -54,86 +64,103 @@ public class PlaceWithNotInProximities9 implements ToolCardDecorator {
 
     public boolean play( int player){return false;}
 
-    public boolean play (DieInt dieFromDraft, Box toBox, int player ) { //piazza il dado in modo che non sia addiacente ad altri
-
+    @Override
+    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
         return false;
-        //Die die1 =chooseFromTheDraft();
-        //Box toBox = askTheBok();
-        // int i = toBox.getI();
-        //int j = toBox.getJ();
-        //boolean placed=false;
-        //box[][] board = player.getPlayerBoard();
+    }
 
-        //while(!placed){
+    public boolean play (DieInt dieFromDraft, Box toBox, int pl ) { //piazza il dado in modo che non sia addiacente ad altri
 
-        //toBox = askTheBok();
 
-        // if (player.getPlayerBoard().isEmpty())
-        //              while(!(i==0 || i==3 || j==0 || j==4 )){
-        //                          System.out.println("error: primo dado deve andare sul bordo");
-        //                          toBox = askTheBok();
-        //                          }
-        //
-        //if (i=0 ){
-        //
-        //      if(j=0) //angolo alto a sinistra
+      Model model=singletonModel();
+      PlayerZone player =  model.getPlayerList().get(pl);
+      Box[][] board = model.getPlayerList().get(pl).getPlayerBoard().getBoardMatrix();
+      int i = toBox.getI();
+      int j = toBox.getJ();
+      PlaceDie placement = new PlaceDie(dieFromDraft, toBox, player);
 
-        //              if(!board[i][j+1].isIsPresent()  && !board[i+1][j].isIsPresent() && ! board[i+1][j+1].isIsPresent() &&
-        //                  checkColorRestriction(die, toBox) && checkValueRestriction(die, toBox))
-        //                      {placed=true; toBox.setDie(die); inDraft.remove(die);
+      if (player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) {
+          System.out.println("action expired");
+          return false;
+      }
 
-        //      elseif(j=4)  //angolo in alto a destra
-        //             if(!board[i][j-1].isIsPresent()  && !board[i+1][j-i].isIsPresent() && ! board[i+1][j].isIsPresent() &&
-        //                  checkColorRestriction(die, toBox) && checkValueRestriction(die, toBox))
-        //                             {placed=true; toBox.setDie(die); inDraft.remove(die);
+      if(toBox.isIsPresent())return false;
 
-        //      else       //tutti gli altri valori prima riga
-        //             if(!board[i][j-1].isIsPresent()  && !board[i+1][j-i].isIsPresent() && ! board[i+1][j].isIsPresent() &&
-        //                !board[i+1][j+1].isIsPresent() && ! board[i][j+1].isIsPresent() && checkColorRestriction(die, toBox) && checkValueRestriction(die, toBox))
-        //                             {placed=true; toBox.setDie(die); inDraft.remove(die);
+      if (player.getPlayerBoard().isEmpty()){
+          if(!(i==0 || i==3 || j==0 || j==4 )){
+              System.out.println("error: first die must be placed on the edge");
+              return false;
+          }
+      }
 
-        //elseif (i=3 )
-        //      if(j=0)  //angolo in basso a sinistra
-        //              if(!board[i][j+1].isIsPresent()  && !board[i-1][j].isIsPresent() && ! board[i-1][j+1].isIsPresent() &&
-        //                  checkColorRestriction(die, toBox) && checkValueRestriction(die, toBox))
-        //                               {placed=true; toBox.setDie(die); inDraft.remove(die);
-        //
-        //     elseif(j=4)    // angolo in basso a destra
-        //              if(!board[i][j-1].isIsPresent()  && !board[i-1][j].isIsPresent() && ! board[i-1][j-1].isIsPresent() &&
-        //                  checkColorRestriction(die, toBox) && checkValueRestriction(die, toBox))
-        //                               {placed=true; toBox.setDie(die); inDraft.remove(die);
-        //
-        //      else       //tutti gli altri valori ultima riga
-        //             if(!board[i][j-1].isIsPresent()  && !board[i-1][j-i].isIsPresent() && ! board[i-1][j].isIsPresent() &&
-        //                 !board[i-1][j+1].isIsPresent() && !board[i][j+i].isIsPresent() checkColorRestriction(die, toBox) && checkValueRestriction(die, toBox))
-        //                            {placed=true; toBox.setDie(die); inDraft.remove(die);
-
-        //elseif (j=0 )             //tutti gli altri valori prima colonna
-        //      if(i!=0 && i!=3)
-        //             if(!board[i][j+1].isIsPresent()  && !board[i-1][j+i].isIsPresent() && ! board[i-1][j].isIsPresent() &&
-        //                 !board[i+1][j+1].isIsPresent() && !board[i][j+i].isIsPresent() checkColorRestriction(die, toBox) && checkValueRestriction(die, toBox))
-        //                             {placed=true; toBox.setDie(die); inDraft.remove(die);
-
-        //elseif (j=4 ){            //tutti gli altri valori ultima colonna
-        //      if(i!=0 && i!=3)
-        //             if(!board[i][j-1].isIsPresent()  && !board[i-1][j-i].isIsPresent() && ! board[i-1][j].isIsPresent() &&
-        //                 !board[i+1][j-1].isIsPresent() && !board[i+1][j].isIsPresent() checkColorRestriction(die, toBox) && checkValueRestriction(die, toBox))
-        //                             {placed=true; toBox.setDie(die); inDraft.remove(die);
-
-        //else      //tutti i valori non di margine
-        //          if(
-        //          ! board[i][j-1].isIsPresent() && ! board[i+1][j-i].isIsPresent() &&
-        //          ! board[i+1][j].isIsPresent() && ! board[i+1][j+1].isIsPresent() &&
-        //          ! board[i][j+1].isIsPresent() && ! board[i-1][j-i].isIsPresent() &&
-        //          ! board[i-1][j].isIsPresent() && ! board[i-1][j+1].isIsPresent() &&
-        //          checkColorRestriction(die, toBox) && checkValueRestriction(die, toBox) ) {placed=true; toBox.setDie(die); inDraft.remove(die);
-        //          }
-
-        //}
+      if (!placement.checkColorRestriction() || !placement.checkValueRestriction()) return false;
 
 
 
 
+        if (i==3 ) {
+
+            if(j==0) {     //angolo basso a sinistra
+
+                if (board[i][j + 1].isIsPresent() || board[i - 1][j].isIsPresent() || board[i - 1][j + 1].isIsPresent())
+                    return false;
+            } else if(j==4) {   //angolo basso a destra
+
+                if (board[i][j - 1].isIsPresent() || board[i - 1][j].isIsPresent() || board[i - 1][j - 1].isIsPresent())
+                    return false;
+            }
+
+            else     //tutti valori ultima riga
+            {
+                if(board[i][j-1].isIsPresent()  || board[i-1][j-i].isIsPresent() || board[i-1][j].isIsPresent() ||
+                        board[i-1][j+1].isIsPresent() || board[i][j+i].isIsPresent())return false;
+            }
+        }
+
+         else if (i==0 ) {
+
+            if (j == 0) {  //angolo alto a sinistra
+
+                if (board[i][j + 1].isIsPresent() || board[i + 1][j].isIsPresent() || board[i + 1][j + 1].isIsPresent())
+                    return false;
+            }else if (j == 4) {      //angolo alto a destra
+
+                if (board[i][j - 1].isIsPresent() || board[i + 1][j - i].isIsPresent() || board[i + 1][j].isIsPresent())
+                    return false;
+            }
+
+            else    //tutti valori prima riga
+            {
+                if (board[i][j - 1].isIsPresent() || board[i + 1][j - i].isIsPresent() || board[i + 1][j].isIsPresent() ||
+                        board[i + 1][j + 1].isIsPresent() || board[i][j + 1].isIsPresent()) return false;
+            }
+        }
+
+
+        else {
+             if (j == 0) {
+                 if (board[i][j + 1].isIsPresent() || board[i - 1][j + i].isIsPresent() || board[i - 1][j].isIsPresent() ||
+                         board[i + 1][j + 1].isIsPresent() || board[i + 1][j].isIsPresent()) return false;
+
+             }else if (j == 4) {
+                 if (board[i][j - 1].isIsPresent() || board[i - 1][j - i].isIsPresent() || board[i - 1][j].isIsPresent() ||
+                         board[i + 1][j - 1].isIsPresent() || board[i + 1][j].isIsPresent()) return false;
+
+             } else if (board[i][j - 1].isIsPresent() || board[i + 1][j - 1].isIsPresent() ||
+                        board[i + 1][j].isIsPresent() || board[i + 1][j + 1].isIsPresent() ||
+                             board[i][j + 1].isIsPresent() || board[i - 1][j - 1].isIsPresent() ||
+                             board[i - 1][j].isIsPresent() || board[i - 1][j + 1].isIsPresent()) return false;
+         }
+
+
+        toBox.setDie(dieFromDraft);
+        model.getDraftPool().getInDraft().remove(dieFromDraft);
+        player.getPlayerBoard().incrementNumDice();
+        player.getActionHistory().setDieUsed(true);
+        player.getActionHistory().setPlacement(true);
+
+
+        return true ;
 
 
     }

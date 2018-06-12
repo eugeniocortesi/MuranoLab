@@ -69,7 +69,7 @@ public class ClientViewSocket extends ClientView {
             outVideo = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
             listenerClientView = new ListenerClientView(this, socket);
             connected();
-            listenerClientView.listen();
+            listenerClientView.start();
 
             LOGGER.log(Level.SEVERE,"ClientImplementationSocket connected");
         } catch (Exception e) {
@@ -185,6 +185,12 @@ public class ClientViewSocket extends ClientView {
     @Override
     public void sendBeginTurn(String name, PlayerZone playerZone) {
         concreteClientView.showSetPlayerMenu(name, playerZone);
+    }
+
+    @Override
+    public void sendAddedPlayer(String field1) {
+        //concreteClientView.showAddedPlayer();
+        System.out.println("Added new player " +field1 );
     }
 
     @Override

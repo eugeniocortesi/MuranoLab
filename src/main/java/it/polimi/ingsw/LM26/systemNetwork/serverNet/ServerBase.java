@@ -9,6 +9,9 @@ import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfigur
 import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.RMIAcceptor;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket.SocketAcceptor;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerImplementation;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerPlayers;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -25,7 +28,6 @@ public class ServerBase extends ViewGameInterface {
     private SocketAcceptor socketAcceptor;
     private ClientManagerList clientManagerList;
     private ArrayList<ClientManager> lobby;
-    private boolean playing;
 
     private Receiver receiver;
     private MessageQueue queueController;
@@ -33,6 +35,10 @@ public class ServerBase extends ViewGameInterface {
 
     private DataServerImplementation dataServerImplementation;
     private DataServerConfiguration dataServerConfiguration;
+    private TimerImplementation timerImplementation;
+    private TimerConfiguration timerConfiguration;
+
+    private boolean gameIsGoing;
 
     TimerPlayers timerPlayers;
 
@@ -40,12 +46,14 @@ public class ServerBase extends ViewGameInterface {
 
 
         controller = controllerInt;
-        playing = false;
+        gameIsGoing = false;
 
 
         lobby = new ArrayList<ClientManager>();
         dataServerImplementation = new DataServerImplementation();
         dataServerConfiguration = dataServerImplementation.implementation();
+        timerImplementation = new TimerImplementation();
+        timerConfiguration = timerImplementation.implentation();
 
         System.out.println("SocketPort " +dataServerConfiguration.getSOCKETPORT()+ " ClientRMI " + dataServerConfiguration.getClientRMIPORT()
                 + " ServerRMI "+ dataServerConfiguration.getServerRMIPORT());
@@ -78,11 +86,17 @@ public class ServerBase extends ViewGameInterface {
         System.out.println("Registered Observer");
         this.model = model;
         receiver.start();
+        System.out.println("Timer start!");
+
     }
 
 
     public ClientManagerList getClientManagerList() {
         return clientManagerList;
+    }
+
+    public void setGameIsGoing(boolean gameIsGoing) {
+        this.gameIsGoing = gameIsGoing;
     }
 
     public Receiver getReceiver() {
@@ -98,15 +112,40 @@ public class ServerBase extends ViewGameInterface {
     }
 
     public synchronized boolean addView(String s, ClientManager clientManager){
+        if(gameIsGoing)
+            return false;
         if(checkNumberUsers()){
-            if(clientManagerListSize()== 1){
-                timerPlayers = new TimerPlayers(this);
+            updatePlayers(s);
+
+            boolean b = clientManagerList.addClientManager(s, clientManager);
+            if(clientManagerListSize()== 2){
+                System.out.println("Timer start!");
+                timerPlayers = new TimerPlayers(this, timerConfiguration);
+                timerPlayers.scheduleTimerPlayer();
             }
-            //clientManager.setObservable(receiver);
-            return clientManagerList.addClientManager(s, clientManager);
+            return b;
 
         }
         return false;
+    }
+
+    private synchronized void updatePlayers(String s){
+
+        Iterator iterator = clientManagerList.getManagerHashMap().entrySet().iterator();
+        while(iterator.hasNext()){
+            Map.Entry couple = (Map.Entry)iterator.next();
+            System.out.println(couple.getKey());
+
+            if(couple.getValue()!= null){
+                ClientManager cm = (ClientManager) couple.getValue();
+                cm.sendAddedPlayer(s);
+            }
+            else{
+                System.out.println("Client manager null");
+            }
+
+            System.out.println("Updated players");
+        }
     }
 
     public synchronized void addClientManager(ClientManager clientManager){
@@ -122,6 +161,8 @@ public class ServerBase extends ViewGameInterface {
     }
 
     public boolean checkNumberUsers(){
+        if(gameIsGoing)
+            return false;
         if (clientManagerListSize()<4)
             return true;
 

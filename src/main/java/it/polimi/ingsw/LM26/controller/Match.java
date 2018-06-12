@@ -12,6 +12,7 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
 
@@ -118,7 +119,8 @@ public class Match {
 
                 //ripeti il controllo utente
 
-                result=false;
+                if (!playing.getActionHistory().isPlacement() || !playing.getActionHistory().isDieUsed() || !playing.getActionHistory().isCardUsed())
+                    result=false;
 
                 if(playing.getActionHistory().isFreezed()){
                     result = true;
@@ -211,11 +213,14 @@ public class Match {
             System.out.println("Insert 1 to place a die");
             System.out.println("Insert 2 for cards 2 and 3");
             System.out.println("insert 3 to for card 4");
+            System.out.println("insert 4 to for card 9");
+            System.out.println("insert 5 to for card 5");
             System.out.println("insert 6 to for card 1");
             System.out.println("insert 8 to for card 7 or 8");
             System.out.println("insert 7 to for card 6,10 or 11");
             System.out.println("Insert 9 to continue with card 11 ");
-            System.out.println("Insert 10 to pass the turn");
+            System.out.println("Insert 10 to continue with card 12 ");
+            System.out.println("Insert 11 to pass the turn");
 
             id=askId();
 
@@ -266,22 +271,42 @@ public class Match {
 
             card=4;
             Box[][] board = playing.getPlayerBoard().getBoardMatrix();
+            ArrayList<Box> fromList=new ArrayList<Box>();
+            ArrayList<Box> toList=new ArrayList<Box>();
             event.setId(id);
             event.setCard(model.getDecks().getToolCardDeck().get(card-1));
             event.setPlayer(playing.getIDPlayer());
+            System.out.println("first movement ");
             line= askLine();
             col=askCol();
-            event.setFromBox1(board[line - 1][col - 1]);
+            fromList.add(board[line - 1][col - 1]);
+            System.out.println("to");
             line= askLine();
             col=askCol();
-            event.setToBox1(board[line - 1][col - 1]);
+            toList.add(board[line - 1][col - 1]);
+            System.out.println("second movement");
             line= askLine();
             col=askCol();
-            event.setFromBox2(board[line - 1][col - 1]);
+            fromList.add(board[line - 1][col - 1]);
+            System.out.println("to");
             line= askLine();
             col=askCol();
-            event.setToBox2(board[line - 1][col - 1]);
+            toList.add(board[line - 1][col - 1]);
+            event.setFromBoxList(fromList);
+            event.setToBoxList(toList);
 
+        }
+
+        if(id==4) {
+            line= askLine();
+            col=askCol();
+            die=askDie();
+            event.setCard(model.getDecks().getToolCardDeck().get(8));
+            Box[][] board = playing.getPlayerBoard().getBoardMatrix();
+            event.setId(id);
+            event.setDieFromDraft( model.getDraftPool().getInDraft().get(die - 1));
+            event.setToBox1(board[line - 1][col - 1]);
+            event.setPlayer(playing.getIDPlayer());
         }
 
         if (id==7){
@@ -364,9 +389,48 @@ public class Match {
 
 
         }
-        if(id==10) event.setId(id);
 
+        if (id==10){
+
+            Box[][] board = playing.getPlayerBoard().getBoardMatrix();
+            ArrayList<Box> fromList=new ArrayList<Box>();
+            ArrayList<Box> toList=new ArrayList<Box>();
+            event.setId(id);
+            event.setCard(model.getDecks().getToolCardDeck().get(11));
+            event.setPlayer(playing.getIDPlayer());
+
+            System.out.println("insert number of turn");
+            id=askId();
+
+            while(id>model.getRoundTrackInt().getRoundTrackTurnList().size())
+                id=askId();
+            die=askDie();
+
+            event.setDieFromRoundTrack( model.getRoundTrackInt().getRoundTrackTurnList().get(id-1).getDiceList().get(die-1));
+
+            System.out.println("first movement ");
+            line= askLine();
+            col=askCol();
+            fromList.add(board[line - 1][col - 1]);
+            System.out.println("to");
+            line= askLine();
+            col=askCol();
+            toList.add(board[line - 1][col - 1]);
+            System.out.println("second movement");
+            line= askLine();
+            col=askCol();
+            fromList.add(board[line - 1][col - 1]);
+            System.out.println("to");
+            line= askLine();
+            col=askCol();
+            toList.add(board[line - 1][col - 1]);
+            event.setFromBoxList(fromList);
+            event.setToBoxList(toList);
+
+        }
         if(id==11) event.setId(id);
+
+        if(id==12) event.setId(id);
         ///////////////////////////////////////////
 
 

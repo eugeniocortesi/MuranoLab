@@ -232,6 +232,15 @@ public class ClientManagerSocket extends ClientManager {
         listenerClientManager.listen();
     }
 
+    @Override
+    public void sendAddedPlayer(String name) {
+
+        LOGGER.log(Level.SEVERE,"server is sending a new player");
+        DataMessage dataMessage = new DataMessage("added_player", name);
+        String s = dataMessage.serializeClassMessage();
+        sendMessage(s);
+    }
+
 
     @Override
     public void update(Model m) {

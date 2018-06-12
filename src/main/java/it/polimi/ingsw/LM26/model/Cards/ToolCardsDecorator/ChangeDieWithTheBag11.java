@@ -7,6 +7,8 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
+import java.util.ArrayList;
+
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class ChangeDieWithTheBag11 implements ToolCardDecorator {
@@ -51,7 +53,11 @@ public class ChangeDieWithTheBag11 implements ToolCardDecorator {
     }
 
     public boolean play(Box fromBox, Box toBox, int player){return false;}
-    public boolean play(Box fromBox1, Box toBox1, Box fromBox2, Box toBox2, int player){return false;}
+
+    @Override
+    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
+        return false;
+    }
     public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
     public boolean play(DieInt dieFromDraft, String inDeCrement){return false;}
@@ -60,11 +66,22 @@ public class ChangeDieWithTheBag11 implements ToolCardDecorator {
 
     public boolean play( int player){return false;}
 
+    @Override
+    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
+        return false;
+    }
+
     public boolean play (DieInt dieFromDraft, int pl) {
 
         Model model = singletonModel();
         model.getBag().add(dieFromDraft);
         model.getDraftPool().remove(dieFromDraft);
+        PlayerZone player = model.getPlayerList().get(pl);
+
+        if (player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) {
+            System.out.println("action expired");
+            return false;
+        }
         die = model.getBag().draw();
         System.out.println("you got a " + die.getColor() + " die ");
         firstPart=true;

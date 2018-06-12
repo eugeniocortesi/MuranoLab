@@ -36,7 +36,7 @@ public class EventHandler{
             if(eventChecker.check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getPlayer())) {   model.hasChanged();    return true;}
             else return false;
         if (event.getId()==3)
-            if(eventChecker.check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getFromBox2(), event.getToBox2(),event.getPlayer())) { model.hasChanged();     return true;}
+            if(eventChecker.check(event.getCard(), event.getFromBoxList(), event.getToBoxList(),event.getPlayer())) { model.hasChanged();     return true;}
             else return false;
         if (event.getId()==4)
             if(eventChecker.check(event.getCard(), event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {   model.hasChanged();    return true;}
@@ -56,7 +56,10 @@ public class EventHandler{
         if (event.getId()==9)
             if(eventChecker.check(event.getCard(), event.getNumber(), event.getToBox1(), event.getPlayer())) {   model.hasChanged();    return true;}
             else return false;
-        if (event.getId()==10) {
+        if (event.getId()==10)
+            if(eventChecker.check(event.getCard(), event.getDieFromRoundTrack(), event.getFromBoxList(), event.getToBoxList(), event.getPlayer())) {   model.hasChanged();    return true;}
+            else return false;
+        if (event.getId()==11) {
 
             System.out.println("i'll pass ");
 
@@ -70,7 +73,7 @@ public class EventHandler{
 
             return true;
         }
-        if (event.getId()==11)
+        if (event.getId()==12)
             //view.showmenu;
             return false;
         return false;

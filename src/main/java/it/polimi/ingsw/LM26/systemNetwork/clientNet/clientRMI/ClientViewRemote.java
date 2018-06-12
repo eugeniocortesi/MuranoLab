@@ -29,4 +29,6 @@ public interface ClientViewRemote extends Remote {
     void sendBeginTurnMessage(String name, PlayerZone playerZone) throws RemoteException;
 
     void disconnected() throws RemoteException;
+
+    void sendAddedPlayer(String name) throws RemoteException;
 }

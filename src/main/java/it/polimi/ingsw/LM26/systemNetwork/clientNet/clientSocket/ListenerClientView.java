@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ListenerClientView {
+public class ListenerClientView extends Thread {
 
     private BufferedReader reader;
     private ClientViewSocket clientView;
@@ -65,6 +65,7 @@ public class ListenerClientView {
             if (message!= null){
                 LOGGER.log(Level.INFO,"Message " + message);
                 recognize(message);
+                //listen();
             }
             message = null;
         //}
@@ -137,11 +138,22 @@ public class ListenerClientView {
             LOGGER.log(Level.SEVERE, "In send disconnected message body");
             clientView.disconnected();
         }
+        else if(op.equals("added_player")){
+
+            LOGGER.log(Level.SEVERE, "In added player message body");
+            DataMessage dataMessage1 = DataMessage.deserializeDataMessage(message);
+            clientView.sendAddedPlayer(dataMessage1.getField1());
+        }
 
         else {
             LOGGER.log(Level.WARNING,"Message not recognized");
         }
 
+       run();
+    }
+
+    @Override
+    public void run() {
         listen();
     }
 }
