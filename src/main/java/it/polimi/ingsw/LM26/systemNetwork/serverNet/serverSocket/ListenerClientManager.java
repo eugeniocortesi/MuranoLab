@@ -93,6 +93,9 @@ public class ListenerClientManager {
             DataMessage dataMessage1 = DataMessage.deserializeDataMessage(message);
             clientManagerSocket.disconnect(dataMessage1.getField1());
         }
+        else {
+            LOGGER.log(Level.WARNING,"Message not recognized");
+        }
 
     }
 

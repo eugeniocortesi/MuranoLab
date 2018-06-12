@@ -69,7 +69,7 @@ public class ClientViewSocket extends ClientView {
             outVideo = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
             listenerClientView = new ListenerClientView(this, socket);
             connected();
-            listenerClientView.listen();
+            listenerClientView.start();
 
             LOGGER.log(Level.SEVERE,"ClientImplementationSocket connected");
         } catch (Exception e) {

@@ -19,12 +19,21 @@ public class TimerPlayers {
         this.timerConfiguration = timerConfiguration;
         this.serverBase = serverBase;
         myLong = timerConfiguration.getTimerEnd();
-        Timer timer = new Timer();
+        timer = new Timer();
     }
     public void scheduleTimerPlayer(){
 
-        timer.schedule(new TimerTaskPlayers(serverBase, timerConfiguration) , 0, this.myLong);
+        System.out.println("Started schedule");
+        if(serverBase == null)
+            System.out.println("Server is null");
+        if(timerConfiguration == null)
+            System.out.println("Timer configuration is null");
+        if(timer == null)
+            System.out.println("Timer is null");
+        timer.schedule(new TimerTaskPlayers(serverBase, timerConfiguration, timer) , 0, this.myLong);
 
     }
+
+
 
 }

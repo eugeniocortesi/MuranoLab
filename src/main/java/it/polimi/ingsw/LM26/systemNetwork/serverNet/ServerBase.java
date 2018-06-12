@@ -28,7 +28,6 @@ public class ServerBase extends ViewGameInterface {
     private SocketAcceptor socketAcceptor;
     private ClientManagerList clientManagerList;
     private ArrayList<ClientManager> lobby;
-    private boolean playing;
 
     private Receiver receiver;
     private MessageQueue queueController;
@@ -39,13 +38,15 @@ public class ServerBase extends ViewGameInterface {
     private TimerImplementation timerImplementation;
     private TimerConfiguration timerConfiguration;
 
+    private boolean gameIsGoing;
+
     TimerPlayers timerPlayers;
 
     public ServerBase(Observer controllerInt){
 
 
         controller = controllerInt;
-        playing = false;
+        gameIsGoing = false;
 
 
         lobby = new ArrayList<ClientManager>();
@@ -85,11 +86,17 @@ public class ServerBase extends ViewGameInterface {
         System.out.println("Registered Observer");
         this.model = model;
         receiver.start();
+        System.out.println("Timer start!");
+
     }
 
 
     public ClientManagerList getClientManagerList() {
         return clientManagerList;
+    }
+
+    public void setGameIsGoing(boolean gameIsGoing) {
+        this.gameIsGoing = gameIsGoing;
     }
 
     public Receiver getReceiver() {
@@ -105,34 +112,40 @@ public class ServerBase extends ViewGameInterface {
     }
 
     public synchronized boolean addView(String s, ClientManager clientManager){
+        if(gameIsGoing)
+            return false;
         if(checkNumberUsers()){
+            updatePlayers(s);
 
-            if(clientManagerListSize()>0){
-                Iterator iterator = clientManagerList.getManagerHashMap().entrySet().iterator();
-                while(iterator.hasNext()){
-                    Map.Entry couple = (Map.Entry)iterator.next();
-                    System.out.println(couple.getKey());
-
-                    if(couple.getValue()!= null){
-                        ClientManager cm = (ClientManager) couple.getValue();
-                        cm.sendAddedPlayer(s);
-                    }
-                    else{
-                        System.out.println("Client manager null");
-                    }
-                }
-            }
-
-            //clientManager.setObservable(receiver);
             boolean b = clientManagerList.addClientManager(s, clientManager);
             if(clientManagerListSize()== 2){
                 System.out.println("Timer start!");
                 timerPlayers = new TimerPlayers(this, timerConfiguration);
+                timerPlayers.scheduleTimerPlayer();
             }
             return b;
 
         }
         return false;
+    }
+
+    private synchronized void updatePlayers(String s){
+
+        Iterator iterator = clientManagerList.getManagerHashMap().entrySet().iterator();
+        while(iterator.hasNext()){
+            Map.Entry couple = (Map.Entry)iterator.next();
+            System.out.println(couple.getKey());
+
+            if(couple.getValue()!= null){
+                ClientManager cm = (ClientManager) couple.getValue();
+                cm.sendAddedPlayer(s);
+            }
+            else{
+                System.out.println("Client manager null");
+            }
+
+            System.out.println("Updated players");
+        }
     }
 
     public synchronized void addClientManager(ClientManager clientManager){
@@ -148,7 +161,8 @@ public class ServerBase extends ViewGameInterface {
     }
 
     public boolean checkNumberUsers(){
-
+        if(gameIsGoing)
+            return false;
         if (clientManagerListSize()<4)
             return true;
 

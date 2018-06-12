@@ -239,7 +239,6 @@ public class ClientManagerSocket extends ClientManager {
         DataMessage dataMessage = new DataMessage("added_player", name);
         String s = dataMessage.serializeClassMessage();
         sendMessage(s);
-        listenerClientManager.listen();
     }
 
 
