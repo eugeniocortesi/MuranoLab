@@ -6,6 +6,7 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ModelMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.*;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ListenerClientView extends Thread {
+public class ListenerClientView {
 
     private BufferedReader reader;
     private ClientViewSocket clientView;
@@ -109,7 +110,15 @@ public class ListenerClientView extends Thread {
         }
         else if(op.equals("send_model")){
             LOGGER.log(Level.SEVERE, "In send model body");
-            Model model = ModelMessage.deserializeModelMessage(message);
+            DataMessage dataMessage1 = DataMessage.deserializeDataMessage(message);
+            String modelString = dataMessage1.getField1();
+            Model model = Model.deserializeModelMessage(modelString);
+
+            System.out.println("Playerlist: " +model.getPlayerList());
+            for(int i=0; i<model.getPlayerList().size(); i++){
+                System.out.println("player: "+ model.getPlayerList().get(i).getName());
+                System.out.println("player zone: " +model.getPlayerList().get(i));
+            }
             clientView.notify(model);
         }
         else if(op.equals("send_answer_from_controller")){
@@ -144,16 +153,17 @@ public class ListenerClientView extends Thread {
             DataMessage dataMessage1 = DataMessage.deserializeDataMessage(message);
             clientView.sendAddedPlayer(dataMessage1.getField1());
         }
+        else if(op.equals("send_currentmenu")){
+            LOGGER.log(Level.SEVERE, "In send current menu message body");
+            DataMessage dataMessage1 = DataMessage.deserializeDataMessage(message);
+            clientView.sendCurrentMenu(dataMessage1.getField1());
+        }
 
         else {
             LOGGER.log(Level.WARNING,"Message not recognized");
         }
 
-       run();
-    }
 
-    @Override
-    public void run() {
         listen();
     }
 }

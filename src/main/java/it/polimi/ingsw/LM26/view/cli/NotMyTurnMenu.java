@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.view.cli;
 
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.Observable;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 
 import java.io.BufferedReader;
@@ -9,7 +10,7 @@ import java.io.InputStreamReader;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-public class NotMyTurnMenu implements PlayerMenuInt {
+public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
 
     String input;
     ConsoleTools consoleTools= new ConsoleTools();
@@ -20,6 +21,8 @@ public class NotMyTurnMenu implements PlayerMenuInt {
 
     public NotMyTurnMenu(ClientView clientView) {
         this.clientView = clientView;
+        register(clientView);
+        System.out.println("Registered");
     }
 
     @Override
@@ -50,7 +53,8 @@ public class NotMyTurnMenu implements PlayerMenuInt {
             consoleTools.showCards();
         }
         actionEvent=ae.askForMenu();
-        clientView.sendActionEventFromView(actionEvent);
+        notify(actionEvent);
+        //clientView.sendActionEventFromView(actionEvent);
     }
 
 

@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.view.cli;
 
 
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.Observable;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 
 import java.io.BufferedReader;
@@ -10,7 +11,7 @@ import java.io.InputStreamReader;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-public class MyTurnMenu implements PlayerMenuInt {
+public class MyTurnMenu extends Observable implements PlayerMenuInt{
     String input;
     ClientView clientView;
     ConsoleTools consoleTools= new ConsoleTools();
@@ -20,6 +21,8 @@ public class MyTurnMenu implements PlayerMenuInt {
 
     public MyTurnMenu(ClientView clientView) {
         this.clientView = clientView;
+        register(clientView);
+        System.out.println("Registered");
     }
 
     @Override
@@ -54,7 +57,8 @@ public class MyTurnMenu implements PlayerMenuInt {
             consoleTools.printDraftPool();
             consoleTools.showInstructionsForPlacement();
             actionEvent=ae.askForDiePlacing();
-            clientView.sendActionEventFromView(actionEvent);
+            notify(actionEvent);
+            //clientView.sendActionEventFromView(actionEvent);
         }
         else if(input.equalsIgnoreCase("U")){
             consoleTools.printToolCardsOnBoard();
@@ -64,10 +68,12 @@ public class MyTurnMenu implements PlayerMenuInt {
         }
         else if(input.equalsIgnoreCase("P")){
             actionEvent=ae.loseTurn();
-            clientView.sendActionEventFromView(actionEvent);
+            notify(actionEvent);
+            //clientView.sendActionEventFromView(actionEvent);
         }
         actionEvent=ae.askForMenu();
-        clientView.sendActionEventFromView(actionEvent);
+        notify(actionEvent);
+        //clientView.sendActionEventFromView(actionEvent);
     }
 
 

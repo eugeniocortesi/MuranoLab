@@ -1,5 +1,8 @@
 package it.polimi.ingsw.LM26.model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import it.polimi.ingsw.LM26.controller.GamePhases.Game;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
 import it.polimi.ingsw.LM26.model.PlayArea.ScoreTrackInt;
@@ -8,11 +11,13 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.model.Serialization.Decks;
+import it.polimi.ingsw.LM26.model.Serialization.*;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
 import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ClassMessage;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
@@ -134,6 +139,37 @@ public class Model extends ObservableSimple implements Serializable {
 
     public void hasChanged(){
         this.notify(this);
+    }
+
+    public String serializeClassMessage(){
+
+        Gson gson = new GsonBuilder().create();
+        String msgJson = gson.toJson(this);
+        return msgJson;
+    }
+
+    static public Model deserializeModelMessage(String protocolJson){
+
+        Type modelType = new TypeToken<Model>() {
+        }.getType();
+
+        RuntimeTypeAdapterFactory1<Effect> runtimeTypeAdapterFactory1 = RuntimeTypeAdapterFactory1
+                .of(Effect.class, "type")
+                .registerSubtype(DifferentColorShadeOnRowColomn.class)
+                .registerSubtype(DifferentColorShade.class)
+                .registerSubtype(Shades.class)
+                .registerSubtype(ColoredDiagonals.class);
+
+        Gson gson = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory1).create();
+
+
+        Model model= gson.fromJson(protocolJson, modelType);
+        System.out.println("playerlist "+ model.getPlayerList());
+        for(int i = 0; i<model.getPlayerList().size(); i++){
+            System.out.println(model.getPlayerList().get(i)+ "player");
+        }
+
+        return model;
     }
 }
 

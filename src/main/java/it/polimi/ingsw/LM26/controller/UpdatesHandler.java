@@ -51,6 +51,7 @@ public class UpdatesHandler implements Observer {
         if(timerEnd.getName().equals("ready") && timerEnd.getTimerEnd()){
 
             System.out.println("Game start!");
+
         }
         //A player has end his time to do the action
         else if(timerEnd.getTimerEnd()){

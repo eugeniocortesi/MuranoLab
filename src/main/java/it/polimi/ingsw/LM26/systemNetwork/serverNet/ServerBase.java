@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.*;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
@@ -97,6 +98,10 @@ public class ServerBase extends ViewGameInterface {
 
     public void setGameIsGoing(boolean gameIsGoing) {
         this.gameIsGoing = gameIsGoing;
+    }
+
+    public boolean isGameIsGoing() {
+        return gameIsGoing;
     }
 
     public Receiver getReceiver() {
@@ -215,6 +220,20 @@ public class ServerBase extends ViewGameInterface {
     public void showPrivateCard(String name, ObjectivePrivateCard privateCard) {
         System.out.println("called private cards");
         clientManagerList.getClientManager(name).sendPrivateCard(privateCard);
+    }
+
+    @Override
+    public void showSetPlayerMenu(String name, PlayerZone player) {
+
+        System.out.println("called set player menu");
+        clientManagerList.getClientManager(name).sendBeginTurnMessage(name, player);
+    }
+
+    @Override
+    public void showCurrentMenu(String name) {
+
+        System.out.println("called show current menu");
+        clientManagerList.getClientManager(name).sendCurrentMenu(name);
     }
 
 }

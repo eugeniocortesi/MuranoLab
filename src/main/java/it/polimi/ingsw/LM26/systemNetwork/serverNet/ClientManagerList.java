@@ -50,7 +50,7 @@ public class ClientManagerList{
     }
 
     public void checkNumberLogged(){
-        if(size()>= 4){
+        if(size()>= 2 && myserver.isGameIsGoing()){
 
             System.out.println("4 players logged");
             //TODO beginning game -> send notify to to controller

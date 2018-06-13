@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
 import it.polimi.ingsw.LM26.model.Serialization.*;
@@ -12,16 +13,10 @@ import java.util.ArrayList;
 
 public class ModelMessage extends ClassMessage{
 
-    private String idModel;
     private Model model;
 
-    public ModelMessage(String idModel, Model model) {
-        this.idModel = idModel;
+    public ModelMessage(Model model) {
         this.model = model;
-    }
-
-    public String getIdModel() {
-        return idModel;
     }
 
     public Model getModel() {
@@ -29,9 +24,6 @@ public class ModelMessage extends ClassMessage{
     }
 
     static public Model deserializeModelMessage(String protocolJson){
-
-
-        Gson gson = new Gson();
 
         Type modelType = new TypeToken<Model>() {
         }.getType();
@@ -43,8 +35,24 @@ public class ModelMessage extends ClassMessage{
                 .registerSubtype(Shades.class)
                 .registerSubtype(ColoredDiagonals.class);
 
+        Gson gson = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory1).create();
+
+
         Model model= gson.fromJson(protocolJson, modelType);
+        System.out.println("playerlist "+ model.getPlayerList());
+        for(int i = 0; i<model.getPlayerList().size(); i++){
+            System.out.println(model.getPlayerList().get(i)+ "player");
+        }
+
         return model;
+    }
+
+    @Override
+    public String serializeClassMessage(){
+
+        Gson gson = new GsonBuilder().create();
+        String msgJson = gson.toJson(this.model);
+        return msgJson;
     }
 
 

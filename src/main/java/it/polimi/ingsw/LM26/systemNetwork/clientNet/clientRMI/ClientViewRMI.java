@@ -3,6 +3,8 @@ package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI;
 
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventPlayer;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventTimerEnd;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
@@ -166,6 +168,13 @@ public class ClientViewRMI extends ClientView {
     @Override
     protected void notify(Model m) {
         LOGGER.log(Level.SEVERE,"Arrived Model from Controller");
+        if(m == null)
+            System.out.println("Model null");
+
+        System.out.println("playerlist "+ m.getPlayerList());
+        for(int i = 0; i<m.getPlayerList().size(); i++){
+            System.out.println(m.getPlayerList().get(i)+ "player");
+        }
         super.notify(m);
     }
 
@@ -192,9 +201,39 @@ public class ClientViewRMI extends ClientView {
 
     @Override
     public void sendAddedPlayer(String field1) {
-        //concreteClientView.showAddedPlayer();
+        //concreteClientView.showAddedPlayer(field1);
         System.out.println("Added new player " +field1 );
     }
 
+    @Override
+    public void sendCurrentMenu(String name) {
 
+        concreteClientView.showCurrentMenu(name);
+    }
+
+
+    @Override
+    public void updatePlayers(ActionEventPlayer actionEventPlayer) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void updateAction(ActionEvent actionEvent) {
+        sendActionEventFromView(actionEvent);
+    }
+
+    @Override
+    public void updateWindowPattern(ActionEventWindow actionEventWindow) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void updateBeginGame(Boolean beginGame) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void updateActionEventTimerEnd(ActionEventTimerEnd timerEnd) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

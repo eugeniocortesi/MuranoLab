@@ -26,8 +26,6 @@ public abstract class ViewInterface extends ViewGameInterface implements Observe
     @Override
     public abstract void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck);
 
-    public abstract void showSetPlayerMenu(String name, PlayerZone player);
-
     public abstract void showAnswerFromController(String answer);
 
     public abstract void showEndGame(String name, Object score);

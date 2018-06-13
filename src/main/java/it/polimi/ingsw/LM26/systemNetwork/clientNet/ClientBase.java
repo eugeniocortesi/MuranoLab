@@ -1,6 +1,5 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
-import it.polimi.ingsw.LM26.systemNetwork.Testing.ConsoleStringsTest;
 import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 
 public class ClientBase {

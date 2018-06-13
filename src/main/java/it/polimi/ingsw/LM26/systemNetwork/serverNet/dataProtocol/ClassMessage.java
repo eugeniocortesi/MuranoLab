@@ -39,6 +39,8 @@ public abstract class ClassMessage {
                     String value = jsonReader.nextString();
                     LOGGER.log(Level.INFO,value);
                     return value;
+                } else{
+                    System.out.println("NISBA");
                 }
             }
         } catch (IOException e) {

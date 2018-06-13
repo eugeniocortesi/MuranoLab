@@ -199,9 +199,10 @@ public class ClientManagerSocket extends ClientManager {
 
     @Override
     public void sendModel(Model m) {
-        ModelMessage modelMessage = new ModelMessage("send_model", m);
-        String s = modelMessage.serializeClassMessage();
-        sendMessage(s);
+        String s = m.serializeClassMessage();
+        DataMessage dataMessage = new DataMessage("send_model", s);
+        String message = dataMessage.serializeClassMessage();
+        sendMessage(message);
         //listenerClientManager.listen();
     }
 
@@ -229,7 +230,7 @@ public class ClientManagerSocket extends ClientManager {
         LOGGER.log(Level.SEVERE,"server is sending playerzone of " + name);
         BeginTurnMessage beginTurnMessage = new BeginTurnMessage("send_beginturnmessage", name, playerZone);
         sendMessage(beginTurnMessage.serializeClassMessage());
-        listenerClientManager.listen();
+        //listenerClientManager.listen();
     }
 
     @Override
@@ -237,6 +238,15 @@ public class ClientManagerSocket extends ClientManager {
 
         LOGGER.log(Level.SEVERE,"server is sending a new player");
         DataMessage dataMessage = new DataMessage("added_player", name);
+        String s = dataMessage.serializeClassMessage();
+        sendMessage(s);
+    }
+
+    @Override
+    public void sendCurrentMenu(String name) {
+
+        LOGGER.log(Level.SEVERE,"server is sending current menu");
+        DataMessage dataMessage = new DataMessage("send_currentmenu", name);
         String s = dataMessage.serializeClassMessage();
         sendMessage(s);
     }

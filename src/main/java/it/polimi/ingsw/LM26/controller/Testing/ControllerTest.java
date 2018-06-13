@@ -7,6 +7,7 @@ import it.polimi.ingsw.LM26.controller.controllerHandler.EventHandler;
 import it.polimi.ingsw.LM26.controller.Match;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.ViewGameInterface;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -50,6 +51,11 @@ public class ControllerTest implements ControllerInt {
     @Override
     public void playersReady() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ViewGameInterface getViewGameInterface() {
+        return null;
     }
 
 

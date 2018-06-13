@@ -71,5 +71,10 @@ public class ClientViewRMIRemote implements ClientViewRemote {
         clientViewRMI.sendAddedPlayer(name);
     }
 
+    @Override
+    public void sendCurrentMenu(String name) {
+        clientViewRMI.sendCurrentMenu(name);
+    }
+
 
 }
