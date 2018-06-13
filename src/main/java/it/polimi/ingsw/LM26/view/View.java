@@ -64,6 +64,11 @@ public class View extends ViewInterface{
     }
 
     @Override
+    public void showAddedPlayer(String s) {
+
+    }
+
+    @Override
     public void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
         Platform.runLater(new Runnable() {
             public void run() {

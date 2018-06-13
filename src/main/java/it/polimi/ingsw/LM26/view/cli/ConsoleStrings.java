@@ -128,7 +128,12 @@ public class ConsoleStrings extends ViewInterface {
 
     @Override
     public void showTooManyUsersScreen() {
-        AnsiConsole.out().println("Nella partita corrente ci sono già quattro giocatori");
+        AnsiConsole.out().println("Partita già in corso");
+    }
+
+    @Override
+    public void showAddedPlayer(String s) {
+
     }
 
 

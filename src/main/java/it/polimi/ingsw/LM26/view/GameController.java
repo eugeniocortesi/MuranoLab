@@ -14,6 +14,7 @@ public class GameController {
     private ImageView publicCard1;
 
     public void setPublicCard1(){
+        imageManager=new ImageManager();
         Image i=imageManager.getObjectiveCard(13);
         publicCard1.setImage(i);
     }

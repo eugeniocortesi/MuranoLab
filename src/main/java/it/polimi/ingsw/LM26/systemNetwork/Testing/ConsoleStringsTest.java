@@ -126,6 +126,11 @@ public class ConsoleStringsTest extends ViewInterface {
     }
 
     @Override
+    public void showAddedPlayer(String s) {
+        
+    }
+
+    @Override
     public void showDisconnectScreen() {
         AnsiConsole.out().println(); //è il messaggio che viene a tutti i connessi
     }

@@ -19,6 +19,8 @@ public abstract class ViewInterface extends ViewGameInterface implements Observe
 
     public abstract void showTooManyUsersScreen();
 
+    public abstract void showAddedPlayer(String s);
+
     public abstract void showDisconnectScreen();
 
     @Override

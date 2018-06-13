@@ -17,13 +17,13 @@ public class ImageManager {
             objectivePublicCards[i]=new Image(ImageManager.class.getResource("0002.jpg").toExternalForm());
         }
         for(int i=0; i<objectivePrivateCards.length; i++){
-            objectivePrivateCards[i]=new Image(ImageManager.class.getResourceAsStream("000"+(i+13)+".jpg"));
+            objectivePrivateCards[i]=new Image(ImageManager.class.getResourceAsStream("0017.jpg"));
         }
     }
 
     public Image getObjectiveCard(int id){
         char[] c=Integer.toString(id).toCharArray();
-        if(c[0]!=1 && c[0]!=2 || Character.getNumericValue(c[1])>5 && c[0]==1 || Character.getNumericValue(c[1])>10 && c[0]==2){
+        if((c[0]!='1' && c[0]!='1') || (Character.getNumericValue(c[1])>5 && c[0]=='1') || (Character.getNumericValue(c[1])>10 && c[0]=='2')){
             throw new IllegalArgumentException();
         }
         else{
@@ -34,12 +34,12 @@ public class ImageManager {
         }
     }
 
-    public static void main(String[] agrs){
+   /* public static void main(String[] agrs){
         ImageManager imageManager= new ImageManager();
         Image im;
         im= imageManager.getObjectiveCard(13);
         System.out.println(im.toString());
-    }
+    }*/
 
 
 }

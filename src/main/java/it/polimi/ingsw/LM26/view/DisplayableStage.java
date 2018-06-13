@@ -1,7 +1,9 @@
 package it.polimi.ingsw.LM26.view;
 
+import it.polimi.ingsw.LM26.view.images.ImageManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
