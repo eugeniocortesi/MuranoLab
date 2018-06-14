@@ -17,4 +17,11 @@ public class Shades extends Effect implements Serializable{
     public String getE() { return "Shades " + shades; }
 
     protected void resolve(){}
+
+    @Override
+    public void rewrite() {
+
+        this.type = "Shades";
+
+    }
 }

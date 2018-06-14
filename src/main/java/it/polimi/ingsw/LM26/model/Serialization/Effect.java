@@ -6,7 +6,9 @@ public abstract class Effect implements Serializable {
 
      protected String type;
 
-      public abstract String getE();
+     public abstract String getE();
 
      protected abstract void resolve();
+
+     public abstract void rewrite();
 }
