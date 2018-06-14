@@ -30,7 +30,7 @@ public class TimerPlayers {
             System.out.println("Timer configuration is null");
         if(timer == null)
             System.out.println("Timer is null");
-        timer.schedule(new TimerTaskPlayers(serverBase, timerConfiguration, timer) , 0, this.myLong);
+        timer.schedule(new TimerTaskPlayers(serverBase, timerConfiguration, timer) , this.myLong);
 
     }
 
