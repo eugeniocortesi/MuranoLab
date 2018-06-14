@@ -21,6 +21,8 @@ public class ChangeDieWithTheBag11 implements ToolCardDecorator {
 
     private boolean firstPart=false;
 
+    private String type;
+
 
     public ChangeDieWithTheBag11(ToolCard toolcard) {
         this.toolcard = toolcard;
@@ -28,6 +30,13 @@ public class ChangeDieWithTheBag11 implements ToolCardDecorator {
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="ChangeDieWithTheBag11";
+
     }
 
     public void printCard(){

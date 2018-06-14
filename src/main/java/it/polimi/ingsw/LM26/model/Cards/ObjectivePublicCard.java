@@ -2,9 +2,11 @@ package it.polimi.ingsw.LM26.model.Cards;
 
 import it.polimi.ingsw.LM26.model.Serialization.Effect;
 
-public class ObjectivePublicCard extends ObjectiveCardAC {
+public class ObjectivePublicCard implements CardInt {
 
     private int points;
+
+    private String type;
 
     private Effect effect= null;
 
@@ -53,6 +55,13 @@ public class ObjectivePublicCard extends ObjectiveCardAC {
         System.out.println(getId());
         if(getId()!=10) System.out.println(getPoints());
         System.out.println(getEffect());
+
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="ObjectivePublicCard";
 
     }
 }

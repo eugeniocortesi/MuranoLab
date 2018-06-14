@@ -11,6 +11,7 @@ public class ToolCard implements ToolCardInt  {
     private boolean inUse=false;
     private int num;
     private int token=0;
+    private String type;
 
     public ToolCard(int num) {
 
@@ -21,6 +22,13 @@ public class ToolCard implements ToolCardInt  {
     public int getNum() {
 
         return num;
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="ToolCard";
+
     }
 
     public boolean isInUse() {

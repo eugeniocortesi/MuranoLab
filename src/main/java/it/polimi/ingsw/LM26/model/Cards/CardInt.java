@@ -4,4 +4,6 @@ import java.io.Serializable;
 
 public interface CardInt extends Serializable {
 
+    public void rewrite();
+
 }

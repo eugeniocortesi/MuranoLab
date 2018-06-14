@@ -15,6 +15,7 @@ public class MoveWithNoColorRestriction2 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    private String type;
 
     public MoveWithNoColorRestriction2(ToolCard toolcard) {
         this.toolcard = toolcard;
@@ -22,6 +23,13 @@ public class MoveWithNoColorRestriction2 implements ToolCardDecorator {
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="MoveWithNoColorRestriction2";
+
     }
 
     public void printCard(){

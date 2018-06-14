@@ -15,6 +15,7 @@ public class RollAgainADie6 implements ToolCardDecorator {
     private ToolCard toolcard = null;
     private boolean needPlacement=false;
     private DieInt die;
+    private String type;
 
 
     public RollAgainADie6(ToolCard toolcard) {
@@ -23,6 +24,13 @@ public class RollAgainADie6 implements ToolCardDecorator {
 
     public int getNum() {
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="RollAgainADie6";
+
     }
 
     public void printCard() {

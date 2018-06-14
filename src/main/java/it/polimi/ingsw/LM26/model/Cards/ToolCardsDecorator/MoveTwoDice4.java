@@ -15,6 +15,7 @@ public class MoveTwoDice4 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    private String type;
 
     public MoveTwoDice4(ToolCard toolcard) {
         this.toolcard = toolcard;
@@ -22,6 +23,13 @@ public class MoveTwoDice4 implements ToolCardDecorator {
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="MoveTwoDice4";
+
     }
 
     public void printCard(){

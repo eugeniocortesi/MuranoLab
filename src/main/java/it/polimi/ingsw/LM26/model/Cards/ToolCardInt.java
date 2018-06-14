@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public interface ToolCardInt extends Serializable{
 
     public int getNum();
+    public void rewrite();
     public void printCard();
     public boolean play(Box fromBox,Box toBox, int player);
     public boolean play( ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player);

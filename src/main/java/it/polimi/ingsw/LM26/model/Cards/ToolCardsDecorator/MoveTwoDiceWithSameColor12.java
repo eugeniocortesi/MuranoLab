@@ -15,6 +15,7 @@ public class MoveTwoDiceWithSameColor12 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    private String type;
 
     public MoveTwoDiceWithSameColor12(ToolCard toolcard) {
         this.toolcard = toolcard;
@@ -22,6 +23,13 @@ public class MoveTwoDiceWithSameColor12 implements ToolCardDecorator {
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="MoveTwoDiceWithSameColor12";
+
     }
 
     public void printCard(){

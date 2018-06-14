@@ -11,6 +11,7 @@ public class ChangeDieValue1 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    private String type;
 
     public ChangeDieValue1(ToolCard toolcard) {
         this.toolcard = toolcard;
@@ -18,6 +19,13 @@ public class ChangeDieValue1 implements ToolCardDecorator {
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="ChangeDieValue1";
+
     }
 
     public void printCard(){

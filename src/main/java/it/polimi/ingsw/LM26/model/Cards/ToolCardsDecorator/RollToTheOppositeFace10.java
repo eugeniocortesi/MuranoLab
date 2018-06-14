@@ -11,6 +11,7 @@ public class RollToTheOppositeFace10 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    private String type;
 
     public RollToTheOppositeFace10(ToolCard toolcard) {
         this.toolcard = toolcard;
@@ -18,6 +19,13 @@ public class RollToTheOppositeFace10 implements ToolCardDecorator {
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="RollToTheOppositeFace10";
+
     }
 
     public void printCard(){

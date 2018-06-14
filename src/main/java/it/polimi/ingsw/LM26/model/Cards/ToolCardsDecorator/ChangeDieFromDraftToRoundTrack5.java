@@ -14,6 +14,7 @@ public class ChangeDieFromDraftToRoundTrack5 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    private String type;
 
     public ChangeDieFromDraftToRoundTrack5(ToolCard toolcard) {
         this.toolcard = toolcard;
@@ -21,6 +22,13 @@ public class ChangeDieFromDraftToRoundTrack5 implements ToolCardDecorator {
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="ChangeDieFromDraftToRoundTrack5";
+
     }
 
     public void printCard(){

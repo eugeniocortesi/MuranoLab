@@ -5,6 +5,7 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
 public class PlayerZone implements PlayerZoneInt {
 
+    private String type;
 
     private  String namePlayer;
 
@@ -111,6 +112,13 @@ public class PlayerZone implements PlayerZoneInt {
     }
 
     public ActionHistory getActionHistory() { return actionHistory; }
+
+    @Override
+    public void rewrite() {
+
+        this.type="PlayerZone";
+
+    }
 
     //get carta obbiettivo privato
 }

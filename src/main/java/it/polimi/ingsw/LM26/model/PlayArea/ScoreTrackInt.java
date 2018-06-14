@@ -6,4 +6,6 @@ import java.io.Serializable;
 
 public interface ScoreTrackInt extends Serializable{
     public int getScoreTrack(ScoreMarker sm);
+
+    public void rewrite();
 }

@@ -12,7 +12,7 @@ public class WindowPatternCard implements CardInt {
     private Matrix matrix;
     private PatternBox[][] patternMatrix;
     private boolean inUse=false;
-
+    private String type;
 
     public WindowPatternCard(int token, String title, Matrix matrix) {
 
@@ -68,6 +68,13 @@ public class WindowPatternCard implements CardInt {
             }
             System.out.println();
         }
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="WindowPatternCard";
+
     }
 }
 

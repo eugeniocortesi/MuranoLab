@@ -14,6 +14,7 @@ public class RollAllDraftDice7 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    private String type;
 
     public RollAllDraftDice7(ToolCard toolcard) {
         this.toolcard = toolcard;
@@ -21,6 +22,12 @@ public class RollAllDraftDice7 implements ToolCardDecorator {
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="RollAllDraftDice7";
     }
 
     public void printCard(){

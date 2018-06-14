@@ -15,6 +15,8 @@ public class MoveWithNoValueRestriction3 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    private String type;
+
 
     public MoveWithNoValueRestriction3(ToolCard toolcard) {
         this.toolcard = toolcard;
@@ -22,6 +24,13 @@ public class MoveWithNoValueRestriction3 implements ToolCardDecorator {
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="MoveWithNoValueRestriction3";
+
     }
 
     public void printCard(){

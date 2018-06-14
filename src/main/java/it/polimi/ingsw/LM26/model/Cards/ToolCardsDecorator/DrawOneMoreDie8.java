@@ -16,6 +16,7 @@ public class DrawOneMoreDie8 implements ToolCardDecorator {
     private ToolCard toolcard = null;
     private boolean needPlacement=false;
     private boolean currentPlacement=false;
+    private String type;
 
 
     public DrawOneMoreDie8(ToolCard toolcard) {
@@ -24,6 +25,13 @@ public class DrawOneMoreDie8 implements ToolCardDecorator {
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="DrawOneMoreDie8";
+
     }
 
     public void printCard(){

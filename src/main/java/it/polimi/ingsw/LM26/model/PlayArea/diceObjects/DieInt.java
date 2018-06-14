@@ -21,4 +21,6 @@ public interface DieInt extends Serializable{
     public void decrement();
 
     public void setRoll(int value);
+
+    public void rewrite();
 }

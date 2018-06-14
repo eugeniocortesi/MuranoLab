@@ -16,4 +16,6 @@ public interface RoundTrackInt extends Serializable{
     public ArrayList<RoundTrackTurn> getRoundTrackTurnList();
 
     public void dump();
+
+    public void rewrite();
 }

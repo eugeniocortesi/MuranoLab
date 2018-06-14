@@ -10,6 +10,8 @@ public class RoundTrack implements RoundTrackInt{
 
     private int currentTurn;
 
+    private String type;
+
     public RoundTrack(){
 
         roundTrackTurnList = new ArrayList<RoundTrackTurn>();
@@ -45,6 +47,13 @@ public class RoundTrack implements RoundTrackInt{
 
             this.roundTrackTurnList.get(i).dump();
         }
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="RoundTrack";
+
     }
 
     public ArrayList<RoundTrackTurn> getRoundTrackTurnList() {

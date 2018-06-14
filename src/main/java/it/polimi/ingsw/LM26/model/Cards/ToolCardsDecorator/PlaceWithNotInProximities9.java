@@ -15,6 +15,8 @@ public class PlaceWithNotInProximities9 implements ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    private String type;
+
 
     public PlaceWithNotInProximities9(ToolCard toolcard) {
         this.toolcard = toolcard;
@@ -22,6 +24,13 @@ public class PlaceWithNotInProximities9 implements ToolCardDecorator {
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="PlaceWithNotInProximities9";
+
     }
 
     public void printCard(){

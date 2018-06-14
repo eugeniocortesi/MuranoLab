@@ -10,6 +10,8 @@ public class Die implements DieInt {
 
     private String face;
 
+    private String type;
+
     public static final String[] faces = {
             "\u2680",
             "\u2681",
@@ -68,6 +70,13 @@ public class Die implements DieInt {
         if(value==4)face="\u2683";
         if(value==5)face="\u2684";
         if(value==6)face="\u2685";
+
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="Die";
 
     }
 

@@ -1,5 +1,10 @@
-package it.polimi.ingsw.LM26.model.Cards;
+/*package it.polimi.ingsw.LM26.model.Cards;
 
 public abstract class ObjectiveCardAC implements CardInt{
 
+    @Override
+    public void rewrite() {
+
+    }
 }
+*/
