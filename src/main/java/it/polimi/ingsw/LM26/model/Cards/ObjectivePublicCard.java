@@ -1,12 +1,11 @@
 package it.polimi.ingsw.LM26.model.Cards;
 
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.Serialization.Effect;
 
-public class ObjectivePublicCard implements CardInt {
+public class ObjectivePublicCard extends CardInt {
 
     private int points;
-
-    private String type;
 
     private Effect effect= null;
 
@@ -18,6 +17,7 @@ public class ObjectivePublicCard implements CardInt {
 
         this.effect=effect;
         this.id=id;
+        this.type = "ObjectivePublicCard";
     }
 
     public ObjectivePublicCard(int id, int points, Effect effect) {
@@ -61,7 +61,11 @@ public class ObjectivePublicCard implements CardInt {
     @Override
     public void rewrite() {
 
-        this.type="ObjectivePublicCard";
+        this.type = "ObjectivePublicCard";
 
+    }
+
+    public Effect getRealEffect() {
+        return effect;
     }
 }

@@ -19,13 +19,11 @@ public abstract class ClassMessage {
 
     public String parserFirstElement(String s){
 
-        Handler handlerObj = new ConsoleHandler();
-        handlerObj.setLevel(Level.ALL);
-        LOGGER.addHandler(handlerObj);
+
         LOGGER.setLevel(Level.ALL);
-        LOGGER.setUseParentHandlers(false);
 
         JsonReader jsonReader = new JsonReader(new StringReader(s));
+        //jsonReader.setLenient(true);
         try{
             while(jsonReader.hasNext()) {
                 JsonToken nextToken = jsonReader.peek();

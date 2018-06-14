@@ -13,36 +13,26 @@ import java.util.ArrayList;
 
 public class ModelMessage extends ClassMessage{
 
-    private Model model;
+    private String idModel;
 
-    public ModelMessage(Model model) {
+    private String model;
+
+    public ModelMessage(String m, String model) {
+        this.idModel = m;
         this.model = model;
     }
 
-    public Model getModel() {
+    public String getModel() {
         return model;
     }
 
-    static public Model deserializeModelMessage(String protocolJson){
-
-        Type modelType = new TypeToken<Model>() {
-        }.getType();
-
-        RuntimeTypeAdapterFactory1<Effect> runtimeTypeAdapterFactory1 = RuntimeTypeAdapterFactory1
-                .of(Effect.class, "type")
-                .registerSubtype(DifferentColorShadeOnRowColomn.class)
-                .registerSubtype(DifferentColorShade.class)
-                .registerSubtype(Shades.class)
-                .registerSubtype(ColoredDiagonals.class);
-
-        Gson gson = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory1).create();
+    static public ModelMessage deserializeModelMessage(String protocolJson){
 
 
-        Model model= gson.fromJson(protocolJson, modelType);
-        System.out.println("playerlist "+ model.getPlayerList());
-        for(int i = 0; i<model.getPlayerList().size(); i++){
-            System.out.println(model.getPlayerList().get(i)+ "player");
-        }
+        Gson gson = new Gson();
+
+        ModelMessage model= gson.fromJson(protocolJson, ModelMessage.class );
+
 
         return model;
     }
@@ -51,7 +41,7 @@ public class ModelMessage extends ClassMessage{
     public String serializeClassMessage(){
 
         Gson gson = new GsonBuilder().create();
-        String msgJson = gson.toJson(this.model);
+        String msgJson = gson.toJson(this);
         return msgJson;
     }
 

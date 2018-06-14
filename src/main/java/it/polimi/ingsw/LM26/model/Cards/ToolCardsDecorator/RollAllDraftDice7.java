@@ -10,14 +10,14 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class RollAllDraftDice7 implements ToolCardDecorator {
+public class RollAllDraftDice7 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
-    private String type;
-
     public RollAllDraftDice7(ToolCard toolcard) {
         this.toolcard = toolcard;
+        this.type="RollAllDraftDice7";
+        this.typeToolCard = "ToolCard";
     }
 
     public int getNum(){
@@ -28,6 +28,7 @@ public class RollAllDraftDice7 implements ToolCardDecorator {
     public void rewrite() {
 
         this.type="RollAllDraftDice7";
+        this.typeToolCard = "ToolCard";
     }
 
     public void printCard(){

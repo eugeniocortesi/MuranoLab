@@ -11,14 +11,14 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class MoveTwoDice4 implements ToolCardDecorator {
+public class MoveTwoDice4 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
-    private String type;
-
     public MoveTwoDice4(ToolCard toolcard) {
         this.toolcard = toolcard;
+        this.type="MoveTwoDice4";
+        this.typeToolCard = "ToolCard";
     }
 
     public int getNum(){
@@ -29,6 +29,7 @@ public class MoveTwoDice4 implements ToolCardDecorator {
     public void rewrite() {
 
         this.type="MoveTwoDice4";
+        this.typeToolCard = "ToolCard";
 
     }
 

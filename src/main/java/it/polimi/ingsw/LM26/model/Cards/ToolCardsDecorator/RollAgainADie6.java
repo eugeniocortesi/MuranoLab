@@ -10,16 +10,16 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class RollAgainADie6 implements ToolCardDecorator {
+public class RollAgainADie6 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
     private boolean needPlacement=false;
     private DieInt die;
-    private String type;
-
 
     public RollAgainADie6(ToolCard toolcard) {
         this.toolcard = toolcard;
+        this.type="RollAgainADie6";
+        this.typeToolCard = "ToolCard";
     }
 
     public int getNum() {
@@ -30,6 +30,7 @@ public class RollAgainADie6 implements ToolCardDecorator {
     public void rewrite() {
 
         this.type="RollAgainADie6";
+        this.typeToolCard = "ToolCard";
 
     }
 

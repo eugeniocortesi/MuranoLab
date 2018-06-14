@@ -110,7 +110,16 @@ public class ListenerClientView {
         }
         else if(op.equals("send_model")){
             LOGGER.log(Level.SEVERE, "In send model body");
-            DataMessage dataMessage1 = DataMessage.deserializeDataMessage(message);
+
+            ModelMessage modelMessage = ModelMessage.deserializeModelMessage(message);
+
+            String m =  modelMessage.getModel();
+            Model model = Model.deserializeModelMessage(m);
+
+           // String m = message;
+            //m = m.substring(m.indexOf('$'));
+            //Model model = Model.deserializeModelMessage(m);
+            /*DataMessage dataMessage1 = DataMessage.deserializeDataMessage(message);
             String modelString = dataMessage1.getField1();
             Model model = Model.deserializeModelMessage(modelString);
 
@@ -118,7 +127,7 @@ public class ListenerClientView {
             for(int i=0; i<model.getPlayerList().size(); i++){
                 System.out.println("player: "+ model.getPlayerList().get(i).getName());
                 System.out.println("player zone: " +model.getPlayerList().get(i));
-            }
+            }*/
             clientView.notify(model);
         }
         else if(op.equals("send_answer_from_controller")){

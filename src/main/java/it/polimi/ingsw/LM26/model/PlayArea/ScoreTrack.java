@@ -4,15 +4,14 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;
 
 import java.util.ArrayList;
 
-public class ScoreTrack implements ScoreTrackInt {
+public class ScoreTrack extends ScoreTrackInt {
 
     private ArrayList<ScoreMarker> scoreMarkerList;
-
-    private String type;
 
     public ScoreTrack(){
 
         scoreMarkerList = new ArrayList<ScoreMarker>();
+        this.typeScoreTrack="ScoreTrack";
 
     }
 
@@ -23,7 +22,7 @@ public class ScoreTrack implements ScoreTrackInt {
     @Override
     public void rewrite() {
 
-        this.type="ScoreTrack";
+        this.typeScoreTrack="ScoreTrack";
 
     }
 }

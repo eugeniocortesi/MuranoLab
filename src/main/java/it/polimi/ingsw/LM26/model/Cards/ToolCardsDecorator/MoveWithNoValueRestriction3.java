@@ -11,15 +11,14 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class MoveWithNoValueRestriction3 implements ToolCardDecorator {
+public class MoveWithNoValueRestriction3 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
-    private String type;
-
-
     public MoveWithNoValueRestriction3(ToolCard toolcard) {
         this.toolcard = toolcard;
+        this.type="MoveWithNoValueRestriction3";
+        this.typeToolCard = "ToolCard";
     }
 
     public int getNum(){
@@ -30,6 +29,7 @@ public class MoveWithNoValueRestriction3 implements ToolCardDecorator {
     public void rewrite() {
 
         this.type="MoveWithNoValueRestriction3";
+        this.typeToolCard = "ToolCard";
 
     }
 

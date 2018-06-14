@@ -7,14 +7,14 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
 
-public class RollToTheOppositeFace10 implements ToolCardDecorator {
+public class RollToTheOppositeFace10 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
-    private String type;
-
     public RollToTheOppositeFace10(ToolCard toolcard) {
         this.toolcard = toolcard;
+        this.type="RollToTheOppositeFace10";
+        this.typeToolCard = "ToolCard";
     }
 
     public int getNum(){
@@ -25,6 +25,7 @@ public class RollToTheOppositeFace10 implements ToolCardDecorator {
     public void rewrite() {
 
         this.type="RollToTheOppositeFace10";
+        this.typeToolCard = "ToolCard";
 
     }
 

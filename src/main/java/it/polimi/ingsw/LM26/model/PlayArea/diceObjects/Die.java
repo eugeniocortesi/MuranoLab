@@ -4,13 +4,13 @@ import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
 import java.util.Random;
 
-public class Die implements DieInt {
+public class Die extends DieInt {
 
     private Color color;
 
     private String face;
 
-    private String type;
+    private int number;
 
     public static final String[] faces = {
             "\u2680",
@@ -25,6 +25,7 @@ public class Die implements DieInt {
         Random rand = new Random();
         int index = rand.nextInt(count);
         this.face = faces[index];
+        number = getValue();
     }
 
     public int getValue() {
@@ -82,6 +83,7 @@ public class Die implements DieInt {
 
     public Die(Color color) {
         this.color = color;
+        this.type="Die";
     }
 
     public Color getColor() {
@@ -92,6 +94,10 @@ public class Die implements DieInt {
         this.color = color;
     }
 
+    public int getNumber(){
+        return this.number;
+    }
+
     @Override
     public String toString() {
         String escape = this.color.escape();
@@ -100,6 +106,10 @@ public class Die implements DieInt {
 
     public void dump() {
         System.out.println(this);
+    }
+
+    public  void dumpNumber(){
+        System.out.println(number);
     }
 
     public String getFace() {

@@ -6,16 +6,16 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
 
-public class ToolCard implements ToolCardInt  {
+public class ToolCard extends ToolCardInt  {
 
     private boolean inUse=false;
     private int num;
     private int token=0;
-    private String type;
 
     public ToolCard(int num) {
 
         this.num=num;
+        this.typeToolCard="ToolCard";
 
     }
 
@@ -27,7 +27,7 @@ public class ToolCard implements ToolCardInt  {
     @Override
     public void rewrite() {
 
-        this.type="ToolCard";
+        this.typeToolCard="ToolCard";
 
     }
 

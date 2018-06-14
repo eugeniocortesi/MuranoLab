@@ -212,6 +212,12 @@ public class ClientViewSocket extends ClientView {
         for(int i = 0; i<m.getPlayerList().size(); i++){
             System.out.println(m.getPlayerList().get(i)+ "player");
         }
+
+        System.out.println("draftpool "+ m.getDraftPool());
+        m.getDraftPool().printDraftPool();
+
+        m.getDraftPool().getInDraft().forEach(number -> {System.out.println(number.getNumber());});
+
         super.notify(m);
     }
 

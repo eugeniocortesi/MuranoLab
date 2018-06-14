@@ -79,7 +79,7 @@ public class Controller implements ControllerInt{
 
         if(gameIsGoing== true){
 
-            model.hasChanged();
+            //model.hasChanged();
             System.out.println("playerlist "+ model.getPlayerList());
             for(int i = 0; i<model.getPlayerList().size(); i++){
                 System.out.println(model.getPlayerList().get(i)+ "player");

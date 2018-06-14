@@ -5,9 +5,7 @@ import it.polimi.ingsw.LM26.model.Serialization.Elements.elements;
 
 import static it.polimi.ingsw.LM26.model.Serialization.Elements.elements.*;
 
-public class ObjectivePrivateCard implements CardInt {
-
-    private String type;
+public class ObjectivePrivateCard extends CardInt {
 
     private elements colour= null;
 
@@ -19,6 +17,7 @@ public class ObjectivePrivateCard implements CardInt {
 
         this.colour=colour;
         this.id=id;
+        this.type="ObjectivePrivateCard";
     }
     public Color getColour() {
 

@@ -199,9 +199,19 @@ public class ClientManagerSocket extends ClientManager {
 
     @Override
     public void sendModel(Model m) {
+
+        m.rewriteBeforeSerializing();
+        //String prova = "send_model" + "$" + "\n" + m.serializeClassMessage();
         String s = m.serializeClassMessage();
-        DataMessage dataMessage = new DataMessage("send_model", s);
-        String message = dataMessage.serializeClassMessage();
+        ModelMessage modelMessage = new ModelMessage("send_model", s);
+
+        String message = modelMessage.serializeClassMessage();
+        System.out.println("message");
+        /*DataMessage dataMessage1 = DataMessage.deserializeDataMessage(message);
+        String modelString = dataMessage1.getField1();
+        Model model = Model.deserializeModelMessage(modelString);
+        System.out.println(model);*/
+
         sendMessage(message);
         //listenerClientManager.listen();
     }

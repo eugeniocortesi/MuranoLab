@@ -5,17 +5,19 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public interface RoundTrackInt extends Serializable{
+public abstract class RoundTrackInt implements Serializable{
 
-    public int getCurrentTurn();
+    String type;
 
-    public void addDice( ArrayList<DieInt> ad);
+    public abstract int getCurrentTurn();
 
-    public ArrayList<DieInt> getRoundTrackTurn(int turn);
+    public abstract void addDice( ArrayList<DieInt> ad);
 
-    public ArrayList<RoundTrackTurn> getRoundTrackTurnList();
+    public abstract ArrayList<DieInt> getRoundTrackTurn(int turn);
 
-    public void dump();
+    public abstract ArrayList<RoundTrackTurn> getRoundTrackTurnList();
 
-    public void rewrite();
+    public abstract void dump();
+
+    public abstract void rewrite();
 }

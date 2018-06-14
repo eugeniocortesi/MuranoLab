@@ -11,14 +11,15 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class MoveWithNoColorRestriction2 implements ToolCardDecorator {
+public class MoveWithNoColorRestriction2 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
-    private String type;
 
     public MoveWithNoColorRestriction2(ToolCard toolcard) {
         this.toolcard = toolcard;
+        this.type="MoveWithNoColorRestriction2";
+        this.typeToolCard = "ToolCard";
     }
 
     public int getNum(){
@@ -29,6 +30,7 @@ public class MoveWithNoColorRestriction2 implements ToolCardDecorator {
     public void rewrite() {
 
         this.type="MoveWithNoColorRestriction2";
+        this.typeToolCard = "ToolCard";
 
     }
 

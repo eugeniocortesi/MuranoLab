@@ -35,6 +35,9 @@ public class Match {
         game.getPhase().doAction(game, model.getPlayerList());    //centralPhase
         this.centralPhase = (CentralPhase) game.getPhase();
         this.model=model;
+        this.model.hasChanged();
+        model.getDraftPool().printDraftPool();
+
 
         System.out.println("START");
 
@@ -73,7 +76,7 @@ public class Match {
                 //TODO DELETE
                 System.out.println(playing.getName()+" is playing "  );
 
-                //controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
+                controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
 
                 playing.getPlayerBoard().printCard();
                 System.out.println("DraftPool");

@@ -7,14 +7,15 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
 
-public class ChangeDieValue1 implements ToolCardDecorator {
+public class ChangeDieValue1 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
-    private String type;
 
     public ChangeDieValue1(ToolCard toolcard) {
         this.toolcard = toolcard;
+        this.type="ChangeDieValue1";
+        this.typeToolCard = "ToolCard";
     }
 
     public int getNum(){
@@ -25,6 +26,7 @@ public class ChangeDieValue1 implements ToolCardDecorator {
     public void rewrite() {
 
         this.type="ChangeDieValue1";
+        this.typeToolCard = "ToolCard";
 
     }
 
