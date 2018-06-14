@@ -87,7 +87,7 @@ public class MoveWithNoValueRestriction3 extends ToolCardDecorator {
             }
         }
         else if (placement.checkColorRestriction() && placement.checkNearByRestrictions() ){
-
+            toBox.setDie(die);
             return true;
         }
 

@@ -109,7 +109,10 @@ public boolean checkEdgeRestrictions(){
                      if (checkRightDie()) return true;
                      else return false;
                  }
-                 if (checkDown()) return true;
+                 if (checkDown()){
+                     if (checkDownDie()) return true;
+                     else return false;
+                 }
                  if (checkRightDown()) return true;
              }
 
@@ -119,7 +122,10 @@ public boolean checkEdgeRestrictions(){
                      if (checkLeftDie()) return true;
                      else return false;
                  }
-                 if (checkDown()) return true;
+                 if (checkDown()){
+                     if (checkDownDie()) return true;
+                     else return false;
+                 }
                  if (checkLeftDown()) return true;
              }
 
@@ -132,7 +138,10 @@ public boolean checkEdgeRestrictions(){
                          if (checkLeftDie()) return true;
                          else return false;
                  }
-                 if (checkDown()) return true;
+                 if (checkDown()){
+                     if (checkDownDie()) return true;
+                     else return false;
+                 }
                  if (checkRightDown()) return true;
                  if (checkLeftDown()) return true;
              }
@@ -144,7 +153,11 @@ public boolean checkEdgeRestrictions(){
                      else return false;
                  }
                  if (checkUp()) return true;
-                 if (checkRightUp()) return true;
+                 if (checkRightUp()){
+                     if (checkUpDie()) return true;
+                     else return false;
+                 }
+
              }
              if (j == 4) {   // angolo in basso a destra
                  if (checkLeft()) {
@@ -152,7 +165,10 @@ public boolean checkEdgeRestrictions(){
                      else return false;
                  }
                  if (checkUp()) return true;
-                 if (checkLeftUp()) return true;
+                 if (checkLeftUp()) {
+                     if (checkUpDie()) return true;
+                     else return false;
+                 }
              }
 
 
@@ -165,34 +181,49 @@ public boolean checkEdgeRestrictions(){
                             else return false;}
                  if (checkUp()) return true;
                  if (checkRightUp()) return true;
-                 if (checkLeftUp()) return true;
+                 if (checkLeftUp()) {
+                     if (checkUpDie()) return true;
+                     else return false;
+                 }
              }
          }
 
          else if(j == 0) {         //tutti gli altri valori prima colonna
-             if (i != 0 && i != 3) {
+             //if (i != 0 && i != 3) {
                  if (checkRight()) {
                      if (checkRightDie()) return true;
                      else return false;
                  }
                  if (checkRightUp()) return true;
                  if (checkRightDown()) return true;
-                 if (checkUp()) return true;
-                 if (checkDown()) return true;
-             }
+                 if (checkUp()) {
+                     if (checkUpDie()) return true;
+                     else return false;
+                 }
+                 if (checkDown()) {
+                     if (checkDownDie()) return true;
+                     else return false;
+                 }
+             //}
          }
 
          else if(j == 4) {          //tutti gli altri valori ultima colonna
-             if (i != 0 && i != 3) {
+             //if (i != 0 && i != 3) {
                  if (checkLeft()) {
                      if (checkLeftDie()) return true;
                      else return false;
                  }
                  if (checkLeftUp()) return true;
                  if (checkLeftDown()) return true;
-                 if (checkUp()) return true;
-                 if (checkDown()) return true;
-             }
+                 if (checkUp()) {
+                     if (checkUpDie()) return true;
+                     else return false;
+                 }
+                 if (checkDown()) {
+                     if (checkDownDie()) return true;
+                     else return false;
+                 }
+             //}
          }
 
         else      //tutti i valori non di margine
@@ -209,12 +240,22 @@ public boolean checkEdgeRestrictions(){
 
 
     public boolean checkAll(){
-    if(checkRight()){ if  (checkRightDie() ) return true;
-                        else return false; }
-    if(checkLeft()){  if  (checkLeftDie() ) return true;
-                        else return false; }
-     if( checkUp())  return true;
-      if(checkDown()) return true;
+    if(checkRight()){
+        if  (checkRightDie() ) return true;
+        else return false;
+    }
+    if(checkLeft()){
+        if  (checkLeftDie() ) return true;
+        else return false;
+    }
+     if( checkUp()) {
+         if (checkUpDie()) return true;
+         else return false;
+     }
+      if(checkDown()) {
+          if (checkDownDie()) return true;
+          else return false;
+      }
       if(checkRightUp())  return true;
       if(checkRightDown()) return true;
       if(checkLeftUp()) return true;
@@ -259,7 +300,17 @@ public boolean checkEdgeRestrictions(){
     else return true;
     }
 
+    public boolean checkUpDie(){
+        if(board[i-1][j].getDie().getColor()==die.getColor() ||
+                board[i-1][j].getDie().getValue()==die.getValue())return false;
+        else return true;
+    }
 
+    public boolean checkDownDie(){
+        if(board[i+1][j].getDie().getColor()==die.getColor() ||
+                board[i+1][j].getDie().getValue()==die.getValue())return false;
+        else return true;
+    }
 
 
 }
