@@ -11,6 +11,8 @@ import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ModelMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.*;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerPlayers;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskActionPlayers;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -28,6 +30,8 @@ public class ClientManagerSocket extends ClientManager {
     private String user;
     private int id;
     private DataOutputStream writer;
+    TimerPlayers timerPlayers;
+    TimerTaskActionPlayers timerTaskActionPlayers;
     private static final Logger LOGGER = Logger.getLogger(ClientManagerSocket.class.getName());
 
 
@@ -47,6 +51,7 @@ public class ClientManagerSocket extends ClientManager {
         }
 
         listenerClientManager = new ListenerClientManager(this, socket);
+        timerPlayers = new TimerPlayers(server, server.getTimerConfiguration());
     }
 
     public String getName(){
@@ -139,6 +144,8 @@ public class ClientManagerSocket extends ClientManager {
                 server.getQueueController().pushMessage(actionEventPlayer);
                 server.checkPlayers();
 
+                //timerPlayers.scheduleTimerNetworkPlayer(user);
+
                 sendMessage(dataMessage.serializeClassMessage());
             }
         }
@@ -176,6 +183,7 @@ public class ClientManagerSocket extends ClientManager {
         LOGGER.log(Level.SEVERE,"server is asking a window pattern");
         WindowInitialMessage windowInitialMessage= new WindowInitialMessage("send_windowlist", user, id, windowDeck);
         sendMessage(windowInitialMessage.serializeClassMessage());
+        timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
     }
 
     @Override
@@ -184,6 +192,8 @@ public class ClientManagerSocket extends ClientManager {
         LOGGER.log(Level.SEVERE,"I have received one windowcard from "+user);
 
         server.getQueueController().pushMessage(actionEventWindow);
+
+        timerTaskActionPlayers.setArrivedMessage(true);
         //TODO ATTENTION LISTEN!
         //server.sendToObservable(actionEventWindow);
         listenerClientManager.listen();
@@ -219,7 +229,7 @@ public class ClientManagerSocket extends ClientManager {
     @Override
     public void sendActionEventFromView(ActionEvent actionEvent) {
         LOGGER.log(Level.SEVERE,"I have received one actionEvent from "+user);
-
+        timerTaskActionPlayers.setArrivedMessage(true);
         server.getQueueController().pushMessage(actionEvent);
         listenerClientManager.listen();
     }
@@ -240,6 +250,7 @@ public class ClientManagerSocket extends ClientManager {
         LOGGER.log(Level.SEVERE,"server is sending playerzone of " + name);
         BeginTurnMessage beginTurnMessage = new BeginTurnMessage("send_beginturnmessage", name, playerZone);
         sendMessage(beginTurnMessage.serializeClassMessage());
+        timerPlayers.scheduleTimerActionPlayer(user);
         //listenerClientManager.listen();
     }
 

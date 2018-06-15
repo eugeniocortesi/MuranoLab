@@ -91,6 +91,9 @@ public class ServerBase extends ViewGameInterface {
 
     }
 
+    public TimerConfiguration getTimerConfiguration() {
+        return timerConfiguration;
+    }
 
     public ClientManagerList getClientManagerList() {
         return clientManagerList;
