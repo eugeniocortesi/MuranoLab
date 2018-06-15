@@ -55,7 +55,7 @@ public class ConsoleStrings extends ViewInterface {
     }
 
     public ConsoleStrings(ClientBase clientBase) {
-        System.setProperty("jansi.passthrough", "true");
+        System.setProperty("jansi.passthrough", "true"); //TODO remove later
         AnsiConsole.systemInstall();
         playerMenu=null;
         this.clientBase = clientBase;
