@@ -34,7 +34,10 @@ public class ControllerLogin implements ViewControllerInt{
      }
 
      public void tooManyUsersScreen(){
-          label.setText("Nella partita corrente ci sono già");
-          label2.setText("quattro giocatori");
+          label.setText("Partita già iniziata");
+     }
+
+     public void addedPlayer(String name){
+          label.setText("Nuovo giocatore aggiunto: "+name);
      }
 }

@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.LM26.view.FrameBoardController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="255.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.LM26.view.FrameBoardController">
    <children>
       <VBox fx:id="background" prefHeight="200.0" style="-fx-background-color: #d3d3d3;">
          <children>

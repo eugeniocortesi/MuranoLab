@@ -31,7 +31,7 @@ public class MainView extends Application {
         }
         view.showWindowPattern("we", 1, testarray);*/
 
-        view.showSetPlayerMenu("n", new PlayerZone("n", 1));
+        view.showCurrentMenu("name");
 
 
         //view.showCentralPhaseScreen();

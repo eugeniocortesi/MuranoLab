@@ -13,17 +13,21 @@ public class ImageManager {
     private Image[] boxes= new Image[13];
 
     public ImageManager() {
+        String s;
         for(int i=0; i<objectivePublicCards.length; i++){
-            objectivePublicCards[i]=new Image(ImageManager.class.getResource("0002.jpg").toExternalForm());
+            if(i<8){s="000"+(i+2)+".jpg";}
+            else s="00"+(i+2)+".jpg";
+            objectivePublicCards[i]=new Image(ImageManager.class.getResource(s).toExternalForm());
         }
         for(int i=0; i<objectivePrivateCards.length; i++){
-            objectivePrivateCards[i]=new Image(ImageManager.class.getResourceAsStream("0017.jpg"));
+            s="00"+(i+13)+".jpg";
+            objectivePrivateCards[i]=new Image(ImageManager.class.getResourceAsStream(s));
         }
     }
 
     public Image getObjectiveCard(int id){
         char[] c=Integer.toString(id).toCharArray();
-        if((c[0]!='1' && c[0]!='1') || (Character.getNumericValue(c[1])>5 && c[0]=='1') || (Character.getNumericValue(c[1])>10 && c[0]=='2')){
+        if((c[0]!='1' && c[0]!='2') || (Character.getNumericValue(c[1])>5 && c[0]=='1') || (Character.getNumericValue(c[1])>10 && c[0]=='2')){
             throw new IllegalArgumentException();
         }
         else{

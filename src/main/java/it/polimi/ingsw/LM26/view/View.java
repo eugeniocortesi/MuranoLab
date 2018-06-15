@@ -17,8 +17,10 @@ public class View extends ViewInterface{
     //private DisplayableStage displayableStage2 = new DisplayableStage("MyPlayerzone.fxml");
     private DisplayableStage displayableStageNetChioce = new DisplayableStage("NetChioce.fxml");
     private DisplayableStage displayableStageWPattern = new DisplayableStage("WindowPattern.fxml");
-    private DisplayableStage displayableStageGame= new DisplayableStage("Game.fxml");
+    private DisplayableStage displayableStageGame= new DisplayableStage("CentralPhase.fxml");
     private Stage stage;
+
+    static Model model;
 
     public View(Stage stage) {
         this.stage = stage;
@@ -65,7 +67,9 @@ public class View extends ViewInterface{
 
     @Override
     public void showAddedPlayer(String s) {
-
+        FXMLLoader fLoader=displayableStage1.getFxmlLoader();
+        ControllerLogin cl=fLoader.getController();
+        cl.addedPlayer(s);
     }
 
     @Override
@@ -82,11 +86,15 @@ public class View extends ViewInterface{
 
     @Override
     public void showSetPlayerMenu(String name, PlayerZone player) {
+
+    }
+
+    public void showCurrentMenu(String name){
         Platform.runLater(new Runnable() {
             public void run() {
                 FXMLLoader fLoader=displayableStageGame.getFxmlLoader();
                 GameController gController=fLoader.getController();
-                gController.setPublicCard1();
+                gController.setupGame();
                 displayableStageGame.show(stage);
             }
         });
