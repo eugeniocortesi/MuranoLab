@@ -4,7 +4,7 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 
 import java.util.ArrayList;
 
-public class RoundTrack implements RoundTrackInt{
+public class RoundTrack extends RoundTrackInt{
 
     private ArrayList<RoundTrackTurn> roundTrackTurnList;
 
@@ -15,6 +15,7 @@ public class RoundTrack implements RoundTrackInt{
         roundTrackTurnList = new ArrayList<RoundTrackTurn>();
 
         currentTurn = 1;
+        this.type="RoundTrack";
     }
 
     public int getCurrentTurn(){
@@ -45,6 +46,13 @@ public class RoundTrack implements RoundTrackInt{
 
             this.roundTrackTurnList.get(i).dump();
         }
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="RoundTrack";
+
     }
 
     public ArrayList<RoundTrackTurn> getRoundTrackTurnList() {

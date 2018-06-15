@@ -3,6 +3,8 @@ package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket;
 
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventPlayer;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventTimerEnd;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
@@ -69,7 +71,7 @@ public class ClientViewSocket extends ClientView {
             outVideo = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
             listenerClientView = new ListenerClientView(this, socket);
             connected();
-            listenerClientView.start();
+            listenerClientView.listen();
 
             LOGGER.log(Level.SEVERE,"ClientImplementationSocket connected");
         } catch (Exception e) {
@@ -184,18 +186,63 @@ public class ClientViewSocket extends ClientView {
 
     @Override
     public void sendBeginTurn(String name, PlayerZone playerZone) {
+        LOGGER.log(Level.SEVERE,"Show set player menu arrived from Controller");
         concreteClientView.showSetPlayerMenu(name, playerZone);
     }
 
     @Override
     public void sendAddedPlayer(String field1) {
-        //concreteClientView.showAddedPlayer();
+        //concreteClientView.showAddedPlayer(field1);
         System.out.println("Added new player " +field1 );
+    }
+
+    @Override
+    public void sendCurrentMenu(String name) {
+        LOGGER.log(Level.SEVERE,"Show current menu is arrived from Controller");
+        concreteClientView.showCurrentMenu(name);
     }
 
     @Override
     protected void notify(Model m) {
         LOGGER.log(Level.SEVERE,"Model is arrived from Controller");
+        if(m == null)
+            System.out.println("Model null");
+
+        System.out.println("playerlist "+ m.getPlayerList());
+        for(int i = 0; i<m.getPlayerList().size(); i++){
+            System.out.println(m.getPlayerList().get(i)+ "player");
+        }
+
+        System.out.println("draftpool "+ m.getDraftPool());
+        m.getDraftPool().printDraftPool();
+
+        m.getDraftPool().getInDraft().forEach(number -> {System.out.println(number.getNumber());});
+
         super.notify(m);
+    }
+
+    @Override
+    public void updatePlayers(ActionEventPlayer actionEventPlayer) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void updateAction(ActionEvent actionEvent) {
+        sendActionEventFromView(actionEvent);
+    }
+
+    @Override
+    public void updateWindowPattern(ActionEventWindow actionEventWindow) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void updateBeginGame(Boolean beginGame) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void updateActionEventTimerEnd(ActionEventTimerEnd timerEnd) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

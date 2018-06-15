@@ -1,8 +1,9 @@
 package it.polimi.ingsw.LM26.model.Cards;
 
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.Serialization.Effect;
 
-public class ObjectivePublicCard extends ObjectiveCardAC {
+public class ObjectivePublicCard extends CardInt {
 
     private int points;
 
@@ -16,6 +17,7 @@ public class ObjectivePublicCard extends ObjectiveCardAC {
 
         this.effect=effect;
         this.id=id;
+        this.type = "ObjectivePublicCard";
     }
 
     public ObjectivePublicCard(int id, int points, Effect effect) {
@@ -54,5 +56,16 @@ public class ObjectivePublicCard extends ObjectiveCardAC {
         if(getId()!=10) System.out.println(getPoints());
         System.out.println(getEffect());
 
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type = "ObjectivePublicCard";
+
+    }
+
+    public Effect getRealEffect() {
+        return effect;
     }
 }

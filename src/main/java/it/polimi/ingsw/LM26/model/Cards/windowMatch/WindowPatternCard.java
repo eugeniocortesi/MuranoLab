@@ -5,7 +5,7 @@ import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.Serialization.Matrix;
 
 
-public class WindowPatternCard implements CardInt {
+public class WindowPatternCard extends CardInt {
 
     private int token;
     private String title;
@@ -13,12 +13,12 @@ public class WindowPatternCard implements CardInt {
     private PatternBox[][] patternMatrix;
     private boolean inUse=false;
 
-
     public WindowPatternCard(int token, String title, Matrix matrix) {
 
         this.token = token;
         this.title = title;
         this.matrix = matrix;
+        this.type="WindowPatternCard";
     }
 
     public void createPattern(){
@@ -68,6 +68,13 @@ public class WindowPatternCard implements CardInt {
             }
             System.out.println();
         }
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="WindowPatternCard";
+
     }
 }
 

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class ChangeDieWithTheBag11 implements ToolCardDecorator {
+public class ChangeDieWithTheBag11 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
@@ -22,12 +22,23 @@ public class ChangeDieWithTheBag11 implements ToolCardDecorator {
     private boolean firstPart=false;
 
 
+
     public ChangeDieWithTheBag11(ToolCard toolcard) {
         this.toolcard = toolcard;
+        this.type="ChangeDieWithTheBag11";
+        this.typeToolCard = "ToolCard";
     }
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="ChangeDieWithTheBag11";
+        this.typeToolCard = "ToolCard";
+
     }
 
     public void printCard(){

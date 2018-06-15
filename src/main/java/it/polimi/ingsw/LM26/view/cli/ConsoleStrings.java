@@ -8,6 +8,7 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
+import it.polimi.ingsw.LM26.observers.serverController.Observable;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.*;
@@ -191,18 +192,28 @@ public class ConsoleStrings extends ViewInterface {
      */
     public void setPlayerMenu(PlayerMenuInt playerMenu) {
         this.playerMenu = playerMenu;
+        showCurrentMenu(null);
     }
 
     /**
      * called by controller to show one of the two possible menùs
      */
-    public void currentMenu(){
+    @Override
+    public void showCurrentMenu(String name){
+        System.out.println("Show current menu");
         playerMenu.showMenu();
     }
 
 
     @Override
     public void update(Model m) {
+        if(m == null)
+            System.out.println("Model null");
+
+        System.out.println("playerlist "+ m.getPlayerList());
+        for(int i = 0; i<m.getPlayerList().size(); i++){
+            System.out.println(m.getPlayerList().get(i)+ "player");
+        }
         ConsoleTools.setModel(m);
     }
 

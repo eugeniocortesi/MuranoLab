@@ -44,4 +44,5 @@ public abstract class ClientManager implements Runnable, ObserverSimple {
 
     public abstract void sendAddedPlayer(String name);
 
+    public abstract void sendCurrentMenu(String name);
 }

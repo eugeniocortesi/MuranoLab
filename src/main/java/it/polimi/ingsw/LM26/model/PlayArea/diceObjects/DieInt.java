@@ -4,21 +4,27 @@ import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
 import java.io.Serializable;
 
-public interface DieInt extends Serializable{
+public abstract class DieInt implements Serializable{
 
-    public Color getColor();
+    String type;
 
-    public void setColor(Color c);
+    public abstract Color getColor();
 
-    public void roll();
+    public abstract void setColor(Color c);
 
-    public void dump();
+    public abstract int getNumber ();
 
-    public int getValue();
+    public abstract void roll();
 
-    public void increment();
+    public abstract void dump();
 
-    public void decrement();
+    public abstract int getValue();
 
-    public void setRoll(int value);
+    public abstract void increment();
+
+    public abstract void decrement();
+
+    public abstract void setRoll(int value);
+
+    public abstract void rewrite();
 }

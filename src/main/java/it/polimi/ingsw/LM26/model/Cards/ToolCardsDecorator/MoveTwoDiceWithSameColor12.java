@@ -11,17 +11,27 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class MoveTwoDiceWithSameColor12 implements ToolCardDecorator {
+public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
 
     public MoveTwoDiceWithSameColor12(ToolCard toolcard) {
         this.toolcard = toolcard;
+        this.type="MoveTwoDiceWithSameColor12";
+        this.typeToolCard = "ToolCard";
     }
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="MoveTwoDiceWithSameColor12";
+        this.typeToolCard = "ToolCard";
+
     }
 
     public void printCard(){

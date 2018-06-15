@@ -44,6 +44,7 @@ public class TimerTaskPlayers extends TimerTask {
             timer.cancel();  // Terminates this timer, discarding any currently scheduled tasks.
             timer.purge();
             serverBase.getQueueController().pushMessage(timerEnd);
+            serverBase.getClientManagerList().checkNumberLogged();
         }
     }
 }

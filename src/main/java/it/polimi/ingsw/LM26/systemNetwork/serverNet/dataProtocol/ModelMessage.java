@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
 import it.polimi.ingsw.LM26.model.Serialization.*;
@@ -13,38 +14,35 @@ import java.util.ArrayList;
 public class ModelMessage extends ClassMessage{
 
     private String idModel;
-    private Model model;
 
-    public ModelMessage(String idModel, Model model) {
-        this.idModel = idModel;
+    private String model;
+
+    public ModelMessage(String m, String model) {
+        this.idModel = m;
         this.model = model;
     }
 
-    public String getIdModel() {
-        return idModel;
-    }
-
-    public Model getModel() {
+    public String getModel() {
         return model;
     }
 
-    static public Model deserializeModelMessage(String protocolJson){
+    static public ModelMessage deserializeModelMessage(String protocolJson){
 
 
         Gson gson = new Gson();
 
-        Type modelType = new TypeToken<Model>() {
-        }.getType();
+        ModelMessage model= gson.fromJson(protocolJson, ModelMessage.class );
 
-        RuntimeTypeAdapterFactory1<Effect> runtimeTypeAdapterFactory1 = RuntimeTypeAdapterFactory1
-                .of(Effect.class, "type")
-                .registerSubtype(DifferentColorShadeOnRowColomn.class)
-                .registerSubtype(DifferentColorShade.class)
-                .registerSubtype(Shades.class)
-                .registerSubtype(ColoredDiagonals.class);
 
-        Model model= gson.fromJson(protocolJson, modelType);
         return model;
+    }
+
+    @Override
+    public String serializeClassMessage(){
+
+        Gson gson = new GsonBuilder().create();
+        String msgJson = gson.toJson(this);
+        return msgJson;
     }
 
 

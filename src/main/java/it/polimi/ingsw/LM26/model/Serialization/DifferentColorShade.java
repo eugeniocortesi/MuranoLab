@@ -24,4 +24,11 @@ public class DifferentColorShade extends Effect {
     }
 
     protected void resolve(){}
+
+    @Override
+    public void rewrite() {
+
+        this.type = "DifferentColorShade";
+
+    }
 }

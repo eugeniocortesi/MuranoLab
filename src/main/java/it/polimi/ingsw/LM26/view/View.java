@@ -101,6 +101,11 @@ public class View extends ViewInterface{
     }
 
     @Override
+    public void showCurrentMenu(String name) {
+
+    }
+
+    @Override
     public void showAnswerFromController(String answer) {
 
     }

@@ -11,19 +11,29 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class DrawOneMoreDie8 implements ToolCardDecorator {
+public class DrawOneMoreDie8 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
     private boolean needPlacement=false;
     private boolean currentPlacement=false;
 
-
     public DrawOneMoreDie8(ToolCard toolcard) {
         this.toolcard = toolcard;
+        this.type="DrawOneMoreDie8";
+        this.typeToolCard = "ToolCard";
+
     }
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="DrawOneMoreDie8";
+        this.typeToolCard = "ToolCard";
+
     }
 
     public void printCard(){

@@ -11,17 +11,27 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class MoveWithNoColorRestriction2 implements ToolCardDecorator {
+public class MoveWithNoColorRestriction2 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
 
     public MoveWithNoColorRestriction2(ToolCard toolcard) {
         this.toolcard = toolcard;
+        this.type="MoveWithNoColorRestriction2";
+        this.typeToolCard = "ToolCard";
     }
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="MoveWithNoColorRestriction2";
+        this.typeToolCard = "ToolCard";
+
     }
 
     public void printCard(){
@@ -79,7 +89,7 @@ public class MoveWithNoColorRestriction2 implements ToolCardDecorator {
             }
         }
         else if (placement.checkValueRestriction() && placement.checkNearByRestrictions() ){
-
+            toBox.setDie(die);
             return true;
         }
 

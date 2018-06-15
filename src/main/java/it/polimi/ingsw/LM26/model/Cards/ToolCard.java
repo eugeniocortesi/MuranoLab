@@ -6,7 +6,7 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
 
-public class ToolCard implements ToolCardInt  {
+public class ToolCard extends ToolCardInt  {
 
     private boolean inUse=false;
     private int num;
@@ -15,12 +15,20 @@ public class ToolCard implements ToolCardInt  {
     public ToolCard(int num) {
 
         this.num=num;
+        this.typeToolCard="ToolCard";
 
     }
 
     public int getNum() {
 
         return num;
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.typeToolCard="ToolCard";
+
     }
 
     public boolean isInUse() {

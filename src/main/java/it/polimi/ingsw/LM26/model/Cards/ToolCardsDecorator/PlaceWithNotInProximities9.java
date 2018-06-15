@@ -11,17 +11,27 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class PlaceWithNotInProximities9 implements ToolCardDecorator {
+public class PlaceWithNotInProximities9 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
 
     public PlaceWithNotInProximities9(ToolCard toolcard) {
         this.toolcard = toolcard;
+        this.type="PlaceWithNotInProximities9";
+        this.typeToolCard = "ToolCard";
     }
 
     public int getNum(){
         return toolcard.getNum();
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="PlaceWithNotInProximities9";
+        this.typeToolCard = "ToolCard";
+
     }
 
     public void printCard(){

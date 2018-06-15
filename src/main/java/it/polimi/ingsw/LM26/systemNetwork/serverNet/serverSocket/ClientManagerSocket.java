@@ -199,9 +199,20 @@ public class ClientManagerSocket extends ClientManager {
 
     @Override
     public void sendModel(Model m) {
-        ModelMessage modelMessage = new ModelMessage("send_model", m);
-        String s = modelMessage.serializeClassMessage();
-        sendMessage(s);
+
+        m.rewriteBeforeSerializing();
+        //String prova = "send_model" + "$" + "\n" + m.serializeClassMessage();
+        String s = m.serializeClassMessage();
+        ModelMessage modelMessage = new ModelMessage("send_model", s);
+
+        String message = modelMessage.serializeClassMessage();
+        System.out.println("message");
+        /*DataMessage dataMessage1 = DataMessage.deserializeDataMessage(message);
+        String modelString = dataMessage1.getField1();
+        Model model = Model.deserializeModelMessage(modelString);
+        System.out.println(model);*/
+
+        sendMessage(message);
         //listenerClientManager.listen();
     }
 
@@ -229,7 +240,7 @@ public class ClientManagerSocket extends ClientManager {
         LOGGER.log(Level.SEVERE,"server is sending playerzone of " + name);
         BeginTurnMessage beginTurnMessage = new BeginTurnMessage("send_beginturnmessage", name, playerZone);
         sendMessage(beginTurnMessage.serializeClassMessage());
-        listenerClientManager.listen();
+        //listenerClientManager.listen();
     }
 
     @Override
@@ -237,6 +248,15 @@ public class ClientManagerSocket extends ClientManager {
 
         LOGGER.log(Level.SEVERE,"server is sending a new player");
         DataMessage dataMessage = new DataMessage("added_player", name);
+        String s = dataMessage.serializeClassMessage();
+        sendMessage(s);
+    }
+
+    @Override
+    public void sendCurrentMenu(String name) {
+
+        LOGGER.log(Level.SEVERE,"server is sending current menu");
+        DataMessage dataMessage = new DataMessage("send_currentmenu", name);
         String s = dataMessage.serializeClassMessage();
         sendMessage(s);
     }

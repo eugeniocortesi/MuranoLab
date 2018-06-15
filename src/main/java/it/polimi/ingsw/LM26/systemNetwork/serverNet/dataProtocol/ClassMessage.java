@@ -19,13 +19,11 @@ public abstract class ClassMessage {
 
     public String parserFirstElement(String s){
 
-        Handler handlerObj = new ConsoleHandler();
-        handlerObj.setLevel(Level.ALL);
-        LOGGER.addHandler(handlerObj);
+
         LOGGER.setLevel(Level.ALL);
-        LOGGER.setUseParentHandlers(false);
 
         JsonReader jsonReader = new JsonReader(new StringReader(s));
+        //jsonReader.setLenient(true);
         try{
             while(jsonReader.hasNext()) {
                 JsonToken nextToken = jsonReader.peek();
@@ -39,6 +37,8 @@ public abstract class ClassMessage {
                     String value = jsonReader.nextString();
                     LOGGER.log(Level.INFO,value);
                     return value;
+                } else{
+                    System.out.println("NISBA");
                 }
             }
         } catch (IOException e) {

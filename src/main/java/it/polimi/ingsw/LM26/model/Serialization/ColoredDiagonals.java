@@ -13,4 +13,11 @@ public class ColoredDiagonals extends Effect{
     }
 
     protected void resolve(){}
+
+    @Override
+    public void rewrite() {
+
+        this.type = "ColoredDiagonals";
+
+    }
 }

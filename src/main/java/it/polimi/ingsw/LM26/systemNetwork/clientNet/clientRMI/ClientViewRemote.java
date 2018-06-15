@@ -31,4 +31,6 @@ public interface ClientViewRemote extends Remote {
     void disconnected() throws RemoteException;
 
     void sendAddedPlayer(String name) throws RemoteException;
+
+    void sendCurrentMenu(String name) throws RemoteException;
 }

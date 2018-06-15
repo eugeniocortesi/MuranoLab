@@ -146,13 +146,37 @@ public class InitialPhase implements PhaseInt {
         System.out.print("\n");
     }
 
+    public void setToolCard(){
+        int count = decks.getToolCardDeck().size();
+        ArrayList<ToolCardInt> three= new ArrayList<ToolCardInt>();
+
+        for (int j = 0; j <3; j++) {
+
+            Random rand = new Random();
+            int index = rand.nextInt(count);
+            while (decks.getToolCardDeck().get(index).isInUse() == true) {
+                rand = new Random();
+                index = rand.nextInt(count);
+            }
+            decks.getToolCardDeck().get(index).setInUse(true);
+            three.add(decks.getToolCardDeck().get(index));
+
+        }
+        System.out.print("On boards Tool cards: " );
+        onBoardCards.setToolCardList(three);
+        for(int j=0; j<three.size(); j++)
+            System.out.print(three.get(j).getNum()+  " ");
+        System.out.print("\n");
+    }
+
 
     //questo metodo va chiamato dopo aver assegnato la windowPatternCard
     public void doAction(Game game, ArrayList<PlayerZone> playerList) {
         setScoreMarkerAndWindowFrame(playerList, decks);
         setWindowPattern(decks, playerList);
         setTokens(playerList);
-        setPublicCards(onBoardCards, decks);
+       // setPublicCards(onBoardCards, decks);
+        setToolCard();
         game.setPhase(new CentralPhase(playerList));
 
     }

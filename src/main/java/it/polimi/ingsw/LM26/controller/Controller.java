@@ -51,6 +51,10 @@ public class Controller implements ControllerInt{
         return setupHandler;
     }
 
+    public ViewGameInterface getViewGameInterface(){
+        return server;
+    }
+
     @Override
     public boolean handler(ActionEvent event) {
 
@@ -74,7 +78,15 @@ public class Controller implements ControllerInt{
         }
 
         if(gameIsGoing== true){
+
+            //model.hasChanged();
+            System.out.println("playerlist "+ model.getPlayerList());
+            for(int i = 0; i<model.getPlayerList().size(); i++){
+                System.out.println(model.getPlayerList().get(i)+ "player");
+            }
+
             newMatch(model, this);
+
         }
     }
 
@@ -99,6 +111,7 @@ public class Controller implements ControllerInt{
             model.getDecks().getObjectivePrivateCardDeck().get(index).setInUse(true);
                 server.showPrivateCard(model.getPlayerList().get(j).getName(), model.getDecks().getObjectivePrivateCardDeck().get(index));
             }
+
     }
 
     public void setupWindowCard(){

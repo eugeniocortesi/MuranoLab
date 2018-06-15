@@ -221,6 +221,13 @@ public class ClientManagerRMI extends ClientManager {
     }
 
     @Override
+    public void sendCurrentMenu(String name) {
+        Thread t = new Thread(new myRunnableCurrentMenu(name));
+        t.start();
+
+    }
+
+    @Override
     public void update(Model m) {
         sendModel(m);
     }
@@ -368,6 +375,27 @@ public class ClientManagerRMI extends ClientManager {
             try {
                 LOGGER.log(Level.SEVERE,"Sending player zone");
                 skeleton.sendAddedPlayer(username);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class myRunnableCurrentMenu implements Runnable {
+
+        volatile String name;
+
+        public myRunnableCurrentMenu(String name) {
+
+            this.name = name;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+                LOGGER.log(Level.SEVERE,"Sending player zone");
+                skeleton.sendCurrentMenu(name);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }

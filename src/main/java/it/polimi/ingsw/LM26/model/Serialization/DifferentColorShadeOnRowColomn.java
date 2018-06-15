@@ -36,4 +36,11 @@ public class DifferentColorShadeOnRowColomn extends Effect{
     protected void resolve() {
 
     }
+
+    @Override
+    public void rewrite() {
+
+        this.type = "DifferentColorShadeOnRowColomn";
+
+    }
 }

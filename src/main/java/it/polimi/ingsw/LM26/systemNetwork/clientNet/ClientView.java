@@ -6,10 +6,11 @@ import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
+import it.polimi.ingsw.LM26.observers.serverController.Observer;
 
 import java.util.ArrayList;
 
-public abstract class ClientView extends ObservableSimple{
+public abstract class ClientView extends ObservableSimple implements Observer {
 
     public abstract void connect();
 
@@ -38,4 +39,6 @@ public abstract class ClientView extends ObservableSimple{
     public abstract void sendBeginTurn(String name, PlayerZone playerZone);
 
     public abstract void sendAddedPlayer(String field1);
+
+    public abstract void sendCurrentMenu(String name);
 }
