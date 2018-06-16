@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.LM26.view.GUI.ControllerLogin">
+  <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="31.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="238.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="31.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="101.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="257.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <HBox prefHeight="24.0" prefWidth="208.0" GridPane.columnIndex="1">
+         <children>
+            <Region prefWidth="20.0" />
+            <TextField fx:id="textField">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></TextField>
+            <Button id="bLogin" mnemonicParsing="false" onAction="#handleClick" text="Login" />
+         </children>
+         <GridPane.margin>
+            <Insets top="60.0" />
+         </GridPane.margin>
+      </HBox>
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <Region prefHeight="20.0" prefWidth="200.0" />
+            <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" textAlignment="CENTER" />
+            <Label fx:id="label2" alignment="CENTER" maxWidth="1.7976931348623157E308" />
+         </children>
+      </VBox>
+   </children>
+</GridPane>

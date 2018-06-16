@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.LM26.view.GUI.ControllerNetChoice">
+   <children>
+      <Label text="Scegli uno tra i seguenti metodi di connessione:">
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </VBox.margin>
+      </Label>
+      <GridPane prefHeight="63.0" prefWidth="400.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="65.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="266.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="106.0" minWidth="10.0" prefWidth="58.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox prefHeight="65.0" prefWidth="266.0" GridPane.columnIndex="1">
+               <children>
+                  <RadioButton fx:id="socket" mnemonicParsing="false" selected="true" text="Socket">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="connection" />
+                     </toggleGroup>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </RadioButton>
+                  <RadioButton fx:id="rmi" mnemonicParsing="false" text="RMI" toggleGroup="$connection">
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </RadioButton>
+               </children>
+            </VBox>
+         </children>
+      </GridPane>
+      <AnchorPane prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button layoutX="175.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleRmiSocketButton" prefWidth="40.0" text="Ok" AnchorPane.topAnchor="14.0">
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
