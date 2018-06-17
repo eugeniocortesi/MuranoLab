@@ -8,7 +8,7 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import static it.polimi.ingsw.LM26.model.PlayArea.Color.WHITE;
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class PlaceDie implements PlayerActionInt{
+public class PlaceDie {
 
     Model model = singletonModel();
     private DieInt die;

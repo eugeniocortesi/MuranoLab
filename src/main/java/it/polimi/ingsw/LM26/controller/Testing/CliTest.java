@@ -283,7 +283,7 @@ public class CliTest {
 
         if (id == 12) event.setId(id);
 
-        controller.getUpdatesHandler().updateAction(event);
+        controller.setActionEvent(event);
     }
 
     public int askId() {

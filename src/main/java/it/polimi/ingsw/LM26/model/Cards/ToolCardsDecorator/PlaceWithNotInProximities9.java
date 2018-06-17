@@ -165,6 +165,7 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
 
         toBox.setDie(dieFromDraft);
         model.getDraftPool().getInDraft().remove(dieFromDraft);
+        player.getPlayerBoard().setEmpty(false);
         player.getPlayerBoard().incrementNumDice();
         player.getActionHistory().setDieUsed(true);
         player.getActionHistory().setPlacement(true);
