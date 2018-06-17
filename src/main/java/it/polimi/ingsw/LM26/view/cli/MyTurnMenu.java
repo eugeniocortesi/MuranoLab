@@ -64,7 +64,8 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
             consoleTools.printToolCardsOnBoard();
             consoleTools.printRoundTrack();
             consoleTools.printDraftPool();
-            ae.askToolCard();
+            actionEvent=ae.askToolCard();
+            notify(actionEvent);
         }
         else if(input.equalsIgnoreCase("P")){
             actionEvent=ae.loseTurn();

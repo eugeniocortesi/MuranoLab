@@ -8,6 +8,7 @@ import it.polimi.ingsw.LM26.model.Cards.*;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.*;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
+import it.polimi.ingsw.LM26.model.PlayArea.Restrictions;
 import it.polimi.ingsw.LM26.model.PlayArea.ScoreTrack;
 import it.polimi.ingsw.LM26.model.PlayArea.ScoreTrackInt;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Bag;
@@ -33,8 +34,6 @@ import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonD
 
 public class Model extends ObservableSimple implements Serializable {
 
-
-
     private ArrayList<PlayerZone> playerList;
 
     private ScoreTrackInt scoreTrackInt;
@@ -45,11 +44,11 @@ public class Model extends ObservableSimple implements Serializable {
 
     private DraftPool draftPool;
 
-    //private Game game;
-
     private transient Decks decks;
 
     private OnBoardCards onBoardCards;
+
+    private Restrictions restrictions;
 
     public Model() {
 
@@ -60,25 +59,12 @@ public class Model extends ObservableSimple implements Serializable {
         this.onBoardCards= new OnBoardCards();
         this.decks=singletonDecks();
         this.playerList=new ArrayList<PlayerZone>();
+        this.restrictions=new Restrictions();
 
         //set playerList, scoreTrack
     }
 
-    /*public void accept(Update update){
-
-        //check istanceof Update
-
-    }*/
-
     public Decks getDecks() { return decks; }
-
-    /*public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }*/
 
     public OnBoardCards getOnBoardCards() {
         return onBoardCards;

@@ -8,10 +8,10 @@ import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class ActionEventGenerator {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    String input;
     ConsoleTools cTools;
     ToolsActionEventGenerator tceGenerator = new ToolsActionEventGenerator();
 
@@ -33,6 +33,7 @@ public class ActionEventGenerator {
     public ActionEvent loseTurn(){
         ActionEvent ae=new ActionEvent();
         ae.setNoAction(true);
+        ae.setId(11);
         return ae;
     }
 
@@ -43,26 +44,15 @@ public class ActionEventGenerator {
     public ActionEvent askForMenu(){
         while(!tceGenerator.askEndMove()){}
         ActionEvent a= new ActionEvent();
-        a.setId(10);
+        a.setId(12);
         a.setMenu(true);
         return a;
     }
 
     //controlli roundtrack vuota e frameboard vuota
-    public void askToolCard(){
-        int n=0;
+    public ActionEvent askToolCard(){
         ActionEvent actionEvent=null;
-        System.out.println("Scegli una Carta Utensile scrivendo il suo numero");
-        while(n<1 || n>3){
-            try {
-                n=Integer.parseInt(br.readLine());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (NumberFormatException e) {
-                System.out.println("inserire un intero!");
-            }
-            if(n<1 || n>3) System.out.println("numeri tra 1 e 3!");
-        }
+        int n=tceGenerator.askforToolCardOnboard();
         int id=ConsoleTools.model.getOnBoardCards().getToolCardList().get(n-1).getNum();
         switch (id){
             case 2:
@@ -71,39 +61,60 @@ public class ActionEventGenerator {
             case 4:
             {actionEvent=this.fromToBox2(n-1); break;}
             case 6:
-            case 8:
+            {actionEvent=this.addToBox1(this.dieFromDraftPoolEvent(n-1));
+            System.out.println("Il dado è stato riposto nella Riserva, accedivi per piazzarlo nella Plancia Vetrata.\n" +
+                    "Se non puoi piazzarlo, passa il turno");
+            break;}
             case 9:
-            {actionEvent=this.dfdToBox1(n-1); break;}
+            {actionEvent=this.addToBox1(this.dieFromDraftPoolEvent(n-1));
+            actionEvent.setId(4); break;}
             case 5:
-            {actionEvent=this.dfdDieFromRoundtrack(n-1); break;}
+            {actionEvent=this.addDieFromRoundtrack(this.dieFromDraftPoolEvent(n-1));
+            actionEvent.setId(5); break;}
             case 1:
             {actionEvent=this.dfdIncrement(n-1); break;}
             case 10:
-            case 11:
-            {actionEvent=this.dieFromDraftPoolEvent(n-1); break;}
+                actionEvent=this.dieFromDraftPoolEvent(n-1);
+            case 11:{
+                String fs=tceGenerator.askFirstSecondPart();
+                if(fs.equalsIgnoreCase("p")){
+                    actionEvent=this.dieFromDraftPoolEvent(n-1);
+                    System.out.println("Prendi di nuovo la carta 11 per la seconda parte");
+                }
+                else {
+                    actionEvent=this.addToBox1(this.number(n-1));
+                } break;}
+            case 8:
             case 7:
             {actionEvent=this.toolCEvent(n-1); break;}
+            case 12:
+            {actionEvent=this.addDieFromRoundtrack(this.fromToBox2(n-1));
+            actionEvent.setId(10); break;}
         }
+        return actionEvent;
     }
 
-    public ActionEvent toolCEvent(int tCardPosition){
+    private ActionEvent toolCEvent(int tCardPosition){
         ActionEvent acEv = new ActionEvent();
+        acEv.setId(8);
         acEv.setPlayer(ConsoleTools.id);
         acEv.setCard(ConsoleTools.model.getOnBoardCards().getToolCardList().get(tCardPosition));
         return acEv;
     }
 
-    public ActionEvent dieFromDraftPoolEvent(int tCardPos){
+    private ActionEvent dieFromDraftPoolEvent(int tCardPos){
         ActionEvent a=toolCEvent(tCardPos);
+        a.setId(7);
         System.out.println("Dado dalla Riserva:");
         cTools.showInstructionsForPlacement();
         a.setDieFromDraft(tceGenerator.askForDie(true));
         return a;
     }
 
-    public ActionEvent fromToBox1(int tCardPos){
+    private ActionEvent fromToBox1(int tCardPos){
         Box box;
         ActionEvent a=toolCEvent(tCardPos);
+        a.setId(2);
         System.out.println("Cella da cui vuoi prendere il dado:");
         box=tceGenerator.askForRowCol();
         a.setFromBox1(box);
@@ -113,39 +124,54 @@ public class ActionEventGenerator {
         return a;
     }
 
-    public ActionEvent fromToBox2(int tCardPos){
+    private ActionEvent fromToBox2(int tCardPos){
         Box box;
         ActionEvent ae=fromToBox1(tCardPos);
+        ae.setId(3);
+        ArrayList<Box> arrayFrom=new ArrayList<Box>();
+        arrayFrom.add(ae.getFromBox1());
+        ArrayList<Box> arrayTo=new ArrayList<Box>();
+        arrayTo.add(ae.getToBox1());
+        ae.setFromBox1(null); ae.setFromBox1(null);
         System.out.println("Cella da cui vuoi prendere il dado:");
         box=tceGenerator.askForRowCol();
-        ae.setFromBox2(box);
+        arrayFrom.add(box);
+        ae.setFromBoxList(arrayFrom);
         System.out.println("Cella in cui vuoi mettere il dado:");
         box=tceGenerator.askForRowCol();
-        ae.setToBox2(box);
+        arrayTo.add(box);
+        ae.setToBoxList(arrayTo);
         return ae;
     }
 
-    public ActionEvent dfdToBox1(int tCardPos){
+    private ActionEvent addToBox1(ActionEvent ae){
         Box box;
-        ActionEvent ae=dieFromDraftPoolEvent(tCardPos);
         System.out.println("Cella in cui vuoi mettere il dado:");
         box=tceGenerator.askForRowCol();
         ae.setToBox1(box);
         return ae;
     }
 
-    public ActionEvent dfdIncrement(int tCardPos){
+    private ActionEvent dfdIncrement(int tCardPos){
         String str;
         ActionEvent ae=dieFromDraftPoolEvent(tCardPos);
+        ae.setId(6);
         str=tceGenerator.askForIncDec();
         ae.setInDeCrement(str);
         return ae;
     }
 
-    public ActionEvent dfdDieFromRoundtrack(int tCardPos){
-        ActionEvent ae=dieFromDraftPoolEvent(tCardPos);
+    private ActionEvent addDieFromRoundtrack(ActionEvent ae){
         System.out.println("Dado dal tracciato dei round:");
         ae.setDieFromRoundTrack(tceGenerator.askForDie(false));
         return ae;
+    }
+
+    public ActionEvent number(int tCardPos){
+        ActionEvent a=toolCEvent(tCardPos);
+        a.setId(9);
+        int n=tceGenerator.askNumber();
+        a.setNumber(n);
+        return a;
     }
 }

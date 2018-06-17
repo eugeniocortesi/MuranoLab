@@ -11,6 +11,7 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import org.fusesource.jansi.AnsiConsole;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -65,6 +66,12 @@ public class ConsoleTools {
         }
     }
 
+    public String printDie(DieInt die){
+        String face=numToFace(die.getNumber());
+        String escape=die.getColor().escape();
+        return (escape+face+Color.RESET);
+    }
+
     /**
      * @return the size of the longest list of dice in the round track
      */
@@ -89,7 +96,7 @@ public class ConsoleTools {
             for(int j=0; j<5; j++){
                 Box box=frame.getBoardMatrix()[i][j];
                 if(box.isIsPresent()){
-                    System.out.print(box.getDie()+"|");
+                    System.out.print(this.printDie(box.getDie())+"|");
                     System.out.flush();
                 }
                 else printPatternBox(box.getPatternBox());
@@ -264,7 +271,7 @@ public class ConsoleTools {
             for(int j=0; j<rtSize; j++){
                 if(i<model.getRoundTrackInt().getRoundTrackTurn(j+1).size()){
                     die = model.getRoundTrackInt().getRoundTrackTurn(j+1).get(i);
-                    System.out.print(die+" ");
+                    System.out.print(this.printDie(die)+" ");
                 }
                 else System.out.print("   ");
             }
@@ -275,7 +282,7 @@ public class ConsoleTools {
     public void printDraftPool(){
         System.out.println( ansi().bold().a("riserva").boldOff());
         for(DieInt d : model.getDraftPool().getInDraft()){
-            System.out.print(d+"\t");
+            System.out.print(this.printDie(d)+"\t");
             System.out.flush();
         }
         System.out.println();

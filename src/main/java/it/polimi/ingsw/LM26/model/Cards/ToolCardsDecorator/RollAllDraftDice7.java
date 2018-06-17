@@ -93,4 +93,3 @@ public class RollAllDraftDice7 extends ToolCardDecorator {
         return false;
     }
 }
-//player.isDieUsed()==false

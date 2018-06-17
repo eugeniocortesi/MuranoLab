@@ -45,7 +45,7 @@ public class TestInitialPhase {
         }
     }
 
-    @Test
+    /*@Test
     //testa che il numero di toolcard sia giusto, stampa gli indici delle public card e verifica che siano tutti diversi
     public void TestSetPublicCards(){
         initialPhase.setPublicCards(onBoardCards, deck);
@@ -59,7 +59,7 @@ public class TestInitialPhase {
                 if(i!=j) assertThat(onBoardCards.getObjectivePublicCardList().get(i).getId(),is(not(onBoardCards.getObjectivePublicCardList().get(j).getId())));
             }
         }
-    }
+    }*/
 
     @Test
     //tests that every score marker has the same colour of its frame board

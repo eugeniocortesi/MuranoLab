@@ -10,4 +10,10 @@ public interface ControllerInt {
     void playersReady();
 
     ViewGameInterface getViewGameInterface();
+
+    UpdatesHandler getUpdatesHandler();
+
+    void setActionEvent(ActionEvent event);
+
+    ActionEvent getActionEvent();
 }

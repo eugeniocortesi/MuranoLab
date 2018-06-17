@@ -28,6 +28,8 @@ public class Controller implements ControllerInt{
 
     private Boolean gameIsGoing;
 
+    private ActionEvent event;
+
     public Controller() {
 
         this.model = singletonModel();
@@ -44,6 +46,9 @@ public class Controller implements ControllerInt{
 
         server= new ServerBase(updatesHandler);
 
+        //TODO
+        //setServer in updatesHandler to move setups in the right class
+
         server.startAcceptor(updatesHandler, model);
     }
 
@@ -54,6 +59,12 @@ public class Controller implements ControllerInt{
     public ViewGameInterface getViewGameInterface(){
         return server;
     }
+
+    public UpdatesHandler getUpdatesHandler() { return updatesHandler; }
+
+    public void setActionEvent(ActionEvent event) { this.event = event; }
+
+    public ActionEvent getActionEvent() { return event; }
 
     @Override
     public boolean handler(ActionEvent event) {
@@ -77,9 +88,9 @@ public class Controller implements ControllerInt{
 
         }
 
-        if(gameIsGoing== true){
+        if(gameIsGoing){
 
-            //model.hasChanged();
+            //TODO DELETE
             System.out.println("playerlist "+ model.getPlayerList());
             for(int i = 0; i<model.getPlayerList().size(); i++){
                 System.out.println(model.getPlayerList().get(i)+ "player");
@@ -90,10 +101,15 @@ public class Controller implements ControllerInt{
         }
     }
 
-    public void newMatch(Model model, ControllerInt controller/*, ArrayList<ConsoleStrings> console*/){
+    public void newMatch(Model model, ControllerInt controller){
 
         this.match=new Match(model, controller);
 
+    }
+
+    public void setStandbyPlayer(String namePlayer) {
+
+        model.getPlayer(namePlayer).setPlayerState(PlayerState.STANDBY);
     }
 
     public void setupPrivateCard() {
@@ -104,13 +120,13 @@ public class Controller implements ControllerInt{
 
             Random rand = new Random();
             int index = rand.nextInt(count);
-            while (model.getDecks().getObjectivePrivateCardDeck().get(index).isInUse() == true) {
+            while (model.getDecks().getObjectivePrivateCardDeck().get(index).isInUse()) {
                 rand = new Random();
                 index = rand.nextInt(count);
             }
             model.getDecks().getObjectivePrivateCardDeck().get(index).setInUse(true);
-                server.showPrivateCard(model.getPlayerList().get(j).getName(), model.getDecks().getObjectivePrivateCardDeck().get(index));
-            }
+            server.showPrivateCard(model.getPlayerList().get(j).getName(), model.getDecks().getObjectivePrivateCardDeck().get(index));
+        }
 
     }
 
@@ -118,31 +134,21 @@ public class Controller implements ControllerInt{
 
         for(int i=0; i< model.getPlayerList().size(); i++){
             ArrayList<WindowPatternCard> windowlist = setupHandler.createWindowPattern();
+
+            //TODO DELETE
             System.out.println(windowlist.size());
             if(model.getPlayerList().get(i).getName() == null)
-                    System.out.println("name null");
+                System.out.println("name null");
             else if(model.getDecks().getWindowPatternCardDeck()== null)
                 System.out.println("cards null");
             if(server== null)
                 System.out.println("server: " + server);
+
             server.showWindowPattern(model.getPlayerList().get(i).getName(), model.getPlayerList().get(i).getIDPlayer(), windowlist);
             windowlist.clear();
 
         }
     }
-
-
-    //TODO remove later
-    public void setActionEvent(ActionEvent newEvent ){
-
-        match.setActionEvent(newEvent);
-    }
-
-    public void setStandbyPlayer(String namePlayer) {
-
-        model.getPlayer(namePlayer).setPlayerState(PlayerState.STANDBY);
-    }
-
 }
 
 
