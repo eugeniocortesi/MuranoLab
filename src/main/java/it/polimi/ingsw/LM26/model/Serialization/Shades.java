@@ -11,7 +11,7 @@ public class Shades extends Effect implements Serializable{
     public Shades(elements shades) {
 
         this.shades = shades;
-        this.type = "Shades";
+        this.typeEffect = "Shades";
     }
 
     public String getE() { return "Shades " + shades; }
@@ -21,7 +21,7 @@ public class Shades extends Effect implements Serializable{
     @Override
     public void rewrite() {
 
-        this.type = "Shades";
+        this.typeEffect = "Shades";
 
     }
 }

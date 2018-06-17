@@ -17,7 +17,7 @@ public class ObjectivePublicCard extends CardInt {
 
         this.effect=effect;
         this.id=id;
-        this.type = "ObjectivePublicCard";
+        this.typeCard = "ObjectivePublicCard";
     }
 
     public ObjectivePublicCard(int id, int points, Effect effect) {
@@ -61,7 +61,7 @@ public class ObjectivePublicCard extends CardInt {
     @Override
     public void rewrite() {
 
-        this.type = "ObjectivePublicCard";
+        this.typeCard = "ObjectivePublicCard";
 
     }
 

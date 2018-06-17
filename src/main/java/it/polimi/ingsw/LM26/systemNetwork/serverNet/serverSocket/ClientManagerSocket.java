@@ -250,6 +250,7 @@ public class ClientManagerSocket extends ClientManager {
         LOGGER.log(Level.SEVERE,"server is sending playerzone of " + name);
         BeginTurnMessage beginTurnMessage = new BeginTurnMessage("send_beginturnmessage", name, playerZone);
         sendMessage(beginTurnMessage.serializeClassMessage());
+        timerPlayers.resetTimerActionPlayer();
         timerPlayers.scheduleTimerActionPlayer(user);
         //listenerClientManager.listen();
     }

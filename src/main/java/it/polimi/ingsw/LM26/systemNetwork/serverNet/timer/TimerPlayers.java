@@ -74,4 +74,7 @@ public class TimerPlayers {
         return  timerTaskActionPlayers;
     }
 
+    public void resetTimerActionPlayer(){
+        timer3 = new Timer();
+    }
 }

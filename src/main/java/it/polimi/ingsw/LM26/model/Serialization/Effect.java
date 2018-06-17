@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public abstract class Effect implements Serializable {
 
-     protected String type = "type";
+     protected String typeEffect = "typeEffect";
 
      public abstract String getE();
 

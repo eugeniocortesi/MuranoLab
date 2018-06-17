@@ -5,7 +5,7 @@ public class ColoredDiagonals extends Effect{
     private String effect4="Colored diagonals";
 
     public ColoredDiagonals() {
-        this.type = "ColoredDiagonals";
+        this.typeEffect = "ColoredDiagonals";
     }
 
     public String getE(){
@@ -17,7 +17,7 @@ public class ColoredDiagonals extends Effect{
     @Override
     public void rewrite() {
 
-        this.type = "ColoredDiagonals";
+        this.typeEffect = "ColoredDiagonals";
 
     }
 }

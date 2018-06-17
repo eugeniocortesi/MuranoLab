@@ -15,7 +15,7 @@ public class OnBoardCards implements Serializable {
 
     private ArrayList<ToolCardInt>  toolCardList;
 
-    private Decks decks;
+    private transient Decks decks;
 
     public OnBoardCards() {
 

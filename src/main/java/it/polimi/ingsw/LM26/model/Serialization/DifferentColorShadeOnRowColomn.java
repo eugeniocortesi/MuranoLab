@@ -13,7 +13,7 @@ public class DifferentColorShadeOnRowColomn extends Effect{
 
         this.colorShades = colorShades;
         this.rowColomn = rowColomn;
-        this.type = "DifferentColorShadeOnRowColomn";
+        this.typeEffect = "DifferentColorShadeOnRowColomn";
         effect1="Different " + iscolorShades() + " - " + isrowColomn();
     }
 
@@ -40,7 +40,7 @@ public class DifferentColorShadeOnRowColomn extends Effect{
     @Override
     public void rewrite() {
 
-        this.type = "DifferentColorShadeOnRowColomn";
+        this.typeEffect = "DifferentColorShadeOnRowColomn";
 
     }
 }

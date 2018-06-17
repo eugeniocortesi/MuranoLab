@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public abstract class DieInt implements Serializable{
 
-    String type;
+    String typeDie;
 
     public abstract Color getColor();
 

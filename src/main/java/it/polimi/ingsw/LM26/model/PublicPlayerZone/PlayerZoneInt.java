@@ -2,7 +2,9 @@ package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 
 import java.io.Serializable;
 
-public interface PlayerZoneInt extends Serializable {
+public abstract class PlayerZoneInt implements Serializable {
 
-    public void rewrite();
+    public String typePlayerZone;
+
+    public abstract void rewrite();
 }

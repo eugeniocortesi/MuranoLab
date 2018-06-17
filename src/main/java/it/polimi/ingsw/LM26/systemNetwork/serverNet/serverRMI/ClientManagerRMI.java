@@ -12,6 +12,8 @@ import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRemote;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.PlayerConnectionMessage;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerPlayers;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskActionPlayers;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -32,6 +34,8 @@ public class ClientManagerRMI extends ClientManager {
     private String address;
     private ClientViewRemote skeleton;
     private String user;
+    TimerPlayers timerPlayers;
+    TimerTaskActionPlayers timerTaskActionPlayers;
     private static final Logger LOGGER = Logger.getLogger(ClientManagerRMI.class.getName());
 
     public ClientManagerRMI(ServerBase serverBase, int RMIPORTServer, int RMIPORTClient, String address){
@@ -40,6 +44,7 @@ public class ClientManagerRMI extends ClientManager {
         this.RMIPORTServer = RMIPORTServer;
         this.RMIPORTClient = RMIPORTClient;
         this.address = address;
+        timerPlayers = new TimerPlayers(myserver, myserver.getTimerConfiguration());
 
     }
 
@@ -165,13 +170,16 @@ public class ClientManagerRMI extends ClientManager {
 
     @Override
     public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
+
         Thread t = new Thread(new MyRunnableWindow(user, id, (ArrayList<WindowPatternCard>) windowDeck.clone()));
         t.start();
+        timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
     }
 
     @Override
     public void chosenWindowPattern(ActionEventWindow actionEventWindow) {
 
+        timerTaskActionPlayers.setArrivedMessage(true);
         LOGGER.log(Level.SEVERE,"I have received one windowcard from "+user);
         myserver.getQueueController().pushMessage(actionEventWindow);
 
@@ -196,6 +204,8 @@ public class ClientManagerRMI extends ClientManager {
 
     @Override
     public void sendActionEventFromView(ActionEvent actionEvent) {
+
+        timerTaskActionPlayers.setArrivedMessage(true);
         LOGGER.log(Level.SEVERE,"I have received one actionEvent from " +user);
         myserver.getQueueController().pushMessage(actionEvent);
     }
@@ -210,6 +220,9 @@ public class ClientManagerRMI extends ClientManager {
 
     @Override
     public void sendBeginTurnMessage(String name, PlayerZone playerZone) {
+
+        timerPlayers.resetTimerActionPlayer();
+        timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
         Thread t = new Thread(new MyRunnableBeginTurnMessage(name, playerZone));
         t.start();
     }

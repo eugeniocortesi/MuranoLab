@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public abstract class CardInt implements Serializable {
 
-    public String type;
+    public String typeCard;
 
     public abstract void rewrite();
 

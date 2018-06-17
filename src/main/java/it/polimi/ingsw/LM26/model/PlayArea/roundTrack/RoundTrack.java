@@ -15,7 +15,7 @@ public class RoundTrack extends RoundTrackInt{
         roundTrackTurnList = new ArrayList<RoundTrackTurn>();
 
         currentTurn = 1;
-        this.type="RoundTrack";
+        this.typeRoundTrack="RoundTrack";
     }
 
     public int getCurrentTurn(){
@@ -51,7 +51,7 @@ public class RoundTrack extends RoundTrackInt{
     @Override
     public void rewrite() {
 
-        this.type="RoundTrack";
+        this.typeRoundTrack="RoundTrack";
 
     }
 

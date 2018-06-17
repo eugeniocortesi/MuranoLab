@@ -10,7 +10,7 @@ public class DifferentColorShade extends Effect {
     public DifferentColorShade(boolean colorShades) {
 
         this.colorShades = colorShades;
-        this.type = "DifferentColorShade";
+        this.typeEffect = "DifferentColorShade";
     }
 
     private String iscolorShades() {
@@ -28,7 +28,7 @@ public class DifferentColorShade extends Effect {
     @Override
     public void rewrite() {
 
-        this.type = "DifferentColorShade";
+        this.typeEffect = "DifferentColorShade";
 
     }
 }

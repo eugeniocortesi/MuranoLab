@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public abstract class RoundTrackInt implements Serializable{
 
-    String type;
+    String typeRoundTrack;
 
     public abstract int getCurrentTurn();
 

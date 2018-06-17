@@ -48,7 +48,7 @@ public class Model extends ObservableSimple implements Serializable {
 
     private OnBoardCards onBoardCards;
 
-    private Restrictions restrictions;
+    private transient Restrictions restrictions;
 
     public Model() {
 
@@ -189,17 +189,17 @@ public class Model extends ObservableSimple implements Serializable {
     static public Model deserializeModelMessage(String protocolJson){
 
         RuntimeTypeAdapterFactory1<Effect> runtimeTypeAdapterFactory8 = RuntimeTypeAdapterFactory1
-                .of(Effect.class, "type")
-                .registerSubtype(DifferentColorShadeOnRowColomn.class)
-                .registerSubtype(DifferentColorShade.class)
-                .registerSubtype(Shades.class)
-                .registerSubtype(ColoredDiagonals.class);
+                .of(Effect.class, "typeEffect")
+                .registerSubtype(DifferentColorShadeOnRowColomn.class, "DifferentColorShadeOnRowColomn")
+                .registerSubtype(DifferentColorShade.class, "DifferentColorShade")
+                .registerSubtype(Shades.class, "Shades")
+                .registerSubtype(ColoredDiagonals.class, "ColoredDiagonals");
 
-        RuntimeTypeAdapterFactory1<RoundTrackInt> runtimeTypeAdapterFactory1 = RuntimeTypeAdapterFactory1.of(RoundTrackInt.class, "type")
+        RuntimeTypeAdapterFactory1<RoundTrackInt> runtimeTypeAdapterFactory1 = RuntimeTypeAdapterFactory1.of(RoundTrackInt.class, "typeRoundTrack")
                 .registerSubtype(RoundTrack.class, "RoundTrack");
         RuntimeTypeAdapterFactory1<ScoreTrackInt> runtimeTypeAdapterFactory2 = RuntimeTypeAdapterFactory1.of(ScoreTrackInt.class, "typeScoreTrack")
                 .registerSubtype(ScoreTrack.class, "ScoreTrack");
-        RuntimeTypeAdapterFactory1<DieInt> runtimeTypeAdapterFactory3 = RuntimeTypeAdapterFactory1.of(DieInt.class, "type")
+        RuntimeTypeAdapterFactory1<DieInt> runtimeTypeAdapterFactory3 = RuntimeTypeAdapterFactory1.of(DieInt.class, "typeDie")
                 .registerSubtype(Die.class, "Die");
         RuntimeTypeAdapterFactory1<ToolCardInt> runtimeTypeAdapterFactory4 = RuntimeTypeAdapterFactory1.of(ToolCardInt.class, "typeToolCard")
                 .registerSubtype(ToolCard.class, "ToolCard")
@@ -220,10 +220,10 @@ public class Model extends ObservableSimple implements Serializable {
             .registerSubtype(RollToTheOppositeFace10.class, "RollToTheOppositeFace10");
 
 
-        RuntimeTypeAdapterFactory1<PlayerZoneInt> runtimeTypeAdapterFactory6 = RuntimeTypeAdapterFactory1.of(PlayerZoneInt.class, "type")
+        RuntimeTypeAdapterFactory1<PlayerZoneInt> runtimeTypeAdapterFactory6 = RuntimeTypeAdapterFactory1.of(PlayerZoneInt.class, "typePlayerZone")
                 .registerSubtype(PlayerZone.class, "PlayerZone");
 
-        RuntimeTypeAdapterFactory1<CardInt> runtimeTypeAdapterFactory7 = RuntimeTypeAdapterFactory1.of(CardInt.class, "type")
+        RuntimeTypeAdapterFactory1<CardInt> runtimeTypeAdapterFactory7 = RuntimeTypeAdapterFactory1.of(CardInt.class, "typeCard")
                 .registerSubtype(ObjectivePrivateCard.class, "ObjectivePrivateCard")
                 .registerSubtype(ObjectivePublicCard.class, "ObjectivePublicCard")
                 .registerSubtype(WindowPatternCard.class, "WindowPatternCard");
@@ -258,10 +258,10 @@ public class Model extends ObservableSimple implements Serializable {
             this.getOnBoardCards().getObjectivePublicCardList().get(i).getRealEffect().rewrite();
         }
 
-        this.getDecks().getToolCardDeck().forEach(toolCard -> {toolCard.rewrite();});
+        /*this.getDecks().getToolCardDeck().forEach(toolCard -> {toolCard.rewrite();});
         this.getDecks().getWindowPatternCardDeck().forEach(windowPatternCard ->  {windowPatternCard.rewrite();});
         this.getDecks().getObjectivePrivateCardDeck().forEach( privateCard -> {privateCard.rewrite();});
-        this.getDecks().getObjectivePublicCardDeck().forEach( publicCard -> {publicCard.rewrite();});
+        this.getDecks().getObjectivePublicCardDeck().forEach( publicCard -> {publicCard.rewrite();});*/
         this.getPlayerList().forEach(player -> {player.rewrite();});
         this.getRoundTrackInt().rewrite();
         this.getScoreTrackInt().rewrite();

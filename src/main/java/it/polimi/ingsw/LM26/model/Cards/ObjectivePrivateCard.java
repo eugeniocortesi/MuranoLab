@@ -17,7 +17,7 @@ public class ObjectivePrivateCard extends CardInt {
 
         this.colour=colour;
         this.id=id;
-        this.type="ObjectivePrivateCard";
+        this.typeCard="ObjectivePrivateCard";
     }
     public Color getColour() {
 
@@ -61,6 +61,6 @@ public class ObjectivePrivateCard extends CardInt {
     @Override
     public void rewrite() {
 
-        this.type="ObjectivePrivateCard";
+        this.typeCard="ObjectivePrivateCard";
     }
 }

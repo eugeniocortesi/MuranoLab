@@ -77,13 +77,13 @@ public class Die extends DieInt {
     @Override
     public void rewrite() {
 
-        this.type="Die";
+        this.typeDie="Die";
 
     }
 
     public Die(Color color) {
         this.color = color;
-        this.type="Die";
+        this.typeDie="Die";
     }
 
     public Color getColor() {

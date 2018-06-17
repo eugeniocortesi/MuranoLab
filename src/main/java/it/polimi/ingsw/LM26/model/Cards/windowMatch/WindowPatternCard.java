@@ -18,7 +18,7 @@ public class WindowPatternCard extends CardInt {
         this.token = token;
         this.title = title;
         this.matrix = matrix;
-        this.type="WindowPatternCard";
+        this.typeCard="WindowPatternCard";
     }
 
     public void createPattern(){
@@ -73,7 +73,7 @@ public class WindowPatternCard extends CardInt {
     @Override
     public void rewrite() {
 
-        this.type="WindowPatternCard";
+        this.typeCard="WindowPatternCard";
 
     }
 }

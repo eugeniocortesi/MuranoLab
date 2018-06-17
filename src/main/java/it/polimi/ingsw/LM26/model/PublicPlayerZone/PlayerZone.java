@@ -3,9 +3,8 @@ package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
-public class PlayerZone implements PlayerZoneInt {
+public class PlayerZone extends PlayerZoneInt {
 
-    private String type;
 
     private  String namePlayer;
 
@@ -42,6 +41,7 @@ public class PlayerZone implements PlayerZoneInt {
         this.scoreMarker= null;
         this.privatePoints= 0;
         this.lastRoundTurn= 0;
+        this.typePlayerZone = "PlayerZone";
 
     }
 
@@ -116,7 +116,7 @@ public class PlayerZone implements PlayerZoneInt {
     @Override
     public void rewrite() {
 
-        this.type="PlayerZone";
+        this.typePlayerZone="PlayerZone";
 
     }
 
