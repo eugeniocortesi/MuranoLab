@@ -61,7 +61,13 @@ public class Round {
                   currentPlayer=player.get(i);
                   return player.get(i);
               }
-              else return nextPlayer(player, turn, ++plStandby);
+              else {
+                  if(turnCounter == turn.length) {
+                      Model model = singletonModel();
+                      endRound(model.getRoundTrackInt(), model.getDraftPool(), player.get(i));
+                  }
+                  return nextPlayer(player, turn, ++plStandby);
+              }
           }
       }
       throw new IllegalArgumentException("no player has the current turn");
@@ -70,22 +76,23 @@ public class Round {
 
     //passa il turno al successivo, se è finito turno globale mette dadi nella casella della round track e ritorna FINISHED
     public void endAction(int[] turn, RoundTrackInt roundTrack, DraftPool draftPool, PlayerZone actingPlayer) {
-        actingPlayer.setPlayerState(PlayerState.ENDING);
+        if(actingPlayer.getPlayerState()!=STANDBY)
+            actingPlayer.setPlayerState(PlayerState.ENDING);
         actingPlayer.getActionHistory().deleteTurnHistory();
-        //TODO
-        actingPlayer.getActionHistory().setDieUsed(false);
         turnCounter++;
         if(turnCounter == turn.length) {
-            roundTrack.addDice(draftPool.getInDraft());
-            draftPool.removeAllDice();
-            actingPlayer.getActionHistory().deleteRoundHistory();
-            turnCounter=0;
-            roundState= RoundState.FINISHED;
+            endRound(roundTrack, draftPool, actingPlayer);
         }
         else roundState= RoundState.RUNNING;
     }
-    //TODO
-    // aggiungere controlli e aggiornamenti di "second die/turn"
+
+    public void endRound(RoundTrackInt roundTrack, DraftPool draftPool, PlayerZone actingPlayer){
+        roundTrack.addDice(draftPool.getInDraft());
+        draftPool.removeAllDice();
+        actingPlayer.getActionHistory().deleteRoundHistory();
+        turnCounter=0;
+        roundState= RoundState.FINISHED;
+        }
 
     public void pullDice(){
 

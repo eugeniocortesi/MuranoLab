@@ -56,6 +56,7 @@ public class CliTest {
 
     public void askEvent(PlayerZone playing){
 
+        if(playing.getPlayerState()==PlayerState.STANDBY)return;
         this.event = new ActionEvent();
         int id = 0;
 
