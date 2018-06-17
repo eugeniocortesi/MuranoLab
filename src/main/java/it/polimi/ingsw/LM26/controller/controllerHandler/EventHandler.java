@@ -29,35 +29,34 @@ public class EventHandler{
     private boolean handle(EventChecker eventChecker){
 
         if (event.getId()==1)
-            if (eventChecker.check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {  System.out.println("checked");model.hasChanged();
-                            return true; }
+            if (eventChecker.check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {return true; }
             else return false;
         if (event.getId()==2)
-            if(eventChecker.check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getPlayer())) {   model.hasChanged();    return true;}
+            if(eventChecker.check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getPlayer())) {return true;}
             else return false;
         if (event.getId()==3)
-            if(eventChecker.check(event.getCard(), event.getFromBoxList(), event.getToBoxList(),event.getPlayer())) { model.hasChanged();     return true;}
+            if(eventChecker.check(event.getCard(), event.getFromBoxList(), event.getToBoxList(),event.getPlayer())) {return true;}
             else return false;
         if (event.getId()==4)
-            if(eventChecker.check(event.getCard(), event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {   model.hasChanged();    return true;}
+            if(eventChecker.check(event.getCard(), event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {return true;}
             else return false;
         if (event.getId()==5)
-            if(eventChecker.check(event.getCard(), event.getDieFromDraft(), event.getDieFromRoundTrack(), event.getPlayer())) {   model.hasChanged();    return true;}
+            if(eventChecker.check(event.getCard(), event.getDieFromDraft(), event.getDieFromRoundTrack(), event.getPlayer())) {return true;}
             else return false;
         if (event.getId()==6)
-            if(eventChecker.check(event.getCard(), event.getDieFromDraft(), event.getInDeCrement(), event.getPlayer())) {  model.hasChanged();    return true;}
+            if(eventChecker.check(event.getCard(), event.getDieFromDraft(), event.getInDeCrement(), event.getPlayer())) {return true;}
             else return false;
         if (event.getId()==7)
-            if(eventChecker.check(event.getCard(), event.getDieFromDraft(), event.getPlayer())) {   model.hasChanged();    return true;}
+            if(eventChecker.check(event.getCard(), event.getDieFromDraft(), event.getPlayer())) { return true;}
             else return false;
         if (event.getId()==8)
-            if(eventChecker.check(event.getCard(), event.getPlayer())) { model.hasChanged();     return true;}
+            if(eventChecker.check(event.getCard(), event.getPlayer())) {return true;}
             else return false;
         if (event.getId()==9)
-            if(eventChecker.check(event.getCard(), event.getNumber(), event.getToBox1(), event.getPlayer())) {   model.hasChanged();    return true;}
+            if(eventChecker.check(event.getCard(), event.getNumber(), event.getToBox1(), event.getPlayer())) {return true;}
             else return false;
         if (event.getId()==10)
-            if(eventChecker.check(event.getCard(), event.getDieFromRoundTrack(), event.getFromBoxList(), event.getToBoxList(), event.getPlayer())) {   model.hasChanged();    return true;}
+            if(eventChecker.check(event.getCard(), event.getDieFromRoundTrack(), event.getFromBoxList(), event.getToBoxList(), event.getPlayer())) {return true;}
             else return false;
         if (event.getId()==11) {
 

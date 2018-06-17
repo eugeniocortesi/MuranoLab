@@ -39,23 +39,25 @@ public class Round {
 
     //nextPlayer va usato dopo endAction, quando il contatore è già incrementato. plStandby passato è sempre 0
     public PlayerZone nextPlayer(ArrayList<PlayerZone> player, int[] turn, int plStandby) throws IllegalArgumentException {
-        //System.out.println("!");
+
         turnCounter=turnCounter+plStandby;
+
       for(int i=0; i<player.size(); i++){
-          //System.out.println(player.get(i).getName());
-          for(int j=0; j<turnCounter; j++){
-              //System.out.println("o");
-          }
-          //System.out.println("g");
+
+          for(int j=0; j<turnCounter; j++){}
+
           if(player.get(i).getNumber()==turn[turnCounter]) {
+                System.out.println(player.get(i).getPlayerState());
               if(player.get(i).getPlayerState()!= STANDBY){
                   player.get(i).setPlayerState(PlayerState.BEGINNING);
+
                   if (turnCounter > 0) {
                       if(turn[turnCounter]==turn[turnCounter-1]) {
                           player.get(i).getActionHistory().setFirstTurn(false);
                           player.get(i).getActionHistory().setSecondTurn(true);
                       }else player.get(i).getActionHistory().setFirstTurn(true);
                   }else player.get(i).getActionHistory().setFirstTurn(true);
+
                   currentPlayer=player.get(i);
                   return player.get(i);
               }
