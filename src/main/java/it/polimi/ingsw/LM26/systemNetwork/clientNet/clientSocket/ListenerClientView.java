@@ -113,8 +113,10 @@ public class ListenerClientView {
 
             ModelMessage modelMessage = ModelMessage.deserializeModelMessage(message);
 
-            String m =  modelMessage.getModel();
-            Model model = Model.deserializeModelMessage(m);
+            Model model = ModelMessage.deserializeModel(modelMessage.getModel());
+
+            /*String m =  modelMessage.getModel();
+            Model model = Model.deserializeModelMessage(m);*/
 
            // String m = message;
             //m = m.substring(m.indexOf('$'));

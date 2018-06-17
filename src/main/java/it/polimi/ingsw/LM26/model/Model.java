@@ -188,6 +188,8 @@ public class Model extends ObservableSimple implements Serializable {
 
     static public Model deserializeModelMessage(String protocolJson){
 
+        System.out.println("I'm in deserializing Model in class model");
+
         RuntimeTypeAdapterFactory1<Effect> runtimeTypeAdapterFactory8 = RuntimeTypeAdapterFactory1
                 .of(Effect.class, "typeEffect")
                 .registerSubtype(DifferentColorShadeOnRowColomn.class, "DifferentColorShadeOnRowColomn")
