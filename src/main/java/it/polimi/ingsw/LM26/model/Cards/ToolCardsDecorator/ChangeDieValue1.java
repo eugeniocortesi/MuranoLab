@@ -44,13 +44,11 @@ public class ChangeDieValue1 extends ToolCardDecorator {
 
     @Override
     public boolean isInUse() {
-        return false;
+        return toolcard.isInUse();
     }
 
     @Override
-    public void setInUse(boolean inUse) {
-
-    }
+    public void setInUse(boolean inUse) { toolcard.setInUse(inUse); }
 
     public boolean play(Box fromBox, Box toBox, int player){return false;}
 

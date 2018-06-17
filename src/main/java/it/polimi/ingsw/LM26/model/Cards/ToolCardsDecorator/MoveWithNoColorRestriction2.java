@@ -48,13 +48,11 @@ public class MoveWithNoColorRestriction2 extends ToolCardDecorator {
 
     @Override
     public boolean isInUse() {
-        return false;
+        return toolcard.isInUse();
     }
 
     @Override
-    public void setInUse(boolean inUse) {
-
-    }
+    public void setInUse(boolean inUse) { toolcard.setInUse(inUse); }
 
     public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
