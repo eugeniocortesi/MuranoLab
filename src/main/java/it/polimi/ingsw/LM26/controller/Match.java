@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
+import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
 
 public class Match {
 
@@ -62,30 +63,35 @@ public class Match {
                 System.out.println("DraftPool");
                 model.getDraftPool().printDraftPool();
 
-                waitCorrectPlayer();
-
                 //controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
 
-                if (playing.getActionHistory().isFreezed()) {
-                    result = true;
-                    System.out.println("this turn you are freezed");
-                }
-
-                firstAction();
-                //set the correct number of turn 1 0 2
-
                 waitCorrectPlayer();
 
-                if (!playing.getActionHistory().isPlacement() || !playing.getActionHistory().isDieUsed() || !playing.getActionHistory().isCardUsed())
-                    result = false;
+                if(playing.getPlayerState()!=STANDBY) {
 
-                if (playing.getActionHistory().isFreezed()) {
-                    result = true;
-                    System.out.println("this turn you are freezed");
+                    if (playing.getActionHistory().isFreezed()) {
+                        result = true;
+                        System.out.println("this turn you are freezed");
+                    }
+
+                    firstAction();
+                    //set the correct number of turn 1 0 2
+
+                    waitCorrectPlayer();
+                    if (playing.getPlayerState()!=STANDBY){
+
+                        if (!playing.getActionHistory().isPlacement() || !playing.getActionHistory().isDieUsed() || !playing.getActionHistory().isCardUsed())
+                            result = false;
+
+                        if (playing.getActionHistory().isFreezed()) {
+                            result = true;
+                            System.out.println("this turn you are freezed");
+                        }
+
+                        secondAction();
+                        //set the correct number of turn 1 0 2
+                    }
                 }
-
-                secondAction();
-                //set the correct number of turn 1 0 2
 
                 centralPhase.getCurrentRound().endAction(centralPhase.getTurn(), model.getRoundTrackInt(), model.getDraftPool(), centralPhase.getCurrentRound().getCurrentPlayer());
 
@@ -113,23 +119,24 @@ public class Match {
         while (!result) {
 
             waitCorrectPlayer();
+            if (playing.getPlayerState() != STANDBY) {
+                if (controller.handler(controller.getActionEvent())) {
+                    System.out.println("done");
+                    playing.getPlayerBoard().printCard();
+                    System.out.println("DraftPool");
+                    model.getDraftPool().printDraftPool();
+                    // view.showOK()
+                    model.hasChanged();
+                    result = true;
+                } else System.out.println("match error 1 ");
 
-            if (controller.handler(controller.getActionEvent())) {
-                System.out.println("done");
-                playing.getPlayerBoard().printCard();
-                System.out.println("DraftPool");
-                model.getDraftPool().printDraftPool();
-                // view.showOK()
-                model.hasChanged();
-                result = true;
-            } else System.out.println("match error 1 ");
+                controller.setActionEvent(null);
 
-            controller.setActionEvent(null);
+                //view.showNO()
 
-            //view.showNO()
+                //view.showReduAction()
 
-            //view.showReduAction()
-
+            }else result = true;
         }
 
     }
@@ -139,54 +146,56 @@ public class Match {
         while (!result) {
 
             waitCorrectPlayer();
+            if (playing.getPlayerState() != STANDBY) {
+                if (controller.handler(controller.getActionEvent())) {
+                    System.out.println("done");
+                    playing.getPlayerBoard().printCard();
+                    System.out.println("DraftPool");
+                    model.getDraftPool().printDraftPool();
 
-            if (controller.handler(controller.getActionEvent())) {
-                System.out.println("done");
-                playing.getPlayerBoard().printCard();
-                System.out.println("DraftPool");
-                model.getDraftPool().printDraftPool();
+                    DrawOneMoreDie8 tool8 = (DrawOneMoreDie8) model.getDecks().getToolCardDeck().get(7);
 
-                DrawOneMoreDie8 tool8 = (DrawOneMoreDie8) model.getDecks().getToolCardDeck().get(7);
+                    if (tool8.isNeedPlacement()) {
+                        playing.getActionHistory().setPlacement(false);
+                        playing.getActionHistory().setDieUsed(false);
+                        tool8.setCurrentPlacement(true);
+                        playing.getActionHistory().setFreezed(true);
+                        System.out.println("choose another die");
+                        model.hasChanged();
 
-                if (tool8.isNeedPlacement()) {
-                    playing.getActionHistory().setPlacement(false);
-                    playing.getActionHistory().setDieUsed(false);
-                    tool8.setCurrentPlacement(true);
-                    playing.getActionHistory().setFreezed(true);
-                    System.out.println("choose another die");
-                    model.hasChanged();
+                    } else {
+                        model.hasChanged();
+                        result = true;
+                    }
+                } else
+                    System.out.println("match error 2 ");
 
-                } else {
-                    model.hasChanged();
-                    result = true;
-                }
-            } else
-                System.out.println("match error 2 ");
+                controller.setActionEvent(null);
 
-            controller.setActionEvent(null);
+                //view.showNO()
 
-            //view.showNO()
+                //view.showReduAction()
 
-            //view.showReduAction()
-
+            }else result=true;
         }
     }
 
     public void waitCorrectPlayer(){
 
-        while (controller.getActionEvent()== null )
+        while (controller.getActionEvent()== null && playing.getPlayerState()!=STANDBY)
 
             //TODO DELETE
             cli.ask(playing);
             //view.showWrongPlayer();
 
-
-        while (controller.getActionEvent().getPlayer()!=playing.getIDPlayer()) {
-            controller.setActionEvent(null);
-            while (controller.getActionEvent() == null)
-                //view.showWrongPlayer();
-                ;
-        }
+        if (playing.getPlayerState() != STANDBY)
+            while (controller.getActionEvent().getPlayer()!=playing.getIDPlayer() && playing.getPlayerState()!=STANDBY) {
+                controller.setActionEvent(null);
+                while (controller.getActionEvent() == null && playing.getPlayerState()!=STANDBY)
+                    System.out.println("entering here");
+                    //view.showWrongPlayer();
+                    ;
+            }
 
     }
 
