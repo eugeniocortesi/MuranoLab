@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -8,16 +10,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.LM26.view.GUI.GameController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.LM26.view.GUI.controllers.GameController">
    <children>
       <VBox spacing="20.0">
          <children>
-            <TilePane alignment="TOP_RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefColumns="4" prefHeight="200.0" prefWidth="200.0">
+            <TilePane fx:id="draftAndPlayers" alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefColumns="4" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <fx:include source="FrameBoard.fxml" />
-                  <fx:include source="FrameBoard.fxml" />
-                  <fx:include source="FrameBoard.fxml" />
-                  <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="TOP_RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="RISERVA">
                            <VBox.margin>
@@ -26,7 +25,7 @@
                         </Label>
                         <ScrollPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <TilePane hgap="10.0" nodeOrientation="LEFT_TO_RIGHT" prefColumns="3" prefHeight="200.0" prefTileHeight="40.0" prefTileWidth="40.0" prefWidth="240.0" vgap="10.0">
+                              <TilePane fx:id="draftPool" hgap="10.0" nodeOrientation="LEFT_TO_RIGHT" prefColumns="3" prefHeight="200.0" prefTileHeight="40.0" prefTileWidth="40.0" prefWidth="240.0" vgap="10.0">
                                  <padding>
                                     <Insets bottom="25.0" left="40.0" right="40.0" top="25.0" />
                                  </padding>
@@ -46,6 +45,9 @@
                         </ScrollPane>
                      </children>
                   </VBox>
+                  <fx:include fx:id="plZone1" source="FrameBoard.fxml" />
+                  <fx:include fx:id="plZone2" source="FrameBoard.fxml" />
+                  <fx:include fx:id="plZone3" source="FrameBoard.fxml" />
                </children>
             </TilePane>
             <HBox prefHeight="444.0" prefWidth="900.0" spacing="20.0">
@@ -54,7 +56,207 @@
                      <children>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="460.0">
+                                 <children>
+                                    <VBox layoutX="154.0" layoutY="-24.0" prefHeight="200.0" prefWidth="110.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                       <children>
+                                          <TilePane fx:id="roundTrack" hgap="1.0" prefColumns="10" prefHeight="80.0" prefRows="1" prefWidth="220.0" style="-fx-border-color: #000000; -fx-background-color: #4a3926;">
+                                             <children>
+                                                <VBox alignment="TOP_CENTER" prefHeight="80.0" prefWidth="42.0">
+                                                   <children>
+                                                      <Label text="1" textFill="#fba74c">
+                                                         <VBox.margin>
+                                                            <Insets bottom="3.0" top="5.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="DejaVu Sans Bold Oblique" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <StackPane prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #fba74c; -fx-padding: 1;">
+                                                         <children>
+                                                            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" layoutX="11.0" layoutY="11.0" prefHeight="80.0" prefWidth="42.0">
+                                                   <children>
+                                                      <Label text="2" textFill="#fba74c">
+                                                         <font>
+                                                            <Font name="DejaVu Sans Bold Oblique" size="13.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="3.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <StackPane prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #fba74c; -fx-padding: 1;">
+                                                         <children>
+                                                            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" layoutX="54.0" layoutY="11.0" prefHeight="80.0" prefWidth="42.0">
+                                                   <children>
+                                                      <Label text="3" textFill="#fba74c">
+                                                         <font>
+                                                            <Font name="DejaVu Sans Bold Oblique" size="13.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="3.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <StackPane prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #fba74c; -fx-padding: 1;">
+                                                         <children>
+                                                            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" layoutX="97.0" layoutY="11.0" prefHeight="80.0" prefWidth="42.0">
+                                                   <children>
+                                                      <Label text="4" textFill="#fba74c">
+                                                         <font>
+                                                            <Font name="DejaVu Sans Bold Oblique" size="13.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="3.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <StackPane prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #fba74c; -fx-padding: 1;">
+                                                         <children>
+                                                            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" layoutX="140.0" layoutY="11.0" prefHeight="80.0" prefWidth="42.0">
+                                                   <children>
+                                                      <Label text="5" textFill="#fba74c">
+                                                         <font>
+                                                            <Font name="DejaVu Sans Bold Oblique" size="13.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="3.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <StackPane prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #fba74c; -fx-padding: 1;">
+                                                         <children>
+                                                            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" layoutX="183.0" layoutY="11.0" prefHeight="80.0" prefWidth="42.0">
+                                                   <children>
+                                                      <Label text="6" textFill="#fba74c">
+                                                         <font>
+                                                            <Font name="DejaVu Sans Bold Oblique" size="13.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="3.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <StackPane prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #fba74c; -fx-padding: 1;">
+                                                         <children>
+                                                            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" layoutX="226.0" layoutY="11.0" prefHeight="80.0" prefWidth="42.0">
+                                                   <children>
+                                                      <Label text="7" textFill="#fba74c">
+                                                         <font>
+                                                            <Font name="DejaVu Sans Bold Oblique" size="13.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="3.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <StackPane prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #fba74c; -fx-padding: 1;">
+                                                         <children>
+                                                            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" layoutX="269.0" layoutY="11.0" prefHeight="80.0" prefWidth="42.0">
+                                                   <children>
+                                                      <Label text="8" textFill="#fba74c">
+                                                         <font>
+                                                            <Font name="DejaVu Sans Bold Oblique" size="13.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="3.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <StackPane prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #fba74c; -fx-padding: 1;">
+                                                         <children>
+                                                            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" layoutX="312.0" layoutY="11.0" prefHeight="80.0" prefWidth="42.0">
+                                                   <children>
+                                                      <Label text="9" textFill="#fba74c">
+                                                         <font>
+                                                            <Font name="DejaVu Sans Bold Oblique" size="13.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="3.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <StackPane prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #fba74c; -fx-padding: 1;">
+                                                         <children>
+                                                            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" layoutX="355.0" layoutY="11.0" prefHeight="80.0" prefWidth="42.0">
+                                                   <children>
+                                                      <Label text="10" textFill="#fba74c">
+                                                         <font>
+                                                            <Font name="DejaVu Sans Bold Oblique" size="13.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="3.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <StackPane prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #fba74c; -fx-padding: 1;">
+                                                         <children>
+                                                            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                             <padding>
+                                                <Insets left="5.0" right="3.0" />
+                                             </padding>
+                                          </TilePane>
+                                          <TilePane hgap="4.0" prefColumns="10" prefHeight="200.0" prefRows="1" prefWidth="200.0">
+                                             <children>
+                                                <VBox prefHeight="200.0" prefWidth="40.0" />
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="6.0" right="6.0" />
+                                             </VBox.margin>
+                                          </TilePane>
+                                       </children>
+                                    </VBox>
+                                 </children></AnchorPane>
                           </content>
                         </ScrollPane>
                         <Label text="Istruzioni">

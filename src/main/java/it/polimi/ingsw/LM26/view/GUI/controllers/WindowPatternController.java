@@ -1,7 +1,7 @@
-package it.polimi.ingsw.LM26.view.GUI;
+package it.polimi.ingsw.LM26.view.GUI.controllers;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
-import it.polimi.ingsw.LM26.view.GUI.ControllerCardRec;
+import it.polimi.ingsw.LM26.view.GUI.controllers.ControllerCardRec;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

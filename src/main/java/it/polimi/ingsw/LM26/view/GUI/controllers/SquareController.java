@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.view.GUI;
+package it.polimi.ingsw.LM26.view.GUI.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

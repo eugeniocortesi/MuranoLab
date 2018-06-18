@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="255.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.LM26.view.GUI.FrameBoardController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="255.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.LM26.view.GUI.controllers.FrameBoardController">
    <children>
       <VBox fx:id="background" prefHeight="200.0" style="-fx-background-color: #d3d3d3;">
          <children>
@@ -18,26 +18,106 @@
                <children>
                   <TilePane fx:id="tilepane" maxHeight="200.0" maxWidth="250.0" prefHeight="176.0" prefTileHeight="44.0" prefTileWidth="44.0" prefWidth="220.0" style="-fx-background-color: #000000;">
                      <children>
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
-                        <fx:include source="square.fxml" />
+                        <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="13.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="13.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="13.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="101.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="57.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="145.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="13.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="13.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="189.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="101.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="57.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="189.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="145.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="13.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="57.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="145.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="101.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="189.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="13.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/grey-0.jpg" />
+                           </image>
+                        </ImageView>
                      </children>
                   </TilePane>
                   <VBox fx:id="tokens" spacing="5.0">

@@ -1,14 +1,22 @@
 package it.polimi.ingsw.LM26.view.GUI;
 
+import it.polimi.ingsw.LM26.controller.GamePhases.Game;
 import it.polimi.ingsw.LM26.controller.GamePhases.InitialPhase;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Bag;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
+import it.polimi.ingsw.LM26.view.GUI.controllers.ControllerLogin;
+import it.polimi.ingsw.LM26.view.GUI.controllers.GameController;
+import it.polimi.ingsw.LM26.view.GUI.controllers.WindowPatternController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -19,7 +27,6 @@ import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonD
 
 public class View extends ViewInterface{
     private DisplayableStage displayableStage1 = new DisplayableStage("Login.fxml");
-    //private DisplayableStage displayableStage2 = new DisplayableStage("MyPlayerzone.fxml");
     private DisplayableStage displayableStageNetChioce = new DisplayableStage("NetChioce.fxml");
     private DisplayableStage displayableStageWPattern = new DisplayableStage("WindowPattern.fxml");
     private DisplayableStage displayableStageGame= new DisplayableStage("Game.fxml");
@@ -34,14 +41,17 @@ public class View extends ViewInterface{
         ModelManager.model=new Model();
         Decks deck=singletonDecks();
         ModelManager.privateCard=deck.getObjectivePrivateCardDeck().get(0);
+        ModelManager.setId(1);
         OnBoardCards obc= new OnBoardCards();
         ArrayList<PlayerZone> plList= new ArrayList<PlayerZone>();
         for(int i=0; i<4;i++){
-            PlayerZone pl= new PlayerZone("n", i);
+            PlayerZone pl= new PlayerZone("Name", i);
             plList.add(pl);
+            pl.setWindowPatternCard(deck.getWindowPatternCardDeck().get(i+3));
         }
-        InitialPhase initialPhase=new InitialPhase(plList, deck, obc);
-        initialPhase.setPublicCards(obc, deck);
+       // obc.setPublicCards();
+        Game game=new Game(plList, deck, obc);
+        game.getPhase().doAction(game, plList);
         /*ArrayList<ObjectivePublicCard> pubc=new ArrayList<ObjectivePublicCard>();
         ArrayList<ToolCard> toolc=new ArrayList<ToolCard>();
         for(int i=0; i<3; i++);{
@@ -49,8 +59,19 @@ public class View extends ViewInterface{
             toolc.add(deck.getToolCardDeck().get(i));
         }*/
         ModelManager.model.setOnBoardCards(obc);
+        ModelManager.model.setPlayerList(plList);
 
-
+        DieInt d;
+        Bag bag=new Bag();
+        ArrayList<DieInt> dList=new ArrayList<DieInt>();
+        for(int j=0; j<5; j++){
+            d= bag.draw();
+            d.roll();
+            dList.add(d);
+        }
+        DraftPool dPool =new DraftPool();
+        dPool.setInDraft(dList);
+        ModelManager.model.setDraftPool(dPool);
     }
 
     @Override

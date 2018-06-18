@@ -1,5 +1,6 @@
-package it.polimi.ingsw.LM26.view.GUI;
+package it.polimi.ingsw.LM26.view.GUI.controllers;
 
+import it.polimi.ingsw.LM26.view.GUI.ViewControllerInt;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

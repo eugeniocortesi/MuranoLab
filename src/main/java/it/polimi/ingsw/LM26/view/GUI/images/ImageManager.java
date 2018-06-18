@@ -1,7 +1,9 @@
 package it.polimi.ingsw.LM26.view.GUI.images;
 
 
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class ImageManager {
 
@@ -103,5 +105,14 @@ public class ImageManager {
         System.out.println(im.toString());
     }*/
 
+    public void setDie(ImageView imView, DieInt die){
+        switch (die.getColor()){
+            case ANSI_YELLOW:{ imView.setImage(this.getYellowDie(die.getValue())); break;}
+            case ANSI_PURPLE:{imView.setImage(this.getPurpleDie(die.getValue())); break;}
+            case ANSI_GREEN:{imView.setImage(this.getGreenDie(die.getValue())); break;}
+            case ANSI_RED:{imView.setImage(this.getRedDie(die.getValue())); break;}
+            case ANSI_BLUE:{imView.setImage(this.getBlueDie(die.getValue())); break;}
+        }
+    }
 
 }
