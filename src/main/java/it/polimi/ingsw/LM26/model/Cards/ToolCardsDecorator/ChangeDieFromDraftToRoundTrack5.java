@@ -14,6 +14,9 @@ public class ChangeDieFromDraftToRoundTrack5 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    public ChangeDieFromDraftToRoundTrack5() {
+    }
+
     public ChangeDieFromDraftToRoundTrack5(ToolCard toolcard) {
         this.toolcard = toolcard;
         this.type="ChangeDieFromDraftToRoundTrack5";

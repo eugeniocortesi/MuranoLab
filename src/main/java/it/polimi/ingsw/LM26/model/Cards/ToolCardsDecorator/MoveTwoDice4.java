@@ -15,6 +15,9 @@ public class MoveTwoDice4 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    public MoveTwoDice4() {
+    }
+
     public MoveTwoDice4(ToolCard toolcard) {
         this.toolcard = toolcard;
         this.type="MoveTwoDice4";

@@ -15,6 +15,9 @@ public class MoveWithNoValueRestriction3 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    public MoveWithNoValueRestriction3() {
+    }
+
     public MoveWithNoValueRestriction3(ToolCard toolcard) {
         this.toolcard = toolcard;
         this.type="MoveWithNoValueRestriction3";

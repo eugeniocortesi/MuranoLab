@@ -13,6 +13,9 @@ public class ObjectivePublicCard extends CardInt {
 
     private boolean inUse= false;
 
+    public ObjectivePublicCard() {
+    }
+
     public ObjectivePublicCard(int id, Effect effect) {
 
         this.effect=effect;

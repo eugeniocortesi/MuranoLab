@@ -210,13 +210,20 @@ public class ClientViewSocket extends ClientView {
 
         System.out.println("playerlist "+ m.getPlayerList());
         for(int i = 0; i<m.getPlayerList().size(); i++){
-            System.out.println(m.getPlayerList().get(i)+ "player");
+            System.out.println(m.getPlayerList().get(i).getName() + " player");
         }
 
         System.out.println("draftpool "+ m.getDraftPool());
         m.getDraftPool().printDraftPool();
 
         m.getDraftPool().getInDraft().forEach(number -> {System.out.println(number.getNumber());});
+
+        System.out.println("TOOL LIST");
+        m.getToolList().forEach( n -> {System.out.println(n);});
+
+        System.out.println("PUBLIC LIST");
+        m.getPublicList().forEach( b -> {System.out.println(b);});
+
 
         super.notify(m);
     }

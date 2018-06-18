@@ -12,6 +12,10 @@ public class ToolCard extends ToolCardInt  {
     private int num;
     private int token=0;
 
+    public ToolCard(){
+        ;
+    }
+
     public ToolCard(int num) {
 
         this.num=num;

@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 public abstract class ToolCardInt implements Serializable{
 
+    public ToolCardInt() {
+
+    }
+
     public abstract int getNum();
     public abstract void rewrite();
     public abstract void printCard();
