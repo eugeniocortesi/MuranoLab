@@ -21,7 +21,8 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
 
     private boolean firstPart=false;
 
-
+    public ChangeDieWithTheBag11() {
+    }
 
     public ChangeDieWithTheBag11(ToolCard toolcard) {
         this.toolcard = toolcard;

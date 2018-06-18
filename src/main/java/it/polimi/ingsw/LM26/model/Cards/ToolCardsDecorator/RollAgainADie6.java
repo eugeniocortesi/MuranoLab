@@ -16,6 +16,9 @@ public class RollAgainADie6 extends ToolCardDecorator {
     private boolean needPlacement=false;
     private DieInt die;
 
+    public RollAgainADie6() {
+    }
+
     public RollAgainADie6(ToolCard toolcard) {
         this.toolcard = toolcard;
         this.type="RollAgainADie6";

@@ -7,4 +7,7 @@ public abstract class ToolCardDecorator extends ToolCardInt {
     public String type = "ToolCardDecorator";
 
     public abstract void rewrite();
+
+    public ToolCardDecorator() {
+    }
 }

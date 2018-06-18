@@ -14,6 +14,9 @@ public class RollAllDraftDice7 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    public RollAllDraftDice7() {
+    }
+
     public RollAllDraftDice7(ToolCard toolcard) {
         this.toolcard = toolcard;
         this.type="RollAllDraftDice7";

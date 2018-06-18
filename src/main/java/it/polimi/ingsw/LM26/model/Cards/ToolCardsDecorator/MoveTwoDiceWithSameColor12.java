@@ -15,6 +15,8 @@ public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    public MoveTwoDiceWithSameColor12() {
+    }
 
     public MoveTwoDiceWithSameColor12(ToolCard toolcard) {
         this.toolcard = toolcard;

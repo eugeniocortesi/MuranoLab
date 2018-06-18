@@ -15,6 +15,8 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    public PlaceWithNotInProximities9() {
+    }
 
     public PlaceWithNotInProximities9(ToolCard toolcard) {
         this.toolcard = toolcard;

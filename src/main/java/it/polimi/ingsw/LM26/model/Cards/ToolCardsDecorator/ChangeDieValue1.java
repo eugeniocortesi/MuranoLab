@@ -11,6 +11,8 @@ public class ChangeDieValue1 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    public ChangeDieValue1() {
+    }
 
     public ChangeDieValue1(ToolCard toolcard) {
         this.toolcard = toolcard;

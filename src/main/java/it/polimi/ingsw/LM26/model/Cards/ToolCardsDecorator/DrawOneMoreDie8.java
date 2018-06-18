@@ -17,6 +17,9 @@ public class DrawOneMoreDie8 extends ToolCardDecorator {
     private boolean needPlacement=false;
     private boolean currentPlacement=false;
 
+    public DrawOneMoreDie8() {
+    }
+
     public DrawOneMoreDie8(ToolCard toolcard) {
         this.toolcard = toolcard;
         this.type="DrawOneMoreDie8";

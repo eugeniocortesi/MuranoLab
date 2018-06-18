@@ -40,26 +40,39 @@ public class Model extends ObservableSimple implements Serializable {
 
     private RoundTrackInt roundTrackInt;
 
-    private Bag bag;
+    private transient Bag bag;
 
     private DraftPool draftPool;
 
     private transient Decks decks;
 
-    private OnBoardCards onBoardCards;
+    private transient OnBoardCards onBoardCards;
 
     private transient Restrictions restrictions;
 
-    public Model() {
+    private ArrayList<Integer> toolList;
+
+    private ArrayList<Integer> publicList;
+
+    public Model(){
+        ;
+    }
+
+    public Model(String s ) {
+
+        this.publicList = new ArrayList<Integer>();
+        this.toolList = new ArrayList<Integer>();
 
         this.roundTrackInt = new RoundTrack();
         this.scoreTrackInt = new ScoreTrack();
         this.bag = new Bag();
         this.draftPool =new DraftPool();
-        this.onBoardCards= new OnBoardCards();
+        this.onBoardCards= new OnBoardCards(toolList, publicList);
         this.decks=singletonDecks();
         this.playerList=new ArrayList<PlayerZone>();
         this.restrictions=new Restrictions();
+
+
 
         //set playerList, scoreTrack
     }
@@ -112,6 +125,22 @@ public class Model extends ObservableSimple implements Serializable {
 
     public void setDraftPool(DraftPool draftPool) {
         this.draftPool = draftPool;
+    }
+
+    public ArrayList<Integer> getToolList() {
+        return toolList;
+    }
+
+    public void setToolList(ArrayList<Integer> toolList) {
+        this.toolList = toolList;
+    }
+
+    public ArrayList<Integer> getPublicList() {
+        return publicList;
+    }
+
+    public void setPublicList(ArrayList<Integer> publicList) {
+        this.publicList = publicList;
     }
 
     public PlayerZone getPlayer(String name){

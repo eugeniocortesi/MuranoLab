@@ -11,6 +11,9 @@ public class RollToTheOppositeFace10 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    public RollToTheOppositeFace10() {
+    }
+
     public RollToTheOppositeFace10(ToolCard toolcard) {
         this.toolcard = toolcard;
         this.type="RollToTheOppositeFace10";

@@ -12,6 +12,9 @@ public class Die extends DieInt {
 
     private int number;
 
+    public Die() {
+    }
+
     public static final String[] faces = {
             "\u2680",
             "\u2681",

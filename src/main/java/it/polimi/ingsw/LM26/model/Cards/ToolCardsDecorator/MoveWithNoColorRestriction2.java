@@ -15,6 +15,8 @@ public class MoveWithNoColorRestriction2 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
+    public MoveWithNoColorRestriction2() {
+    }
 
     public MoveWithNoColorRestriction2(ToolCard toolcard) {
         this.toolcard = toolcard;
