@@ -70,7 +70,7 @@ public class CliTest {
         System.out.println("insert 8 to for card 7 or 8");
         System.out.println("insert 7 to for card 6,10 or 11");
         System.out.println("Insert 9 to continue with card 11 ");
-        System.out.println("Insert 10 to continue with card 12 ");
+        System.out.println("Insert 10 for card 12 ");
         System.out.println("Insert 11 to pass the turn");
 
 
@@ -104,7 +104,7 @@ public class CliTest {
 
             Box[][] board = playing.getPlayerBoard().getBoardMatrix();
             event.setId(id);
-            event.setCard(model.getDecks().getToolCardDeck().get(card - 1));
+            event.setCardID(card);
             event.setFromBox1(board[line - 1][col - 1]);
             event.setPlayer(playing.getIDPlayer());
 
@@ -122,7 +122,7 @@ public class CliTest {
             ArrayList<Box> fromList = new ArrayList<Box>();
             ArrayList<Box> toList = new ArrayList<Box>();
             event.setId(id);
-            event.setCard(model.getDecks().getToolCardDeck().get(card - 1));
+            event.setCardID(card);
             event.setPlayer(playing.getIDPlayer());
             System.out.println("first movement ");
             line = askLine();
@@ -149,7 +149,7 @@ public class CliTest {
             line = askLine();
             col = askCol();
             die = askDie();
-            event.setCard(model.getDecks().getToolCardDeck().get(8));
+            event.setCardID(9);
             Box[][] board = playing.getPlayerBoard().getBoardMatrix();
             event.setId(id);
             event.setDieFromDraft(model.getDraftPool().getInDraft().get(die - 1));
@@ -163,7 +163,7 @@ public class CliTest {
             event.setId(id);
             card = askCard();
 
-            event.setCard(model.getDecks().getToolCardDeck().get(card - 1));
+            event.setCardID(card);
             event.setPlayer(playing.getIDPlayer());
 
             die = askDie();
@@ -176,7 +176,7 @@ public class CliTest {
 
             event.setId(id);
             event.setPlayer(playing.getIDPlayer());
-            event.setCard(model.getDecks().getToolCardDeck().get(0));
+            event.setCardID(1);
 
             die = askDie();
             event.setDieFromDraft(model.getDraftPool().getInDraft().get(die - 1));
@@ -193,7 +193,7 @@ public class CliTest {
 
             event.setId(id);
             event.setPlayer(playing.getIDPlayer());
-            event.setCard(model.getDecks().getToolCardDeck().get(4));
+            event.setCardID(5);
 
             die = askDie();
             event.setDieFromDraft(model.getDraftPool().getInDraft().get(die - 1));
@@ -215,7 +215,7 @@ public class CliTest {
             System.out.println("card 7 or 8?");
             event.setId(id);
             card = askCard();
-            event.setCard(model.getDecks().getToolCardDeck().get(card - 1));
+            event.setCardID(card);
             event.setPlayer(playing.getIDPlayer());
 
 
@@ -225,7 +225,7 @@ public class CliTest {
         if (id == 9) {
 
             event.setId(id);
-            event.setCard(model.getDecks().getToolCardDeck().get(10));
+            event.setCardID(11);
             event.setPlayer(playing.getIDPlayer());
             System.out.println("insert number to set on the die ");
             id = askId();
@@ -244,7 +244,7 @@ public class CliTest {
             ArrayList<Box> fromList = new ArrayList<Box>();
             ArrayList<Box> toList = new ArrayList<Box>();
             event.setId(id);
-            event.setCard(model.getDecks().getToolCardDeck().get(11));
+            event.setCardID(12);
             event.setPlayer(playing.getIDPlayer());
 
             System.out.println("insert number of turn");

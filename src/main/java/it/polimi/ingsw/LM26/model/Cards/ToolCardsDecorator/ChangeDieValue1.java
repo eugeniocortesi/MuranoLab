@@ -76,6 +76,7 @@ public class ChangeDieValue1 extends ToolCardDecorator {
 
     public boolean play (DieInt die, String inDeCrement) {
 
+        System.out.println("passo di qui 4" );
 
         if (inDeCrement == "increment") {
             if (die.getValue() == 6) {
@@ -96,7 +97,6 @@ public class ChangeDieValue1 extends ToolCardDecorator {
             die.dump();
             return true;
         }
-
         return false;
 
 

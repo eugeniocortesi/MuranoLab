@@ -8,6 +8,11 @@ import java.util.ArrayList;
 public interface PhaseInt extends Serializable{
 
     public void doAction(Game game, ArrayList<PlayerZone> playerList);
-    public void doAction( ArrayList<PlayerZone> playerList);
+
+    public void nextRound(Round round, Game game);
+
+    public Round getCurrentRound();
+
+    public int[] getTurn();
 }
 

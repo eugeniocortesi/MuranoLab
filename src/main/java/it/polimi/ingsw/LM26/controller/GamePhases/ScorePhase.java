@@ -11,6 +11,21 @@ public class ScorePhase implements PhaseInt{
         game.setPhase(new FinalPhase());
     }
 
+    @Override
+    public void nextRound(Round round, Game game) {
+
+    }
+
+    @Override
+    public Round getCurrentRound() {
+        return null;
+    }
+
+    @Override
+    public int[] getTurn() {
+        return new int[0];
+    }
+
     public void doAction(ArrayList<PlayerZone> playerList) {
 
     }

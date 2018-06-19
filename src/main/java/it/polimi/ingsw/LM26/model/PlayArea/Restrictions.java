@@ -4,6 +4,8 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 
 public class Restrictions {
 
+    private boolean tool8needPlacement=false;
+
     private boolean needPlacement=false;
 
     private DieInt die=null;
@@ -14,6 +16,8 @@ public class Restrictions {
 
     public void resetRestrictions(){
 
+        tool8needPlacement=false;
+
         needPlacement=false;
 
         die=null;
@@ -21,16 +25,15 @@ public class Restrictions {
         firstPart=false;
 
         currentPlacement=false;
-
     }
 
-    public boolean isNeedPlacement() {
-        return needPlacement;
-    }
+    public boolean isTool8needPlacement() { return tool8needPlacement; }
 
-    public void setNeedPlacement(boolean needPlacement) {
-        this.needPlacement = needPlacement;
-    }
+    public void setTool8needPlacement(boolean tool8needPlacement) { this.tool8needPlacement = tool8needPlacement; }
+
+    public boolean isNeedPlacement() { return needPlacement; }
+
+    public void setNeedPlacement(boolean needPlacement) { this.needPlacement = needPlacement; }
 
     public DieInt getDie() {
         return die;

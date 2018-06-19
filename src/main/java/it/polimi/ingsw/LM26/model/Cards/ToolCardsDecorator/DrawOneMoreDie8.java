@@ -93,7 +93,7 @@ public class DrawOneMoreDie8 extends ToolCardDecorator {
             //e fa il piazzamento extra per un totale di due azioni,
             // una standard e una extra
 
-            setNeedPlacement(true);
+            model.getRestrictions().setTool8needPlacement(true);
             return true;
 
                 //problemi:

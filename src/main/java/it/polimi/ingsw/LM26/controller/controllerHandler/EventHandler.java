@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.controller.controllerHandler;
 
+import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.ChangeDieWithTheBag11;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.DrawOneMoreDie8;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
@@ -26,59 +27,52 @@ public class EventHandler{
 
     }
 
-    private boolean handle(EventChecker eventChecker){
+    private boolean handle(EventChecker eventChecker) {
 
-        if (event.getId()==1)
-            if (eventChecker.check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {return true; }
-            else return false;
-        if (event.getId()==2)
-            if(eventChecker.check(event.getCard(), event.getFromBox1(), event.getToBox1(), event.getPlayer())) {return true;}
-            else return false;
-        if (event.getId()==3)
-            if(eventChecker.check(event.getCard(), event.getFromBoxList(), event.getToBoxList(),event.getPlayer())) {return true;}
-            else return false;
-        if (event.getId()==4)
-            if(eventChecker.check(event.getCard(), event.getDieFromDraft(), event.getToBox1(), event.getPlayer())) {return true;}
-            else return false;
-        if (event.getId()==5)
-            if(eventChecker.check(event.getCard(), event.getDieFromDraft(), event.getDieFromRoundTrack(), event.getPlayer())) {return true;}
-            else return false;
-        if (event.getId()==6)
-            if(eventChecker.check(event.getCard(), event.getDieFromDraft(), event.getInDeCrement(), event.getPlayer())) {return true;}
-            else return false;
-        if (event.getId()==7)
-            if(eventChecker.check(event.getCard(), event.getDieFromDraft(), event.getPlayer())) { return true;}
-            else return false;
-        if (event.getId()==8)
-            if(eventChecker.check(event.getCard(), event.getPlayer())) {return true;}
-            else return false;
-        if (event.getId()==9)
-            if(eventChecker.check(event.getCard(), event.getNumber(), event.getToBox1(), event.getPlayer())) {return true;}
-            else return false;
-        if (event.getId()==10)
-            if(eventChecker.check(event.getCard(), event.getDieFromRoundTrack(), event.getFromBoxList(), event.getToBoxList(), event.getPlayer())) {return true;}
-            else return false;
-        if (event.getId()==11) {
+        ToolCardInt toolCard;
+
+        if (event.getId() == 1)
+            return(eventChecker.check(event.getDieFromDraft(), event.getToBox1(), event.getPlayer()));
+
+        if (event.getCardID() != -1)
+            if (eventChecker.checkCard(event.getCardID())) {
+                toolCard = getToolCard();
+                if (event.getId() == 2)
+                    return (eventChecker.check(toolCard, event.getFromBox1(), event.getToBox1(), event.getPlayer()));
+                if (event.getId() == 3)
+                    return (eventChecker.check(toolCard, event.getFromBoxList(), event.getToBoxList(), event.getPlayer()));
+                if (event.getId() == 4)
+                    return(eventChecker.check(toolCard, event.getDieFromDraft(), event.getToBox1(), event.getPlayer()));
+                if (event.getId() == 5)
+                    return(eventChecker.check(toolCard, event.getDieFromDraft(), event.getDieFromRoundTrack(), event.getPlayer()));
+                if (event.getId() == 6)
+                    return (eventChecker.check(toolCard, event.getDieFromDraft(), event.getInDeCrement(), event.getPlayer()));
+                if (event.getId() == 7)
+                    return(eventChecker.check(toolCard, event.getDieFromDraft(), event.getPlayer()));
+                if (event.getId() == 8)
+                    return(eventChecker.check(toolCard, event.getPlayer()));
+                if (event.getId() == 9)
+                    return(eventChecker.check(toolCard, event.getNumber(), event.getToBox1(), event.getPlayer()));
+                if (event.getId() == 10)
+                    return(eventChecker.check(toolCard, event.getDieFromRoundTrack(), event.getFromBoxList(), event.getToBoxList(), event.getPlayer()));
+                }
+        if (event.getId() == 11) {
 
             System.out.println("i'll pass ");
-
-            RollAgainADie6 tool6=(RollAgainADie6)model.getDecks().getToolCardDeck().get(5);
-            if(tool6.isNeedPlacement()) tool6.setNeedPlacement(false);
-            DrawOneMoreDie8 tool8=(DrawOneMoreDie8)model.getDecks().getToolCardDeck().get(7);
-            if(tool8.isNeedPlacement()) tool6.setNeedPlacement(false);
-            if(tool8.isCurrentPlacement()) tool6.setNeedPlacement(false);
-            ChangeDieWithTheBag11 tool11=(ChangeDieWithTheBag11)model.getDecks().getToolCardDeck().get(10);
-            if(tool11.isNeedPlacement()) tool6.setNeedPlacement(false);
-
             return true;
         }
-        if (event.getId()==12)
+        if (event.getId() == 12)
             //view.showmenu;
             return false;
         return false;
-
     }
+
 
     public Boolean getResult() {
         return result; }
+
+    public ToolCardInt getToolCard(){
+
+        return model.getOnBoardCards().getToolCardList().get(event.getCardID()-1);
+    }
 }

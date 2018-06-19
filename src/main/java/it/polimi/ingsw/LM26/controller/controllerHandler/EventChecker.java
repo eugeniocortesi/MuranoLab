@@ -29,21 +29,21 @@ public class EventChecker {
     //che rifunzionino per il secondo turno di quel giocatore in quel round
     //ATTENZIONE prima di ogni piazzamento controllare che non abbia gia piazzato dadi in quel turno, esempio con una toolcard
 
+    //TODO
+    //check the card is one of the three sended
+
     public boolean check(DieInt dieFromDraft, Box toBox, int pl){
 
         PlayerZone player=model.getPlayerList().get(pl);
-        RollAgainADie6 tool6=(RollAgainADie6)model.getDecks().getToolCardDeck().get(5);
-        DrawOneMoreDie8 tool8=(DrawOneMoreDie8) model.getDecks().getToolCardDeck().get(7);
-        ChangeDieWithTheBag11 tool11=(ChangeDieWithTheBag11) model.getDecks().getToolCardDeck().get(10);
 
-        if(tool6.isNeedPlacement()){
-            if(!dieFromDraft.equals(tool6.getDieCard6())){
+        if(model.getRestrictions().isNeedPlacement()){
+            if(!dieFromDraft.equals(model.getRestrictions().getDie())){
                 System.out.println("must use the rolled die");
                 return false;
             }
         }
-        if(tool11.isNeedPlacement()){
-            if(!dieFromDraft.equals(tool11.getDieCard11())){
+        if(model.getRestrictions().isNeedPlacement()){
+            if(!dieFromDraft.equals(model.getRestrictions().getDie())){
                 System.out.println("must use the rolled die");
                 return false;
             }
@@ -62,20 +62,15 @@ public class EventChecker {
             player.getActionHistory().setDieUsed(true);
             player.getActionHistory().setPlacement(true);
 
-            if(tool6.isNeedPlacement()) {
-                tool6.setNeedPlacement(false);
-                tool6.removeDie();
+            if(model.getRestrictions().isCurrentPlacement()) {
+                model.getRestrictions().setTool8needPlacement(false);
+                model.getRestrictions().setCurrentPlacement(false);
             }
-            if(tool8.isCurrentPlacement()) {
-                tool8.setNeedPlacement(false);
-                tool8.setCurrentPlacement(false);
+            if(model.getRestrictions().isNeedPlacement()) {
+                model.getRestrictions().setNeedPlacement(false);
+                model.getRestrictions().setDie(null);
+                model.getRestrictions().setFirstPart(false);
             }
-            if(tool11.isNeedPlacement()) {
-                tool11.setNeedPlacement(false);
-                tool11.removeDie();
-                tool11.noFirstPart();
-            }
-
             return true;
         }
         else{
@@ -143,16 +138,17 @@ public class EventChecker {
     }
     public boolean check(ToolCardInt one, DieInt dieFromDraft, String inDeCrement, int player){
 
+        System.out.println("passo di qui 1" );
         PlayerZone pl=model.getPlayerList().get(player);
         if ( pl.getActionHistory().isCardUsed() ) return false;
 
         if(checkToken(model.getPlayerList().get(player),one))
-
+            System.out.println("passo di qui 2" );
             if(one.play(dieFromDraft, inDeCrement)) {
                 pl.getActionHistory().setCardUsed(true);
                 return true;
             }
-
+        System.out.println("passo di qui 3" );
         return false;
     }
     public boolean check(ToolCardInt sixTenEleven, DieInt dieFromDraft, int player){
@@ -193,17 +189,17 @@ public class EventChecker {
         return false;
     }
 
-    public boolean check(ToolCardInt eleven, DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player){
+    public boolean check(ToolCardInt twelve, DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player){
 
         PlayerZone pl=model.getPlayerList().get(player);
         if ( pl.getActionHistory().isCardUsed()) {
             System.out.println("Action already done ");
             return false;}
-        if(model.getRoundTrackInt().getRoundTrackTurnList().size()<1)return false;
+        if(model.getRoundTrackInt().getRoundTrackTurnList().isEmpty())return false;
 
-        if(checkToken(model.getPlayerList().get(player),eleven))
+        if(checkToken(model.getPlayerList().get(player),twelve))
 
-            if(eleven.play(fromRoundTrack, fromBoxList, toBoxList, player)){
+            if(twelve.play(fromRoundTrack, fromBoxList, toBoxList, player)){
                 pl.getActionHistory().setCardUsed(true);
                 return true;}
 
@@ -215,6 +211,13 @@ public class EventChecker {
 
 
         return false;
+    }
+
+    public boolean checkCard(int i){
+        if(model.getOnBoardCards().getToolCardList().contains(model.getDecks().getToolCardDeck().get(i-1)))
+            return true;
+        else System.out.println("this card is not one of the selected ones");
+        return false ;
     }
 
     public boolean checkToken(PlayerZone player, ToolCardInt toolCard){
