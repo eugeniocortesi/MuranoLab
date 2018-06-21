@@ -24,6 +24,7 @@ public class UpdatesHandler implements Observer {
     @Override
     public void updateAction(ActionEvent actionEvent) {
 
+        System.out.println("Arrived action event");
         controller.setActionEvent(actionEvent);
 
     }

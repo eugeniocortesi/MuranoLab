@@ -218,11 +218,11 @@ public class ClientViewSocket extends ClientView {
 
         m.getDraftPool().getInDraft().forEach(number -> {System.out.println(number.getNumber());});
 
-        System.out.println("TOOL LIST");
-        m.getToolList().forEach( n -> {System.out.println(n);});
+       System.out.println("TOOL LIST");
+        m.getOnBoardCards().getToolArrayList().forEach( n -> {System.out.println(n);});
 
-        System.out.println("PUBLIC LIST");
-        m.getPublicList().forEach( b -> {System.out.println(b);});
+       /* System.out.println("PUBLIC LIST");
+        m.getPublicList().forEach( b -> {System.out.println(b);});*/
 
 
         super.notify(m);

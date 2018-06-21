@@ -178,8 +178,8 @@ public class ClientViewRMI extends ClientView {
 
         //TODO DELETE
         System.out.print("On boards Tool cards: " );
-        for(int j=0; j<m.getOnBoardCards().getToolCardList().size(); j++)
-            System.out.print(m.getOnBoardCards().getToolCardList().get(j).getNum()+  " ");
+        for(int j=0; j<m.getOnBoardCards().getToolArrayList().size(); j++)
+            System.out.print(m.getOnBoardCards().getToolArrayList().get(j) +  " ");
         System.out.print("\n");
         super.notify(m);
     }

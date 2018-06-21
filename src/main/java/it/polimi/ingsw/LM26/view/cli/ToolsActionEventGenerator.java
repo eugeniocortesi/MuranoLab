@@ -12,7 +12,7 @@ public class ToolsActionEventGenerator {
 
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private String input;
-    private ConsoleTools cTools;
+    private ConsoleTools cTools = new ConsoleTools();
 
 
     public DieInt askForDie(boolean draftP){

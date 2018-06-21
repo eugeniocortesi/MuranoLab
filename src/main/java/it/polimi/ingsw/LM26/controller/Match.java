@@ -64,7 +64,7 @@ public class Match {
                 System.out.println("DraftPool");
                 model.getDraftPool().printDraftPool();
 
-                //controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
+                controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
 
                 waitCorrectPlayer();
 

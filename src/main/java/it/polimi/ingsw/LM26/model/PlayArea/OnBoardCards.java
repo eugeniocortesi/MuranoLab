@@ -15,26 +15,21 @@ public class OnBoardCards implements Serializable {
 
     private ArrayList<ObjectivePublicCard>  objectivePublicCardList;
 
-    private ArrayList<ToolCardInt>  toolCardList;
+    private transient ArrayList<ToolCardInt>  toolCardList;
 
     private ArrayList<Integer> toolArrayList;
 
-    private ArrayList<Integer> publicArrayList;
-
-    public OnBoardCards(){
-        ;
-    }
+    //private transient ArrayList<Integer> publicArrayList;
 
 
-    public OnBoardCards(ArrayList<Integer> toolArrayList, ArrayList<Integer> publicArrayList) {
+    public OnBoardCards() {
 
         this.objectivePublicCardList =new ArrayList<ObjectivePublicCard>() ;
 
         this.toolCardList = new ArrayList<ToolCardInt>();
 
-        this.toolArrayList = toolArrayList;
-
-        this.publicArrayList = publicArrayList;
+        //this.publicArrayList = new ArrayList<Integer>();
+        this.toolArrayList = new ArrayList<Integer>();
 
         setPublicCards();
 
@@ -51,6 +46,10 @@ public class OnBoardCards implements Serializable {
 
     public void setObjectivePublicCardList(ArrayList<ObjectivePublicCard> objectivePublicCardList) {
         this.objectivePublicCardList = objectivePublicCardList;
+    }
+
+    public ArrayList<Integer> getToolArrayList() {
+        return toolArrayList;
     }
 
     public void setToolCardList(ArrayList<ToolCardInt> toolCardList) {
@@ -73,7 +72,7 @@ public class OnBoardCards implements Serializable {
             if (!card.isInUse()) {
                 card.setInUse(true);
                 this.getObjectivePublicCardList().add(card);
-                publicArrayList.add(index+1);
+                //publicArrayList.add(index+1);
             } else {
                 i--;
             }
@@ -85,10 +84,10 @@ public class OnBoardCards implements Serializable {
             System.out.print(objectivePublicCardList.get(j).getId()+  " ");
         System.out.print("\n");
 
-        System.out.print("On boards Public cards: " );
+        /*System.out.print("On boards Public cards: " );
         for(int j=0; j<publicArrayList.size(); j++)
             System.out.print( publicArrayList.get(j) + " ");
-        System.out.print("\n");
+        System.out.print("\n");*/
 
     }
 
