@@ -38,7 +38,7 @@ public abstract class ClassMessage {
                     LOGGER.log(Level.INFO,value);
                     return value;
                 } else{
-                    System.out.println("NISBA");
+                    LOGGER.log(Level.INFO,"null");
                 }
             }
         } catch (IOException e) {
@@ -60,4 +60,5 @@ public abstract class ClassMessage {
     }
 
     public abstract void accept(VisitorInt visitorInt);
+
 }

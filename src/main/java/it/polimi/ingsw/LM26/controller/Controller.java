@@ -11,6 +11,9 @@ import it.polimi.ingsw.LM26.systemNetwork.serverNet.ViewGameInterface;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
@@ -28,13 +31,19 @@ public class Controller implements ControllerInt{
 
     private Boolean gameIsGoing;
 
-    private ActionEvent event;
+    private ConcurrentLinkedQueue<ActionEvent> queueEvent;
+
+    //private ActionEvent event;
+
+    private static final Logger LOGGER = Logger.getLogger(Controller.class.getName());
 
     public Controller() {
 
         this.model = singletonModel();
 
         gameIsGoing = false;
+
+        queueEvent = new ConcurrentLinkedQueue<ActionEvent>();
 
     }
 
@@ -62,9 +71,15 @@ public class Controller implements ControllerInt{
 
     public UpdatesHandler getUpdatesHandler() { return updatesHandler; }
 
-    public void setActionEvent(ActionEvent event) { this.event = event; }
+    public void setActionEvent(ActionEvent event) {
+        queueEvent.add(event);
+        //this.event = event;
+        LOGGER.log(Level.SEVERE,"a new event has been setted: "+ event);
+    }
 
-    public ActionEvent getActionEvent() { return event; }
+    public ActionEvent getActionEvent() {
+        //return this.event;
+        return queueEvent.poll(); }
 
     @Override
     public boolean handler(ActionEvent event) {
@@ -104,6 +119,7 @@ public class Controller implements ControllerInt{
     public void newMatch(Model model, ControllerInt controller){
 
         this.match=new Match(model, controller);
+        match.start();
 
     }
 

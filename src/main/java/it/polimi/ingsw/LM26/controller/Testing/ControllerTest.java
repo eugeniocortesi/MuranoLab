@@ -110,7 +110,9 @@ public class ControllerTest implements ControllerInt {
 
     }
 
-    public ActionEvent getActionEvent() { return event;
+    public ActionEvent getActionEvent() {
+        System.out.println("event got from controllerTest");
+        return event;
     }
 
 

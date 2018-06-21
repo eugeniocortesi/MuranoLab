@@ -2,9 +2,13 @@ package it.polimi.ingsw.LM26.controller;
 
 import it.polimi.ingsw.LM26.observers.serverController.*;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class UpdatesHandler implements Observer {
 
     Controller controller;
+    private static final Logger LOGGER = Logger.getLogger(UpdatesHandler.class.getName());
 
     public UpdatesHandler(Controller controller) {this.controller= controller;
     }
@@ -24,7 +28,8 @@ public class UpdatesHandler implements Observer {
     @Override
     public void updateAction(ActionEvent actionEvent) {
 
-        System.out.println("Arrived action event");
+        LOGGER.log(Level.INFO,"Arrived action event "+ actionEvent);
+
         controller.setActionEvent(actionEvent);
 
     }
@@ -32,7 +37,7 @@ public class UpdatesHandler implements Observer {
     @Override
     public void updateWindowPattern(ActionEventWindow actionEventWindow) {
 
-        System.out.println("Notify window arrived");
+        LOGGER.log(Level.INFO,"Notify window arrived");
         controller.getSetupHandler().assignWindowCard(actionEventWindow.getName(), actionEventWindow.getWindowPatternCard());
     }
 
@@ -50,12 +55,12 @@ public class UpdatesHandler implements Observer {
         //There are 2 players and timer end -> begin game
         if(timerEnd.getName().equals("ready") && timerEnd.getTimerEnd()){
 
-            System.out.println("Game start!");
+            LOGGER.log(Level.INFO,"Game start!");
 
         }
         //A player has end his time to do the action
         else if(timerEnd.getTimerEnd()){
-            System.out.println(timerEnd.getName()+ " client has finished his time");
+            LOGGER.log(Level.INFO,timerEnd.getName()+ " client has finished his time");
             //The current player has finished  his time
             //TODO esci dal while e passa il turno
             //timerEnd.getName(); nome di chi ha finito il tempo per la mossa

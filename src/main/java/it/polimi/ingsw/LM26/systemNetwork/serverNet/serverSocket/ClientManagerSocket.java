@@ -183,7 +183,7 @@ public class ClientManagerSocket extends ClientManager {
         LOGGER.log(Level.SEVERE,"server is asking a window pattern");
         WindowInitialMessage windowInitialMessage= new WindowInitialMessage("send_windowlist", user, id, windowDeck);
         sendMessage(windowInitialMessage.serializeClassMessage());
-        timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
+        //timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
     }
 
     @Override
@@ -193,7 +193,7 @@ public class ClientManagerSocket extends ClientManager {
 
         server.getQueueController().pushMessage(actionEventWindow);
 
-        timerTaskActionPlayers.setArrivedMessage(true);
+        //timerTaskActionPlayers.setArrivedMessage(true);
         //TODO ATTENTION LISTEN!
         //server.sendToObservable(actionEventWindow);
         listenerClientManager.listen();
@@ -229,7 +229,7 @@ public class ClientManagerSocket extends ClientManager {
     @Override
     public void sendActionEventFromView(ActionEvent actionEvent) {
         LOGGER.log(Level.SEVERE,"I have received one actionEvent from "+user);
-        timerTaskActionPlayers.setArrivedMessage(true);
+        //timerTaskActionPlayers.setArrivedMessage(true);
         server.getQueueController().pushMessage(actionEvent);
         listenerClientManager.listen();
     }
@@ -250,8 +250,8 @@ public class ClientManagerSocket extends ClientManager {
         LOGGER.log(Level.SEVERE,"server is sending playerzone of " + name);
         BeginTurnMessage beginTurnMessage = new BeginTurnMessage("send_beginturnmessage", name, playerZone);
         sendMessage(beginTurnMessage.serializeClassMessage());
-        timerPlayers.resetTimerActionPlayer();
-        timerPlayers.scheduleTimerActionPlayer(user);
+        //timerPlayers.resetTimerActionPlayer();
+        //timerPlayers.scheduleTimerActionPlayer(user);
         //listenerClientManager.listen();
     }
 

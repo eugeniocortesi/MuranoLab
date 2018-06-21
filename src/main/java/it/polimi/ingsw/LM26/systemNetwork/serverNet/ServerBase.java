@@ -74,9 +74,6 @@ public class ServerBase extends ViewGameInterface {
         visitor = new VisitorMessage();
         receiver = new Receiver(queueController, visitor);
 
-
-
-
     }
 
     public void startAcceptor(Observer controller, ObservableSimple model){

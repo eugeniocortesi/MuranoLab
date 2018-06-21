@@ -16,11 +16,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
 import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
 
-public class Match {
+public class Match extends Thread {
 
     private PlayerZone playing;
     private boolean result = false;
@@ -29,7 +31,8 @@ public class Match {
     private Game game;
     private ControllerInt controller;
     private CliTest cli;
-
+    private static final Logger LOGGER = Logger.getLogger(Match.class.getName());
+    private ActionEvent event;
 
     public Match(Model model, ControllerInt controller) {
 
@@ -41,8 +44,12 @@ public class Match {
         this.model = model;
         this.model.hasChanged();
 
-        play();
+        //play();
 
+    }
+
+    public void run(){
+        play();
     }
 
     public void play() {
@@ -59,7 +66,7 @@ public class Match {
                 // X4 setPlayerMenu(String name, PlayerZone player)
 
                 //TODO DELETE
-                System.out.println(playing.getName() + " is playing ");
+                LOGGER.log(Level.SEVERE, playing.getName() + " is playing ");
                 playing.getPlayerBoard().printCard();
                 System.out.println("DraftPool");
                 model.getDraftPool().printDraftPool();
@@ -67,6 +74,7 @@ public class Match {
                 controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
 
                 waitCorrectPlayer();
+                LOGGER.log(Level.WARNING, "Action event and player ok");
 
                 if(playing.getPlayerState()!=STANDBY) {
 
@@ -181,16 +189,23 @@ public class Match {
 
     public void waitCorrectPlayer(){
 
-        while (controller.getActionEvent()== null && playing.getPlayerState()!=STANDBY)
+        ActionEvent event = controller.getActionEvent();
+        LOGGER.log(Level.WARNING, "Event match: " + event);
+        if(playing.getPlayerState()!= STANDBY)
+        LOGGER.log(Level.WARNING, "playing is ok");
+        while (event == null && playing.getPlayerState()!=STANDBY){
+            event = controller.getActionEvent();
+        }
+            LOGGER.log(Level.WARNING,"exit while ");
 
             //TODO DELETE
-            cli.ask(playing);
+            //cli.ask(playing);
             //view.showWrongPlayer();
 
         if (playing.getPlayerState() != STANDBY)
-            while (controller.getActionEvent().getPlayer()!=playing.getIDPlayer() && playing.getPlayerState()!=STANDBY) {
-                controller.setActionEvent(null);
-                while (controller.getActionEvent() == null && playing.getPlayerState()!=STANDBY)
+            while (event.getPlayer()!=playing.getIDPlayer() && playing.getPlayerState()!=STANDBY) {
+                event = controller.getActionEvent();
+                while (event == null && playing.getPlayerState()!=STANDBY)
                     System.out.println("entering here");
                     //view.showWrongPlayer();
                     ;

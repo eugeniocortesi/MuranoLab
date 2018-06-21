@@ -2,10 +2,14 @@ package it.polimi.ingsw.LM26.observers.serverController;
 
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ClassMessage;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Receiver extends Thread{
 
     MessageQueue messageQueue;
     VisitorInt visitorInt;
+    private static final Logger LOGGER = Logger.getLogger(Receiver.class.getName());
 
     public Receiver(MessageQueue messageQueue, VisitorInt visitorInt){
         this.messageQueue = messageQueue;
@@ -22,13 +26,13 @@ public class Receiver extends Thread{
             message = messageQueue.pullMessage();
         }
 
-        System.out.println("FOUND Message");
+        LOGGER.log(Level.WARNING,"FOUND Message");
         message.accept(visitorInt);
         execute();
     }
 
     public void run(){
-        System.out.println("RECEIVER STARTED");
+        LOGGER.log(Level.WARNING,"RECEIVER STARTED");
         execute();
     }
 }
