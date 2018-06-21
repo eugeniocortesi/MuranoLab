@@ -25,7 +25,7 @@
                <HBox.margin>
                   <Insets />
                </HBox.margin></TextField>
-            <Button id="bLogin" mnemonicParsing="false" onAction="#handleClick" text="Login" />
+            <Button id="bLogin" fx:id="bLogin" mnemonicParsing="false" onAction="#handleClick" text="Login" />
          </children>
          <GridPane.margin>
             <Insets top="60.0" />

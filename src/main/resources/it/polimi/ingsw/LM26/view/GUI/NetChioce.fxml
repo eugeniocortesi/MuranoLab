@@ -46,7 +46,7 @@
       </GridPane>
       <AnchorPane prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button layoutX="175.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleRmiSocketButton" prefWidth="40.0" text="Ok" AnchorPane.topAnchor="14.0">
+            <Button fx:id="ok" layoutX="175.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleRmiSocketButton" prefWidth="40.0" text="Ok" AnchorPane.topAnchor="14.0">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>

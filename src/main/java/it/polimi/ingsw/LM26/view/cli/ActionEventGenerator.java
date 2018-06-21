@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ActionEventGenerator {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    ConsoleTools cTools;
+    ConsoleTools cTools=new ConsoleTools();
     ToolsActionEventGenerator tceGenerator = new ToolsActionEventGenerator();
 
     /**

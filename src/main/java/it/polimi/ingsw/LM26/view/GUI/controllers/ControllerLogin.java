@@ -27,6 +27,7 @@ public class ControllerLogin implements ViewControllerInt {
 
      public void loggedScreen(){
           label.setText("Utente iscritto con successo");
+          bLogin.setDisable(true);
      }
 
      public void alreadyLoggedScreen(){

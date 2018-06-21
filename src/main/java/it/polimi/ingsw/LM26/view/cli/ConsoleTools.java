@@ -206,7 +206,7 @@ public class ConsoleTools {
     public void printToolCardsOnBoard(){
         for(int i=0; i<model.getOnBoardCards().getToolCardList().size(); i++ ){
             System.out.println("CARTA UTENSILE");
-            switch (model.getOnBoardCards().getToolCardList().get(i).getNum()){
+            switch (model.getOnBoardCards().getToolCardList().get(i)){
                 case 1: {System.out.println("Pinza Sgrossatrice\n\n" +
                         "Dopo aver scelto un dado, aumenta o dominuisci il valore del dado scelto di 1\n" +
                         "Non puoi cambiare un 6 in 1 o un 1 in 6"); break;}
