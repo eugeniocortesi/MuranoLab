@@ -49,7 +49,7 @@ public class GameController {
             imView.setImage(im);
         }
         for(int i=0; i<obc.getToolCardList().size(); i++){
-            im=imageManager.getToolCard(obc.getToolCardList().get(i).getNum());
+            im=imageManager.getToolCard(obc.getToolArrayList().get(i));
             imView=(ImageView)cardsOnBoard.getChildren().get(i+obc.getObjectivePublicCardList().size());
             imView.setImage(im);
         }

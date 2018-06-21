@@ -33,6 +33,7 @@ public class ActionEventGenerator {
     public ActionEvent loseTurn(){
         ActionEvent ae=new ActionEvent();
         ae.setNoAction(true);
+        ae.setPlayer(ConsoleTools.id);
         ae.setId(11);
         return ae;
     }
@@ -45,6 +46,7 @@ public class ActionEventGenerator {
         while(!tceGenerator.askEndMove()){}
         ActionEvent a= new ActionEvent();
         a.setId(12);
+        a.setPlayer(ConsoleTools.id);
         a.setMenu(true);
         return a;
     }

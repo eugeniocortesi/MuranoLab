@@ -1,5 +1,7 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientBase;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,11 +19,21 @@ public class ControllerNetChoice {
     @FXML
     private ToggleGroup connection;
 
+    ClientView clientView;
+    ClientBase clientBase;
+
+
+
     //it returns the label on the radio button
-    public String handleRmiSocketButton(ActionEvent event){
+    public void handleRmiSocketButton(ActionEvent event){
         RadioButton selected= (RadioButton)connection.getSelectedToggle();
         System.out.println(selected.getText());
         ok.setDisable(true);
-        return selected.getText();
+        if(selected.getText().equals("RMI")){
+
+        }
+        else{
+
+        }
     }
 }
