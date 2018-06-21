@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.model.PlayArea;
 
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import java.io.Serializable;
@@ -129,6 +130,34 @@ public class OnBoardCards implements Serializable {
             System.out.println(n);
         });
     }
+
+    public ArrayList<WindowPatternCard> getFourWindowPattern(){
+
+        Decks decks = singletonDecks();
+
+        ArrayList<WindowPatternCard> temp = new ArrayList<WindowPatternCard>();
+        ArrayList<WindowPatternCard> four = new ArrayList<WindowPatternCard>();
+
+        temp.addAll(decks.getWindowPatternCardDeck());
+
+        int count= temp.size();
+
+        for (int j = 0; j < 4; j++) {
+
+            Random rand = new Random();
+            int index = rand.nextInt(count);
+            while (temp.get(index).isInUse() == true) {
+                rand = new Random();
+                index = rand.nextInt(count);
+            }
+            temp.get(index).setInUse(true);
+            four.add(temp.get(index));
+            temp.remove(index);
+            count = temp.size();
+        }
+        return four;
+    }
+
 
 
 }

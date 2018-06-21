@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.model.Cards;
 
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Elements.elements;
 
 import static it.polimi.ingsw.LM26.model.Serialization.Elements.elements.*;
@@ -10,6 +11,8 @@ public class ObjectivePrivateCard extends CardInt {
     private elements colour= null;
 
     private boolean inUse= false;
+
+    private PlayerZone player;
 
     int id;
 
@@ -50,6 +53,10 @@ public class ObjectivePrivateCard extends CardInt {
     public int getId() {
         return id;
     }
+
+    public PlayerZone getPlayer() { return player; }
+
+    public void setPlayer(PlayerZone player) { this.player = player; }
 
     public void printCard(){
 

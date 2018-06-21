@@ -73,6 +73,11 @@ public class EventHandler{
 
     public ToolCardInt getToolCard(){
 
-        return model.getOnBoardCards().getToolCardList().get(event.getCardID()-1);
+       int i=0;
+       while(model.getOnBoardCards().getToolCardList().get(i).getNum()==event.getCardID()-1){
+           i++;
+       }
+       return model.getOnBoardCards().getToolCardList().get(event.getCardID()-1);
+
     }
 }
