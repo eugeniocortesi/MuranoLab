@@ -379,22 +379,22 @@ public class ConsoleTools {
             else{
                 switch(n){
                     case 1: for(int i : dcolored){
-                        if(dieList.get(i).getValue()==1) return i;
+                        if(dieList.get(i).getNumber()==1) return i;
                     }  break;
                     case 2:for(int i : dcolored){
-                        if(dieList.get(i).getValue()==2) return i;
+                        if(dieList.get(i).getNumber()==2) return i;
                     }  break;
                     case 3:for(int i : dcolored){
-                        if(dieList.get(i).getValue()==3) return i;
+                        if(dieList.get(i).getNumber()==3) return i;
                     }  break;
                     case 4:for(int i : dcolored){
-                        if(dieList.get(i).getValue()==4) return i;
+                        if(dieList.get(i).getNumber()==4) return i;
                     }  break;
                     case 5:for(int i : dcolored){
-                        if(dieList.get(i).getValue()==5) return i;
+                        if(dieList.get(i).getNumber()==5) return i;
                     }  break;
                     case 6:for(int i : dcolored){
-                        if(dieList.get(i).getValue()==6) return i;
+                        if(dieList.get(i).getNumber()==6) return i;
                     } break;
                     default:{System.out.println("err4");
                         return -1;//if the number is 0 or >6

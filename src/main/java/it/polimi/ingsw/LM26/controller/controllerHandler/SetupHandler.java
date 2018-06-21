@@ -35,7 +35,7 @@ public class SetupHandler {
 
     }
 
-    public ArrayList<WindowPatternCard> createWindowPattern(){
+    /*public ArrayList<WindowPatternCard> createWindowPattern(){
         ArrayList<WindowPatternCard> temp = new ArrayList<WindowPatternCard>();
         ArrayList<WindowPatternCard> four = new ArrayList<WindowPatternCard>();
 
@@ -57,7 +57,7 @@ public class SetupHandler {
             count = temp.size();
         }
         return four;
-    }
+    }*/
 
     public void assignWindowCard(String name, WindowPatternCard windowPatternCard){
 

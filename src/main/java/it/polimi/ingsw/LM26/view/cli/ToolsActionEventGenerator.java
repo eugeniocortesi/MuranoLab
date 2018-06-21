@@ -33,7 +33,9 @@ public class ToolsActionEventGenerator {
                 n=v[0];
             }
             if(n!=-1 && n!=-2 && n!=-3) dieOk=true;
-            else System.out.println("dado non presente, riprova!");
+            else {
+                System.out.println("dado non presente, riprova!");
+            }
         }
         return ConsoleTools.model.getDraftPool().getInDraft().get(n);
     }

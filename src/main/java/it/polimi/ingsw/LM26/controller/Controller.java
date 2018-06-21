@@ -142,6 +142,7 @@ public class Controller implements ControllerInt{
             }
             model.getDecks().getObjectivePrivateCardDeck().get(index).setInUse(true);
             server.showPrivateCard(model.getPlayerList().get(j).getName(), model.getDecks().getObjectivePrivateCardDeck().get(index));
+            model.getDecks().getObjectivePrivateCardDeck().get(index).setPlayer(model.getPlayerList().get(j));
         }
 
     }
@@ -149,7 +150,8 @@ public class Controller implements ControllerInt{
     public void setupWindowCard(){
 
         for(int i=0; i< model.getPlayerList().size(); i++){
-            ArrayList<WindowPatternCard> windowlist = setupHandler.createWindowPattern();
+            //ArrayList<WindowPatternCard> windowlist = setupHandler.createWindowPattern();
+            ArrayList<WindowPatternCard> windowlist = model.getOnBoardCards().getFourWindowPattern();
 
             //TODO DELETE
             System.out.println(windowlist.size());
