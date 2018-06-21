@@ -62,7 +62,7 @@ public class EventHandler{
             return true;
         }
         if (event.getId() == 12)
-            //view.showmenu;
+            //controller.getViewGameInterface().showMenu();
             return false;
         return false;
     }

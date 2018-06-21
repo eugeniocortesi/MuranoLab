@@ -126,9 +126,9 @@ public class Match extends Thread {
 
         while (!result) {
 
-            waitCorrectPlayer();
+
             if (playing.getPlayerState() != STANDBY) {
-                if (controller.handler(controller.getActionEvent())) {
+                if (controller.handler(event)) {
                     System.out.println("done");
                     playing.getPlayerBoard().printCard();
                     System.out.println("DraftPool");
@@ -136,9 +136,10 @@ public class Match extends Thread {
                     // view.showOK()
                     model.hasChanged();
                     result = true;
-                } else System.out.println("match error 1 ");
-
-                controller.setActionEvent(null);
+                } else {
+                    System.out.println("match error 1 ");
+                    waitCorrectPlayer();
+                }
 
                 //view.showNO()
 
@@ -153,9 +154,8 @@ public class Match extends Thread {
 
         while (!result) {
 
-            waitCorrectPlayer();
             if (playing.getPlayerState() != STANDBY) {
-                if (controller.handler(controller.getActionEvent())) {
+                if (controller.handler(event)) {
                     System.out.println("done");
                     playing.getPlayerBoard().printCard();
                     System.out.println("DraftPool");
@@ -168,15 +168,18 @@ public class Match extends Thread {
                         playing.getActionHistory().setFreezed(true);
                         System.out.println("choose another die");
                         model.hasChanged();
+                        waitCorrectPlayer();
 
                     } else {
                         model.hasChanged();
                         result = true;
                     }
-                } else
+                } else {
                     System.out.println("match error 2 ");
+                    waitCorrectPlayer();
 
-                controller.setActionEvent(null);
+                }
+
                 model.getRestrictions().resetRestrictions();
 
                 //view.showNO()
@@ -189,7 +192,7 @@ public class Match extends Thread {
 
     public void waitCorrectPlayer(){
 
-        ActionEvent event = controller.getActionEvent();
+        event = controller.getActionEvent();
         LOGGER.log(Level.WARNING, "Event match: " + event);
         if(playing.getPlayerState()!= STANDBY)
         LOGGER.log(Level.WARNING, "playing is ok");
