@@ -100,6 +100,22 @@ public class InitialPhase implements PhaseInt {
 
     }
 
+    @Override
+    public void nextRound(Round round, Game game) {
+
+    }
+
+    @Override
+    public Round getCurrentRound() {
+        return null;
+    }
+
+    @Override
+    public int[] getTurn() {
+
+        return null;
+    }
+
     public void doAction(ArrayList<PlayerZone> playerList) {
 
     }

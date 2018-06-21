@@ -96,7 +96,7 @@ public class RollAgainADie6 extends ToolCardDecorator {
         Model model = singletonModel();
         ArrayList<DieInt> inDraft = model.getDraftPool().getInDraft();
         PlayerZone player = model.getPlayerList().get(pl);
-
+        System.out.println("passo di qui 4" );
 
         dieFromDraft.roll();
         dieFromDraft.dump();
@@ -106,8 +106,8 @@ public class RollAgainADie6 extends ToolCardDecorator {
 
 
         else {
-            setNeedPlacement(true);
-            this.die = dieFromDraft;
+            model.getRestrictions().setNeedPlacement(true);
+            model.getRestrictions().setDie(dieFromDraft);
 
         }
         return true;

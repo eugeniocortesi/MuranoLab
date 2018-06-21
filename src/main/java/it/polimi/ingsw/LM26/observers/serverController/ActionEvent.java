@@ -10,19 +10,20 @@ import java.util.ArrayList;
 
 public class ActionEvent extends ClassMessage implements Serializable {
 
-    private int ID=1;
+    private int ID;
     private int player;
     private int number;
     private Box fromBox1=null;
     private Box toBox1=null;
+    private int CardID=-1;
 
     //TODO DELETE
     private Box fromBox2=null;
     private Box toBox2=null;
+    private ToolCardInt card=null;
 
     private ArrayList<Box> fromBoxList=null;
     private ArrayList<Box> toBoxList=null;
-    private ToolCardInt card=null;
     private DieInt dieFromDraft=null;
     private DieInt dieFromRoundTrack=null;
     private String inDeCrement=null;
@@ -31,24 +32,26 @@ public class ActionEvent extends ClassMessage implements Serializable {
 
 
         /*
+        CardID is from 1 not 0!
+
         event 1: place die. to set: DieFromDraf, ToBox1, Player.
-        event 2: use card 2, 3. to set: Card, FromBox1, ToBox1, Player.
-        event 3: use card 4. to set: Card,  ArrayList FromBox, ArrayList ToBox Player.
-        event 4: use card 9. to set: Card, DieFromDraft, ToBox1, Player.
-        event 5: use card 5. to set: Card, DieFromDraft, DieFromRoundTrack, Player.
-        event 6: use card 1. to set: Card, DieFromDraft, InDeCrement, Player.
-        event 7: use card 6, 10, 11. to set: Card, DieFromDraft, Player.
-        event 8: use card 7,8. to set: Card, Player.
-        event 9: use card 11. to set: Card, number, toBox1; (second action pf card 11)
-        event 10: use card 12. to set: Card, DieFromRoundTrack, ArrayList FromBox, ArrayList ToBox
+        event 2: use card 2, 3. to set: CardInt, FromBox1, ToBox1, Player.
+        event 3: use card 4. to set: CardInt,  ArrayList FromBox, ArrayList ToBox Player.
+        event 4: use card 9. to set: CardInt, DieFromDraft, ToBox1, Player.
+        event 5: use card 5. to set: CardInt, DieFromDraft, DieFromRoundTrack, Player.
+        event 6: use card 1. to set: CardInt, DieFromDraft, InDeCrement, Player.
+        event 7: use card 6, 10, 11. to set: CardInt, DieFromDraft, Player.
+        event 8: use card 7,8. to set: CardInt, Player.
+        event 9: use card 11. to set: CardInt, number, toBox1; (second action pf card 11)
+        event 10: use card 12. to set: CardInt, DieFromRoundTrack, ArrayList FromBox, ArrayList ToBox
         event 11: no action: set boolean.
-        event 12: ask menu: set boolean.
+        event 12: ask menu: player, set boolean.
         */
 
-        //TODO
-    // ID=1 di default
-    // setta l'impostazione degli in ID in setCard,
-    //ID=9 se viene settato no action
+
+    public int getCardID() { return CardID; }
+
+    public void setCardID(int cardID) { CardID = cardID; }
 
     public int getId() { return ID; }
 
@@ -126,7 +129,7 @@ public class ActionEvent extends ClassMessage implements Serializable {
 
     public Boolean getMenu() { return menu; }
 
-    public void setMenu(Boolean menu) { this.menu = menu; ID=11; }
+    public void setMenu(Boolean menu) { this.menu = menu; }
 
     public Boolean getNoAction() { return noAction; }
 
@@ -150,12 +153,7 @@ public class ActionEvent extends ClassMessage implements Serializable {
         this.toBoxList = toBoxList;
     }
 
-    public void setNoAction(Boolean noAction) {
-
-        this.noAction = noAction;
-
-        if(noAction==false) ID=10;
-    }
+    public void setNoAction(Boolean noAction) { this.noAction = noAction; }
 
     @Override
     public void accept(VisitorInt visitorInt) {

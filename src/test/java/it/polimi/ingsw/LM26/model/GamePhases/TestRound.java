@@ -11,6 +11,7 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
@@ -92,8 +93,8 @@ public class TestRound {
         bag= new Bag();
         round = new Round(roundTrack, playerZones, nrounds);
         for(int i=0; i<(turn.length-1); i++){
-            round.endAction(turn, roundTrack, draftPool,round.nextPlayer(playerZones, turn, plStandby));
-            round.nextPlayer(playerZones, turn, plStandby);
+            round.endAction(turn, roundTrack, draftPool,round.nextPlayer(playerZones, turn));
+            round.nextPlayer(playerZones, turn);
             contBeg=0; contEnd=0;
             for(PlayerZone j : playerZones){
                 if(j.getPlayerState().equals(PlayerState.ENDING)) contEnd++;
@@ -105,7 +106,7 @@ public class TestRound {
         }
         dice.add(bag.draw());
         draftPool.setInDraft(dice);
-        round.endAction(turn, roundTrack, draftPool,round.nextPlayer(playerZones, turn, plStandby));
+        round.endAction(turn, roundTrack, draftPool,round.nextPlayer(playerZones, turn));
         assertEquals( RoundState.FINISHED, round.getRoundState());
         assertEquals(1, roundTrack.getRoundTrackTurn(1).size() );
     }
@@ -125,7 +126,7 @@ public class TestRound {
         player=playerZones.get(0); //per non far finire il turno al giocatore in standby
         while(round.getTurnCounter() < (turn.length-1)){
             round.endAction(turn, roundTrack, draftPool, player);
-            player=round.nextPlayer(playerZones, turn, plStandby);
+            player=round.nextPlayer(playerZones, turn);
             System.out.println(player.getNumber());
             contBeg=0; contEnd=0; contSta=0;
             for(PlayerZone j : playerZones){
@@ -140,8 +141,56 @@ public class TestRound {
         }
         dice.add(bag.draw());
         draftPool.setInDraft(dice);
-        round.endAction(turn, roundTrack, draftPool,round.nextPlayer(playerZones, turn, plStandby));
+        round.endAction(turn, roundTrack, draftPool,round.nextPlayer(playerZones, turn));
         assertEquals( RoundState.FINISHED, round.getRoundState());
         assertEquals(1, roundTrack.getRoundTrackTurn(1).size() );
     }
+
+    @Test
+    public void checkNextPlayer(){
+
+        for(int i=0; i<4; i++){
+            playerZones.add(new PlayerZone(name + (i+1), i));
+        }
+        //no player in standby, 3 round, 2 turn each
+        round = new Round(roundTrack, playerZones, nrounds);
+        for(int i=0; i<24; i++){
+            player=round.nextPlayer(playerZones, turn);
+            System.out.println("Round "+i+ " "+ player.getName());
+            round.endAction(turn, roundTrack, draftPool, player);
+        }
+
+        round = new Round(roundTrack, playerZones, nrounds);
+        Random rand = new Random();
+
+                for (int i = 0; i < 24; i++) {
+
+                    player = round.nextPlayer(playerZones, turn);
+                    System.out.println("Round " + i + " " + player.getName()+ " is playing ");
+                    if(i==5) {
+                        playerZones.get(1).setPlayerState(PlayerState.STANDBY);
+                        System.out.println(playerZones.get(1).getName() + " went in STANDBY");
+                    }
+                    if(i==9) {
+                        playerZones.get(3).setPlayerState(PlayerState.STANDBY);
+                        System.out.println(playerZones.get(3).getName() + " went in STANDBY");
+                    }
+                    if(i==12) {
+                        playerZones.get(0).setPlayerState(PlayerState.STANDBY);
+                        System.out.println(playerZones.get(0).getName() + " went in STANDBY");
+                    }
+                    if(i==17) {
+                        playerZones.get(1).setPlayerState(PlayerState.ENDING);
+                        System.out.println(playerZones.get(1).getName() + " went in STANDBY");
+                    }
+                    if(i==20) {
+                        playerZones.get(3).setPlayerState(PlayerState.ENDING);
+                        System.out.println( playerZones.get(3).getName() + " went in STANDBY");
+                    }
+                    round.endAction(turn, roundTrack, draftPool, player);
+                }
+
+        }
+
 }
+

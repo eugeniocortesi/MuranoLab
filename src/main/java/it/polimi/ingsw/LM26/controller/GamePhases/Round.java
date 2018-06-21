@@ -38,16 +38,10 @@ public class Round {
     }
 
     //nextPlayer va usato dopo endAction, quando il contatore è già incrementato. plStandby passato è sempre 0
-    public PlayerZone nextPlayer(ArrayList<PlayerZone> player, int[] turn, int plStandby) throws IllegalArgumentException {
-
-        turnCounter=turnCounter+plStandby;
+    public PlayerZone nextPlayer(ArrayList<PlayerZone> player, int[] turn) throws IllegalArgumentException {
 
       for(int i=0; i<player.size(); i++){
-
-          for(int j=0; j<turnCounter; j++){}
-
           if(player.get(i).getNumber()==turn[turnCounter]) {
-                System.out.println(player.get(i).getPlayerState());
               if(player.get(i).getPlayerState()!= STANDBY){
                   player.get(i).setPlayerState(PlayerState.BEGINNING);
 
@@ -62,11 +56,13 @@ public class Round {
                   return player.get(i);
               }
               else {
+                  System.out.println(player.get(i).getName() +" is in STANDBY");
+                  turnCounter=turnCounter+1;
                   if(turnCounter == turn.length) {
                       Model model = singletonModel();
                       endRound(model.getRoundTrackInt(), model.getDraftPool(), player.get(i));
                   }
-                  return nextPlayer(player, turn, ++plStandby);
+                  return nextPlayer(player, turn);
               }
           }
       }
@@ -87,6 +83,7 @@ public class Round {
     }
 
     public void endRound(RoundTrackInt roundTrack, DraftPool draftPool, PlayerZone actingPlayer){
+        System.out.println(" TURN ENDED ");
         roundTrack.addDice(draftPool.getInDraft());
         draftPool.removeAllDice();
         actingPlayer.getActionHistory().deleteRoundHistory();

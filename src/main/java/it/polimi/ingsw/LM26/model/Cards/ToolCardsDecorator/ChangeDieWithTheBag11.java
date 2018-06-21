@@ -92,9 +92,10 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
             System.out.println("action expired");
             return false;
         }
-        die = model.getBag().draw();
-        System.out.println("you got a " + die.getColor() + " die ");
-        firstPart=true;
+        DieInt d=model.getBag().draw();
+        model.getRestrictions().setDie(d);
+        System.out.println("you got a " + d.getColor() + " die ");
+        model.getRestrictions().setFirstPart(true);
         return true;
 
     }
@@ -102,12 +103,12 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
     @Override
     public boolean play(int number, Box toBox, int pl) {
 
-        if(!firstPart)return false;
-
         Model model = singletonModel();
+
+        if(!model.getRestrictions().isFirstPart())return false;
         PlayerZone player=model.getPlayerList().get(pl);
-        die.setRoll(number);
-        PlaceDie placement = new PlaceDie(die, toBox, player);
+        model.getRestrictions().getDie().setRoll(number);
+        PlaceDie placement = new PlaceDie(model.getRestrictions().getDie(), toBox, player);
 
         if (placement.placeDie()) {
 
@@ -116,8 +117,8 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
             player.getActionHistory().setPlacement(true);
             return true;
         }
-        model.getDraftPool().addDie(die);
-        needPlacement=true;
+        model.getDraftPool().addDie(model.getRestrictions().getDie());
+        model.getRestrictions().setNeedPlacement(true);
         return false;
 
     }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.controller;
 
+import it.polimi.ingsw.LM26.controller.GamePhases.PhaseInt;
 import it.polimi.ingsw.LM26.controller.Testing.CliTest;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.ChangeDieWithTheBag11;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
@@ -24,7 +25,7 @@ public class Match {
     private PlayerZone playing;
     private boolean result = false;
     private Model model;
-    private CentralPhase centralPhase;
+    private PhaseInt centralPhase;
     private Game game;
     private ControllerInt controller;
     private CliTest cli;
@@ -36,7 +37,7 @@ public class Match {
         cli= new CliTest(playing, controller);
         this.game = new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());  //initialPhase
         game.getPhase().doAction(game, model.getPlayerList());    //centralPhase
-        this.centralPhase = (CentralPhase) game.getPhase();
+        this.centralPhase = game.getPhase();
         this.model = model;
         this.model.hasChanged();
 
@@ -48,7 +49,7 @@ public class Match {
 
         for (int i = 0; i < 10; i++) {
 
-            playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn(), 0);
+            playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn());
 
             int k = playing.getIDPlayer();
 
@@ -72,30 +73,29 @@ public class Match {
                     if (playing.getActionHistory().isFreezed()) {
                         result = true;
                         System.out.println("this turn you are freezed");
-                    }
-
-                    firstAction();
-                    //set the correct number of turn 1 0 2
-
-                    waitCorrectPlayer();
-                    if (playing.getPlayerState()!=STANDBY){
-
-                        if (!playing.getActionHistory().isPlacement() || !playing.getActionHistory().isDieUsed() || !playing.getActionHistory().isCardUsed())
-                            result = false;
-
-                        if (playing.getActionHistory().isFreezed()) {
-                            result = true;
-                            System.out.println("this turn you are freezed");
-                        }
-
-                        secondAction();
+                    } else {
+                        firstAction();
                         //set the correct number of turn 1 0 2
+
+                        waitCorrectPlayer();
+                        if (playing.getPlayerState() != STANDBY) {
+
+                            if (!playing.getActionHistory().isPlacement() || !playing.getActionHistory().isDieUsed() || !playing.getActionHistory().isCardUsed())
+                                result = false;
+
+                            if (playing.getActionHistory().isFreezed()) {
+                                result = true;
+                                System.out.println("this turn you are freezed");
+                            } else
+
+                                secondAction();
+                            //set the correct number of turn 1 0 2
+                        }
                     }
                 }
-
                 centralPhase.getCurrentRound().endAction(centralPhase.getTurn(), model.getRoundTrackInt(), model.getDraftPool(), centralPhase.getCurrentRound().getCurrentPlayer());
 
-                playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn(), 0);
+                playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn());
 
                 result = false;
             }
@@ -153,12 +153,10 @@ public class Match {
                     System.out.println("DraftPool");
                     model.getDraftPool().printDraftPool();
 
-                    DrawOneMoreDie8 tool8 = (DrawOneMoreDie8) model.getDecks().getToolCardDeck().get(7);
-
-                    if (tool8.isNeedPlacement()) {
+                    if (model.getRestrictions().isTool8needPlacement()) {
                         playing.getActionHistory().setPlacement(false);
                         playing.getActionHistory().setDieUsed(false);
-                        tool8.setCurrentPlacement(true);
+                        model.getRestrictions().setCurrentPlacement(true);
                         playing.getActionHistory().setFreezed(true);
                         System.out.println("choose another die");
                         model.hasChanged();
@@ -171,6 +169,7 @@ public class Match {
                     System.out.println("match error 2 ");
 
                 controller.setActionEvent(null);
+                model.getRestrictions().resetRestrictions();
 
                 //view.showNO()
 

@@ -143,6 +143,14 @@ public class Model extends ObservableSimple implements Serializable {
         this.publicList = publicList;
     }
 
+    public Restrictions getRestrictions() {
+        return restrictions;
+    }
+
+    public void setRestrictions(Restrictions restrictions) {
+        this.restrictions = restrictions;
+    }
+
     public PlayerZone getPlayer(String name){
         for(int i=0; i<playerList.size(); i++){
             if(playerList.get(i).getName().equals(name))
