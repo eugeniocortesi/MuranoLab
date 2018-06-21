@@ -138,17 +138,15 @@ public class EventChecker {
     }
     public boolean check(ToolCardInt one, DieInt dieFromDraft, String inDeCrement, int player){
 
-        System.out.println("passo di qui 1" );
         PlayerZone pl=model.getPlayerList().get(player);
         if ( pl.getActionHistory().isCardUsed() ) return false;
 
         if(checkToken(model.getPlayerList().get(player),one))
-            System.out.println("passo di qui 2" );
-            if(one.play(dieFromDraft, inDeCrement)) {
+            if (one.play(dieFromDraft, inDeCrement)) {
                 pl.getActionHistory().setCardUsed(true);
                 return true;
-            }
-        System.out.println("passo di qui 3" );
+                }
+
         return false;
     }
     public boolean check(ToolCardInt sixTenEleven, DieInt dieFromDraft, int player){
