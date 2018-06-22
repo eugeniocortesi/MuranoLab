@@ -173,13 +173,13 @@ public class ClientManagerRMI extends ClientManager {
 
         Thread t = new Thread(new MyRunnableWindow(user, id, (ArrayList<WindowPatternCard>) windowDeck.clone()));
         t.start();
-        timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
+        //timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
     }
 
     @Override
     public void chosenWindowPattern(ActionEventWindow actionEventWindow) {
 
-        timerTaskActionPlayers.setArrivedMessage(true);
+        //timerTaskActionPlayers.setArrivedMessage(true);
         LOGGER.log(Level.SEVERE,"I have received one windowcard from "+user);
         myserver.getQueueController().pushMessage(actionEventWindow);
 
