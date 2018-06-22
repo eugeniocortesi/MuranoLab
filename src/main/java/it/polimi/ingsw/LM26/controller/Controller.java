@@ -84,7 +84,7 @@ public class Controller implements ControllerInt{
     @Override
     public boolean handler(ActionEvent event) {
 
-        EventHandler handler = new EventHandler(event, model );
+        EventHandler handler = new EventHandler(event, model, this );
 
         return handler.getResult();
     }

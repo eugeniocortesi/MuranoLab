@@ -1,5 +1,8 @@
 package it.polimi.ingsw.LM26.model.Serialization;
 
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
+
 public class DifferentColorShadeOnRowColomn extends Effect{
 
     //Colore, Riga = true
@@ -31,6 +34,26 @@ public class DifferentColorShadeOnRowColomn extends Effect{
 
     public String getE() {
         return "Different " + iscolorShades() + " - " + isrowColomn();
+    }
+
+    public int checkEffect(WindowFramePlayerBoard b){
+
+        Box[][] board=b.getBoardMatrix();
+        boolean green1=false;
+        boolean red2=false;
+        boolean purple3=false;
+        boolean blue4=false;
+        boolean yellow5=false;
+        boolean six=false;
+
+        return 0;
+
+
+    }
+
+    @Override
+    public int getPoints() {
+        return 0;
     }
 
     protected void resolve() {

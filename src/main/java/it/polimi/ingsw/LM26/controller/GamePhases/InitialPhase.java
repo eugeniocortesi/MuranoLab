@@ -68,7 +68,7 @@ public class InitialPhase implements PhaseInt {
 
     }
 
-    public void setWindowPattern(Decks decks, ArrayList<PlayerZone> playerList) {
+    public void insertPattern(ArrayList<PlayerZone> playerList) {
 
         for(int i=0; i<playerList.size(); i++)
             playerList.get(i).getPlayerBoard().insertPatternIntoBoard(playerList.get(i).getWindowPatternCard().getWindowPatter());
@@ -94,7 +94,7 @@ public class InitialPhase implements PhaseInt {
     public void doAction(Game game, ArrayList<PlayerZone> playerList) {
 
         setScoreMarkerAndWindowFrame(playerList, decks);
-        setWindowPattern(decks, playerList);
+        insertPattern(playerList);
         setTokens(playerList);
         game.setPhase(new CentralPhase(playerList));
 

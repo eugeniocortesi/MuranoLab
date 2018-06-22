@@ -161,7 +161,6 @@ public class TestRound {
         }
 
         round = new Round(roundTrack, playerZones, nrounds);
-        Random rand = new Random();
 
                 for (int i = 0; i < 24; i++) {
 

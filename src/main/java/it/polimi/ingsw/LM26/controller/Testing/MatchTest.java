@@ -1,40 +1,32 @@
-package it.polimi.ingsw.LM26.controller;
-
+package it.polimi.ingsw.LM26.controller.Testing;
+import it.polimi.ingsw.LM26.controller.ControllerInt;
 import it.polimi.ingsw.LM26.controller.GamePhases.PhaseInt;
+import it.polimi.ingsw.LM26.controller.Match;
 import it.polimi.ingsw.LM26.controller.Testing.CliTest;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.ChangeDieWithTheBag11;
-import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
+import it.polimi.ingsw.LM26.controller.Testing.ControllerTest;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
-import it.polimi.ingsw.LM26.controller.GamePhases.CentralPhase;
 import it.polimi.ingsw.LM26.controller.GamePhases.Game;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.DrawOneMoreDie8;
-import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
 import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
 
-public class Match extends Thread {
+public class MatchTest {
 
     private PlayerZone playing;
     private boolean result = false;
     private Model model;
     private PhaseInt centralPhase;
     private Game game;
-    private ControllerInt controller;
+    private ControllerTest controller;
     private CliTest cli;
     private static final Logger LOGGER = Logger.getLogger(Match.class.getName());
     private ActionEvent event;
 
-    public Match(Model model, ControllerInt controller) {
+    public MatchTest(Model model, ControllerTest controller) {
 
         this.controller = controller;
         cli= new CliTest(playing, controller);
@@ -44,13 +36,10 @@ public class Match extends Thread {
         this.model = model;
         this.model.hasChanged();
 
-        //play();
-
-    }
-
-    public void run(){
         play();
+
     }
+
 
     public void play() {
 
@@ -71,8 +60,6 @@ public class Match extends Thread {
                 System.out.println("DraftPool");
                 model.getDraftPool().printDraftPool();
 
-                controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
-
                 waitCorrectPlayer();
                 LOGGER.log(Level.WARNING, "Action event and player ok");
 
@@ -86,10 +73,6 @@ public class Match extends Thread {
                         //set the correct number of turn 1 0 2
 
                         waitCorrectPlayer();
-                        if(event.getId()==12){
-                            waitCorrectPlayer();
-                            System.out.println("showing menu ");
-                        }else System.out.println("error: non asking menu ");
 
 
                         if (playing.getPlayerState() != STANDBY) {
@@ -197,18 +180,23 @@ public class Match extends Thread {
 
     public void waitCorrectPlayer(){
 
+        controller.setActionEvent(null);
+
         event = controller.getActionEvent();
         LOGGER.log(Level.WARNING, "Event match: " + event);
         if(playing.getPlayerState()!= STANDBY)
-        LOGGER.log(Level.WARNING, "playing is ok");
+            LOGGER.log(Level.WARNING, "playing is ok");
         while (event == null && playing.getPlayerState()!=STANDBY){
+
+
+                cli.ask(playing);
+
             event = controller.getActionEvent();
         }
-            LOGGER.log(Level.WARNING,"exit while ");
+        LOGGER.log(Level.WARNING,"exit while ");
 
-            //TODO DELETE
-            //cli.ask(playing);
-            //view.showWrongPlayer();
+
+        //view.showWrongPlayer();
         while (event.getPlayer()!=playing.getIDPlayer() && playing.getPlayerState()!=STANDBY) {
             event = controller.getActionEvent();
             while (event == null && playing.getPlayerState()!=STANDBY ){
@@ -221,5 +209,7 @@ public class Match extends Thread {
         }
 
     }
+
+
 
 }

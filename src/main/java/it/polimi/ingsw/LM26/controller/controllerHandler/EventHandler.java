@@ -1,5 +1,7 @@
 package it.polimi.ingsw.LM26.controller.controllerHandler;
 
+import it.polimi.ingsw.LM26.controller.Controller;
+import it.polimi.ingsw.LM26.controller.ControllerInt;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.ChangeDieWithTheBag11;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.DrawOneMoreDie8;
@@ -18,9 +20,12 @@ public class EventHandler{
 
    private ActionEvent event;
 
-    public EventHandler(ActionEvent event, Model model) {
+   private ControllerInt controller;
+
+    public EventHandler(ActionEvent event, Model model, ControllerInt controller ) {
 
         this.model=model;
+        this.controller=controller;
         eventChecker = new EventChecker(model);
         this.event=event;
         result=handle(eventChecker);
@@ -61,9 +66,10 @@ public class EventHandler{
             System.out.println("i'll pass ");
             return true;
         }
-        if (event.getId() == 12)
-            //controller.getViewGameInterface().showMenu();
+        if (event.getId() == 12) {
+            controller.getViewGameInterface().showCurrentMenu(model.getPlayerList().get(event.getPlayer()).getName());
             return false;
+        }
         return false;
     }
 

@@ -19,7 +19,7 @@ public class ControllerTest implements ControllerInt {
 
     private Model model;
     private ActionEvent event;
-    private Match match;
+    private MatchTest match;
 
     public ControllerTest() {
 
@@ -31,7 +31,7 @@ public class ControllerTest implements ControllerInt {
 
 
     public boolean handler(ActionEvent event){
-        EventHandler handler = new EventHandler(event, model );
+        EventHandler handler = new EventHandler(event, model,this );
         return handler.getResult();
     }
 
@@ -100,7 +100,7 @@ public class ControllerTest implements ControllerInt {
 
     public void newMatch(Model model, ControllerTest controller){
 
-        this.match=new Match(model,controller);
+        this.match=new MatchTest(model,controller);
 
     }
 

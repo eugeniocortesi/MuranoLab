@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.model.Cards;
 
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Effect;
 
 public class ObjectivePublicCard extends CardInt {
@@ -28,12 +29,24 @@ public class ObjectivePublicCard extends CardInt {
         this.points = points;
         this.id=id;
         this.effect = effect;
+        this.typeCard = "ObjectivePublicCard";
 
     }
 
     public int getPoints() {
-
         return points;
+    }
+
+    public int computePoints(PlayerZone player) {
+
+        int p = effect.checkEffect(player.getPlayerBoard());
+        int result=0;
+        if(points!=0) {
+            for(int i=0; i<points;i++)
+                result=result+p;
+            return result;
+        }
+        else return p;
     }
 
     public String getEffect() {
