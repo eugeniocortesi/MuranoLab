@@ -58,12 +58,7 @@ public class Match extends Thread {
 
             playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn());
 
-            int k = playing.getIDPlayer();
-
             while (centralPhase.getCurrentRound().getRoundState() != FINISHED) {         //1
-
-                //TODO
-                // X4 setPlayerMenu(String name, PlayerZone player)
 
                 //TODO DELETE
                 LOGGER.log(Level.SEVERE, playing.getName() + " is playing ");
