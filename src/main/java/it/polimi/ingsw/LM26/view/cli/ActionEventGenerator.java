@@ -43,8 +43,10 @@ public class ActionEventGenerator {
     /**
      *it asks for the current menù screen
      */
-    public ActionEvent askForMenu(){
-        while(!tceGenerator.askEndMove()){}
+    public ActionEvent askForMenu(boolean explicitly){
+        if(explicitly) {
+            while(!tceGenerator.askEndMove()){}
+        }
         ActionEvent a= new ActionEvent();
         a.setId(12);
         a.setPlayer(ConsoleTools.id);

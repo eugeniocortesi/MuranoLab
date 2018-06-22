@@ -1,14 +1,19 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
+import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackTurn;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
 import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
@@ -36,6 +41,11 @@ public class GameController {
     private TilePane draftPool;
     @FXML
     private TilePane roundTrack;
+    @FXML
+    private TilePane diceLists;
+    @FXML
+    private Label instructions;
+
 
     public void setupGame(){
         Image im;
@@ -45,12 +55,12 @@ public class GameController {
         imageManager=new ImageManager();
         for(int i=0; i<obc.getObjectivePublicCardList().size(); i++){
             im=imageManager.getObjectiveCard(obc.getObjectivePublicCardList().get(i).getId());
-            imView=(ImageView)cardsOnBoard.getChildren().get(i);
+            imView=(ImageView)cardsOnBoard.getChildren().get(i+obc.getToolCardList().size());
             imView.setImage(im);
         }
         for(int i=0; i<obc.getToolCardList().size(); i++){
             im=imageManager.getToolCard(obc.getToolArrayList().get(i));
-            imView=(ImageView)cardsOnBoard.getChildren().get(i+obc.getObjectivePublicCardList().size());
+            imView=(ImageView)cardsOnBoard.getChildren().get(i);
             imView.setImage(im);
         }
         privateCard.setImage(imageManager.getObjectiveCard(ModelManager.getPrivateCard().getId()));
@@ -73,8 +83,29 @@ public class GameController {
         }
     }
 
-    public void updateRoundTrack(){
 
+    public void updateRoundTrack(){
+        ArrayList<RoundTrackTurn> roundTrackList = ModelManager.getModel().getRoundTrackInt().getRoundTrackTurnList();
+        for(int i=0; i<roundTrackList.size(); i++){
+            VBox cell=(VBox) roundTrack.getChildren().get(i);
+            StackPane sp=(StackPane) cell.getChildren().get(1);
+            ImageView num=(ImageView) sp.getChildren().get(0);
+            imageManager.setDie(num, roundTrackList.get(i).getDiceList().get(0));
+            if(roundTrackList.get(i).getDiceList().size()>1){
+                VBox diceList=(VBox) diceLists.getChildren().get(i);
+                for(int j=1; j<roundTrackList.get(i).getDiceList().size(); j++){
+                    ImageView newDie= new ImageView();
+                    newDie.setFitHeight(40);
+                    newDie.setFitHeight(40);
+                    imageManager.setDie(newDie, roundTrackList.get(i).getDiceList().get(j));
+                    diceList.getChildren().add(newDie);
+                }
+            }
+        }
+    }
+
+    public void setInstructions(String s){
+        instructions.setText(s);
     }
 
 }

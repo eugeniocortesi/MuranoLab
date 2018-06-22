@@ -31,10 +31,10 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
         System.out.println("E' il tuo turno, scrivi\n" +
                 "'A' per vedere la zona di gioco di un altro giocatore\n" +
                 "'T' per vedere la tua zona di gioco e la riserva\n" +
-                "'C' per vedere una carta" +
-                "'D' per posizionare un dado nella Plancia Vetrata" +
-                "'U' per usare una carta utensile" +
-                "'P' per passare il turno");
+                "'C' per vedere una carta\n" +
+                "'D' per posizionare un dado nella Plancia Vetrata\n" +
+                "'U' per usare una carta utensile\n" +
+                "'P' per passare il turno\n");
         try{
             input = br.readLine();
         } catch (IOException e){
@@ -72,9 +72,15 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
             notify(actionEvent);
             //clientView.sendActionEventFromView(actionEvent);
         }
-        actionEvent=ae.askForMenu();
-        notify(actionEvent);
-        //clientView.sendActionEventFromView(actionEvent);
+        if(input.equalsIgnoreCase("D")||input.equalsIgnoreCase("U")||input.equalsIgnoreCase("P")){
+            actionEvent=ae.askForMenu(false);
+            notify(actionEvent);
+        }
+        else{
+            actionEvent=ae.askForMenu(true);
+            notify(actionEvent);
+            //clientView.sendActionEventFromView(actionEvent);
+        }
     }
 
 

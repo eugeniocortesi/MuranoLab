@@ -10,6 +10,8 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Bag;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
+import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
+import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
@@ -87,6 +89,11 @@ public class View extends ViewInterface{
         DraftPool dPool =new DraftPool();
         dPool.setInDraft(dList);
         ModelManager.model.setDraftPool(dPool);
+        RoundTrackInt rTrack=new RoundTrack();
+        for(int f=0; f<5; f++){
+            rTrack.addDice(dList);
+        }
+        ModelManager.model.setRoundTrackInt(rTrack);
     }
 
     @Override
@@ -164,6 +171,7 @@ public class View extends ViewInterface{
                 FXMLLoader fLoader=displayableStageGame.getFxmlLoader();
                 GameController gController=fLoader.getController();
                 gController.setupGame();
+                gController.updateRoundTrack();
                 displayableStageGame.show(stage);
             }
         });
@@ -172,7 +180,9 @@ public class View extends ViewInterface{
 
     @Override
     public void showAnswerFromController(String name, String answer) {
-
+        FXMLLoader fLoader=displayableStageGame.getFxmlLoader();
+        GameController gc=fLoader.getController();
+        gc.setInstructions(answer);
     }
 
     @Override

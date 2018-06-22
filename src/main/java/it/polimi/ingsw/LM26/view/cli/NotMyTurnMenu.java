@@ -52,7 +52,7 @@ public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
         else if(input.equalsIgnoreCase("C")){
             consoleTools.showCards();
         }
-        actionEvent=ae.askForMenu();
+        actionEvent=ae.askForMenu(true);
         notify(actionEvent);
         //clientView.sendActionEventFromView(actionEvent);
     }

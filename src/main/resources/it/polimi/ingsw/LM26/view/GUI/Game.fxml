@@ -237,18 +237,48 @@
                                                 <Insets left="5.0" right="3.0" />
                                              </padding>
                                           </TilePane>
-                                          <TilePane hgap="4.0" prefColumns="10" prefHeight="200.0" prefRows="1" prefWidth="200.0">
+                                          <TilePane fx:id="diceLists" hgap="4.0" prefColumns="10" prefHeight="200.0" prefRows="1" prefWidth="200.0">
                                              <children>
-                                                <VBox prefHeight="200.0" prefWidth="40.0" />
-                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
-                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
-                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
-                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
-                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
-                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
-                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
-                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
-                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" />
+                                                <VBox prefHeight="200.0" prefWidth="40.0" spacing="2.0">
+                                                   <TilePane.margin>
+                                                      <Insets top="3.0" />
+                                                   </TilePane.margin></VBox>
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" spacing="2.0">
+                                                   <TilePane.margin>
+                                                      <Insets top="3.0" />
+                                                   </TilePane.margin></VBox>
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" spacing="2.0">
+                                                   <TilePane.margin>
+                                                      <Insets top="3.0" />
+                                                   </TilePane.margin></VBox>
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" spacing="2.0">
+                                                   <TilePane.margin>
+                                                      <Insets top="3.0" />
+                                                   </TilePane.margin></VBox>
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" spacing="2.0">
+                                                   <TilePane.margin>
+                                                      <Insets top="3.0" />
+                                                   </TilePane.margin></VBox>
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" spacing="2.0">
+                                                   <TilePane.margin>
+                                                      <Insets top="3.0" />
+                                                   </TilePane.margin></VBox>
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" spacing="2.0">
+                                                   <TilePane.margin>
+                                                      <Insets top="3.0" />
+                                                   </TilePane.margin></VBox>
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" spacing="2.0">
+                                                   <TilePane.margin>
+                                                      <Insets top="3.0" />
+                                                   </TilePane.margin></VBox>
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" spacing="2.0">
+                                                   <TilePane.margin>
+                                                      <Insets top="3.0" />
+                                                   </TilePane.margin></VBox>
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="40.0" spacing="2.0">
+                                                   <TilePane.margin>
+                                                      <Insets top="3.0" />
+                                                   </TilePane.margin></VBox>
                                              </children>
                                              <VBox.margin>
                                                 <Insets left="6.0" right="6.0" />
@@ -259,7 +289,7 @@
                                  </children></AnchorPane>
                           </content>
                         </ScrollPane>
-                        <Label text="Istruzioni">
+                        <Label fx:id="instructions" text="Istruzioni">
                            <VBox.margin>
                               <Insets bottom="30.0" left="5.0" right="5.0" top="20.0" />
                            </VBox.margin>
@@ -278,23 +308,42 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <TilePane fx:id="cardsOnBoard" hgap="5.0" prefColumns="3" prefRows="2" prefTileHeight="200.0" prefTileWidth="150.0" prefWidth="468.0" tileAlignment="TOP_LEFT" vgap="5.0">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
+                  <VBox alignment="BOTTOM_LEFT">
                      <children>
-                        <ImageView fx:id="publicCard1" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="publicCard2" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="publicCard3" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                           <TilePane.margin>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Costo: 1 Segnalino Favore">
+                                 <HBox.margin>
+                                    <Insets right="17.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label text="Costo: 1 Segnalino Favore">
+                                 <HBox.margin>
+                                    <Insets right="17.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label text="Costo: 1 Segnalino Favore" />
+                           </children>
+                        </HBox>
+                        <TilePane fx:id="cardsOnBoard" alignment="BOTTOM_LEFT" hgap="5.0" prefColumns="3" prefRows="2" prefTileHeight="200.0" prefTileWidth="150.0" prefWidth="468.0" tileAlignment="TOP_LEFT" vgap="5.0">
+                           <HBox.margin>
                               <Insets />
-                           </TilePane.margin>
-                        </ImageView>
-                        <ImageView fx:id="toolCard1" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="toolCard2" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="toolCard3" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                           </HBox.margin>
+                           <children>
+                              <ImageView fx:id="publicCard1" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="publicCard2" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="publicCard3" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                 <TilePane.margin>
+                                    <Insets />
+                                 </TilePane.margin>
+                              </ImageView>
+                              <ImageView fx:id="toolCard1" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="toolCard2" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="toolCard3" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </TilePane>
                      </children>
-                  </TilePane>
+                  </VBox>
                </children>
             </HBox>
          </children>
