@@ -6,6 +6,7 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ModelMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.*;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.ClientManagerRMI;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.io.BufferedReader;
@@ -69,7 +70,10 @@ public class ListenerClientView extends Thread {
             }
             if (message!= null){
                 LOGGER.log(Level.INFO,"Message " + message);
-                recognize(message);
+                Thread t = new Thread(new MyRunnableRecognize(message));
+                t.start();
+
+                //recognize(message);
                 listen();
             }
             message = null;
@@ -179,6 +183,19 @@ public class ListenerClientView extends Thread {
         }
 
 
-        listen();
+        //listen();
+    }
+
+    private class MyRunnableRecognize implements Runnable {
+        volatile String message;
+
+        public MyRunnableRecognize(String message) {
+            this.message = message;
+        }
+
+        @Override
+        public void run() {
+            recognize(message);
+        }
     }
 }
