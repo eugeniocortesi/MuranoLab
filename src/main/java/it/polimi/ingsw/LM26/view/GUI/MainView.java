@@ -2,6 +2,8 @@ package it.polimi.ingsw.LM26.view.GUI;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.Client;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientInt;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -12,6 +14,7 @@ import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonD
 public class MainView extends Application {
 
     private View view;
+    private ClientInt clientInt = new Client();
 
     private Decks deck=singletonDecks();
     private ArrayList<WindowPatternCard> testarray = new ArrayList<WindowPatternCard>();
@@ -24,7 +27,7 @@ public class MainView extends Application {
 
     public void start(Stage primaryStage) throws Exception {
 
-        view = new View(primaryStage);
+        view = new View(primaryStage, clientInt);
         /*for(int i=0; i<4; i++){
             testarray.add(deck.getWindowPatternCardDeck().get(i));
         }

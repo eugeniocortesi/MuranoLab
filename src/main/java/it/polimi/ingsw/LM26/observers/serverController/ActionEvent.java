@@ -159,4 +159,14 @@ public class ActionEvent extends ClassMessage implements Serializable {
     public void accept(VisitorInt visitorInt) {
         visitorInt.visitActionEvent(this);
     }
+
+    public void rewrite(){
+
+        //card.rewrite();
+        if(dieFromDraft!= null)
+            dieFromDraft.rewrite();
+        if(dieFromRoundTrack!= null)
+            dieFromRoundTrack.rewrite();
+
+    }
 }

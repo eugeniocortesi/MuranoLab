@@ -173,11 +173,13 @@ public class ClientViewSocket extends ClientView {
 
     @Override
     public void sendActionEventFromView(ActionEvent actionEvent) {
+        actionEvent.rewrite();
         EventMessage message = new EventMessage("send_actionevent_from_view", actionEvent);
         LOGGER.log(Level.WARNING, "sending answer from view to Controller");
         outSocket.println(message.serializeClassMessage());
         listenerClientView.listen();
     }
+
 
     @Override
     public void sendAnswerFromController(String answer) {

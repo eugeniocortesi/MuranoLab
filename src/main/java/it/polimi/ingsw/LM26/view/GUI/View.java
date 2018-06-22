@@ -13,6 +13,10 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.clientConfiguration.DataClientImplementation;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientInt;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
 import it.polimi.ingsw.LM26.view.GUI.controllers.ControllerLogin;
 import it.polimi.ingsw.LM26.view.GUI.controllers.GameController;
@@ -26,6 +30,14 @@ import java.util.ArrayList;
 import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
 
 public class View extends ViewInterface{
+
+    private ClientInt clientBase;
+    private ClientView clientView;
+
+    DataClientImplementation dataClientImplementation;
+    DataClientConfiguration dataClientConfiguration;
+
+
     private DisplayableStage displayableStage1 = new DisplayableStage("Login.fxml");
     private DisplayableStage displayableStageNetChioce = new DisplayableStage("NetChioce.fxml");
     private DisplayableStage displayableStageWPattern = new DisplayableStage("WindowPattern.fxml");
@@ -34,7 +46,15 @@ public class View extends ViewInterface{
     private ModelManager modelManager;
 
 
-    public View(Stage stage) {
+    public View(Stage stage, ClientInt clientBase) {
+
+        //Initialize client Net
+        this.clientBase = clientBase;
+        dataClientImplementation = new DataClientImplementation();
+        dataClientConfiguration = dataClientImplementation.implementation();
+        System.out.println("SocketPort " +dataClientConfiguration.getClientSOCKETPORT()+ " ClientRMI " + dataClientConfiguration.getClientRMIPORT()
+                + " ServerRMI "+ dataClientConfiguration.getServerRMIPORT());
+
         this.stage = stage;
 
         //TODO remove later
@@ -81,6 +101,8 @@ public class View extends ViewInterface{
                 displayableStageNetChioce.show(stage);
             }
         });
+
+        //TODO add clientVIew initialization
     }
 
     @Override

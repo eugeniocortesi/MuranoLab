@@ -29,7 +29,7 @@ public class ConsoleStrings extends ViewInterface {
 
 
 
-    private ClientBase clientBase;
+    private ClientInt clientBase;
     private ClientView clientView;
 
     DataClientImplementation dataClientImplementation;
@@ -54,7 +54,7 @@ public class ConsoleStrings extends ViewInterface {
         cs.showWindowPattern("string", 1, wList);*/
     }
 
-    public ConsoleStrings(ClientBase clientBase) {
+    public ConsoleStrings(ClientInt clientBase) {
         System.setProperty("jansi.passthrough", "true"); //TODO remove later
         AnsiConsole.systemInstall();
         playerMenu=null;

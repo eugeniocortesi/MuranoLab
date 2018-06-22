@@ -1,24 +1,30 @@
 package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 
+import it.polimi.ingsw.LM26.view.GUI.View;
 import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 
-public class ClientBase {
+import java.io.IOException;
 
-    private ConsoleStrings cli;
+public class ClientBase extends ClientInt {
+
+    //private ConsoleStrings cli;
+    //private View view;
+
+    //ViewInterface view;
     //ConsoleStrings concreteClientView;
 
-    private boolean connection; //true for RMI, false for Socket
-    private String username;
+    //private boolean connection; //true for RMI, false for Socket
+    //private String username;
 
-    public ClientBase(){
+    public ClientBase() {
 
 
-        //cli = new ConsoleStrings(this);
-        cli = new ConsoleStrings(this);
+            //cli = new ConsoleStrings(this);
+            //cli = new ConsoleStrings(this);
 
-        //Warning now is initialScreen()
+            //Warning now is initialScreen()
 
-        cli.showNetChoise();
+            //cli.showNetChoise();
         /*
         if (connection == true){
             //ClientView has to take ClientBase
@@ -28,6 +34,10 @@ public class ClientBase {
         else if (connection == false)
             clientView = new ClientViewSocket(this, dataClientConfiguration);
         clientView.connect();*/
+    }
+
+    public void setView(ViewInterface view) {
+        this.view = view;
     }
 
     public String getUsername() {
