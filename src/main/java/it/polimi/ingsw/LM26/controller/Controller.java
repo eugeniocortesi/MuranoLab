@@ -72,9 +72,12 @@ public class Controller implements ControllerInt{
     public UpdatesHandler getUpdatesHandler() { return updatesHandler; }
 
     public void setActionEvent(ActionEvent event) {
-        queueEvent.add(event);
-        //this.event = event;
-        LOGGER.log(Level.SEVERE,"a new event has been setted: "+ event);
+        if(event!=null) {
+            queueEvent.add(event);
+            //this.event = event;
+            LOGGER.log(Level.SEVERE, "a new event has been setted: " + event);
+        }
+        else LOGGER.log(Level.SEVERE, "event nullo" + event );
     }
 
     public ActionEvent getActionEvent() {
