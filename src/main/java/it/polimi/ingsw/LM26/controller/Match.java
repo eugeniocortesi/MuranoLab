@@ -87,6 +87,7 @@ public class Match extends Thread {
 
                         waitCorrectPlayer();
                         if(event.getId()==12){
+                            controller.handler(event);
                             waitCorrectPlayer();
                             System.out.println("showing menu ");
                         }else System.out.println("error: non asking menu ");

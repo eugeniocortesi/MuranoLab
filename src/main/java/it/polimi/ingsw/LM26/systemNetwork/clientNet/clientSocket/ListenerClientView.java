@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ListenerClientView {
+public class ListenerClientView extends Thread {
 
     private BufferedReader reader;
     private ClientViewSocket clientView;
@@ -38,6 +38,10 @@ public class ListenerClientView {
         }
     }
 
+    public void run(){
+        listen();
+    }
+
     public String receiveMessage(){
 
         String messageReceived = null;
@@ -56,7 +60,7 @@ public class ListenerClientView {
     }
 
     public void listen() {
-        LOGGER.log(Level.SEVERE,"I'm listening");
+        //LOGGER.log(Level.SEVERE,"I'm listening");
         String message = null;
         //while (message == null) {
             while(message == null) {
@@ -66,7 +70,7 @@ public class ListenerClientView {
             if (message!= null){
                 LOGGER.log(Level.INFO,"Message " + message);
                 recognize(message);
-                //listen();
+                listen();
             }
             message = null;
         //}

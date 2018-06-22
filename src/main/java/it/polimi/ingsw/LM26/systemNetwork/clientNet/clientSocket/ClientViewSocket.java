@@ -71,7 +71,7 @@ public class ClientViewSocket extends ClientView {
             outVideo = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
             listenerClientView = new ListenerClientView(this, socket);
             connected();
-            listenerClientView.listen();
+            listenerClientView.start();
 
             LOGGER.log(Level.SEVERE,"ClientImplementationSocket connected");
         } catch (Exception e) {
@@ -111,7 +111,7 @@ public class ClientViewSocket extends ClientView {
         DataMessage message = new DataMessage("login", name);
         message.dump();
         outSocket.println(message.serializeClassMessage());
-        listenerClientView.listen();
+        //listenerClientView.listen();
     }
 
     @Override
@@ -177,7 +177,7 @@ public class ClientViewSocket extends ClientView {
         EventMessage message = new EventMessage("send_actionevent_from_view", actionEvent);
         LOGGER.log(Level.WARNING, "sending answer from view to Controller");
         outSocket.println(message.serializeClassMessage());
-        listenerClientView.listen();
+        //listenerClientView.listen();
     }
 
 

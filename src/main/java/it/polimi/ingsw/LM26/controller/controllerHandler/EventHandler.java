@@ -8,6 +8,7 @@ import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.DrawOneMoreDie8;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.RollAgainADie6;
 import it.polimi.ingsw.LM26.model.Model;
+import org.omg.PortableInterceptor.LOCATION_FORWARD;
 
 
 public class EventHandler{
@@ -67,6 +68,7 @@ public class EventHandler{
             return true;
         }
         if (event.getId() == 12) {
+            System.out.println("Getted id 12 (action event)");
             controller.getViewGameInterface().showCurrentMenu(model.getPlayerList().get(event.getPlayer()).getName());
             return false;
         }
