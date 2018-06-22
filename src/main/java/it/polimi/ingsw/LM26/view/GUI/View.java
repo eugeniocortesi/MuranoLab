@@ -19,6 +19,7 @@ import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientInt;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
 import it.polimi.ingsw.LM26.view.GUI.controllers.ControllerLogin;
+import it.polimi.ingsw.LM26.view.GUI.controllers.ControllerNetChoice;
 import it.polimi.ingsw.LM26.view.GUI.controllers.GameController;
 import it.polimi.ingsw.LM26.view.GUI.controllers.WindowPatternController;
 import javafx.application.Platform;
@@ -34,8 +35,6 @@ public class View extends ViewInterface{
     private ClientInt clientBase;
     private ClientView clientView;
 
-    DataClientImplementation dataClientImplementation;
-    DataClientConfiguration dataClientConfiguration;
 
 
     private DisplayableStage displayableStage1 = new DisplayableStage("Login.fxml");
@@ -50,10 +49,6 @@ public class View extends ViewInterface{
 
         //Initialize client Net
         this.clientBase = clientBase;
-        dataClientImplementation = new DataClientImplementation();
-        dataClientConfiguration = dataClientImplementation.implementation();
-        System.out.println("SocketPort " +dataClientConfiguration.getClientSOCKETPORT()+ " ClientRMI " + dataClientConfiguration.getClientRMIPORT()
-                + " ServerRMI "+ dataClientConfiguration.getServerRMIPORT());
 
         this.stage = stage;
 
@@ -96,6 +91,9 @@ public class View extends ViewInterface{
 
     @Override
     public void showNetChoise() {
+        FXMLLoader fxmlLoader=displayableStageNetChioce.getFxmlLoader();
+        ControllerNetChoice cNetChoice=fxmlLoader.getController();
+        cNetChoice.setClientViewBase(clientView, clientBase, this);
         Platform.runLater(new Runnable() {
             public void run() {
                 displayableStageNetChioce.show(stage);

@@ -190,7 +190,7 @@ public class ConsoleStrings extends ViewInterface {
      * this method, currentMenù and the attribute playerMenu make the "Context" class of StatePattern
      * @param playerMenu is the current player's menù
      */
-    public void setPlayerMenu(PlayerMenuInt playerMenu) {
+    private void setPlayerMenu(PlayerMenuInt playerMenu) {
         this.playerMenu = playerMenu;
         showCurrentMenu(null);
     }
