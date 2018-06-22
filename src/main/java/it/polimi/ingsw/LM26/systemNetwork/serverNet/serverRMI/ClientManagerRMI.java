@@ -241,6 +241,11 @@ public class ClientManagerRMI extends ClientManager {
     }
 
     @Override
+    public void sendEndGame(Object score) {
+        //TODO
+    }
+
+    @Override
     public void update(Model m) {
         sendModel(m);
     }

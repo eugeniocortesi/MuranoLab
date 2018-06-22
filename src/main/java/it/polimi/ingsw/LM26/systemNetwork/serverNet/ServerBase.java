@@ -236,4 +236,17 @@ public class ServerBase extends ViewGameInterface {
         clientManagerList.getClientManager(name).sendCurrentMenu(name);
     }
 
+    @Override
+    public void showAnswerFromController(String name, String answer) {
+        System.out.println("called show current menu");
+        clientManagerList.getClientManager(name).sendAnswerFromController(answer);
+    }
+
+    @Override
+    public void showEndGame(String name, Object score) {
+
+        System.out.println("called show current menu");
+        clientManagerList.getClientManager(name).sendEndGame(score);
+    }
+
 }

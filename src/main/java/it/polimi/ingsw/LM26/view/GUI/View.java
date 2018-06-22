@@ -173,7 +173,7 @@ public class View extends ViewInterface{
 
 
     @Override
-    public void showAnswerFromController(String answer) {
+    public void showAnswerFromController(String name, String answer) {
 
     }
 

@@ -183,7 +183,7 @@ public class ClientViewSocket extends ClientView {
 
     @Override
     public void sendAnswerFromController(String answer) {
-        concreteClientView.showAnswerFromController(answer);
+        concreteClientView.showAnswerFromController(username, answer);
 
     }
 

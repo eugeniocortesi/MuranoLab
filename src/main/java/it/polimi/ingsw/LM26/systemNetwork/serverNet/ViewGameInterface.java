@@ -20,4 +20,8 @@ public abstract class ViewGameInterface extends Observable {
 
     public abstract void showCurrentMenu(String name);
 
+    public abstract void showAnswerFromController(String name,String answer);
+
+    public abstract void showEndGame(String name, Object score);
+
 }

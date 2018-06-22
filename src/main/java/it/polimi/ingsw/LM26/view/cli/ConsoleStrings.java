@@ -177,7 +177,7 @@ public class ConsoleStrings extends ViewInterface {
     }
 
     @Override
-    public void showAnswerFromController(String answer) {
+    public void showAnswerFromController(String name, String answer) {
         System.out.println(answer);
     }
 

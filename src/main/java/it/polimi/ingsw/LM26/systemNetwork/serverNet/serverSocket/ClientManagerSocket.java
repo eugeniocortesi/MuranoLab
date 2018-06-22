@@ -273,6 +273,11 @@ public class ClientManagerSocket extends ClientManager {
         sendMessage(s);
     }
 
+    @Override
+    public void sendEndGame(Object score) {
+        //TODO it
+    }
+
 
     @Override
     public void update(Model m) {
