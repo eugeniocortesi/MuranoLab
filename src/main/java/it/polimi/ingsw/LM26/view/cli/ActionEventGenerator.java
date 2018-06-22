@@ -16,7 +16,7 @@ public class ActionEventGenerator {
     ToolsActionEventGenerator tceGenerator = new ToolsActionEventGenerator();
 
     /**
-     * it asks for a die to put into the frame board, but the player can also return to the menù
+     * it asks for a die to put into the frame board
      */
     public ActionEvent askForDiePlacing(){
         Box rc;
@@ -24,7 +24,7 @@ public class ActionEventGenerator {
         ActionEvent actionEvent = new ActionEvent();
         d=tceGenerator.askForDie(true);
         actionEvent.setDieFromDraft(d);
-        rc=tceGenerator.askForRowCol();
+        rc=tceGenerator.askForRowCol(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix());
         actionEvent.setToBox1(rc);
         actionEvent.setPlayer(ConsoleTools.id);
         actionEvent.setId(1);
@@ -119,10 +119,10 @@ public class ActionEventGenerator {
         ActionEvent a=toolCEvent(tCardPos);
         a.setId(2);
         System.out.println("Cella da cui vuoi prendere il dado:");
-        box=tceGenerator.askForRowCol();
+        box=tceGenerator.askForRowCol(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix());
         a.setFromBox1(box);
         System.out.println("Cella in cui vuoi mettere il dado:");
-        box=tceGenerator.askForRowCol();
+        box=tceGenerator.askForRowCol(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix());
         a.setToBox1(box);
         return a;
     }
@@ -137,11 +137,11 @@ public class ActionEventGenerator {
         arrayTo.add(ae.getToBox1());
         ae.setFromBox1(null); ae.setFromBox1(null);
         System.out.println("Cella da cui vuoi prendere il dado:");
-        box=tceGenerator.askForRowCol();
+        box=tceGenerator.askForRowCol(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix());
         arrayFrom.add(box);
         ae.setFromBoxList(arrayFrom);
         System.out.println("Cella in cui vuoi mettere il dado:");
-        box=tceGenerator.askForRowCol();
+        box=tceGenerator.askForRowCol(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix());
         arrayTo.add(box);
         ae.setToBoxList(arrayTo);
         return ae;
@@ -150,7 +150,7 @@ public class ActionEventGenerator {
     private ActionEvent addToBox1(ActionEvent ae){
         Box box;
         System.out.println("Cella in cui vuoi mettere il dado:");
-        box=tceGenerator.askForRowCol();
+        box=tceGenerator.askForRowCol(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix());
         ae.setToBox1(box);
         return ae;
     }

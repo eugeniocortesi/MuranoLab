@@ -50,7 +50,7 @@ public class ToolsActionEventGenerator {
         else return "decrement";
     }
 
-    public Box askForRowCol(){
+    public Box askForRowCol(Box[][] matrix){
         int r=0, c=0;
         int[] row=new int[]{1,4};
         int[] col=new int[]{1,5};
@@ -58,8 +58,7 @@ public class ToolsActionEventGenerator {
         r=askInRange(row);
         System.out.println("colonna:");
         c=askInRange(col);
-        Box rc= new Box(r,c);
-        return rc;
+        return matrix[r-1][c-1];
     }
 
     public boolean askEndMove(){
