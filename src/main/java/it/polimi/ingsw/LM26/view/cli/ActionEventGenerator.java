@@ -27,6 +27,7 @@ public class ActionEventGenerator {
         rc=tceGenerator.askForRowCol();
         actionEvent.setToBox1(rc);
         actionEvent.setPlayer(ConsoleTools.id);
+        actionEvent.setId(1);
         return  actionEvent;
     }
 
