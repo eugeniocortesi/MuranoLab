@@ -133,9 +133,7 @@ public class ConsoleStrings extends ViewInterface {
     }
 
     @Override
-    public void showAddedPlayer(String s) {
-
-    }
+    public void showAddedPlayer(String s) { AnsiConsole.out().println("Nuovo giocatore aggiunto: "+s);}
 
 
     public void showDisconnectScreen() {
@@ -192,7 +190,6 @@ public class ConsoleStrings extends ViewInterface {
      */
     private void setPlayerMenu(PlayerMenuInt playerMenu) {
         this.playerMenu = playerMenu;
-        showCurrentMenu(null);
     }
 
     /**

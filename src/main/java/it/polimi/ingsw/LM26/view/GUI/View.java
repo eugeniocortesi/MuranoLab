@@ -12,6 +12,7 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
@@ -24,6 +25,7 @@ import it.polimi.ingsw.LM26.view.GUI.controllers.ControllerLogin;
 import it.polimi.ingsw.LM26.view.GUI.controllers.ControllerNetChoice;
 import it.polimi.ingsw.LM26.view.GUI.controllers.GameController;
 import it.polimi.ingsw.LM26.view.GUI.controllers.WindowPatternController;
+import it.polimi.ingsw.LM26.view.cli.PlayerMenuInt;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -36,7 +38,7 @@ public class View extends ViewInterface{
 
     private static ClientInt clientBase;
     private static ClientView clientView;
-
+    private boolean myTurn;
 
 
     private DisplayableStage displayableStageLogin = new DisplayableStage("Login.fxml");
@@ -196,7 +198,10 @@ public class View extends ViewInterface{
 
     @Override
     public void showSetPlayerMenu(String name, PlayerZone player) {
-
+        if (player.getPlayerState().equals(PlayerState.BEGINNING)) {
+            myTurn=true;
+        }
+        else myTurn=false;
     }
 
     @Override
@@ -205,7 +210,7 @@ public class View extends ViewInterface{
             public void run() {
                 FXMLLoader fLoader=displayableStageGame.getFxmlLoader();
                 GameController gController=fLoader.getController();
-                gController.setupGame();
+                gController.setupGame(myTurn);
                 gController.updateRoundTrack();
                 displayableStageGame.show(stage);
             }
@@ -244,5 +249,12 @@ public class View extends ViewInterface{
     @Override
     public void update(Model m) {
         ModelManager.model=m;
+        Platform.runLater(new Runnable() {
+            public void run() {
+                FXMLLoader fLoader=displayableStageGame.getFxmlLoader();
+                GameController gController=fLoader.getController();
+                gController.updateGame();
+            }
+        });
     }
 }

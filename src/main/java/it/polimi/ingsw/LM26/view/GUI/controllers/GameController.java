@@ -1,10 +1,12 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackTurn;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
 import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
 import javafx.fxml.FXML;
@@ -24,6 +26,7 @@ public class GameController {
 
     private ImageManager imageManager;
     private ArrayList<PlayerZone> plListWithoutMe = new ArrayList<PlayerZone>();
+    private boolean myTurn;
 
     @FXML
     private ImageView privateCard;
@@ -47,10 +50,11 @@ public class GameController {
     private Label instructions;
 
 
-    public void setupGame(){
+    public void setupGame(boolean myTurn){
         Image im;
         ImageView imView=new ImageView();
         OnBoardCards obc= ModelManager.getModel().getOnBoardCards();
+        this.myTurn=myTurn;
 
         imageManager=new ImageManager();
         for(int i=0; i<obc.getObjectivePublicCardList().size(); i++){
@@ -108,4 +112,7 @@ public class GameController {
         instructions.setText(s);
     }
 
+   public void updateGame(){
+
+   }
 }
