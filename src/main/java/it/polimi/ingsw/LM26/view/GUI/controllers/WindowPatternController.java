@@ -4,6 +4,7 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
+import it.polimi.ingsw.LM26.view.GUI.View;
 import it.polimi.ingsw.LM26.view.GUI.controllers.ControllerCardRec;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 
 public class WindowPatternController {
 
-    private ClientView cView;
     private ArrayList<WindowPatternCard> wpc;
     private String user;
 
@@ -32,7 +32,7 @@ public class WindowPatternController {
     @FXML
     private Button ok;
 
-    public void setCardLable(ArrayList<WindowPatternCard> wpc, ClientView cView, String user){
+    public void setCardLable(ArrayList<WindowPatternCard> wpc, String user){
         this.wpc=wpc;
         this.user=user;
         if(wpc.size()==4){
@@ -41,7 +41,6 @@ public class WindowPatternController {
             card3Controller.setLable(wpc.get(2).getTitle());
             card4Controller.setLable(wpc.get(3).getTitle());
         }
-        this.cView=cView;
     }
 
     public void cardChoice(ActionEvent event){
@@ -51,7 +50,7 @@ public class WindowPatternController {
             //System.out.println(n);
             ok.setDisable(true);
             ActionEventWindow aew= new ActionEventWindow(user, wpc.get(n-1));
-            cView.chosenWindowPattern(aew);
+            View.getClientView().chosenWindowPattern(aew);
         }
     }
 

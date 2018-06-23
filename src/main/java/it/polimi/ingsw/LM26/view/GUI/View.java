@@ -34,8 +34,8 @@ import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonD
 
 public class View extends ViewInterface{
 
-    private ClientInt clientBase;
-    private ClientView clientView;
+    private static ClientInt clientBase;
+    private static ClientView clientView;
 
 
 
@@ -44,13 +44,13 @@ public class View extends ViewInterface{
     private DisplayableStage displayableStageWPattern = new DisplayableStage("WindowPattern.fxml");
     private DisplayableStage displayableStageGame= new DisplayableStage("Game.fxml");
     private Stage stage;
-    private ModelManager modelManager;
+
 
 
     public View(Stage stage, ClientInt clientBase) {
 
         //Initialize client Net
-        this.clientBase = clientBase;
+        View.clientBase = clientBase;
 
         this.stage = stage;
 
@@ -96,11 +96,27 @@ public class View extends ViewInterface{
         ModelManager.model.setRoundTrackInt(rTrack);
     }
 
+    public static ClientInt getClientBase() {
+        return clientBase;
+    }
+
+    public static void setClientBase(ClientInt clientBase) {
+        View.clientBase = clientBase;
+    }
+
+    public static ClientView getClientView() {
+        return clientView;
+    }
+
+    public static void setClientView(ClientView clientView) {
+        View.clientView = clientView;
+    }
+
     @Override
     public void showNetChoise() {
         FXMLLoader fxmlLoader=displayableStageNetChioce.getFxmlLoader();
         ControllerNetChoice cNetChoice=fxmlLoader.getController();
-        cNetChoice.setClientViewBase(clientView, clientBase, this);
+        cNetChoice.setClientViewBase(this);
         Platform.runLater(new Runnable() {
             public void run() {
                 displayableStageNetChioce.show(stage);
@@ -116,7 +132,6 @@ public class View extends ViewInterface{
            public void run() {
                FXMLLoader fxmlLoader=displayableStageLogin.getFxmlLoader();
                ControllerLogin cLogin=fxmlLoader.getController();
-               cLogin.setUp(clientBase, clientView);
                displayableStageLogin.show(stage);
            }
        });
@@ -124,39 +139,56 @@ public class View extends ViewInterface{
 
     @Override
     public void showLoggedScreen() {
-        FXMLLoader fLoader=displayableStageLogin.getFxmlLoader();
-        ControllerLogin cl=fLoader.getController();
-        cl.loggedScreen();
+        Platform.runLater(new Runnable() {
+            public void run() {
+                FXMLLoader fLoader=displayableStageLogin.getFxmlLoader();
+                ControllerLogin cl=fLoader.getController();
+                cl.loggedScreen();
+            }
+        });
     }
 
     @Override
     public void showAlreadyLoggedScreen() {
-        FXMLLoader fLoader=displayableStageLogin.getFxmlLoader();
-        ControllerLogin cl=fLoader.getController();
-        cl.alreadyLoggedScreen();
+        Platform.runLater(new Runnable() {
+            public void run() {
+                FXMLLoader fLoader=displayableStageLogin.getFxmlLoader();
+                ControllerLogin cl=fLoader.getController();
+                cl.alreadyLoggedScreen();
+            }
+        });
     }
 
     @Override
     public void showTooManyUsersScreen() {
-        FXMLLoader fLoader=displayableStageLogin.getFxmlLoader();
-        ControllerLogin cl=fLoader.getController();
-        cl.tooManyUsersScreen();
+        Platform.runLater(new Runnable() {
+            public void run() {
+                FXMLLoader fLoader=displayableStageLogin.getFxmlLoader();
+                ControllerLogin cl=fLoader.getController();
+                cl.tooManyUsersScreen();
+            }
+        });
     }
 
     @Override
     public void showAddedPlayer(String s) {
-        FXMLLoader fLoader=displayableStageLogin.getFxmlLoader();
-        ControllerLogin cl=fLoader.getController();
-        cl.addedPlayer(s);
+        Platform.runLater(new Runnable() {
+            public void run() {
+                FXMLLoader fLoader=displayableStageLogin.getFxmlLoader();
+                ControllerLogin cl=fLoader.getController();
+                cl.addedPlayer(s);
+            }
+        });
     }
 
     @Override
     public void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
+        ModelManager.id=id;
         Platform.runLater(new Runnable() {
             public void run() {
                 FXMLLoader fLoader=displayableStageWPattern.getFxmlLoader();
                 WindowPatternController wpController=fLoader.getController();
-                wpController.setCardLable(windowDeck, clientView, user);
+                wpController.setCardLable(windowDeck, user);
                 displayableStageWPattern.show(stage);
             }
         });
@@ -201,15 +233,7 @@ public class View extends ViewInterface{
 
     @Override
     public void showPrivateCard(String name, ObjectivePrivateCard privateCard) {
-
-    }
-
-    public void  showCentralPhaseScreen() {
-        Platform.runLater(new Runnable() {
-            public void run() {
-                //displayableStage2.show(stage);
-            }
-        });
+        ModelManager.privateCard=privateCard;
     }
 
     @Override
@@ -219,6 +243,6 @@ public class View extends ViewInterface{
 
     @Override
     public void update(Model m) {
-
+        ModelManager.model=m;
     }
 }

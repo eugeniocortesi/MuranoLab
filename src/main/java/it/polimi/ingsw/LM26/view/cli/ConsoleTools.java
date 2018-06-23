@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-;
+
 
 public class ConsoleTools {
 

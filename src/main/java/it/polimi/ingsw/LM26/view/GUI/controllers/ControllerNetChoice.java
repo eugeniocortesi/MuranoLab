@@ -26,16 +26,12 @@ public class ControllerNetChoice {
     @FXML
     private ToggleGroup connection;
 
-    private ClientView clientView;
-    private ClientInt clientBase;
     private DataClientConfiguration dClientConfig;
     private DataClientImplementation dClientImplem;
     private View view;
 
 
-    public void setClientViewBase(ClientView cView, ClientInt cBase, View view){
-        this.clientBase=cBase;
-        this.clientView=cView;
+    public void setClientViewBase(View view){
         this.view=view;
         dClientImplem = new DataClientImplementation();
         dClientConfig = dClientImplem.implementation();
@@ -50,13 +46,13 @@ public class ControllerNetChoice {
         System.out.println(selected.getText());
         ok.setDisable(true);
         if(selected.getText().equals("RMI")){
-            clientView = new ClientViewRMI(view, dClientConfig );
-            clientBase.setConnection(true);
+            View.setClientView( new ClientViewRMI(view, dClientConfig ));
+            View.getClientBase().setConnection(true);
         }
         else{
-            clientView = new ClientViewSocket(view, dClientConfig);
-            clientBase.setConnection(false);
+            View.setClientView(new ClientViewSocket(view, dClientConfig));
+            View.getClientBase().setConnection(false);
         }
-        clientView.connect();
+        View.getClientView().connect();
     }
 }

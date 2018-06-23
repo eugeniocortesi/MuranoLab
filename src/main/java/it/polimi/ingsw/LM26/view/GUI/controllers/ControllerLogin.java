@@ -3,6 +3,7 @@ package it.polimi.ingsw.LM26.view.GUI.controllers;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientBase;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientInt;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
+import it.polimi.ingsw.LM26.view.GUI.View;
 import it.polimi.ingsw.LM26.view.GUI.ViewControllerInt;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,8 +14,6 @@ import javafx.scene.control.TextField;
 
 public class ControllerLogin implements ViewControllerInt {
 
-     private ClientInt cBase;
-     private ClientView cView;
 
      @FXML
      Button bLogin;
@@ -25,20 +24,17 @@ public class ControllerLogin implements ViewControllerInt {
      @FXML
      private Label label2;
 
-     public void setUp(ClientInt cBase, ClientView cView){
-          this.cBase=cBase;
-          this.cView=cView;
-     }
 
      public void handleClick(ActionEvent actionEvent){
           String s=textField.getText();
-          cView.login(s);
-          cBase.setUsername(s);
+         View.getClientView().login(s);
+          View.getClientBase().setUsername(s);
 
      }
 
      public void loggedScreen(){
           label.setText("Utente iscritto con successo");
+          label2.setText("");
           bLogin.setDisable(true);
      }
 
@@ -49,9 +45,11 @@ public class ControllerLogin implements ViewControllerInt {
 
      public void tooManyUsersScreen(){
           label.setText("Partita già iniziata");
+          label2.setText("");
      }
 
      public void addedPlayer(String name){
           label.setText("Nuovo giocatore aggiunto: "+name);
+          label2.setText("");
      }
 }
