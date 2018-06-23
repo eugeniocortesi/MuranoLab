@@ -36,7 +36,7 @@ public class ConsoleStrings extends ViewInterface {
     DataClientConfiguration dataClientConfiguration;
 
     private ConsoleTools consoleTools = new ConsoleTools();
-    PlayerMenuInt playerMenu;
+    private PlayerMenuInt playerMenu;
     private ActionEvent event;
     private ArrayList<ActionEvent> events = new ArrayList<ActionEvent>();
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

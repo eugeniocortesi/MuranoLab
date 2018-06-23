@@ -34,9 +34,15 @@ public class TestConsoleTools {
         die2.roll();
         die3.roll();
         for(int i=0; i<5; i++){
-            die.increment();
-            die3.increment();
-            die2.decrement();
+            if(die.getNumber()!=6){
+                die.increment();
+            }
+            if(die3.getNumber()!=6){
+                die3.increment();
+            }
+            if(die2.getNumber()!=1){
+                die2.decrement();
+            }
         }
         dieList.add(die);
         dieList.add(die2);
@@ -122,6 +128,10 @@ public class TestConsoleTools {
     @Test
     public void testSearchInDraftPool(){
         String s="R6";
+        for(DieInt j : dieList){
+            System.out.println(j);
+            System.out.println(j.getNumber());
+        }
         char[] chars=s.toCharArray();
         int n=cTools.searchDraftPoolDie(chars);
         assertEquals( 0, n);
@@ -133,7 +143,7 @@ public class TestConsoleTools {
         DieInt die4=new Die(Color.ANSI_RED);
         die4.roll();
         for(int i=0; i<5; i++){
-            die4.decrement();
+            if(die4.getNumber()!=1) die4.decrement();
         }
         die4.increment();
         ArrayList<DieInt> searched= new ArrayList<DieInt>();

@@ -396,9 +396,8 @@ public class ConsoleTools {
                     case 6:for(int i : dcolored){
                         if(dieList.get(i).getNumber()==6) return i;
                     } break;
-                    default:{System.out.println("err4");
-                        return -1;//if the number is 0 or >6
-                    }
+                    default:{ return -1;//if the number is 0 or >6
+                         }
                 }
                 return -1;// if the chosen die have the right color but wrong number
             }

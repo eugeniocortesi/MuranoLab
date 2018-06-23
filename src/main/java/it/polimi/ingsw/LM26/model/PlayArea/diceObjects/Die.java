@@ -52,6 +52,7 @@ public class Die extends DieInt {
         else if(face=="\u2682")face="\u2683";
         else if(face=="\u2681")face="\u2682";
         else if(face=="\u2680")face="\u2681";
+        number= getValue();
 
 
     }
@@ -63,7 +64,7 @@ public class Die extends DieInt {
         else if(face=="\u2683")face="\u2682";
         else if(face=="\u2684")face="\u2683";
         else if(face=="\u2685")face="\u2684";
-
+        number= getValue();
     }
 
     public void setRoll(int value){

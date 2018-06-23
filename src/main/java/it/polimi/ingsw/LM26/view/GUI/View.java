@@ -39,7 +39,7 @@ public class View extends ViewInterface{
 
 
 
-    private DisplayableStage displayableStage1 = new DisplayableStage("Login.fxml");
+    private DisplayableStage displayableStageLogin = new DisplayableStage("Login.fxml");
     private DisplayableStage displayableStageNetChioce = new DisplayableStage("NetChioce.fxml");
     private DisplayableStage displayableStageWPattern = new DisplayableStage("WindowPattern.fxml");
     private DisplayableStage displayableStageGame= new DisplayableStage("Game.fxml");
@@ -114,35 +114,38 @@ public class View extends ViewInterface{
     public void showLoginScreen() {
        Platform.runLater(new Runnable() {
            public void run() {
-               displayableStage1.show(stage);
+               FXMLLoader fxmlLoader=displayableStageLogin.getFxmlLoader();
+               ControllerLogin cLogin=fxmlLoader.getController();
+               cLogin.setUp(clientBase, clientView);
+               displayableStageLogin.show(stage);
            }
        });
     }
 
     @Override
     public void showLoggedScreen() {
-        FXMLLoader fLoader=displayableStage1.getFxmlLoader();
+        FXMLLoader fLoader=displayableStageLogin.getFxmlLoader();
         ControllerLogin cl=fLoader.getController();
         cl.loggedScreen();
     }
 
     @Override
     public void showAlreadyLoggedScreen() {
-        FXMLLoader fLoader=displayableStage1.getFxmlLoader();
+        FXMLLoader fLoader=displayableStageLogin.getFxmlLoader();
         ControllerLogin cl=fLoader.getController();
         cl.alreadyLoggedScreen();
     }
 
     @Override
     public void showTooManyUsersScreen() {
-        FXMLLoader fLoader=displayableStage1.getFxmlLoader();
+        FXMLLoader fLoader=displayableStageLogin.getFxmlLoader();
         ControllerLogin cl=fLoader.getController();
         cl.tooManyUsersScreen();
     }
 
     @Override
     public void showAddedPlayer(String s) {
-        FXMLLoader fLoader=displayableStage1.getFxmlLoader();
+        FXMLLoader fLoader=displayableStageLogin.getFxmlLoader();
         ControllerLogin cl=fLoader.getController();
         cl.addedPlayer(s);
     }
@@ -153,7 +156,7 @@ public class View extends ViewInterface{
             public void run() {
                 FXMLLoader fLoader=displayableStageWPattern.getFxmlLoader();
                 WindowPatternController wpController=fLoader.getController();
-                wpController.setCardLable(windowDeck);
+                wpController.setCardLable(windowDeck, clientView, user);
                 displayableStageWPattern.show(stage);
             }
         });
