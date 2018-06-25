@@ -10,39 +10,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.LM26.view.GUI.controllers.GameController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.LM26.view.GUI.controllers.GameController">
    <children>
       <VBox spacing="20.0">
          <children>
             <TilePane fx:id="draftAndPlayers" alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefColumns="4" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <VBox alignment="TOP_RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="200.0" prefWidth="100.0">
+                  <VBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label text="RISERVA">
+                        <Label nodeOrientation="LEFT_TO_RIGHT" text="RISERVA">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                            </VBox.margin>
                         </Label>
-                        <ScrollPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0">
-                           <content>
-                              <TilePane fx:id="draftPool" hgap="10.0" nodeOrientation="LEFT_TO_RIGHT" prefColumns="3" prefHeight="200.0" prefTileHeight="40.0" prefTileWidth="40.0" prefWidth="240.0" style="-fx-background-color: #ffffff;" vgap="10.0">
-                                 <padding>
-                                    <Insets bottom="25.0" left="40.0" right="40.0" top="25.0" />
-                                 </padding>
-                                 <children>
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="110.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="135.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="160.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="185.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="110.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="135.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="160.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="185.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </TilePane>
-                           </content>
-                        </ScrollPane>
+                        <fx:include fx:id="dPool" source="draftPool.fxml" />
                      </children>
                   </VBox>
                   <fx:include fx:id="plZone1" source="FrameBoard.fxml" />
@@ -50,9 +31,9 @@
                   <fx:include fx:id="plZone3" source="FrameBoard.fxml" />
                </children>
             </TilePane>
-            <HBox prefHeight="444.0" prefWidth="900.0" spacing="20.0">
+            <HBox alignment="BOTTOM_LEFT" spacing="20.0">
                <children>
-                  <VBox alignment="BOTTOM_LEFT" prefHeight="430.0" prefWidth="474.0">
+                  <VBox alignment="BOTTOM_LEFT">
                      <children>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                           <content>
@@ -294,54 +275,43 @@
                               <Insets bottom="30.0" left="5.0" right="5.0" top="20.0" />
                            </VBox.margin>
                         </Label>
-                        <HBox alignment="BOTTOM_LEFT" prefHeight="204.0" prefWidth="443.0" spacing="30.0">
+                        <MenuBar>
+                          <menus>
+                            <Menu mnemonicParsing="false" text="File">
+                              <items>
+                                <MenuItem mnemonicParsing="false" text="Close" />
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Edit">
+                              <items>
+                                <MenuItem mnemonicParsing="false" text="Delete" />
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Help">
+                              <items>
+                                <MenuItem mnemonicParsing="false" text="About" />
+                              </items>
+                            </Menu>
+                          </menus>
+                        </MenuBar>
+                        <HBox alignment="BOTTOM_LEFT" spacing="30.0">
                            <children>
-                              <ImageView fx:id="privateCard" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
-                              <fx:include source="FrameBoard.fxml" />
+                              <ImageView fx:id="privateCard" fitHeight="223.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true" />
+                              <fx:include fx:id="myFBoard" source="FrameBoard.fxml" />
                            </children>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
                            <padding>
-                              <Insets left="20.0" right="20.0" top="10.0" />
+                              <Insets left="20.0" right="10.0" top="10.0" />
                            </padding>
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox alignment="BOTTOM_LEFT">
+                  <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label text="Costo: 1 Segnalino Favore">
-                                 <HBox.margin>
-                                    <Insets right="17.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Label text="Costo: 1 Segnalino Favore">
-                                 <HBox.margin>
-                                    <Insets right="17.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Label text="Costo: 1 Segnalino Favore" />
-                           </children>
-                        </HBox>
-                        <TilePane fx:id="cardsOnBoard" alignment="BOTTOM_LEFT" hgap="5.0" prefColumns="3" prefRows="2" prefTileHeight="200.0" prefTileWidth="150.0" prefWidth="468.0" tileAlignment="TOP_LEFT" vgap="5.0">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                           <children>
-                              <ImageView fx:id="publicCard1" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fx:id="publicCard2" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fx:id="publicCard3" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <TilePane.margin>
-                                    <Insets />
-                                 </TilePane.margin>
-                              </ImageView>
-                              <ImageView fx:id="toolCard1" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fx:id="toolCard2" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fx:id="toolCard3" fitHeight="200.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                        </TilePane>
+                        <Region prefHeight="200.0" prefWidth="200.0" />
+                        <fx:include fx:id="onBCards" source="OnBoardCards.fxml" />
                      </children>
                   </VBox>
                </children>

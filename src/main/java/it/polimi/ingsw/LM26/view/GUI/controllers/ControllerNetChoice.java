@@ -43,7 +43,6 @@ public class ControllerNetChoice {
     //it returns the label on the radio button
     public void handleRmiSocketButton(ActionEvent event){
         RadioButton selected= (RadioButton)connection.getSelectedToggle();
-        System.out.println(selected.getText());
         ok.setDisable(true);
         if(selected.getText().equals("RMI")){
             View.setClientView( new ClientViewRMI(view, dClientConfig ));

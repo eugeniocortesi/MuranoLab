@@ -44,7 +44,7 @@ public class View extends ViewInterface{
     private DisplayableStage displayableStageLogin = new DisplayableStage("Login.fxml");
     private DisplayableStage displayableStageNetChioce = new DisplayableStage("NetChioce.fxml");
     private DisplayableStage displayableStageWPattern = new DisplayableStage("WindowPattern.fxml");
-    private DisplayableStage displayableStageGame= new DisplayableStage("Game.fxml");
+    private DisplayableStage displayableStageGame= new DisplayableStage("GamePhase.fxml");
     private Stage stage;
 
 

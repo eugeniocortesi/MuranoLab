@@ -3,14 +3,21 @@ package it.polimi.ingsw.LM26.view.GUI.controllers;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.view.GUI.ModelManager;
 import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+
+import javax.xml.ws.Action;
 
 import static it.polimi.ingsw.LM26.model.PlayArea.Color.ANSI_YELLOW;
 import static it.polimi.ingsw.LM26.model.PlayArea.Color.WHITE;
@@ -27,6 +34,11 @@ public class FrameBoardController {
     private Label playername;
 
     private ImageManager imageManager=new ImageManager();
+    private GameController gController=null;
+
+    public void setMainController(GameController gController){
+        this. gController=gController;
+    }
 
     public void setPlayer(PlayerZone pl){
         switch (pl.getScoreMarker().getColor()){
@@ -44,6 +56,12 @@ public class FrameBoardController {
         createTokens(n);
         playername.setText(pl.getName());
         setGrid(pl.getPlayerBoard());
+        if(pl.getIDPlayer()== ModelManager.getId()){
+            for(int i=0; i<tilepane.getChildren().size(); i++){
+                int d=i;
+                tilepane.getChildren().get(i).setOnMouseClicked((MouseEvent event)->handleCellClicked(d+1));
+            }
+        }
     }
 
     public void useTokens(){
@@ -86,6 +104,23 @@ public class FrameBoardController {
             for(int j=0; j<5; j++){
                 setBox(frameBoard.getBoardMatrix()[i][j]);
             }
+        }
+    }
+
+    public void handleCellClicked(int index){
+        System.out.println(index);
+        gController.setInstructions(Integer.toString(index));
+    }
+
+    public void setEnable(){
+        for(int i=0; i<tilepane.getChildren().size(); i++){
+            tilepane.getChildren().get(i).setDisable(false);
+        }
+    }
+
+    public void setDisable(){
+        for(int i=0; i<tilepane.getChildren().size(); i++){
+            tilepane.getChildren().get(i).setDisable(true);
         }
     }
 }

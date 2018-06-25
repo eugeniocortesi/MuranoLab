@@ -29,19 +29,21 @@ public class GameController {
     private boolean myTurn;
 
     @FXML
-    private ImageView privateCard;
-    @FXML
-    private TilePane cardsOnBoard;
-    @FXML
     private FrameBoardController plZone1Controller;
     @FXML
     private FrameBoardController plZone2Controller;
     @FXML
     private FrameBoardController plZone3Controller;
     @FXML
+    private FrameBoardController myFBoardController;
+    @FXML
+    private OnBoardCardsController onBCardsController;
+    @FXML
+    private DraftPoolController dPoolController;
+    @FXML
     private TilePane draftAndPlayers;
     @FXML
-    private TilePane draftPool;
+    private ImageView privateCard;
     @FXML
     private TilePane roundTrack;
     @FXML
@@ -51,27 +53,20 @@ public class GameController {
 
 
     public void setupGame(boolean myTurn){
-        Image im;
-        ImageView imView=new ImageView();
-        OnBoardCards obc= ModelManager.getModel().getOnBoardCards();
+        PlayerZone me=null;
         this.myTurn=myTurn;
 
+        myFBoardController.setMainController(this);
+
         imageManager=new ImageManager();
-        for(int i=0; i<obc.getObjectivePublicCardList().size(); i++){
-            im=imageManager.getObjectiveCard(obc.getObjectivePublicCardList().get(i).getId());
-            imView=(ImageView)cardsOnBoard.getChildren().get(i+obc.getToolCardList().size());
-            imView.setImage(im);
-        }
-        for(int i=0; i<obc.getToolCardList().size(); i++){
-            im=imageManager.getToolCard(obc.getToolArrayList().get(i));
-            imView=(ImageView)cardsOnBoard.getChildren().get(i);
-            imView.setImage(im);
-        }
+        onBCardsController.setUpCards(imageManager);
         privateCard.setImage(imageManager.getObjectiveCard(ModelManager.getPrivateCard().getId()));
 
         for(PlayerZone i : ModelManager.getModel().getPlayerList()){
             if(i.getIDPlayer()!=ModelManager.getId()) plListWithoutMe.add(i);
+            else me=i;
         }
+        myFBoardController.setPlayer(me);
         if(plListWithoutMe.size()>=1){
             plZone1Controller.setPlayer(plListWithoutMe.get(0));
             if(plListWithoutMe.size()>=2){
@@ -81,13 +76,11 @@ public class GameController {
                 }
             }
         }
-        for(int i=0; i< ModelManager.getModel().getDraftPool().getInDraft().size(); i++){
-            ImageView dieImage=(ImageView) draftPool.getChildren().get(i);
-            imageManager.setDie(dieImage, ModelManager.getModel().getDraftPool().getInDraft().get(i));
-        }
+
+        dPoolController.updateDPool(imageManager);
     }
 
-
+//to move in RoundTrack controller
     public void updateRoundTrack(){
         ArrayList<RoundTrackTurn> roundTrackList = ModelManager.getModel().getRoundTrackInt().getRoundTrackTurnList();
         for(int i=0; i<roundTrackList.size(); i++){
@@ -112,7 +105,14 @@ public class GameController {
         instructions.setText(s);
     }
 
-   public void updateGame(){
+    public void updateGame(){
 
-   }
+    }
+
+    public void disableEverything(){
+        myFBoardController.setDisable();
+        dPoolController.setDisable();
+        onBCardsController.setDisable();
+    }
+
 }
