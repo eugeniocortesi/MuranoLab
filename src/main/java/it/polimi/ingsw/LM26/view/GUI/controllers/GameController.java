@@ -52,31 +52,36 @@ public class GameController {
     @FXML
     private Label instructions;
 
+    @FXML
+    public void initialize(){
+        imageManager=new ImageManager();
+    }
 
     public void setupGame(boolean myTurn){
         PlayerZone me=null;
         this.myTurn=myTurn;
 
-        myFBoardController.setMainController(this);
-        dPoolController.setMainController(this);
-        onBCardsController.setMainController(this);
-        rTrackController.setMainController(this);
+        dPoolController.setUpDPool(this);
+        rTrackController.setUpRTrack(this);
 
-        imageManager=new ImageManager();
-        onBCardsController.setUpCards(imageManager);
+        //imageManager=new ImageManager();
+        onBCardsController.setUpCards(imageManager, this);
         privateCard.setImage(imageManager.getObjectiveCard(ModelManager.getPrivateCard().getId()));
 
         for(PlayerZone i : ModelManager.getModel().getPlayerList()){
             if(i.getIDPlayer()!=ModelManager.getId()) plListWithoutMe.add(i);
             else me=i;
         }
-        myFBoardController.setPlayer(me);
+        myFBoardController.setUpPlayer(me, this);
         if(plListWithoutMe.size()>=1){
-            plZone1Controller.setPlayer(plListWithoutMe.get(0));
+            plZone1Controller.updateFrameBoard(imageManager);
+            plZone1Controller.setUpPlayer(plListWithoutMe.get(0), this);
             if(plListWithoutMe.size()>=2){
-                plZone2Controller.setPlayer(plListWithoutMe.get(1));
+                plZone2Controller.updateFrameBoard(imageManager);
+                plZone2Controller.setUpPlayer(plListWithoutMe.get(1), this);
                 if(plListWithoutMe.size()==3) {
-                    plZone3Controller.setPlayer(plListWithoutMe.get(2));
+                    plZone3Controller.updateFrameBoard(imageManager);
+                    plZone3Controller.setUpPlayer(plListWithoutMe.get(2), this);
                 }
             }
         }
@@ -90,7 +95,7 @@ public class GameController {
     public void updateGame(){
         rTrackController.updateRoundTrack(imageManager);
         dPoolController.updateDPool(imageManager);
-        myFBoardController.updateFrameBoard();
+        myFBoardController.updateFrameBoard(imageManager);
     }
 
     public void disableEverything(){
@@ -101,4 +106,43 @@ public class GameController {
         endMove.setDisable(true);
     }
 
+    public void stateFrameBoard(){
+        myFBoardController.setDisable(false);
+        dPoolController.setDisable(true);
+        onBCardsController.setDisable(true);
+        rTrackController.setDisable(true);
+        endMove.setDisable(false);
+    }
+
+    public void stateDraftPool(){
+        myFBoardController.setDisable(true);
+        dPoolController.setDisable(false);
+        onBCardsController.setDisable(true);
+        rTrackController.setDisable(true);
+        endMove.setDisable(false);
+    }
+
+    public void stateRoundTrack(){
+        myFBoardController.setDisable(true);
+        dPoolController.setDisable(true);
+        onBCardsController.setDisable(true);
+        rTrackController.setDisable(false);
+        endMove.setDisable(false);
+    }
+
+    public void stateFBoardCards(){
+        myFBoardController.setDisable(false);
+        dPoolController.setDisable(true);
+        onBCardsController.setDisable(false);
+        rTrackController.setDisable(true);
+        endMove.setDisable(false);
+    }
+
+    public void stateIDNumber(){
+        myFBoardController.setDisable(true);
+        dPoolController.setDisable(true);
+        onBCardsController.setDisable(true);
+        rTrackController.setDisable(true);
+        endMove.setDisable(false);
+    }
 }

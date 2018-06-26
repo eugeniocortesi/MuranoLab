@@ -33,14 +33,12 @@ public class FrameBoardController {
     @FXML
     private Label playername;
 
-    private ImageManager imageManager=new ImageManager();
+    private ImageManager imageManager;
     private GameController gController=null;
 
-    public void setMainController(GameController gController){
-        this. gController=gController;
-    }
 
-    public void setPlayer(PlayerZone pl){
+    public void setUpPlayer(PlayerZone pl, GameController gController){
+        this. gController=gController;
         switch (pl.getScoreMarker().getColor()){
             case ANSI_RED:{background.setStyle("-fx-background-color: #8B0000");
                 playername.setStyle("-fx-background-color: #8B0000"); break;}
@@ -55,7 +53,6 @@ public class FrameBoardController {
         n=n-3;
         createTokens(n);
         playername.setText(pl.getName());
-        setGrid(pl.getPlayerBoard());
         if(pl.getIDPlayer()== ModelManager.getId()){
             for(int i=0; i<tilepane.getChildren().size(); i++){
                 int d=i;
@@ -64,7 +61,8 @@ public class FrameBoardController {
         }
     }
 
-    public void updateFrameBoard(){
+    public void updateFrameBoard(ImageManager imageManager){
+        this.imageManager=imageManager;
         PlayerZone me=ModelManager.getModel().getPlayer(ModelManager.getId());
         setGrid(me.getPlayerBoard());
         for(int i=0; i<tokens.getChildren().size()-me.getToken().getTokenNumber(); i++){

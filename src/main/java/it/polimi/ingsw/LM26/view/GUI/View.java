@@ -68,17 +68,12 @@ public class View extends ViewInterface{
             plList.add(pl);
             pl.setWindowPatternCard(deck.getWindowPatternCardDeck().get(i+3));
         }
-       // obc.setPublicCards();
         Game game=new Game(plList, deck, obc);
         game.getPhase().doAction(game, plList);
-        /*ArrayList<ObjectivePublicCard> pubc=new ArrayList<ObjectivePublicCard>();
-        ArrayList<ToolCard> toolc=new ArrayList<ToolCard>();
-        for(int i=0; i<3; i++);{
-            pubc.add(deck.getObjectivePublicCardDeck().get(i));
-            toolc.add(deck.getToolCardDeck().get(i));
-        }*/
+
         ModelManager.model.setOnBoardCards(obc);
         ModelManager.model.setPlayerList(plList);
+        this.update(ModelManager.model);
 
         DieInt d;
         Bag bag=new Bag();
