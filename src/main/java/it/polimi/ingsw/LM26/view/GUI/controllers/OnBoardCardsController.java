@@ -11,9 +11,14 @@ import javafx.scene.layout.TilePane;
 public class OnBoardCardsController {
 
     private ImageManager imageManager;
+    private GameController gController;
 
     @FXML
     private TilePane cards;
+
+    public void setMainController(GameController gController){
+        this. gController=gController;
+    }
 
     public void setUpCards(ImageManager imManager){
         imageManager=imManager;
@@ -32,15 +37,10 @@ public class OnBoardCardsController {
         }
     }
 
-    public void setDisable(){
+    public void setDisable(boolean disable){
         for(int i=0; i<cards.getChildren().size(); i++){
-            cards.getChildren().get(i).setDisable(true);
+            cards.getChildren().get(i).setDisable(disable);
         }
     }
 
-    public void setEnable(){
-        for(int i=0; i<cards.getChildren().size(); i++){
-            cards.getChildren().get(i).setDisable(false);
-        }
-    }
 }

@@ -8,10 +8,15 @@ import javafx.scene.layout.TilePane;
 
 public class DraftPoolController {
 
-    ImageManager imageManager;
+    private ImageManager imageManager;
+    private GameController gController;
 
     @FXML
     TilePane dPool;
+
+    public void setMainController(GameController gController){
+        this. gController=gController;
+    }
 
     public void updateDPool(ImageManager imMa){
         imageManager=imMa;
@@ -21,15 +26,10 @@ public class DraftPoolController {
         }
     }
 
-    public void setDisable(){
+    public void setDisable(boolean disable){
         for(int i=0; i<dPool.getChildren().size(); i++){
-            dPool.getChildren().get(i).setDisable(true);
+            dPool.getChildren().get(i).setDisable(disable);
         }
     }
 
-    public void setEnable(){
-        for(int i=0; i<dPool.getChildren().size(); i++){
-            dPool.getChildren().get(i).setDisable(false);
-        }
-    }
 }

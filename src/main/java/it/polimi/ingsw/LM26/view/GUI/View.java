@@ -211,7 +211,6 @@ public class View extends ViewInterface{
                 FXMLLoader fLoader=displayableStageGame.getFxmlLoader();
                 GameController gController=fLoader.getController();
                 gController.setupGame(myTurn);
-                gController.updateRoundTrack();
                 displayableStageGame.show(stage);
             }
         });

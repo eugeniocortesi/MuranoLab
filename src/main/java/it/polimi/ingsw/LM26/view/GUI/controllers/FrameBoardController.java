@@ -64,6 +64,14 @@ public class FrameBoardController {
         }
     }
 
+    public void updateFrameBoard(){
+        PlayerZone me=ModelManager.getModel().getPlayer(ModelManager.getId());
+        setGrid(me.getPlayerBoard());
+        for(int i=0; i<tokens.getChildren().size()-me.getToken().getTokenNumber(); i++){
+            tokens.getChildren().remove(0);
+        }
+    }
+
     public void useTokens(){
 
     }
@@ -112,15 +120,9 @@ public class FrameBoardController {
         gController.setInstructions(Integer.toString(index));
     }
 
-    public void setEnable(){
+    public void setDisable(boolean disable){
         for(int i=0; i<tilepane.getChildren().size(); i++){
-            tilepane.getChildren().get(i).setDisable(false);
-        }
-    }
-
-    public void setDisable(){
-        for(int i=0; i<tilepane.getChildren().size(); i++){
-            tilepane.getChildren().get(i).setDisable(true);
+            tilepane.getChildren().get(i).setDisable(disable);
         }
     }
 }

@@ -10,6 +10,7 @@ import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
 import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,13 +42,13 @@ public class GameController {
     @FXML
     private DraftPoolController dPoolController;
     @FXML
+    private RoundTrackController rTrackController;
+    @FXML
     private TilePane draftAndPlayers;
     @FXML
     private ImageView privateCard;
     @FXML
-    private TilePane roundTrack;
-    @FXML
-    private TilePane diceLists;
+    private Button endMove;
     @FXML
     private Label instructions;
 
@@ -57,6 +58,9 @@ public class GameController {
         this.myTurn=myTurn;
 
         myFBoardController.setMainController(this);
+        dPoolController.setMainController(this);
+        onBCardsController.setMainController(this);
+        rTrackController.setMainController(this);
 
         imageManager=new ImageManager();
         onBCardsController.setUpCards(imageManager);
@@ -77,28 +81,6 @@ public class GameController {
             }
         }
 
-        dPoolController.updateDPool(imageManager);
-    }
-
-//to move in RoundTrack controller
-    public void updateRoundTrack(){
-        ArrayList<RoundTrackTurn> roundTrackList = ModelManager.getModel().getRoundTrackInt().getRoundTrackTurnList();
-        for(int i=0; i<roundTrackList.size(); i++){
-            VBox cell=(VBox) roundTrack.getChildren().get(i);
-            StackPane sp=(StackPane) cell.getChildren().get(1);
-            ImageView num=(ImageView) sp.getChildren().get(0);
-            imageManager.setDie(num, roundTrackList.get(i).getDiceList().get(0));
-            if(roundTrackList.get(i).getDiceList().size()>1){
-                VBox diceList=(VBox) diceLists.getChildren().get(i);
-                for(int j=1; j<roundTrackList.get(i).getDiceList().size(); j++){
-                    ImageView newDie= new ImageView();
-                    newDie.setFitHeight(40);
-                    newDie.setFitHeight(40);
-                    imageManager.setDie(newDie, roundTrackList.get(i).getDiceList().get(j));
-                    diceList.getChildren().add(newDie);
-                }
-            }
-        }
     }
 
     public void setInstructions(String s){
@@ -106,13 +88,17 @@ public class GameController {
     }
 
     public void updateGame(){
-
+        rTrackController.updateRoundTrack(imageManager);
+        dPoolController.updateDPool(imageManager);
+        myFBoardController.updateFrameBoard();
     }
 
     public void disableEverything(){
-        myFBoardController.setDisable();
-        dPoolController.setDisable();
-        onBCardsController.setDisable();
+        myFBoardController.setDisable(true);
+        dPoolController.setDisable(true);
+        onBCardsController.setDisable(true);
+        rTrackController.setDisable(true);
+        endMove.setDisable(true);
     }
 
 }
