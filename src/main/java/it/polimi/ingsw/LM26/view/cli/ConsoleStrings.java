@@ -42,7 +42,6 @@ public class ConsoleStrings extends ViewInterface {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private String s= "";
     private Observer observer;
-    static boolean automaticShowMenu=true;
 
     public static void main(String[] args) {
         //System.out.println("\u00AF"+"\u2310"+"\u00AC"+"\u2319"+"\u2310");
@@ -172,10 +171,7 @@ public class ConsoleStrings extends ViewInterface {
             this.setPlayerMenu(new MyTurnMenu(clientView));
         }
         else this.setPlayerMenu(new NotMyTurnMenu(clientView));
-        if(automaticShowMenu){
-            showCurrentMenu(null);
-            automaticShowMenu=false;
-        }
+        showCurrentMenu(null);
     }
 
     @Override

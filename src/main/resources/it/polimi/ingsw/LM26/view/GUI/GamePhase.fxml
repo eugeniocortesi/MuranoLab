@@ -51,19 +51,20 @@
                         </Label>
                         <MenuBar>
                           <menus>
-                            <Menu mnemonicParsing="false" text="File">
+                            <Menu mnemonicParsing="false" text="In/Decremento">
                               <items>
-                                <MenuItem mnemonicParsing="false" text="Close" />
+                                <MenuItem mnemonicParsing="false" text="Incremento" />
+                                    <MenuItem mnemonicParsing="false" text="Decremento" />
                               </items>
                             </Menu>
-                            <Menu mnemonicParsing="false" text="Edit">
+                            <Menu mnemonicParsing="false" text="Valore Dado">
                               <items>
-                                <MenuItem mnemonicParsing="false" text="Delete" />
-                              </items>
-                            </Menu>
-                            <Menu mnemonicParsing="false" text="Help">
-                              <items>
-                                <MenuItem mnemonicParsing="false" text="About" />
+                                <MenuItem mnemonicParsing="false" text="1" />
+                                    <MenuItem mnemonicParsing="false" text="2" />
+                                    <MenuItem mnemonicParsing="false" text="3" />
+                                    <MenuItem mnemonicParsing="false" text="4" />
+                                    <MenuItem mnemonicParsing="false" text="5" />
+                                    <MenuItem mnemonicParsing="false" text="6" />
                               </items>
                             </Menu>
                           </menus>

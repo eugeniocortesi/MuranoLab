@@ -51,14 +51,7 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
         else if(input.equalsIgnoreCase("C")){
             consoleTools.showCards();
         }
-        if(input.equalsIgnoreCase("D")||input.equalsIgnoreCase("U")||input.equalsIgnoreCase("P")){
-            ConsoleStrings.automaticShowMenu=true;
-        }
-        else{
-            actionEvent=ae.askForMenu(true);
-            notify(actionEvent);
-        }
-        if (input.equalsIgnoreCase("D")) {
+        else if (input.equalsIgnoreCase("D")) {
             System.out.println("Prima scegli il dado, poi indica le coordinate della Plancia Vetrata in cui vuoi piazzarlo");
             consoleTools.showYourplayerZone(ConsoleTools.id);
             consoleTools.printDraftPool();
@@ -75,6 +68,10 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
         }
         else if(input.equalsIgnoreCase("P")){
             actionEvent=ae.loseTurn();
+            notify(actionEvent);
+        }
+        if(input.equalsIgnoreCase("A")||input.equalsIgnoreCase("T")||input.equalsIgnoreCase("C")){
+            actionEvent=ae.askForMenu(true);
             notify(actionEvent);
         }
     }
