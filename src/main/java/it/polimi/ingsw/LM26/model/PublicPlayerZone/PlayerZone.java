@@ -5,14 +5,13 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
 public class PlayerZone extends PlayerZoneInt {
 
+    private String namePlayer;
 
-    private  String namePlayer;
-
-    private  int numberPlayer;
+    private int numberPlayer;
 
     private int IDPlayer;
 
-    private  WindowFramePlayerBoard playerBoard;
+    private WindowFramePlayerBoard playerBoard;
 
     private WindowPatternCard windowPatternCard;
 
@@ -28,70 +27,59 @@ public class PlayerZone extends PlayerZoneInt {
 
     private ActionHistory actionHistory;
 
-
     public PlayerZone(String namePlayer, int IDPlayer) {
 
-        this.namePlayer=namePlayer;
-        this.IDPlayer=IDPlayer;
-        this.playerState=PlayerState.ENDING;
+        this.namePlayer = namePlayer;
+        this.IDPlayer = IDPlayer;
+        this.playerState = PlayerState.ENDING;
         this.actionHistory = new ActionHistory();
-        this.playerBoard= null;
+        this.playerBoard = null;
         this.windowPatternCard = null;
         this.token = null;
-        this.scoreMarker= null;
-        this.privatePoints= 0;
-        this.lastRoundTurn= 0;
+        this.scoreMarker = null;
+        this.privatePoints = 0;
+        this.lastRoundTurn = 0;
         this.typePlayerZone = "PlayerZone";
 
-    }
-
-    public String getNamePlayer() {
-        return namePlayer;
     }
 
     public Token getToken() { return token; }
 
     public int getIDPlayer() { return IDPlayer; }
 
-    public void setIDPlayer(int IDPlayer) { this.IDPlayer = IDPlayer; }
-
     public void setToken(Token token) {
-            this.token = token;
-        }
+        this.token = token;
+    }
 
     public void setScoreMarker(ScoreMarker scoreMarker) {
         this.scoreMarker = scoreMarker;
-        }
+    }
 
-        public String getName() {
-            return namePlayer;
-        }
+    public String getName() {
+        return namePlayer;
+    }
 
-        public int getNumber() { return numberPlayer; }
+    public int getNumber() { return numberPlayer; }
 
-        public WindowFramePlayerBoard getPlayerBoard() {
-            return playerBoard;
-        }
+    public WindowFramePlayerBoard getPlayerBoard() {
+        return playerBoard;
+    }
 
-        public WindowPatternCard getWindowPatternCard() {
-            return windowPatternCard;
-        }
+    public WindowPatternCard getWindowPatternCard() {
+        return windowPatternCard;
+    }
 
-        public PlayerState getPlayerState() {
-            return playerState;
-        }
+    public PlayerState getPlayerState() {
+        return playerState;
+    }
 
     public int getPrivatePoints() { return privatePoints; }
 
-        public void setPrivatePoints(int privatePoints) { this.privatePoints = privatePoints; }
+    public void setPrivatePoints(int privatePoints) { this.privatePoints = privatePoints; }
 
-        public ScoreMarker getScoreMarker() { return scoreMarker; }
+    public ScoreMarker getScoreMarker() { return scoreMarker; }
 
     public void setNumberPlayer(int numberPlayer) { this.numberPlayer = numberPlayer; }
-
-    public void setNamePlayer(String namePlayer) {
-        this.namePlayer = namePlayer;
-    }
 
     public void setPlayerBoard(WindowFramePlayerBoard playerBoard) {
         this.playerBoard = playerBoard;
@@ -116,10 +104,7 @@ public class PlayerZone extends PlayerZoneInt {
     @Override
     public void rewrite() {
 
-        this.typePlayerZone="PlayerZone";
+        this.typePlayerZone = "PlayerZone";
 
     }
-
-    //get carta obbiettivo privato
 }
-

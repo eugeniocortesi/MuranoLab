@@ -16,6 +16,8 @@ public class ActionHistory implements Serializable{
 
     private boolean freezed=false;
 
+    private boolean jump=false;
+
     public boolean isFirstTurn() {
         return firstTurn;
     }
@@ -56,6 +58,10 @@ public class ActionHistory implements Serializable{
 
     public void setFreezed(boolean freezed) { this.freezed = freezed; }
 
+    public boolean isJump() { return jump;}
+
+    public void setJump(boolean jump) { this.jump = jump; }
+
     public void deleteTurnHistory() {
 
        dieUsed=false;
@@ -64,8 +70,7 @@ public class ActionHistory implements Serializable{
 
        cardUsed=false;
 
-
-
+       jump=false;
     }
 
     public void deleteRoundHistory(){
@@ -77,8 +82,5 @@ public class ActionHistory implements Serializable{
         secondTurn= false;
 
         deleteTurnHistory();
-
     }
-
-
 }

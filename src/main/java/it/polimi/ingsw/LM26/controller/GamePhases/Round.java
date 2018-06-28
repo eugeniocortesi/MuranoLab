@@ -22,8 +22,14 @@ public class Round {
 
     private RoundState roundState=RoundState.RUNNING;
 
+    private Model model;
+
     public Round(RoundTrackInt rTrack, ArrayList<PlayerZone> pZone, int nrounds) {
+
+        this.model=singletonModel();
+
         this.assignTurn(rTrack, pZone, nrounds);
+
         pullDice();
     }
 
@@ -59,7 +65,6 @@ public class Round {
                   System.out.println(player.get(i).getName() +" is in STANDBY");
                   turnCounter=turnCounter+1;
                   if(turnCounter == turn.length) {
-                      Model model = singletonModel();
                       endRound(model.getRoundTrackInt(), model.getDraftPool(), player.get(i));
                   }
                   return nextPlayer(player, turn);
@@ -75,6 +80,7 @@ public class Round {
         if(actingPlayer.getPlayerState()!=STANDBY)
             actingPlayer.setPlayerState(PlayerState.ENDING);
         actingPlayer.getActionHistory().deleteTurnHistory();
+        model.getRestrictions().resetRestrictions();
         turnCounter++;
         if(turnCounter == turn.length) {
             endRound(roundTrack, draftPool, actingPlayer);
@@ -92,8 +98,6 @@ public class Round {
         }
 
     public void pullDice(){
-
-        Model model = singletonModel();
 
         int contStandby=0;
         int contDice=0;

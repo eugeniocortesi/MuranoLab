@@ -71,9 +71,7 @@ public class EventHandler{
         if (event.getId() == 11) {
 
             System.out.println("i'll pass ");
-            model.getPlayerList().get(pl).getActionHistory().setDieUsed(true);
-            model.getPlayerList().get(pl).getActionHistory().setPlacement(true);
-            model.getPlayerList().get(pl).getActionHistory().setCardUsed(true);
+            model.getPlayerList().get(pl).getActionHistory().setJump(true);
             return true;
         }
         if (event.getId() == 12) {

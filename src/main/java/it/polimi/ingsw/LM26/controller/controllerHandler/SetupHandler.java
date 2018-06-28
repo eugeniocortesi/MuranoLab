@@ -5,6 +5,7 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventTimerEnd;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -70,4 +71,8 @@ public class SetupHandler {
     }
 
 
+    public void setUpJumpTurn(ActionEventTimerEnd timerEnd) {
+
+        model.getPlayer(timerEnd.getName()).getActionHistory().setJump(true);
+    }
 }

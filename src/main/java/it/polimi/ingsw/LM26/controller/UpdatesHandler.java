@@ -76,10 +76,11 @@ public class UpdatesHandler implements Observer {
         }
         //A player has end his time to do the action
         else if(timerEnd.getTimerEnd()){
+
             LOGGER.log(Level.INFO,timerEnd.getName()+ " client has finished his time");
-            //The current player has finished  his time
-            //TODO esci dal while e passa il turno
-            //timerEnd.getName(); nome di chi ha finito il tempo per la mossa
+
+
+           //controller.getSetupHandler().setUpJumpTurn(timerEnd);
         }
         else{
             throw new UnsupportedOperationException("Not supported yet.");
