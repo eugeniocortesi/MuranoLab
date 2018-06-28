@@ -41,4 +41,6 @@ public abstract class ClientView extends ObservableSimple implements Observer {
     public abstract void sendAddedPlayer(String field1);
 
     public abstract void sendCurrentMenu(String name);
+
+    public abstract void pong();
 }

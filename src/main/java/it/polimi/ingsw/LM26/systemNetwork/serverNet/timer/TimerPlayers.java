@@ -6,6 +6,12 @@ import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Class TimerPlayers
+ * General timer that manages all timerTasks
+ * @author Chiara Criscuolo
+ */
+
 public class TimerPlayers {
 
     private long myLong;
@@ -22,7 +28,11 @@ public class TimerPlayers {
 
     private static final Logger LOGGER = Logger.getLogger(TimerPlayers.class.getName());
 
-
+    /**
+     * class constructor
+     * @param serverBase Server
+     * @param timerConfiguration file of configuration of timer
+     */
     public TimerPlayers(ServerBase serverBase, TimerConfiguration timerConfiguration) {
         this.timerConfiguration = timerConfiguration;
         this.serverBase = serverBase;
@@ -31,6 +41,10 @@ public class TimerPlayers {
         timer2 = new Timer();
         timer3 = new Timer();
     }
+
+    /**
+     * call method that schedule TimerTaskPlayers
+     */
     public void scheduleTimerPlayer(){
 
         LOGGER.log(Level.SEVERE,"Started schedule");
@@ -45,7 +59,12 @@ public class TimerPlayers {
 
     }
 
-    public void scheduleTimerNetworkPlayer(String name){
+    /**
+     * call method that schedule TimerNetworkPlayer
+     * @param name name of player
+     */
+
+    public TimerTaskNetworkPlayers scheduleTimerNetworkPlayer(String name){
 
         LOGGER.log(Level.SEVERE,"Started schedule");
         if(serverBase == null)
@@ -55,9 +74,15 @@ public class TimerPlayers {
         if(timer2 == null)
             LOGGER.log(Level.SEVERE,"Timer is null");
         LOGGER.log(Level.WARNING, "STARTED SCHEDULE TIMER NETWORK PLAYER");
-        timer2.schedule(new TimerTaskNetworkPlayers(serverBase, timerConfiguration, timer2, name) , this.myLong);
-
+        TimerTaskNetworkPlayers timerTaskNetworkPlayers = new TimerTaskNetworkPlayers(serverBase, timerConfiguration, timer2, name);
+        timer2.schedule( timerTaskNetworkPlayers , this.myLong);
+        return timerTaskNetworkPlayers;
     }
+
+    /**
+     * call method that schedule TimerTaskActionPlayer
+     * @param name name of player
+     */
 
     public TimerTaskActionPlayers scheduleTimerActionPlayer(String name){
 
@@ -73,6 +98,10 @@ public class TimerPlayers {
         timer3.schedule(timerTaskActionPlayers , this.myLong);
         return  timerTaskActionPlayers;
     }
+
+    /**
+     * reset timer3
+     */
 
     public void resetTimerActionPlayer(){
         timer3 = new Timer();

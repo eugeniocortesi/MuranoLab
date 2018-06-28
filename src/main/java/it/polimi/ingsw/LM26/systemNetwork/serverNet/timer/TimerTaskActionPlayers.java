@@ -8,6 +8,11 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * TimerTaskActionPlayers class
+ * TimerTask that manages the time of each move for each client
+ */
+
 public class TimerTaskActionPlayers extends TimerTask {
 
     private ServerBase serverBase;
@@ -17,6 +22,13 @@ public class TimerTaskActionPlayers extends TimerTask {
     private static final Logger LOGGER = Logger.getLogger(TimerTaskPlayers.class.getName());
     private boolean arrivedMessage;
 
+    /**
+     * Constructor
+     * @param serverBase Server
+     * @param timerConfiguration file of configuration of timer
+     * @param timer timer
+     * @param name name of player
+     */
     public TimerTaskActionPlayers(ServerBase serverBase, TimerConfiguration timerConfiguration, Timer timer, String name) {
 
         if(serverBase == null)
@@ -38,15 +50,27 @@ public class TimerTaskActionPlayers extends TimerTask {
         arrivedMessage = b;
     }
 
+    /**
+     * called by start
+     */
+
     @Override
     public void run() {
         body();
     }
 
+    /**
+     * Every time that finish the timer checks if the player has sent an action
+     * If the player has sent one the timer has finished his job
+     * Otherwise it sends an ActionEventTimerEnd to the Controller
+     */
+
     public void body(){
         if(//end time for the action, so didn't arrive action event
               arrivedMessage  ) {
             LOGGER.log(Level.SEVERE,"Reset timer action player");
+            timer.cancel();  // Terminates this timer, discarding any currently scheduled tasks.
+            timer.purge();
 
             //TimerPlayers timerPlayers = new TimerPlayers(serverBase, timerConfiguration);
             //timerPlayers.scheduleTimerPlayer();

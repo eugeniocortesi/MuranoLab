@@ -76,5 +76,10 @@ public class ClientViewRMIRemote implements ClientViewRemote {
         clientViewRMI.sendCurrentMenu(name);
     }
 
+    @Override
+    public void pong() throws RemoteException {
+        clientViewRMI.pong();
+    }
+
 
 }

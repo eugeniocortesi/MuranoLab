@@ -81,10 +81,15 @@ public class ListenerClientView extends Thread {
     }
 
     //parsing of messages
-    public void recognize(String message){
+    public synchronized void recognize(String message){
 
         if (message == null)
             return;
+        if(message.equals("ping")){
+            clientView.pong();
+            return;
+        }
+
         DataMessage dataMessage = new DataMessage(null,null);
         String op = dataMessage.parserFirstElement(message);
         if (op.equals("requested_login")){

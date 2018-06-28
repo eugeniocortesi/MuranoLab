@@ -86,7 +86,9 @@ public class ClientManagerSocket extends ClientManager {
     @Override
     public void connect() {
         LOGGER.log(Level.WARNING,"Server connected");
-        listenerClientManager.listen();
+        //TODO delete comment
+        //ping();
+        listenerClientManager.start();
         //sendAvailableId();
         //requestedLogin();
     }
@@ -100,7 +102,7 @@ public class ClientManagerSocket extends ClientManager {
         ConnectMessage message = new ConnectMessage("connected", id );
         message.dump();
         sendMessage(message.serializeClassMessage());
-        listenerClientManager.listen();
+        //listenerClientManager.listen();
     }
 
     @Override
@@ -114,7 +116,7 @@ public class ClientManagerSocket extends ClientManager {
         DataMessage dataMessage = new DataMessage("requested_login","Server");
         String message = dataMessage.serializeClassMessage();
         sendMessage(message);
-        listenerClientManager.listen();
+        //listenerClientManager.listen();
     }
 
     @Override
@@ -150,7 +152,7 @@ public class ClientManagerSocket extends ClientManager {
             }
         }
 
-        listenerClientManager.listen();
+        //listenerClientManager.listen();
     }
 
     @Override
@@ -196,12 +198,13 @@ public class ClientManagerSocket extends ClientManager {
         //timerTaskActionPlayers.setArrivedMessage(true);
         //TODO ATTENTION LISTEN!
         //server.sendToObservable(actionEventWindow);
-        listenerClientManager.listen();
+        //listenerClientManager.listen();
     }
 
     @Override
     public void sendPrivateCard(ObjectivePrivateCard card) {
 
+        card.rewrite();
         PrivateCardMessage privateCardMessage = new PrivateCardMessage("send_privatecard", card);
         String s = privateCardMessage.serializeClassMessage();
         sendMessage(s);
@@ -231,7 +234,7 @@ public class ClientManagerSocket extends ClientManager {
         LOGGER.log(Level.SEVERE,"I have received one actionEvent from "+user);
         //timerTaskActionPlayers.setArrivedMessage(true);
         server.getQueueController().pushMessage(actionEvent);
-        listenerClientManager.listen();
+        //listenerClientManager.listen();
     }
 
     @Override
@@ -246,6 +249,8 @@ public class ClientManagerSocket extends ClientManager {
 
     @Override
     public void sendBeginTurnMessage(String name, PlayerZone playerZone) {
+
+        playerZone.rewrite();
 
         LOGGER.log(Level.SEVERE,"server is sending playerzone of " + name);
         BeginTurnMessage beginTurnMessage = new BeginTurnMessage("send_beginturnmessage", name, playerZone);
@@ -278,11 +283,35 @@ public class ClientManagerSocket extends ClientManager {
         //TODO it
     }
 
+    @Override
+    public void ping() {
+        Thread t = new Thread(new MyRunnablePing());
+        t.start();
+    }
+
+    @Override
+    public void pong() {
+        //TODO something pong
+        ping();
+    }
+
 
     @Override
     public void update(Model m) {
 
         LOGGER.log(Level.SEVERE,"Updating model from server");
         sendModel(m);
+    }
+
+    private class MyRunnablePing implements Runnable {
+
+        public MyRunnablePing() {
+        }
+
+        @Override
+        public void run(){
+            //TODO something timer
+            sendMessage("ping");
+        }
     }
 }

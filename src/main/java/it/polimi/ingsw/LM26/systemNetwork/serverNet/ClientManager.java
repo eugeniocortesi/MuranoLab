@@ -10,6 +10,9 @@ import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
 
 import java.util.ArrayList;
 
+/**
+ * Class that manages connection with Clients
+ */
 public abstract class ClientManager implements Runnable, ObserverSimple {
 
     public abstract void connect();
@@ -47,4 +50,8 @@ public abstract class ClientManager implements Runnable, ObserverSimple {
     public abstract void sendCurrentMenu(String name);
 
     public abstract void sendEndGame(Object score);
+
+    public abstract void ping();
+
+    public abstract void pong();
 }

@@ -205,6 +205,12 @@ public class ClientViewSocket extends ClientView {
     }
 
     @Override
+    public void pong() {
+
+        outSocket.println("pong");
+    }
+
+    @Override
     protected void notify(Model m) {
         LOGGER.log(Level.SEVERE,"Model is arrived from Controller");
         if(m == null)

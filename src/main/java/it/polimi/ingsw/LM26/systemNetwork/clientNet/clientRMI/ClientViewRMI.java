@@ -217,6 +217,15 @@ public class ClientViewRMI extends ClientView {
         concreteClientView.showCurrentMenu(name);
     }
 
+    @Override
+    public void pong() {
+
+        try {
+            stub.pong();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void updatePlayers(ActionEventPlayer actionEventPlayer) {

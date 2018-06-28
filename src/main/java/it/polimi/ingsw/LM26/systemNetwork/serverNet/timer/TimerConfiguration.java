@@ -6,6 +6,11 @@ import com.google.gson.GsonBuilder;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * TimerConfiguration class
+ * it has the number of milliseconds when a timer finish
+ */
+
 public class TimerConfiguration {
 
     private long timerEnd = 5000;
@@ -13,6 +18,10 @@ public class TimerConfiguration {
     public long getTimerEnd() {
         return timerEnd;
     }
+
+    /**
+     * method tha create the file TimerConfiguration
+     */
 
     public void create(){
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.timer;
 
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventPlayer;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventTimerEnd;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 
@@ -7,6 +8,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+/**
+ * TimerTaskNetworkPlayers class
+ * Manages the timer of connection
+ */
 
 public class TimerTaskNetworkPlayers extends TimerTask {
 
@@ -30,27 +36,39 @@ public class TimerTaskNetworkPlayers extends TimerTask {
         this.connected = false;
     }
 
+    public void setConnected(boolean connected) {
+        this.connected = connected;
+    }
+
+    /**
+     * called by start
+     */
     @Override
     public void run() {
         body();
     }
 
+    /**
+     * Every time that finish the timer checks if the player is online
+     * If the player is online the timer starts again
+     * Otherwise it sends a disconnectMessage (actionEventPlayer) to the Controller
+     */
+    
     public void body(){
         if(connected) {
             LOGGER.log(Level.SEVERE,"Reset timer");
-
+            connected = false;
             //TimerPlayers timerPlayers = new TimerPlayers(serverBase, timerConfiguration);
             //timerPlayers.scheduleTimerPlayer();
         } else{
 
-            //TODO Add disconnect message?
-            ActionEventTimerEnd timerEnd = new ActionEventTimerEnd(name, true);
+            ActionEventPlayer actionEventPlayer = new ActionEventPlayer(name, false);
             LOGGER.log(Level.SEVERE,"Timer end for "+ name);
 
-
-            timer.cancel();  // Terminates this timer, discarding any currently scheduled tasks.
+            // Terminates this timer, discarding any currently scheduled tasks
+            timer.cancel();
             timer.purge();
-            serverBase.getQueueController().pushMessage(timerEnd);
+            serverBase.getQueueController().pushMessage(actionEventPlayer);
 
         }
     }

@@ -8,6 +8,10 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * TimerImplementation class
+ * Class that reads the file TimerConfiguration
+ */
 public class TimerImplementation {
 
     private TimerConfiguration timerConfiguration;
@@ -17,11 +21,15 @@ public class TimerImplementation {
         //this.timerConfiguration.create();
     }
 
+    /**
+     * method that reads the file TimerCOnfiguration and save timerEnd
+     * @return TimerConfiguration class that memorize timerEnd
+     * @exception Exception if it can't read the file amd return null
+     */
     public TimerConfiguration implentation(){
 
         try {
             InputStream stream = Main.class.getResourceAsStream("TimerConfiguration");
-            //FileReader fr = new FileReader("src/main/resources/DataClientConfiguration");
             BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 
             Gson gson = new GsonBuilder()
@@ -31,7 +39,6 @@ public class TimerImplementation {
             TimerConfiguration timer = gson.fromJson(br, TimerConfiguration.class);
             return timer;
 
-            //InputStream reader = Main.class.getResourceAsStream("DataServerConfiguration");
         } catch (Exception e) {
 
             System.out.println("Timer not configured");

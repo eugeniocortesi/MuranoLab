@@ -14,6 +14,7 @@ import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.PlayerConnectionMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerPlayers;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskActionPlayers;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskNetworkPlayers;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -26,6 +27,10 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * ClientManagerRMI class
+ * It manages the RMI connection
+ */
 public class ClientManagerRMI extends ClientManager {
 
     private ServerBase myserver;
@@ -36,8 +41,16 @@ public class ClientManagerRMI extends ClientManager {
     private String user;
     TimerPlayers timerPlayers;
     TimerTaskActionPlayers timerTaskActionPlayers;
+    TimerTaskNetworkPlayers timerTaskNetworkPlayers;
     private static final Logger LOGGER = Logger.getLogger(ClientManagerRMI.class.getName());
 
+    /**
+     * Constructor
+     * @param serverBase Server
+     * @param RMIPORTServer RMI port of Server
+     * @param RMIPORTClient RMI port of Client
+     * @param address IP of Server
+     */
     public ClientManagerRMI(ServerBase serverBase, int RMIPORTServer, int RMIPORTClient, String address){
 
         myserver = serverBase;
@@ -48,14 +61,18 @@ public class ClientManagerRMI extends ClientManager {
 
     }
 
+    /**
+     * method that take the skeleton from Client and add the new client to the lobby
+     * Then call method "requestedLogin" in the client
+     */
     public void connect(){
 
         //Take Skeleton
         try {
             // Getting the registry
-           // Registry registry = LocateRegistry.getRegistry(address, RMIPORTClient);
             String addr= RemoteServer.getClientHost();
             Registry registry = LocateRegistry.getRegistry(addr, RMIPORTServer);
+
             //Looking up the registry for the remote object
             skeleton = (ClientViewRemote) registry.lookup("ClientViewRemote"+getAvailableId());
             LOGGER.log(Level.WARNING, "Took Skeleton");
@@ -74,7 +91,6 @@ public class ClientManagerRMI extends ClientManager {
             });
             t.start();
 
-            //skeleton.requestedLogin();
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
@@ -88,11 +104,25 @@ public class ClientManagerRMI extends ClientManager {
         return myserver.lobbySize();
     }
 
+    /**
+     * method not used in this implementation of ClientManager
+     * @throws UnsupportedOperationException if the method is called
+     */
+
     @Override
     public void requestedLogin() {
-        LOGGER.log(Level.SEVERE,"The client RMI is connected. He tries to login");
+
+        throw new UnsupportedOperationException("Not supported yet.");
 
     }
+
+    /**
+     * method called by client that controls if this name is already logged
+     * if the name is already playing answer to the client to change the name
+     * if there is already a game on going answer to the client to wait
+     * otherwise it memorizes the name and wait the beginning of the game
+     * @param name name of the player in login phase
+     */
 
     @Override
     public void login(String name) {
@@ -109,6 +139,14 @@ public class ClientManagerRMI extends ClientManager {
             LOGGER.log(Level.INFO,"The add result value: " + result);
             Thread t = new Thread(new MyRunnableLogged(user, result));
             t.start();
+
+            if(result){
+                //Start Network Timer
+                timerTaskNetworkPlayers = timerPlayers.scheduleTimerNetworkPlayer(user);
+                LOGGER.log(Level.WARNING, "Timer network Begin");
+                Thread t1 = new Thread(new myRunnablePing());
+                t1.start();
+            }
 
         }
         else {
@@ -128,11 +166,22 @@ public class ClientManagerRMI extends ClientManager {
         }
     }
 
+    /**
+     * method not used in this implementation of ClientManager
+     * @param l true or false if the player is logged or not
+     * @param name name of the player
+     * @throws UnsupportedOperationException if the method is called
+     */
 
     @Override
     public void logged(Boolean l, String name) {
 
+        throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    /**
+     * method that manages the disconnection of the player
+     */
 
     @Override
     public void disconnected() {
@@ -154,6 +203,12 @@ public class ClientManagerRMI extends ClientManager {
 
     }
 
+    /**
+     * it receive a disconnect message and notify the controller of the exit from the game
+     * Then calls disconnected();
+     * @param s name of the player
+     */
+
     @Override
     public void disconnect(String s) {
 
@@ -166,26 +221,45 @@ public class ClientManagerRMI extends ClientManager {
     @Override
     public void run() {
 
+        //TODO wait()??
+        //TODO Add JavaDoc
     }
+
+    /**
+     * method that sends to the client an ArrayList of WindowPatternCard
+     * Starts the timer of an action
+     * @param user name of the player
+     * @param id id of the player
+     * @param windowDeck ArrayList of WindowPatternCard
+     */
 
     @Override
     public void choseWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
 
         Thread t = new Thread(new MyRunnableWindow(user, id, (ArrayList<WindowPatternCard>) windowDeck.clone()));
         t.start();
-        //timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
+        timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
     }
+
+    /**
+     * method that receive and actionEventWindow as answer from Client and sends it to the Controller
+     * it manages also the timer
+     * @param actionEventWindow actionEvent that contains the information about windowCard from Client
+     */
 
     @Override
     public void chosenWindowPattern(ActionEventWindow actionEventWindow) {
 
-        //timerTaskActionPlayers.setArrivedMessage(true);
+        timerTaskActionPlayers.setArrivedMessage(true);
         LOGGER.log(Level.SEVERE,"I have received one windowcard from "+user);
         myserver.getQueueController().pushMessage(actionEventWindow);
 
-        //this.getObserver().accept(actionEventWindow);
     }
 
+    /**
+     * Method that sends the random PrivateCard to the Client
+     * @param card random PrivateCard chosen by Controller
+     */
     @Override
     public void sendPrivateCard(ObjectivePrivateCard card) {
 
@@ -193,6 +267,11 @@ public class ClientManagerRMI extends ClientManager {
         t.start();
 
     }
+
+    /**
+     * Method that sends the updated Model to the Client
+     * @param m updated Model
+     */
 
     @Override
     public void sendModel(Model m) {
@@ -202,6 +281,12 @@ public class ClientManagerRMI extends ClientManager {
 
     }
 
+    /**
+     * Method that receives an actionEvent from the Client and sends it to Controller
+     * Updates the timer
+     * @param actionEvent answer from Client
+     */
+
     @Override
     public void sendActionEventFromView(ActionEvent actionEvent) {
 
@@ -210,6 +295,11 @@ public class ClientManagerRMI extends ClientManager {
         myserver.getQueueController().pushMessage(actionEvent);
     }
 
+    /**
+     * Method that receive a String from Controller and sends it to the Client
+     * @param answer string of answer from Controller after an actionEvent
+     */
+
     @Override
     public void sendAnswerFromController(String answer) {
 
@@ -217,6 +307,12 @@ public class ClientManagerRMI extends ClientManager {
         t.start();
 
     }
+
+    /**
+     * Method that sends to the Client his playerZone
+     * @param name name of the player
+     * @param playerZone playerZone of the player
+     */
 
     @Override
     public void sendBeginTurnMessage(String name, PlayerZone playerZone) {
@@ -227,30 +323,75 @@ public class ClientManagerRMI extends ClientManager {
         t.start();
     }
 
+    /**
+     * Method that says to the Client that another player is in the Game
+     * @param name name of the new player that is logged
+     */
+
     @Override
     public void sendAddedPlayer(String name) {
         Thread t = new Thread(new MyRunnableAddedPlayer(name));
         t.start();
     }
 
+    /**
+     * Method that calls in Client View showCurrentMenu
+     * Updates the timer
+     * @param name of the player
+     */
     @Override
     public void sendCurrentMenu(String name) {
+        //TODO CHECK IF IT WILL BE DELETED
+        timerPlayers.resetTimerActionPlayer();
+        timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
         Thread t = new Thread(new myRunnableCurrentMenu(name));
         t.start();
 
     }
 
+    /**
+     * Method that sends to the player his points
+     * @param score points of the player
+     */
     @Override
     public void sendEndGame(Object score) {
         //TODO
     }
 
+    /**
+     * Method that checks if the player is online or not sending a ping message
+     */
+    @Override
+    public void ping() {
+
+        Thread t = new Thread(new myRunnablePing());
+        t.start();
+    }
+
+    /**
+     * Method that receive the answer from the Client Network to check if the player is online or not
+     * Updates the timer, then calls ping
+     */
+
+    @Override
+    public void pong() {
+
+       timerTaskNetworkPlayers.setConnected(true);
+       ping();
+    }
+
+    /**
+     * Method called by Observer of model that sends the Model to the Client
+     * @param m updated Model
+     */
     @Override
     public void update(Model m) {
         sendModel(m);
     }
 
-
+    /**
+     * Thread that manages the sending the List of WindowPatternCard
+     */
 
     public class MyRunnableWindow implements Runnable{
 
@@ -276,6 +417,9 @@ public class ClientManagerRMI extends ClientManager {
         }
     }
 
+    /**
+     * Thread that sends the result of the login phase to the Client
+     */
     private class MyRunnableLogged implements Runnable{
 
         volatile String user;
@@ -296,6 +440,10 @@ public class ClientManagerRMI extends ClientManager {
             }
         }
     }
+
+    /**
+     * Thread that sends the privateCard to the Client
+     */
 
     private class MyRunnablePrivateCard implements Runnable {
 
@@ -318,6 +466,9 @@ public class ClientManagerRMI extends ClientManager {
         }
     }
 
+    /**
+     * Thread that sends the updated Model to the Client
+     */
     private class MyRunnableModel implements Runnable {
 
         volatile Model m;
@@ -339,6 +490,9 @@ public class ClientManagerRMI extends ClientManager {
         }
     }
 
+    /**
+     *Thread that sends the answer from Controller to the Client
+     */
     private class MyRunnableAnswer implements Runnable {
 
         volatile String answer;
@@ -359,6 +513,9 @@ public class ClientManagerRMI extends ClientManager {
         }
     }
 
+    /**
+     * Thread that sends the PlayerZone to the Client
+     */
     private class MyRunnableBeginTurnMessage implements Runnable {
 
         volatile String name;
@@ -381,6 +538,9 @@ public class ClientManagerRMI extends ClientManager {
         }
     }
 
+    /**
+     * Thread that notifies that Client that a new playe is in the game
+     */
     private class MyRunnableAddedPlayer implements Runnable {
         volatile String username;
         public MyRunnableAddedPlayer(String name) {
@@ -398,6 +558,10 @@ public class ClientManagerRMI extends ClientManager {
             }
         }
     }
+
+    /**
+     * Thread that sends the CurrentMenu to the Client
+     */
 
     private class myRunnableCurrentMenu implements Runnable {
 
@@ -419,6 +583,28 @@ public class ClientManagerRMI extends ClientManager {
             }
         }
     }
+
+    /**
+     * Thread that sends the ping message to the client
+     * Updates timer
+     */
+    private class myRunnablePing implements Runnable {
+
+        public myRunnablePing() {
+        }
+
+
+        @Override
+        public void run() {
+
+            try{
+                skeleton.pong();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
 
 

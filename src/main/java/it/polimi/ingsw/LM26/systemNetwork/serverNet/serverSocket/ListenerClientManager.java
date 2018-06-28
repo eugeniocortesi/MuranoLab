@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ListenerClientManager {
+public class ListenerClientManager extends Thread {
 
     private BufferedReader reader;
     private ClientManagerSocket clientManagerSocket;
@@ -56,6 +56,7 @@ public class ListenerClientManager {
             LOGGER.log(Level.SEVERE,"Message " + message);
             recognize(message);
 
+            listen();
             message = null;
         }
     }
@@ -65,6 +66,9 @@ public class ListenerClientManager {
 
         if (message == null)
             return;
+        else if(message.equals("pong")){
+            clientManagerSocket.pong();
+        }
         DataMessage dataMessage = new DataMessage(null,null);
         String op = dataMessage.parserFirstElement(message);
         if (op.equals("login")){
@@ -97,6 +101,12 @@ public class ListenerClientManager {
             LOGGER.log(Level.WARNING,"Message not recognized");
         }
 
+    }
+
+    @Override
+    public void run(){
+
+        listen();
     }
 
 }

@@ -44,5 +44,10 @@ public class ClientManagerRMIRemote implements ClientManagerRemote {
         clientManagerRMI.sendActionEventFromView(actionEvent);
     }
 
+    @Override
+    public void pong() throws RemoteException {
+        clientManagerRMI.pong();
+    }
+
 
 }

@@ -106,5 +106,18 @@ public class PlayerZone extends PlayerZoneInt {
 
         this.typePlayerZone = "PlayerZone";
 
+        if(windowPatternCard!= null){
+            windowPatternCard.rewrite();
+        }
+        if (playerBoard!= null && playerBoard.getBoardMatrix()!= null) {
+
+            for(int i=0; i<4; i++) {
+                for (int j = 0; j < 5; j++) {
+                    if (playerBoard.getBoardMatrix()[i][j].getDie()!=null)
+                        playerBoard.getBoardMatrix()[i][j].getDie().rewrite();
+                }
+            }
+        }
+
     }
 }
