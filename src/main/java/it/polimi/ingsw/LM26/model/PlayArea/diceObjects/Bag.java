@@ -20,6 +20,10 @@ public class Bag implements Serializable{
 
     private int contPurple;
 
+    public int size(){
+        return inBag.size();
+    }
+
     public ArrayList<DieInt> getInBag() {
         return inBag;
     }

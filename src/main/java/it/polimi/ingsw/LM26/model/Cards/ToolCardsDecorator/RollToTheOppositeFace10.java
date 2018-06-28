@@ -40,9 +40,9 @@ public class RollToTheOppositeFace10 extends ToolCardDecorator {
         return toolcard.getToken();
     }
 
-    public void setOneToken(PlayerZone player){}
+    public void setOneToken(PlayerZone player){toolcard.setOneToken(player);}
 
-    public void setTwoToken(PlayerZone player){}
+    public void setTwoToken(PlayerZone player){toolcard.setTwoToken(player);}
 
     @Override
     public boolean isInUse() {

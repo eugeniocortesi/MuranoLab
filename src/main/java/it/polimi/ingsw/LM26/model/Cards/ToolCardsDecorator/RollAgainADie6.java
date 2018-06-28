@@ -45,11 +45,9 @@ public class RollAgainADie6 extends ToolCardDecorator {
         return toolcard.getToken();
     }
 
-    public void setOneToken(PlayerZone player) {
-    }
+    public void setOneToken(PlayerZone player){toolcard.setOneToken(player);}
 
-    public void setTwoToken(PlayerZone player) {
-    }
+    public void setTwoToken(PlayerZone player){toolcard.setTwoToken(player);}
 
     @Override
     public boolean isInUse() {
@@ -94,9 +92,7 @@ public class RollAgainADie6 extends ToolCardDecorator {
     public boolean play(DieInt dieFromDraft, int pl) {
 
         Model model = singletonModel();
-        ArrayList<DieInt> inDraft = model.getDraftPool().getInDraft();
         PlayerZone player = model.getPlayerList().get(pl);
-        System.out.println("passo di qui 4" );
 
         dieFromDraft.roll();
         dieFromDraft.dump();

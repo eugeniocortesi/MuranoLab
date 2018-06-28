@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.model.Serialization;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
+import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
 public class DifferentColorShadeOnRowColomn extends Effect{
 
@@ -45,10 +46,189 @@ public class DifferentColorShadeOnRowColomn extends Effect{
         boolean blue4=false;
         boolean yellow5=false;
         boolean six=false;
+        int count=0;
+        boolean repeated=false;
+        boolean incomplete=false;
 
-        return 0;
+        if(colorShades) {
+            if (rowColomn) {
+                for (int i = 0; i < 4; i++) {
+                    for (int j = 0; j < 5; j++) {
+                        if (board[i][j].isIsPresent()) {
+                            if (board[i][j].getDie().getColor() == Color.ANSI_BLUE)
+                                if(blue4==false) {
+                                    blue4 = true;
+                                }
+                                else repeated=true;
+                            if (board[i][j].getDie().getColor() == Color.ANSI_RED)
+                                if(red2==false) {
+                                    red2= true;
+                                }
+                                else repeated=true;
+                            if (board[i][j].getDie().getColor() == Color.ANSI_YELLOW)
+                                if(yellow5==false) {
+                                    yellow5= true;
+                                }
+                                else repeated=true;
+                            if (board[i][j].getDie().getColor() == Color.ANSI_GREEN)
+                                if(green1==false) {
+                                    green1= true;
+                                }
+                                else repeated=true;
+                            if (board[i][j].getDie().getColor() == Color.ANSI_PURPLE)
+                                if(purple3==false) {
+                                    purple3= true;
+                                }
+                                else repeated=true;
+                        }else incomplete=true;
+                    }
+                    if (!repeated && !incomplete) count = count + 1;
+                    green1 = false;
+                    red2 = false;
+                    purple3 = false;
+                    blue4 = false;
+                    yellow5 = false;
+                    repeated=false;
+                    incomplete=false;
+                }
+            } else {
+                for (int i = 0; i < 5; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        if (board[j][i].isIsPresent()) {
+                            if (board[j][i].getDie().getColor() == Color.ANSI_BLUE)
+                                if(blue4==false) {
+                                    blue4 = true;
+                                }
+                                else repeated=true;
+                            if (board[j][i].getDie().getColor() == Color.ANSI_RED)
+                                if(red2==false) {
+                                    red2= true;
+                                }
+                                else repeated=true;
+                            if (board[j][i].getDie().getColor() == Color.ANSI_YELLOW)
+                                if(yellow5==false) {
+                                    yellow5= true;
+                                }
+                                else repeated=true;
+                            if (board[j][i].getDie().getColor() == Color.ANSI_GREEN)
+                                if(green1==false) {
+                                    green1= true;
+                                }
+                                else repeated=true;
+                            if (board[j][i].getDie().getColor() == Color.ANSI_PURPLE)
+                                if(purple3==false) {
+                                    purple3= true;
+                                }
+                                else repeated=true;
+                        }else incomplete=true;
+                    }
+                    if (!repeated && !incomplete) count = count + 1;
+                    green1 = false;
+                    red2 = false;
+                    purple3 = false;
+                    blue4 = false;
+                    yellow5 = false;
+                    repeated=false;
+                    incomplete=false;
+                }
+            }
+        }else {
+            if (rowColomn) {
+                for (int i = 0; i < 4; i++) {
+                    for (int j = 0; j < 5; j++) {
+                        if (board[i][j].isIsPresent()) {
+                            if (board[i][j].getDie().getValue()== 1)
+                                if(blue4==false) {
+                                    blue4 = true;
+                                }
+                                else repeated=true;
+                            if (board[i][j].getDie().getValue() == 2)
+                                if(red2==false) {
+                                    red2= true;
+                                }
+                                else repeated=true;
+                            if (board[i][j].getDie().getValue() == 3)
+                                if(yellow5==false) {
+                                    yellow5= true;
+                                }
+                                else repeated=true;
+                            if (board[i][j].getDie().getValue() == 4)
+                                if(green1==false) {
+                                    green1= true;
+                                }
+                                else repeated=true;
+                            if (board[i][j].getDie().getValue() == 5)
+                                if(purple3==false) {
+                                    purple3= true;
+                                }
+                                else repeated=true;
+                            if (board[i][j].getDie().getValue()==6)
+                                if(six==false) {
+                                    six= true;
+                                }
+                                else repeated=true;
+                        }else incomplete=true;
+                    }
+                    if (!repeated && !incomplete) count = count + 1;
+                    green1 = false;
+                    red2 = false;
+                    purple3 = false;
+                    blue4 = false;
+                    yellow5 = false;
+                    six=false;
+                    repeated=false;
+                    incomplete=false;
+                }
+            } else {
+                for (int i = 0; i < 5; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        if (board[j][i].isIsPresent()) {
+                            if (board[j][i].getDie().getValue()== 1)
+                                if(blue4==false) {
+                                    blue4 = true;
+                                }
+                                else repeated=true;
+                            if (board[j][i].getDie().getValue() == 2)
+                                if(red2==false) {
+                                    red2= true;
+                                }
+                                else repeated=true;
+                            if (board[j][i].getDie().getValue() == 3)
+                                if(yellow5==false) {
+                                    yellow5= true;
+                                }
+                                else repeated=true;
+                            if (board[j][i].getDie().getValue() == 4)
+                                if(green1==false) {
+                                    green1= true;
+                                }
+                                else repeated=true;
+                            if (board[j][i].getDie().getValue() == 5)
+                                if(purple3==false) {
+                                    purple3= true;
+                                }
+                                else repeated=true;
+                            if (board[j][i].getDie().getValue()==6)
+                                if(six==false) {
+                                    six= true;
+                                }
+                                else repeated=true;
+                        }else incomplete=true;
+                    }
+                    if (!repeated && !incomplete) count = count + 1;
+                    green1 = false;
+                    red2 = false;
+                    purple3 = false;
+                    blue4 = false;
+                    yellow5 = false;
+                    six=false;
+                    repeated=false;
+                    incomplete=false;
+                }
+            }
 
-
+        }
+        return count;
     }
 
     @Override

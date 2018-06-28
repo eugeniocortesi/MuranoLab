@@ -1,8 +1,13 @@
 package it.polimi.ingsw.LM26.controller.GamePhases;
 
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
+import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
+
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class FinalPhase implements PhaseInt {
 
@@ -18,11 +23,18 @@ public class FinalPhase implements PhaseInt {
      * points from Private Objectives, most remaining
      * Favor Tokens, then finally by reverse player
      * order in the final round."
-     * @param players, the list of all players enrolled
+     * @param pls, the list of all players enrolled
      * @return the winner
      * @throws IllegalArgumentException when there are problems with players' LastTurnValue
      */
-    public PlayerZone declareWinner(ArrayList<PlayerZone> players) throws IllegalArgumentException{
+    public PlayerZone declareWinner(ArrayList<PlayerZone> pls) throws IllegalArgumentException{
+
+        ArrayList<PlayerZone> players = new ArrayList<PlayerZone>();
+        for(int i=0; i<pls.size(); i++) {
+            if (pls.get(i).getPlayerState() != PlayerState.STANDBY)
+                players.add(pls.get(i));
+        }
+
         if(players.size()==1) return players.get(0);
         else{
             maximum=players.get(0).getScoreMarker().getRealPoints();
@@ -51,7 +63,7 @@ public class FinalPhase implements PhaseInt {
                     maximum=-1;
                     for(PlayerZone i : winners){
                         if(i.getToken().getTokenNumber()>maximum){
-                           maximum = i.getToken().getTokenNumber();
+                            maximum = i.getToken().getTokenNumber();
                         }
                     }
                     for(int j=0; j<winners.size();){
@@ -76,7 +88,46 @@ public class FinalPhase implements PhaseInt {
         throw new IllegalArgumentException("players have no LastRoundTurn value");
     }
 
+    public void computeScore() {
+
+        Model model = singletonModel();
+
+
+        int result = 0;
+
+        for (int i = 0; i < model.getPlayerList().size(); i++) {
+
+            PlayerZone player = model.getPlayerList().get(i);
+            for (int j = 0; j < model.getDecks().getObjectivePrivateCardDeck().size(); j++) {
+                ObjectivePrivateCard card = model.getDecks().getObjectivePrivateCardDeck().get(j);
+                if (card.getPlayer() != null && card.getPlayer().equals(player)) {
+                    result = card.checkPoints(player.getPlayerBoard());
+                    System.out.println("points from private card " + card.getColour() + " " +  result);
+                    player.setPrivatePoints(result);
+                }
+
+            }
+            for (int j = 0; j < model.getOnBoardCards().getObjectivePublicCardList().size(); j++) {
+                int fromPublic = model.getOnBoardCards().getObjectivePublicCardList().get(j).computePoints(player);
+                result = result + fromPublic;
+                System.out.println("points from public card (" + model.getOnBoardCards().getObjectivePublicCardList().get(j).getEffect() + ") : " + fromPublic);
+            }
+            result = result + player.getToken().getTokenNumber();
+            System.out.println("points from tokens " + player.getToken().getTokenNumber());
+            int emptysp= player.getPlayerBoard().getEmptySpaces();
+            result = result - emptysp;
+            System.out.println("with " + emptysp + " emptyspaces");
+            player.getScoreMarker().incrementScore(result);
+            //TODO
+            //model.getScoreTrackInt().addToScoreTrack(player.getScoreMarker());
+
+        }
+    }
+
     public void doAction(Game game, ArrayList<PlayerZone> playerList) {
+
+        computeScore();
+        declareWinner(playerList);
 
     }
 

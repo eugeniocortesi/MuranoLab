@@ -19,6 +19,9 @@ public class ScoreTrack extends ScoreTrackInt {
         return sm.getRealPoints();
     }
 
+    //TODO
+    //create structure, add setter and getter for scoreMarker
+
     @Override
     public void rewrite() {
 

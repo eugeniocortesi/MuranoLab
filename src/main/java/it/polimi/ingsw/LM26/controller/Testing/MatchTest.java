@@ -55,6 +55,7 @@ public class MatchTest {
                 // X4 setPlayerMenu(String name, PlayerZone player)
 
                 //TODO DELETE
+                System.out.println("              CHANGE TURN: "+playing.getName());
                 LOGGER.log(Level.SEVERE, playing.getName() + " is playing ");
                 playing.getPlayerBoard().printCard();
                 System.out.println("DraftPool");
@@ -72,21 +73,21 @@ public class MatchTest {
                         firstAction();
                         //set the correct number of turn 1 0 2
 
-                        waitCorrectPlayer();
-
 
                         if (playing.getPlayerState() != STANDBY) {
 
-                            if (!playing.getActionHistory().isPlacement() || !playing.getActionHistory().isDieUsed() || !playing.getActionHistory().isCardUsed())
+                            if (!playing.getActionHistory().isPlacement() || !playing.getActionHistory().isDieUsed() || !playing.getActionHistory().isCardUsed()) {
+
                                 result = false;
 
-                            if (playing.getActionHistory().isFreezed()) {
-                                result = true;
-                                System.out.println("this turn you are freezed");
-                            } else
-
-                                secondAction();
-                            //set the correct number of turn 1 0 2
+                                if (playing.getActionHistory().isFreezed()) {
+                                    result = true;
+                                    System.out.println("this turn you are freezed");
+                                } else
+                                    waitCorrectPlayer();
+                                    secondAction();
+                                //set the correct number of turn 1 0 2
+                            }
                         }
                     }
                 }

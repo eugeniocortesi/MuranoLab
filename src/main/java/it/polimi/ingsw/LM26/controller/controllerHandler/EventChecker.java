@@ -36,12 +36,7 @@ public class EventChecker {
 
         PlayerZone player=model.getPlayerList().get(pl);
 
-        if(model.getRestrictions().isNeedPlacement()){
-            if(!dieFromDraft.equals(model.getRestrictions().getDie())){
-                System.out.println("must use the rolled die");
-                return false;
-            }
-        }
+        //this control is used for card 6 and 8 (if it's first attempt of placing goes wrong
         if(model.getRestrictions().isNeedPlacement()){
             if(!dieFromDraft.equals(model.getRestrictions().getDie())){
                 System.out.println("must use the rolled die");
@@ -66,6 +61,7 @@ public class EventChecker {
                 model.getRestrictions().setTool8needPlacement(false);
                 model.getRestrictions().setCurrentPlacement(false);
             }
+
             if(model.getRestrictions().isNeedPlacement()) {
                 model.getRestrictions().setNeedPlacement(false);
                 model.getRestrictions().setDie(null);
@@ -179,6 +175,7 @@ public class EventChecker {
         PlayerZone pl=model.getPlayerList().get(player);
         if ( pl.getActionHistory().isCardUsed() ) return false;
 
+        System.out.println(sevenEight.getNum());
         if(checkToken(model.getPlayerList().get(player),sevenEight))
 
             if(sevenEight.play(player)){

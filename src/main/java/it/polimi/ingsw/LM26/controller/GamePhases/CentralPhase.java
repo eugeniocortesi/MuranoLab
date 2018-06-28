@@ -69,7 +69,7 @@ public class CentralPhase implements PhaseInt{
             this.round=new Round(roundTrack, playerList, nrounds);
             rounds.add(round);
         }
-        else if(rounds.size() == nrounds) game.setPhase(new ScorePhase());
+        else if(rounds.size() == nrounds) game.setPhase(new FinalPhase());
     }
 
     public ArrayList<Round> getRounds() {

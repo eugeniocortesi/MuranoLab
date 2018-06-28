@@ -45,22 +45,6 @@ public class TestInitialPhase {
         }
     }
 
-    /*@Test
-    //testa che il numero di toolcard sia giusto, stampa gli indici delle public card e verifica che siano tutti diversi
-    public void TestSetPublicCards(){
-        initialPhase.setPublicCards(onBoardCards, deck);
-        int a=onBoardCards.getToolCardList().size();
-        assertEquals(a, deck.getToolCardDeck().size());
-        for(ObjectivePublicCard i : onBoardCards.getObjectivePublicCardList()){
-            System.out.println(i.getId());
-        }
-        for(int i=0; i<initialPhase.getCardsOnBoardsize(); i++){
-            for(int j=0; j<initialPhase.getCardsOnBoardsize(); j++){
-                if(i!=j) assertThat(onBoardCards.getObjectivePublicCardList().get(i).getId(),is(not(onBoardCards.getObjectivePublicCardList().get(j).getId())));
-            }
-        }
-    }*/
-
     @Test
     //tests that every score marker has the same colour of its frame board
     public void TestSetScoreMarkerAndWindowFrame(){

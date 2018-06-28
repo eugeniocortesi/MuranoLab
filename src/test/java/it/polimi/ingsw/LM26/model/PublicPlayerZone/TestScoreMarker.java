@@ -10,7 +10,7 @@ public class TestScoreMarker {
     @Test
     public void checkScoreMarker(){
 
-        newScoreMarker = new ScoreMarker(Color.ANSI_BLUE);
+        newScoreMarker = new ScoreMarker(Color.ANSI_BLUE, new PlayerZone("name", 0));
 
         newScoreMarker.incrementScore(30);
 

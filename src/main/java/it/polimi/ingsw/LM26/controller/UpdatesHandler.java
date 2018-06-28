@@ -5,14 +5,30 @@ import it.polimi.ingsw.LM26.observers.serverController.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * UpdatesHandler class
+ * @author Eugenio Cortesi
+ * Class that manages updates from Server
+ */
 public class UpdatesHandler implements Observer {
 
     Controller controller;
     private static final Logger LOGGER = Logger.getLogger(UpdatesHandler.class.getName());
 
+    /**
+     * Constructor
+     * @param controller reference to Controller
+     */
+
     public UpdatesHandler(Controller controller) {this.controller= controller;
     }
 
+    /**
+     * Method that receive and actionEventPlayer from Server
+     * if player is connected => creates a new PlayerZone
+     * Otherwise set Stanby Player
+     * @param actionEventPlayer information about a player
+     */
     @Override
     public void updatePlayers(ActionEventPlayer actionEventPlayer) {
 
@@ -29,7 +45,7 @@ public class UpdatesHandler implements Observer {
     public void updateAction(ActionEvent actionEvent) {
 
         LOGGER.log(Level.INFO,"Arrived action event "+ actionEvent);
-
+        System.out.println("Arrived action event! ID: "+ actionEvent.getId()+ " Player: "+ actionEvent.getPlayer());
         controller.setActionEvent(actionEvent);
 
     }

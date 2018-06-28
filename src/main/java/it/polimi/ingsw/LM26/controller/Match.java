@@ -61,48 +61,54 @@ public class Match extends Thread {
             while (centralPhase.getCurrentRound().getRoundState() != FINISHED) {         //1
 
                 //TODO DELETE
-                LOGGER.log(Level.SEVERE, playing.getName() + " is playing ");
+                System.out.println("              CHANGE TURN: "+playing.getName());
+                LOGGER.log(Level.SEVERE,   playing.getName() + " is playing ");
                 playing.getPlayerBoard().printCard();
                 System.out.println("DraftPool");
                 model.getDraftPool().printDraftPool();
 
                 controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
 
-                waitCorrectPlayer();
+                waitEvent();
+
                 LOGGER.log(Level.WARNING, "Action event and player ok");
 
                 if(playing.getPlayerState()!=STANDBY) {
 
-                    if (playing.getActionHistory().isFreezed()) {
+                    if (playing.getActionHistory().isFreezed() ) {
                         result = true;
                         System.out.println("this turn you are freezed");
+                        //controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Salti il turno");
                     } else {
                         firstAction();
                         //set the correct number of turn 1 0 2
 
-                        waitCorrectPlayer();
-                        if(event.getId()==12){
-                            controller.handler(event);
-                            waitCorrectPlayer();
-                            System.out.println("showing menu ");
-                        }else System.out.println("error: non asking menu ");
-
 
                         if (playing.getPlayerState() != STANDBY) {
 
-                            if (!playing.getActionHistory().isPlacement() || !playing.getActionHistory().isDieUsed() || !playing.getActionHistory().isCardUsed())
+                            if (!playing.getActionHistory().isPlacement() || !playing.getActionHistory().isDieUsed() || !playing.getActionHistory().isCardUsed()) {
                                 result = false;
 
-                            if (playing.getActionHistory().isFreezed()) {
-                                result = true;
-                                System.out.println("this turn you are freezed");
-                            } else
+                                if (playing.getActionHistory().isFreezed()) {
+                                    result = true;
+                                    System.out.println("this turn you are freezed");
+                                    //controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Salti il turno");
+                                } else {
 
-                                secondAction();
-                            //set the correct number of turn 1 0 2
+                                    controller.getViewGameInterface().showCurrentMenu(playing.getName());
+
+                                    waitEvent();
+
+                                    secondAction();
+                                }
+                                //set the correct number of turn 1 0 2
+                            }
                         }
                     }
                 }
+
+
+
                 centralPhase.getCurrentRound().endAction(centralPhase.getTurn(), model.getRoundTrackInt(), model.getDraftPool(), centralPhase.getCurrentRound().getCurrentPlayer());
 
                 playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn());
@@ -120,18 +126,23 @@ public class Match extends Thread {
             //controller.getView().showTurnEndPhase();
         }
 
+        game.getPhase().doAction(game, model.getPlayerList());
+
         //controller.getView().showPoints();
 
     }
 
     public void firstAction(){
 
-        while (!result) {
+        System.out.println("        FIRST ACTION ");
 
+        while (!result) {
 
             if (playing.getPlayerState() != STANDBY) {
                 if (controller.handler(event)) {
                     System.out.println("done");
+                    //if(event.getId()==11)controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Passi il turno ");
+                    //else controller.getViewGameInterface().showAnswerFromController (playing.getName(),"OK");
                     playing.getPlayerBoard().printCard();
                     System.out.println("DraftPool");
                     model.getDraftPool().printDraftPool();
@@ -139,7 +150,9 @@ public class Match extends Thread {
                     model.hasChanged();
                     result = true;
                 } else { System.out.println("match error 1 ");
-                    waitCorrectPlayer();
+                    //controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Errore: vuoi riprovare?");
+                    controller.getViewGameInterface().showCurrentMenu(playing.getName());
+                    waitEvent();
                 }
 
                 //view.showNO()
@@ -153,11 +166,15 @@ public class Match extends Thread {
 
     public void secondAction(){
 
+        System.out.println("        SECOND ACTION ");
+
         while (!result) {
 
             if (playing.getPlayerState() != STANDBY) {
                 if (controller.handler(event)) {
                     System.out.println("done");
+                    //if(event.getId()==11)controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Passi ");
+                    //else controller.getViewGameInterface().showAnswerFromController (playing.getName(),"OK");
                     playing.getPlayerBoard().printCard();
                     System.out.println("DraftPool");
                     model.getDraftPool().printDraftPool();
@@ -168,8 +185,10 @@ public class Match extends Thread {
                         model.getRestrictions().setCurrentPlacement(true);
                         playing.getActionHistory().setFreezed(true);
                         System.out.println("choose another die");
+                        //controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Ok, scegli un altro dado");
                         model.hasChanged();
-                        waitCorrectPlayer();
+                        controller.getViewGameInterface().showCurrentMenu(playing.getName());
+                        waitEvent();
 
                     } else {
                         model.hasChanged();
@@ -177,7 +196,9 @@ public class Match extends Thread {
                     }
                 } else {
                     System.out.println("match error 2 ");
-                    waitCorrectPlayer();
+                    //controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Errore: vuoi riprovare?");
+                    controller.getViewGameInterface().showCurrentMenu(playing.getName());
+                    waitEvent();
 
                 }
 
@@ -191,21 +212,33 @@ public class Match extends Thread {
         }
     }
 
+    public void waitEvent(){
+        waitCorrectPlayer();
+        while(event.getId()==12){
+            System.out.println("        SHOWING MENU to player " + event.getPlayer());
+            controller.handler(event);
+            waitCorrectPlayer();
+        }
+    }
+
     public void waitCorrectPlayer(){
 
         event = controller.getActionEvent();
+
         LOGGER.log(Level.WARNING, "Event match: " + event);
+
         if(playing.getPlayerState()!= STANDBY)
         LOGGER.log(Level.WARNING, "playing is ok");
+
         while (event == null && playing.getPlayerState()!=STANDBY){
             event = controller.getActionEvent();
+
         }
             LOGGER.log(Level.WARNING,"exit while ");
 
-            //TODO DELETE
-            //cli.ask(playing);
-            //view.showWrongPlayer();
-        while (event.getPlayer()!=playing.getIDPlayer() && playing.getPlayerState()!=STANDBY) {
+
+        while (event.getPlayer()!=playing.getIDPlayer() && playing.getPlayerState()!=STANDBY && event.getId()!=12) {
+            System.out.println("THIS IS NOT THE RIGHT PLAYER: EVENT REFUSED ");
             event = controller.getActionEvent();
             while (event == null && playing.getPlayerState()!=STANDBY ){
                 event = controller.getActionEvent();

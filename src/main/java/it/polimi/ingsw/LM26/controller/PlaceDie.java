@@ -105,162 +105,107 @@ public boolean checkEdgeRestrictions(){
 
              if (j == 0) { //angolo alto a sinistra
 
-                 if (checkRight()) {
-                     if (checkRightDie()) return true;
-                     else return false;
-                 }
-                 if (checkDown()){
-                     if (checkDownDie()) return true;
-                     else return false;
-                 }
+                 if (!checkRightDie())return false;
+                 if (!checkDownDie()) return false;
+                 if (checkRight()) return true;
+                 if (checkDown()) return true;
                  if (checkRightDown()) return true;
-             }
 
-             if (j == 4) { //angolo in alto a destra
+             } else if (j == 4) { //angolo in alto a destra
 
-                 if (checkLeft()){
-                     if (checkLeftDie()) return true;
-                     else return false;
-                 }
-                 if (checkDown()){
-                     if (checkDownDie()) return true;
-                     else return false;
-                 }
+                 if (!checkLeftDie())return false;
+                 if (!checkDownDie())return false;
+                 if (checkLeft()) return true;
+                 if (checkDown()) return true;
                  if (checkLeftDown()) return true;
-             }
 
-             else {      //tutti gli altri valori prima riga
-                 if (checkRight()){
-                     if (checkRightDie()) return true;
-                     else return false;
-                 }
-                 if (checkLeft()){
-                         if (checkLeftDie()) return true;
-                         else return false;
-                 }
-                 if (checkDown()){
-                     if (checkDownDie()) return true;
-                     else return false;
-                 }
+             } else {      //tutti gli altri valori prima riga
+
+                 if (!checkLeftDie())return false;
+                 if (!checkRightDie())return false;
+                 if (!checkDownDie())return false;
+                 if (checkLeft()) return true;
+                 if (checkRight()) return true;
+                 if (checkDown()) return true;
                  if (checkRightDown()) return true;
                  if (checkLeftDown()) return true;
              }
-         }
-         else if(i ==3) {
+         } else if (i == 3) {
+
              if (j == 0) { //angolo in basso a sinistra
-                 if (checkRight()) {
-                     if (checkRightDie()) return true;
-                     else return false;
-                 }
-                 if (checkUp()) return true;
-                 if (checkRightUp()){
-                     if (checkUpDie()) return true;
-                     else return false;
-                 }
 
-             }
-             if (j == 4) {   // angolo in basso a destra
-                 if (checkLeft()) {
-                     if (checkLeftDie()) return true;
-                     else return false;
-                 }
-                 if (checkUp()) return true;
-                 if (checkLeftUp()) {
-                     if (checkUpDie()) return true;
-                     else return false;
-                 }
-             }
-
-
-            else {   //tutti gli altri valori ultima riga
-                 if (checkRight()) {
-                            if (checkRightDie()) return true;
-                            else return false;}
-                 if (checkLeft()){
-                            if (checkLeftDie()) return true;
-                            else return false;}
-                 if (checkUp()) return true;
+                 if (!checkUpDie())return false;
+                 if (!checkRightDie())return false;
+                 if (checkUp())return true;
+                 if (checkRight()) return true;
                  if (checkRightUp()) return true;
-                 if (checkLeftUp()) {
-                     if (checkUpDie()) return true;
-                     else return false;
-                 }
-             }
-         }
 
-         else if(j == 0) {         //tutti gli altri valori prima colonna
-             //if (i != 0 && i != 3) {
-                 if (checkRight()) {
-                     if (checkRightDie()) return true;
-                     else return false;
-                 }
-                 if (checkRightUp()) return true;
-                 if (checkRightDown()) return true;
-                 if (checkUp()) {
-                     if (checkUpDie()) return true;
-                     else return false;
-                 }
-                 if (checkDown()) {
-                     if (checkDownDie()) return true;
-                     else return false;
-                 }
-             //}
-         }
 
-         else if(j == 4) {          //tutti gli altri valori ultima colonna
-             //if (i != 0 && i != 3) {
-                 if (checkLeft()) {
-                     if (checkLeftDie()) return true;
-                     else return false;
-                 }
+             } else if (j == 4) {   // angolo in basso a destra
+
+                 if (!checkUpDie())return false;
+                 if (!checkLeftDie())return false;
+                 if (checkUp())return true;
+                 if (checkLeft()) return true;
                  if (checkLeftUp()) return true;
-                 if (checkLeftDown()) return true;
-                 if (checkUp()) {
-                     if (checkUpDie()) return true;
-                     else return false;
-                 }
-                 if (checkDown()) {
-                     if (checkDownDie()) return true;
-                     else return false;
-                 }
-             //}
-         }
 
-        else      //tutti i valori non di margine
+             } else {   //tutti gli altri valori ultima riga
+
+                 if (!checkUpDie())return false;
+                 if (!checkRightDie())return false;
+                 if (!checkLeftDie())return false;
+                 if (checkUp())return true;
+                 if (checkRight()) return true;
+                 if (checkLeft()) return true;
+                 if (checkRightUp()) return true;
+                 if (checkLeftUp()) return true;
+
+             }
+         } else if (j == 0) {         //tutti gli altri valori prima colonna
+
+             if (!checkUpDie())return false;
+             if (!checkRightDie())return false;
+             if (!checkDownDie()) return false;
+             if (checkUp())return true;
+             if (checkDown()) return true;
+             if (checkRight()) return true;
+             if (checkRightUp()) return true;
+             if (checkRightDown()) return true;
+
+         } else if (j == 4) {          //tutti gli altri valori ultima colonna
+
+             if (!checkDownDie()) return false;
+             if (!checkLeftDie()) return false;
+             if (!checkUpDie())return false;
+             if (checkLeft()) return true;
+             if (checkDown()) return true;
+             if (checkUp())return true;
+             if (checkLeftUp()) return true;
+             if (checkLeftDown()) return true;
+
+         } else      //tutti i valori non di margine
              if (checkAll()) return true;
 
          System.out.println("error in position restriction");
          return false;
-         }
-
-
-
-
-
-
-
-    public boolean checkAll(){
-    if(checkRight()){
-        if  (checkRightDie() ) return true;
-        else return false;
-    }
-    if(checkLeft()){
-        if  (checkLeftDie() ) return true;
-        else return false;
-    }
-     if( checkUp()) {
-         if (checkUpDie()) return true;
-         else return false;
      }
-      if(checkDown()) {
-          if (checkDownDie()) return true;
-          else return false;
-      }
-      if(checkRightUp())  return true;
-      if(checkRightDown()) return true;
-      if(checkLeftUp()) return true;
-      if(checkLeftDown()) return true;
-     return false;
+
+
+
+    public boolean checkAll() {
+        if (!checkLeftDie()) return false;
+        if (!checkRightDie()) return false;
+        if (!checkDownDie()) return false;
+        if (!checkUpDie())return false;
+        if (checkLeft()) return true;
+        if (checkRight()) return true;
+        if (checkDown()) return true;
+        if (checkUp())return true;
+        if (checkRightUp()) return true;
+        if (checkRightDown()) return true;
+        if (checkLeftUp()) return true;
+        if (checkLeftDown()) return true;
+        return false;
     }
 
 
@@ -289,26 +234,30 @@ public boolean checkEdgeRestrictions(){
      return (board[i+1][j-1].isIsPresent());}
 
     public boolean checkLeftDie(){
-    if(board[i][j-1].getDie().getColor()==die.getColor() ||
-             board[i][j-1].getDie().getValue()==die.getValue())return false;
+
+    if(board[i][j-1].isIsPresent() && (board[i][j-1].getDie().getColor().equals(die.getColor()) ||
+             board[i][j-1].getDie().getValue()==die.getValue()))return false;
     else return true;
     }
 
     public boolean checkRightDie(){
-    if(board[i][j+1].getDie().getColor()==die.getColor() ||
-              board[i][j+1].getDie().getValue()==die.getValue())return false;
+
+    if(board[i][j+1].isIsPresent() && ( board[i][j+1].getDie().getColor().equals(die.getColor()) ||
+              board[i][j+1].getDie().getValue()==die.getValue()))return false;
     else return true;
     }
 
     public boolean checkUpDie(){
-        if(board[i-1][j].getDie().getColor()==die.getColor() ||
-                board[i-1][j].getDie().getValue()==die.getValue())return false;
+
+        if(board[i-1][j].isIsPresent() && (  board[i-1][j].getDie().getColor().equals(die.getColor()) ||
+                board[i-1][j].getDie().getValue()==die.getValue()))return false;
         else return true;
     }
 
     public boolean checkDownDie(){
-        if(board[i+1][j].getDie().getColor()==die.getColor() ||
-                board[i+1][j].getDie().getValue()==die.getValue())return false;
+
+        if(board[i+1][j].isIsPresent() && ( board[i+1][j].getDie().getColor().equals(die.getColor()) ||
+                board[i+1][j].getDie().getValue()==die.getValue()))return false;
         else return true;
     }
 

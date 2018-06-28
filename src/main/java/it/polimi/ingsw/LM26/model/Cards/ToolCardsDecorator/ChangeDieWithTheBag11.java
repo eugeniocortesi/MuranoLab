@@ -50,9 +50,9 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
         return toolcard.getToken();
     }
 
-    public void setOneToken(PlayerZone player){}
+    public void setOneToken(PlayerZone player){toolcard.setOneToken(player);}
 
-    public void setTwoToken(PlayerZone player){}
+    public void setTwoToken(PlayerZone player){toolcard.setTwoToken(player);}
 
     @Override
     public boolean isInUse() {
@@ -94,6 +94,9 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
         }
         DieInt d=model.getBag().draw();
         model.getRestrictions().setDie(d);
+        model.getRestrictions().setColor(d.getColor());
+
+        //TODO show to view the colore restriction
         System.out.println("you got a " + d.getColor() + " die ");
         model.getRestrictions().setFirstPart(true);
         return true;

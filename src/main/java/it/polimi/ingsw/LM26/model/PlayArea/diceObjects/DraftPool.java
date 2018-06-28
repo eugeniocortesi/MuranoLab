@@ -16,6 +16,11 @@ public class DraftPool implements Serializable {
         return inDraft;
     }
 
+    public DieInt get(int i){
+
+        return inDraft.get(i);
+    }
+
     public void setInDraft(ArrayList<DieInt> inDraft) {
         this.inDraft = inDraft;
     }
@@ -25,6 +30,10 @@ public class DraftPool implements Serializable {
         for(int i=0; i<inDraft.size(); i++)
             System.out.print("\t" + inDraft.get(i).toString() + " ");
             System.out.println();
+    }
+
+    public int size(){
+        return inDraft.size();
     }
 
     //TODO to test

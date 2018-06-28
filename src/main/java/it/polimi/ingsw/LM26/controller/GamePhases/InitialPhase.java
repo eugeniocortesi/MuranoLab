@@ -44,15 +44,15 @@ public class InitialPhase implements PhaseInt {
     public void setScoreMarkerAndWindowFrame(ArrayList<PlayerZone> playerList,  Decks decks ){
 
         playerList.get(0).setPlayerBoard(decks.getWindowFramePlayerBoardDeck().get(0));
-        playerList.get(0).setScoreMarker(new ScoreMarker(Color.ANSI_RED));
+        playerList.get(0).setScoreMarker(new ScoreMarker(Color.ANSI_RED,playerList.get(0)));
         playerList.get(1).setPlayerBoard(decks.getWindowFramePlayerBoardDeck().get(1));
-        playerList.get(1).setScoreMarker(new ScoreMarker(Color.ANSI_GREEN));
+        playerList.get(1).setScoreMarker(new ScoreMarker(Color.ANSI_GREEN,playerList.get(1)));
         if(playerList.size()>2){
             playerList.get(2).setPlayerBoard(decks.getWindowFramePlayerBoardDeck().get(2));
-            playerList.get(2).setScoreMarker(new ScoreMarker(Color.ANSI_BLUE));
+            playerList.get(2).setScoreMarker(new ScoreMarker(Color.ANSI_BLUE,playerList.get(2)));
             if(playerList.size()==4){
                 playerList.get(3).setPlayerBoard(decks.getWindowFramePlayerBoardDeck().get(3));
-                playerList.get(3).setScoreMarker(new ScoreMarker(Color.ANSI_PURPLE));
+                playerList.get(3).setScoreMarker(new ScoreMarker(Color.ANSI_PURPLE, playerList.get(3)));
             }
         }
     }
@@ -72,21 +72,6 @@ public class InitialPhase implements PhaseInt {
 
         for(int i=0; i<playerList.size(); i++)
             playerList.get(i).getPlayerBoard().insertPatternIntoBoard(playerList.get(i).getWindowPatternCard().getWindowPatter());
-    }
-
-    //TODO DELETE THIS METHOD
-
-    public void setPublicCards(OnBoardCards onBoardCards, Decks decks){
-
-        ArrayList<ObjectivePublicCard> publicCardsOnBoard= new ArrayList<ObjectivePublicCard>();
-        while(publicCardsOnBoard.size() <cardsOnBoardsize){
-            index=random.nextInt(decks.getObjectivePublicCardDeck().size()-1);
-            objectivePublicCard = decks.getObjectivePublicCardDeck().get(index);
-            if(!objectivePublicCard.isInUse()){
-                objectivePublicCard.setInUse(true);
-                publicCardsOnBoard.add(objectivePublicCard);
-            }
-        }
     }
 
 
@@ -116,7 +101,4 @@ public class InitialPhase implements PhaseInt {
         return null;
     }
 
-    public void doAction(ArrayList<PlayerZone> playerList) {
-
-    }
 }

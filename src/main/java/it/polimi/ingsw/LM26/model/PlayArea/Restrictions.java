@@ -14,6 +14,8 @@ public class Restrictions {
 
     private boolean currentPlacement=false;
 
+    private Color color=null;
+
     public void resetRestrictions(){
 
         tool8needPlacement=false;
@@ -25,6 +27,8 @@ public class Restrictions {
         firstPart=false;
 
         currentPlacement=false;
+
+        color=null;
     }
 
     public boolean isTool8needPlacement() { return tool8needPlacement; }
@@ -55,7 +59,9 @@ public class Restrictions {
         return currentPlacement;
     }
 
-    public void setCurrentPlacement(boolean currentPlacement) {
-        this.currentPlacement = currentPlacement;
-    }
+    public void setCurrentPlacement(boolean currentPlacement) { this.currentPlacement = currentPlacement; }
+
+    public Color getColor() { return color;}
+
+    public void setColor(Color color) { this.color = color; }
 }

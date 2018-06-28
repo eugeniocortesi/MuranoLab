@@ -1,5 +1,7 @@
 package it.polimi.ingsw.LM26.model.Cards;
 
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Elements.elements;
@@ -40,6 +42,17 @@ public class ObjectivePrivateCard extends CardInt {
             return Color.ANSI_YELLOW;
 
         else return null;
+    }
+
+    public int checkPoints(WindowFramePlayerBoard board){
+        Box[][] b = board.getBoardMatrix();
+        int count=0;
+        for(int i=0; i<4; i++)
+            for(int j=0; j<5; j++)
+                if(b[i][j].isIsPresent() && b[i][j].getDie().getColor().equals(this.getColour()))
+                    count= count + b[i][j].getDie().getValue();
+
+        return count;
     }
 
     public boolean isInUse() {

@@ -48,7 +48,17 @@ public class WindowFramePlayerBoard implements Serializable{
         for(int i=0; i<4; i++)
             for(int j=0; j<5; j++)
                 BoardMatrix[i][j].setPatternBox(patternMatrix[i][j]);
+    }
+
+    public int getEmptySpaces(){
+        int count=0;
+        for(int i=0;i<4;i++) {
+            for (int j = 0; j < 5; j++) {
+                if(!BoardMatrix[i][j].isIsPresent())count++;
+            }
         }
+        return count;
+    }
 
     public boolean isHasPatternCard() {
         return hasPatternCard;

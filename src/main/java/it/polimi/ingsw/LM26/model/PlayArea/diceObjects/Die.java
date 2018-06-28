@@ -10,7 +10,7 @@ public class Die extends DieInt {
 
     private String face;
 
-    private int number;
+    private int number=0;
 
     public Die() {
     }
@@ -35,12 +35,12 @@ public class Die extends DieInt {
 
         int value=0;
 
-        if(face=="\u2680")value = 1;
-        if(face=="\u2681")value = 2;
-        if(face=="\u2682")value = 3;
-        if(face=="\u2683")value = 4;
-        if(face=="\u2684")value = 5;
-        if(face=="\u2685")value = 6;
+        if(face=="\u2680" || number==1)value = 1;
+        if(face=="\u2681" || number==2)value = 2;
+        if(face=="\u2682" || number==3)value = 3;
+        if(face=="\u2683" || number==4)value = 4;
+        if(face=="\u2684" || number==5)value = 5;
+        if(face=="\u2685" || number==6)value = 6;
         return value;
     }
 
@@ -53,8 +53,6 @@ public class Die extends DieInt {
         else if(face=="\u2681")face="\u2682";
         else if(face=="\u2680")face="\u2681";
         number= getValue();
-
-
     }
 
     public void decrement(){
@@ -75,6 +73,7 @@ public class Die extends DieInt {
         if(value==4)face="\u2683";
         if(value==5)face="\u2684";
         if(value==6)face="\u2685";
+        number = getValue();
 
     }
 
