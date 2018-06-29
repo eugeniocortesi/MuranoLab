@@ -91,6 +91,7 @@ public class Round {
     public void endRound(RoundTrackInt roundTrack, DraftPool draftPool, PlayerZone actingPlayer){
         System.out.println(" TURN ENDED ");
         roundTrack.addDice(draftPool.getInDraft());
+        roundTrack.update();
         draftPool.removeAllDice();
         actingPlayer.getActionHistory().deleteRoundHistory();
         turnCounter=0;

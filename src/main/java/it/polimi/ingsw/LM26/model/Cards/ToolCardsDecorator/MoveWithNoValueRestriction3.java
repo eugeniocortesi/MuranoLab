@@ -79,7 +79,14 @@ public class MoveWithNoValueRestriction3 extends ToolCardDecorator {
         Model model = singletonModel();
         PlayerZone player = model.getPlayerList().get(pl);
         DieInt die = fromBox.getDie();
-        if(!fromBox.isIsPresent())return false;                      //added controller
+        if(!fromBox.isIsPresent()){
+            System.out.println("no die found");
+            return false;
+        }
+        if(toBox.isIsPresent()){
+            System.out.println("a die is already present here ");
+            return false;
+        }
         PlaceDie placement = new PlaceDie(die, toBox, player);
         fromBox.free();
         if(player.getPlayerBoard().getNumDice()==1) {

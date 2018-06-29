@@ -20,4 +20,6 @@ public abstract class RoundTrackInt implements Serializable{
     public abstract void dump();
 
     public abstract void rewrite();
+
+    public abstract void update();
 }

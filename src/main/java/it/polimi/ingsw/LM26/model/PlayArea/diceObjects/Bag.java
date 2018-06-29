@@ -64,14 +64,6 @@ public class Bag implements Serializable{
             c =Color.ANSI_PURPLE;
             d = new Die(c);
             this.inBag.add(d);
-
-
-           /* for (Color c : Color.values()) {
-
-                    Die d = new Die(c);
-                    this.inBag.add(d);
-
-            }*/
         }
 
     }
@@ -83,7 +75,7 @@ public class Bag implements Serializable{
                 return null;
             Random rand = new Random();
             int index = rand.nextInt(count);
-            DieInt d = (DieInt) inBag.get(index);
+            DieInt d = inBag.get(index);
             this.inBag.remove(d);
             if ( d.getColor().equals( Color.ANSI_BLUE ))
                 contBlue--;
@@ -106,8 +98,6 @@ public class Bag implements Serializable{
             System.out.println(count);
             for (DieInt d : inBag) {
                 System.out.println(d);
-                // or:
-                // d.dump();
             }
     }
 

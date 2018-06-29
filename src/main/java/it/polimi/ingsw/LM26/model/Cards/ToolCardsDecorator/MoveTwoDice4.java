@@ -85,23 +85,22 @@ public class MoveTwoDice4 extends ToolCardDecorator {
 
         for(int i=0; i<fromBoxList.size(); i++)
 
-            if( !fromBoxList.get(i).isIsPresent()  )
+            if( !fromBoxList.get(i).isIsPresent() || toBoxList.get(i).isIsPresent() )
                 return false;
-            else dieList.add(fromBoxList.get(i).getDie());
-
+            else {
+                dieList.add(fromBoxList.get(i).getDie());
+                fromBoxList.get(i).free();
+            }
 
         for(int j=0; j<fromBoxList.size(); j++){
 
-            PlaceDie placement = new PlaceDie(fromBoxList.get(j).getDie(), toBoxList.get(j) , player);
-
-            fromBoxList.get(j).free();
+            PlaceDie placement = new PlaceDie(dieList.get(j), toBoxList.get(j) , player);
 
             if (!placement.placeDie() ) {
 
                 System.out.println("error " + j +" placement");
 
                 for(int k=0; k<fromBoxList.size(); k++) {
-                    fromBoxList.get(k).free();
                     fromBoxList.get(k).setDie(dieList.get(k));
                     toBoxList.get(k).free();
                 }

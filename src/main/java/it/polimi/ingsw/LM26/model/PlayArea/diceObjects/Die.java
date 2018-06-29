@@ -40,7 +40,7 @@ public class Die extends DieInt {
 
         this.face = faces[index];
 
-        number = getValue();
+        setNumber();
     }
 
     public int getValue() {
@@ -62,6 +62,20 @@ public class Die extends DieInt {
         return value;
     }
 
+    public void setNumber() {
+
+        if (face == "\u2680" ) number = 1;
+
+        if (face == "\u2681" ) number = 2;
+
+        if (face == "\u2682" ) number = 3;
+
+        if (face == "\u2683" ) number = 4;
+
+        if (face == "\u2684" ) number = 5;
+
+        if (face == "\u2685" ) number = 6;
+    }
 
     public void increment() {
 
@@ -77,7 +91,7 @@ public class Die extends DieInt {
 
         else if (face == "\u2680") face = "\u2681";
 
-        number = getValue();
+        setNumber();
     }
 
     public void decrement() {
@@ -94,7 +108,7 @@ public class Die extends DieInt {
 
         else if (face == "\u2685") face = "\u2684";
 
-        number = getValue();
+        setNumber();
     }
 
     public void setRoll(int value) {
@@ -111,7 +125,7 @@ public class Die extends DieInt {
 
         if (value == 6) face = "\u2685";
 
-        number = getValue();
+        setNumber();
     }
 
     @Override

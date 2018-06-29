@@ -138,6 +138,9 @@ public class Match extends Thread {
                     // view.showOK()
                     model.hasChanged();
                     result = true;
+                    //from card 11
+                    //if(model.getRestrictions().getColor()!=null)
+                    //controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Hai estratto un dado "+model.getRestrictions().getColor());
                 } else {
                     System.out.println("match error 1 ");
                     //controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Errore: vuoi riprovare?");

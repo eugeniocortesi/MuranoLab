@@ -36,7 +36,7 @@ public class EventChecker {
 
         PlayerZone player=model.getPlayerList().get(pl);
 
-        //this control is used for card 6 and 8 (if it's first attempt of placing goes wrong
+        //this control is used for card 6 and 11 (if it's first attempt of placing goes wrong)
         if(model.getRestrictions().isNeedPlacement()){
             if(!dieFromDraft.equals(model.getRestrictions().getDie())){
                 System.out.println("must use the rolled die");

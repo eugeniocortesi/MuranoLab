@@ -95,8 +95,6 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
         DieInt d=model.getBag().draw();
         model.getRestrictions().setDie(d);
         model.getRestrictions().setColor(d.getColor());
-
-        //TODO show to view the colore restriction
         System.out.println("you got a " + d.getColor() + " die ");
         model.getRestrictions().setFirstPart(true);
         return true;
@@ -110,6 +108,7 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
 
         if(!model.getRestrictions().isFirstPart())return false;
         PlayerZone player=model.getPlayerList().get(pl);
+        if(number<1 || number>6)return false;
         model.getRestrictions().getDie().setRoll(number);
         PlaceDie placement = new PlaceDie(model.getRestrictions().getDie(), toBox, player);
 
