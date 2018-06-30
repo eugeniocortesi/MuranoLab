@@ -13,6 +13,7 @@ import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.*;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerPlayers;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskActionPlayers;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskNetworkPlayers;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -32,6 +33,7 @@ public class ClientManagerSocket extends ClientManager {
     private DataOutputStream writer;
     TimerPlayers timerPlayers;
     TimerTaskActionPlayers timerTaskActionPlayers;
+    TimerTaskNetworkPlayers timerTaskNetworkPlayers;
     private static final Logger LOGGER = Logger.getLogger(ClientManagerSocket.class.getName());
 
 
@@ -116,7 +118,6 @@ public class ClientManagerSocket extends ClientManager {
         DataMessage dataMessage = new DataMessage("requested_login","Server");
         String message = dataMessage.serializeClassMessage();
         sendMessage(message);
-        //listenerClientManager.listen();
     }
 
     @Override
@@ -149,6 +150,10 @@ public class ClientManagerSocket extends ClientManager {
                 //timerPlayers.scheduleTimerNetworkPlayer(user);
 
                 sendMessage(dataMessage.serializeClassMessage());
+                timerTaskNetworkPlayers = timerPlayers.scheduleTimerNetworkPlayer(user);
+                LOGGER.log(Level.WARNING, "Timer network Begin");
+                Thread t1 = new Thread(new MyRunnablePing());
+                t1.start();
             }
         }
 
@@ -285,14 +290,15 @@ public class ClientManagerSocket extends ClientManager {
 
     @Override
     public void ping() {
+        LOGGER.log(Level.WARNING, "Start ping");
         Thread t = new Thread(new MyRunnablePing());
         t.start();
     }
 
     @Override
     public void pong() {
-        //TODO something pong
-        ping();
+
+        timerTaskNetworkPlayers.setConnected(true);
     }
 
 
@@ -310,8 +316,9 @@ public class ClientManagerSocket extends ClientManager {
 
         @Override
         public void run(){
-            //TODO something timer
-            sendMessage("ping");
+
+            DataMessage dataMessage = new DataMessage("ping", "ping");
+            sendMessage(dataMessage.serializeClassMessage());
         }
     }
 }

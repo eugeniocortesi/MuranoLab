@@ -45,6 +45,7 @@ public class TimerTaskNetworkPlayers extends TimerTask {
      */
     @Override
     public void run() {
+        LOGGER.log(Level.WARNING, "START SCHEDULE TIMER");
         body();
     }
 
@@ -58,9 +59,12 @@ public class TimerTaskNetworkPlayers extends TimerTask {
         if(connected) {
             LOGGER.log(Level.SEVERE,"Reset timer");
             connected = false;
+
+            serverBase.ping(name);
             //TimerPlayers timerPlayers = new TimerPlayers(serverBase, timerConfiguration);
             //timerPlayers.scheduleTimerPlayer();
         } else{
+
 
             ActionEventPlayer actionEventPlayer = new ActionEventPlayer(name, false);
             LOGGER.log(Level.SEVERE,"Timer end for "+ name);

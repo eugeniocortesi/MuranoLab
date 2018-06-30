@@ -85,11 +85,6 @@ public class ListenerClientView extends Thread {
 
         if (message == null)
             return;
-        if(message.equals("ping")){
-            clientView.pong();
-            return;
-        }
-
         DataMessage dataMessage = new DataMessage(null,null);
         String op = dataMessage.parserFirstElement(message);
         if (op.equals("requested_login")){
@@ -181,6 +176,10 @@ public class ListenerClientView extends Thread {
             LOGGER.log(Level.SEVERE, "In send current menu message body");
             DataMessage dataMessage1 = DataMessage.deserializeDataMessage(message);
             clientView.sendCurrentMenu(dataMessage1.getField1());
+        }
+        else if(op.equals("ping")){
+            clientView.pong();
+
         }
 
         else {

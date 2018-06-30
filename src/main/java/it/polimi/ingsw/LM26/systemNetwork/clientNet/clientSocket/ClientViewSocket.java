@@ -17,6 +17,7 @@ import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.EventMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowAnswerMessage;
 
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -207,7 +208,17 @@ public class ClientViewSocket extends ClientView {
     @Override
     public void pong() {
 
-        outSocket.println("pong");
+        DataMessage dataMessage = new DataMessage("pong", "pong");
+
+        LOGGER.log(Level.SEVERE, "Pong arrived");
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                outSocket.println(dataMessage.serializeClassMessage());
+            }
+        });
+        t.start();
+
     }
 
     @Override
@@ -216,22 +227,10 @@ public class ClientViewSocket extends ClientView {
         if(m == null)
             System.out.println("Model null");
 
-        System.out.println("playerlist "+ m.getPlayerList());
+        LOGGER.log(Level.SEVERE,"playerlist "+ m.getPlayerList());
         for(int i = 0; i<m.getPlayerList().size(); i++){
-            System.out.println(m.getPlayerList().get(i).getName() + " player");
+            LOGGER.log(Level.SEVERE,m.getPlayerList().get(i).getName() + " player");
         }
-
-        System.out.println("draftpool "+ m.getDraftPool());
-        m.getDraftPool().printDraftPool();
-
-        m.getDraftPool().getInDraft().forEach(number -> {System.out.println(number.getNumber());});
-
-       System.out.println("TOOL LIST");
-        m.getOnBoardCards().getToolArrayList().forEach( n -> {System.out.println(n);});
-
-       /* System.out.println("PUBLIC LIST");
-        m.getPublicList().forEach( b -> {System.out.println(b);});*/
-
 
         super.notify(m);
     }

@@ -220,6 +220,8 @@ public class ClientViewRMI extends ClientView {
     @Override
     public void pong() {
 
+        LOGGER.log(Level.SEVERE, "Pong arrived");
+
         try {
             stub.pong();
         } catch (RemoteException e) {

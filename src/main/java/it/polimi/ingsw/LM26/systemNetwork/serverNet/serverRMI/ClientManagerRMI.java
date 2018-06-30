@@ -377,7 +377,7 @@ public class ClientManagerRMI extends ClientManager {
     public void pong() {
 
        timerTaskNetworkPlayers.setConnected(true);
-       ping();
+
     }
 
     /**
@@ -393,7 +393,7 @@ public class ClientManagerRMI extends ClientManager {
      * Thread that manages the sending the List of WindowPatternCard
      */
 
-    public class MyRunnableWindow implements Runnable{
+    private class MyRunnableWindow implements Runnable{
 
         volatile String user;
         volatile int id;
@@ -597,6 +597,7 @@ public class ClientManagerRMI extends ClientManager {
         @Override
         public void run() {
 
+            LOGGER.log(Level.WARNING, "Arrived pong");
             try{
                 skeleton.pong();
             } catch (RemoteException e) {

@@ -16,6 +16,8 @@ public class TimerPlayers {
 
     private long myLong;
 
+    private final long myLongNetwork = 5000;
+
     private TimerConfiguration timerConfiguration;
 
     private ServerBase serverBase;
@@ -55,7 +57,7 @@ public class TimerPlayers {
         if(timer1 == null)
             LOGGER.log(Level.SEVERE,"Timer is null");
         LOGGER.log(Level.WARNING, "STARTED SCHEDULE TIMEPLAYER");
-        timer1.schedule(new TimerTaskPlayers(serverBase, timerConfiguration, timer1) , this.myLong);
+        timer1.scheduleAtFixedRate(new TimerTaskPlayers(serverBase, timerConfiguration, timer1) , this.myLong, this.myLong);
 
     }
 
@@ -75,7 +77,7 @@ public class TimerPlayers {
             LOGGER.log(Level.SEVERE,"Timer is null");
         LOGGER.log(Level.WARNING, "STARTED SCHEDULE TIMER NETWORK PLAYER");
         TimerTaskNetworkPlayers timerTaskNetworkPlayers = new TimerTaskNetworkPlayers(serverBase, timerConfiguration, timer2, name);
-        timer2.schedule( timerTaskNetworkPlayers , this.myLong);
+        timer2.scheduleAtFixedRate( timerTaskNetworkPlayers ,this.myLongNetwork, this.myLongNetwork);
         return timerTaskNetworkPlayers;
     }
 
@@ -95,7 +97,7 @@ public class TimerPlayers {
             LOGGER.log(Level.SEVERE,"Timer is null");
         LOGGER.log(Level.WARNING, "STARTED SCHEDULE TIMER ACTION PLAYER");
         TimerTaskActionPlayers timerTaskActionPlayers = new TimerTaskActionPlayers(serverBase, timerConfiguration, timer3, name);
-        timer3.schedule(timerTaskActionPlayers , this.myLong);
+        timer3.scheduleAtFixedRate(timerTaskActionPlayers , this.myLong, this.myLong);
         return  timerTaskActionPlayers;
     }
 

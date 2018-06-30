@@ -249,4 +249,8 @@ public class ServerBase extends ViewGameInterface {
         clientManagerList.getClientManager(name).sendEndGame(score);
     }
 
+    public void ping(String name){
+
+        clientManagerList.getClientManager(name).ping();
+    }
 }

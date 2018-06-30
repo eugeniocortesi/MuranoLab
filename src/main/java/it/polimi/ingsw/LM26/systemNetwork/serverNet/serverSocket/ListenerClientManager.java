@@ -66,9 +66,6 @@ public class ListenerClientManager extends Thread {
 
         if (message == null)
             return;
-        else if(message.equals("pong")){
-            clientManagerSocket.pong();
-        }
         DataMessage dataMessage = new DataMessage(null,null);
         String op = dataMessage.parserFirstElement(message);
         if (op.equals("login")){
@@ -96,6 +93,17 @@ public class ListenerClientManager extends Thread {
             LOGGER.log(Level.SEVERE,"In disconnect client body");
             DataMessage dataMessage1 = DataMessage.deserializeDataMessage(message);
             clientManagerSocket.disconnect(dataMessage1.getField1());
+        }
+        else if(op.equals("pong")){
+            LOGGER.log(Level.SEVERE,"In pong body");
+            Thread t2 = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    clientManagerSocket.pong();
+                }
+            });
+            t2.start();
+
         }
         else {
             LOGGER.log(Level.WARNING,"Message not recognized");
