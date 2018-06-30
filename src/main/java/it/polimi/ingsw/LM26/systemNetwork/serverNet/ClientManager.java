@@ -54,4 +54,8 @@ public abstract class ClientManager implements Runnable, ObserverSimple {
     public abstract void ping();
 
     public abstract void pong();
+
+    public abstract void stop();
+
+    public abstract String getName();
 }

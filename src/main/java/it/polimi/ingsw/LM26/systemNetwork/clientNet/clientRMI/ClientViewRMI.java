@@ -207,8 +207,7 @@ public class ClientViewRMI extends ClientView {
 
     @Override
     public void sendAddedPlayer(String field1) {
-        //concreteClientView.showAddedPlayer(field1);
-        System.out.println("Added new player " +field1 );
+        concreteClientView.showAddedPlayer(field1);
     }
 
     @Override
@@ -220,7 +219,7 @@ public class ClientViewRMI extends ClientView {
     @Override
     public void pong() {
 
-        LOGGER.log(Level.SEVERE, "Pong arrived");
+        //LOGGER.log(Level.SEVERE, "Pong arrived");
 
         try {
             stub.pong();

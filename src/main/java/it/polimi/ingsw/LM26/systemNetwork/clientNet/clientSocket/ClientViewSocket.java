@@ -195,8 +195,7 @@ public class ClientViewSocket extends ClientView {
 
     @Override
     public void sendAddedPlayer(String field1) {
-        //concreteClientView.showAddedPlayer(field1);
-        System.out.println("Added new player " +field1 );
+        concreteClientView.showAddedPlayer(field1);
     }
 
     @Override
@@ -210,7 +209,7 @@ public class ClientViewSocket extends ClientView {
 
         DataMessage dataMessage = new DataMessage("pong", "pong");
 
-        LOGGER.log(Level.SEVERE, "Pong arrived");
+        //LOGGER.log(Level.SEVERE, "Pong arrived");
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.timer;
 
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 
 import java.util.Timer;
@@ -16,7 +17,7 @@ public class TimerPlayers {
 
     private long myLong;
 
-    private final long myLongNetwork = 5000;
+    private final long myLongNetwork = 1000;
 
     private TimerConfiguration timerConfiguration;
 
@@ -63,10 +64,10 @@ public class TimerPlayers {
 
     /**
      * call method that schedule TimerNetworkPlayer
-     * @param name name of player
+     * @param cm ClientManager of player
      */
 
-    public TimerTaskNetworkPlayers scheduleTimerNetworkPlayer(String name){
+    public TimerTaskNetworkPlayers scheduleTimerNetworkPlayer(ClientManager cm){
 
         LOGGER.log(Level.SEVERE,"Started schedule");
         if(serverBase == null)
@@ -76,7 +77,7 @@ public class TimerPlayers {
         if(timer2 == null)
             LOGGER.log(Level.SEVERE,"Timer is null");
         LOGGER.log(Level.WARNING, "STARTED SCHEDULE TIMER NETWORK PLAYER");
-        TimerTaskNetworkPlayers timerTaskNetworkPlayers = new TimerTaskNetworkPlayers(serverBase, timerConfiguration, timer2, name);
+        TimerTaskNetworkPlayers timerTaskNetworkPlayers = new TimerTaskNetworkPlayers(serverBase, timerConfiguration, timer2, cm);
         timer2.scheduleAtFixedRate( timerTaskNetworkPlayers ,this.myLongNetwork, this.myLongNetwork);
         return timerTaskNetworkPlayers;
     }
@@ -97,7 +98,7 @@ public class TimerPlayers {
             LOGGER.log(Level.SEVERE,"Timer is null");
         LOGGER.log(Level.WARNING, "STARTED SCHEDULE TIMER ACTION PLAYER");
         TimerTaskActionPlayers timerTaskActionPlayers = new TimerTaskActionPlayers(serverBase, timerConfiguration, timer3, name);
-        timer3.scheduleAtFixedRate(timerTaskActionPlayers , this.myLong, this.myLong);
+        timer3.schedule(timerTaskActionPlayers , this.myLong, this.myLong);
         return  timerTaskActionPlayers;
     }
 

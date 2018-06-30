@@ -16,6 +16,7 @@ public class ListenerClientManager extends Thread {
     private BufferedReader reader;
     private ClientManagerSocket clientManagerSocket;
     private Socket socket;
+    private boolean inAction;
 
     private static final Logger LOGGER = Logger.getLogger(ListenerClientManager.class.getName());
 
@@ -28,6 +29,7 @@ public class ListenerClientManager extends Thread {
         }catch (IOException e) {
 
         }
+        inAction = true;
     }
 
     public String receiveMessage() {
@@ -113,9 +115,13 @@ public class ListenerClientManager extends Thread {
 
     @Override
     public void run(){
-
-        listen();
+        if(inAction)
+            listen();
     }
 
+    public void end(){
+
+        inAction= false;
+    }
 }
 

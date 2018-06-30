@@ -56,6 +56,7 @@ public class ClientManagerSocket extends ClientManager {
         timerPlayers = new TimerPlayers(server, server.getTimerConfiguration());
     }
 
+    @Override
     public String getName(){
         return this.user;
     }
@@ -88,11 +89,15 @@ public class ClientManagerSocket extends ClientManager {
     @Override
     public void connect() {
         LOGGER.log(Level.WARNING,"Server connected");
-        //TODO delete comment
-        //ping();
+
         listenerClientManager.start();
-        //sendAvailableId();
-        //requestedLogin();
+
+        //Start TimerTaskNetworkPlayer
+        timerTaskNetworkPlayers = timerPlayers.scheduleTimerNetworkPlayer(this);
+        LOGGER.log(Level.WARNING, "Timer network Begin");
+        Thread t1 = new Thread(new MyRunnablePing());
+        t1.start();
+
     }
 
     public void sendAvailableId(){
@@ -104,7 +109,7 @@ public class ClientManagerSocket extends ClientManager {
         ConnectMessage message = new ConnectMessage("connected", id );
         message.dump();
         sendMessage(message.serializeClassMessage());
-        //listenerClientManager.listen();
+
     }
 
     @Override
@@ -147,17 +152,12 @@ public class ClientManagerSocket extends ClientManager {
                 server.getQueueController().pushMessage(actionEventPlayer);
                 server.checkPlayers();
 
-                //timerPlayers.scheduleTimerNetworkPlayer(user);
-
                 sendMessage(dataMessage.serializeClassMessage());
-                timerTaskNetworkPlayers = timerPlayers.scheduleTimerNetworkPlayer(user);
-                LOGGER.log(Level.WARNING, "Timer network Begin");
-                Thread t1 = new Thread(new MyRunnablePing());
-                t1.start();
+
+
             }
         }
 
-        //listenerClientManager.listen();
     }
 
     @Override
@@ -260,9 +260,10 @@ public class ClientManagerSocket extends ClientManager {
         LOGGER.log(Level.SEVERE,"server is sending playerzone of " + name);
         BeginTurnMessage beginTurnMessage = new BeginTurnMessage("send_beginturnmessage", name, playerZone);
         sendMessage(beginTurnMessage.serializeClassMessage());
-        //timerPlayers.resetTimerActionPlayer();
-        //timerPlayers.scheduleTimerActionPlayer(user);
-        //listenerClientManager.listen();
+
+        timerPlayers.resetTimerActionPlayer();
+        timerPlayers.scheduleTimerActionPlayer(user);
+
     }
 
     @Override
@@ -290,7 +291,7 @@ public class ClientManagerSocket extends ClientManager {
 
     @Override
     public void ping() {
-        LOGGER.log(Level.WARNING, "Start ping");
+        //LOGGER.log(Level.WARNING, "Start ping");
         Thread t = new Thread(new MyRunnablePing());
         t.start();
     }
@@ -299,6 +300,12 @@ public class ClientManagerSocket extends ClientManager {
     public void pong() {
 
         timerTaskNetworkPlayers.setConnected(true);
+    }
+
+    @Override
+    public void stop() {
+
+        listenerClientManager.end();
     }
 
 

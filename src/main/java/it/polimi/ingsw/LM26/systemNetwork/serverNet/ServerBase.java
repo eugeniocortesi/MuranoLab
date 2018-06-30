@@ -253,4 +253,9 @@ public class ServerBase extends ViewGameInterface {
 
         clientManagerList.getClientManager(name).ping();
     }
+
+    public void stop(String name){
+
+        clientManagerList.getClientManager(name).stop();
+    }
 }

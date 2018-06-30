@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.systemNetwork.serverNet.timer;
 
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventPlayer;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventTimerEnd;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 
 import java.util.Timer;
@@ -19,11 +20,11 @@ public class TimerTaskNetworkPlayers extends TimerTask {
     private ServerBase serverBase;
     private TimerConfiguration timerConfiguration;
     private Timer timer;
-    private String name;
+    private ClientManager cm;
     private static final Logger LOGGER = Logger.getLogger(TimerTaskPlayers.class.getName());
     private boolean connected;
 
-    public TimerTaskNetworkPlayers(ServerBase serverBase, TimerConfiguration timerConfiguration, Timer timer, String name) {
+    public TimerTaskNetworkPlayers(ServerBase serverBase, TimerConfiguration timerConfiguration, Timer timer, ClientManager cm) {
 
         if(serverBase == null)
             LOGGER.log(Level.SEVERE,"Server is null");
@@ -32,7 +33,7 @@ public class TimerTaskNetworkPlayers extends TimerTask {
         this.serverBase = serverBase;
         this.timerConfiguration = timerConfiguration;
         this.timer = timer;
-        this.name = name;
+        this.cm = cm;
         this.connected = false;
     }
 
@@ -57,22 +58,30 @@ public class TimerTaskNetworkPlayers extends TimerTask {
     
     public void body(){
         if(connected) {
-            LOGGER.log(Level.SEVERE,"Reset timer");
+            //LOGGER.log(Level.SEVERE,"Reset timer");
             connected = false;
 
-            serverBase.ping(name);
+            cm.ping();
             //TimerPlayers timerPlayers = new TimerPlayers(serverBase, timerConfiguration);
             //timerPlayers.scheduleTimerPlayer();
         } else{
 
+            if(cm.getName()!= null){
+                String name = cm.getName();
+                ActionEventPlayer actionEventPlayer = new ActionEventPlayer(name, false);
+                serverBase.getQueueController().pushMessage(actionEventPlayer);
+                serverBase.stop(name);
+            }
+            else{
+                cm.stop();
+            }
 
-            ActionEventPlayer actionEventPlayer = new ActionEventPlayer(name, false);
-            LOGGER.log(Level.SEVERE,"Timer end for "+ name);
+            //LOGGER.log(Level.SEVERE,"Timer end for "+ name);
 
             // Terminates this timer, discarding any currently scheduled tasks
             timer.cancel();
             timer.purge();
-            serverBase.getQueueController().pushMessage(actionEventPlayer);
+
 
         }
     }

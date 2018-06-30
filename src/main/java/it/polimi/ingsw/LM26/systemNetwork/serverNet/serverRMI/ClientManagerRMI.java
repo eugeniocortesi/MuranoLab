@@ -142,7 +142,7 @@ public class ClientManagerRMI extends ClientManager {
 
             if(result){
                 //Start Network Timer
-                timerTaskNetworkPlayers = timerPlayers.scheduleTimerNetworkPlayer(user);
+                timerTaskNetworkPlayers = timerPlayers.scheduleTimerNetworkPlayer(this);
                 LOGGER.log(Level.WARNING, "Timer network Begin");
                 Thread t1 = new Thread(new myRunnablePing());
                 t1.start();
@@ -380,6 +380,17 @@ public class ClientManagerRMI extends ClientManager {
 
     }
 
+    @Override
+    public void stop() {
+
+        //TODO something
+    }
+
+    @Override
+    public String getName() {
+        return user;
+    }
+
     /**
      * Method called by Observer of model that sends the Model to the Client
      * @param m updated Model
@@ -597,7 +608,7 @@ public class ClientManagerRMI extends ClientManager {
         @Override
         public void run() {
 
-            LOGGER.log(Level.WARNING, "Arrived pong");
+            //LOGGER.log(Level.WARNING, "Arrived pong");
             try{
                 skeleton.pong();
             } catch (RemoteException e) {
