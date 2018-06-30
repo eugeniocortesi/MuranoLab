@@ -48,6 +48,7 @@ public class ClientViewRMI extends ClientView {
         getStub();
     }
 
+    @Override
     public void connect(){
         bind();
     }

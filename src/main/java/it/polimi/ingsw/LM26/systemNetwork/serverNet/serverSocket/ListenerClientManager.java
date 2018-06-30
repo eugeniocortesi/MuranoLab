@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,12 +39,16 @@ public class ListenerClientManager extends Thread {
         try {
 
             messageReceived = (String) this.reader.readLine();
-            if (messageReceived == null){
+            if (messageReceived == null) {
 
                 return null;
             }
+        }catch (SocketException se){
+            System.err.println("Connection reset");
+            end();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("IOException socket reading");
+            end();
         }
         //TODO gestire operazioni bloccanti !!
 
@@ -52,13 +57,13 @@ public class ListenerClientManager extends Thread {
 
     public void listen() {
         String message = null;
-        while (message == null)
+        while (message == null && inAction)
             message = receiveMessage();
         if (message!= null){
             LOGGER.log(Level.SEVERE,"Message " + message);
             recognize(message);
 
-            listen();
+            run();
             message = null;
         }
     }

@@ -22,7 +22,7 @@ public class TimerTaskNetworkPlayers extends TimerTask {
     private Timer timer;
     private ClientManager cm;
     private static final Logger LOGGER = Logger.getLogger(TimerTaskPlayers.class.getName());
-    private boolean connected;
+    private volatile boolean connected;
 
     public TimerTaskNetworkPlayers(ServerBase serverBase, TimerConfiguration timerConfiguration, Timer timer, ClientManager cm) {
 

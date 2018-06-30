@@ -20,7 +20,7 @@ public class TimerTaskActionPlayers extends TimerTask {
     private Timer timer;
     private String name;
     private static final Logger LOGGER = Logger.getLogger(TimerTaskPlayers.class.getName());
-    private boolean arrivedMessage;
+    private volatile boolean arrivedMessage;
 
     /**
      * Constructor

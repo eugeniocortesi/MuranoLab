@@ -18,6 +18,7 @@ import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskNetworkPlayer
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,8 +72,13 @@ public class ClientManagerSocket extends ClientManager {
         try{
             //TODO CHANGE SOMETHING
             this.writer.writeBytes(messageSent  + "\n");
+        } catch (SocketException se){
+            System.err.println("Connection reset");
+            stop();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("IOException socket writing");
+            stop();
+
         }
 
     }
@@ -261,8 +267,6 @@ public class ClientManagerSocket extends ClientManager {
         BeginTurnMessage beginTurnMessage = new BeginTurnMessage("send_beginturnmessage", name, playerZone);
         sendMessage(beginTurnMessage.serializeClassMessage());
 
-        timerPlayers.resetTimerActionPlayer();
-        timerPlayers.scheduleTimerActionPlayer(user);
 
     }
 
@@ -282,6 +286,10 @@ public class ClientManagerSocket extends ClientManager {
         DataMessage dataMessage = new DataMessage("send_currentmenu", name);
         String s = dataMessage.serializeClassMessage();
         sendMessage(s);
+
+        timerPlayers.resetTimerActionPlayer();
+        timerPlayers.scheduleTimerActionPlayer(user);
+
     }
 
     @Override

@@ -58,6 +58,7 @@ public class ClientManagerRMI extends ClientManager {
         this.RMIPORTClient = RMIPORTClient;
         this.address = address;
         timerPlayers = new TimerPlayers(myserver, myserver.getTimerConfiguration());
+        this.user= null;
 
     }
 
@@ -78,29 +79,37 @@ public class ClientManagerRMI extends ClientManager {
             LOGGER.log(Level.WARNING, "Took Skeleton");
             myserver.addClientManager(this);
 
+            //Start Network Timer
+            timerTaskNetworkPlayers = timerPlayers.scheduleTimerNetworkPlayer(this);
+            LOGGER.log(Level.WARNING, "Timer network Begin");
+            Thread t1 = new Thread(new myRunnablePing());
+            t1.start();
+
             Thread t = new Thread(new Runnable(){
 
                 public void run() {
                     try {
                         skeleton.requestedLogin();
                     } catch (RemoteException e) {
-                        e.printStackTrace();
+                        System.err.println("Connection reset");
                     }
                 }
 
             });
             t.start();
 
+
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.err.println("Connection reset");
         } catch (NotBoundException e) {
             e.printStackTrace();
         } catch (ServerNotActiveException e) {
-            e.printStackTrace();
+            System.err.println("Server no active");
         }
     }
 
     public int getAvailableId(){
+
         return myserver.lobbySize();
     }
 
@@ -140,14 +149,6 @@ public class ClientManagerRMI extends ClientManager {
             Thread t = new Thread(new MyRunnableLogged(user, result));
             t.start();
 
-            if(result){
-                //Start Network Timer
-                timerTaskNetworkPlayers = timerPlayers.scheduleTimerNetworkPlayer(this);
-                LOGGER.log(Level.WARNING, "Timer network Begin");
-                Thread t1 = new Thread(new myRunnablePing());
-                t1.start();
-            }
-
         }
         else {
             Thread t = new Thread(new Runnable(){
@@ -156,7 +157,7 @@ public class ClientManagerRMI extends ClientManager {
                     try {
                         skeleton.tooManyUsers();
                     } catch (RemoteException e) {
-                        e.printStackTrace();
+                        System.err.println("Connection reset");
                     }
                 }
 
@@ -194,7 +195,7 @@ public class ClientManagerRMI extends ClientManager {
                 try {
                     skeleton.disconnected();
                 } catch (RemoteException e) {
-                    e.printStackTrace();
+                    System.err.println("Connection reset");
                 }
             }
 
@@ -317,8 +318,8 @@ public class ClientManagerRMI extends ClientManager {
     @Override
     public void sendBeginTurnMessage(String name, PlayerZone playerZone) {
 
-        timerPlayers.resetTimerActionPlayer();
-        timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
+        //timerPlayers.resetTimerActionPlayer();
+        //timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
         Thread t = new Thread(new MyRunnableBeginTurnMessage(name, playerZone));
         t.start();
     }
@@ -383,7 +384,7 @@ public class ClientManagerRMI extends ClientManager {
     @Override
     public void stop() {
 
-        //TODO something
+        System.err.println("Timer out: Connection reset");
     }
 
     @Override
@@ -423,7 +424,7 @@ public class ClientManagerRMI extends ClientManager {
                 LOGGER.log(Level.SEVERE, windowDeck.toString());
                 skeleton.choseWindowPattern(user, id, windowDeck);
             } catch (RemoteException e) {
-                e.printStackTrace();
+                System.err.println("Connection reset");
             }
         }
     }
@@ -447,7 +448,7 @@ public class ClientManagerRMI extends ClientManager {
             try {
                 skeleton.logged(result, user);
             } catch (RemoteException e) {
-                e.printStackTrace();
+                System.err.println("Connection reset");
             }
         }
     }
@@ -472,7 +473,7 @@ public class ClientManagerRMI extends ClientManager {
                 LOGGER.log(Level.SEVERE,"Sending private card");
                 skeleton.sendPrivateCard(card);
             } catch (RemoteException e) {
-                e.printStackTrace();
+                System.err.println("Connection reset");
             }
         }
     }
@@ -496,7 +497,7 @@ public class ClientManagerRMI extends ClientManager {
                 LOGGER.log(Level.SEVERE,"Sending model");
                 skeleton.sendModel(m);
             } catch (RemoteException e) {
-                e.printStackTrace();
+                System.err.println("Connection reset");
             }
         }
     }
@@ -519,7 +520,7 @@ public class ClientManagerRMI extends ClientManager {
                 LOGGER.log(Level.SEVERE,"Sending actionEvent");
                 skeleton.sendAnswerFromController(answer);
             } catch (RemoteException e) {
-                e.printStackTrace();
+                System.err.println("Connection reset");
             }
         }
     }
@@ -544,7 +545,7 @@ public class ClientManagerRMI extends ClientManager {
                 LOGGER.log(Level.SEVERE,"Sending player zone");
                 skeleton.sendBeginTurnMessage(name, playerZone);
             } catch (RemoteException e) {
-                e.printStackTrace();
+                System.err.println("Connection reset");
             }
         }
     }
@@ -565,7 +566,7 @@ public class ClientManagerRMI extends ClientManager {
                 LOGGER.log(Level.SEVERE,"Sending player zone");
                 skeleton.sendAddedPlayer(username);
             } catch (RemoteException e) {
-                e.printStackTrace();
+                System.err.println("Connection reset");
             }
         }
     }
@@ -590,7 +591,7 @@ public class ClientManagerRMI extends ClientManager {
                 LOGGER.log(Level.SEVERE,"Sending player zone");
                 skeleton.sendCurrentMenu(name);
             } catch (RemoteException e) {
-                e.printStackTrace();
+                System.err.println("Connection reset");
             }
         }
     }
@@ -612,7 +613,7 @@ public class ClientManagerRMI extends ClientManager {
             try{
                 skeleton.pong();
             } catch (RemoteException e) {
-                e.printStackTrace();
+                System.err.println("Connection refused");
             }
         }
     }
