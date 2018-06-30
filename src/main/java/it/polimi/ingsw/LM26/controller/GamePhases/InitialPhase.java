@@ -64,6 +64,7 @@ public class InitialPhase implements PhaseInt {
         for(PlayerZone i : playerZones){
             Token token= new Token(i.getWindowPatternCard().getToken());
             i.setToken(token);
+            System.out.println(i.getName()+" has "+ i.getToken().getTokenNumber()+" token");
         }
 
     }
@@ -99,6 +100,17 @@ public class InitialPhase implements PhaseInt {
     public int[] getTurn() {
 
         return null;
+    }
+
+    @Override
+    public PlayerZone getWinner() {
+        return null;
+    }
+
+    @Override
+    public void setAllInStandBy(Boolean allInStandBy) {
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.controller;
 
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ViewGameInterface;
 
@@ -16,4 +17,6 @@ public interface ControllerInt {
     void setActionEvent(ActionEvent event);
 
     ActionEvent getActionEvent();
+
+    void declareWinner(PlayerZone winner);
 }

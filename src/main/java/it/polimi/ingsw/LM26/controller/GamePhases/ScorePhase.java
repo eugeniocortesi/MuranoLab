@@ -14,19 +14,31 @@ public class ScorePhase implements PhaseInt{
     @Override
     public void nextRound(Round round, Game game) {
 
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override
     public Round getCurrentRound() {
-        return null;
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override
     public int[] getTurn() {
-        return new int[0];
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
-    public void doAction(ArrayList<PlayerZone> playerList) {
+    @Override
+    public PlayerZone getWinner() {
 
+        throw new UnsupportedOperationException("Not supported here");
     }
+
+    @Override
+    public void setAllInStandBy(Boolean allInStandBy) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
 }

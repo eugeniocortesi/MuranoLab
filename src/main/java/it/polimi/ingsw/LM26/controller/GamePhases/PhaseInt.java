@@ -14,5 +14,9 @@ public interface PhaseInt extends Serializable{
     public Round getCurrentRound();
 
     public int[] getTurn();
+
+    public PlayerZone getWinner();
+
+    public void setAllInStandBy(Boolean allInStandBy);
 }
 

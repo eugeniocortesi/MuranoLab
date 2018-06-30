@@ -71,8 +71,9 @@ public class ClientViewSocket extends ClientView {
             inKeyboard = new BufferedReader(new InputStreamReader(System.in));
             outVideo = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
             listenerClientView = new ListenerClientView(this, socket);
-            connected();
+
             listenerClientView.start();
+            connected();
 
             LOGGER.log(Level.SEVERE,"ClientImplementationSocket connected");
         } catch (Exception e) {

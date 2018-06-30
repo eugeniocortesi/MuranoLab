@@ -14,7 +14,11 @@ public class FinalPhase implements PhaseInt {
     private ArrayList<PlayerZone> winners= new ArrayList<PlayerZone>();
 
     private int maximum;
+
     private int minimum;
+
+    private PlayerZone winner;
+
 
     /**
      * the method declares the winner: he's the one connected
@@ -124,29 +128,41 @@ public class FinalPhase implements PhaseInt {
         }
     }
 
+    public PlayerZone getWinner() {
+
+        return winner;
+    }
+
+    @Override
+    public void setAllInStandBy(Boolean allInStandBy) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
     public void doAction(Game game, ArrayList<PlayerZone> playerList) {
 
         computeScore();
-        declareWinner(playerList);
+
+        winner = declareWinner(playerList);
 
     }
 
     @Override
     public void nextRound(Round round, Game game) {
 
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override
     public Round getCurrentRound() {
-        return null;
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override
     public int[] getTurn() {
-        return null;
-    }
 
-    public void doAction(ArrayList<PlayerZone> playerList) {
-
+        throw new UnsupportedOperationException("Not supported here");
     }
 }

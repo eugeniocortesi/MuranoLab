@@ -24,6 +24,8 @@ public class Round {
 
     private Model model;
 
+    PhaseInt centralPhase;
+
     public Round(RoundTrackInt rTrack, ArrayList<PlayerZone> pZone, int nrounds) {
 
         this.model=singletonModel();
@@ -39,7 +41,7 @@ public class Round {
         for (int i = 0; i < playerList.size(); i++) {
             int j=t[(i + roundTrack.getCurrentTurn() - 1) %playerList.size()];
             playerList.get(i).setNumberPlayer(j);
-            if(roundTrack.getCurrentTurn() == nrounds) playerList.get(i).setLastRoundTurn(j);
+            playerList.get(i).setLastRoundTurn(j);
         }
     }
 
@@ -63,9 +65,22 @@ public class Round {
               }
               else {
                   System.out.println(player.get(i).getName() +" is in STANDBY");
+                  Boolean allStandby=true;
+                  for(int j=0; j<model.getPlayerList().size(); j++ )
+                      if(!model.getPlayerList().get(i).getPlayerState().equals(STANDBY))
+                          allStandby=false;
+                  if(allStandby){
+                      centralPhase.setAllInStandBy(true);
+                      System.out.println("ALL PLAYERS ARE IN STANDBY");
+                  }
                   turnCounter=turnCounter+1;
                   if(turnCounter == turn.length) {
                       endRound(model.getRoundTrackInt(), model.getDraftPool(), player.get(i));
+                  }
+                  if (allStandby){
+                      if(i==model.getPlayerList().size()-1)
+                          return player.get(0);
+                      else return player.get(i+1);
                   }
                   return nextPlayer(player, turn);
               }
@@ -122,9 +137,12 @@ public class Round {
         die=model.getBag().draw();
         die.roll();
         model.getDraftPool().addDie(die);
+    }
 
+    public void setCentralPhase(PhaseInt centralPhase) {
 
-
+        System.out.println("SETTING CENTRAL PHASE");
+        this.centralPhase = centralPhase;
     }
 
     public PlayerZone getCurrentPlayer() { return currentPlayer; }

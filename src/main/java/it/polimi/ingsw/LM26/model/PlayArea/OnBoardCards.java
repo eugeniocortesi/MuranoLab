@@ -1,14 +1,18 @@
 package it.polimi.ingsw.LM26.model.PlayArea;
 
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
 import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class OnBoardCards implements Serializable {
 
@@ -162,5 +166,29 @@ public class OnBoardCards implements Serializable {
         }
 
         return four;
+    }
+
+    public ObjectivePrivateCard getPrivateCard(PlayerZone player) {
+
+        Model model = singletonModel();
+
+        Random rand = new Random();
+
+        int count = model.getDecks().getObjectivePrivateCardDeck().size();
+
+        int index = rand.nextInt(count);
+
+        while (model.getDecks().getObjectivePrivateCardDeck().get(index).isInUse()) {
+
+            rand = new Random();
+
+            index = rand.nextInt(count);
+        }
+
+        model.getDecks().getObjectivePrivateCardDeck().get(index).setInUse(true);
+
+        model.getDecks().getObjectivePrivateCardDeck().get(index).setPlayer(player);
+
+        return model.getDecks().getObjectivePrivateCardDeck().get(index);
     }
 }

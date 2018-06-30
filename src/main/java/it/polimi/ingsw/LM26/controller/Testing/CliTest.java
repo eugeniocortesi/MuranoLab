@@ -34,11 +34,12 @@ public class CliTest {
 
         System.out.println("Insert 1 set event");
         System.out.println("Insert 2 to manage STANDBY");
+        System.out.println("Insert 11 to pass");
         op = askId();
 
         if(op==1) askEvent(playing);
         if(op==2) standby(playing);
-
+        if(op==11) pass(playing);
     }
 
     private void standby(PlayerZone playing) {
@@ -52,6 +53,17 @@ public class CliTest {
 
         askEvent(playing);
 
+    }
+
+    public void pass(PlayerZone playing) {
+
+        this.event = new ActionEvent();
+
+        event.setId(11);
+
+        event.setPlayer(playing.getIDPlayer());
+
+        controller.setActionEvent(event);
     }
 
     public void askEvent(PlayerZone playing){

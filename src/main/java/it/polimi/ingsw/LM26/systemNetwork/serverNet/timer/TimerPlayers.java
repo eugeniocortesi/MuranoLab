@@ -98,7 +98,7 @@ public class TimerPlayers {
             LOGGER.log(Level.SEVERE,"Timer is null");
         LOGGER.log(Level.WARNING, "STARTED SCHEDULE TIMER ACTION PLAYER");
         TimerTaskActionPlayers timerTaskActionPlayers = new TimerTaskActionPlayers(serverBase, timerConfiguration, timer3, name);
-        timer3.schedule(timerTaskActionPlayers , this.myLong, this.myLong);
+        timer3.scheduleAtFixedRate(timerTaskActionPlayers , this.myLong, this.myLong);
         return  timerTaskActionPlayers;
     }
 

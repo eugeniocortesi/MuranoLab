@@ -52,20 +52,25 @@ public class ControllerTest implements ControllerInt {
 
         PlayerZone player1 = new PlayerZone("eugenio", 0);
         PlayerZone player2 = new PlayerZone("Chiara", 1);
-        PlayerZone player3 = new PlayerZone( "Claudia", 2);
-        PlayerZone player4 = new PlayerZone("Tommaso", 3);
+        //PlayerZone player3 = new PlayerZone( "Claudia", 2);
+        //PlayerZone player4 = new PlayerZone("Tommaso", 3);
 
         player1.setNumberPlayer(0);
         player2.setNumberPlayer(1);
-        player3.setNumberPlayer(2);
-        player4.setNumberPlayer(3);
+        //player3.setNumberPlayer(2);
+        //player4.setNumberPlayer(3);
 
         ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
 
         playerList.add(player1);
         playerList.add(player2);
-        playerList.add(player3);
-        playerList.add(player4);
+        //playerList.add(player3);
+        //playerList.add(player4);
+
+        model.getDecks().getObjectivePrivateCardDeck().get(0).setPlayer(player1);
+        model.getDecks().getObjectivePrivateCardDeck().get(1).setPlayer(player2);
+        //model.getDecks().getObjectivePrivateCardDeck().get(2).setPlayer(player3);
+        //model.getDecks().getObjectivePrivateCardDeck().get(3).setPlayer(player4);
 
         model.setPlayerList(playerList);
 
@@ -113,6 +118,11 @@ public class ControllerTest implements ControllerInt {
     public ActionEvent getActionEvent() {
         System.out.println("event got from controllerTest");
         return event;
+    }
+
+    @Override
+    public void declareWinner(PlayerZone winner) {
+
     }
 
 

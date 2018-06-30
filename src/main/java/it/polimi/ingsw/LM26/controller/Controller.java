@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.controller;
 
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.controller.controllerHandler.EventHandler;
 import it.polimi.ingsw.LM26.controller.controllerHandler.SetupHandler;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class Controller implements ControllerInt{
+public class Controller implements ControllerInt {
 
     private Model model;
 
@@ -33,8 +34,6 @@ public class Controller implements ControllerInt{
 
     private ConcurrentLinkedQueue<ActionEvent> queueEvent;
 
-    //private ActionEvent event;
-
     private static final Logger LOGGER = Logger.getLogger(Controller.class.getName());
 
     public Controller() {
@@ -44,16 +43,17 @@ public class Controller implements ControllerInt{
         gameIsGoing = false;
 
         queueEvent = new ConcurrentLinkedQueue<ActionEvent>();
-
     }
 
-    public void startServer(){
+    public void startServer() {
 
         updatesHandler = new UpdatesHandler(this);
 
         setupHandler = new SetupHandler(this, model);
 
-        server= new ServerBase(updatesHandler);
+        server = new ServerBase(updatesHandler);
+
+        setupHandler.setServer(server );
 
         //TODO
         //setServer in updatesHandler to move setups in the right class
@@ -65,70 +65,91 @@ public class Controller implements ControllerInt{
         return setupHandler;
     }
 
-    public ViewGameInterface getViewGameInterface(){
+    public ViewGameInterface getViewGameInterface() {
         return server;
     }
 
-    public UpdatesHandler getUpdatesHandler() { return updatesHandler; }
+    public UpdatesHandler getUpdatesHandler() {
+        return updatesHandler;
+    }
 
     public void setActionEvent(ActionEvent event) {
-        if(event!=null) {
+
+        if (event != null) {
+
             queueEvent.add(event);
-            //this.event = event;
+
             LOGGER.log(Level.SEVERE, "a new event has been setted: " + event);
-        }
-        else LOGGER.log(Level.SEVERE, "event nullo" + event );
+        } else LOGGER.log(Level.SEVERE, "event nullo" + event);
     }
 
     public ActionEvent getActionEvent() {
-        //return this.event;
-        return queueEvent.poll(); }
+
+        return queueEvent.poll();
+    }
 
     @Override
     public boolean handler(ActionEvent event) {
 
-        EventHandler handler = new EventHandler(event, model, this );
+        EventHandler handler = new EventHandler(event, model, this);
 
         return handler.getResult();
     }
 
     @Override
     public void playersReady() {
+
         gameIsGoing = true;
 
-        for(int i = 0; i< model.getPlayerList().size(); i++){
+        for (int i = 0; i < model.getPlayerList().size(); i++) {
 
-            if(model.getPlayerList().get(i).getWindowPatternCard()== null && model.getPlayerList().get(i)!= null){
+            if (model.getPlayerList().get(i).getWindowPatternCard() == null && model.getPlayerList().get(i) != null) {
 
-                System.out.println("window pattern is null from " +model.getPlayerList().get(i).getName());
+                //System.out.println("window pattern is null from " + model.getPlayerList().get(i).getName());
                 gameIsGoing = false;
             }
-
         }
 
-        if(gameIsGoing){
+        /*if (gameIsGoing) {
 
             //TODO DELETE
-            System.out.println("playerlist "+ model.getPlayerList());
-            for(int i = 0; i<model.getPlayerList().size(); i++){
-                System.out.println(model.getPlayerList().get(i)+ "player");
+            System.out.println("playerlist " + model.getPlayerList());
+            for (int i = 0; i < model.getPlayerList().size(); i++) {
+                System.out.println(model.getPlayerList().get(i) + "player");
             }
 
             newMatch(model, this);
+        }*/
 
+        if (gameIsGoing) {
+
+            this.match = new Match(model, this);
+
+            match.start();
         }
     }
 
-    public void newMatch(Model model, ControllerInt controller){
+    /*public void newMatch(Model model, ControllerInt controller) {
 
-        this.match=new Match(model, controller);
+        this.match = new Match(model, controller);
+
         match.start();
 
-    }
+    }*/
 
-    public void setStandbyPlayer(String namePlayer) {
+    /*public void setStandbyPlayer(String namePlayer) {
 
         model.getPlayer(namePlayer).setPlayerState(PlayerState.STANDBY);
+
+        for (int i = 0; i < model.getPlayerList().size(); i++) {
+
+            if (model.getPlayerList().get(i).getName().equals(namePlayer))
+
+                server.showAnswerFromController(namePlayer, "Sei in pausa.");
+
+            else
+                server.showAnswerFromController(model.getPlayerList().get(i).getName(), "Il player " + namePlayer + " è il pausa.");
+        }
     }
 
     public void setupPrivateCard() {
@@ -150,24 +171,37 @@ public class Controller implements ControllerInt{
 
     }
 
-    public void setupWindowCard(){
+    public void setupWindowCard() {
 
-        for(int i=0; i< model.getPlayerList().size(); i++){
-            //ArrayList<WindowPatternCard> windowlist = setupHandler.createWindowPattern();
+        for (int i = 0; i < model.getPlayerList().size(); i++) {
+
             ArrayList<WindowPatternCard> windowlist = model.getOnBoardCards().getFourWindowPattern();
 
             //TODO DELETE
             System.out.println(windowlist.size());
-            if(model.getPlayerList().get(i).getName() == null)
+            if (model.getPlayerList().get(i).getName() == null)
                 System.out.println("name null");
-            else if(model.getDecks().getWindowPatternCardDeck()== null)
+            else if (model.getDecks().getWindowPatternCardDeck() == null)
                 System.out.println("cards null");
-            if(server== null)
+            if (server == null)
                 System.out.println("server: " + server);
 
             server.showWindowPattern(model.getPlayerList().get(i).getName(), model.getPlayerList().get(i).getIDPlayer(), windowlist);
             windowlist.clear();
 
+        }
+    }
+*/
+    public void declareWinner(PlayerZone winner) {
+
+        for (int i = 0; i < model.getPlayerList().size(); i++) {
+
+            if (winner.equals(model.getPlayerList().get(i)))
+
+                server.showAnswerFromController(winner.getName(), "Sei il Vincitore");
+
+            else
+                server.showAnswerFromController(model.getPlayerList().get(i).getName(), winner.getName() + " è il vincitore");
         }
     }
 }

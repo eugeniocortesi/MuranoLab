@@ -118,7 +118,9 @@ public class Match extends Thread {
 
         game.getPhase().doAction(game, model.getPlayerList());
 
-        //controller.getView().showPoints();
+        System.out.println("Il vincitore è " + game.getPhase().getWinner().getName());  // final phase
+
+        controller.declareWinner(game.getPhase().getWinner());
     }
 
     public void firstAction() {
