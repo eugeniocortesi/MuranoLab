@@ -8,7 +8,7 @@ public abstract class ScoreTrackInt implements Serializable{
 
     String typeScoreTrack;
 
-    public abstract int getScoreTrack(ScoreMarker sm);
-
     public abstract void rewrite();
+
+    public abstract  void addToScoreTrack(ScoreMarker scoreMarker);
 }

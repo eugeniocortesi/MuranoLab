@@ -40,7 +40,7 @@ public class UpdatesHandler implements Observer {
 
             controller.getSetupHandler().setupPlayers(actionEventPlayer.getNamePlayer());
 
-        //else
+        else
 
             controller.getSetupHandler().setStandbyPlayer(actionEventPlayer.getNamePlayer());
     }
@@ -79,7 +79,7 @@ public class UpdatesHandler implements Observer {
             LOGGER.log(Level.INFO,"Game start!");
         }
 
-        else if(timerEnd.getTimerEnd()){  //A player has end his time to do the action
+        /*else if(timerEnd.getTimerEnd()){  //A player has end his time to do the action
 
             LOGGER.log(Level.INFO,timerEnd.getName()+ " client has finished his time");
 
@@ -91,6 +91,6 @@ public class UpdatesHandler implements Observer {
         else{
 
             throw new UnsupportedOperationException("Not supported yet.");
-        }
+        }*/
     }
 }

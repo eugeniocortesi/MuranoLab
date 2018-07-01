@@ -123,7 +123,7 @@ public class FinalPhase implements PhaseInt {
             System.out.println("with " + emptysp + " emptyspaces");
             player.getScoreMarker().incrementScore(result);
             //TODO
-            //model.getScoreTrackInt().addToScoreTrack(player.getScoreMarker());
+            model.getScoreTrackInt().addToScoreTrack(player.getScoreMarker());
 
         }
     }

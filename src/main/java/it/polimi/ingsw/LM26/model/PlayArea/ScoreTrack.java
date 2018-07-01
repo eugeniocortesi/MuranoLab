@@ -6,26 +6,28 @@ import java.util.ArrayList;
 
 public class ScoreTrack extends ScoreTrackInt {
 
-    private ArrayList<ScoreMarker> scoreMarkerList;
+    private ScoreMarker[] scoreMarkerList;
 
     public ScoreTrack(){
 
-        scoreMarkerList = new ArrayList<ScoreMarker>();
+        scoreMarkerList = new ScoreMarker[50];
+
         this.typeScoreTrack="ScoreTrack";
-
     }
 
-    public int getScoreTrack(ScoreMarker sm) {
-        return sm.getRealPoints();
+    public ScoreMarker getScoreTrackCell(int n) {
+
+        return scoreMarkerList[n];
     }
 
-    //TODO
-    //create structure, add setter and getter for scoreMarker
+    public void addToScoreTrack(ScoreMarker scoreMarker) {
+
+        scoreMarkerList[scoreMarker.getPoints()]=scoreMarker;
+    }
 
     @Override
     public void rewrite() {
 
         this.typeScoreTrack="ScoreTrack";
-
     }
 }
