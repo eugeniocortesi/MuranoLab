@@ -125,7 +125,7 @@ public class ServerBase extends ViewGameInterface {
             boolean b = clientManagerList.addClientManager(s, clientManager);
             if(clientManagerListSize()== 2){
                 System.out.println("Timer start!");
-                timerGame = new TimerGame(this, timerConfiguration);
+                timerGame = new TimerGame(this, timerConfiguration.getTimerEnd());
                 timerGame.scheduleTimerPlayer();
             }
             return b;

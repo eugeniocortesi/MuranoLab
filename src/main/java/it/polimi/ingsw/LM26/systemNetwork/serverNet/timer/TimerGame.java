@@ -17,7 +17,6 @@ public class TimerGame {
 
     private long myLong;
 
-
     private ServerBase serverBase;
 
     private Timer timerGame;
@@ -28,11 +27,11 @@ public class TimerGame {
      * class constructor
      *
      * @param serverBase         Server
-     * @param timerConfiguration file of configuration of timer
+     * @param timerGameEnd milliseconds loaded by file of configuration of timer
      */
-    public TimerGame(ServerBase serverBase, TimerConfiguration timerConfiguration) {
+    public TimerGame(ServerBase serverBase, long timerGameEnd) {
         this.serverBase = serverBase;
-        myLong = timerConfiguration.getTimerEnd();
+        myLong = timerGameEnd;
         timerGame = new Timer();
     }
 

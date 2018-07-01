@@ -18,7 +18,7 @@ public class TimerImplementation {
 
     public TimerImplementation(){
         this.timerConfiguration =  new TimerConfiguration();
-        //this.timerConfiguration.create();
+        this.timerConfiguration.create();
     }
 
     /**

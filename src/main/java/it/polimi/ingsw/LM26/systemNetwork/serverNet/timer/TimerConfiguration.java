@@ -13,10 +13,16 @@ import java.io.IOException;
 
 public class TimerConfiguration {
 
-    private long timerEnd = 5000;
+    private long timerEnd = 60000;
+
+    private long timerGameEnd = 10000;
 
     public long getTimerEnd() {
         return timerEnd;
+    }
+
+    public long getTimerGameEnd(){
+        return timerGameEnd;
     }
 
     /**
