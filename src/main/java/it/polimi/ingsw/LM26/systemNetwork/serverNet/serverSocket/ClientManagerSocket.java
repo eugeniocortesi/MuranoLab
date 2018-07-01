@@ -134,13 +134,13 @@ public class ClientManagerSocket extends ClientManager {
 
     @Override
     public void login(String name) {
-        if (!server.checkNumberUsers()) {
+        if (!(server.checkNumberUsers()) && server.isGameIsGoing()) {
             LOGGER.log(Level.SEVERE,"Too many users logged");
 
             DataMessage dataMessage = new DataMessage("too_many_users", name);
             sendMessage(dataMessage.serializeClassMessage());
 
-        } else {
+        } else if(!server.isGameIsGoing()){
             boolean result = server.addView(name, this);
             if (!result) {
                 LOGGER.log(Level.SEVERE,"not logged");
@@ -163,6 +163,29 @@ public class ClientManagerSocket extends ClientManager {
 
 
             }
+        }
+        else{
+
+            if( server.getClientManagerList().getClientManager(name)!= null){
+
+                LOGGER.log(Level.SEVERE,"Logged");
+
+                DataMessage dataMessage = new DataMessage("logged", name);
+                dataMessage.dump();
+                this.user= name;
+
+
+                ActionEventPlayer actionEventPlayer = new ActionEventPlayer(name, true);
+                server.getQueueController().pushMessage(actionEventPlayer);
+
+                sendMessage(dataMessage.serializeClassMessage());
+            }
+            else{
+                LOGGER.log(Level.SEVERE,"not logged");
+                DataMessage dataMessage = new DataMessage("not_logged", name);
+                sendMessage(dataMessage.serializeClassMessage());
+            }
+
         }
 
     }

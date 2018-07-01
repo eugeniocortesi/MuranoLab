@@ -136,22 +136,9 @@ public class ClientManagerRMI extends ClientManager {
     @Override
     public void login(String name) {
         LOGGER.log(Level.SEVERE,"User tries to connect with username : " + name);
-        if (myserver.checkNumberUsers()){
-            boolean result = myserver.addView(name, this);
-            if(result){
-                this.user = name;
-                ActionEventPlayer actionEventPlayer = new ActionEventPlayer(name, true);
-                myserver.getQueueController().pushMessage(actionEventPlayer);
+        if (!myserver.checkNumberUsers() && myserver.isGameIsGoing()) {
 
-                myserver.checkPlayers();
-            }
-            LOGGER.log(Level.INFO,"The add result value: " + result);
-            Thread t = new Thread(new MyRunnableLogged(user, result));
-            t.start();
-
-        }
-        else {
-            Thread t = new Thread(new Runnable(){
+            Thread t = new Thread(new Runnable() {
 
                 public void run() {
                     try {
@@ -163,8 +150,33 @@ public class ClientManagerRMI extends ClientManager {
 
             });
             t.start();
+        }else if (!myserver.isGameIsGoing()){
+            boolean result = myserver.addView(name, this);
+            if(result){
+                this.user = name;
+                ActionEventPlayer actionEventPlayer = new ActionEventPlayer(name, true);
+                myserver.getQueueController().pushMessage(actionEventPlayer);
+
+                myserver.checkPlayers();
+            }
+
+            LOGGER.log(Level.INFO,"The add result value: " + result);
+            Thread t = new Thread(new MyRunnableLogged(user, result));
+            t.start();
 
         }
+        else{
+            boolean result1 = false;
+            if( myserver.getClientManagerList().getClientManager(name)!= null){
+
+                 result1 = true;
+            }
+
+            LOGGER.log(Level.INFO,"The add result value: " + result1);
+            Thread t = new Thread(new MyRunnableLogged(user, result1));
+            t.start();
+        }
+
     }
 
     /**

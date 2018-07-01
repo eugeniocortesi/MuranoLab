@@ -166,8 +166,8 @@ public class ServerBase extends ViewGameInterface {
     }
 
     public boolean checkNumberUsers(){
-        if(gameIsGoing)
-            return false;
+        //if(gameIsGoing)
+          //  return true;
         if (clientManagerListSize()<4)
             return true;
 
@@ -185,6 +185,10 @@ public class ServerBase extends ViewGameInterface {
             }
         }*/
         return false;
+    }
+
+    public boolean isGameGoing(){
+        return gameIsGoing;
     }
 
     public void registerModel(){
