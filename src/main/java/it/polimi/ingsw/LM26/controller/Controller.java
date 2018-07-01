@@ -69,6 +69,12 @@ public class Controller implements ControllerInt {
         return setupHandler;
     }
 
+    @Override
+    public ServerBase getServer() {
+
+        return (ServerBase) server;
+    }
+
     public ViewGameInterface getViewGameInterface() {
         return server;
     }

@@ -83,9 +83,7 @@ public class UpdatesHandler implements Observer {
 
             LOGGER.log(Level.INFO,timerEnd.getName()+ " client has finished his time");
 
-            //controller.getViewGameInterface().showAnswerFromController(timerEnd.getName(), "Your time ended.");
-
-            controller.getSetupHandler().setUpJumpTurn(timerEnd);
+            controller.getSetupHandler().deletePlayer(timerEnd);
         }
 
         else{

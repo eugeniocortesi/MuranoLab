@@ -4,6 +4,7 @@ import it.polimi.ingsw.LM26.controller.GamePhases.PhaseInt;
 import it.polimi.ingsw.LM26.controller.controllerHandler.SetupHandler;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ViewGameInterface;
 
 public interface ControllerInt {
@@ -27,4 +28,6 @@ public interface ControllerInt {
     void setGamePhase(PhaseInt phase);
 
     SetupHandler getSetupHandler();
+
+    ServerBase getServer();
 }

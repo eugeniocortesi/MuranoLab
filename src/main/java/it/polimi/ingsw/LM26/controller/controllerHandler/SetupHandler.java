@@ -135,16 +135,21 @@ public class SetupHandler {
         }
     }
 
-    public void setUpJumpTurn(ActionEventTimerEnd timerEnd) {
+    public void deletePlayer(ActionEventTimerEnd timerEnd) {
 
-        model.getPlayer(timerEnd.getName()).getActionHistory().setJump(true);
+        PlayerZone toDelete= model.getPlayer(timerEnd.getName());
+
+        model.getPlayerList().remove(toDelete);
+
+        model.deregister(controller.getServer().getClientManagerList().getClientManager(timerEnd.getName()));
+
+        controller.playersReady();
     }
 
     public void setUpJumpTurn(String name) {
 
         model.getPlayer(name).getActionHistory().setJump(true);
     }
-
 
     public void setServer(ViewGameInterface server) {
 

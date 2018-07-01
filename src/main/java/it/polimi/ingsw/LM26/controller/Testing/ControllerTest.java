@@ -10,6 +10,7 @@ import it.polimi.ingsw.LM26.controller.controllerHandler.EventHandler;
 import it.polimi.ingsw.LM26.controller.Match;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ViewGameInterface;
 
 import java.util.ArrayList;
@@ -143,6 +144,12 @@ public class ControllerTest implements ControllerInt {
 
     @Override
     public SetupHandler getSetupHandler() {
+        return null;
+    }
+
+    @Override
+    public ServerBase getServer() {
+
         return null;
     }
 

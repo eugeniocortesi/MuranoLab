@@ -64,20 +64,21 @@ public class TimerTaskActionPlayers extends TimerTask {
         if(//end time for the action, so didn't arrive action event
               arrivedMessage  ) {
             LOGGER.log(Level.SEVERE,"Reset timer action player");
-            timer.cancel();  // Terminates this timer, discarding any currently scheduled tasks.
-            timer.purge();
-
             //TimerGame timerPlayers = new TimerGame(serverBase, timerConfiguration);
             //timerPlayers.scheduleTimerPlayer();
         } else{
             ActionEventTimerEnd timerEnd = new ActionEventTimerEnd(name, true);
             LOGGER.log(Level.SEVERE,"Timer end for "+ name);
 
-
-            timer.cancel();  // Terminates this timer, discarding any currently scheduled tasks.
-            timer.purge();
             serverBase.getQueueController().pushMessage(timerEnd);
 
+
+
         }
+
+
+        timer.cancel();  // Terminates this timer, discarding any currently scheduled tasks.
+        timer.purge();
+
     }
 }

@@ -278,7 +278,12 @@ public class Match extends Thread {
 
         timerActionPlayer.resetTimer();
 
-        if (playing.getActionHistory().isJump()) System.out.println("STOP WAITING because the player end his time");
+        if (playing.getActionHistory().isJump()) {
+
+            System.out.println("STOP WAITING because the player end his time");
+
+            //controller.getViewGameInterface().showAnswerFromController(timerEnd.getName(), "Your time ended.");
+        }
 
         if (playing.getPlayerState() == STANDBY) System.out.println("STOP WAITING because the player went in STANDBY");
     }
