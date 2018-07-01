@@ -135,10 +135,10 @@ public class SetupHandler {
         }
     }
 
-    /*public void setUpJumpTurn(ActionEventTimerEnd timerEnd) {
+    public void setUpJumpTurn(ActionEventTimerEnd timerEnd) {
 
         model.getPlayer(timerEnd.getName()).getActionHistory().setJump(true);
-    }*/
+    }
 
     public void setUpJumpTurn(String name) {
 

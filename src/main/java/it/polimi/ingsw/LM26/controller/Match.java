@@ -255,6 +255,8 @@ public class Match extends Thread {
 
         while (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump() && event.getPlayer() != playing.getIDPlayer() && event.getId() != 12) {
 
+            timerActionPlayer.resetTimer();
+
             TimerTaskActionEvent ttask2= timerActionPlayer.scheduleTimerActionPlayer(controller.getSetupHandler(), playing.getName());
 
             System.out.println("THIS IS NOT THE RIGHT PLAYER: EVENT REFUSED ");
@@ -273,6 +275,8 @@ public class Match extends Thread {
                 ttask2.setArrived(true);
             }
         }
+
+        timerActionPlayer.resetTimer();
 
         if (playing.getActionHistory().isJump()) System.out.println("STOP WAITING because the player end his time");
 
