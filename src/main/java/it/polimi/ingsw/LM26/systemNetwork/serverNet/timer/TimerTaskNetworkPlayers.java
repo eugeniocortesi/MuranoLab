@@ -42,7 +42,7 @@ public class TimerTaskNetworkPlayers extends TimerTask {
      */
     @Override
     public void run() {
-        LOGGER.log(Level.WARNING, "START SCHEDULE TIMER");
+        //LOGGER.log(Level.WARNING, "START SCHEDULE TIMER");
         body();
     }
 

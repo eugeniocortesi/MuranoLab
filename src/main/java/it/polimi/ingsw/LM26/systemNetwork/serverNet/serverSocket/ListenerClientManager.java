@@ -60,7 +60,7 @@ public class ListenerClientManager extends Thread {
         while (message == null && inAction)
             message = receiveMessage();
         if (message!= null){
-            LOGGER.log(Level.SEVERE,"Message " + message);
+            //LOGGER.log(Level.SEVERE,"Message " + message);
             recognize(message);
 
             run();
@@ -102,7 +102,7 @@ public class ListenerClientManager extends Thread {
             clientManagerSocket.disconnect(dataMessage1.getField1());
         }
         else if(op.equals("pong")){
-            LOGGER.log(Level.SEVERE,"In pong body");
+            //LOGGER.log(Level.SEVERE,"In pong body");
             Thread t2 = new Thread(new Runnable() {
                 @Override
                 public void run() {

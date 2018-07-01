@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.controller.Testing;
 
 import it.polimi.ingsw.LM26.controller.GamePhases.PhaseInt;
 import it.polimi.ingsw.LM26.controller.UpdatesHandler;
+import it.polimi.ingsw.LM26.controller.controllerHandler.SetupHandler;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.controller.ControllerInt;
@@ -138,6 +139,11 @@ public class ControllerTest implements ControllerInt {
     public void setGamePhase(PhaseInt phase) {
 
         this.gamePhase=phase;
+    }
+
+    @Override
+    public SetupHandler getSetupHandler() {
+        return null;
     }
 
 

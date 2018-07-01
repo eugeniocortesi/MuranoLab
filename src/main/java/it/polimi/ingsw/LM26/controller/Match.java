@@ -11,6 +11,10 @@ import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.DrawOneMoreDie8;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerActionPlayer;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerImplementation;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskActionEvent;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,6 +34,7 @@ public class Match extends Thread {
     private PhaseInt centralPhase;
     private Game game;
     private ControllerInt controller;
+    private TimerActionPlayer timerActionPlayer;
     private static final Logger LOGGER = Logger.getLogger(Match.class.getName());
     private ActionEvent event;
     private int i=0;
@@ -42,6 +47,11 @@ public class Match extends Thread {
         this.centralPhase = game.getPhase();
         this.model = model;
         this.model.hasChanged();
+
+        //Taking end timer in milliseconds from file
+        TimerImplementation timerImplementation = new TimerImplementation();
+        TimerConfiguration timerConfiguration = timerImplementation.implentation();
+        timerActionPlayer = new TimerActionPlayer(timerConfiguration.getTimerEnd());
     }
 
     public void run() {
@@ -231,12 +241,21 @@ public class Match extends Thread {
 
         LOGGER.log(Level.WARNING, "Event match: " + event);
 
+        TimerTaskActionEvent ttask1= timerActionPlayer.scheduleTimerActionPlayer(controller.getSetupHandler(), playing.getName());
+
         while (event == null && playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump()) {
 
             event = controller.getActionEvent();
         }
 
+        if(!playing.getActionHistory().isJump() && ttask1!=null){
+
+            ttask1.setArrived(true);
+        }
+
         while (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump() && event.getPlayer() != playing.getIDPlayer() && event.getId() != 12) {
+
+            TimerTaskActionEvent ttask2= timerActionPlayer.scheduleTimerActionPlayer(controller.getSetupHandler(), playing.getName());
 
             System.out.println("THIS IS NOT THE RIGHT PLAYER: EVENT REFUSED ");
 
@@ -247,6 +266,11 @@ public class Match extends Thread {
             while (event == null && playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump()) {
 
                 event = controller.getActionEvent();
+            }
+
+            if(!playing.getActionHistory().isJump() && ttask2!=null){
+
+                ttask2.setArrived(true);
             }
         }
 

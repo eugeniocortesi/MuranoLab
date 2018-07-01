@@ -88,6 +88,8 @@ public class ListenerClientView extends Thread {
             return;
         DataMessage dataMessage = new DataMessage(null,null);
         String op = dataMessage.parserFirstElement(message);
+        if(op == null)
+            return;
         if (op.equals("requested_login")){
             LOGGER.log(Level.SEVERE,"In login body");
             clientView.requestedLogin();

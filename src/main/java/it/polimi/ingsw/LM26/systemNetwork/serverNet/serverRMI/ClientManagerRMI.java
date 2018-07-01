@@ -344,8 +344,8 @@ public class ClientManagerRMI extends ClientManager {
     @Override
     public void sendCurrentMenu(String name) {
         //TODO CHECK IF IT WILL BE DELETED
-        timerPlayer.resetTActionPlayer();
-        timerTaskActionPlayers = timerPlayer.scheduleTActionPlayer();
+        //timerPlayer.resetTActionPlayer();
+        //timerTaskActionPlayers = timerPlayer.scheduleTActionPlayer();
         Thread t = new Thread(new myRunnableCurrentMenu(name));
         t.start();
 

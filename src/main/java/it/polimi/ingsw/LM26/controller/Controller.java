@@ -64,6 +64,7 @@ public class Controller implements ControllerInt {
         server.startAcceptor(updatesHandler, model);
     }
 
+    @Override
     public SetupHandler getSetupHandler() {
         return setupHandler;
     }
