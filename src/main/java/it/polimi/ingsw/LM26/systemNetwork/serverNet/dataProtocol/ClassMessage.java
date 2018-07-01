@@ -32,17 +32,18 @@ public abstract class ClassMessage {
                     jsonReader.beginObject();
                 } else if (JsonToken.NAME.equals(nextToken)) {
                     String name = jsonReader.nextName();
-                    LOGGER.log(Level.INFO,name);
+                    //LOGGER.log(Level.INFO,name);
                 } else if (JsonToken.STRING.equals(nextToken)) {
                     String value = jsonReader.nextString();
-                    LOGGER.log(Level.INFO,value);
+                    //LOGGER.log(Level.INFO,value);
                     return value;
                 } else{
-                    LOGGER.log(Level.INFO,"null");
+                    //LOGGER.log(Level.INFO,"null");
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Enable to parse message");
+            return null;
         }
         return null;
     }

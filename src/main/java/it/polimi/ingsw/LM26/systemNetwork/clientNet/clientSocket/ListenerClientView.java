@@ -33,12 +33,13 @@ public class ListenerClientView extends Thread {
 
         try {
             this.reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-            //listen();
-        } catch (IOException e) {
 
+        } catch (IOException e) {
+            System.err.println("Error in socket get Stream");
         }
     }
 
+    @Override
     public void run(){
         listen();
     }
@@ -53,9 +54,9 @@ public class ListenerClientView extends Thread {
                 return null;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error in receive message");
+            return null;
         }
-        //TODO gestire operazioni bloccanti !!
 
         return messageReceived;
     }
@@ -69,7 +70,7 @@ public class ListenerClientView extends Thread {
                 message = receiveMessage();
             }
             if (message!= null){
-                LOGGER.log(Level.INFO,"Message " + message);
+                //LOGGER.log(Level.INFO,"Message " + message);
                 Thread t = new Thread(new MyRunnableRecognize(message));
                 t.start();
 
@@ -81,7 +82,7 @@ public class ListenerClientView extends Thread {
     }
 
     //parsing of messages
-    public synchronized void recognize(String message){
+    public void recognize(String message){
 
         if (message == null)
             return;
