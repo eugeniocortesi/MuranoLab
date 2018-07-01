@@ -24,6 +24,8 @@ public class MatchTest {
     private CliTest cli;
     private static final Logger LOGGER = Logger.getLogger(Match.class.getName());
     private ActionEvent event;
+    private int i=0;
+
 
     public MatchTest(Model model, ControllerTest controller) {
 
@@ -31,6 +33,7 @@ public class MatchTest {
         cli= new CliTest(playing, controller);
         this.game = new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());  //initialPhase
         game.getPhase().doAction(game, model.getPlayerList());    //centralPhase
+        controller.setGamePhase(game.getPhase());
         this.model = model;
         this.model.hasChanged();
 
@@ -40,7 +43,7 @@ public class MatchTest {
 
     public void play() {
 
-        for (int i = 0; i < 10; i++) {
+        while(i<game.getPhase().getNrounds() && !game.getPhase().getOnePlayer()) {
 
             playing = game.getPhase().getCurrentRound().nextPlayer(model.getPlayerList(), game.getPhase().getTurn());
 
@@ -79,7 +82,7 @@ public class MatchTest {
                     System.out.println("this turn you are freezed");
                 }
 
-                game.getPhase().getCurrentRound().endAction(game.getPhase().getTurn(), model.getRoundTrackInt(), model.getDraftPool(), game.getPhase().getCurrentRound().getCurrentPlayer());
+                game.getPhase().getCurrentRound().endAction(game.getPhase().getTurn(), model.getRoundTrackInt(), model.getDraftPool(), playing);
 
                 playing = game.getPhase().getCurrentRound().nextPlayer(model.getPlayerList(), game.getPhase().getTurn());
 
@@ -172,8 +175,7 @@ public class MatchTest {
 
         event = controller.getActionEvent();
         LOGGER.log(Level.WARNING, "Event match: " + event);
-        if(playing.getPlayerState()!= STANDBY)
-            LOGGER.log(Level.WARNING, "playing is ok");
+
         while (event == null && playing.getPlayerState()!=STANDBY){
 
 
@@ -184,7 +186,7 @@ public class MatchTest {
         LOGGER.log(Level.WARNING,"exit while ");
 
 
-        //view.showWrongPlayer();
+        if(playing.getPlayerState()!=STANDBY) // for sure i got an event
         while (event.getPlayer()!=playing.getIDPlayer() && playing.getPlayerState()!=STANDBY) {
             event = controller.getActionEvent();
             while (event == null && playing.getPlayerState()!=STANDBY ){
@@ -197,7 +199,4 @@ public class MatchTest {
         }
 
     }
-
-
-
 }

@@ -36,7 +36,19 @@ public class ScorePhase implements PhaseInt{
     }
 
     @Override
-    public void setAllInStandBy(Boolean allInStandBy) {
+    public void endGame() {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public int getNrounds() {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean getOnePlayer() {
 
         throw new UnsupportedOperationException("Not supported here");
     }

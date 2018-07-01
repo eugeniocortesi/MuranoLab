@@ -44,12 +44,21 @@ public class CliTest {
 
     private void standby(PlayerZone playing) {
 
+        ArrayList<PlayerZone> plNotStandby = new ArrayList<PlayerZone>();
         int num;
         System.out.println("Insert num of player to STANDBY");
         num = askId();
         if(model.getPlayerList().get(num-1).getPlayerState()==PlayerState.STANDBY)
             model.getPlayerList().get(num-1).setPlayerState(PlayerState.ENDING);
         else model.getPlayerList().get(num-1).setPlayerState(PlayerState.STANDBY);
+
+        for(int i =0; i< model.getPlayerList().size();i++)
+
+            if(!model.getPlayerList().get(i).getPlayerState().equals(PlayerState.STANDBY))
+
+                plNotStandby.add(model.getPlayerList().get(i));
+
+        if(plNotStandby.size()==1)controller.setEndGame();
 
         askEvent(playing);
 

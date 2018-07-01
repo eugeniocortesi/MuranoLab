@@ -19,7 +19,7 @@ public class CentralPhase implements PhaseInt{
 
     private Round round;
 
-    private Boolean allInStandBy=false;
+    private Boolean onePlayer=false;
 
     private int[] turn; //stabilisce l'ordine dei giocatori all'interno del turno, es "12344321", "123321"..
 
@@ -31,7 +31,7 @@ public class CentralPhase implements PhaseInt{
 
         this.roundTrack=model.getRoundTrackInt();
 
-        this.round= new Round(roundTrack, playerZones, nrounds);
+        this.round= new Round(roundTrack, playerZones, nrounds, this);
 
         rounds= new ArrayList<Round>();
 
@@ -73,29 +73,43 @@ public class CentralPhase implements PhaseInt{
     @Override
     public void nextRound(Round round, Game game){
 
-        if(rounds.size()<nrounds && round.getRoundState() == RoundState.FINISHED){
-
-            this.round=new Round(roundTrack, playerList, nrounds);
-
-            this.round.setCentralPhase(this);
-
-            rounds.add(round);
-        }
-
-        else if(rounds.size() == nrounds || allInStandBy) {
+        if(rounds.size() == nrounds || onePlayer) {
 
             System.out.println("CentralPhase: creating finalPhase ");
 
             game.setPhase(new FinalPhase());
         }
-    }
 
-    public void setAllInStandBy(Boolean allInStandBy) {
+        else  if(rounds.size()<nrounds && round.getRoundState() == RoundState.FINISHED){
 
-        this.allInStandBy = allInStandBy;
+            this.round=new Round(roundTrack, playerList, nrounds, this);
+
+            rounds.add(round);
+        }
     }
 
     @Override
+    public void endGame() {
+
+        System.out.println("ONLY ONE PLAYER REMAINED");
+
+        onePlayer=true;
+    }
+
+    @Override
+    public int getNrounds() {
+
+        return nrounds;
+    }
+
+    @Override
+    public boolean getOnePlayer() {
+
+        return onePlayer;
+    }
+
+    @Override
+
     public Round getCurrentRound() {
 
         return round;
@@ -106,4 +120,5 @@ public class CentralPhase implements PhaseInt{
 
         throw new UnsupportedOperationException("Not supported here");
     }
+
 }

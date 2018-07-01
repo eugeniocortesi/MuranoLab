@@ -134,10 +134,23 @@ public class FinalPhase implements PhaseInt {
     }
 
     @Override
-    public void setAllInStandBy(Boolean allInStandBy) {
+    public void endGame() {
 
         throw new UnsupportedOperationException("Not supported here");
     }
+
+    @Override
+    public int getNrounds() {
+
+        return 10;
+    }
+
+    @Override
+    public boolean getOnePlayer() {
+
+        return true;
+    }
+
 
     @Override
     public void doAction(Game game, ArrayList<PlayerZone> playerList) {

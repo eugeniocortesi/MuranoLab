@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.controller;
 
+import it.polimi.ingsw.LM26.controller.GamePhases.PhaseInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.controller.controllerHandler.EventHandler;
@@ -33,6 +34,8 @@ public class Controller implements ControllerInt {
     private Boolean gameIsGoing;
 
     private ConcurrentLinkedQueue<ActionEvent> queueEvent;
+
+    private PhaseInt gamePhase;
 
     private static final Logger LOGGER = Logger.getLogger(Controller.class.getName());
 
@@ -203,6 +206,18 @@ public class Controller implements ControllerInt {
             else
                 server.showAnswerFromController(model.getPlayerList().get(i).getName(), winner.getName() + " è il vincitore");
         }
+    }
+
+    @Override
+    public void setEndGame() {
+
+        gamePhase.endGame();
+    }
+
+    @Override
+    public void setGamePhase(PhaseInt phase) {
+
+        this.gamePhase=phase;
     }
 }
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.controller.Testing;
 
+import it.polimi.ingsw.LM26.controller.GamePhases.PhaseInt;
 import it.polimi.ingsw.LM26.controller.UpdatesHandler;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
@@ -20,6 +21,7 @@ public class ControllerTest implements ControllerInt {
     private Model model;
     private ActionEvent event;
     private MatchTest match;
+    private PhaseInt gamePhase;
 
     public ControllerTest() {
 
@@ -52,25 +54,25 @@ public class ControllerTest implements ControllerInt {
 
         PlayerZone player1 = new PlayerZone("eugenio", 0);
         PlayerZone player2 = new PlayerZone("Chiara", 1);
-        //PlayerZone player3 = new PlayerZone( "Claudia", 2);
-        //PlayerZone player4 = new PlayerZone("Tommaso", 3);
+        PlayerZone player3 = new PlayerZone( "Claudia", 2);
+        PlayerZone player4 = new PlayerZone("Tommaso", 3);
 
         player1.setNumberPlayer(0);
         player2.setNumberPlayer(1);
-        //player3.setNumberPlayer(2);
-        //player4.setNumberPlayer(3);
+        player3.setNumberPlayer(2);
+        player4.setNumberPlayer(3);
 
         ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
 
         playerList.add(player1);
         playerList.add(player2);
-        //playerList.add(player3);
-        //playerList.add(player4);
+        playerList.add(player3);
+        playerList.add(player4);
 
         model.getDecks().getObjectivePrivateCardDeck().get(0).setPlayer(player1);
         model.getDecks().getObjectivePrivateCardDeck().get(1).setPlayer(player2);
-        //model.getDecks().getObjectivePrivateCardDeck().get(2).setPlayer(player3);
-        //model.getDecks().getObjectivePrivateCardDeck().get(3).setPlayer(player4);
+        model.getDecks().getObjectivePrivateCardDeck().get(2).setPlayer(player3);
+        model.getDecks().getObjectivePrivateCardDeck().get(3).setPlayer(player4);
 
         model.setPlayerList(playerList);
 
@@ -123,6 +125,19 @@ public class ControllerTest implements ControllerInt {
     @Override
     public void declareWinner(PlayerZone winner) {
 
+    }
+
+    @Override
+    public void setEndGame() {
+
+        gamePhase.endGame();
+
+    }
+
+    @Override
+    public void setGamePhase(PhaseInt phase) {
+
+        this.gamePhase=phase;
     }
 
 

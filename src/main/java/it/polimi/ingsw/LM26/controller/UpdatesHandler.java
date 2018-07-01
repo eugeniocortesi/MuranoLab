@@ -40,7 +40,7 @@ public class UpdatesHandler implements Observer {
 
             controller.getSetupHandler().setupPlayers(actionEventPlayer.getNamePlayer());
 
-        else
+        //else
 
             controller.getSetupHandler().setStandbyPlayer(actionEventPlayer.getNamePlayer());
     }

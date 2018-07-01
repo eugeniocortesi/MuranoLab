@@ -26,9 +26,11 @@ public class Round {
 
     PhaseInt centralPhase;
 
-    public Round(RoundTrackInt rTrack, ArrayList<PlayerZone> pZone, int nrounds) {
+    public Round(RoundTrackInt rTrack, ArrayList<PlayerZone> pZone, int nrounds, CentralPhase centralPhase) {
 
         this.model=singletonModel();
+
+        this.centralPhase=centralPhase;
 
         this.assignTurn(rTrack, pZone, nrounds);
 
@@ -39,7 +41,7 @@ public class Round {
     //assegna l'ordine con cui si gioca all'interno di un turno e salva l'ordine dell'ultimo turno per la parità di punteggio
     public void assignTurn(RoundTrackInt roundTrack, ArrayList<PlayerZone> playerList, int nrounds) { //roundtrack passata dalla centralPhase, l'nrounds da passare è la costante della centralPhase
         for (int i = 0; i < playerList.size(); i++) {
-            int j=t[(i + roundTrack.getCurrentTurn() - 1) %playerList.size()];
+            int j=t[(i ) %playerList.size()];
             playerList.get(i).setNumberPlayer(j);
             playerList.get(i).setLastRoundTurn(j);
         }
@@ -48,7 +50,11 @@ public class Round {
     //nextPlayer va usato dopo endAction, quando il contatore è già incrementato. plStandby passato è sempre 0
     public PlayerZone nextPlayer(ArrayList<PlayerZone> player, int[] turn) throws IllegalArgumentException {
 
-      for(int i=0; i<player.size(); i++){
+     for(int i=0; i<turn.length;i++)
+            System.out.print(turn[i]);
+        System.out.println();
+
+        for(int i=0; i<player.size(); i++){
           if(player.get(i).getNumber()==turn[turnCounter]) {
               if(player.get(i).getPlayerState()!= STANDBY){
                   player.get(i).setPlayerState(PlayerState.BEGINNING);
@@ -65,24 +71,12 @@ public class Round {
               }
               else {
                   System.out.println(player.get(i).getName() +" is in STANDBY");
-                  Boolean allStandby=true;
-                  for(int j=0; j<model.getPlayerList().size(); j++ )
-                      if(!model.getPlayerList().get(i).getPlayerState().equals(STANDBY))
-                          allStandby=false;
-                  if(allStandby){
-                      centralPhase.setAllInStandBy(true);
-                      System.out.println("ALL PLAYERS ARE IN STANDBY");
-                  }
                   turnCounter=turnCounter+1;
                   if(turnCounter == turn.length) {
                       endRound(model.getRoundTrackInt(), model.getDraftPool(), player.get(i));
+                      return null;
                   }
-                  if (allStandby){
-                      if(i==model.getPlayerList().size()-1)
-                          return player.get(0);
-                      else return player.get(i+1);
-                  }
-                  return nextPlayer(player, turn);
+                  else return nextPlayer(player, turn);
               }
           }
       }
@@ -138,14 +132,6 @@ public class Round {
         die.roll();
         model.getDraftPool().addDie(die);
     }
-
-    public void setCentralPhase(PhaseInt centralPhase) {
-
-        System.out.println("SETTING CENTRAL PHASE");
-        this.centralPhase = centralPhase;
-    }
-
-    public PlayerZone getCurrentPlayer() { return currentPlayer; }
 
     public RoundState getRoundState() {
         return roundState;

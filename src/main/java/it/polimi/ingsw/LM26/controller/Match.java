@@ -32,6 +32,7 @@ public class Match extends Thread {
     private ControllerInt controller;
     private static final Logger LOGGER = Logger.getLogger(Match.class.getName());
     private ActionEvent event;
+    private int i=0;
 
     public Match(Model model, ControllerInt controller) {
 
@@ -54,7 +55,7 @@ public class Match extends Thread {
 
             //controller.getViewGameInterface().showSetPlayerMenu(model.getPlayerList().get(i).getName(), model.getPlayerList().get(i));
 
-        for (int i = 0; i < 10; i++) {
+        while(i<game.getPhase().getNrounds() && !game.getPhase().getOnePlayer()) {
 
             playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn());
 
@@ -97,7 +98,7 @@ public class Match extends Thread {
 
                 //PlayerZone playerEnding = playing;
 
-                centralPhase.getCurrentRound().endAction(centralPhase.getTurn(), model.getRoundTrackInt(), model.getDraftPool(), centralPhase.getCurrentRound().getCurrentPlayer());
+                centralPhase.getCurrentRound().endAction(centralPhase.getTurn(), model.getRoundTrackInt(), model.getDraftPool(), playing);
 
                 playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn());
 
@@ -252,5 +253,10 @@ public class Match extends Thread {
         if (playing.getActionHistory().isJump()) System.out.println("STOP WAITING because the player end his time");
 
         if (playing.getPlayerState() == STANDBY) System.out.println("STOP WAITING because the player went in STANDBY");
+    }
+
+    public PhaseInt getGame() {
+
+        return game.getPhase();
     }
 }

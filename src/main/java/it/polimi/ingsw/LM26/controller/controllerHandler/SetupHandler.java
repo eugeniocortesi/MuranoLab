@@ -59,6 +59,8 @@ public class SetupHandler {
 
         model.getPlayer(namePlayer).setPlayerState(PlayerState.STANDBY);
 
+        ArrayList<PlayerZone> plNotStandby = new ArrayList<PlayerZone>();
+
         //TODO CODE TO KEEP: JUST DELETE COMMENTING
 
         /*for (int i = 0; i < model.getPlayerList().size(); i++) {
@@ -71,6 +73,15 @@ public class SetupHandler {
 
                 server.showAnswerFromController(model.getPlayerList().get(i).getName(), "Il player " + namePlayer + " è il pausa.");
         }*/
+
+        for(int i =0; i< model.getPlayerList().size();i++)
+
+            if(!model.getPlayerList().get(i).getPlayerState().equals(PlayerState.STANDBY))
+
+                plNotStandby.add(model.getPlayerList().get(i));
+
+        if(plNotStandby.size()==1)controller.setEndGame();
+
     }
 
     public void setupPrivateCard() {
