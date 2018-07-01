@@ -18,20 +18,16 @@ import java.util.logging.Logger;
 public class TimerTaskNetworkPlayers extends TimerTask {
 
     private ServerBase serverBase;
-    private TimerConfiguration timerConfiguration;
     private Timer timer;
     private ClientManager cm;
     private static final Logger LOGGER = Logger.getLogger(TimerTaskPlayers.class.getName());
     private volatile boolean connected;
 
-    public TimerTaskNetworkPlayers(ServerBase serverBase, TimerConfiguration timerConfiguration, Timer timer, ClientManager cm) {
+    public TimerTaskNetworkPlayers(ServerBase serverBase, Timer timer, ClientManager cm) {
 
         if(serverBase == null)
             LOGGER.log(Level.SEVERE,"Server is null");
-        if(timerConfiguration == null)
-            LOGGER.log(Level.SEVERE,"Timer configuration is null");
         this.serverBase = serverBase;
-        this.timerConfiguration = timerConfiguration;
         this.timer = timer;
         this.cm = cm;
         this.connected = false;
@@ -62,7 +58,7 @@ public class TimerTaskNetworkPlayers extends TimerTask {
             connected = false;
 
             cm.ping();
-            //TimerPlayers timerPlayers = new TimerPlayers(serverBase, timerConfiguration);
+            //TimerGame timerPlayers = new TimerGame(serverBase, timerConfiguration);
             //timerPlayers.scheduleTimerPlayer();
         } else{
 
@@ -76,7 +72,7 @@ public class TimerTaskNetworkPlayers extends TimerTask {
                 cm.stop();
             }
 
-            //LOGGER.log(Level.SEVERE,"Timer end for "+ name);
+            LOGGER.log(Level.SEVERE,"Timer end for "+ cm.getName());
 
             // Terminates this timer, discarding any currently scheduled tasks
             timer.cancel();

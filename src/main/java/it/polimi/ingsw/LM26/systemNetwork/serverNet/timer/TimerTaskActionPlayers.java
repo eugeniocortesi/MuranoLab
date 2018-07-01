@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 public class TimerTaskActionPlayers extends TimerTask {
 
     private ServerBase serverBase;
-    private TimerConfiguration timerConfiguration;
     private Timer timer;
     private String name;
     private static final Logger LOGGER = Logger.getLogger(TimerTaskPlayers.class.getName());
@@ -25,18 +24,14 @@ public class TimerTaskActionPlayers extends TimerTask {
     /**
      * Constructor
      * @param serverBase Server
-     * @param timerConfiguration file of configuration of timer
      * @param timer timer
      * @param name name of player
      */
-    public TimerTaskActionPlayers(ServerBase serverBase, TimerConfiguration timerConfiguration, Timer timer, String name) {
+    public TimerTaskActionPlayers(ServerBase serverBase, Timer timer, String name) {
 
         if(serverBase == null)
             LOGGER.log(Level.SEVERE,"Server is null");
-        if(timerConfiguration == null)
-            LOGGER.log(Level.SEVERE,"Timer configuration is null");
         this.serverBase = serverBase;
-        this.timerConfiguration = timerConfiguration;
         this.timer = timer;
         this.name = name;
         this.arrivedMessage = false;
@@ -72,7 +67,7 @@ public class TimerTaskActionPlayers extends TimerTask {
             timer.cancel();  // Terminates this timer, discarding any currently scheduled tasks.
             timer.purge();
 
-            //TimerPlayers timerPlayers = new TimerPlayers(serverBase, timerConfiguration);
+            //TimerGame timerPlayers = new TimerGame(serverBase, timerConfiguration);
             //timerPlayers.scheduleTimerPlayer();
         } else{
             ActionEventTimerEnd timerEnd = new ActionEventTimerEnd(name, true);

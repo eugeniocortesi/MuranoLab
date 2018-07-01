@@ -11,8 +11,8 @@ import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerImplemen
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.RMIAcceptor;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket.SocketAcceptor;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerGame;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerImplementation;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerPlayers;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -41,7 +41,7 @@ public class ServerBase extends ViewGameInterface {
 
     private boolean gameIsGoing;
 
-    TimerPlayers timerPlayers;
+    TimerGame timerGame;
 
     public ServerBase(Observer controllerInt){
 
@@ -125,8 +125,8 @@ public class ServerBase extends ViewGameInterface {
             boolean b = clientManagerList.addClientManager(s, clientManager);
             if(clientManagerListSize()== 2){
                 System.out.println("Timer start!");
-                timerPlayers = new TimerPlayers(this, timerConfiguration);
-                timerPlayers.scheduleTimerPlayer();
+                timerGame = new TimerGame(this, timerConfiguration);
+                timerGame.scheduleTimerPlayer();
             }
             return b;
 

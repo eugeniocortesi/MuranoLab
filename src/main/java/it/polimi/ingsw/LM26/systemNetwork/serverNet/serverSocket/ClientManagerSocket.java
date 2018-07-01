@@ -11,7 +11,8 @@ import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ModelMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.*;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerPlayers;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerGame;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerPlayer;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskActionPlayers;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskNetworkPlayers;
 
@@ -32,9 +33,9 @@ public class ClientManagerSocket extends ClientManager {
     private String user;
     private int id;
     private DataOutputStream writer;
-    TimerPlayers timerPlayers;
-    TimerTaskActionPlayers timerTaskActionPlayers;
-    TimerTaskNetworkPlayers timerTaskNetworkPlayers;
+    private TimerPlayer timerPlayer;
+    private TimerTaskActionPlayers timerTaskActionPlayers;
+    private TimerTaskNetworkPlayers timerTaskNetworkPlayers;
     private static final Logger LOGGER = Logger.getLogger(ClientManagerSocket.class.getName());
 
 
@@ -54,7 +55,6 @@ public class ClientManagerSocket extends ClientManager {
         }
 
         listenerClientManager = new ListenerClientManager(this, socket);
-        timerPlayers = new TimerPlayers(server, server.getTimerConfiguration());
     }
 
     @Override
@@ -95,11 +95,12 @@ public class ClientManagerSocket extends ClientManager {
     @Override
     public void connect() {
         LOGGER.log(Level.WARNING,"Server connected");
+        timerPlayer = new TimerPlayer(this, server);
 
         listenerClientManager.start();
 
         //Start TimerTaskNetworkPlayer
-        timerTaskNetworkPlayers = timerPlayers.scheduleTimerNetworkPlayer(this);
+        timerTaskNetworkPlayers = timerPlayer.scheduleTNetwork();
         LOGGER.log(Level.WARNING, "Timer network Begin");
         Thread t1 = new Thread(new MyRunnablePing());
         t1.start();
@@ -141,7 +142,7 @@ public class ClientManagerSocket extends ClientManager {
 
         } else {
             boolean result = server.addView(name, this);
-            if (result == false) {
+            if (!result) {
                 LOGGER.log(Level.SEVERE,"not logged");
                 DataMessage dataMessage = new DataMessage("not_logged", name);
                 sendMessage(dataMessage.serializeClassMessage());
@@ -196,7 +197,7 @@ public class ClientManagerSocket extends ClientManager {
         LOGGER.log(Level.SEVERE,"server is asking a window pattern");
         WindowInitialMessage windowInitialMessage= new WindowInitialMessage("send_windowlist", user, id, windowDeck);
         sendMessage(windowInitialMessage.serializeClassMessage());
-        //timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
+        timerTaskActionPlayers = timerPlayer.scheduleTActionPlayer();
     }
 
     @Override
@@ -206,10 +207,8 @@ public class ClientManagerSocket extends ClientManager {
 
         server.getQueueController().pushMessage(actionEventWindow);
 
-        //timerTaskActionPlayers.setArrivedMessage(true);
-        //TODO ATTENTION LISTEN!
-        //server.sendToObservable(actionEventWindow);
-        //listenerClientManager.listen();
+        timerTaskActionPlayers.setArrivedMessage(true);
+
     }
 
     @Override
@@ -237,7 +236,7 @@ public class ClientManagerSocket extends ClientManager {
         System.out.println(model);*/
 
         sendMessage(message);
-        //listenerClientManager.listen();
+
     }
 
     @Override
@@ -245,7 +244,7 @@ public class ClientManagerSocket extends ClientManager {
         LOGGER.log(Level.SEVERE,"I have received one actionEvent from "+user);
         //timerTaskActionPlayers.setArrivedMessage(true);
         server.getQueueController().pushMessage(actionEvent);
-        //listenerClientManager.listen();
+
     }
 
     @Override
@@ -255,7 +254,7 @@ public class ClientManagerSocket extends ClientManager {
         DataMessage dataMessage = new DataMessage("send_answer_from_controller", message);
         String s = dataMessage.serializeClassMessage();
         sendMessage(s);
-        listenerClientManager.listen();
+
     }
 
     @Override
@@ -267,6 +266,9 @@ public class ClientManagerSocket extends ClientManager {
         BeginTurnMessage beginTurnMessage = new BeginTurnMessage("send_beginturnmessage", name, playerZone);
         sendMessage(beginTurnMessage.serializeClassMessage());
 
+        //TODO check it
+        //timerPlayer.resetTActionPlayer();
+        //timerPlayer.scheduleTActionPlayer();
 
     }
 
@@ -286,9 +288,6 @@ public class ClientManagerSocket extends ClientManager {
         DataMessage dataMessage = new DataMessage("send_currentmenu", name);
         String s = dataMessage.serializeClassMessage();
         sendMessage(s);
-
-        timerPlayers.resetTimerActionPlayer();
-        timerPlayers.scheduleTimerActionPlayer(user);
 
     }
 

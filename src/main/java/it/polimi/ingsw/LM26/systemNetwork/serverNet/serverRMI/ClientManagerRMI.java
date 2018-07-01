@@ -11,8 +11,8 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRemote;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.PlayerConnectionMessage;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerPlayers;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerGame;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerPlayer;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskActionPlayers;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskNetworkPlayers;
 
@@ -23,7 +23,6 @@ import java.rmi.registry.Registry;
 import java.rmi.server.RemoteServer;
 import java.rmi.server.ServerNotActiveException;
 import java.util.ArrayList;
-import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,9 +38,9 @@ public class ClientManagerRMI extends ClientManager {
     private String address;
     private ClientViewRemote skeleton;
     private String user;
-    TimerPlayers timerPlayers;
-    TimerTaskActionPlayers timerTaskActionPlayers;
-    TimerTaskNetworkPlayers timerTaskNetworkPlayers;
+    private TimerPlayer timerPlayer;
+    private TimerTaskActionPlayers timerTaskActionPlayers;
+    private TimerTaskNetworkPlayers timerTaskNetworkPlayers;
     private static final Logger LOGGER = Logger.getLogger(ClientManagerRMI.class.getName());
 
     /**
@@ -57,7 +56,6 @@ public class ClientManagerRMI extends ClientManager {
         this.RMIPORTServer = RMIPORTServer;
         this.RMIPORTClient = RMIPORTClient;
         this.address = address;
-        timerPlayers = new TimerPlayers(myserver, myserver.getTimerConfiguration());
         this.user= null;
 
     }
@@ -67,6 +65,8 @@ public class ClientManagerRMI extends ClientManager {
      * Then call method "requestedLogin" in the client
      */
     public void connect(){
+
+        timerPlayer = new TimerPlayer( this, myserver);
 
         //Take Skeleton
         try {
@@ -80,7 +80,7 @@ public class ClientManagerRMI extends ClientManager {
             myserver.addClientManager(this);
 
             //Start Network Timer
-            timerTaskNetworkPlayers = timerPlayers.scheduleTimerNetworkPlayer(this);
+            timerTaskNetworkPlayers = timerPlayer.scheduleTNetwork();
             LOGGER.log(Level.WARNING, "Timer network Begin");
             Thread t1 = new Thread(new myRunnablePing());
             t1.start();
@@ -239,7 +239,7 @@ public class ClientManagerRMI extends ClientManager {
 
         Thread t = new Thread(new MyRunnableWindow(user, id, (ArrayList<WindowPatternCard>) windowDeck.clone()));
         t.start();
-        timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
+        timerTaskActionPlayers = timerPlayer.scheduleTActionPlayer();
     }
 
     /**
@@ -318,8 +318,9 @@ public class ClientManagerRMI extends ClientManager {
     @Override
     public void sendBeginTurnMessage(String name, PlayerZone playerZone) {
 
-        //timerPlayers.resetTimerActionPlayer();
-        //timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
+        //TODO CHECK TIMER
+        //timerGame.resetTimerActionPlayer();
+        //timerTaskActionPlayers = timerGame.scheduleTimerActionPlayer(user);
         Thread t = new Thread(new MyRunnableBeginTurnMessage(name, playerZone));
         t.start();
     }
@@ -343,8 +344,8 @@ public class ClientManagerRMI extends ClientManager {
     @Override
     public void sendCurrentMenu(String name) {
         //TODO CHECK IF IT WILL BE DELETED
-        timerPlayers.resetTimerActionPlayer();
-        timerTaskActionPlayers = timerPlayers.scheduleTimerActionPlayer(user);
+        timerPlayer.resetTActionPlayer();
+        timerTaskActionPlayers = timerPlayer.scheduleTActionPlayer();
         Thread t = new Thread(new myRunnableCurrentMenu(name));
         t.start();
 
