@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.controller;
 
 import it.polimi.ingsw.LM26.controller.GamePhases.PhaseInt;
 import it.polimi.ingsw.LM26.controller.controllerHandler.SetupHandler;
+import it.polimi.ingsw.LM26.controller.controllerHandler.UpdatesHandler;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
@@ -21,7 +22,7 @@ public interface ControllerInt {
 
     ActionEvent getActionEvent();
 
-    void declareWinner(PlayerZone winner);
+    void declareScoresAndWinner(PlayerZone winner);
 
     void setEndGame();
 
