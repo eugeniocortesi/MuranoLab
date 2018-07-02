@@ -6,8 +6,7 @@ import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
 import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
-import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerConfiguration;
-import it.polimi.ingsw.LM26.systemNetwork.serverConfiguration.DataServerImplementation;
+import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.RMIAcceptor;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket.SocketAcceptor;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerConfiguration;
@@ -34,7 +33,6 @@ public class ServerBase extends ViewGameInterface {
     private MessageQueue queueController;
     private VisitorInt visitor;
 
-    private DataServerImplementation dataServerImplementation;
     private DataServerConfiguration dataServerConfiguration;
     private TimerImplementation timerImplementation;
     private TimerConfiguration timerConfiguration;
@@ -51,8 +49,7 @@ public class ServerBase extends ViewGameInterface {
 
 
         lobby = new ArrayList<ClientManager>();
-        dataServerImplementation = new DataServerImplementation();
-        dataServerConfiguration = dataServerImplementation.implementation();
+        dataServerConfiguration = new DataServerConfiguration().implementation();
         timerImplementation = new TimerImplementation();
         timerConfiguration = timerImplementation.implentation();
 
