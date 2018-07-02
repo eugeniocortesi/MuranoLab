@@ -17,11 +17,6 @@ public class ActionEvent extends ClassMessage implements Serializable {
     private Box toBox1=null;
     private int CardID=-1;
 
-    //TODO DELETE
-    private Box fromBox2=null;
-    private Box toBox2=null;
-    private ToolCardInt card=null;
-
     private ArrayList<Box> fromBoxList=null;
     private ArrayList<Box> toBoxList=null;
     private DieInt dieFromDraft=null;
@@ -29,6 +24,7 @@ public class ActionEvent extends ClassMessage implements Serializable {
     private String inDeCrement=null;
     private Boolean noAction=false;
     private Boolean menu=false;
+    private int[] rTrackCoordinates=null;
 
 
         /*
@@ -83,28 +79,6 @@ public class ActionEvent extends ClassMessage implements Serializable {
         this.toBox1 = toBox1;
     }
 
-    public Box getFromBox2() {
-        return fromBox2;
-    }
-
-    public void setFromBox2(Box fromBox2) {
-        this.fromBox2 = fromBox2;
-    }
-
-    public Box getToBox2() {
-        return toBox2;
-    }
-
-    public void setToBox2(Box toBox2) {
-        this.toBox2 = toBox2;
-    }
-
-    public ToolCardInt getCard() {
-        return card;
-    }
-
-    public void setCard(ToolCardInt card) { this.card = card; }
-
     public DieInt getDieFromDraft() {
         return dieFromDraft;
     }
@@ -154,6 +128,11 @@ public class ActionEvent extends ClassMessage implements Serializable {
     }
 
     public void setNoAction(Boolean noAction) { this.noAction = noAction; }
+
+    public int[] getrTrackCoordinates() { return rTrackCoordinates; }
+
+    public void setrTrackCoordinates(int[] rTrackCoordinates) { this.rTrackCoordinates = rTrackCoordinates; }
+
 
     @Override
     public void accept(VisitorInt visitorInt) {
