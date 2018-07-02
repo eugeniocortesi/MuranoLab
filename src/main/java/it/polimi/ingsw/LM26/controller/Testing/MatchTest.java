@@ -1,9 +1,5 @@
 package it.polimi.ingsw.LM26.controller.Testing;
-import it.polimi.ingsw.LM26.controller.ControllerInt;
-import it.polimi.ingsw.LM26.controller.GamePhases.PhaseInt;
-import it.polimi.ingsw.LM26.controller.Match;
-import it.polimi.ingsw.LM26.controller.Testing.CliTest;
-import it.polimi.ingsw.LM26.controller.Testing.ControllerTest;
+import it.polimi.ingsw.LM26.controller.controllerHandler.RoundsHandler;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.controller.GamePhases.Game;
 import it.polimi.ingsw.LM26.model.Model;
@@ -22,7 +18,7 @@ public class MatchTest {
     private Game game;
     private ControllerTest controller;
     private CliTest cli;
-    private static final Logger LOGGER = Logger.getLogger(Match.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(RoundsHandler.class.getName());
     private ActionEvent event;
     private int i=0;
 

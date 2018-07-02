@@ -1,5 +1,6 @@
-package it.polimi.ingsw.LM26.controller;
+package it.polimi.ingsw.LM26.controller.controllerHandler;
 
+import it.polimi.ingsw.LM26.controller.Controller;
 import it.polimi.ingsw.LM26.observers.serverController.*;
 
 import java.util.logging.Level;

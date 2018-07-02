@@ -1,13 +1,12 @@
 package it.polimi.ingsw.LM26.controller.Testing;
 
 import it.polimi.ingsw.LM26.controller.GamePhases.PhaseInt;
-import it.polimi.ingsw.LM26.controller.UpdatesHandler;
+import it.polimi.ingsw.LM26.controller.controllerHandler.UpdatesHandler;
 import it.polimi.ingsw.LM26.controller.controllerHandler.SetupHandler;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.controller.ControllerInt;
 import it.polimi.ingsw.LM26.controller.controllerHandler.EventHandler;
-import it.polimi.ingsw.LM26.controller.Match;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
@@ -125,7 +124,7 @@ public class ControllerTest implements ControllerInt {
     }
 
     @Override
-    public void declareWinner(PlayerZone winner) {
+    public void declareScoresAndWinner(PlayerZone winner) {
 
     }
 

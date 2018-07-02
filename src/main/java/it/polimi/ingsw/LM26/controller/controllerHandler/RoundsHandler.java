@@ -1,14 +1,9 @@
-package it.polimi.ingsw.LM26.controller;
+package it.polimi.ingsw.LM26.controller.controllerHandler;
 
+import it.polimi.ingsw.LM26.controller.ControllerInt;
 import it.polimi.ingsw.LM26.controller.GamePhases.PhaseInt;
-import it.polimi.ingsw.LM26.controller.Testing.CliTest;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.ChangeDieWithTheBag11;
-import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
-import it.polimi.ingsw.LM26.controller.GamePhases.CentralPhase;
 import it.polimi.ingsw.LM26.controller.GamePhases.Game;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.DrawOneMoreDie8;
-import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerActionPlayer;
@@ -16,17 +11,13 @@ import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskActionEvent;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
 import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
 
-public class Match extends Thread {
+public class RoundsHandler extends Thread {
 
     private PlayerZone playing;
     private boolean result = false;
@@ -35,11 +26,11 @@ public class Match extends Thread {
     private Game game;
     private ControllerInt controller;
     private TimerActionPlayer timerActionPlayer;
-    private static final Logger LOGGER = Logger.getLogger(Match.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(RoundsHandler.class.getName());
     private ActionEvent event;
     private int i=0;
 
-    public Match(Model model, ControllerInt controller) {
+    public RoundsHandler(Model model, ControllerInt controller) {
 
         this.controller = controller;
         this.game = new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());  //initialPhase
@@ -131,7 +122,7 @@ public class Match extends Thread {
 
         System.out.println("Il vincitore è " + game.getPhase().getWinner().getName());  // final phase
 
-        controller.declareWinner(game.getPhase().getWinner());
+        controller.declareScoresAndWinner(game.getPhase().getWinner());
     }
 
     public void firstAction() {

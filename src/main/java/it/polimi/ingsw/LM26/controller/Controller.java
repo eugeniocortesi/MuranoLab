@@ -1,18 +1,16 @@
 package it.polimi.ingsw.LM26.controller;
 
 import it.polimi.ingsw.LM26.controller.GamePhases.PhaseInt;
+import it.polimi.ingsw.LM26.controller.controllerHandler.RoundsHandler;
+import it.polimi.ingsw.LM26.controller.controllerHandler.UpdatesHandler;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.controller.controllerHandler.EventHandler;
 import it.polimi.ingsw.LM26.controller.controllerHandler.SetupHandler;
-import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ViewGameInterface;
 
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +21,7 @@ public class Controller implements ControllerInt {
 
     private Model model;
 
-    private Match match;
+    private RoundsHandler roundsHandler;
 
     private ViewGameInterface server;
 
@@ -133,17 +131,17 @@ public class Controller implements ControllerInt {
 
         if (gameIsGoing) {
 
-            this.match = new Match(model, this);
+            this.roundsHandler = new RoundsHandler(model, this);
 
-            match.start();
+            roundsHandler.start();
         }
     }
 
     /*public void newMatch(Model model, ControllerInt controller) {
 
-        this.match = new Match(model, controller);
+        this.roundsHandler = new RoundsHandler(model, controller);
 
-        match.start();
+        roundsHandler.start();
 
     }*/
 
@@ -202,7 +200,7 @@ public class Controller implements ControllerInt {
         }
     }
 */
-    public void declareWinner(PlayerZone winner) {
+    public void declareScoresAndWinner(PlayerZone winner) {
 
         for (int i = 0; i < model.getPlayerList().size(); i++) {
 
