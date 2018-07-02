@@ -18,7 +18,7 @@ public class TimerImplementation {
 
     public TimerImplementation(){
         this.timerConfiguration =  new TimerConfiguration();
-        this.timerConfiguration.create();
+        //this.timerConfiguration.create();
     }
 
     /**
@@ -29,7 +29,11 @@ public class TimerImplementation {
     public TimerConfiguration implentation(){
 
         try {
+
             InputStream stream = Main.class.getResourceAsStream("TimerConfiguration");
+
+            System.out.println(stream);
+
             BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 
             Gson gson = new GsonBuilder()
@@ -41,7 +45,7 @@ public class TimerImplementation {
 
         } catch (Exception e) {
 
-            System.out.println("Timer not configured");
+            System.err.println("Timer not configured");
             return null;
         }
     }

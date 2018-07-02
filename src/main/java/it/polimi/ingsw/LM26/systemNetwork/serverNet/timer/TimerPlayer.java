@@ -41,7 +41,8 @@ public class TimerPlayer {
         this.serverBase= serverBase;
         tActionPlayer = new Timer();
         tNetworkConnection = new Timer();
-        myLong = serverBase.getTimerConfiguration().getTimerEnd();
+        TimerConfiguration tc = serverBase.getTimerConfiguration();
+        myLong = tc.getTimerEnd();
     }
 
     /**
