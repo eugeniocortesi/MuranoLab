@@ -32,11 +32,11 @@ public class SetupHandler {
 
             PlayerZone player = new PlayerZone(name, model.getPlayerList().size());
 
-            player.setNumberPlayer(model.getPlayerList().size());
+            player.setNumberPlayer(model.getPlayerList().size()+1);
 
             model.getPlayerList().add(player);
 
-            System.out.println(player.getName() + player.getIDPlayer());
+            System.out.println("ADDED "+ player.getName() + player.getIDPlayer() + player.getNumber());
         }
 
         else model.getPlayer(name).setPlayerState(PlayerState.ENDING);

@@ -11,6 +11,7 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.Random;
 import java.util.logging.Level;
 
 import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
+import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.ENDING;
 import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 import static org.junit.Assert.assertEquals;
@@ -37,17 +39,54 @@ public class TestRound {
     private PlayerZone player;
     private final int plStandby = 0;
     private ArrayList<PlayerZone> playerZones = new ArrayList<PlayerZone>();
-    private CentralPhase central = new CentralPhase(playerZones);
+    private Model model;
 
-    @Test
+    @Before
+    public void setup(){
+
+        model= singletonModel();
+
+        PlayerZone player1 = new PlayerZone("eugenio", 0);
+        PlayerZone player2 = new PlayerZone("Chiara", 1);
+        PlayerZone player3 = new PlayerZone( "Claudia", 2);
+        PlayerZone player4 = new PlayerZone("Tommaso", 3);
+
+        player1.setPlayerState(ENDING);
+        player2.setPlayerState(ENDING);
+        player3.setPlayerState(ENDING);
+        player4.setPlayerState(ENDING);
+
+        player1.setNumberPlayer(1);
+        player1.setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(0));
+        player2.setNumberPlayer(2);
+        player2.setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(1));
+        player3.setNumberPlayer(3);
+        player3.setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(2));
+        player4.setNumberPlayer(4);
+        player4.setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(3));
+
+        ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
+
+        playerList.add(player1);
+        playerList.add(player2);
+        playerList.add(player3);
+        playerList.add(player4);
+
+        model.getDecks().getObjectivePrivateCardDeck().get(0).setPlayer(player1);
+        model.getDecks().getObjectivePrivateCardDeck().get(1).setPlayer(player2);
+        model.getDecks().getObjectivePrivateCardDeck().get(2).setPlayer(player3);
+        model.getDecks().getObjectivePrivateCardDeck().get(3).setPlayer(player4);
+
+        model.setPlayerList(playerList);
+
+    }
+
+   /* @Test
     //stampa l'ordine dei 4 giocatori nei 10 turni
     public void checkAssignment4Players() {
-        for (int i = 0; i < 4; i++) {
-            playerZones.add(new PlayerZone(name, i));
-        }
         round = new Round(roundTrack, playerZones, nrounds, central);
         for (int i = 0; i < nrounds; i++) {
-            round.assignTurn(roundTrack, playerZones, nrounds);
+            //round.assignTurn(roundTrack, playerZones, nrounds);
             for (int j = 0; j < playerZones.size(); j++) {
                 System.out.println(playerZones.get(j).getNumber());
             }
@@ -60,12 +99,10 @@ public class TestRound {
     @Test
     //stampa l'ordine dei 2 o 3 giocatori nei 10 turni
     public void checkAssignment2and3Players() {
-        for (int i = 0; i < 2; i++) {
-            playerZones.add(new PlayerZone(name + "i", i));
-        }
+
         round = new Round(roundTrack, playerZones, nrounds, central);
         for (int i = 0; i < nrounds; i++) {
-            round.assignTurn(roundTrack, playerZones, nrounds);
+            //round.assignTurn(roundTrack, playerZones, nrounds);
             for (int j = 0; j < playerZones.size(); j++) {
                 System.out.println(playerZones.get(j).getNumber());
             }
@@ -76,7 +113,7 @@ public class TestRound {
         playerZones.add(new PlayerZone(name, 2));
         Round round2 = new Round(roundTrack, playerZones, nrounds, central);
         for (int i = 0; i < nrounds; i++) {
-            round2.assignTurn(roundTrack, playerZones, nrounds);
+            //round2.assignTurn(roundTrack, playerZones, nrounds);
             for (int j = 0; j < playerZones.size(); j++) {
                 System.out.println(playerZones.get(j).getNumber());
             }
@@ -92,11 +129,6 @@ public class TestRound {
     // controlla che ad ogni turno (senza disconnessioni) 3 giocatori siano in "ENDING" e uno sia in "BEGINNING"
     public void checkEndActionNextPlayer() {
         round = new Round(roundTrack, playerZones, nrounds, central);
-        for (int i = 0; i < 4; i++) {
-            player = new PlayerZone(name + "i", i);
-            player.setPlayerState(PlayerState.ENDING);
-            playerZones.add(player);
-        }
         bag = new Bag();
         round = new Round(roundTrack, playerZones, nrounds, central);
         for (int i = 0; i < (turn.length - 1); i++) {
@@ -123,11 +155,6 @@ public class TestRound {
     //test uguale a quello di prima, ma prova il caso di player 4 in standby
     public void checkEndActionNextPlayerStandby() {
         round = new Round(roundTrack, playerZones, nrounds, central);
-        for (int i = 0; i < 4; i++) {
-            player = new PlayerZone(name + "i", i);
-            player.setPlayerState(PlayerState.ENDING);
-            playerZones.add(player);
-        }
         playerZones.get(3).setPlayerState(PlayerState.STANDBY);
         bag = new Bag();
         round = new Round(roundTrack, playerZones, nrounds, central);
@@ -154,44 +181,45 @@ public class TestRound {
         round.endAction(turn, roundTrack, draftPool, round.nextPlayer(playerZones, turn));
         assertEquals(RoundState.FINISHED, round.getRoundState());
         assertEquals(1, roundTrack.getRoundTrackTurn(1).size());
-    }
+    }*/
+
 
     @Test
     public void checkNextPlayer() {
 
-        Model model= singletonModel();
+        int j=0;
+        PlayerZone playing;
+        playerZones = model.getPlayerList();
+        Game game=new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());  //initialPhase
+        game.getPhase().doAction(game, model.getPlayerList());
 
-        PlayerZone player1 = new PlayerZone("eugenio", 0);
-        PlayerZone player2 = new PlayerZone("Chiara", 1);
-        PlayerZone player3 = new PlayerZone( "Claudia", 2);
-        PlayerZone player4 = new PlayerZone("Tommaso", 3);
+        while (j < game.getPhase().getNrounds() && !game.getPhase().getOnePlayer()) {
 
-        player1.setNumberPlayer(0);
-        player1.setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(0));
-        player2.setNumberPlayer(1);
-        player2.setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(1));
-        player3.setNumberPlayer(2);
-        player3.setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(2));
-        player4.setNumberPlayer(3);
-        player4.setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(3));
+            playing = game.getPhase().getCurrentRound().nextPlayer(model.getPlayerList(), game.getPhase().getTurn());
 
-        ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
+            while (game.getPhase().getCurrentRound().getRoundState() != FINISHED) {
 
-        playerList.add(player1);
-        playerList.add(player2);
-        playerList.add(player3);
-        playerList.add(player4);
+                System.out.println("              CHANGE TURN: " + playing.getName());
 
-        model.getDecks().getObjectivePrivateCardDeck().get(0).setPlayer(player1);
-        model.getDecks().getObjectivePrivateCardDeck().get(1).setPlayer(player2);
-        model.getDecks().getObjectivePrivateCardDeck().get(2).setPlayer(player3);
-        model.getDecks().getObjectivePrivateCardDeck().get(3).setPlayer(player4);
+                game.getPhase().getCurrentRound().endAction(game.getPhase().getTurn(), model.getRoundTrackInt(), model.getDraftPool(), playing);
 
-        model.setPlayerList(playerList);
+                playing = game.getPhase().getCurrentRound().nextPlayer(model.getPlayerList(), game.getPhase().getTurn());
+
+            }
+
+            game.getPhase().nextRound(game.getPhase().getCurrentRound(), game);
+        }
+    }
+
+
+
+    @Test
+    public void checkStandby() {
 
         int j=0, i=0;
         PlayerZone playing;
         playerZones = model.getPlayerList();
+        model.setBag(new Bag());
         Game game=new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());  //initialPhase
         game.getPhase().doAction(game, model.getPlayerList());
 

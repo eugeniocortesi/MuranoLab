@@ -58,10 +58,10 @@ public class ControllerTest implements ControllerInt {
         PlayerZone player3 = new PlayerZone( "Claudia", 2);
         PlayerZone player4 = new PlayerZone("Tommaso", 3);
 
-        player1.setNumberPlayer(0);
-        player2.setNumberPlayer(1);
-        player3.setNumberPlayer(2);
-        player4.setNumberPlayer(3);
+        player1.setNumberPlayer(1);
+        player2.setNumberPlayer(2);
+        player3.setNumberPlayer(3);
+        player4.setNumberPlayer(4);
 
         ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
 

@@ -32,30 +32,31 @@ public class Round {
 
         this.centralPhase=centralPhase;
 
-        this.assignTurn(rTrack, pZone, nrounds);
+        //this.assignTurn(rTrack, pZone, nrounds);
 
         pullDice();
     }
 
 
     //assegna l'ordine con cui si gioca all'interno di un turno e salva l'ordine dell'ultimo turno per la parità di punteggio
-    public void assignTurn(RoundTrackInt roundTrack, ArrayList<PlayerZone> playerList, int nrounds) { //roundtrack passata dalla centralPhase, l'nrounds da passare è la costante della centralPhase
+    /*public void assignTurn(RoundTrackInt roundTrack, ArrayList<PlayerZone> playerList, int nrounds) { //roundtrack passata dalla centralPhase, l'nrounds da passare è la costante della centralPhase
         for (int i = 0; i < playerList.size(); i++) {
             int j=t[(i ) %playerList.size()];
             playerList.get(i).setNumberPlayer(j);
             playerList.get(i).setLastRoundTurn(j);
         }
-    }
+    }*/
 
     //nextPlayer va usato dopo endAction, quando il contatore è già incrementato. plStandby passato è sempre 0
     public PlayerZone nextPlayer(ArrayList<PlayerZone> player, int[] turn) throws IllegalArgumentException {
 
      for(int i=0; i<turn.length;i++)
-            System.out.print(turn[i]);
+            System.out.print( turn[i]);
         System.out.println();
 
         for(int i=0; i<player.size(); i++){
-          if(player.get(i).getNumber()==turn[turnCounter]) {
+            if((player.get(i).getIDPlayer()+1)==turn[turnCounter]) {
+          //if(player.get(i).getNumber()==turn[turnCounter]) {
               if(player.get(i).getPlayerState()!= STANDBY){
                   player.get(i).setPlayerState(PlayerState.BEGINNING);
 

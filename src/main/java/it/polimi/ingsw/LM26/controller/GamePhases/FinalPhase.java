@@ -78,8 +78,12 @@ public class FinalPhase implements PhaseInt {
                     else {
                         minimum=10;
                         for(PlayerZone i : winners) {
+                            /*
                             if (i.getLastRoundTurn() < minimum) {
                                 minimum = i.getLastRoundTurn();
+                            }*/
+                            if (i.getNumber() < minimum) {
+                                minimum = i.getNumber();
                             }
                         }
                         for(PlayerZone j : winners){

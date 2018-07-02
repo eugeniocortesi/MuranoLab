@@ -4,6 +4,7 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;
 
 import java.util.ArrayList;
 
@@ -25,9 +26,11 @@ public class CentralPhase implements PhaseInt{
 
     private ArrayList<PlayerZone> playerList;
 
+    Model model;
+
     public CentralPhase(ArrayList<PlayerZone> playerZones) {
 
-        Model model = singletonModel();
+        this.model = singletonModel();
 
         this.roundTrack=model.getRoundTrackInt();
 
@@ -50,11 +53,32 @@ public class CentralPhase implements PhaseInt{
 
         turn = new int[2*nplayers];
 
-        for(int i=0; i<nplayers; i++) turn[i]=i+1;
+        for(int i=0; i<nplayers; i++) turn[i]=model.getPlayer(i).getNumber();
 
-        for(int i=nplayers, j=nplayers; j>0; i++, j--) turn[i]=j;
+        for(int i=nplayers, j=nplayers-1; j>=0; i++, j--) turn[i]=model.getPlayer(j).getNumber();
+
+        for(int i=0; i<turn.length; i++)
+
+            System.out.print(turn[i]);
+
+        System.out.println();
 
         return turn;
+    }
+
+    public void resetOrder(int nplayers){
+
+        int last = model.getPlayer(nplayers-1).getNumber();
+
+        model.getPlayer(nplayers-1).setNumberPlayer(model.getPlayer(0).getNumber());
+
+        for(int i=0; i<model.getPlayerList().size()-1; i++)
+
+            model.getPlayer(i).setNumberPlayer(model.getPlayer(i+1).getNumber());
+
+        model.getPlayer(nplayers-2).setNumberPlayer(last);
+
+        turn = setOrder(nplayers);
     }
 
     @Override
@@ -81,6 +105,8 @@ public class CentralPhase implements PhaseInt{
         }
 
         else  if(rounds.size()<nrounds && round.getRoundState() == RoundState.FINISHED){
+
+            resetOrder(model.getPlayerList().size());
 
             this.round=new Round(roundTrack, playerList, nrounds, this);
 
