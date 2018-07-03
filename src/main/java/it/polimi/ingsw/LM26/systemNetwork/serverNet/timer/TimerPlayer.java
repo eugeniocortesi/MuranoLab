@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 /**
  * Class Timer Player
+ * @author Chiara Criscuolo
  * It contains two timers that manage:
  * one: the network connection
  * two: the time for each action
@@ -38,11 +39,18 @@ public class TimerPlayer {
 
     public TimerPlayer(ClientManager cm, ServerBase serverBase) {
         this.cm = cm;
+
         this.serverBase= serverBase;
+
         tActionPlayer = new Timer();
+
         tNetworkConnection = new Timer();
+
         TimerConfiguration tc = serverBase.getTimerConfiguration();
+
         myLong = tc.getTimerEnd();
+
+        LOGGER.setLevel(Level.OFF);
     }
 
     /**
@@ -54,8 +62,11 @@ public class TimerPlayer {
     public TimerTaskNetworkPlayers scheduleTNetwork(){
 
         LOGGER.log(Level.WARNING, "STARTED SCHEDULE TIMER NETWORK PLAYER");
+
         TimerTaskNetworkPlayers timerTaskNetworkPlayers = new TimerTaskNetworkPlayers(serverBase, tNetworkConnection, cm);
+
         tNetworkConnection.scheduleAtFixedRate( timerTaskNetworkPlayers ,this.myLongNetwork, this.myLongNetwork);
+
         return timerTaskNetworkPlayers;
     }
 
@@ -67,8 +78,11 @@ public class TimerPlayer {
     public TimerTaskActionPlayers scheduleTActionPlayer(){
 
         LOGGER.log(Level.WARNING, "STARTED SCHEDULE TIMER ACTION PLAYER");
+
         TimerTaskActionPlayers timerTaskActionPlayers = new TimerTaskActionPlayers(serverBase, tActionPlayer, cm.getName());
+
         tActionPlayer.schedule(timerTaskActionPlayers , this.myLong, this.myLong);
+
         return  timerTaskActionPlayers;
     }
 

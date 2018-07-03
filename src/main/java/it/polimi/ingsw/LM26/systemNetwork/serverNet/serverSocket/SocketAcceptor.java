@@ -10,43 +10,60 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * SocketAcceptor class
+ * @author Chiara Criscuolo
+ * It manages all the new socket Connections and created a ClientManagerSocket for each one
+ */
 
 public class SocketAcceptor extends Thread{
 
-    private ServerBase myserver;
+    private ServerBase serverBase;
+
     private int SOCKETPORT;
 
     private static final Logger LOGGER = Logger.getLogger(SocketAcceptor.class.getName());
 
+    /**
+     * Constructor
+     * @param serverBase reference to the Server
+     * @param dataServerConfiguration contains data from file of configuration of the Server
+     */
 
     public SocketAcceptor(ServerBase serverBase, DataServerConfiguration dataServerConfiguration){
-        myserver = serverBase;
+        this.serverBase = serverBase;
+
         this.SOCKETPORT = dataServerConfiguration.getSOCKETPORT();
 
     }
 
-    public void accept(){
+    /**
+     * Method that accept socket connections
+     */
+    @Override
+    public void run(){
 
         try {
-            LOGGER.log(Level.WARNING,"Acception Connection Socket");
+
             ServerSocket serversocket = new ServerSocket(SOCKETPORT);
-            LOGGER.log(Level.SEVERE,"serversocket created");
+
+            LOGGER.log(Level.SEVERE,"Server socket created");
+
             while (true) {
-                LOGGER.log(Level.SEVERE,"Server listening");
+
                 Socket socket = serversocket.accept();
-                ClientManager clientSocket = new ClientManagerSocket(socket, myserver);
+
+                ClientManager clientSocket = new ClientManagerSocket(socket, serverBase);
+
                 Thread t = new Thread(clientSocket);
 
                 t.start();
-                //clientSocket.start();
 
             }
         }
         catch (IOException e) {
-        }
-    }
 
-    public void run(){
-        accept();
+            System.err.println("Impossible to create socket, reset Server");
+        }
     }
 }

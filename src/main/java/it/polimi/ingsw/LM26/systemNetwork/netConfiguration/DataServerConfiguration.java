@@ -70,8 +70,7 @@ public class DataServerConfiguration {
                     .setPrettyPrinting()
                     .create();
 
-            DataServerConfiguration dataServer = gson.fromJson(br, DataServerConfiguration.class);
-            return dataServer;
+            return gson.fromJson(br, DataServerConfiguration.class);
 
 
         } catch (Exception e) {

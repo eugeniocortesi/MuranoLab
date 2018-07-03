@@ -8,10 +8,19 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * ClientViewRMIRemote class
+ * Implements skeleton and class for each method the corresponding one in ClientViewRMI
+ */
+
 public class ClientViewRMIRemote implements ClientViewRemote {
 
-    ClientViewRMI clientViewRMI;
+    private ClientViewRMI clientViewRMI;
 
+    /**
+     * Constructor
+     * @param clientViewRMI instance of ClientView
+     */
     public ClientViewRMIRemote(ClientViewRMI  clientViewRMI){
         this.clientViewRMI = clientViewRMI;
     }
@@ -80,6 +89,5 @@ public class ClientViewRMIRemote implements ClientViewRemote {
     public void pong() throws RemoteException {
         clientViewRMI.pong();
     }
-
 
 }

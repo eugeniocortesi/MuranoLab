@@ -8,7 +8,8 @@ import java.io.IOException;
 
 /**
  * TimerConfiguration class
- * it has the number of milliseconds when a timer finish
+ * @author Chiara Criscuolo
+ * It has the number of milliseconds when a timer finish
  */
 
 public class TimerConfiguration {
@@ -26,7 +27,7 @@ public class TimerConfiguration {
     }
 
     /**
-     * method tha create the file TimerConfiguration
+     * Method tha creates the file TimerConfiguration
      */
 
     public void create(){
