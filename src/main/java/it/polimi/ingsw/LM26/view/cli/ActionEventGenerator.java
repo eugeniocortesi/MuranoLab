@@ -13,7 +13,11 @@ import java.util.ArrayList;
 public class ActionEventGenerator {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     ConsoleTools cTools=new ConsoleTools();
-    ToolsActionEventGenerator tceGenerator = new ToolsActionEventGenerator();
+    ToolsActionEventGenerator tceGenerator;
+
+    ActionEventGenerator(){
+        tceGenerator= new ToolsActionEventGenerator();
+    }
 
     /**
      * it asks for a die to put into the frame board
@@ -45,7 +49,7 @@ public class ActionEventGenerator {
      */
     public ActionEvent askForMenu(boolean explicitly){
         if(explicitly) {
-            while(!tceGenerator.askEndMove()){}
+            tceGenerator.askEndMove();
         }
         ActionEvent a= new ActionEvent();
         a.setId(12);
@@ -103,7 +107,7 @@ public class ActionEventGenerator {
         ActionEvent acEv = new ActionEvent();
         acEv.setId(8);
         acEv.setPlayer(ConsoleTools.id);
-        acEv.setCard(ConsoleTools.model.getOnBoardCards().getToolCardList().get(tCardPosition));
+        acEv.setCardID(ConsoleTools.model.getOnBoardCards().getToolArrayList().get(tCardPosition));
         return acEv;
     }
 
