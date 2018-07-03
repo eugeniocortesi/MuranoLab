@@ -71,7 +71,7 @@ public class SetupHandler {
 
             else
 
-                server.showAnswerFromController(model.getPlayerList().get(i).getName(), "Il player " + namePlayer + " è il pausa.");
+                server.showAnswerFromController(model.getPlayerList().get(i).getName(), "Il player " + namePlayer + " è in pausa.");
         }*/
 
         for(int i =0; i< model.getPlayerList().size();i++)

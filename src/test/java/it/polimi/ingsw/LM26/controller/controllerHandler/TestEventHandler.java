@@ -1,10 +1,12 @@
 package it.polimi.ingsw.LM26.controller.controllerHandler;
 
 import it.polimi.ingsw.LM26.controller.Controller;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import org.junit.Before;
@@ -22,13 +24,13 @@ public class TestEventHandler {
     ActionEvent actionEvnet=new ActionEvent();
     Controller controller = new Controller();
     EventHandler eventHandler;
+    WindowFramePlayerBoard window;
 
     @Before
     public void setup(){
 
         model= singletonModel();
         model.reset();
-        eventHandler=new EventHandler(actionEvnet, model, controller);
         for(int i=0; i<5; i++){
             DieInt die= model.getBag().draw();
             die.roll();
@@ -57,6 +59,11 @@ public class TestEventHandler {
         dice.removeAll(dice);
 
         model.getRoundTrackInt().dump();
+        model.getPlayerList().add(new PlayerZone("name",0));
+        window = new WindowFramePlayerBoard(0, Color.ANSI_RED);
+        model.getPlayerList().get(0).setPlayerBoard(window);
+        actionEvnet.setId(0);
+        eventHandler=new EventHandler(actionEvnet, model, controller);
     }
 
 
@@ -73,24 +80,22 @@ public class TestEventHandler {
 
         actionEvnet.setCardID(model.getOnBoardCards().getToolArrayList().get(1));
 
-        for(int i=0; i<model.getOnBoardCards().getToolCardList().size(); i++)
-            model.getOnBoardCards().getToolCardList().get(i).getNum();
-
-        for(int i=0; i<model.getOnBoardCards().getToolArrayList().size(); i++)
-            model.getOnBoardCards().getToolArrayList().get(i);
-
-        System.out.print(model.getOnBoardCards().getToolArrayList().get(1));
-
-        System.out.print( model.getOnBoardCards().getToolCardList().get(1).getNum());
-
         assertEquals(eventHandler.getToolCard(), model.getOnBoardCards().getToolCardList().get(1));
 
-        WindowFramePlayerBoard window = new WindowFramePlayerBoard(0, Color.ANSI_RED);
+        ArrayList<Box> from = new ArrayList<Box>();
 
-        ArrayList<Integer> from = new ArrayList<Integer>();
-        ArrayList<Integer> to = new ArrayList<Integer>();
+        from.add(model.getPlayerList().get(0).getPlayerBoard().getBoardMatrix()[3][3]);
+        from.add(model.getPlayerList().get(0).getPlayerBoard().getBoardMatrix()[2][4]);
 
+        ArrayList<Box> returnedList= eventHandler.getBoxListCopy(from);
 
+        assertEquals(returnedList.get(0), from.get(0));
+
+        assertEquals(returnedList.get(1), from.get(1));
+
+        Box returnedBox = eventHandler.getBoxCopy(from.get(0));
+
+        assertEquals(from.get(0), returnedBox);
 
 
     }

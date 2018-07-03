@@ -29,6 +29,8 @@ public class EventHandler {
 
     private ControllerInt controller;
 
+    PlayerZone player;
+
     public EventHandler(ActionEvent event, Model model, ControllerInt controller) {
 
         this.model = model;
@@ -46,13 +48,13 @@ public class EventHandler {
 
         ToolCardInt toolCard;
 
-        PlayerZone player=model.getPlayer(event.getPlayer());
+        player=model.getPlayer(event.getPlayer());
 
-        int pl = event.getPlayer();
+        int pl = event.getPlayer(); //TODO  DELETE E SET PLAYER
 
         if (event.getId() == 1)
 
-            return (eventChecker.check(getDraftDieCopy(event.getDieFromDraft()), getBoxCopy(event.getToBox1(), pl), pl));
+            return (eventChecker.check(getDraftDieCopy(event.getDieFromDraft()), getBoxCopy(event.getToBox1()), pl));
 
         if (event.getCardID() != -1)
 
@@ -62,15 +64,15 @@ public class EventHandler {
 
                 if (event.getId() == 2)
 
-                    return (eventChecker.check(toolCard, getBoxCopy(event.getFromBox1(), pl), getBoxCopy(event.getToBox1(), pl), pl));
+                    return (eventChecker.check(toolCard, getBoxCopy(event.getFromBox1()), getBoxCopy(event.getToBox1()), pl));
 
                 if (event.getId() == 3)
 
-                    return (eventChecker.check(toolCard, getBoxListCopy(event.getFromBoxList(), pl), getBoxListCopy(event.getToBoxList(), pl), pl));
+                    return (eventChecker.check(toolCard, getBoxListCopy(event.getFromBoxList()), getBoxListCopy(event.getToBoxList()), pl));
 
                 if (event.getId() == 4)
 
-                    return (eventChecker.check(toolCard, getDraftDieCopy(event.getDieFromDraft()), getBoxCopy(event.getToBox1(), pl), pl));
+                    return (eventChecker.check(toolCard, getDraftDieCopy(event.getDieFromDraft()), getBoxCopy(event.getToBox1()), pl));
 
                 if (event.getId() == 5)
 
@@ -90,11 +92,11 @@ public class EventHandler {
 
                 if (event.getId() == 9)
 
-                    return (eventChecker.check(toolCard, event.getNumber(), getBoxCopy(event.getToBox1(), pl), pl));
+                    return (eventChecker.check(toolCard, event.getNumber(), getBoxCopy(event.getToBox1()), pl));
 
                 if (event.getId() == 10)
 
-                    return (eventChecker.check(toolCard, event.getDieFromRoundTrack(), getBoxListCopy(event.getFromBoxList(), pl), getBoxListCopy(event.getToBoxList(), pl), pl));
+                    return (eventChecker.check(toolCard, event.getDieFromRoundTrack(), getBoxListCopy(event.getFromBoxList()), getBoxListCopy(event.getToBoxList()), pl));
             }
 
         if (event.getId() == 11) {
@@ -146,11 +148,11 @@ public class EventHandler {
        return null;
     }
 
-    public Box getBoxCopy(Box b, int pl) throws NoSuchElementException {
+    public Box getBoxCopy(Box b) throws NoSuchElementException {
 
         try {
 
-            return model.getPlayerList().get(pl).getPlayerBoard().getBoardMatrix()[b.getI()][b.getJ()];
+            return player.getPlayerBoard().getBoardMatrix()[b.getI()][b.getJ()];
 
         } catch (NoSuchElementException e) {
         }
@@ -169,12 +171,12 @@ public class EventHandler {
         throw new NoSuchElementException();
     }
 
-    public ArrayList<Box> getBoxListCopy(ArrayList<Box> a, int pl) throws NoSuchElementException {
+    public ArrayList<Box> getBoxListCopy(ArrayList<Box> a) throws NoSuchElementException {
 
         ArrayList<Box> toReturn = new ArrayList<Box>();
 
         try {
-            Box[][] board = model.getPlayerList().get(pl).getPlayerBoard().getBoardMatrix();
+            Box[][] board = player.getPlayerBoard().getBoardMatrix();
 
             for (int i = 0; i < a.size(); i++)
 
