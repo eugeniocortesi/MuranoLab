@@ -3,7 +3,6 @@ package it.polimi.ingsw.LM26.model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import it.polimi.ingsw.LM26.controller.GamePhases.Game;
 import it.polimi.ingsw.LM26.model.Cards.*;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.*;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
@@ -22,15 +21,12 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZoneInt;
 import it.polimi.ingsw.LM26.model.Serialization.*;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
 import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ClassMessage;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Observer;
 
-import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
+import static it.polimi.ingsw.LM26.model.Serialization.reloadDecks.loadDecks;
 
 public class Model extends ObservableSimple implements Serializable {
 
@@ -56,20 +52,18 @@ public class Model extends ObservableSimple implements Serializable {
 
     public Model(String s ) {
 
+        reset();
+    }
 
-
+    public void reset() {
         this.roundTrackInt = new RoundTrack();
         this.scoreTrackInt = new ScoreTrack();
         this.bag = new Bag();
         this.draftPool =new DraftPool();
         this.onBoardCards= new OnBoardCards();
-        this.decks=singletonDecks();
+        this.decks=loadDecks();
         this.playerList=new ArrayList<PlayerZone>();
         this.restrictions=new Restrictions();
-
-
-
-        //set playerList, scoreTrack
     }
 
     public Decks getDecks() { return decks; }
@@ -129,6 +123,8 @@ public class Model extends ObservableSimple implements Serializable {
     public void setRestrictions(Restrictions restrictions) {
         this.restrictions = restrictions;
     }
+
+    public void setDecks(Decks decks) { this.decks = decks; }
 
     public PlayerZone getPlayer(String name){
         for(int i=0; i<playerList.size(); i++){

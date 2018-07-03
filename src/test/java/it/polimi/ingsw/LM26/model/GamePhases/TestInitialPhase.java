@@ -1,7 +1,7 @@
 package it.polimi.ingsw.LM26.model.GamePhases;
 
 import it.polimi.ingsw.LM26.controller.GamePhases.InitialPhase;
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
@@ -18,6 +18,7 @@ import static org.junit.Assert.assertThat;
 
 public class TestInitialPhase {
 
+    private Model model;
     private Decks deck;
     private ArrayList<PlayerZone> playerList= new ArrayList<PlayerZone>();
     private OnBoardCards onBoardCards = new OnBoardCards();
@@ -25,7 +26,9 @@ public class TestInitialPhase {
 
     @Before
     public void SetUpInitialPhase(){
-        deck=singletonDecks();
+        model= singletonModel();
+        model.reset();
+        deck=model.getDecks();
         for(int i=0; i<4; i++){
             playerList.add(new PlayerZone("name", i));
         }

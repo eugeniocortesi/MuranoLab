@@ -11,7 +11,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class OnBoardCards implements Serializable {
@@ -49,11 +48,11 @@ public class OnBoardCards implements Serializable {
 
     public void setPublicCards() {
 
-        Decks decks = singletonDecks();
+        Model model= singletonModel();
 
         for (int i = 0; i < 3; i++) {
 
-            int count = decks.getObjectivePublicCardDeck().size();
+            int count = model.getDecks().getObjectivePublicCardDeck().size();
 
             Random rand = new Random();
 
@@ -63,7 +62,7 @@ public class OnBoardCards implements Serializable {
 
                 index--;
 
-            ObjectivePublicCard card = decks.getObjectivePublicCardDeck().get(index);
+            ObjectivePublicCard card = model.getDecks().getObjectivePublicCardDeck().get(index);
 
             if (!card.isInUse()) {
 
@@ -86,9 +85,9 @@ public class OnBoardCards implements Serializable {
 
     public void setToolCard() {
 
-        Decks decks = singletonDecks();
+        Model model= singletonModel();
 
-        int count = decks.getToolCardDeck().size();
+        int count = model.getDecks().getToolCardDeck().size();
 
         ArrayList<ToolCardInt> three = new ArrayList<ToolCardInt>();
 
@@ -102,7 +101,7 @@ public class OnBoardCards implements Serializable {
 
                 index--;
 
-            while (decks.getToolCardDeck().get(index).isInUse()) {
+            while (model.getDecks().getToolCardDeck().get(index).isInUse()) {
 
                 rand = new Random();
 
@@ -113,9 +112,9 @@ public class OnBoardCards implements Serializable {
                     index--;
             }
 
-            decks.getToolCardDeck().get(index).setInUse(true);
+            model.getDecks().getToolCardDeck().get(index).setInUse(true);
 
-            three.add(decks.getToolCardDeck().get(index));
+            three.add(model.getDecks().getToolCardDeck().get(index));
 
             toolNumberList.add(index + 1);
         }
@@ -133,13 +132,13 @@ public class OnBoardCards implements Serializable {
 
     public ArrayList<WindowPatternCard> getFourWindowPattern() {
 
-        Decks decks = singletonDecks();
+        Model model= singletonModel();
 
         ArrayList<WindowPatternCard> temp = new ArrayList<WindowPatternCard>();
 
         ArrayList<WindowPatternCard> four = new ArrayList<WindowPatternCard>();
 
-        temp.addAll(decks.getWindowPatternCardDeck());
+        temp.addAll(model.getDecks().getWindowPatternCardDeck());
 
         int count = temp.size();
 

@@ -7,6 +7,7 @@ import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.ChangeDieWithTheBag11
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.DrawOneMoreDie8;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.RollAgainADie6;
 import it.polimi.ingsw.LM26.model.Model;
@@ -44,6 +45,8 @@ public class EventHandler {
     private boolean handle(EventChecker eventChecker) {
 
         ToolCardInt toolCard;
+
+        PlayerZone player=model.getPlayer(event.getPlayer());
 
         int pl = event.getPlayer();
 
@@ -131,11 +134,17 @@ public class EventHandler {
         return null;
     }
 
-   /*public DieInt getTrackDieCopy(){
+   public DieInt getTrackDieCopy(int[] c){
 
-   TODO IMPLEMENT and change action event
+       try {
 
-    }*/
+        return model.getRoundTrackInt().getRoundTrackTurn(c[0]+1).get(c[1]);
+
+       } catch (NoSuchElementException e) {
+       }
+
+       return null;
+    }
 
     public Box getBoxCopy(Box b, int pl) throws NoSuchElementException {
 

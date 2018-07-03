@@ -13,6 +13,7 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.Token;
+import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,10 +30,12 @@ public class TestFinalPhase {
     private final int roundTrackSize = 100;
     private int random;
     private PlayerZone player;
-    Model model = singletonModel();
+    Model model;
 
     @Before
     public void FinalPhaseSetUp(){
+        model= singletonModel();
+        model.reset();
         for(int i=0; i<4; i++){
             playerList.add(new PlayerZone("name", i+1));
         }
@@ -134,7 +137,8 @@ public class TestFinalPhase {
     @Test
     public void checkScore() {
 
-        Model model = singletonModel();
+        model = new Model("s");
+        model.setDecks(new Decks());
         for (int i = 0; i < 2; i++) {
             model.getPlayerList().add(new PlayerZone("name" + i, i));
             model.getPlayerList().get(i).setNumberPlayer(i);

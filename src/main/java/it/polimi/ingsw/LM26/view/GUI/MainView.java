@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-import static it.polimi.ingsw.LM26.model.Serialization.SingletonDecks.singletonDecks;
+import static it.polimi.ingsw.LM26.model.Serialization.reloadDecks.singletonDecks;
 
 public class MainView extends Application {
 

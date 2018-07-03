@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.model.PlayArea;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,13 +12,17 @@ import static org.junit.Assert.*;
 
 public class TestOnBoardCards {
 
-    Model model=singletonModel();
-    
-    ArrayList<WindowPatternCard> four;
+        Model model= singletonModel();
+
+        ArrayList<WindowPatternCard> four;
 
     @Test
 
     public void checkCardSelections(){
+
+        model.reset();
+
+        model.setDecks(new Decks());
 
         model.getDecks().getWindowPatternCardDeck().get(2).setInUse(true);
 

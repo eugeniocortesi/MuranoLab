@@ -5,28 +5,35 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.Random;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 import static javafx.scene.input.KeyCode.R;
+import static javafx.scene.input.KeyCode.S;
 import static org.junit.Assert.*;
 
 public class TestDrawOneMoreDie8 {
 
 
-    Model model = singletonModel();
+    Model model;
     PlayerZone player;
     Box[][] board;
-    Random rand = new Random();
 
     @Before
     public void setup(){
+        model= singletonModel();
+        model.reset();
+
+
 
         player=new PlayerZone("name" , 0);
         model.getPlayerList().add(player);
+        System.out.print(model.getPlayerList().get(0).getName());
     }
 
     @Test

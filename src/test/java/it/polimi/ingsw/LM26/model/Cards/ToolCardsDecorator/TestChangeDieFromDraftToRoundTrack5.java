@@ -8,9 +8,11 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,12 +21,15 @@ import static org.junit.Assert.*;
 
 public class TestChangeDieFromDraftToRoundTrack5 {
 
-    Model model =singletonModel();
+    Model model;
     Random rand = new Random();
 
     @Before
 
     public void setup(){
+
+        model= singletonModel();
+        model.reset();
 
         int i;
         int index = 0;

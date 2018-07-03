@@ -3,15 +3,15 @@ package it.polimi.ingsw.LM26.model.Serialization;
 import java.io.IOException;
 import java.io.Serializable;
 
-public class SingletonDecks implements Serializable{
-
-    private static Decks decks;
+public class reloadDecks implements Serializable{
 
 
 
-    public static Decks singletonDecks(){
+    public static Decks loadDecks(){
 
-        if(decks==null) {decks = new Decks();
+        Decks decks;
+
+        decks = new Decks();
 
             try {
                 decks.setup();
@@ -19,7 +19,7 @@ public class SingletonDecks implements Serializable{
             }
 
             decks.serialize();
-        }
+
 
         return decks;
     }

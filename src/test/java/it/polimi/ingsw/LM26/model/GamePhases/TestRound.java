@@ -11,6 +11,7 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,6 +46,7 @@ public class TestRound {
     public void setup(){
 
         model= singletonModel();
+        model.reset();
 
         PlayerZone player1 = new PlayerZone("eugenio", 0);
         PlayerZone player2 = new PlayerZone("Chiara", 1);
