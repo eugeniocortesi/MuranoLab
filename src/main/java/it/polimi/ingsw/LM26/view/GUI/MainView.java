@@ -9,14 +9,15 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-import static it.polimi.ingsw.LM26.model.Serialization.reloadDecks.singletonDecks;
+import static it.polimi.ingsw.LM26.model.Serialization.reloadDecks.loadDecks;
+
 
 public class MainView extends Application {
 
     private View view;
     private ClientInt clientInt = new Client();
 
-    private Decks deck=singletonDecks();
+    private Decks deck=loadDecks();
     private ArrayList<WindowPatternCard> testarray = new ArrayList<WindowPatternCard>();
 
     public static void main(String[] args){
@@ -32,10 +33,13 @@ public class MainView extends Application {
             testarray.add(deck.getWindowPatternCardDeck().get(i));
         }
         view.showWindowPattern("we", 1, testarray);*/
-
+        view.showSetPlayerMenu("name", ModelManager.getModel().getPlayer(0));
         view.showCurrentMenu("name");
+        //view.showEndGame("name", null);
 
-
-        //view.showCentralPhaseScreen();
+        primaryStage.setOnCloseRequest(event ->{
+            event.consume();
+            view.showDisconnectScreen();
+        });
     }
 }

@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.LM26.view.GUI.controllers.ScoreController">
+   <children>
+      <VBox alignment="TOP_CENTER">
+         <children>
+            <Label text="SEI ARRIVATO 2^!">
+               <VBox.margin>
+                  <Insets bottom="40.0" top="40.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Dubai Medium" size="53.0" />
+               </font>
+            </Label>
+            <VBox fx:id="scoreTrack" maxHeight="277.0" maxWidth="900.0" prefHeight="220.0" prefWidth="714.0" styleClass="bodybg" stylesheets="@scoreTrack.css">
+               <children>
+                  <TilePane alignment="TOP_CENTER" hgap="7.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <StackPane prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="10.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="2">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="55.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="3">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="4">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="5">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="145.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="145.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="190.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <TilePane.margin>
+                              <Insets />
+                           </TilePane.margin>
+                        </StackPane>
+                        <StackPane layoutX="235.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="190.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="14.0" />
+                     </VBox.margin>
+                  </TilePane>
+                  <TilePane alignment="TOP_CENTER" hgap="7.0" layoutX="10.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <StackPane prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="10.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="55.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="145.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="145.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="190.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="235.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </TilePane>
+                  <TilePane alignment="TOP_CENTER" hgap="7.0" layoutX="10.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <StackPane prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="10.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="55.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="145.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="145.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="190.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="235.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="190.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </TilePane>
+                  <TilePane alignment="TOP_CENTER" hgap="7.0" layoutX="10.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <StackPane prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="10.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="55.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="145.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="145.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="190.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="1">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="235.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
+                           <children>
+                              <Label text="50">
+                                 <font>
+                                    <Font name="Dubai Medium" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="14.0" />
+                     </VBox.margin>
+                  </TilePane>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

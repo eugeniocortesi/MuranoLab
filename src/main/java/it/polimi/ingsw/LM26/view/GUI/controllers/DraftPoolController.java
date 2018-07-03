@@ -1,5 +1,7 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
+import it.polimi.ingsw.LM26.view.GUI.ActionEventGenerator;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
 import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
 import javafx.fxml.FXML;
@@ -11,14 +13,13 @@ public class DraftPoolController {
 
     private ImageManager imageManager;
     private GameController gController;
+    private DieInt die;
 
     @FXML
     TilePane dPool;
 
     public void setUpDPool(GameController gController){
-        for(int i=0; i<dPool.getChildren().size(); i++){
-        }
-        this. gController=gController;
+        this.gController=gController;
     }
 
     public void updateDPool(ImageManager imMa){
@@ -39,5 +40,7 @@ public class DraftPoolController {
 
     private void handleDiceClicked(int idx){
         gController.setInstructions(Integer.toString(idx+1));
+        die=ModelManager.getModel().getDraftPool().getInDraft().get(idx);
+        gController.sendDPoolEvent(die);
     }
 }

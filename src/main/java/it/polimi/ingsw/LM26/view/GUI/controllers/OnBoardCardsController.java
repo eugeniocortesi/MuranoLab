@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
+import it.polimi.ingsw.LM26.view.GUI.ActionEventGenerator;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
 import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
 import javafx.fxml.FXML;
@@ -9,21 +10,26 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 
+import javax.jws.WebParam;
+
 
 public class OnBoardCardsController {
 
     private ImageManager imageManager;
     private GameController gController;
+    private ActionEventGenerator aeGenerator;
+    private OnBoardCards obc;
 
     @FXML
     private TilePane cards;
 
-    public void setUpCards(ImageManager imManager, GameController gController){
+    public void setUpCards(ImageManager imManager, GameController gController, ActionEventGenerator aeGenerator){
         imageManager=imManager;
+        this.aeGenerator=aeGenerator;
         Image im;
+        ImageView imView;
         this. gController=gController;
-        ImageView imView=new ImageView();
-        OnBoardCards obc= ModelManager.getModel().getOnBoardCards();
+        obc= ModelManager.getModel().getOnBoardCards();
         for(int i=0; i<obc.getToolCardList().size(); i++){
             im=imageManager.getToolCard(obc.getToolArrayList().get(i));
             imView=(ImageView)cards.getChildren().get(i);
@@ -46,5 +52,10 @@ public class OnBoardCardsController {
 
     public void handleCardClicked(int idx){
         gController.setInstructions(Integer.toString(idx+1));
+        try{
+            aeGenerator.cardEvent(idx);
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
     }
 }

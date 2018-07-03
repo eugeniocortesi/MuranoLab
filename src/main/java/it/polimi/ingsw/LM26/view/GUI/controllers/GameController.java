@@ -7,11 +7,16 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackTurn;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
+import it.polimi.ingsw.LM26.view.GUI.ActionEventGenerator;
+import it.polimi.ingsw.LM26.view.GUI.GameState;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
 import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -28,6 +33,9 @@ public class GameController {
     private ImageManager imageManager;
     private ArrayList<PlayerZone> plListWithoutMe = new ArrayList<PlayerZone>();
     private boolean myTurn;
+    private PlayerZone me=null;
+    private ActionEventGenerator aeGenerator;
+    private GameState gameState;
 
     @FXML
     private FrameBoardController plZone1Controller;
@@ -51,41 +59,56 @@ public class GameController {
     private Button endMove;
     @FXML
     private Label instructions;
-
     @FXML
-    public void initialize(){
-        imageManager=new ImageManager();
-    }
+    private Menu inDecrement;
+    @FXML
+    private Menu dieValue;
+
+
+//TODO GESTISCI LE ECCEZIONI DELL'ACTIONEVENTGENERATOR
 
     public void setupGame(boolean myTurn){
-        PlayerZone me=null;
+        imageManager=new ImageManager();
+        aeGenerator=new ActionEventGenerator(this);
         this.myTurn=myTurn;
 
         dPoolController.setUpDPool(this);
-        rTrackController.setUpRTrack(this);
+        rTrackController.setUpRTrack(this, aeGenerator);
 
-        //imageManager=new ImageManager();
-        onBCardsController.setUpCards(imageManager, this);
+        onBCardsController.setUpCards(imageManager, this, aeGenerator);
         privateCard.setImage(imageManager.getObjectiveCard(ModelManager.getPrivateCard().getId()));
 
         for(PlayerZone i : ModelManager.getModel().getPlayerList()){
             if(i.getIDPlayer()!=ModelManager.getId()) plListWithoutMe.add(i);
             else me=i;
         }
-        myFBoardController.setUpPlayer(me, this);
+        myFBoardController.setUpPlayer(me, this, aeGenerator);
         if(plListWithoutMe.size()>=1){
-            plZone1Controller.updateFrameBoard(imageManager);
-            plZone1Controller.setUpPlayer(plListWithoutMe.get(0), this);
+            plZone1Controller.setUpPlayer(plListWithoutMe.get(0), this, aeGenerator);
             if(plListWithoutMe.size()>=2){
-                plZone2Controller.updateFrameBoard(imageManager);
-                plZone2Controller.setUpPlayer(plListWithoutMe.get(1), this);
+                plZone2Controller.setUpPlayer(plListWithoutMe.get(1), this, aeGenerator);
                 if(plListWithoutMe.size()==3) {
-                    plZone3Controller.updateFrameBoard(imageManager);
-                    plZone3Controller.setUpPlayer(plListWithoutMe.get(2), this);
+                    plZone3Controller.setUpPlayer(plListWithoutMe.get(2), this, aeGenerator);
                 }
             }
         }
+        for(int i=0; i<inDecrement.getItems().size(); i++){
+            int n=i;
+            inDecrement.getItems().get(i).setOnAction((ActionEvent event)->handleInDecrement(n));
+        }
+        for(int i=0; i<dieValue.getItems().size(); i++){
+            int n=i;
+            dieValue.getItems().get(i).setOnAction((ActionEvent event)->handleDieValue(n+1));
+        }
+        this.isMyTurn(myTurn);
+        this.updateGame();
+    }
 
+    public void isMyTurn(boolean myTurn){
+        if(me!=null){
+            if(!myTurn) disableEverything();
+            else setUpState(GameState.BEGINMOVE);
+        }
     }
 
     public void setInstructions(String s){
@@ -93,9 +116,15 @@ public class GameController {
     }
 
     public void updateGame(){
-        rTrackController.updateRoundTrack(imageManager);
-        dPoolController.updateDPool(imageManager);
-        myFBoardController.updateFrameBoard(imageManager);
+        if(me!=null){
+            rTrackController.updateRoundTrack(imageManager);
+            dPoolController.updateDPool(imageManager);
+            myFBoardController.updateFrameBoard(me, imageManager);
+            plZone1Controller.updateFrameBoard(plListWithoutMe.get(0), imageManager);
+            plZone2Controller.updateFrameBoard(plListWithoutMe.get(1), imageManager);
+            plZone3Controller.updateFrameBoard(plListWithoutMe.get(2), imageManager);
+            setUpState(gameState);
+        }
     }
 
     public void disableEverything(){
@@ -103,46 +132,71 @@ public class GameController {
         dPoolController.setDisable(true);
         onBCardsController.setDisable(true);
         rTrackController.setDisable(true);
-        endMove.setDisable(true);
+        inDecrement.setDisable(true);
+        dieValue.setDisable(true);
     }
 
-    public void stateFrameBoard(){
-        myFBoardController.setDisable(false);
-        dPoolController.setDisable(true);
-        onBCardsController.setDisable(true);
-        rTrackController.setDisable(true);
-        endMove.setDisable(false);
+    public void setUpState(GameState gState){
+        gameState=gState;
+        disableEverything();
+        switch(gState){
+            case BEGINMOVE:
+                dPoolController.setDisable(false);
+                onBCardsController.setDisable(false);
+                setInstructions("Inizio turno: puoi posizionare un dado o usare una carta strumento");
+                break;
+            case FRAMEBOARD:
+                myFBoardController.setDisable(false);
+                setInstructions("Scegli sulla Plancia Vetrata");
+                break;
+            case DRAFTPOOL:
+                dPoolController.setDisable(false);
+                setInstructions("Scegli un dado dalla Riserva");
+                break;
+            case ROUNDTRACK:
+                rTrackController.setDisable(false);
+                setInstructions("Scegli un dado dal tracciato dei round");
+                break;
+            case INDECREMENT:
+                inDecrement.setDisable(false);
+                setInstructions("Scegli se incrementare o decrementare il valore del dado");
+                break;
+            case DIEVALUE:
+                dieValue.setDisable(false);
+                setInstructions("Scegli il valore del dado");
+                break;
+            case ACTIONEVENT: break;
+        }
     }
 
-    public void stateDraftPool(){
-        myFBoardController.setDisable(true);
-        dPoolController.setDisable(false);
-        onBCardsController.setDisable(true);
-        rTrackController.setDisable(true);
-        endMove.setDisable(false);
+    public void handleEndMove(ActionEvent event){
+        aeGenerator.endTurn();
     }
 
-    public void stateRoundTrack(){
-        myFBoardController.setDisable(true);
-        dPoolController.setDisable(true);
-        onBCardsController.setDisable(true);
-        rTrackController.setDisable(false);
-        endMove.setDisable(false);
+    private void handleInDecrement(int idx){
+        String s;
+        if(idx==0) s="Increment";
+        else s="Decrement";
+        try{
+            aeGenerator.indecrementEvent(s);
+        }catch (IllegalArgumentException e){
+            e.printStackTrace();
+        }
     }
 
-    public void stateFBoardCards(){
-        myFBoardController.setDisable(false);
-        dPoolController.setDisable(true);
-        onBCardsController.setDisable(false);
-        rTrackController.setDisable(true);
-        endMove.setDisable(false);
+    private void handleDieValue(int idx){
+        try {
+            aeGenerator.dieValueEvent(idx);
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
     }
 
-    public void stateIDNumber(){
-        myFBoardController.setDisable(true);
-        dPoolController.setDisable(true);
-        onBCardsController.setDisable(true);
-        rTrackController.setDisable(true);
-        endMove.setDisable(false);
+    public void sendDPoolEvent(DieInt die){
+        try{
+            aeGenerator.draftPoolEvent(die, gameState);
+        }catch (IllegalArgumentException e){
+            e.printStackTrace();
+        }
     }
 }

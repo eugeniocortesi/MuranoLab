@@ -115,4 +115,7 @@ public class ImageManager {
         }
     }
 
+    public Image backgroundImage(){
+        return new Image(ImageManager.class.getResource("background1.jpg").toExternalForm());
+    }
 }

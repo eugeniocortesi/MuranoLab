@@ -51,13 +51,13 @@
                         </Label>
                         <MenuBar>
                           <menus>
-                            <Menu mnemonicParsing="false" text="In/Decremento">
+                            <Menu fx:id="inDecrement" mnemonicParsing="false" text="In/Decremento">
                               <items>
                                 <MenuItem mnemonicParsing="false" text="Incremento" />
                                     <MenuItem mnemonicParsing="false" text="Decremento" />
                               </items>
                             </Menu>
-                            <Menu mnemonicParsing="false" text="Valore Dado">
+                            <Menu fx:id="dieValue" mnemonicParsing="false" text="Valore Dado">
                               <items>
                                 <MenuItem mnemonicParsing="false" text="1" />
                                     <MenuItem mnemonicParsing="false" text="2" />
@@ -74,7 +74,7 @@
                               <ImageView fx:id="privateCard" fitHeight="223.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true" />
                               <VBox alignment="TOP_RIGHT">
                                  <children>
-                                    <Button fx:id="endMove" mnemonicParsing="false" text="Passa il turno">
+                                    <Button fx:id="endMove" mnemonicParsing="false" onAction="#handleEndMove" text="Passa il turno">
                                        <VBox.margin>
                                           <Insets bottom="5.0" />
                                        </VBox.margin>

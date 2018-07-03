@@ -52,9 +52,9 @@ public class RoundsHandler extends Thread {
 
     public void play() {
 
-        //for (int i = 0; i < model.getPlayerList().size(); i++)
+        for (int i = 0; i < model.getPlayerList().size(); i++)
 
-            //controller.getViewGameInterface().showSetPlayerMenu(model.getPlayerList().get(i).getName(), model.getPlayerList().get(i));
+            controller.getViewGameInterface().showSetPlayerMenu(model.getPlayerList().get(i).getName(), model.getPlayerList().get(i));
 
         while(i<game.getPhase().getNrounds() && !game.getPhase().getOnePlayer()) {
 
@@ -97,13 +97,13 @@ public class RoundsHandler extends Thread {
                     //controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Salti il turno");
                 }
 
-                //PlayerZone playerEnding = playing;
+                PlayerZone playerEnding = playing;
 
                 centralPhase.getCurrentRound().endAction(centralPhase.getTurn(), model.getRoundTrackInt(), model.getDraftPool(), playing);
 
                 playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn());
 
-                //controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
+                controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
 
                 result = false;
             }

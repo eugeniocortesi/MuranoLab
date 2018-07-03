@@ -3,6 +3,7 @@ package it.polimi.ingsw.LM26.view.GUI.controllers;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+import it.polimi.ingsw.LM26.view.GUI.ActionEventGenerator;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
 import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
 import javafx.event.ActionEvent;
@@ -35,10 +36,15 @@ public class FrameBoardController {
 
     private ImageManager imageManager;
     private GameController gController=null;
+    private static final int ncol=5;
+    private static final int nrow=4;
+    private PlayerZone player;
+    private ActionEventGenerator aeGenerator;
 
 
-    public void setUpPlayer(PlayerZone pl, GameController gController){
+    public void setUpPlayer(PlayerZone pl, GameController gController, ActionEventGenerator aeGenerator){
         this. gController=gController;
+        this.aeGenerator=aeGenerator;
         switch (pl.getScoreMarker().getColor()){
             case ANSI_RED:{background.setStyle("-fx-background-color: #8B0000");
                 playername.setStyle("-fx-background-color: #8B0000"); break;}
@@ -61,17 +67,12 @@ public class FrameBoardController {
         }
     }
 
-    public void updateFrameBoard(ImageManager imageManager){
+    public void updateFrameBoard(PlayerZone player,ImageManager imageManager){
         this.imageManager=imageManager;
-        PlayerZone me=ModelManager.getModel().getPlayer(ModelManager.getId());
-        setGrid(me.getPlayerBoard());
-        for(int i=0; i<tokens.getChildren().size()-me.getToken().getTokenNumber(); i++){
+        setGrid(player.getPlayerBoard());
+        for(int i=0; i<tokens.getChildren().size()-player.getToken().getTokenNumber(); i++){
             tokens.getChildren().remove(0);
         }
-    }
-
-    public void useTokens(){
-
     }
 
     private void createTokens(int n){
@@ -106,16 +107,24 @@ public class FrameBoardController {
     }
 
     public void setGrid(WindowFramePlayerBoard frameBoard){
-        for(int i=0; i<4; i++){
-            for(int j=0; j<5; j++){
+        for(int i=0; i<nrow; i++){
+            for(int j=0; j<ncol; j++){
                 setBox(frameBoard.getBoardMatrix()[i][j]);
             }
         }
     }
 
-    public void handleCellClicked(int index){
-        System.out.println(index);
-        gController.setInstructions(Integer.toString(index));
+    private void handleCellClicked(int index){
+        int r=(Math.floorDiv(index-1, ncol));
+        int c=((index-1)%ncol);
+        gController.setInstructions(Integer.toString(r)+" "+Integer.toString(c));
+        player=ModelManager.getModel().getPlayer(playername.getText());
+        Box box=player.getPlayerBoard().getBoardMatrix()[r][c];
+        try{
+            aeGenerator.frameBoardEvent(box);
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
     }
 
     public void setDisable(boolean disable){

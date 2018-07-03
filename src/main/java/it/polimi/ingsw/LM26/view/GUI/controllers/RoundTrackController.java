@@ -1,7 +1,9 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
 import it.polimi.ingsw.LM26.controller.GamePhases.Game;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackTurn;
+import it.polimi.ingsw.LM26.view.GUI.ActionEventGenerator;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
 import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
 import javafx.fxml.FXML;
@@ -17,14 +19,17 @@ public class RoundTrackController {
 
     private ImageManager imManager;
     private GameController gController;
+    private ArrayList<RoundTrackTurn> roundTrackList;
+    private ActionEventGenerator aeGenerator;
 
     @FXML
     private TilePane roundTrack;
     @FXML
-    private  TilePane diceLists;
+    private TilePane diceLists;
 
-    public void setUpRTrack(GameController gController){
+    public void setUpRTrack(GameController gController, ActionEventGenerator aeGenerator){
         this. gController=gController;
+        this.aeGenerator=aeGenerator;
         ArrayList<RoundTrackTurn> roundTrackList = ModelManager.getModel().getRoundTrackInt().getRoundTrackTurnList();
         for(int i=0; i<roundTrackList.size(); i++) {
             ImageView num=keepFirstImage(i);
@@ -35,7 +40,7 @@ public class RoundTrackController {
 
     public void updateRoundTrack(ImageManager imageManager){
         this.imManager=imageManager;
-        ArrayList<RoundTrackTurn> roundTrackList = ModelManager.getModel().getRoundTrackInt().getRoundTrackTurnList();
+        roundTrackList = ModelManager.getModel().getRoundTrackInt().getRoundTrackTurnList();
         for(int i=0; i<roundTrackList.size(); i++){
             ImageView num=keepFirstImage(i);
             imageManager.setDie(num, roundTrackList.get(i).getDiceList().get(0));
@@ -61,7 +66,7 @@ public class RoundTrackController {
         }
         for(int i=0; i<diceLists.getChildren().size(); i++){
             VBox diceList=(VBox) diceLists.getChildren().get(i);
-            for(int j=1; j<diceList.getChildren().size(); j++){
+            for(int j=0; j<diceList.getChildren().size(); j++){
                 diceList.getChildren().get(j).setDisable(disable);
             }
         }
@@ -74,11 +79,24 @@ public class RoundTrackController {
     }
 
     private void handleDieClicked(int idx){
+        DieInt die;
+        int turn, dieidx;
         if(idx<=9){
-            gController.setInstructions("rt: prima riga, posto "+(idx+1));
+            die=roundTrackList.get(idx).getDiceList().get(0);
+            turn= idx;
+            dieidx=0;
+            //gController.setInstructions("rt: prima riga, posto "+(idx+1));
         }
         else{
-            gController.setInstructions("rt: riga"+Math.floorDiv((idx-9),8)+", posto "+((idx-9)%8)+"indice"+idx);
+            die=roundTrackList.get(Math.floorDiv((idx-9),8)).getDiceList().get((idx-9)%8);
+            turn= Math.floorDiv((idx-9),8);
+            dieidx=(idx-9)%8;
+            //gController.setInstructions("rt: riga"+Math.floorDiv((idx-9),8)+", posto "+((idx-9)%8)+"indice "+idx);
+        }
+        try{
+            aeGenerator.roundTrackEvent(die, turn, dieidx);
+        }catch (IllegalArgumentException e){
+            e.printStackTrace();
         }
     }
 }
