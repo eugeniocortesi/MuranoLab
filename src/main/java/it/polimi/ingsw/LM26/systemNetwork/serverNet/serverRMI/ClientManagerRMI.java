@@ -72,6 +72,7 @@ public class ClientManagerRMI extends ClientManager {
         try {
             // Getting the registry
             String addr= RemoteServer.getClientHost();
+            System.out.println("trying to connect to: "+addr);
             Registry registry = LocateRegistry.getRegistry(addr, RMIPORTServer);
 
             //Looking up the registry for the remote object
