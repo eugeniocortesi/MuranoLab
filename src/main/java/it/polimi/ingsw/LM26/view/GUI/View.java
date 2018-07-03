@@ -56,7 +56,7 @@ public class View extends ViewInterface {
         View.clientBase = clientBase;
 
         //TODO remove later
-        ModelManager.model = new Model();
+       /* ModelManager.model = new Model();
         Decks deck =loadDecks();
         ModelManager.privateCard = deck.getObjectivePrivateCardDeck().get(0);
         ModelManager.setId(0);
@@ -91,7 +91,7 @@ public class View extends ViewInterface {
             rTrack.addDice(dList);
         }
         ModelManager.model.setRoundTrackInt(rTrack);
-        this.update(ModelManager.model);
+        this.update(ModelManager.model);*/
     }
 
     public static ClientInt getClientBase() {

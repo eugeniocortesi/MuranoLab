@@ -23,14 +23,13 @@ public class ControllerNetChoice {
     private ToggleGroup connection;
 
     private DataClientConfiguration dClientConfig;
-    private DataClientImplementation dClientImplem;
     private View view;
 
 
     public void setClientViewBase(View view){
         this.view=view;
-        dClientImplem = new DataClientImplementation();
-        dClientConfig = dClientImplem.implementation();
+        dClientConfig = new DataClientConfiguration();
+        dClientConfig = dClientConfig.implementation();
         System.out.println("SocketPort " +dClientConfig.getClientSOCKETPORT()+ " ClientRMI " + dClientConfig.getClientRMIPORT()
                 + " ServerRMI "+ dClientConfig.getServerRMIPORT());
     }
