@@ -10,15 +10,20 @@ import java.util.logging.Logger;
 
 /**
  * TimerTaskActionPlayers class
+ * @author Chiara Criscuolo
  * TimerTask that manages the time of each move for each client
  */
 
 public class TimerTaskActionPlayers extends TimerTask {
 
     private ServerBase serverBase;
+
     private Timer timer;
+
     private String name;
+
     private static final Logger LOGGER = Logger.getLogger(TimerTaskPlayers.class.getName());
+
     private volatile boolean arrivedMessage;
 
     /**
@@ -27,18 +32,18 @@ public class TimerTaskActionPlayers extends TimerTask {
      * @param timer timer
      * @param name name of player
      */
+
     public TimerTaskActionPlayers(ServerBase serverBase, Timer timer, String name) {
 
-        if(serverBase == null)
-            LOGGER.log(Level.SEVERE,"Server is null");
         this.serverBase = serverBase;
-        this.timer = timer;
-        this.name = name;
-        this.arrivedMessage = false;
-    }
 
-    public boolean isArrivedMessage() {
-        return arrivedMessage;
+        this.timer = timer;
+
+        this.name = name;
+
+        this.arrivedMessage = false;
+
+        LOGGER.setLevel(Level.OFF);
     }
 
     public void setArrivedMessage(boolean b){
@@ -63,22 +68,22 @@ public class TimerTaskActionPlayers extends TimerTask {
     public void body(){
         if(//end time for the action, so didn't arrive action event
               arrivedMessage  ) {
+
             LOGGER.log(Level.SEVERE,"Reset timer action player");
-            //TimerGame timerPlayers = new TimerGame(serverBase, timerConfiguration);
-            //timerPlayers.scheduleTimerPlayer();
+
         } else{
+
             ActionEventTimerEnd timerEnd = new ActionEventTimerEnd(name, true);
+
             LOGGER.log(Level.SEVERE,"Timer end for "+ name);
 
             serverBase.getQueueController().pushMessage(timerEnd);
 
-
-
         }
 
+        // Terminates this timer, discarding any currently scheduled tasks
+        timer.cancel();
 
-        timer.cancel();  // Terminates this timer, discarding any currently scheduled tasks.
         timer.purge();
-
     }
 }

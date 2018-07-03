@@ -14,18 +14,17 @@ import java.io.InputStreamReader;
  */
 public class TimerImplementation {
 
-    private TimerConfiguration timerConfiguration;
-
     public TimerImplementation(){
-        this.timerConfiguration =  new TimerConfiguration();
+
         //this.timerConfiguration.create();
     }
 
     /**
-     * method that reads the file TimerCOnfiguration and save timerEnd
+     * method that reads the file TimerConfiguration and save timerEnd
      * @return TimerConfiguration class that memorize timerEnd
      * @exception Exception if it can't read the file amd return null
      */
+
     public TimerConfiguration implentation(){
 
         try {
@@ -40,8 +39,7 @@ public class TimerImplementation {
                     .setPrettyPrinting()
                     .create();
 
-            TimerConfiguration timer = gson.fromJson(br, TimerConfiguration.class);
-            return timer;
+            return gson.fromJson(br, TimerConfiguration.class);
 
         } catch (Exception e) {
 

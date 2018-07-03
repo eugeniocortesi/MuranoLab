@@ -88,11 +88,15 @@ public class ClientViewSocket extends ClientView {
             connected();
 
         } catch (Exception e) {
+
             System.err.println("Client not able to connect, plese try again.");
 
             try {
+
                 socket.close();
+
             } catch (IOException ex) {
+
                 System.err.println("Socket not closed");
             }
         }
@@ -143,6 +147,8 @@ public class ClientViewSocket extends ClientView {
     public void login(String name) {
 
         DataMessage message = new DataMessage("login", name);
+
+        System.out.println("LOGIN " +name);
 
         outSocket.println(message.serializeClassMessage());
 

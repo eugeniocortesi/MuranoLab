@@ -68,9 +68,7 @@ public class DataClientConfiguration {
                     .setPrettyPrinting()
                     .create();
 
-            DataClientConfiguration dataClient = gson.fromJson(br, DataClientConfiguration.class);
-
-            return dataClient;
+            return gson.fromJson(br, DataClientConfiguration.class);
 
         } catch (Exception e) {
 

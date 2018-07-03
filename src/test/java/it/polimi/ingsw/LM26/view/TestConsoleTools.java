@@ -15,18 +15,20 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static it.polimi.ingsw.LM26.model.Serialization.reloadDecks.singletonDecks;
 import static org.junit.Assert.assertEquals;
 
 public class TestConsoleTools {
 
-    private Decks deck=singletonDecks();
+    private Model model;
+
+    private Decks decks;
     private ConsoleTools cTools = new ConsoleTools();
     private ArrayList<DieInt> dList= new ArrayList<DieInt>();
     private ArrayList<DieInt> dieList= new ArrayList<DieInt>();
-    Model model=new Model();
     @Before
     public void setup(){
+        model.reset();
+        decks=model.getDecks();
         DieInt die=new Die(Color.ANSI_RED);
         DieInt die2=new Die(Color.ANSI_GREEN);
         DieInt die3=new Die(Color.ANSI_RED);

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.timer;
 
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 
 import java.util.Timer;
@@ -25,27 +24,25 @@ public class TimerGame {
 
     /**
      * class constructor
-     *
-     * @param serverBase         Server
+     * @param serverBase Server
      * @param timerGameEnd milliseconds loaded by file of configuration of timer
      */
     public TimerGame(ServerBase serverBase, long timerGameEnd) {
+
         this.serverBase = serverBase;
+
         myLong = timerGameEnd;
+
         timerGame = new Timer();
     }
 
     /**
-     * call method that schedule TimerTaskPlayers
+     * Calls method that schedule TimerTaskPlayers
      */
     public void scheduleTimerPlayer() {
 
         LOGGER.log(Level.SEVERE, "Started schedule");
-        if (serverBase == null)
-            LOGGER.log(Level.SEVERE, "Server is null");
-        if (timerGame == null)
-            LOGGER.log(Level.SEVERE, "Timer is null");
-        LOGGER.log(Level.WARNING, "STARTED SCHEDULE TIMEPLAYER");
+
         timerGame.schedule(new TimerTaskPlayers(serverBase, timerGame), this.myLong, this.myLong);
 
     }
