@@ -22,8 +22,6 @@ public class TestOnBoardCards {
 
         model.reset();
 
-        model.setDecks(new Decks());
-
         model.getDecks().getWindowPatternCardDeck().get(2).setInUse(true);
 
         model.getDecks().getWindowPatternCardDeck().get(4).setInUse(true);

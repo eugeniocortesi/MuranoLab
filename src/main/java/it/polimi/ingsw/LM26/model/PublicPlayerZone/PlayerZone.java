@@ -27,6 +27,10 @@ public class PlayerZone extends PlayerZoneInt {
 
     private ActionHistory actionHistory;
 
+    public PlayerZone(){
+
+    }
+
     public PlayerZone(String namePlayer, int IDPlayer) {
 
         this.namePlayer = namePlayer;

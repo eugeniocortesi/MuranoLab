@@ -8,7 +8,10 @@ public class SingletonModel {
     public static Model singletonModel(){
 
 
-        if(model==null) model = new Model("ready");
+        if(model==null) {
+            model = new Model("ready");
+            model.reset();
+        }
 
         return model;
     }

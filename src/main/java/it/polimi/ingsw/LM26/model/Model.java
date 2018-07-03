@@ -52,7 +52,7 @@ public class Model extends ObservableSimple implements Serializable {
 
     public Model(String s ) {
 
-        reset();
+
     }
 
     public void reset() {
@@ -60,8 +60,8 @@ public class Model extends ObservableSimple implements Serializable {
         this.scoreTrackInt = new ScoreTrack();
         this.bag = new Bag();
         this.draftPool =new DraftPool();
-        this.onBoardCards= new OnBoardCards();
         this.decks=loadDecks();
+        this.onBoardCards= new OnBoardCards();
         this.playerList=new ArrayList<PlayerZone>();
         this.restrictions=new Restrictions();
     }

@@ -28,6 +28,7 @@ public class TestDifferentColorShade {
     @Test
     public void checkEffect() {
 
+        model.reset();
         Random rand = new Random();
         int index = rand.nextInt( model.getDecks().getWindowPatternCardDeck().size());
         pattern = model.getDecks().getWindowPatternCardDeck().get(index);

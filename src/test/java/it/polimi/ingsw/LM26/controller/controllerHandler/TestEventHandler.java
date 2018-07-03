@@ -17,17 +17,19 @@ import static org.junit.Assert.*;
 
 public class TestEventHandler {
 
-    Model model= new Model("s");
+    Model model;
     ArrayList<DieInt> dice=new ArrayList<DieInt>();
     ActionEvent actionEvnet=new ActionEvent();
     Controller controller = new Controller();
-    EventHandler eventHandler = new EventHandler(actionEvnet, model, controller);
+    EventHandler eventHandler;
 
     @Before
     public void setup(){
 
-        model.setDecks(new Decks());
-       for(int i=0; i<5; i++){
+        model= singletonModel();
+        model.reset();
+        eventHandler=new EventHandler(actionEvnet, model, controller);
+        for(int i=0; i<5; i++){
             DieInt die= model.getBag().draw();
             die.roll();
             dice.add(die);

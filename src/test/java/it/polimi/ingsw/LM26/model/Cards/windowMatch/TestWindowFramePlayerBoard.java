@@ -12,7 +12,7 @@ import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class TestWindowFramePlayerBoard {
 
-    Model model;
+    Model model=singletonModel();
     Decks decks;
     WindowPatternCard pattern;
     WindowFramePlayerBoard board;

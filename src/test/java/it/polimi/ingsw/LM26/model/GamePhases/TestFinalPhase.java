@@ -137,8 +137,8 @@ public class TestFinalPhase {
     @Test
     public void checkScore() {
 
-        model = new Model("s");
-        model.setDecks(new Decks());
+        model= singletonModel();
+        model.reset();
         for (int i = 0; i < 2; i++) {
             model.getPlayerList().add(new PlayerZone("name" + i, i));
             model.getPlayerList().get(i).setNumberPlayer(i);

@@ -15,11 +15,13 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 import static org.junit.Assert.assertEquals;
 
 public class TestConsoleTools {
 
-    private Model model;
+    private Model model=singletonModel();
+
 
     private Decks decks;
     private ConsoleTools cTools = new ConsoleTools();
