@@ -175,7 +175,7 @@ public class ServerBase extends ViewGameInterface {
 
                 LOGGER.log(Level.WARNING,"Timer game started!");
 
-                timerGame = new TimerGame(this, timerConfiguration.getTimerEnd());
+                timerGame = new TimerGame(this, timerConfiguration.getTimerGameEnd());
 
                 timerGame.scheduleTimerPlayer();
             }
