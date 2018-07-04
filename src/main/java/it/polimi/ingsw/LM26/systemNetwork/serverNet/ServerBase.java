@@ -287,7 +287,7 @@ public class ServerBase extends ViewGameInterface {
 
             Map.Entry couple = (Map.Entry)iterator.next();
 
-            System.out.println(couple.getKey());
+            //System.out.println(couple.getKey());
 
             if((ObserverSimple) couple.getValue()!= null)
                 model.register((ObserverSimple) couple.getValue());

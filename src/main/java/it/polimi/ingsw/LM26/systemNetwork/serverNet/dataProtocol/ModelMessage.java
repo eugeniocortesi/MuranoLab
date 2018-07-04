@@ -120,10 +120,7 @@ public class ModelMessage extends ClassMessage{
 
 
         Model model= gson.fromJson(protocolJson, type);
-        System.out.println("playerlist "+ model.getPlayerList());
-        for(int i = 0; i<model.getPlayerList().size(); i++){
-            System.out.println(model.getPlayerList().get(i)+ "player");
-        }
+
 
         return model;
     }
