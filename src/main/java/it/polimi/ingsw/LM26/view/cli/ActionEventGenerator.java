@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.view.cli;
 
+import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
@@ -14,6 +15,7 @@ public class ActionEventGenerator {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     ConsoleTools cTools=new ConsoleTools();
     ToolsActionEventGenerator tceGenerator;
+    public static boolean invalidActionEvent=false;
 
     ActionEventGenerator(){
         tceGenerator= new ToolsActionEventGenerator();
@@ -28,7 +30,7 @@ public class ActionEventGenerator {
         ActionEvent actionEvent = new ActionEvent();
         d=tceGenerator.askForDie(true);
         actionEvent.setDieFromDraft(d);
-        rc=tceGenerator.askForRowCol(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix());
+        rc=tceGenerator.askForDieFromFrameboard(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix(), false);
         actionEvent.setToBox1(rc);
         actionEvent.setPlayer(ConsoleTools.id);
         actionEvent.setId(1);
@@ -62,7 +64,7 @@ public class ActionEventGenerator {
     public ActionEvent askToolCard(){
         ActionEvent actionEvent=null;
         int n=tceGenerator.askforToolCardOnboard();
-        int id=ConsoleTools.model.getOnBoardCards().getToolCardList().get(n-1).getNum();
+        int id=ConsoleTools.model.getOnBoardCards().getToolArrayList().get(n-1);
         switch (id){
             case 2:
             case 3:
@@ -125,10 +127,10 @@ public class ActionEventGenerator {
         ActionEvent a=toolCEvent(tCardPos);
         a.setId(2);
         System.out.println("Cella da cui vuoi prendere il dado:");
-        box=tceGenerator.askForRowCol(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix());
+        box=tceGenerator.askForDieFromFrameboard(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix(), true);
         a.setFromBox1(box);
         System.out.println("Cella in cui vuoi mettere il dado:");
-        box=tceGenerator.askForRowCol(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix());
+        box=tceGenerator.askForDieFromFrameboard(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix(), false);
         a.setToBox1(box);
         return a;
     }
@@ -143,11 +145,11 @@ public class ActionEventGenerator {
         arrayTo.add(ae.getToBox1());
         ae.setFromBox1(null); ae.setFromBox1(null);
         System.out.println("Cella da cui vuoi prendere il dado:");
-        box=tceGenerator.askForRowCol(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix());
+        box=tceGenerator.askForDieFromFrameboard(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix(), true);
         arrayFrom.add(box);
         ae.setFromBoxList(arrayFrom);
         System.out.println("Cella in cui vuoi mettere il dado:");
-        box=tceGenerator.askForRowCol(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix());
+        box=tceGenerator.askForDieFromFrameboard(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix(), false);
         arrayTo.add(box);
         ae.setToBoxList(arrayTo);
         return ae;
@@ -156,7 +158,7 @@ public class ActionEventGenerator {
     private ActionEvent addToBox1(ActionEvent ae){
         Box box;
         System.out.println("Cella in cui vuoi mettere il dado:");
-        box=tceGenerator.askForRowCol(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix());
+        box=tceGenerator.askForDieFromFrameboard(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix(), false);
         ae.setToBox1(box);
         return ae;
     }
@@ -171,8 +173,13 @@ public class ActionEventGenerator {
     }
 
     private ActionEvent addDieFromRoundtrack(ActionEvent ae){
-        System.out.println("Dado dal tracciato dei round:");
-        ae.setDieFromRoundTrack(tceGenerator.askForDie(false));
+        if(ConsoleTools.model.getRoundTrackInt().getRoundTrackTurnList().size()!=0){
+            System.out.println("Dado dal tracciato dei round:");
+            ae.setDieFromRoundTrack(tceGenerator.askForDie(false));
+        }
+        else{System.out.println("Tracciato dei round vuoto, mossa non valida");
+            invalidActionEvent=true;
+        }
         return ae;
     }
 

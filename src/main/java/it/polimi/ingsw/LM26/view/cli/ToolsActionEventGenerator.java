@@ -49,7 +49,20 @@ public class ToolsActionEventGenerator {
         else return "decrement";
     }
 
-    public Box askForRowCol(Box[][] matrix){
+    public Box askForDieFromFrameboard(Box[][] matrix, boolean from){
+        boolean ok=false;
+        Box b;
+        do {
+            b=askForRowCol(matrix);
+            if(from && b.isIsPresent() || !from && !b.isIsPresent()){
+                ok=true;
+            }
+            else System.out.println("Posizione non valida, riprova");
+        }while (!ok);
+        return b;
+    }
+
+    private Box askForRowCol(Box[][] matrix){
         int r=0, c=0;
         int[] row=new int[]{1,4};
         int[] col=new int[]{1,5};

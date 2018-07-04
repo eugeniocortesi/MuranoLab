@@ -30,7 +30,7 @@ public class OnBoardCardsController {
         ImageView imView;
         this. gController=gController;
         obc= ModelManager.getModel().getOnBoardCards();
-        for(int i=0; i<obc.getToolCardList().size(); i++){
+        for(int i=0; i<obc.getToolArrayList().size(); i++){
             im=imageManager.getToolCard(obc.getToolArrayList().get(i));
             imView=(ImageView)cards.getChildren().get(i);
             imView.setImage(im);
@@ -39,7 +39,7 @@ public class OnBoardCardsController {
         }
         for(int i=0; i<obc.getObjectivePublicCardList().size(); i++){
             im=imageManager.getObjectiveCard(obc.getObjectivePublicCardList().get(i).getId());
-            imView=(ImageView)cards.getChildren().get(i+obc.getToolCardList().size());
+            imView=(ImageView)cards.getChildren().get(i+obc.getToolArrayList().size());
             imView.setImage(im);
         }
     }

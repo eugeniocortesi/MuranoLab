@@ -240,7 +240,7 @@ public class ConsoleStrings extends ViewInterface {
     }
 
     public void notifyMessage(ActionEvent ae){
-        if(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerState()==PlayerState.BEGINNING){
+        if(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerState()==PlayerState.BEGINNING && !ActionEventGenerator.invalidActionEvent){
             notify(ae);
             countDownLatch = new CountDownLatch(1);
             try {
@@ -250,7 +250,10 @@ public class ConsoleStrings extends ViewInterface {
                 Thread.currentThread().interrupt();
             }
         }
-        else showSetPlayerMenu(null, ConsoleTools.model.getPlayer(ConsoleTools.id));
+        else {
+            ActionEventGenerator.invalidActionEvent=false;
+            showSetPlayerMenu(null, ConsoleTools.model.getPlayer(ConsoleTools.id));
+        }
     }
 
     private class InputLoop extends Thread{
