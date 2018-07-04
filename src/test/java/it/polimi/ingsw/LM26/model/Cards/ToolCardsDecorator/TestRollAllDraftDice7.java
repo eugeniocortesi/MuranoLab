@@ -37,10 +37,10 @@ public class TestRollAllDraftDice7 {
 
         //it must enter the else
         if (model.getPlayerList().get(0).getActionHistory().isSecondTurn() && !model.getPlayerList().get(0).getActionHistory().isDieUsed()){
-            assertTrue(model.getDecks().getToolCardDeck().get(6).play(model.getPlayerList().get(0).getIDPlayer()));
+            assertTrue(model.getDecks().getToolCardDeck().get(6).play(model.getPlayerList().get(0)));
             model.getDraftPool().printDraftPool();
         }
-        else assertFalse(model.getDecks().getToolCardDeck().get(6).play(model.getPlayerList().get(0).getIDPlayer()));
+        else assertFalse(model.getDecks().getToolCardDeck().get(6).play(model.getPlayerList().get(0)));
 
         //trying at second turn
         model.getPlayerList().get(0).getActionHistory().setFirstTurn(false);
@@ -48,10 +48,10 @@ public class TestRollAllDraftDice7 {
 
         //it must enter the then
         if (model.getPlayerList().get(0).getActionHistory().isSecondTurn() && !model.getPlayerList().get(0).getActionHistory().isDieUsed()){
-            assertTrue(model.getDecks().getToolCardDeck().get(6).play(model.getPlayerList().get(0).getIDPlayer()));
+            assertTrue(model.getDecks().getToolCardDeck().get(6).play(model.getPlayerList().get(0)));
             model.getDraftPool().printDraftPool();
         }
-        else assertFalse(model.getDecks().getToolCardDeck().get(6).play(model.getPlayerList().get(0).getIDPlayer()));
+        else assertFalse(model.getDecks().getToolCardDeck().get(6).play(model.getPlayerList().get(0)));
 
     }
 

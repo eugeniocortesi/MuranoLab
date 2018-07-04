@@ -86,28 +86,6 @@ public class SetupHandler {
 
     public void setupPrivateCard() {
 
-        /*int count = model.getDecks().getObjectivePrivateCardDeck().size();
-
-        for (int j = 0; j < model.getPlayerList().size(); j++) {
-
-            Random rand = new Random();
-
-            int index = rand.nextInt(count);
-
-            while (model.getDecks().getObjectivePrivateCardDeck().get(index).isInUse()) {
-
-                rand = new Random();
-
-                index = rand.nextInt(count);
-            }
-
-            model.getDecks().getObjectivePrivateCardDeck().get(index).setInUse(true);
-
-            model.getDecks().getObjectivePrivateCardDeck().get(index).setPlayer(model.getPlayerList().get(j));
-
-            server.showPrivateCard(model.getPlayerList().get(j).getName(), model.getDecks().getObjectivePrivateCardDeck().get(index));
-        }*/
-
         for (int j = 0; j < model.getPlayerList().size(); j++)
 
             server.showPrivateCard(model.getPlayerList().get(j).getName(), model.getOnBoardCards().getPrivateCard(model.getPlayerList().get(j)));

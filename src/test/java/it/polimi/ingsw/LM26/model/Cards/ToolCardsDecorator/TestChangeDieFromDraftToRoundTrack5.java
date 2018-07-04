@@ -42,14 +42,14 @@ public class TestChangeDieFromDraftToRoundTrack5 {
             model.getPlayerList().get(i).setPlayerBoard(model.getDecks().getWindowFramePlayerBoardDeck().get(i));
             model.getPlayerList().get(i).getPlayerBoard().insertPatternIntoBoard(model.getPlayerList().get(i).getWindowPatternCard().getWindowPatter());
         }
-        Game game = new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());
-        InitialPhase initialPhase=new InitialPhase(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());
-        initialPhase.doAction(game, model.getPlayerList());
+        Game game = new Game();
+        InitialPhase initialPhase=new InitialPhase();
+        initialPhase.doAction(game);
         PhaseInt cf= game.getPhase();
         cf.nextRound(cf.getCurrentRound(), game);
         model.getDraftPool().printDraftPool();
 
-        RoundTrack rt = new RoundTrack();
+        RoundTrack rt = new RoundTrack("s");
 
         ArrayList<DieInt> list = new ArrayList<DieInt>();
         for (int h=0; h<2; h++){

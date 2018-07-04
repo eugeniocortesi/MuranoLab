@@ -9,6 +9,9 @@ public class ScoreTrack extends ScoreTrackInt {
     private ScoreMarker[] scoreMarkerList;
 
     public ScoreTrack(){
+    }
+
+    public ScoreTrack(String s){
 
         scoreMarkerList = new ScoreMarker[50];
 

@@ -142,6 +142,20 @@ public class ActionEvent extends ClassMessage implements Serializable {
     public void rewrite(){
 
         //card.rewrite();
+        if(fromBox1!=null)
+            fromBox1.rewrite();
+        if(toBox1!= null)
+            toBox1.rewrite();
+        if(toBoxList!=null){
+            for (int i=0; i< toBoxList.size(); i++){
+                toBoxList.get(i).rewrite();
+            }
+        }
+        if(fromBoxList!=null){
+            for(int i=0; i< fromBoxList.size(); i++ ){
+                fromBoxList.get(i).rewrite();
+            }
+        }
         if(dieFromDraft!= null)
             dieFromDraft.rewrite();
         if(dieFromRoundTrack!= null)

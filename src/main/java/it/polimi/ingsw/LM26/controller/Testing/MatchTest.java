@@ -27,8 +27,8 @@ public class MatchTest {
 
         this.controller = controller;
         cli= new CliTest(playing, controller);
-        this.game = new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());  //initialPhase
-        game.getPhase().doAction(game, model.getPlayerList());    //centralPhase
+        this.game = new Game();  //initialPhase
+        game.getPhase().doAction(game);    //centralPhase
         controller.setGamePhase(game.getPhase());
         this.model = model;
         this.model.hasChanged();
@@ -41,7 +41,7 @@ public class MatchTest {
 
         while(i<game.getPhase().getNrounds() && !game.getPhase().getOnePlayer()) {
 
-            playing = game.getPhase().getCurrentRound().nextPlayer(model.getPlayerList(), game.getPhase().getTurn());
+            playing = game.getPhase().getCurrentRound().nextPlayer();
 
             while (game.getPhase().getCurrentRound().getRoundState() != FINISHED) {
 
@@ -78,9 +78,9 @@ public class MatchTest {
                     System.out.println("this turn you are freezed");
                 }
 
-                game.getPhase().getCurrentRound().endAction(game.getPhase().getTurn(), model.getRoundTrackInt(), model.getDraftPool(), playing);
+                game.getPhase().getCurrentRound().endAction();
 
-                playing = game.getPhase().getCurrentRound().nextPlayer(model.getPlayerList(), game.getPhase().getTurn());
+                playing = game.getPhase().getCurrentRound().nextPlayer();
 
                 result = false;
             }
@@ -93,7 +93,7 @@ public class MatchTest {
             game.getPhase().nextRound(game.getPhase().getCurrentRound(), game);
         }
 
-        game.getPhase().doAction(game, model.getPlayerList());
+        game.getPhase().doAction(game);
 
         System.out.println("Il vincitore è " + game.getPhase().getWinner().getName());  // final phase
     }

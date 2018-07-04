@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 public class TestScoreTrack {
 
-    ScoreTrack st = new ScoreTrack();
+    ScoreTrack st = new ScoreTrack("s");
 
     @Test
     public void checkScoreTrack(){

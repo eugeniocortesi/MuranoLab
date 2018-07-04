@@ -49,7 +49,7 @@ public class TestPlaceDie {
         player.getPlayerBoard().printCard();
     }
 
-   /* @Test
+    @Test
 
     public void checkPlacement(){
 
@@ -134,5 +134,5 @@ public class TestPlaceDie {
 
     }
 
-*/
+
 }

@@ -50,11 +50,11 @@ public class TestMoveWithNoValueRestriction3 {
     @Test
     public void checkEffect() {
 
-       /* int i= 0, j= 0 ;
+        int i= 0, j= 0 ;
         i = rand.nextInt(4);
         j = rand.nextInt(5);
 
-        if(!board[i][j].isIsPresent()) assertFalse(model.getDecks().getToolCardDeck().get(2).play(board[i][j], board[0][0], player.getIDPlayer()));
+        if(!board[i][j].isIsPresent()) assertFalse(model.getDecks().getToolCardDeck().get(2).play(board[i][j], board[0][0], player));
         //die not present in first position
 
         die1 = new Die(Color.ANSI_BLUE);
@@ -67,38 +67,43 @@ public class TestMoveWithNoValueRestriction3 {
         i = rand.nextInt(4);
         j = rand.nextInt(5);
         System.out.println("trying with "+i+" "+j);
-        while(!model.getDecks().getToolCardDeck().get(2).play(board[0][0], board[i][j], player.getIDPlayer())) {
+        int count=0;
+        while(count<=1000 && !model.getDecks().getToolCardDeck().get(2).play(board[0][0], board[i][j], player)) {
             i = rand.nextInt(4);
             j = rand.nextInt(5);
             System.out.println("trying with "+i+" "+j);
+            count++;
         }
-        player.getPlayerBoard().printCard();
-        if(board[i][j].getPatternBox().isColor() && !board[i][j].getPatternBox().getColor().equals(Color.WHITE))
-            assertEquals(die1.getColor(), board[i][j].getPatternBox().getColor());
-        placement = new PlaceDie(die1, board[i][j], player);
-        assertTrue(placement.checkEdgeRestrictions());
+
+        if(count<100) {
+            player.getPlayerBoard().printCard();
+            if (board[i][j].getPatternBox().isColor() && !board[i][j].getPatternBox().getColor().equals(Color.WHITE))
+                assertEquals(die1.getColor(), board[i][j].getPatternBox().getColor());
+            placement = new PlaceDie(die1, board[i][j], player);
+            assertTrue(placement.checkEdgeRestrictions());
 
 
-        board[i][j].free();
-        board[1][0].setDie(die1);
-        die2=new Die(Color.ANSI_RED);
-        die2.roll();
-        board[1][1].setDie(die2);
-        player.getPlayerBoard().setNumDice(2);
-        //die must respect nearby restriction and value, but can be placed on every colors
-        i = rand.nextInt(4);
-        j = rand.nextInt(5);
-        while(! model.getDecks().getToolCardDeck().get(2).play(board[1][1], board[i][j], player.getIDPlayer())){
+            board[i][j].free();
+            board[1][0].setDie(die1);
+            die2 = new Die(Color.ANSI_RED);
+            die2.roll();
+            board[1][1].setDie(die2);
+            player.getPlayerBoard().setNumDice(2);
+            //die must respect nearby restriction and value, but can be placed on every colors
             i = rand.nextInt(4);
             j = rand.nextInt(5);
-            System.out.println("trying with "+i+" "+j);
+            while (!model.getDecks().getToolCardDeck().get(2).play(board[1][1], board[i][j], player)) {
+                i = rand.nextInt(4);
+                j = rand.nextInt(5);
+                System.out.println("trying with " + i + " " + j);
+            }
+            player.getPlayerBoard().printCard();
+            //die must respect nearby restriction and value, but can be placed on every colors
+            if (board[i][j].getPatternBox().isColor() && !board[i][j].getPatternBox().getColor().equals(Color.WHITE))
+                assertEquals(die2.getColor(), board[i][j].getPatternBox().getColor());
+            placement = new PlaceDie(die2, board[i][j], player);
+            assertTrue(placement.checkNearByRestrictions());
         }
-        player.getPlayerBoard().printCard();
-        //die must respect nearby restriction and value, but can be placed on every colors
-        if(board[i][j].getPatternBox().isColor() && !board[i][j].getPatternBox().getColor().equals(Color.WHITE))
-            assertEquals(die2.getColor(), board[i][j].getPatternBox().getColor());
-        placement = new PlaceDie(die2, board[i][j], player);
-        assertTrue(placement.checkNearByRestrictions());*/
     }
 }
 

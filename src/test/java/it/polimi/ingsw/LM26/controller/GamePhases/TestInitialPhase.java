@@ -1,6 +1,5 @@
-package it.polimi.ingsw.LM26.model.GamePhases;
+package it.polimi.ingsw.LM26.controller.GamePhases;
 
-import it.polimi.ingsw.LM26.controller.GamePhases.InitialPhase;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
@@ -21,8 +20,8 @@ public class TestInitialPhase {
     private Model model;
     private Decks deck;
     private ArrayList<PlayerZone> playerList= new ArrayList<PlayerZone>();
-    private OnBoardCards onBoardCards = new OnBoardCards();
-    private InitialPhase initialPhase = new InitialPhase(playerList,deck, onBoardCards);
+    private OnBoardCards onBoardCards = new OnBoardCards("s");
+    private InitialPhase initialPhase = new InitialPhase();
 
     @Before
     public void SetUpInitialPhase(){
@@ -35,13 +34,14 @@ public class TestInitialPhase {
         for(int i=0; i<playerList.size();i++){
             playerList.get(i).setWindowPatternCard(deck.getWindowPatternCardDeck().get(i));
         }
+        model.setPlayerList(playerList);
     }
 
 
 
     @Test
     public void TestSetTokens(){
-        initialPhase.setTokens(playerList);
+        initialPhase.setTokens();
         for(int i=0, j=0; i<playerList.size();i++, j++){
             int t=playerList.get(i).getToken().getTokenNumber();
             assertEquals(t, deck.getWindowPatternCardDeck().get(j).getToken());
@@ -51,7 +51,7 @@ public class TestInitialPhase {
     @Test
     //tests that every score marker has the same colour of its frame board
     public void TestSetScoreMarkerAndWindowFrame(){
-        initialPhase.setScoreMarkerAndWindowFrame(playerList, deck);
+        initialPhase.setScoreMarkerAndWindowFrame();
         for(PlayerZone i : playerList){
             assertEquals(i.getPlayerBoard().getColor(), i.getScoreMarker().getColor());
             System.out.println(i.getIDPlayer());

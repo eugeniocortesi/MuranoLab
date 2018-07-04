@@ -21,7 +21,10 @@ public class OnBoardCards implements Serializable {
 
     private ArrayList<Integer> toolNumberList;
 
-    public OnBoardCards() {
+    public OnBoardCards(){
+    }
+
+    public OnBoardCards(String s) {
 
         this.objectivePublicCardList = new ArrayList<ObjectivePublicCard>();
 

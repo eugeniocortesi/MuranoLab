@@ -4,42 +4,55 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 
 import java.io.Serializable;
 
-public class Box implements Serializable{
+public class Box implements Serializable {
 
     private PatternBox patternBox = null;
 
-    private DieInt die=null;
+    private DieInt die = null;
 
     private boolean isPresent = false;
 
-    private int i=0, j=0;
+    private int i = 0, j = 0;
+
+    public Box(){
+    }
 
     public Box(int i, int j) {
+
         this.i = i;
+
         this.j = j;
     }
 
     public int getI() {
+
         return i;
     }
 
     public int getJ() {
+
         return j;
     }
 
     public void setDie(DieInt die) {
+
         this.die = die;
-        isPresent=true;
+
+        isPresent = true;
     }
 
     public DieInt getDie() {
-        if(isPresent==false)return null;
+
+        if (!isPresent) return null;
+
         return die;
     }
 
-    public void free(){
-        isPresent=false;
-        die=null;
+    public void free() {
+
+        isPresent = false;
+
+        die = null;
     }
 
     public boolean isIsPresent() {
@@ -48,10 +61,19 @@ public class Box implements Serializable{
     }
 
     public PatternBox getPatternBox() {
+
         return patternBox;
     }
 
     public void setPatternBox(PatternBox patternBox) {
+
         this.patternBox = patternBox;
+    }
+
+    public void rewrite() {
+
+        if(die!=null)
+
+            die.rewrite();
     }
 }

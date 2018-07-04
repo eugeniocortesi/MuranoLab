@@ -23,9 +23,7 @@ public class EventChecker {
         this.model = model;
     }
 
-    public boolean check(DieInt dieFromDraft, Box toBox, int pl) {
-
-        PlayerZone player = model.getPlayerList().get(pl);
+    public boolean checkPlacement(DieInt dieFromDraft, Box toBox, PlayerZone player) {
 
         //this control is used for card 6 and 11 (if it's first attempt of placing goes wrong)
 
@@ -83,10 +81,53 @@ public class EventChecker {
         }
     }
 
-    //TODO
-    //ATTENZIONE ALL'ITERNO DI OGNI CARTA NON PERMETTERE UN PIAZZAMENTO SE DADO è GIA ALREADY USED
+    public boolean checkActionAvailability(PlayerZone player, ToolCardInt card){
 
-    public boolean check(ToolCardInt twoThree, Box fromBox, Box toBox, int player) {
+        if (player.getActionHistory().isCardUsed() && ! model.getRestrictions().isFirstPart()) {
+
+            System.out.println("Action already done ");
+
+            return false;
+        }
+
+        return (checkToken(player, card));
+    }
+
+
+    public boolean checkCard(int i) {
+
+        if (model.getOnBoardCards().getToolCardList().contains(model.getDecks().getToolCardDeck().get(i - 1)))
+
+            return true;
+
+        else System.out.println("this card is not one of the selected ones");
+
+        return false;
+    }
+
+    public boolean checkToken(PlayerZone player, ToolCardInt toolCard) {
+
+        if (toolCard.getToken() > 0) {
+
+            if (player.getToken().getTokenNumber() > 1) {
+
+                toolCard.setTwoToken(player);
+
+                return true;
+            }
+        } else if (player.getToken().getTokenNumber() > 0) {
+
+            toolCard.setOneToken(player);
+
+            return true;
+        }
+
+        System.out.println("not enough tokens " + player.getToken().getTokenNumber() + player.getWindowPatternCard().getToken() + toolCard.getToken());
+
+        return false;
+    }
+
+   /* public boolean check(ToolCardInt twoThree, Box fromBox, Box toBox, int player) {
 
         PlayerZone pl = model.getPlayerList().get(player);
 
@@ -236,6 +277,7 @@ public class EventChecker {
     public boolean check(ToolCardInt twelve, DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
 
         PlayerZone pl = model.getPlayerList().get(player);
+
         if (pl.getActionHistory().isCardUsed()) {
 
             System.out.println("Action already done ");
@@ -256,36 +298,6 @@ public class EventChecker {
 
         return false;
     }
+    */
 
-    public boolean checkCard(int i) {
-
-        if (model.getOnBoardCards().getToolCardList().contains(model.getDecks().getToolCardDeck().get(i - 1)))
-
-            return true;
-
-        else System.out.println("this card is not one of the selected ones");
-
-        return false;
-    }
-
-    public boolean checkToken(PlayerZone player, ToolCardInt toolCard) {
-
-        if (toolCard.getToken() > 0) {
-
-            if (player.getToken().getTokenNumber() > 1) {
-
-                toolCard.setTwoToken(player);
-
-                return true;
-            }
-        } else if (player.getToken().getTokenNumber() > 0) {
-
-            toolCard.setOneToken(player);
-
-            return true;
-        }
-        System.out.println("not enough tokens " + player.getToken().getTokenNumber() + player.getWindowPatternCard().getToken() + toolCard.getToken());
-
-        return false;
-    }
 }

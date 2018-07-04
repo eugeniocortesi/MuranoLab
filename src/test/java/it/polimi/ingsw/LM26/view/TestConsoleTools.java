@@ -54,8 +54,8 @@ public class TestConsoleTools {
         dieList.add(die3);
 
         DieInt d;
-        DraftPool dPool= new DraftPool();
-        RoundTrackInt rTrack= new RoundTrack();
+        DraftPool dPool= new DraftPool("s");
+        RoundTrackInt rTrack= new RoundTrack("s");
         Bag bag = new Bag();
         for(int j=0; j<5; j++){
             d= bag.draw();
@@ -152,7 +152,7 @@ public class TestConsoleTools {
         die4.increment();
         ArrayList<DieInt> searched= new ArrayList<DieInt>();
         searched.add(die4);
-        RoundTrackInt rt=new RoundTrack();
+        RoundTrackInt rt=new RoundTrack("s");
        for(int j=0; j<6; j++){
            rt.addDice(dieList);
        }

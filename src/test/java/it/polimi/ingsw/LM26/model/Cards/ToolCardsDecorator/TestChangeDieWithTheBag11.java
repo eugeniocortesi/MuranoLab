@@ -51,7 +51,7 @@ public class TestChangeDieWithTheBag11 {
         DieInt die = model.getDraftPool().get(3);
 
         //no placement has been done
-        assertTrue(model.getDecks().getToolCardDeck().get(10).play(die, model.getPlayerList().get(0).getIDPlayer()));
+        assertTrue(model.getDecks().getToolCardDeck().get(10).play(die, model.getPlayerList().get(0)));
 
         assertFalse(model.getDraftPool().getInDraft().contains(die));
         if(model.getBag().getInBag().contains(die))
@@ -62,7 +62,7 @@ public class TestChangeDieWithTheBag11 {
         //a placement has been done
         model.getPlayerList().get(0).getActionHistory().setDieUsed(true);
         model.getPlayerList().get(0).getActionHistory().setPlacement(true);
-        assertFalse(model.getDecks().getToolCardDeck().get(10).play(die, model.getPlayerList().get(0).getIDPlayer()));
+        assertFalse(model.getDecks().getToolCardDeck().get(10).play(die, model.getPlayerList().get(0)));
 
         die = model.getRestrictions().getDie();
         die.setRoll(3);
@@ -75,7 +75,7 @@ public class TestChangeDieWithTheBag11 {
             int i = rand.nextInt(4);
             int j = rand.nextInt(5);
 
-            if (model.getDecks().getToolCardDeck().get(10).play(3, board[i][j],player.getIDPlayer())) {
+            if (model.getDecks().getToolCardDeck().get(10).play(3, board[i][j],player)) {
                 player.getPlayerBoard().printCard();
                 ok = true;
             } else {
@@ -89,7 +89,7 @@ public class TestChangeDieWithTheBag11 {
 
         System.out.println(count);
         model.getRestrictions().setFirstPart(false);
-        assertFalse(model.getDecks().getToolCardDeck().get(10).play(3, board[0][0], player.getIDPlayer()));
+        assertFalse(model.getDecks().getToolCardDeck().get(10).play(3, board[0][0], player));
 
     }
 

@@ -1,10 +1,6 @@
-package it.polimi.ingsw.LM26.model.GamePhases;
+package it.polimi.ingsw.LM26.controller.GamePhases;
 
-import it.polimi.ingsw.LM26.controller.GamePhases.FinalPhase;
-import it.polimi.ingsw.LM26.controller.GamePhases.Game;
-import it.polimi.ingsw.LM26.controller.GamePhases.InitialPhase;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
-import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
@@ -13,7 +9,6 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.Token;
-import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,6 +34,7 @@ public class TestFinalPhase {
         for(int i=0; i<4; i++){
             playerList.add(new PlayerZone("name", i+1));
         }
+        model.setPlayerList(playerList);
 
     }
 
@@ -68,7 +64,7 @@ public class TestFinalPhase {
             playerList.get(i).setLastRoundTurn(i);
         }
         System.out.println("\n");
-        player = finalPhase.declareWinner(playerList);
+        player = finalPhase.declareWinner();
         System.out.println(player.getIDPlayer());
     }
 
@@ -82,7 +78,7 @@ public class TestFinalPhase {
         playerList.get(1).getScoreMarker().incrementScore(67);
         playerList.get(2).getScoreMarker().incrementScore(86);
         playerList.get(3).getScoreMarker().incrementScore(47);
-        player=finalPhase.declareWinner(playerList);
+        player=finalPhase.declareWinner();
         assertEquals(playerList.get(2), player);
     }
 
@@ -97,7 +93,7 @@ public class TestFinalPhase {
         playerList.get(1).setPrivatePoints(36);
         playerList.get(2).setPrivatePoints(18);
         playerList.get(3).setPrivatePoints(28);
-        player=finalPhase.declareWinner(playerList);
+        player=finalPhase.declareWinner();
         assertEquals(playerList.get(0), player);
     }
 
@@ -113,7 +109,7 @@ public class TestFinalPhase {
         playerList.get(1).setToken(new Token(2));
         playerList.get(2).setToken(new Token(3));
         playerList.get(3).setToken(new Token(1));
-        player=finalPhase.declareWinner(playerList);
+        player=finalPhase.declareWinner();
         assertEquals(playerList.get(2), player);
     }
 
@@ -130,7 +126,7 @@ public class TestFinalPhase {
         playerList.get(1).setLastRoundTurn(0);
         playerList.get(2).setLastRoundTurn(2);
         playerList.get(3).setLastRoundTurn(3);
-        player=finalPhase.declareWinner(playerList);
+        player=finalPhase.declareWinner();
         assertEquals(playerList.get(1), player);
     }
 
@@ -151,8 +147,8 @@ public class TestFinalPhase {
 
         }
 
-        Game game = new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());  //initialPhase
-        game.getPhase().doAction(game, model.getPlayerList());
+        Game game = new Game();  //initialPhase
+        game.getPhase().doAction(game);
 
         for (int i = 0; i < 2; i++) {
             Box[][] b = model.getPlayerList().get(i).getPlayerBoard().getBoardMatrix();
@@ -206,7 +202,7 @@ public class TestFinalPhase {
             System.out.println("points player " + i + " " + model.getPlayerList().get(i).getScoreMarker().getRealPoints());
             System.out.println("on scorTrack: " + model.getPlayerList().get(i).getScoreMarker().getPoints());
         }
-        System.out.println("winner is: " + fin.declareWinner(model.getPlayerList()).getName());
+        System.out.println("winner is: " + fin.declareWinner().getName());
 
     }
 

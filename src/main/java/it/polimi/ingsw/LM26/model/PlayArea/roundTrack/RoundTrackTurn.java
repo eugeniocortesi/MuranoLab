@@ -9,9 +9,8 @@ public class RoundTrackTurn implements Serializable {
 
     private ArrayList<DieInt> diceList;
 
-    /*public RoundTrackTurn(){
-        diceList = new ArrayList<DieInt>();
-    }*/
+    public RoundTrackTurn(){
+    }
 
     public RoundTrackTurn ( ArrayList<DieInt> ad){
 
@@ -36,5 +35,16 @@ public class RoundTrackTurn implements Serializable {
 
         }
         System.out.println("\n");
+    }
+
+    public void rewrite(){
+
+        if(diceList!=null){
+
+            for(int i = 0; i< diceList.size(); i++){
+
+                diceList.get(i).rewrite();
+            }
+        }
     }
 }

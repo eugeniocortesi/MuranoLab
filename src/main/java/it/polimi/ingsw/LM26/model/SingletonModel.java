@@ -9,7 +9,7 @@ public class SingletonModel {
 
 
         if(model==null) {
-            model = new Model("ready");
+            model = new Model();
             model.reset();
         }
 

@@ -33,7 +33,7 @@ public class TestRollToTheOppositeFace10 {
 
         die.setRoll(1);
 
-        model.getDecks().getToolCardDeck().get(9).play(die, player.getIDPlayer());
+        model.getDecks().getToolCardDeck().get(9).play(die, player);
 
         assertEquals(die.getValue(), 6);
 
@@ -41,7 +41,7 @@ public class TestRollToTheOppositeFace10 {
 
         die.setRoll(2);
 
-        model.getDecks().getToolCardDeck().get(9).play(die, player.getIDPlayer());
+        model.getDecks().getToolCardDeck().get(9).play(die, player);
 
         assertEquals(die.getValue(), 5);
 
@@ -49,7 +49,7 @@ public class TestRollToTheOppositeFace10 {
 
         die.setRoll(3);
 
-        model.getDecks().getToolCardDeck().get(9).play(die, player.getIDPlayer());
+        model.getDecks().getToolCardDeck().get(9).play(die, player);
 
         assertEquals(die.getValue(), 4);
 
@@ -57,7 +57,7 @@ public class TestRollToTheOppositeFace10 {
 
         die.setRoll(4);
 
-        model.getDecks().getToolCardDeck().get(9).play(die, player.getIDPlayer());
+        model.getDecks().getToolCardDeck().get(9).play(die, player);
 
         assertEquals(die.getValue(), 3);
 
@@ -65,7 +65,7 @@ public class TestRollToTheOppositeFace10 {
 
         die.setRoll(5);
 
-        model.getDecks().getToolCardDeck().get(9).play(die, player.getIDPlayer());
+        model.getDecks().getToolCardDeck().get(9).play(die, player);
 
         assertEquals(die.getValue(), 2);
 
@@ -73,7 +73,7 @@ public class TestRollToTheOppositeFace10 {
 
         die.setRoll(6);
 
-        model.getDecks().getToolCardDeck().get(9).play(die, player.getIDPlayer());
+        model.getDecks().getToolCardDeck().get(9).play(die, player);
 
         assertEquals(die.getValue(), 1);
 

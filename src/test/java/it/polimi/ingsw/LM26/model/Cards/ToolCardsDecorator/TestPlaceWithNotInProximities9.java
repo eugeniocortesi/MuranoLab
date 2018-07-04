@@ -48,50 +48,56 @@ public class TestPlaceWithNotInProximities9 {
     }
 
     @Test
-    public void checkEffect(){
-/*
+    public void checkEffect() {
+
         board[0][0].setDie(die);
-        assertFalse(model.getDecks().getToolCardDeck().get(8).play(die, board[0][0],player.getIDPlayer()));
+        assertFalse(model.getDecks().getToolCardDeck().get(8).play(die, board[0][0], player));
         board[0][0].free();
 
-        die=new Die(Color.ANSI_RED);
+        die = new Die(Color.ANSI_RED);
         die.roll();
         //first on the edge
         int i = rand.nextInt(4);
         int j = rand.nextInt(5);
-        while (!model.getDecks().getToolCardDeck().get(8).play(die, board[i][j],player.getIDPlayer())) {
+        int count = 0;
+        while (count <= 1000 && !model.getDecks().getToolCardDeck().get(8).play(die, board[i][j], player)) {
             i = rand.nextInt(4);
             j = rand.nextInt(5);
+            count++;
         }
-        assertTrue(board[i][j].isIsPresent());
-        if(board[i][j].getPatternBox().isShade())
-            assertEquals(die.getValue(), board[i][j].getPatternBox().getValue());
-        if(board[i][j].getPatternBox().isColor() && !board[i][j].getPatternBox().getColor().equals(Color.WHITE))
-            assertEquals(die.getValue(), board[i][j].getPatternBox().getValue());
-        assertTrue(i==0 || j==0 || i==3 || j==4);
-        player.getPlayerBoard().printCard();
+        if (count < 1000) {
+            assertTrue(board[i][j].isIsPresent());
+            if (board[i][j].getPatternBox().isShade())
+                assertEquals(die.getValue(), board[i][j].getPatternBox().getValue());
+            if (board[i][j].getPatternBox().isColor() && !board[i][j].getPatternBox().getColor().equals(Color.WHITE))
+                assertEquals(die.getValue(), board[i][j].getPatternBox().getValue());
+            assertTrue(i == 0 || j == 0 || i == 3 || j == 4);
+            player.getPlayerBoard().printCard();
 
-        player.getActionHistory().setDieUsed(false) ;
-        player.getActionHistory().setPlacement(false);
-        //second everywhere
-        die=new Die(Color.ANSI_RED);
-        die.roll();
-        i = rand.nextInt(4);
-        j = rand.nextInt(5);
-        while (!model.getDecks().getToolCardDeck().get(8).play(die, board[i][j],player.getIDPlayer())) {
+            player.getActionHistory().setDieUsed(false);
+            player.getActionHistory().setPlacement(false);
+            //second everywhere
+            die = new Die(Color.ANSI_RED);
+            die.roll();
             i = rand.nextInt(4);
             j = rand.nextInt(5);
+            count = 0;
+            while (count <=1000 && !model.getDecks().getToolCardDeck().get(8).play(die, board[i][j], player)) {
+                i = rand.nextInt(4);
+                j = rand.nextInt(5);
+                count++;
+            }
+            if(count<1000) {
+                assertTrue(board[i][j].isIsPresent());
+                if (board[i][j].getPatternBox().isShade())
+                    assertEquals(die.getValue(), board[i][j].getPatternBox().getValue());
+                if (board[i][j].getPatternBox().isColor() && !board[i][j].getPatternBox().getColor().equals(Color.WHITE))
+                    assertEquals(die.getColor(), board[i][j].getPatternBox().getColor());
+                player.getPlayerBoard().printCard();
+
+
+                assertTrue(player.getActionHistory().isDieUsed() && player.getActionHistory().isPlacement());
+            }
         }
-        assertTrue(board[i][j].isIsPresent());
-        if(board[i][j].getPatternBox().isShade())assertEquals(die.getValue(), board[i][j].getPatternBox().getValue());
-        if(board[i][j].getPatternBox().isColor() && !board[i][j].getPatternBox().getColor().equals(Color.WHITE))
-            assertEquals(die.getColor(), board[i][j].getPatternBox().getColor());
-        player.getPlayerBoard().printCard();
-
-
-
-        assertTrue(player.getActionHistory().isDieUsed() && player.getActionHistory().isPlacement());*/
     }
-
-
 }

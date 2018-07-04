@@ -10,5 +10,4 @@ public class ConcreteWindowPatternCardCreator extends CardCreator {
 
             return new WindowPatternCard(token, title, matrix);
         }
-
 }

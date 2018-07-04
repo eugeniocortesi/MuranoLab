@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class TestDraftPool {
 
-    DraftPool draftPool = new DraftPool();
+    DraftPool draftPool = new DraftPool("s");
 
     @Test
     public void checkDraftPool(){

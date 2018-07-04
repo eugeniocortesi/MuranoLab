@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class TestRoundTrack {
 
-    RoundTrack roundTrack = new RoundTrack();
+    RoundTrack roundTrack = new RoundTrack("s");
     Bag bag = new Bag();
 
     @Test

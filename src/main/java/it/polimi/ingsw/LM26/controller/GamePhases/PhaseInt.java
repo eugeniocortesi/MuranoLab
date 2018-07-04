@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public interface PhaseInt extends Serializable{
 
-    public void doAction(Game game, ArrayList<PlayerZone> playerList);
+    public void doAction(Game game);
 
     public void nextRound(Round round, Game game);
 

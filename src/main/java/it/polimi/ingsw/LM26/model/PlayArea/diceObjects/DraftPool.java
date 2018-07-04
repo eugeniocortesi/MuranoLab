@@ -7,7 +7,10 @@ public class DraftPool implements Serializable {
 
     private ArrayList<DieInt> inDraft;
 
-    public DraftPool() {
+    public DraftPool(){
+    }
+
+    public DraftPool(String s) {
 
         this.inDraft = new ArrayList<DieInt>();
     }

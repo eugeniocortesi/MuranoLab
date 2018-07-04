@@ -12,8 +12,6 @@ import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class CentralPhase implements PhaseInt{
 
-    private RoundTrackInt roundTrack;
-
     private final int nrounds=10;
 
     private ArrayList<Round> rounds;
@@ -24,27 +22,19 @@ public class CentralPhase implements PhaseInt{
 
     private int[] turn; //stabilisce l'ordine dei giocatori all'interno del turno, es "12344321", "123321"..
 
-    private ArrayList<PlayerZone> playerList;
-
     Model model;
 
-    public CentralPhase(ArrayList<PlayerZone> playerZones) {
+    public CentralPhase() {
 
         this.model = singletonModel();
 
-        this.roundTrack=model.getRoundTrackInt();
+        turn=setOrder(model.getPlayerList().size());
 
-        this.round= new Round(roundTrack, playerZones, nrounds, this);
+        this.round= new Round( turn);
 
         rounds= new ArrayList<Round>();
 
         rounds.add(round);
-
-        playerList= new ArrayList<PlayerZone>();
-
-        playerList.addAll(playerZones);
-
-        turn=setOrder(playerList.size());
     }
 
     //inizializza turn[]
@@ -82,11 +72,6 @@ public class CentralPhase implements PhaseInt{
     }
 
     @Override
-    public int[] getTurn() {
-        return turn;
-    }
-
-    @Override
     public PlayerZone getWinner() {
 
         throw new UnsupportedOperationException("Not supported here");
@@ -108,10 +93,16 @@ public class CentralPhase implements PhaseInt{
 
             resetOrder(model.getPlayerList().size());
 
-            this.round=new Round(roundTrack, playerList, nrounds, this);
+            this.round=new Round(turn);
 
             rounds.add(round);
         }
+    }
+
+    @Override
+    public int[] getTurn() {
+
+        return turn;
     }
 
     @Override
@@ -135,14 +126,13 @@ public class CentralPhase implements PhaseInt{
     }
 
     @Override
-
     public Round getCurrentRound() {
 
         return round;
     }
 
     @Override
-    public void doAction(Game game, ArrayList<PlayerZone> playerList) {
+    public void doAction(Game game) {
 
         throw new UnsupportedOperationException("Not supported here");
     }

@@ -7,5 +7,4 @@ public abstract class CardInt implements Serializable {
     public String typeCard;
 
     public abstract void rewrite();
-
 }

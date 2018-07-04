@@ -11,17 +11,18 @@ public class Game implements Serializable {
 
     private PhaseInt phase;
 
+    public Game() {
 
-
-    public Game(ArrayList<PlayerZone> playerZones, Decks decks, OnBoardCards onBoardCards) {
-        this.phase = new InitialPhase(playerZones, decks, onBoardCards);
+        this.phase = new InitialPhase();
     }
 
-    public PhaseInt getPhase(){
+    public PhaseInt getPhase(){  //usare getPhase per chiamare i metodi della fase corrente
+
         return  phase;
-    } //usare getPhase per chiamare i metodi della fase corrente
+    }
 
     public void setPhase(PhaseInt phase){
+
         this.phase=phase;
     }
 }

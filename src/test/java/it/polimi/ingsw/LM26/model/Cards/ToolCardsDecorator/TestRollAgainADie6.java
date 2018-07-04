@@ -22,10 +22,10 @@ public class TestRollAgainADie6 {
         DieInt die = new Die(Color.ANSI_RED);
         die.roll();
 
-        model.getDecks().getToolCardDeck().get(5).play(die, model.getPlayerList().get(0).getIDPlayer());
-        if (!model.getPlayerList().get(0).getActionHistory().isDieUsed() && !model.getPlayerList().get(0).getActionHistory().isPlacement())
+        model.getDecks().getToolCardDeck().get(5).play(die, model.getPlayerList().get(0));
+        if (!model.getPlayerList().get(0).getActionHistory().isDieUsed() && !model.getPlayerList().get(0).getActionHistory().isPlacement()) {
             assertEquals(model.getRestrictions().getDie(), die);
-        assertTrue(model.getRestrictions().isNeedPlacement());
-
+            assertTrue(model.getRestrictions().isNeedPlacement());
+        }
     }
 }

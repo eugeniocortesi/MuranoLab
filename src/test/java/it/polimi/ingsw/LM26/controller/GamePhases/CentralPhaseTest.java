@@ -1,7 +1,5 @@
-package it.polimi.ingsw.LM26.model.GamePhases;
+package it.polimi.ingsw.LM26.controller.GamePhases;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import it.polimi.ingsw.LM26.controller.GamePhases.CentralPhase;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
@@ -9,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.ENDING;
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
@@ -25,7 +22,7 @@ public class CentralPhaseTest {
     private int[] v4 ={3,1,2,2,1,3};
     private int[] v5 ={2,3,4,1,1,4,3,2};
 
-    private RoundTrack roundTrack= new RoundTrack();
+    private RoundTrack roundTrack= new RoundTrack("s");
     private Model model;
 
 
@@ -70,7 +67,7 @@ public class CentralPhaseTest {
     @Test
     public void checkSetOrder234players(){
 
-        CentralPhase centralPhase = new CentralPhase(model.getPlayerList());
+        CentralPhase centralPhase = new CentralPhase();
         assertArrayEquals(centralPhase.getTurn(), v1);
 
         centralPhase.resetOrder(model.getPlayerList().size());
@@ -89,23 +86,12 @@ public class CentralPhaseTest {
         model.getDecks().getObjectivePrivateCardDeck().get(3).setPlayer(player4);
         model.getPlayerList().add(player4);
 
-        centralPhase = new CentralPhase(model.getPlayerList());
+        centralPhase = new CentralPhase();
         assertArrayEquals(centralPhase.getTurn(), v2);
         centralPhase.resetOrder(model.getPlayerList().size());
         assertArrayEquals(centralPhase.getTurn(), v5);
 
 
 
-
-
-        /*playerZones.add(new PlayerZone(name, 2));
-        CentralPhase centralPhase2 = new CentralPhase(playerZones);
-        assertArrayEquals(centralPhase2.getTurn(), v3);
-        System.out.println(Arrays.toString(centralPhase2.getTurn()));
-        System.out.println("\n");
-        playerZones.add(new PlayerZone(name, 3));
-        CentralPhase centralPhase3 = new CentralPhase(playerZones);
-        assertArrayEquals(centralPhase3.getTurn(), v4);
-        System.out.println(Arrays.toString(centralPhase3.getTurn()));*/
     }
 }

@@ -36,8 +36,8 @@ public class TestEventChecker {
             System.out.println(model.getPlayerList().get(i).getWindowPatternCard().getToken());
         }
 
-        start= new InitialPhase(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());
-        start.setTokens(model.getPlayerList());
+        start= new InitialPhase();
+        start.setTokens();
     }
 
     @Test

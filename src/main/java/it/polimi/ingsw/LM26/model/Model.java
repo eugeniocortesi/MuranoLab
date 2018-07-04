@@ -47,21 +47,18 @@ public class Model extends ObservableSimple implements Serializable {
     private transient Restrictions restrictions;
 
     public Model(){
+
+
         ;
     }
 
-    public Model(String s ) {
-
-
-    }
-
     public void reset() {
-        this.roundTrackInt = new RoundTrack();
-        this.scoreTrackInt = new ScoreTrack();
+        this.roundTrackInt = new RoundTrack("inRoundTrack");
+        this.scoreTrackInt = new ScoreTrack("inScoreTrack");
         this.bag = new Bag();
-        this.draftPool =new DraftPool();
+        this.draftPool =new DraftPool("inDraft");
         this.decks=loadDecks();
-        this.onBoardCards= new OnBoardCards();
+        this.onBoardCards= new OnBoardCards("onBoardCards");
         this.playerList=new ArrayList<PlayerZone>();
         this.restrictions=new Restrictions();
     }

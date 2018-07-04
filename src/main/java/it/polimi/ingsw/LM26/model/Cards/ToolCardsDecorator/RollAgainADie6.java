@@ -13,118 +13,136 @@ import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 public class RollAgainADie6 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
-    private boolean needPlacement=false;
-    private DieInt die;
 
     public RollAgainADie6() {
     }
 
     public RollAgainADie6(ToolCard toolcard) {
+
         this.toolcard = toolcard;
+
         this.type="RollAgainADie6";
+
         this.typeToolCard = "ToolCard";
     }
 
-    public int getNum() {
+    @Override
+    public boolean play(DieInt dieFromDraft, PlayerZone player) {
+
+        Model model = singletonModel();
+
+        dieFromDraft.roll();
+
+        dieFromDraft.dump();
+
+        if (player.getActionHistory().isDieUsed() || player.getActionHistory().isPlacement())
+
+            System.out.println("you can't place the die");
+
+        else { model.getRestrictions().setNeedPlacement(true);
+
+            model.getRestrictions().setDie(dieFromDraft);
+        }
+
+        return true;
+    }
+
+    @Override
+    public int getNum(){
+
         return toolcard.getNum();
+    }
+
+    @Override
+    public void printCard(){
+
+        toolcard.printCard();
+    }
+
+    @Override
+    public int getToken(){
+
+        return toolcard.getToken();
+    }
+
+    @Override
+    public void setOneToken(PlayerZone player){
+
+        toolcard.setOneToken(player);
+    }
+
+    @Override
+    public void setTwoToken(PlayerZone player){
+
+        toolcard.setTwoToken(player);
+    }
+
+    @Override
+    public boolean isInUse() {
+
+        return toolcard.isInUse();
+    }
+
+    @Override
+    public void setInUse(boolean inUse) {
+
+        toolcard.setInUse(inUse);
     }
 
     @Override
     public void rewrite() {
 
         this.type="RollAgainADie6";
+
         this.typeToolCard = "ToolCard";
-
-    }
-
-    public void printCard() {
-        toolcard.printCard();
-    }
-
-    public int getToken() {
-        return toolcard.getToken();
-    }
-
-    public void setOneToken(PlayerZone player){toolcard.setOneToken(player);}
-
-    public void setTwoToken(PlayerZone player){toolcard.setTwoToken(player);}
-
-    @Override
-    public boolean isInUse() {
-        return toolcard.isInUse();
     }
 
     @Override
-    public void setInUse(boolean inUse) { toolcard.setInUse(inUse); }
+    public boolean play(Box fromBox, Box toBox,  PlayerZone player){
 
-    public boolean play(Box fromBox, Box toBox, int player) {
-        return false;
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override
-    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
-        return false;
+    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, PlayerZone player) {
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
-    public boolean play(DieInt die, Box toBox, int pl) {
-        return false;
+    @Override
+    public boolean play(DieInt dieFromDraft, Box toBox,PlayerZone player){
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
-
+    @Override
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack) {
-        return false;
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
+    @Override
     public boolean play(DieInt dieFromDraft, String inDeCrement) {
-        return false;
-    }
 
-
-    public boolean play(int player) {
-        return false;
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override
-    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
-        return false;
-    }
+    public boolean play(int number, Box toBox, PlayerZone player) {
 
-    public boolean play(DieInt dieFromDraft, int pl) {
-
-        Model model = singletonModel();
-        PlayerZone player = model.getPlayerList().get(pl);
-
-        dieFromDraft.roll();
-        dieFromDraft.dump();
-
-        if (player.getActionHistory().isDieUsed() || player.getActionHistory().isPlacement())
-            System.out.println("you can't place the die");
-
-
-        else {
-            model.getRestrictions().setNeedPlacement(true);
-            model.getRestrictions().setDie(dieFromDraft);
-
-        }
-        return true;
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override
-    public boolean play(int number, Box toBox, int pl) {
-        return false;
+    public boolean play(PlayerZone player) {
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
-    public DieInt getDieCard6() {
-        return die;
+    @Override
+    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList,PlayerZone player) {
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
-    public void removeDie() { this.die = null; }
-
-    public boolean isNeedPlacement() {
-        return needPlacement;
-    }
-
-    public void setNeedPlacement(boolean needPlacement) {
-        this.needPlacement = needPlacement;
-    }
 }

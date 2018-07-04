@@ -54,31 +54,10 @@ public class Controller implements ControllerInt {
 
         server = new ServerBase(updatesHandler);
 
-        setupHandler.setServer(server );
+        setupHandler.setServer(server);
 
-        //TODO
-        //setServer in updatesHandler to move setups in the right class
 
         server.startAcceptor(updatesHandler, model);
-    }
-
-    @Override
-    public SetupHandler getSetupHandler() {
-        return setupHandler;
-    }
-
-    @Override
-    public ServerBase getServer() {
-
-        return (ServerBase) server;
-    }
-
-    public ViewGameInterface getViewGameInterface() {
-        return server;
-    }
-
-    public UpdatesHandler getUpdatesHandler() {
-        return updatesHandler;
     }
 
     public void setActionEvent(ActionEvent event) {
@@ -88,7 +67,9 @@ public class Controller implements ControllerInt {
             queueEvent.add(event);
 
             LOGGER.log(Level.SEVERE, "a new event has been setted: " + event);
-        } else LOGGER.log(Level.SEVERE, "event nullo" + event);
+        }
+
+        else LOGGER.log(Level.SEVERE, "event nullo" + event);
     }
 
     public ActionEvent getActionEvent() {
@@ -113,21 +94,9 @@ public class Controller implements ControllerInt {
 
             if (model.getPlayerList().get(i).getWindowPatternCard() == null && model.getPlayerList().get(i) != null) {
 
-                //System.out.println("window pattern is null from " + model.getPlayerList().get(i).getName());
                 gameIsGoing = false;
             }
         }
-
-        /*if (gameIsGoing) {
-
-            //TODO DELETE
-            System.out.println("playerlist " + model.getPlayerList());
-            for (int i = 0; i < model.getPlayerList().size(); i++) {
-                System.out.println(model.getPlayerList().get(i) + "player");
-            }
-
-            newMatch(model, this);
-        }*/
 
         if (gameIsGoing) {
 
@@ -137,69 +106,6 @@ public class Controller implements ControllerInt {
         }
     }
 
-    /*public void newMatch(Model model, ControllerInt controller) {
-
-        this.roundsHandler = new RoundsHandler(model, controller);
-
-        roundsHandler.start();
-
-    }*/
-
-    /*public void setStandbyPlayer(String namePlayer) {
-
-        model.getPlayer(namePlayer).setPlayerState(PlayerState.STANDBY);
-
-        for (int i = 0; i < model.getPlayerList().size(); i++) {
-
-            if (model.getPlayerList().get(i).getName().equals(namePlayer))
-
-                server.showAnswerFromController(namePlayer, "Sei in pausa.");
-
-            else
-                server.showAnswerFromController(model.getPlayerList().get(i).getName(), "Il player " + namePlayer + " è il pausa.");
-        }
-    }
-
-    public void setupPrivateCard() {
-
-        int count = model.getDecks().getObjectivePrivateCardDeck().size();
-
-        for (int j = 0; j < model.getPlayerList().size(); j++) {
-
-            Random rand = new Random();
-            int index = rand.nextInt(count);
-            while (model.getDecks().getObjectivePrivateCardDeck().get(index).isInUse()) {
-                rand = new Random();
-                index = rand.nextInt(count);
-            }
-            model.getDecks().getObjectivePrivateCardDeck().get(index).setInUse(true);
-            server.showPrivateCard(model.getPlayerList().get(j).getName(), model.getDecks().getObjectivePrivateCardDeck().get(index));
-            model.getDecks().getObjectivePrivateCardDeck().get(index).setPlayer(model.getPlayerList().get(j));
-        }
-
-    }
-
-    public void setupWindowCard() {
-
-        for (int i = 0; i < model.getPlayerList().size(); i++) {
-
-            ArrayList<WindowPatternCard> windowlist = model.getOnBoardCards().getFourWindowPattern();
-
-            //TODO DELETE
-            System.out.println(windowlist.size());
-            if (model.getPlayerList().get(i).getName() == null)
-                System.out.println("name null");
-            else if (model.getDecks().getWindowPatternCardDeck() == null)
-                System.out.println("cards null");
-            if (server == null)
-                System.out.println("server: " + server);
-
-            server.showWindowPattern(model.getPlayerList().get(i).getName(), model.getPlayerList().get(i).getIDPlayer(), windowlist);
-            windowlist.clear();
-
-        }
-    }
-*/
     public void declareScoresAndWinner(PlayerZone winner) {
 
         for (int i = 0; i < model.getPlayerList().size(); i++) {
@@ -211,6 +117,30 @@ public class Controller implements ControllerInt {
             else
                 server.showAnswerFromController(model.getPlayerList().get(i).getName(), winner.getName() + " è il vincitore");
         }
+    }
+
+    @Override
+    public SetupHandler getSetupHandler() {
+
+        return setupHandler;
+    }
+
+    @Override
+    public ServerBase getServer() {
+
+        return (ServerBase) server;
+    }
+
+    @Override
+    public ViewGameInterface getViewGameInterface() {
+
+        return server;
+    }
+
+    @Override
+    public UpdatesHandler getUpdatesHandler() {
+
+        return updatesHandler;
     }
 
     @Override

@@ -19,95 +19,154 @@ public class MoveWithNoValueRestriction3 extends ToolCardDecorator {
     }
 
     public MoveWithNoValueRestriction3(ToolCard toolcard) {
+
         this.toolcard = toolcard;
+
         this.type="MoveWithNoValueRestriction3";
+
         this.typeToolCard = "ToolCard";
     }
 
+    @Override
+    public boolean play (Box fromBox,Box toBox, PlayerZone player) {
+
+        DieInt die = fromBox.getDie();
+
+        if (!fromBox.isIsPresent()) {
+
+            System.out.println("no die found");
+
+            return false;
+        }
+
+        if (toBox.isIsPresent()) {
+
+            System.out.println("a die is already present here ");
+
+            return false;
+        }
+
+        PlaceDie placement = new PlaceDie(die, toBox, player);
+
+        fromBox.free();
+
+        if (player.getPlayerBoard().getNumDice() == 1) {
+
+            if (placement.checkColorRestriction() && placement.checkEdgeRestrictions()) {
+
+                toBox.setDie(die);
+
+                return true;
+            }
+        } else if (placement.checkColorRestriction() && placement.checkNearByRestrictions()) {
+
+            toBox.setDie(die);
+
+            return true;
+        }
+
+        System.out.println("error card 2");
+
+        fromBox.setDie(die);
+
+        return false;
+    }
+
+    @Override
     public int getNum(){
+
         return toolcard.getNum();
+    }
+
+    @Override
+    public void printCard(){
+
+        toolcard.printCard();
+    }
+
+    @Override
+    public int getToken(){
+
+        return toolcard.getToken();
+    }
+
+    @Override
+    public void setOneToken(PlayerZone player){
+
+        toolcard.setOneToken(player);
+    }
+
+    @Override
+    public void setTwoToken(PlayerZone player){
+
+        toolcard.setTwoToken(player);
+    }
+
+    @Override
+    public boolean isInUse() {
+
+        return toolcard.isInUse();
+    }
+
+    @Override
+    public void setInUse(boolean inUse) {
+
+        toolcard.setInUse(inUse);
     }
 
     @Override
     public void rewrite() {
 
         this.type="MoveWithNoValueRestriction3";
+
         this.typeToolCard = "ToolCard";
-
-    }
-
-    public void printCard(){
-        toolcard.printCard();
-    }
-
-    public int getToken(){
-        return toolcard.getToken();
-    }
-
-    public void setOneToken(PlayerZone player){toolcard.setOneToken(player);}
-
-    public void setTwoToken(PlayerZone player){toolcard.setTwoToken(player);}
-
-    @Override
-    public boolean isInUse() {
-        return toolcard.isInUse();
     }
 
     @Override
-    public void setInUse(boolean inUse) { toolcard.setInUse(inUse); }
+    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, PlayerZone player) {
 
-    public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}
-    public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
-    public boolean play( DieInt dieFromDraft, String inDeCrement){return false;}
-    public boolean play(DieInt dieFromDraft, int pl){return false;}
-
-    @Override
-    public boolean play(int number, Box toBox, int pl) {
-        return false;
-    }
-
-
-    public boolean play(int player){return false;}
-
-    @Override
-    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
-        return false;
-    }
-
-    public boolean play (Box fromBox,Box toBox, int pl)  {
-
-        Model model = singletonModel();
-        PlayerZone player = model.getPlayerList().get(pl);
-        DieInt die = fromBox.getDie();
-        if(!fromBox.isIsPresent()){
-            System.out.println("no die found");
-            return false;
-        }
-        if(toBox.isIsPresent()){
-            System.out.println("a die is already present here ");
-            return false;
-        }
-        PlaceDie placement = new PlaceDie(die, toBox, player);
-        fromBox.free();
-        if(player.getPlayerBoard().getNumDice()==1) {
-            if (placement.checkColorRestriction() && placement.checkEdgeRestrictions()) {
-                toBox.setDie(die);
-                return true;
-            }
-        }
-        else if (placement.checkColorRestriction() && placement.checkNearByRestrictions() ){
-            toBox.setDie(die);
-            return true;
-        }
-
-        System.out.println("error card 2");
-        fromBox.setDie(die);
-        return false;
-
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override
-    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
-        return false;
+    public boolean play(DieInt dieFromDraft, Box toBox,PlayerZone player){
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(DieInt dieFromDraft, String inDeCrement) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(DieInt dieFromDraft, PlayerZone player) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(int number, Box toBox, PlayerZone player) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(PlayerZone player) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList,PlayerZone player) {
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 }

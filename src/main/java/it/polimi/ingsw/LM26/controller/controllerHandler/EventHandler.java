@@ -48,62 +48,110 @@ public class EventHandler {
 
         ToolCardInt toolCard;
 
-        player=model.getPlayer(event.getPlayer());
-
-        int pl = event.getPlayer(); //TODO  DELETE E SET PLAYER
+        player = model.getPlayer(event.getPlayer());
 
         if (event.getId() == 1)
 
-            return (eventChecker.check(getDraftDieCopy(event.getDieFromDraft()), getBoxCopy(event.getToBox1()), pl));
+            return (eventChecker.checkPlacement(getDraftDieCopy(event.getDieFromDraft()), getBoxCopy(event.getToBox1()), player));
 
-        if (event.getCardID() != -1)
+        if (event.getCardID() != -1) {
 
-            if (eventChecker.checkCard(event.getCardID())) {
+            if (eventChecker.checkCard(event.getCardID()))
 
                 toolCard = getToolCard();
 
+            else return false;
+
+            if (eventChecker.checkActionAvailability(player, toolCard)) {
+
                 if (event.getId() == 2)
 
-                    return (eventChecker.check(toolCard, getBoxCopy(event.getFromBox1()), getBoxCopy(event.getToBox1()), pl));
+                    if (toolCard.play(getBoxCopy(event.getFromBox1()), getBoxCopy(event.getToBox1()), player)) {
+
+                        player.getActionHistory().setCardUsed(true);
+
+                        return true;
+                    } else return false;
 
                 if (event.getId() == 3)
 
-                    return (eventChecker.check(toolCard, getBoxListCopy(event.getFromBoxList()), getBoxListCopy(event.getToBoxList()), pl));
+                    if (toolCard.play(getBoxListCopy(event.getFromBoxList()), getBoxListCopy(event.getToBoxList()), player)) {
+
+                        player.getActionHistory().setCardUsed(true);
+
+                        return true;
+                    } else return false;
 
                 if (event.getId() == 4)
 
-                    return (eventChecker.check(toolCard, getDraftDieCopy(event.getDieFromDraft()), getBoxCopy(event.getToBox1()), pl));
+                    if (toolCard.play(getDraftDieCopy(event.getDieFromDraft()), getBoxCopy(event.getToBox1()), player)) {
+
+                        player.getActionHistory().setCardUsed(true);
+
+                        return true;
+                    } else return false;
 
                 if (event.getId() == 5)
 
-                    return (eventChecker.check(toolCard, getDraftDieCopy(event.getDieFromDraft()), event.getDieFromRoundTrack(), pl));
+                    if (toolCard.play(event.getDieFromDraft(), event.getDieFromRoundTrack())) {
+
+                        player.getActionHistory().setCardUsed(true);
+
+                        return true;
+                    } else return false;
 
                 if (event.getId() == 6)
 
-                    return (eventChecker.check(toolCard, getDraftDieCopy(event.getDieFromDraft()), event.getInDeCrement(), pl));
+                    if (toolCard.play(event.getDieFromDraft(), event.getInDeCrement())) {
+
+                        player.getActionHistory().setCardUsed(true);
+
+                        return true;
+                    } else return false;
 
                 if (event.getId() == 7)
 
-                    return (eventChecker.check(toolCard, getDraftDieCopy(event.getDieFromDraft()), pl));
+                    if (toolCard.play(getDraftDieCopy(event.getDieFromDraft()), player)) {
+
+                        player.getActionHistory().setCardUsed(true);
+
+                        return true;
+                    } else return false;
 
                 if (event.getId() == 8)
 
-                    return (eventChecker.check(toolCard, pl));
+                    if (toolCard.play(player)) {
+
+                        player.getActionHistory().setCardUsed(true);
+
+                        return true;
+                    } else return false;
 
                 if (event.getId() == 9)
 
-                    return (eventChecker.check(toolCard, event.getNumber(), getBoxCopy(event.getToBox1()), pl));
+                    if (toolCard.play(event.getNumber(), getBoxCopy(event.getToBox1()), player)) {
+
+                        player.getActionHistory().setCardUsed(true);
+
+                        return true;
+                    }else return false;
 
                 if (event.getId() == 10)
 
-                    return (eventChecker.check(toolCard, event.getDieFromRoundTrack(), getBoxListCopy(event.getFromBoxList()), getBoxListCopy(event.getToBoxList()), pl));
-            }
+                    if (toolCard.play(event.getDieFromRoundTrack(), getBoxListCopy(event.getFromBoxList()), getBoxListCopy(event.getToBoxList()), player)) {
+
+                        player.getActionHistory().setCardUsed(true);
+
+                        return true;
+                    } else return false;
+            } else return false;
+        }
 
         if (event.getId() == 11) {
 
             System.out.println("i'll pass ");
 
-            model.getPlayerList().get(pl).getActionHistory().setJump(true);
+            player.getActionHistory().setJump(true);
 
             return true;
         }
@@ -112,7 +160,7 @@ public class EventHandler {
 
             System.out.println("Getted id 12 (action event)");
 
-            controller.getViewGameInterface().showCurrentMenu(model.getPlayerList().get(pl).getName());
+            controller.getViewGameInterface().showCurrentMenu(player.getName());
 
             return false;
         }
@@ -136,16 +184,13 @@ public class EventHandler {
         return null;
     }
 
-   public DieInt getTrackDieCopy(int[] c){
+    public DieInt getTrackDieCopy(int[] c) {
 
-       try {
+        if (model.getRoundTrackInt().getRoundTrackTurnList().size() < c[0] || model.getRoundTrackInt().getRoundTrackTurn(c[0]).size() < c[1])
 
-        return model.getRoundTrackInt().getRoundTrackTurn(c[0]+1).get(c[1]);
+            return null;
 
-       } catch (NoSuchElementException e) {
-       }
-
-       return null;
+        return model.getRoundTrackInt().getRoundTrackTurn(c[0] + 1).get(c[1]);
     }
 
     public Box getBoxCopy(Box b) throws NoSuchElementException {
@@ -160,7 +205,7 @@ public class EventHandler {
         return null;
     }
 
-    public DieInt getDraftDieCopy(DieInt die) throws NoSuchElementException {
+    public DieInt getDraftDieCopy(DieInt die) {
 
         for (int i = 0; i < model.getDraftPool().size(); i++)
 
@@ -168,7 +213,7 @@ public class EventHandler {
 
                 return model.getDraftPool().get(i);
 
-        throw new NoSuchElementException();
+        return null;
     }
 
     public ArrayList<Box> getBoxListCopy(ArrayList<Box> a) throws NoSuchElementException {

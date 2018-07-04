@@ -44,7 +44,7 @@ public class TestDrawOneMoreDie8 {
         player.getActionHistory().setSecondTurn(false);
 
         if (!player.getActionHistory().isSecondTurn()) {
-            assertTrue(model.getDecks().getToolCardDeck().get(7).play(player.getIDPlayer()));
+            assertTrue(model.getDecks().getToolCardDeck().get(7).play(player));
             assertTrue(model.getRestrictions().isTool8needPlacement());
             System.out.println("ASSERTS OK");
         }
@@ -53,7 +53,7 @@ public class TestDrawOneMoreDie8 {
         //trying at second turn
         player.getActionHistory().setFirstTurn(false);
         player.getActionHistory().setSecondTurn(true);
-        assertFalse(model.getDecks().getToolCardDeck().get(7).play(model.getPlayerList().get(0).getIDPlayer()));
+        assertFalse(model.getDecks().getToolCardDeck().get(7).play(model.getPlayerList().get(0)));
         assertFalse(model.getRestrictions().isNeedPlacement());
 
 

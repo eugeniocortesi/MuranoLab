@@ -91,10 +91,10 @@ public class TestMoveTwoDiceWithSameColor12 {
         rt.roll();
 
         if ((!from.get(0).isIsPresent() || !from.get(1).isIsPresent()) && (!to.get(0).isIsPresent() || !to.get(1).isIsPresent()))
-            assertFalse(model.getDecks().getToolCardDeck().get(11).play(rt, from, to, player.getIDPlayer()));
+            assertFalse(model.getDecks().getToolCardDeck().get(11).play(rt, from, to, player));
 
         //dice are not same color as the one from roundTrack
-        assertFalse(model.getDecks().getToolCardDeck().get(11).play(rt, from, to, player.getIDPlayer()));
+        assertFalse(model.getDecks().getToolCardDeck().get(11).play(rt, from, to, player));
 
         die1.setColor(Color.ANSI_RED);
 
@@ -123,7 +123,7 @@ public class TestMoveTwoDiceWithSameColor12 {
         to.add(board[k][h]);
 
         int count = 0;
-        while (count < 1000 && !model.getDecks().getToolCardDeck().get(11).play(rt, from, to, player.getIDPlayer())) {
+        while (count < 1000 && !model.getDecks().getToolCardDeck().get(11).play(rt, from, to, player)) {
             player.getPlayerBoard().printCard();
             System.out.println("error");
             to = new ArrayList<Box>();

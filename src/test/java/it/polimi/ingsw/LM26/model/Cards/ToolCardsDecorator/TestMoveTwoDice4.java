@@ -86,7 +86,7 @@ public class TestMoveTwoDice4 {
         to.add(board[k][h]);
 
         if ((!from.get(0).isIsPresent() || !from.get(1).isIsPresent()) && (!to.get(0).isIsPresent() || !to.get(1).isIsPresent()))
-            assertFalse(model.getDecks().getToolCardDeck().get(3).play(from, to, player.getIDPlayer()));
+            assertFalse(model.getDecks().getToolCardDeck().get(3).play(from, to, player));
 
         from = new ArrayList<Box>();
         i = 1;
@@ -113,7 +113,7 @@ public class TestMoveTwoDice4 {
         to.add(board[k][h]);
 
         int count = 0;
-        while (count < 1000 && !model.getDecks().getToolCardDeck().get(3).play(from, to, player.getIDPlayer())) {
+        while (count <= 1000 && !model.getDecks().getToolCardDeck().get(3).play(from, to, player)) {
             player.getPlayerBoard().printCard();
             System.out.println("error");
             to = new ArrayList<Box>();

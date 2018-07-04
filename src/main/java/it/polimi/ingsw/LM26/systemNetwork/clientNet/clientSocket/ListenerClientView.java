@@ -101,7 +101,7 @@ public class ListenerClientView extends Thread {
             }
             if (message!= null){
 
-                LOGGER.log(Level.INFO,"Message " + message);
+                LOGGER.log(Level.SEVERE,"Message " + message);
 
                 Thread t = new Thread(new MyRunnableRecognize(message));
 

@@ -16,7 +16,6 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
     private ToolCard toolcard = null;
 
     public PlaceWithNotInProximities9() {
-
     }
 
     public PlaceWithNotInProximities9(ToolCard toolcard) {
@@ -29,56 +28,11 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
     }
 
     @Override
-    public void rewrite() {
-
-        this.type = "PlaceWithNotInProximities9";
-
-        this.typeToolCard = "ToolCard";
-    }
-
-    public int getNum() {
-
-        return toolcard.getNum();
-    }
-
-
-    public void printCard() {
-
-        toolcard.printCard();
-    }
-
-    public int getToken() {
-
-        return toolcard.getToken();
-    }
-
-    public void setOneToken(PlayerZone player) {
-
-        toolcard.setOneToken(player);
-    }
-
-    public void setTwoToken(PlayerZone player) {
-
-        toolcard.setTwoToken(player);
-    }
-
-    public boolean isInUse() {
-
-        return toolcard.isInUse();
-    }
-
-    public void setInUse(boolean inUse) {
-
-        toolcard.setInUse(inUse);
-    }
-
-    public boolean play(DieInt dieFromDraft, Box toBox, int pl) {
+    public boolean play(DieInt dieFromDraft, Box toBox, PlayerZone player) {
 
         Model model = singletonModel();
 
-        PlayerZone player = model.getPlayerList().get(pl);
-
-        Box[][] board = model.getPlayerList().get(pl).getPlayerBoard().getBoardMatrix();
+        Box[][] board = player.getPlayerBoard().getBoardMatrix();
 
         int i = toBox.getI();
 
@@ -200,49 +154,100 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
     }
 
     @Override
-    public boolean play(Box fromBox, Box toBox, int player) {
+    public int getNum(){
 
-        return false;
+        return toolcard.getNum();
     }
 
     @Override
-    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
+    public void printCard(){
 
-        return false;
+        toolcard.printCard();
     }
 
+    @Override
+    public int getToken(){
+
+        return toolcard.getToken();
+    }
+
+    @Override
+    public void setOneToken(PlayerZone player){
+
+        toolcard.setOneToken(player);
+    }
+
+    @Override
+    public void setTwoToken(PlayerZone player){
+
+        toolcard.setTwoToken(player);
+    }
+
+    @Override
+    public boolean isInUse() {
+
+        return toolcard.isInUse();
+    }
+
+    @Override
+    public void setInUse(boolean inUse) {
+
+        toolcard.setInUse(inUse);
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type = "PlaceWithNotInProximities9";
+
+        this.typeToolCard = "ToolCard";
+    }
+
+    @Override
+    public boolean play(Box fromBox, Box toBox,  PlayerZone player){
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, PlayerZone player) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
     public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack) {
 
-        return false;
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override
     public boolean play(DieInt dieFromDraft, String inDeCrement) {
 
-        return false;
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override
-    public boolean play(DieInt dieFromDraft, int pl) {
+    public boolean play(DieInt dieFromDraft, PlayerZone player) {
 
-        return false;
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override
-    public boolean play(int number, Box toBox, int pl) {
+    public boolean play(int number, Box toBox, PlayerZone player) {
 
-        return false;
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override
-    public boolean play(int player) {
+    public boolean play(PlayerZone player) {
 
-        return false;
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override
-    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
+    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList,PlayerZone player) {
 
-        return false;
+        throw new UnsupportedOperationException("Not supported here");
     }
 }

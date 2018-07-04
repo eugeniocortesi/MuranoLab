@@ -33,8 +33,8 @@ public class RoundsHandler extends Thread {
     public RoundsHandler(Model model, ControllerInt controller) {
 
         this.controller = controller;
-        this.game = new Game(model.getPlayerList(), model.getDecks(), model.getOnBoardCards());  //initialPhase
-        game.getPhase().doAction(game, model.getPlayerList());    //centralPhase
+        this.game = new Game();  //initialPhase
+        game.getPhase().doAction(game);    //centralPhase
         this.centralPhase = game.getPhase();
         this.model = model;
         this.model.hasChanged();
@@ -58,7 +58,7 @@ public class RoundsHandler extends Thread {
 
         while(i<game.getPhase().getNrounds() && !game.getPhase().getOnePlayer()) {
 
-            playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn());
+            playing = centralPhase.getCurrentRound().nextPlayer();
 
             while (centralPhase.getCurrentRound().getRoundState() != FINISHED) {
 
@@ -99,9 +99,9 @@ public class RoundsHandler extends Thread {
 
                 PlayerZone playerEnding = playing;
 
-                centralPhase.getCurrentRound().endAction(centralPhase.getTurn(), model.getRoundTrackInt(), model.getDraftPool(), playing);
+                centralPhase.getCurrentRound().endAction();
 
-                playing = centralPhase.getCurrentRound().nextPlayer(model.getPlayerList(), centralPhase.getTurn());
+                playing = centralPhase.getCurrentRound().nextPlayer();
 
                 controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
 
@@ -118,7 +118,7 @@ public class RoundsHandler extends Thread {
             //controller.getView().showTurnEndPhase();
         }
 
-        game.getPhase().doAction(game, model.getPlayerList());
+        game.getPhase().doAction(game);
 
         System.out.println("Il vincitore è " + game.getPhase().getWinner().getName());  // final phase
 

@@ -18,6 +18,9 @@ public class ScoreMarker implements Serializable {
         return more50;
     }
 
+    public ScoreMarker(){
+    }
+
     public ScoreMarker(Color color, PlayerZone player) {
         this.color = color;
     }

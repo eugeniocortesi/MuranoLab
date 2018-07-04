@@ -11,6 +11,9 @@ public class RoundTrack extends RoundTrackInt{
     private int currentTurn;
 
     public RoundTrack(){
+    }
+
+    public RoundTrack(String s){
 
         roundTrackTurnList = new ArrayList<RoundTrackTurn>();
 
@@ -52,6 +55,14 @@ public class RoundTrack extends RoundTrackInt{
     public void rewrite() {
 
         this.typeRoundTrack="RoundTrack";
+
+        if(roundTrackTurnList!=null){
+
+            for(int i=0; i< roundTrackTurnList.size(); i++){
+
+                roundTrackTurnList.get(i).rewrite();
+            }
+        }
 
     }
 

@@ -19,72 +19,27 @@ public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
     }
 
     public MoveTwoDiceWithSameColor12(ToolCard toolcard) {
+
         this.toolcard = toolcard;
+
         this.type="MoveTwoDiceWithSameColor12";
+
         this.typeToolCard = "ToolCard";
     }
 
-    public int getNum(){
-        return toolcard.getNum();
-    }
-
     @Override
-    public void rewrite() {
+    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, PlayerZone player) {
 
-        this.type="MoveTwoDiceWithSameColor12";
-        this.typeToolCard = "ToolCard";
-
-    }
-
-    public void printCard(){
-        toolcard.printCard();
-    }
-
-    public int getToken(){
-        return toolcard.getToken();
-    }
-
-    public void setOneToken(PlayerZone player){toolcard.setOneToken(player);}
-
-    public void setTwoToken(PlayerZone player){toolcard.setTwoToken(player);}
-
-    @Override
-    public boolean isInUse() {
-        return toolcard.isInUse();
-    }
-
-    @Override
-    public void setInUse(boolean inUse) { toolcard.setInUse(inUse); }
-
-    public boolean play(Box fromBox, Box toBox, int player){return false;}
-
-    @Override
-    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
-        return false;
-    }
-    public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}
-    public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
-    public boolean play(DieInt dieFromDraft, String inDeCrement){return false;}
-    public boolean play(DieInt dieFromDraft, int pl){return false;}
-    public boolean play(int number, Box toBox, int pl) {
-        return false;
-    }
-    public boolean play(int player){return false;}
-    public boolean play(PlayerZone player) { return false; }
-
-
-    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int pl) {
-
-        Model model = singletonModel();
-        PlayerZone player = model.getPlayerList().get(pl);
         ArrayList <DieInt> dieList=new ArrayList<DieInt>();
 
         for(int i=0; i<fromBoxList.size(); i++)
 
-            if( !fromBoxList.get(i).isIsPresent() || toBoxList.get(i).isIsPresent() || ! fromBoxList.get(i).getDie().getColor().equals(fromRoundTrack.getColor())  )
+            if( !fromBoxList.get(i).isIsPresent() || toBoxList.get(i).isIsPresent() || ! fromBoxList.get(i).getDie().getColor().equals(fromRoundTrack.getColor()) )
+
                 return false;
-             else {
-                 dieList.add(fromBoxList.get(i).getDie());
+
+             else { dieList.add(fromBoxList.get(i).getDie());
+
                 fromBoxList.get(i).free();
             }
 
@@ -97,16 +52,114 @@ public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
                 System.out.println("error " + j +" placement");
 
                 for(int k=0; k<fromBoxList.size(); k++) {
+
                     fromBoxList.get(k).setDie(dieList.get(k));
+
                     toBoxList.get(k).free();
                 }
 
                 return false;
             }
-
         }
+
         return true;
     }
 
+    @Override
+    public int getNum(){
 
+        return toolcard.getNum();
+    }
+
+    @Override
+    public void printCard(){
+
+        toolcard.printCard();
+    }
+
+    @Override
+    public int getToken(){
+
+        return toolcard.getToken();
+    }
+
+    @Override
+    public void setOneToken(PlayerZone player){
+
+        toolcard.setOneToken(player);
+    }
+
+    @Override
+    public void setTwoToken(PlayerZone player){
+
+        toolcard.setTwoToken(player);
+    }
+
+    @Override
+    public boolean isInUse() {
+
+        return toolcard.isInUse();
+    }
+
+    @Override
+    public void setInUse(boolean inUse) {
+
+        toolcard.setInUse(inUse);
+    }
+
+    @Override
+    public void rewrite() {
+
+        this.type="MoveTwoDiceWithSameColor12";
+
+        this.typeToolCard = "ToolCard";
+    }
+
+    @Override
+    public boolean play(Box fromBox, Box toBox,  PlayerZone player){
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, PlayerZone player) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(DieInt dieFromDraft, Box toBox,PlayerZone player){
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(DieInt dieFromDraft, String inDeCrement) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(DieInt dieFromDraft, PlayerZone player) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(int number, Box toBox, PlayerZone player) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(PlayerZone player) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
 }

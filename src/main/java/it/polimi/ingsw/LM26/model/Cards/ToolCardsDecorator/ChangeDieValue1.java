@@ -15,88 +15,147 @@ public class ChangeDieValue1 extends ToolCardDecorator {
     }
 
     public ChangeDieValue1(ToolCard toolcard) {
+
         this.toolcard = toolcard;
+
         this.type="ChangeDieValue1";
+
         this.typeToolCard = "ToolCard";
     }
 
+    @Override
+    public boolean play (DieInt die, String inDeCrement) {
+
+        if (inDeCrement.equals("increment")) {
+
+            if (die.getValue() == 6) {
+
+                System.out.println("error, choose a lower value");
+
+                return false;
+            }
+
+            die.increment();
+
+            die.dump();
+
+            return true;
+        }
+
+        if (inDeCrement.equals("decrement")){
+
+            if (die.getValue() == 1) {
+
+                System.out.println("error, choose a higher value");
+
+                return false;
+            }
+
+            die.decrement();
+
+            die.dump();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
     public int getNum(){
+
         return toolcard.getNum();
+    }
+
+    @Override
+    public void printCard(){
+
+        toolcard.printCard();
+    }
+
+    @Override
+    public int getToken(){
+
+        return toolcard.getToken();
+    }
+
+    @Override
+    public void setOneToken(PlayerZone player){
+
+        toolcard.setOneToken(player);
+    }
+
+    @Override
+    public void setTwoToken(PlayerZone player){
+
+        toolcard.setTwoToken(player);
+    }
+
+    @Override
+    public boolean isInUse() {
+
+        return toolcard.isInUse();
+    }
+
+    @Override
+    public void setInUse(boolean inUse) {
+
+        toolcard.setInUse(inUse);
     }
 
     @Override
     public void rewrite() {
 
         this.type="ChangeDieValue1";
+
         this.typeToolCard = "ToolCard";
-
-    }
-
-    public void printCard(){
-        toolcard.printCard();
-    }
-
-    public int getToken(){
-        return toolcard.getToken();
-    }
-
-    public void setOneToken(PlayerZone player){toolcard.setOneToken(player);}
-
-    public void setTwoToken(PlayerZone player){toolcard.setTwoToken(player);}
-    @Override
-    public boolean isInUse() {
-        return toolcard.isInUse();
     }
 
     @Override
-    public void setInUse(boolean inUse) { toolcard.setInUse(inUse); }
+    public boolean play(Box fromBox, Box toBox,  PlayerZone player){
 
-    public boolean play(Box fromBox, Box toBox, int player){return false;}
-
-    @Override
-    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
-        return false;
+        throw new UnsupportedOperationException("Not supported here");
     }
-    public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}
-    public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
-    public boolean play(DieInt dieFromDraft, int pl){return false;}
 
     @Override
-    public boolean play(int number, Box toBox, int pl) {
+    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, PlayerZone player) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(DieInt dieFromDraft, Box toBox,PlayerZone player){
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack) {
+
         return false;
     }
 
-    public boolean play( int player){return false;}
-
     @Override
-    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
-        return false;
+    public boolean play(DieInt dieFromDraft, PlayerZone pl){
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
-    public boolean play (DieInt die, String inDeCrement) {
+    @Override
+    public boolean play(int number, Box toBox, PlayerZone pl){
 
+        throw new UnsupportedOperationException("Not supported here");
+    }
 
-        if (inDeCrement == "increment") {
-            if (die.getValue() == 6) {
-                System.out.println("error, choose a lower value");
-                return false;
-            }
-            die.increment();
-            die.dump();
-            return true;
-        }
+    @Override
+    public boolean play(PlayerZone player){
 
-        if (inDeCrement == "decrement"){
-            if (die.getValue() == 1) {
-                System.out.println("error, choose a higher value");
-                return false;
-            }
-            die.decrement();
-            die.dump();
-            return true;
-        }
-        return false;
+        throw new UnsupportedOperationException("Not supported here");
+    }
 
+    @Override
+    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList,PlayerZone player) {
 
+        throw new UnsupportedOperationException("Not supported here");
     }
 }

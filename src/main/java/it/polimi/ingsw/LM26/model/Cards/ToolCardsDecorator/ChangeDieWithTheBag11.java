@@ -15,12 +15,6 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
 
-    private boolean needPlacement=false;
-
-    private DieInt die;
-
-    private boolean firstPart=false;
-
     public ChangeDieWithTheBag11() {
     }
 
@@ -30,117 +24,155 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
         this.typeToolCard = "ToolCard";
     }
 
+    @Override
+    public boolean play(int number, Box toBox, PlayerZone player) {
+
+        Model model = singletonModel();
+
+        if(!model.getRestrictions().isFirstPart())return false;
+
+        if(number<1 || number>6)return false;
+
+        model.getRestrictions().getDie().setRoll(number);
+
+        PlaceDie placement = new PlaceDie(model.getRestrictions().getDie(), toBox, player);
+
+        if (placement.placeDie()) {
+
+            player.getPlayerBoard().incrementNumDice();
+
+            player.getActionHistory().setDieUsed(true);
+
+            player.getActionHistory().setPlacement(true);
+
+            return true;
+        }
+
+        model.getDraftPool().addDie(model.getRestrictions().getDie());
+
+        model.getRestrictions().setNeedPlacement(true);
+
+        return false;
+    }
+
+    @Override
+    public boolean play (DieInt dieFromDraft, PlayerZone player) {
+
+        Model model = singletonModel();
+
+        model.getBag().add(dieFromDraft);
+
+        model.getDraftPool().remove(dieFromDraft);
+
+        if (player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) {
+
+            System.out.println("action expired");
+
+            return false;
+        }
+
+        DieInt d=model.getBag().draw();
+
+        model.getRestrictions().setDie(d);
+
+        model.getRestrictions().setColor(d.getColor());
+
+        System.out.println("you got a " + d.getColor() + " die ");
+
+        model.getRestrictions().setFirstPart(true);
+
+        return true;
+    }
+
+    @Override
     public int getNum(){
+
         return toolcard.getNum();
+    }
+
+    @Override
+    public void printCard(){
+
+        toolcard.printCard();
+    }
+
+    @Override
+    public int getToken(){
+
+        return toolcard.getToken();
+    }
+
+    @Override
+    public void setOneToken(PlayerZone player){
+
+        toolcard.setOneToken(player);
+    }
+
+    @Override
+    public void setTwoToken(PlayerZone player){
+
+        toolcard.setTwoToken(player);
+    }
+
+    @Override
+    public boolean isInUse() {
+
+        return toolcard.isInUse();
+    }
+
+    @Override
+    public void setInUse(boolean inUse) {
+
+        toolcard.setInUse(inUse);
     }
 
     @Override
     public void rewrite() {
 
         this.type="ChangeDieWithTheBag11";
+
         this.typeToolCard = "ToolCard";
-
-    }
-
-    public void printCard(){
-        toolcard.printCard();
-    }
-
-    public int getToken(){
-        return toolcard.getToken();
-    }
-
-    public void setOneToken(PlayerZone player){toolcard.setOneToken(player);}
-
-    public void setTwoToken(PlayerZone player){toolcard.setTwoToken(player);}
-
-    @Override
-    public boolean isInUse() {
-        return toolcard.isInUse();
     }
 
     @Override
-    public void setInUse(boolean inUse) { toolcard.setInUse(inUse); }
+    public boolean play(Box fromBox, Box toBox,  PlayerZone player){
 
-    public boolean play(Box fromBox, Box toBox, int player){return false;}
-
-    @Override
-    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
-        return false;
-    }
-    public boolean play(DieInt dieFromDraft, Box toBox, int player){return false;}
-    public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack){return false;}
-    public boolean play(DieInt dieFromDraft, String inDeCrement){return false;}
-
-
-
-    public boolean play( int player){return false;}
-
-    @Override
-    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
-        return false;
-    }
-
-    public boolean play (DieInt dieFromDraft, int pl) {
-
-        Model model = singletonModel();
-        model.getBag().add(dieFromDraft);
-        model.getDraftPool().remove(dieFromDraft);
-        PlayerZone player = model.getPlayerList().get(pl);
-
-        if (player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) {
-            System.out.println("action expired");
-            return false;
-        }
-        DieInt d=model.getBag().draw();
-        model.getRestrictions().setDie(d);
-        model.getRestrictions().setColor(d.getColor());
-        System.out.println("you got a " + d.getColor() + " die ");
-        model.getRestrictions().setFirstPart(true);
-        return true;
-
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override
-    public boolean play(int number, Box toBox, int pl) {
+    public boolean play(ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, PlayerZone player) {
 
-        Model model = singletonModel();
-
-        if(!model.getRestrictions().isFirstPart())return false;
-        PlayerZone player=model.getPlayerList().get(pl);
-        if(number<1 || number>6)return false;
-        model.getRestrictions().getDie().setRoll(number);
-        PlaceDie placement = new PlaceDie(model.getRestrictions().getDie(), toBox, player);
-
-        if (placement.placeDie()) {
-
-            player.getPlayerBoard().incrementNumDice();
-            player.getActionHistory().setDieUsed(true);
-            player.getActionHistory().setPlacement(true);
-            return true;
-        }
-        model.getDraftPool().addDie(model.getRestrictions().getDie());
-        model.getRestrictions().setNeedPlacement(true);
-        return false;
-
+        throw new UnsupportedOperationException("Not supported here");
     }
 
+    @Override
+    public boolean play(DieInt dieFromDraft, Box toBox,PlayerZone player){
 
-    public boolean isNeedPlacement() {
-        return needPlacement;
+        throw new UnsupportedOperationException("Not supported here");
     }
 
-    public void setNeedPlacement(boolean needPlacement) {
-        this.needPlacement = needPlacement;
+    @Override
+    public boolean play(DieInt dieFromDraft, DieInt dieFromRoundTrack) {
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
-    public void noFirstPart() {
-        this.firstPart = false;
+    @Override
+    public boolean play(DieInt dieFromDraft, String inDeCrement) {
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
-    public DieInt getDieCard11() {
-        return die;
+    @Override
+    public boolean play(PlayerZone player){
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
-    public void removeDie() { this.die = null; }
+    @Override
+    public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList,PlayerZone player) {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
 }
