@@ -4,6 +4,10 @@ import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
 import java.io.Serializable;
 
+/**
+ * DieInt abstract class
+ * @author Chiara Criscuolo
+ */
 public abstract class DieInt implements Serializable{
 
     String typeDie;

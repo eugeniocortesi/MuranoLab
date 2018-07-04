@@ -3,6 +3,12 @@ package it.polimi.ingsw.LM26.model.PlayArea.diceObjects;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * DraftPool class
+ * @author Chiara Criscuolo
+ * It contains all dice that are in the DraftPool
+ */
+
 public class DraftPool implements Serializable {
 
     private ArrayList<DieInt> inDraft;
@@ -27,6 +33,10 @@ public class DraftPool implements Serializable {
     public void setInDraft(ArrayList<DieInt> inDraft) {
         this.inDraft = inDraft;
     }
+
+    /**
+     * Shortcut to print DraftPool
+     */
 
     public void printDraftPool(){
 

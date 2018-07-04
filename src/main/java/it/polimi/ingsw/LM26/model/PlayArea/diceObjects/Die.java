@@ -4,6 +4,11 @@ import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
 import java.util.Random;
 
+/**
+ * Die class
+ * @author Chiara Criscuolo
+ * It contains all informations about a single die
+ */
 public class Die extends DieInt {
 
     private Color color;
@@ -30,6 +35,9 @@ public class Die extends DieInt {
 
             "\u2685"};
 
+    /**
+     * It assign to a die a random face
+     */
     public void roll() {
 
         int count = faces.length;
@@ -42,6 +50,10 @@ public class Die extends DieInt {
 
         setNumber();
     }
+
+    /**
+     * @return the value of the die
+     */
 
     public int getValue() {
 
@@ -62,6 +74,11 @@ public class Die extends DieInt {
         return value;
     }
 
+    /**
+     * Transform the face in the corresponding number
+     * And assign it to the die
+     */
+
     public void setNumber() {
 
         if (face == "\u2680" ) number = 1;
@@ -76,6 +93,11 @@ public class Die extends DieInt {
 
         if (face == "\u2685" ) number = 6;
     }
+
+    /**
+     * Increment 1 the value of the face
+     * then call setNumber();
+     */
 
     public void increment() {
 
@@ -94,6 +116,11 @@ public class Die extends DieInt {
         setNumber();
     }
 
+    /**
+     * Decrement 1 the value of the face
+     * then call setNumber();
+     */
+
     public void decrement() {
 
         if (face == "\u2680") face = "\u2685";
@@ -110,6 +137,11 @@ public class Die extends DieInt {
 
         setNumber();
     }
+
+    /**
+     * Takes value and assign the corresponding face to the die
+     * @param value value number
+     */
 
     public void setRoll(int value) {
 
@@ -128,11 +160,20 @@ public class Die extends DieInt {
         setNumber();
     }
 
+    /**
+     * Rewrite field type for Json
+     */
+
     @Override
     public void rewrite() {
 
         this.typeDie = "Die";
     }
+
+    /**
+     * Constructor
+     * @param color color to assign
+     */
 
     public Die(Color color) {
 
@@ -153,14 +194,18 @@ public class Die extends DieInt {
         return this.number;
     }
 
-    @Override
 
+    @Override
     public String toString() {
 
         String escape = this.color.escape();
 
         return escape + "[" + face + "]" + Color.RESET;
     }
+
+    /**
+     * Shortcut to print die
+     */
 
     public void dump() {
 

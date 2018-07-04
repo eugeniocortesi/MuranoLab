@@ -6,18 +6,28 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Bag class
+ * @author Chiara Criscuolo
+ * Contains 90 dice
+ */
 public class Bag implements Serializable{
 
     private ArrayList<DieInt> inBag;
 
+    //Cont how many red dice are in the bag
     private int contRed;
 
+    //Cont how many green dice are in the bag
     private int contGreen;
 
+    //Cont how many yellow dice are in the bag
     private int contYellow;
 
+    //Cont how many blue dice are in the bag
     private int contBlue;
 
+    //Cont how many purple dice are in the bag
     private int contPurple;
 
     public int size(){
@@ -27,6 +37,10 @@ public class Bag implements Serializable{
     public ArrayList<DieInt> getInBag() {
         return inBag;
     }
+
+    /**
+     * Constructor
+     */
 
     public Bag(){
 
@@ -38,6 +52,10 @@ public class Bag implements Serializable{
         contRed = 18;
         contYellow = 18;
     }
+
+    /**
+     * Fill the bag
+     */
 
     private void fill(){
 
@@ -67,6 +85,12 @@ public class Bag implements Serializable{
         }
 
     }
+
+    /**
+     * Draw a die with color but not face
+     * Then update the contators
+     * @return die drawn
+     */
 
     public DieInt draw(){
 
@@ -100,6 +124,11 @@ public class Bag implements Serializable{
                 System.out.println(d);
             }
     }
+
+    /**
+     * add d in the bag and updates conts
+     * @param d die to be added
+     */
 
     public void add(DieInt d){
 
