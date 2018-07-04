@@ -94,7 +94,7 @@ public class RoundsHandler extends Thread {
 
                     System.out.println("this turn you are freezed");
 
-                    //controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Salti il turno");
+                    controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Salti il turno");
                 }
 
                 PlayerZone playerEnding = playing;
@@ -134,20 +134,20 @@ public class RoundsHandler extends Thread {
             if (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump()) {
                 if (controller.handler(event)) {
                     System.out.println("done");
-                    //if(event.getId()==11)controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Passi il turno ");
-                    //else controller.getViewGameInterface().showAnswerFromController (playing.getName(),"OK");
+                    if(event.getId()==11)controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Passi il turno ");
+                    else if(model.getRestrictions().getColor()!=null) //from card 11
+                    controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Hai estratto un dado "+model.getRestrictions().getColor());
+                    else controller.getViewGameInterface().showAnswerFromController (playing.getName(),"OK");
                     playing.getPlayerBoard().printCard();
                     System.out.println("DraftPool");
                     model.getDraftPool().printDraftPool();
                     // view.showOK()
                     model.hasChanged();
                     result = true;
-                    //from card 11
-                    //if(model.getRestrictions().getColor()!=null)
-                    //controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Hai estratto un dado "+model.getRestrictions().getColor());
+
                 } else {
                     System.out.println("match error 1 ");
-                    //controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Errore: vuoi riprovare?");
+                    controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Errore: vuoi riprovare?");
                     controller.getViewGameInterface().showCurrentMenu(playing.getName());
                     waitEvent();
                 }
@@ -170,8 +170,8 @@ public class RoundsHandler extends Thread {
             if (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump()) {
                 if (controller.handler(event)) {
                     System.out.println("done");
-                    //if(event.getId()==11)controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Passi ");
-                    //else controller.getViewGameInterface().showAnswerFromController (playing.getName(),"OK");
+                    if(event.getId()==11)controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Passi ");
+                    else controller.getViewGameInterface().showAnswerFromController (playing.getName(),"OK");
                     playing.getPlayerBoard().printCard();
                     System.out.println("DraftPool");
                     model.getDraftPool().printDraftPool();
@@ -183,7 +183,7 @@ public class RoundsHandler extends Thread {
                         model.getRestrictions().setCurrentPlacement(true);
                         playing.getActionHistory().setFreezed(true);
                         System.out.println("choose another die");
-                        //controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Ok, scegli un altro dado");
+                        controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Ok, scegli un altro dado");
                         model.hasChanged();
                         controller.getViewGameInterface().showCurrentMenu(playing.getName());
                         waitEvent();
@@ -195,7 +195,7 @@ public class RoundsHandler extends Thread {
                     }
                 } else {
                     System.out.println("match error 2 ");
-                    //controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Errore: vuoi riprovare?");
+                    controller.getViewGameInterface().showAnswerFromController (playing.getName(),"Errore: vuoi riprovare?");
                     controller.getViewGameInterface().showCurrentMenu(playing.getName());
                     waitEvent();
                     if (playing.getActionHistory().isJump()) playing.getActionHistory().setFreezed(false);
@@ -273,7 +273,7 @@ public class RoundsHandler extends Thread {
 
             System.out.println("STOP WAITING because the player end his time");
 
-            //controller.getViewGameInterface().showAnswerFromController(timerEnd.getName(), "Your time ended.");
+            controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Your time ended.");
         }
 
         if (playing.getPlayerState() == STANDBY) System.out.println("STOP WAITING because the player went in STANDBY");

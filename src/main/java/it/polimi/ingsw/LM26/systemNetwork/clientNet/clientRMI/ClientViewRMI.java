@@ -93,7 +93,8 @@ public class ClientViewRMI extends ClientView {
 
             ClientViewRemote skeleton = (ClientViewRemote) UnicastRemoteObject.exportObject(clientViewRMIRemote, RMIPORTClient);
             LOGGER.log(Level.INFO, "trying to connect to: {0}",address);
-            Registry registry = LocateRegistry.getRegistry(address, RMIPORTServer );
+            Registry registry = LocateRegistry.createRegistry(RMIPORTClient);
+            //Registry registry = LocateRegistry.getRegistry(address, RMIPORTServer );
             registry.bind("ClientViewRemote"+id,  skeleton);
             LOGGER.log(Level.WARNING,"Client ready, created skeleton");
 
