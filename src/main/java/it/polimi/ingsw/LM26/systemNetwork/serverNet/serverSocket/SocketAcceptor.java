@@ -22,6 +22,8 @@ public class SocketAcceptor extends Thread{
 
     private int SOCKETPORT;
 
+    private boolean inAction;
+
     private static final Logger LOGGER = Logger.getLogger(SocketAcceptor.class.getName());
 
     /**
@@ -35,6 +37,8 @@ public class SocketAcceptor extends Thread{
 
         this.SOCKETPORT = dataServerConfiguration.getSOCKETPORT();
 
+        this.inAction= true;
+
     }
 
     /**
@@ -43,13 +47,15 @@ public class SocketAcceptor extends Thread{
     @Override
     public void run(){
 
+        ServerSocket serversocket = null;
+
         try {
 
-            ServerSocket serversocket = new ServerSocket(SOCKETPORT);
+            serversocket = new ServerSocket(SOCKETPORT);
 
             LOGGER.log(Level.SEVERE,"Server socket created");
 
-            while (true) {
+            while (inAction) {
 
                 Socket socket = serversocket.accept();
 
@@ -65,5 +71,21 @@ public class SocketAcceptor extends Thread{
 
             System.err.println("Impossible to create socket, reset Server");
         }
+        finally {
+
+            try {
+                if(serversocket != null)
+                    serversocket.close();
+
+            } catch (IOException e) {
+
+                System.err.println("Impossible to close Server socket");
+            }
+        }
+
+    }
+
+    public void end(){
+        inAction = false;
     }
 }

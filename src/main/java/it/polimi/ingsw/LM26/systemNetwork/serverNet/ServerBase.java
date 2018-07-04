@@ -374,6 +374,7 @@ public class ServerBase extends ViewGameInterface {
     public void showEndGame(String name, Object score) {
 
         clientManagerList.getClientManager(name).sendEndGame(score);
+        end();
     }
 
     /**
@@ -396,5 +397,8 @@ public class ServerBase extends ViewGameInterface {
         clientManagerList.getClientManager(name).stop();
     }
 
+    public void end(){
+        socketAcceptor.end();
+    }
 
 }
