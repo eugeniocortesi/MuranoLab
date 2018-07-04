@@ -23,6 +23,11 @@ import it.polimi.ingsw.LM26.model.Model;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/**
+ * ModelMessage class
+ * @author Chiara Criscuolo
+ * It contains the model updated
+ */
 public class ModelMessage extends ClassMessage{
 
     private String idModel;
@@ -31,12 +36,19 @@ public class ModelMessage extends ClassMessage{
 
     public ModelMessage(String m, String model) {
         this.idModel = m;
+
         this.model = model;
     }
 
     public String getModel() {
         return model;
     }
+
+    /**
+     * Method that return from a string with json the ModelMessage
+     * @param protocolJson string to deserialize
+     * @return ModelMessage
+     */
 
     static public ModelMessage deserializeModelMessage(String protocolJson){
 
@@ -49,6 +61,10 @@ public class ModelMessage extends ClassMessage{
         return model;
     }
 
+    /**
+     * It serialize the Model as string
+     * @return String
+     */
     @Override
     public String serializeClassMessage(){
 
@@ -57,15 +73,23 @@ public class ModelMessage extends ClassMessage{
         return msgJson;
     }
 
+    /**
+     * Calls the visitor pattern on the message
+     * @param visitorInt instance of visitor
+     */
 
     @Override
     public void accept(VisitorInt visitorInt) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    static public Model deserializeModel(String protocolJson){
+    /**
+     * From a string isìt deserialize returning Model
+     * @param protocolJson string to deserialize
+     * @return Model
+     */
 
-        System.out.println("I'm in deserializing Model in class modelMessage");
+    static public Model deserializeModel(String protocolJson){
 
         RuntimeTypeAdapterFactory1<Effect> runtimeTypeAdapterFactory8 = RuntimeTypeAdapterFactory1
                 .of(Effect.class, "typeEffect")
@@ -121,9 +145,6 @@ public class ModelMessage extends ClassMessage{
                 .create();
 
 
-        Model model= gson.fromJson(protocolJson, type);
-
-
-        return model;
+        return gson.fromJson(protocolJson, type);
     }
 }

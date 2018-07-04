@@ -23,22 +23,22 @@ import it.polimi.ingsw.LM26.observers.serverController.VisitorInt;
 
 import java.lang.reflect.Type;
 
+/**
+ * EventMessage class
+ * @author Chiara Criscuolo
+ * It contains actionEvent as field1
+ */
+
 public class EventMessage extends ClassMessage {
 
     private String idEvent;
+
     private ActionEvent actionEvent;
 
     public EventMessage(String idEvent, ActionEvent actionEvent) {
         this.idEvent = idEvent;
+
         this.actionEvent = actionEvent;
-    }
-
-    public String getIdEvent() {
-        return idEvent;
-    }
-
-    public void setIdEvent(String idEvent) {
-        this.idEvent = idEvent;
     }
 
     public ActionEvent getActionEvent() {
@@ -48,6 +48,12 @@ public class EventMessage extends ClassMessage {
     public void setActionEvent(ActionEvent actionEvent) {
         this.actionEvent = actionEvent;
     }
+
+    /**
+     * Method that return from a string with json the EventMessage
+     * @param protocolJson string to deserialize
+     * @return EventMessage
+     */
 
     static public EventMessage deserializeEventMessage(String protocolJson){
 
@@ -105,10 +111,13 @@ public class EventMessage extends ClassMessage {
                 .create();
 
 
-        //Gson gson = new Gson();
-        EventMessage message= gson.fromJson(protocolJson, EventMessage.class);
-        return message;
+        return gson.fromJson(protocolJson, EventMessage.class);
     }
+
+    /**
+     * Calls the visitor pattern on the message
+     * @param visitorInt instance of visitor
+     */
 
     @Override
     public void accept(VisitorInt visitorInt) {

@@ -1,7 +1,13 @@
 package it.polimi.ingsw.LM26.observers.serverController;
 
-public interface Observer<T> {
+/**
+ * Observer interface
+ * @author Chiara Criscuolo
+ * @param <T> generic type
+ * It uses overloading to call the different update
+ */
 
+public interface Observer<T> {
 
     void updatePlayers(ActionEventPlayer actionEventPlayer);
 

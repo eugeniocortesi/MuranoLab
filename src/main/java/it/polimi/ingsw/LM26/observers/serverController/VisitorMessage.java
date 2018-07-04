@@ -2,9 +2,19 @@ package it.polimi.ingsw.LM26.observers.serverController;
 
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.*;
 
+/**
+ * VisitorMessage class
+ * @author Chiara Criscuolo
+ * For each class of message calls the right method notify in Observable
+ */
+
 public class VisitorMessage implements VisitorInt {
 
     Observable observable;
+
+    /**
+     * Constructor
+     */
 
     public VisitorMessage(){
         observable = new Observable();

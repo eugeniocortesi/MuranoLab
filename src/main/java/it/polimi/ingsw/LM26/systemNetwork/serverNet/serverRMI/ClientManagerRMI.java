@@ -11,63 +11,50 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRemote;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerGame;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerPlayer;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskActionPlayers;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskNetworkPlayers;
 
-import java.rmi.AccessException;
-import java.rmi.AlreadyBoundException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.rmi.server.RemoteServer;
-import java.rmi.server.ServerNotActiveException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * ClientManagerRMI class
+ * @author Chiara Criscuolo
  * It manages the RMI connection
  */
+
 public class ClientManagerRMI extends ClientManager {
 
     private ServerBase myserver;
-    private int RMIPORTServer;
-    //private int RMIPORTClient;
-    //private String address;
+
     private ClientViewRemote skeleton;
+
     private String user;
+
     private TimerPlayer timerPlayer;
+
     private TimerTaskActionPlayers timerTaskActionPlayers;
+
     private TimerTaskNetworkPlayers timerTaskNetworkPlayers;
-    private ClientManagerRemote stub;
 
     private static final Logger LOGGER = Logger.getLogger(ClientManagerRMI.class.getName());
 
     /**
      * Constructor
      * @param serverBase Server
-     * @param RMIPORTServer RMI port of Server
-     * @param RMIPORTClient RMI port of Client
-     * @param address IP of Server
      */
-    public ClientManagerRMI(ServerBase serverBase, int RMIPORTServer, int RMIPORTClient, String address){
+    public ClientManagerRMI(ServerBase serverBase){
 
         myserver = serverBase;
-        this.RMIPORTServer = RMIPORTServer;
-        //this.RMIPORTClient = RMIPORTClient;
-        //this.address = address;
         this.user= null;
-
-
     }
 
     /**
-     * method that take the skeleton from Client and add the new client to the lobby
+     * Method that adds the new client to the lobby
+     * Starts the timer Network
      * Then call method "requestedLogin" in the client
      */
     public void connect() {
@@ -94,30 +81,6 @@ public class ClientManagerRMI extends ClientManager {
         });
         t.start();
     }
-        //Take Skeleton
-        /*try {
-            // Getting the registry
-            String addr = RemoteServer.getClientHost();
-            System.out.println("trying to connect to: " + addr);
-            Registry registry = LocateRegistry.getRegistry(addr, RMIPORTClient);
-
-            //Looking up the registry for the remote object
-            skeleton = (ClientViewRemote) registry.lookup("ClientViewRemote" + getAvailableId());
-            LOGGER.log(Level.WARNING, "Took Skeleton");
-
-
-
-
-
-
-        } catch (RemoteException e) {
-            System.err.println("Connection reset");
-        } catch (NotBoundException e) {
-            e.printStackTrace();
-        } catch (ServerNotActiveException e) {
-            System.err.println("Server no active");
-        }
-    }*/
 
     public int getAvailableId(){
 
@@ -126,35 +89,6 @@ public class ClientManagerRMI extends ClientManager {
 
     }
 
-
-    /*public void updateStub(){
-
-        ClientManagerRemote clientManagerRemote = new ClientManagerRMIRemote(this);
-
-        try {
-
-            System.out.println("0, id:" +getAvailableId());
-            stub = (ClientManagerRemote) UnicastRemoteObject.exportObject(clientManagerRemote, RMIPORTServer);
-
-            System.out.println("1");
-
-            Registry registry1 = LocateRegistry.getRegistry(RMIPORTServer);
-
-            System.out.println("2");
-
-            registry1.bind("ClientManagerRemote"+getAvailableId(), stub);
-
-            System.out.println("3");
-
-        }catch (RemoteException e){
-            System.err.println("Error creating second stub");
-        } catch (AlreadyBoundException e) {
-
-            e.printStackTrace();
-        }
-
-        LOGGER.log(Level.WARNING,"Server ready, stub created");
-    }*/
     /**
      * method not used in this implementation of ClientManager
      * @throws UnsupportedOperationException if the method is called

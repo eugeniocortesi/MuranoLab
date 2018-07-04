@@ -17,13 +17,7 @@ public class DataClientConfiguration {
 
     private int ClientSOCKETPORT = 3095;
     private int ServerRMIPORT=7095;
-    private int ClientRMIPORT = 1095;
     private String ip = "127.0.0.1";
-
-
-    public int getClientRMIPORT() {
-        return ClientRMIPORT;
-    }
 
     public int getServerRMIPORT(){ return ServerRMIPORT;}
 

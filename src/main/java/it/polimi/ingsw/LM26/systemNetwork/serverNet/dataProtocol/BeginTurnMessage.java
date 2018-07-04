@@ -22,6 +22,12 @@ import it.polimi.ingsw.LM26.observers.serverController.VisitorInt;
 
 import java.lang.reflect.Type;
 
+/**
+ * BeginTurnMessage class
+ * @author Chiara Criscuolo
+ * Message that contains the username of the player and his playerZone
+ */
+
 public class BeginTurnMessage extends ClassMessage {
 
     private String idBeginTurn;
@@ -30,9 +36,18 @@ public class BeginTurnMessage extends ClassMessage {
 
     private PlayerZone playerZone;
 
+    /**
+     * Constructor
+     * @param idBeginTurn id of the message
+     * @param username username of the player
+     * @param playerZone playerZone of the player
+     */
     public BeginTurnMessage(String idBeginTurn, String username, PlayerZone playerZone) {
+
         this.idBeginTurn = idBeginTurn;
+
         this.username = username;
+
         this.playerZone = playerZone;
     }
 
@@ -44,6 +59,11 @@ public class BeginTurnMessage extends ClassMessage {
         return playerZone;
     }
 
+    /**
+     * Method that return from a string with json the BeginTurnMessage
+     * @param protocolJson string to deserialize
+     * @return BeginTurnMessage
+     */
     static public BeginTurnMessage deserializeDataMessage(String protocolJson){
 
         RuntimeTypeAdapterFactory1<Effect> runtimeTypeAdapterFactory8 = RuntimeTypeAdapterFactory1
@@ -99,9 +119,13 @@ public class BeginTurnMessage extends ClassMessage {
                 .registerTypeAdapterFactory(runtimeTypeAdapterFactory8)
                 .create();
 
-        BeginTurnMessage message= gson.fromJson(protocolJson, BeginTurnMessage.class);
-        return message;
+        return gson.fromJson(protocolJson, BeginTurnMessage.class);
     }
+
+    /**
+     * Calls the visitor pattern on the message
+     * @param visitorInt instance of visitor
+     */
 
     @Override
     public void accept(VisitorInt visitorInt) {

@@ -139,8 +139,8 @@ public class ClientViewRMI extends ClientView {
      */
 
     private void getStub(){
-        //Takes the stub
 
+        //Takes the stub
         Registry registry = null;
 
         try {
@@ -150,14 +150,23 @@ public class ClientViewRMI extends ClientView {
             ClientAcceptorRemote stubAcceptor;
             //Looking up the registry for the remote object
             stubAcceptor = (ClientAcceptorRemote) registry.lookup("ClientManagerRemote");
+
+            //Creates the skeleton
             ClientViewRMIRemote clientViewRMIRemote = new ClientViewRMIRemote(this);
+
+            //Update the stubAcceptor into stub for this connection
             stub = stubAcceptor.connect(clientViewRMIRemote);
+
             LOGGER.log(Level.SEVERE,"Took the stub");
+
+            //call connect method to the real stub
             stub.connect();
+
             id = stub.getAvailableId();
 
         } catch (RemoteException | NotBoundException e) {
-            LOGGER.log(Level.SEVERE, "could not reach server: {0}", e.getMessage());
+
+            LOGGER.log(Level.SEVERE, "Could not reach server: {0}", e.getMessage());
             System.err.println("Enable to reach the Server(first stub), reset and try again");
         }
     }
