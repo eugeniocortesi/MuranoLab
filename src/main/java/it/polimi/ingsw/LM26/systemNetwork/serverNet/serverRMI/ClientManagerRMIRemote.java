@@ -5,12 +5,13 @@ import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class ClientManagerRMIRemote implements ClientManagerRemote {
+public class ClientManagerRMIRemote extends UnicastRemoteObject implements ClientManagerRemote {
 
     private ClientManager clientManagerRMI;
 
-    public ClientManagerRMIRemote(ClientManager clientManager){
+    public ClientManagerRMIRemote(ClientManager clientManager) throws RemoteException{
         clientManagerRMI = clientManager;
     }
 

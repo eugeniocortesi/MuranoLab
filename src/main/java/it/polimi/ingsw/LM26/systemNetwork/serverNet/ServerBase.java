@@ -115,6 +115,8 @@ public class ServerBase extends ViewGameInterface {
 
         rmiAcceptor = new RMIAcceptor(this, dataServerConfiguration);
 
+        rmiAcceptor.bind();
+
         socketAcceptor = new SocketAcceptor(this, dataServerConfiguration);
 
         socketAcceptor.start();
@@ -393,4 +395,6 @@ public class ServerBase extends ViewGameInterface {
 
         clientManagerList.getClientManager(name).stop();
     }
+
+
 }

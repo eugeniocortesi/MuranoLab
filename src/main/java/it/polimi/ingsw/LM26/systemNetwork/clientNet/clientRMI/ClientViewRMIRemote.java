@@ -6,6 +6,7 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  * Implements skeleton and class for each method the corresponding one in ClientViewRMI
  */
 
-public class ClientViewRMIRemote implements ClientViewRemote {
+public class ClientViewRMIRemote extends UnicastRemoteObject implements ClientViewRemote {
 
     private ClientViewRMI clientViewRMI;
 
@@ -21,7 +22,7 @@ public class ClientViewRMIRemote implements ClientViewRemote {
      * Constructor
      * @param clientViewRMI instance of ClientView
      */
-    public ClientViewRMIRemote(ClientViewRMI  clientViewRMI){
+    public ClientViewRMIRemote(ClientViewRMI  clientViewRMI) throws RemoteException{
         this.clientViewRMI = clientViewRMI;
     }
 

@@ -12,6 +12,7 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.ClientAcceptorRemote;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.ClientManagerRemote;
 
 import java.rmi.NotBoundException;
@@ -33,7 +34,7 @@ public class ClientViewRMI extends ClientView {
 
     private int RMIPORTServer;
 
-    private int RMIPORTClient;
+    //private int RMIPORTClient;
 
     private String address;
 
@@ -56,7 +57,7 @@ public class ClientViewRMI extends ClientView {
 
         RMIPORTServer = data.getServerRMIPORT();
 
-        RMIPORTClient =data.getClientRMIPORT();
+        //RMIPORTClient =data.getClientRMIPORT();
 
         address = data.getIp();
 
@@ -66,7 +67,6 @@ public class ClientViewRMI extends ClientView {
 
         register(concreteClientView);
 
-        getStub();
     }
 
     /**
@@ -76,7 +76,8 @@ public class ClientViewRMI extends ClientView {
     @Override
     public void connect(){
 
-        bind();
+    //    bind();
+        getStub();
     }
 
     /**
@@ -84,7 +85,7 @@ public class ClientViewRMI extends ClientView {
      * Calls connect method in the stub
      */
 
-    private void bind(){
+    /*private void bind(){
 
         //Creates skeleton
 
@@ -98,12 +99,37 @@ public class ClientViewRMI extends ClientView {
             registry.bind("ClientViewRemote"+id,  skeleton);
             LOGGER.log(Level.WARNING,"Client ready, created skeleton");
 
+            getStub(id);
             stub.connect();
+
+
 
         }catch (Exception e){
 
-            System.err.println("Enable to reach the Server, reset and try again");
+            System.err.println("Enable to reach the Server (skeleton), reset and try again");
 
+        }
+    }*/
+
+    /*private void getStub(int id){
+
+        Registry registry = null;
+
+        try {
+            System.out.println("0, id: " +id );
+
+            registry = LocateRegistry.getRegistry(address, RMIPORTServer);
+
+            System.out.println("1");
+            //Looking up the registry for the remote object
+            stub = (ClientManagerRemote) registry.lookup("ClientManagerRemote"+id);
+
+            System.out.println("2");
+            LOGGER.log(Level.SEVERE,"Updated the stub");
+
+        } catch (RemoteException | NotBoundException e) {
+
+            System.err.println("Enable to reach the Server(second stub), reset and try again");
         }
     }
 
@@ -121,16 +147,18 @@ public class ClientViewRMI extends ClientView {
 
             registry = LocateRegistry.getRegistry(address, RMIPORTServer);
 
+            ClientAcceptorRemote stubAcceptor;
             //Looking up the registry for the remote object
-            stub = (ClientManagerRemote) registry.lookup("ClientManagerRemote");
-
+            stubAcceptor = (ClientAcceptorRemote) registry.lookup("ClientManagerRemote");
+            ClientViewRMIRemote clientViewRMIRemote = new ClientViewRMIRemote(this);
+            stub = stubAcceptor.connect(clientViewRMIRemote);
             LOGGER.log(Level.SEVERE,"Took the stub");
-
+            stub.connect();
             id = stub.getAvailableId();
 
         } catch (RemoteException | NotBoundException e) {
-
-            System.err.println("Enable to reach the Server, reset and try again");
+            LOGGER.log(Level.SEVERE, "could not reach server: {0}", e.getMessage());
+            System.err.println("Enable to reach the Server(first stub), reset and try again");
         }
     }
 
