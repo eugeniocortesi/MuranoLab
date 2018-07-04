@@ -30,6 +30,8 @@ public class MoveWithNoValueRestriction3 extends ToolCardDecorator {
     @Override
     public boolean play (Box fromBox, Box toBox, PlayerZone player) {
 
+        if(fromBox == null ||toBox == null) return false;
+
         DieInt die = fromBox.getDie();
 
         if (!fromBox.isIsPresent()) {

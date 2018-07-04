@@ -44,7 +44,7 @@ public class EventHandler {
         result = handle(eventChecker);
     }
 
-    private boolean handle(EventChecker eventChecker) {
+    public boolean handle(EventChecker eventChecker) {
 
         ToolCardInt toolCard;
 
@@ -70,6 +70,8 @@ public class EventHandler {
 
                         player.getActionHistory().setCardUsed(true);
 
+                        eventChecker.checkToken(player, toolCard,true);
+
                         return true;
                     } else return false;
 
@@ -78,6 +80,8 @@ public class EventHandler {
                     if (toolCard.play(getBoxListCopy(event.getFromBoxList()), getBoxListCopy(event.getToBoxList()), player)) {
 
                         player.getActionHistory().setCardUsed(true);
+
+                        eventChecker.checkToken(player, toolCard,true);
 
                         return true;
                     } else return false;
@@ -88,6 +92,8 @@ public class EventHandler {
 
                         player.getActionHistory().setCardUsed(true);
 
+                        eventChecker.checkToken(player, toolCard,true);
+
                         return true;
                     } else return false;
 
@@ -96,6 +102,8 @@ public class EventHandler {
                     if (toolCard.play(event.getDieFromDraft(), event.getDieFromRoundTrack())) {
 
                         player.getActionHistory().setCardUsed(true);
+
+                        eventChecker.checkToken(player, toolCard,true);
 
                         return true;
                     } else return false;
@@ -106,6 +114,8 @@ public class EventHandler {
 
                         player.getActionHistory().setCardUsed(true);
 
+                        eventChecker.checkToken(player, toolCard,true);
+
                         return true;
                     } else return false;
 
@@ -115,6 +125,8 @@ public class EventHandler {
 
                         player.getActionHistory().setCardUsed(true);
 
+                        eventChecker.checkToken(player, toolCard,true);
+
                         return true;
                     } else return false;
 
@@ -123,6 +135,8 @@ public class EventHandler {
                     if (toolCard.play(player)) {
 
                         player.getActionHistory().setCardUsed(true);
+
+                        eventChecker.checkToken(player, toolCard,true);
 
                         return true;
                     } else return false;
@@ -141,6 +155,8 @@ public class EventHandler {
                     if (toolCard.play(event.getDieFromRoundTrack(), getBoxListCopy(event.getFromBoxList()), getBoxListCopy(event.getToBoxList()), player)) {
 
                         player.getActionHistory().setCardUsed(true);
+
+                        eventChecker.checkToken(player, toolCard,true);
 
                         return true;
                     } else return false;
@@ -195,17 +211,14 @@ public class EventHandler {
 
     public Box getBoxCopy(Box b) throws NoSuchElementException {
 
-        try {
+        if(b==null)return null;
 
-            return player.getPlayerBoard().getBoardMatrix()[b.getI()][b.getJ()];
-
-        } catch (NoSuchElementException e) {
-        }
-
-        return null;
+        return player.getPlayerBoard().getBoardMatrix()[b.getI()][b.getJ()];
     }
 
     public DieInt getDraftDieCopy(DieInt die) {
+
+        if(die==null) return null;
 
         for (int i = 0; i < model.getDraftPool().size(); i++)
 
@@ -216,19 +229,17 @@ public class EventHandler {
         return null;
     }
 
-    public ArrayList<Box> getBoxListCopy(ArrayList<Box> a) throws NoSuchElementException {
+    public ArrayList<Box> getBoxListCopy(ArrayList<Box> a) {
+
+        if(a==null) return null;
 
         ArrayList<Box> toReturn = new ArrayList<Box>();
 
-        try {
-            Box[][] board = player.getPlayerBoard().getBoardMatrix();
+        Box[][] board = player.getPlayerBoard().getBoardMatrix();
 
             for (int i = 0; i < a.size(); i++)
 
                 toReturn.add(board[a.get(i).getI()][a.get(i).getJ()]);
-
-        } catch (NoSuchElementException e) {
-        }
 
         return toReturn;
     }

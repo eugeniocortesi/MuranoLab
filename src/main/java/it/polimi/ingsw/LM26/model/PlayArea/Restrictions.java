@@ -14,7 +14,7 @@ public class Restrictions {
 
     private boolean currentPlacement=false;
 
-    private Color color=null;
+    private String color=null;
 
     public void resetRestrictions(){
 
@@ -61,7 +61,7 @@ public class Restrictions {
 
     public void setCurrentPlacement(boolean currentPlacement) { this.currentPlacement = currentPlacement; }
 
-    public Color getColor() { return color;}
+    public String getColor() { return color;}
 
-    public void setColor(Color color) { this.color = color; }
+    public void setColor(String color) { this.color = color; }
 }

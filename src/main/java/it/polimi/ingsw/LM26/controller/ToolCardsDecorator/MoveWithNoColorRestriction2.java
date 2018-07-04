@@ -30,32 +30,50 @@ public class MoveWithNoColorRestriction2 extends ToolCardDecorator {
     @Override
     public boolean play (Box fromBox, Box toBox, PlayerZone player) {
 
+        if(fromBox == null ||toBox == null) return false;
+
         DieInt die = fromBox.getDie();
+
         if(!fromBox.isIsPresent()){
+
             System.out.println("no die found");
+
             return false;
         }
+
         if(toBox.isIsPresent()){
+
             System.out.println("a die is already present here ");
+
             return false;
         }
+
         PlaceDie placement = new PlaceDie(die, toBox, player);
+
         fromBox.free();
+
         if(player.getPlayerBoard().getNumDice()==1) {
+
             if (placement.checkValueRestriction() && placement.checkEdgeRestrictions()) {
+
                 toBox.setDie(die);
+
                 return true;
             }
         }
+
         else if (placement.checkValueRestriction() && placement.checkNearByRestrictions() ){
+
             toBox.setDie(die);
+
             return true;
         }
 
         System.out.println("error card 2");
-        fromBox.setDie(die);
-        return false;
 
+        fromBox.setDie(die);
+
+        return false;
     }
 
     @Override

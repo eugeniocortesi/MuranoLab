@@ -30,6 +30,8 @@ public class MoveTwoDice4 extends ToolCardDecorator {
     @Override
     public boolean play ( ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, PlayerZone player ) {
 
+        if( fromBoxList == null || toBoxList == null) return false;
+
         ArrayList <DieInt> dieList=new ArrayList<DieInt>();
 
         for(int i=0; i<fromBoxList.size(); i++)

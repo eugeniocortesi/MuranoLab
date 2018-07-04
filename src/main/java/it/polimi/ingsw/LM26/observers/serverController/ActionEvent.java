@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ActionEvent extends ClassMessage implements Serializable {
 
     private int ID;
-    private int player;
+    private int player=-1;
     private int number;
     private Box fromBox1=null;
     private Box toBox1=null;

@@ -22,7 +22,6 @@ public class RoundsHandler extends Thread {
     private PlayerZone playing;
     private boolean result = false;
     private Model model;
-    private PhaseInt centralPhase;
     private Game game;
     private ControllerInt controller;
     private TimerActionPlayer timerActionPlayer;
@@ -36,7 +35,6 @@ public class RoundsHandler extends Thread {
         this.controller = controller;
         this.game = new Game();  //initialPhase
         game.getPhase().doAction(game);    //centralPhase
-        this.centralPhase = game.getPhase();
         this.model = model;
         this.model.hasChanged();
 
@@ -53,19 +51,19 @@ public class RoundsHandler extends Thread {
 
     public void play() {
 
-        for (int i = 0; i < model.getPlayerList().size(); i++)
+        for (int j = 0; j < model.getPlayerList().size(); j++)
 
-            controller.getViewGameInterface().showSetPlayerMenu(model.getPlayerList().get(i).getName(), model.getPlayerList().get(i));
+            controller.getViewGameInterface().showSetPlayerMenu(model.getPlayerList().get(j).getName(), model.getPlayerList().get(j));
 
         while (i < game.getPhase().getNrounds() && !game.getPhase().getOnePlayer()) {
 
-            playing = centralPhase.getCurrentRound().nextPlayer();
+            playing = game.getPhase().getCurrentRound().nextPlayer();
 
-            for (int i = 0; i < model.getPlayerList().size(); i++)
+            for (int j = 0; j < model.getPlayerList().size(); j++)
 
-                controller.getViewGameInterface().showAnswerFromController(model.getPlayer(i).getName(), "Inizia il turno " + centralPhase.getRoundNumber());
+                controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "Inizia il turno " + game.getPhase().getRoundNumber());
 
-            while (centralPhase.getCurrentRound().getRoundState() != FINISHED) {
+            while (game.getPhase().getCurrentRound().getRoundState() != FINISHED) {
 
                 //TODO DELETE
                 System.out.println("              CHANGE TURN: " + playing.getName());
@@ -74,13 +72,13 @@ public class RoundsHandler extends Thread {
                 System.out.println("DraftPool");
                 model.getDraftPool().printDraftPool();
 
-                for (int i = 0; i < model.getPlayerList().size(); i++)
+                for (int j = 0; j < model.getPlayerList().size(); j++)
 
-                    if (!playing.equals(model.getPlayer(i)))
+                    if (!playing.equals(model.getPlayer(j)))
 
-                        controller.getViewGameInterface().showAnswerFromController(model.getPlayer(i).getName(), "E' il turno di " + playing.getName());
+                        controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "E' il turno di " + playing.getName());
 
-                    else controller.getViewGameInterface().showAnswerFromController(model.getPlayer(i).getName(), "TUO TURNO " + playing.getName());
+                    else controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "TUO TURNO " + playing.getName());
 
                 controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
 
@@ -112,9 +110,9 @@ public class RoundsHandler extends Thread {
 
                 playerEnding = playing;
 
-                centralPhase.getCurrentRound().endAction();
+                game.getPhase().getCurrentRound().endAction();
 
-                playing = centralPhase.getCurrentRound().nextPlayer();
+                playing = game.getPhase().getCurrentRound().nextPlayer();
 
                 controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
 
@@ -126,9 +124,11 @@ public class RoundsHandler extends Thread {
 
             model.getRoundTrackInt().dump();
 
-            centralPhase.nextRound(centralPhase.getCurrentRound(), game);
+            game.getPhase().nextRound(game.getPhase().getCurrentRound(), game);
 
             //controller.getView().showTurnEndPhase();
+
+            i++;
         }
 
         game.getPhase().doAction(game);

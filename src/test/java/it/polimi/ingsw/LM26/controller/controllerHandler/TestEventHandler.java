@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
 public class TestEventHandler {
 
     Model model;
+    EventChecker checker;
     ArrayList<DieInt> dice=new ArrayList<DieInt>();
     ActionEvent actionEvnet=new ActionEvent();
     Controller controller = new Controller();
@@ -64,8 +65,58 @@ public class TestEventHandler {
         model.getPlayerList().get(0).setPlayerBoard(window);
         actionEvnet.setId(0);
         eventHandler=new EventHandler(actionEvnet, model, controller);
-    }
+        checker=new EventChecker(model);
 
+}
+
+
+    @Test
+
+    public void checkHandler(){
+
+        ActionEvent ae= new ActionEvent();
+        assertFalse(eventHandler.handle(checker));
+        ae.setPlayer(0);
+        ae.setId(1);
+        assertFalse(eventHandler.handle(checker));
+        ae.setId(2);
+        assertFalse(eventHandler.handle(checker));
+        ae.setCardID(2);
+        assertFalse(eventHandler.handle(checker));
+        ae.setCardID(3);
+        assertFalse(eventHandler.handle(checker));
+        ae.setId(3);
+        ae.setCardID(4);
+        assertFalse(eventHandler.handle(checker));
+        ae.setId(4);
+        ae.setCardID(9);
+        assertFalse(eventHandler.handle(checker));
+        ae.setId(5);
+        ae.setCardID(5);
+        assertFalse(eventHandler.handle(checker));
+        ae.setId(6);
+        ae.setCardID(1);
+        assertFalse(eventHandler.handle(checker));
+        ae.setId(7);
+        ae.setCardID(6);
+        assertFalse(eventHandler.handle(checker));
+        ae.setCardID(10);
+        assertFalse(eventHandler.handle(checker));
+        ae.setCardID(11);
+        assertFalse(eventHandler.handle(checker));
+        ae.setId(8);
+        ae.setCardID(7);
+        assertFalse(eventHandler.handle(checker));
+        ae.setCardID(8);
+        assertFalse(eventHandler.handle(checker));
+        ae.setId(9);
+        ae.setCardID(11);
+        assertFalse(eventHandler.handle(checker));
+        ae.setId(10);
+        ae.setCardID(12);
+        assertFalse(eventHandler.handle(checker));
+
+    }
 
     @Test
     public void checkEventAttributes() {
@@ -79,10 +130,17 @@ public class TestEventHandler {
         assertEquals(selected, returned);
 
         actionEvnet.setCardID(model.getOnBoardCards().getToolArrayList().get(1));
+        actionEvnet.setPlayer(0);
 
         assertEquals(eventHandler.getToolCard(), model.getOnBoardCards().getToolCardList().get(1));
 
         ArrayList<Box> from = new ArrayList<Box>();
+
+        actionEvnet.setPlayer(0);
+        actionEvnet.setId(-1);
+        actionEvnet.setCardID(-1);
+        eventHandler.handle(checker);
+
 
         from.add(model.getPlayerList().get(0).getPlayerBoard().getBoardMatrix()[3][3]);
         from.add(model.getPlayerList().get(0).getPlayerBoard().getBoardMatrix()[2][4]);

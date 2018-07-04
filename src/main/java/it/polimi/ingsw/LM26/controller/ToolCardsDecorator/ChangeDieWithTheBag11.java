@@ -4,6 +4,7 @@ import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
@@ -22,6 +23,55 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
         this.toolcard = toolcard;
         this.type="ChangeDieWithTheBag11";
         this.typeToolCard = "ToolCard";
+    }
+
+    @Override
+    public boolean play (DieInt dieFromDraft, PlayerZone player) {
+
+        Model model = singletonModel();
+
+        if(dieFromDraft==null) return false;
+
+        model.getBag().add(dieFromDraft);
+
+        model.getDraftPool().remove(dieFromDraft);
+
+        if (player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) {
+
+            System.out.println("action expired");
+
+            return false;
+        }
+
+        DieInt d=model.getBag().draw();
+
+        model.getRestrictions().setDie(d);
+
+        if(d.getColor().equals(Color.ANSI_GREEN))
+
+            model.getRestrictions().setColor("Verde");
+
+        if(d.getColor().equals(Color.ANSI_RED))
+
+            model.getRestrictions().setColor("Rosso");
+
+        if(d.getColor().equals(Color.ANSI_PURPLE))
+
+            model.getRestrictions().setColor("Viola");
+
+        if(d.getColor().equals(Color.ANSI_BLUE))
+
+            model.getRestrictions().setColor("Blu");
+
+        if(d.getColor().equals(Color.ANSI_YELLOW))
+
+            model.getRestrictions().setColor("Giallo");
+
+        System.out.println("you got a " + d.getColor() + " die ");
+
+        model.getRestrictions().setFirstPart(true);
+
+        return true;
     }
 
     @Override
@@ -53,35 +103,6 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
         model.getRestrictions().setNeedPlacement(true);
 
         return false;
-    }
-
-    @Override
-    public boolean play (DieInt dieFromDraft, PlayerZone player) {
-
-        Model model = singletonModel();
-
-        model.getBag().add(dieFromDraft);
-
-        model.getDraftPool().remove(dieFromDraft);
-
-        if (player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) {
-
-            System.out.println("action expired");
-
-            return false;
-        }
-
-        DieInt d=model.getBag().draw();
-
-        model.getRestrictions().setDie(d);
-
-        model.getRestrictions().setColor(d.getColor());
-
-        System.out.println("you got a " + d.getColor() + " die ");
-
-        model.getRestrictions().setFirstPart(true);
-
-        return true;
     }
 
     @Override

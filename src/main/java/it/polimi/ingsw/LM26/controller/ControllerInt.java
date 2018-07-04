@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.controller;
 
 import it.polimi.ingsw.LM26.controller.GamePhases.PhaseInt;
+import it.polimi.ingsw.LM26.controller.controllerHandler.RoundsHandler;
 import it.polimi.ingsw.LM26.controller.controllerHandler.SetupHandler;
 import it.polimi.ingsw.LM26.controller.controllerHandler.UpdatesHandler;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
@@ -31,4 +32,6 @@ public interface ControllerInt {
     SetupHandler getSetupHandler();
 
     ServerBase getServer();
+
+    public RoundsHandler getRoundsHandler();
 }

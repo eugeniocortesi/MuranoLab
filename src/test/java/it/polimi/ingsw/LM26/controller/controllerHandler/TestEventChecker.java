@@ -52,27 +52,49 @@ public class TestEventChecker {
         System.out.println("tokens: "+token1);
 
         //first usage of a card
-        result=checker.checkToken(model.getPlayerList().get(0), model.getOnBoardCards().getToolCardList().get(0));
+        result=checker.checkToken(model.getPlayerList().get(0), model.getOnBoardCards().getToolCardList().get(0), true );
         assertTrue(result);
+
+        model.getPlayer(0).getActionHistory().setCardUsed(true);
+        model.getRestrictions().setFirstPart(false);
+
+        assertFalse(checker.checkActionAvailability(model.getPlayer(0), model.getOnBoardCards().getToolCardList().get(0)));
+
+        model.getPlayer(0).getActionHistory().setCardUsed(false);
+        model.getRestrictions().setFirstPart(false);
+
+        assertTrue(checker.checkActionAvailability(model.getPlayer(0), model.getOnBoardCards().getToolCardList().get(1)));
+
+
+        model.getPlayer(0).getActionHistory().setCardUsed(true);
+        model.getRestrictions().setFirstPart(true);
+
+        assertTrue(checker.checkActionAvailability(model.getPlayer(0), model.getOnBoardCards().getToolCardList().get(2)));
+
+
+
+
+
+
         System.out.println(result + " after first time tokens: "+model.getPlayerList().get(0).getToken().getTokenNumber());
         assertEquals(token0-1, model.getPlayerList().get(0).getToken().getTokenNumber());
 
         //second usage the same card (it costs more)
-        result=checker.checkToken(model.getPlayerList().get(1), model.getOnBoardCards().getToolCardList().get(0));
+        result=checker.checkToken(model.getPlayerList().get(1), model.getOnBoardCards().getToolCardList().get(0), true );
         assertTrue(result);
         System.out.println(result + " after second time tokens: "+model.getPlayerList().get(1).getToken().getTokenNumber());
         assertEquals(token1-2, model.getPlayerList().get(1).getToken().getTokenNumber());
 
         token1= model.getPlayerList().get(1).getToken().getTokenNumber();
 
-        result=checker.checkToken(model.getPlayerList().get(1), model.getOnBoardCards().getToolCardList().get(0));
+        result=checker.checkToken(model.getPlayerList().get(1), model.getOnBoardCards().getToolCardList().get(0), true );
         if(model.getPlayerList().get(1).getWindowPatternCard().getToken() < 4 ) assertFalse(result);
             else assertTrue(result);
 
         token1= model.getPlayerList().get(1).getToken().getTokenNumber();
         if(token1>0) {
             System.out.println("at least one ");
-            result = checker.checkToken(model.getPlayerList().get(1), model.getOnBoardCards().getToolCardList().get(1));
+            result = checker.checkToken(model.getPlayerList().get(1), model.getOnBoardCards().getToolCardList().get(1), true );
             assertTrue(result);
             assertEquals(token1 - 1, model.getPlayerList().get(1).getToken().getTokenNumber());
         }

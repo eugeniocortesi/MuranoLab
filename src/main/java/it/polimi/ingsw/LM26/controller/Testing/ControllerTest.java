@@ -1,6 +1,7 @@
 package it.polimi.ingsw.LM26.controller.Testing;
 
 import it.polimi.ingsw.LM26.controller.GamePhases.PhaseInt;
+import it.polimi.ingsw.LM26.controller.controllerHandler.RoundsHandler;
 import it.polimi.ingsw.LM26.controller.controllerHandler.UpdatesHandler;
 import it.polimi.ingsw.LM26.controller.controllerHandler.SetupHandler;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
@@ -150,6 +151,11 @@ public class ControllerTest implements ControllerInt {
     public ServerBase getServer() {
 
         return null;
+    }
+
+    public RoundsHandler getRoundsHandler(){
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
 

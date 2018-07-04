@@ -80,7 +80,6 @@ public class TestChangeDieWithTheBag11 {
                 ok = true;
             } else {
                 System.out.println("attempt "+ count+ " went wrong");
-                assertEquals(model.getRestrictions().getDie().getColor(), model.getRestrictions().getColor());
                 assertEquals(model.getRestrictions().getDie().getValue(), 3);
                 assertTrue(model.getRestrictions().isNeedPlacement());
             }

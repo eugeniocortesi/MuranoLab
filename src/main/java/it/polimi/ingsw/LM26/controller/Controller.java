@@ -154,6 +154,11 @@ public class Controller implements ControllerInt {
 
         this.gamePhase=phase;
     }
+
+    @Override
+    public RoundsHandler getRoundsHandler() {
+        return roundsHandler;
+    }
 }
 
 

@@ -26,7 +26,7 @@ public class ChangeDieValue1 extends ToolCardDecorator {
     @Override
     public boolean play (DieInt die, String inDeCrement) {
 
-        if( die== null) return false;
+        if( die== null || inDeCrement==null) return false;
 
         if (inDeCrement.equals("increment")) {
 

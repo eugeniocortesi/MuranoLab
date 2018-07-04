@@ -92,11 +92,13 @@ public class EventChecker {
             return false;
         }
 
-        return (checkToken(player, card));
+        return (checkToken(player, card, false ));
     }
 
 
     public boolean checkCard(int i) {
+
+        if( i>model.getDecks().getToolCardDeck().size()) return false;
 
         if (model.getOnBoardCards().getToolCardList().contains(model.getDecks().getToolCardDeck().get(i - 1)))
 
@@ -107,19 +109,19 @@ public class EventChecker {
         return false;
     }
 
-    public boolean checkToken(PlayerZone player, ToolCardInt toolCard) {
+    public boolean checkToken(PlayerZone player, ToolCardInt toolCard, Boolean pay) {
 
         if (toolCard.getToken() > 0) {
 
             if (player.getToken().getTokenNumber() > 1) {
 
-                toolCard.setTwoToken(player);
+                if (pay ) toolCard.setTwoToken(player);
 
                 return true;
             }
         } else if (player.getToken().getTokenNumber() > 0) {
 
-            toolCard.setOneToken(player);
+            if (pay ) toolCard.setOneToken(player);
 
             return true;
         }

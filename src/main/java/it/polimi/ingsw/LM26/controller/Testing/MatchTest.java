@@ -91,6 +91,8 @@ public class MatchTest {
             model.getRoundTrackInt().dump();
 
             game.getPhase().nextRound(game.getPhase().getCurrentRound(), game);
+
+            i++;
         }
 
         game.getPhase().doAction(game);

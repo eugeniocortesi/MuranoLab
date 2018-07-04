@@ -1,7 +1,9 @@
 package it.polimi.ingsw.LM26.controller.GamePhases;
 
 import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Bag;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
@@ -16,10 +18,11 @@ import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
 import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.ENDING;
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class TestRound {
 
-    private RoundTrack roundTrack = new RoundTrack("s");
     private DraftPool draftPool = new DraftPool("s");
     private String name = "name";
     private Round round;
@@ -71,13 +74,14 @@ public class TestRound {
         model.getDecks().getObjectivePrivateCardDeck().get(3).setPlayer(player4);
 
         model.setPlayerList(playerList);
+        playerZones = playerList;
 
         game=new Game();  //initialPhase
         game.getPhase().doAction(game);
         central=game.getPhase();
     }
 
-    /*@Test
+    @Test
     //4 giocatori, controlla che solo a fine round lo stato sia "FINISHED",
     // che il dado nella draftpool sia trasferito nella roundtrack,
     // controlla che ad ogni turno (senza disconnessioni) 3 giocatori siano in "ENDING" e uno sia in "BEGINNING"
@@ -104,7 +108,7 @@ public class TestRound {
         draftPool.setInDraft(dice);
         round.endAction();
         assertEquals(RoundState.FINISHED, round.getRoundState());
-        assertEquals(1, roundTrack.getRoundTrackTurn(1).size());
+        assertEquals(1, model.getRoundTrackInt().getRoundTrackTurnList().size());
     }
 
     @Test
@@ -137,8 +141,8 @@ public class TestRound {
         draftPool.setInDraft(dice);
         round.endAction();
         assertEquals(RoundState.FINISHED, round.getRoundState());
-        assertEquals(1, roundTrack.getRoundTrackTurn(1).size());
-    }*/
+        assertEquals(1,  model.getRoundTrackInt().getRoundTrackTurnList().size());
+    }
 
     @Test
     public void checkNextPlayer() {
@@ -149,8 +153,9 @@ public class TestRound {
         model.setBag(new Bag());
         Game game=new Game();  //initialPhase
         game.getPhase().doAction(game);
+        PlayerZone previous;
 
-        while (j < game.getPhase().getNrounds() && !game.getPhase().getOnePlayer()) {
+        while (!game.getPhase().getOnePlayer() && j < game.getPhase().getNrounds()  ) {
 
             playing = game.getPhase().getCurrentRound().nextPlayer();
 
@@ -158,13 +163,69 @@ public class TestRound {
 
                 System.out.println("              CHANGE TURN: " + playing.getName());
 
+                int n=game.getPhase().getCurrentRound().getTurnCounter();
+
+                if(n<(game.getPhase().getTurn().length / 2)-1) {
+                    assertTrue(playing.getActionHistory().isFirstTurn());
+                    assertFalse(playing.getActionHistory().isSecondTurn());
+                }
+
+                if(n>(game.getPhase().getTurn().length / 2)-1) {
+                    assertTrue(playing.getActionHistory().isSecondTurn());
+                    assertFalse(playing.getActionHistory().isFirstTurn());
+                }
+
+                playing.getActionHistory().setPlacement(true);
+                playing.getActionHistory().setJump(true);
+                playing.getActionHistory().setCardUsed(true);
+                playing.getActionHistory().setDieUsed(true);
+                playing.getActionHistory().setFreezed(true);
+
+                model.getRestrictions().setNeedPlacement(true);
+                model.getRestrictions().setFirstPart(true);
+                model.getRestrictions().setTool8needPlacement(true);
+                model.getRestrictions().setCurrentPlacement(true);
+                model.getRestrictions().setColor("verde");
+                model.getRestrictions().setDie(new Die());
+
                 game.getPhase().getCurrentRound().endAction();
+
+                if(n<(game.getPhase().getTurn().length)-1 &&  game.getPhase().getTurn()[n]==game.getPhase().getTurn()[n+1]) {
+                    assertTrue(playing.getActionHistory().isSecondTurn());
+                    assertFalse(playing.getActionHistory().isFirstTurn());
+                }
+
+                //check reset partial action history after a turn && restrictions
+
+                assertFalse(playing.getActionHistory().isPlacement() && playing.getActionHistory().isDieUsed()
+                        && playing.getActionHistory().isJump() && playing.getActionHistory().isCardUsed());
+
+               if (n<(game.getPhase().getTurn().length)-1) assertTrue(playing.getActionHistory().isFreezed());
+                    else {
+                        assertFalse(playing.getActionHistory().isFreezed());
+                    assertFalse(playing.getActionHistory().isSecondTurn());
+               }
+
+                assertFalse(model.getRestrictions().isNeedPlacement() && model.getRestrictions().isFirstPart()
+                        && model.getRestrictions().isTool8needPlacement()
+                && model.getRestrictions().isCurrentPlacement());
+
+                assertEquals(model.getRestrictions().getDie(), null);
+                assertEquals(model.getRestrictions().getColor(), null);
 
                 playing = game.getPhase().getCurrentRound().nextPlayer();
 
             }
 
             game.getPhase().nextRound(game.getPhase().getCurrentRound(), game);
+
+            //check reset all action history after a round like rounds reset and freezing
+
+            assertFalse(playing.getActionHistory().isSecondTurn() && playing.getActionHistory().isFreezed() );
+
+            if(j!=9)assertTrue(playing.getActionHistory().isFirstTurn());
+
+            j++;
         }
     }
 
@@ -213,6 +274,16 @@ public class TestRound {
                     System.out.println(playerZones.get(2).getName() + " went in STANDBY");
                 }
 
+                if (i == 27) {
+                    playerZones.get(3).setPlayerState(PlayerState.STANDBY);
+                    System.out.println(playerZones.get(3).getName() + "went STANDBY");
+                }
+
+                if (i == 19) {
+                    playerZones.get(1).setPlayerState(PlayerState.ENDING);
+                    System.out.println(playerZones.get(1).getName() + " exit STANDBY");
+                }
+
                 i++;
 
                 game.getPhase().getCurrentRound().endAction();
@@ -222,6 +293,8 @@ public class TestRound {
             }
 
             game.getPhase().nextRound(game.getPhase().getCurrentRound(), game);
+
+            j++;
         }
 
     }

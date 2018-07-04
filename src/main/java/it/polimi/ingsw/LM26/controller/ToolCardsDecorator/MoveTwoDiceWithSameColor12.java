@@ -30,6 +30,8 @@ public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
     @Override
     public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, PlayerZone player) {
 
+        if( fromBoxList == null || toBoxList == null) return false;
+
         ArrayList <DieInt> dieList=new ArrayList<DieInt>();
 
         if( fromRoundTrack==null ) return false;

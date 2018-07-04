@@ -35,6 +35,8 @@ public class Round {
         //this.assignTurn(rTrack, pZone, nrounds);
 
         pullDice();
+
+        setPlayersTurn();
     }
 
     //assegna l'ordine con cui si gioca all'interno di un turno e salva l'ordine dell'ultimo turno per la parità di punteggio
@@ -65,18 +67,6 @@ public class Round {
 
                     player.get(i).setPlayerState(PlayerState.BEGINNING);
 
-                    if (turnCounter > 0) {
-
-                        if (turn[turnCounter] == turn[turnCounter - 1]) {
-
-                            player.get(i).getActionHistory().setFirstTurn(false);
-
-                            player.get(i).getActionHistory().setSecondTurn(true);
-
-                        } else player.get(i).getActionHistory().setFirstTurn(true);
-
-                    } else player.get(i).getActionHistory().setFirstTurn(true);
-
                     currentPlayer = player.get(i);
 
                     return player.get(i);
@@ -102,6 +92,8 @@ public class Round {
 
     //passa il turno al successivo, se è finito turno globale mette dadi nella casella della round track e ritorna FINISHED
     public void endAction() {
+
+        setPlayersTurn();
 
         if (currentPlayer.getPlayerState() != STANDBY)
 
@@ -135,6 +127,30 @@ public class Round {
         turnCounter = 0;
 
         roundState = RoundState.FINISHED;
+    }
+
+    public void setPlayersTurn() {
+
+        if (turnCounter == 0)
+
+            for (int i = 0; i < model.getPlayerList().size(); i++) {
+
+                model.getPlayer(i).getActionHistory().setFirstTurn(true);
+
+                model.getPlayer(i).getActionHistory().setSecondTurn(false);
+            }
+
+        else if (turnCounter < turn.length-1) {
+
+            if (turn[turnCounter] == turn[turnCounter + 1])
+
+                for (int i = 0; i < model.getPlayerList().size(); i++) {
+
+                    model.getPlayer(i).getActionHistory().setFirstTurn(false);
+
+                    model.getPlayer(i).getActionHistory().setSecondTurn(true);
+                }
+        }
     }
 
     public void pullDice() {

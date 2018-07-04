@@ -32,6 +32,8 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
 
         Model model = singletonModel();
 
+        if(dieFromDraft == null ||toBox == null) return false;
+
         Box[][] board = player.getPlayerBoard().getBoardMatrix();
 
         int i = toBox.getI();
