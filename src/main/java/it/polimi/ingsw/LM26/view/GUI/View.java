@@ -16,6 +16,7 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientInt;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
@@ -202,6 +203,7 @@ public class View extends ViewInterface {
                     myTurn = true;
                 } else myTurn = false;
                 gController.isMyTurn(myTurn);
+                showCurrentMenu(null);
             }
         });
     }
@@ -210,11 +212,11 @@ public class View extends ViewInterface {
     @Override
     public void showCurrentMenu(String name){
         if(begin){
+            FXMLLoader fLoader=displayableStageGame.getFxmlLoader();
+            GameController gController=fLoader.getController();
+            gController.setupGame(myTurn, this);
             Platform.runLater(new Runnable() {
                 public void run() {
-                    FXMLLoader fLoader=displayableStageGame.getFxmlLoader();
-                    GameController gController=fLoader.getController();
-                    gController.setupGame(myTurn);
                     displayableStageGame.show(primaryStage);
                 }
             });
@@ -277,5 +279,9 @@ public class View extends ViewInterface {
                 gController.updateGame();
             }
         });
+    }
+
+    public void notifyActionEvent(ActionEvent ae){
+        notify(ae);
     }
 }

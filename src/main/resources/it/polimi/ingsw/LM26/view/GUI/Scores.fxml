@@ -72,7 +72,7 @@
                         </StackPane>
                         <StackPane layoutX="100.0" layoutY="10.0" prefHeight="45.0" prefWidth="45.0" style="-fx-border-color: #000000; -fx-border-width: 3; -fx-border-radius: 7;">
                            <children>
-                              <Label text="1">
+                              <Label text="6">
                                  <font>
                                     <Font name="Dubai Medium" size="20.0" />
                                  </font>

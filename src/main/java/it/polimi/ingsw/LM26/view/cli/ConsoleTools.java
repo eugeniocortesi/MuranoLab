@@ -204,7 +204,7 @@ public class ConsoleTools {
      * it shows all the tool cards on board
      */
     public void printToolCardsOnBoard(){
-        for(int i=0; i<model.getOnBoardCards().getToolCardList().size(); i++ ){
+        for(int i=0; i<model.getOnBoardCards().getToolArrayList().size(); i++ ){
             System.out.println("CARTA UTENSILE");
             switch (model.getOnBoardCards().getToolArrayList().get(i)){
                 case 1: {System.out.println("Pinza Sgrossatrice\n\n" +

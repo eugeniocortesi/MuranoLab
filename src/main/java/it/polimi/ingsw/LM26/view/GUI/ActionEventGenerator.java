@@ -11,20 +11,26 @@ import it.polimi.ingsw.LM26.view.GUI.controllers.GameController;
 
 import java.util.ArrayList;
 
-public class ActionEventGenerator extends Observable {
+public class ActionEventGenerator {
 
     private GameController gController;
     private ActionEvent ae;
-    private ArrayList<GameState> stateArray=new ArrayList<GameState>();
+    private ArrayList<GameState> stateArray;
     private int idx;
     private int contCellsFrameBoard;
     private ArrayList<Box> fromBoxes;
     private ArrayList<Box> toBoxes;
     private int[] rTrackcoordinates;
+    private View view;
 
-
-    public ActionEventGenerator(GameController gController) {
+    public ActionEventGenerator(GameController gController, View view) {
         this.gController=gController;
+        this.view=view;
+        reset();
+    }
+
+    private void reset(){
+        stateArray=new ArrayList<GameState>();
         stateArray.add(GameState.DRAFTPOOL);
         stateArray.add(GameState.FRAMEBOARD);
     }
@@ -35,7 +41,7 @@ public class ActionEventGenerator extends Observable {
         ae.setPlayer(ModelManager.getId());
         ae.setId(11);
         gController.setInstructions("Fine turno");
-        //notify(ae);
+        view.notifyActionEvent(ae);
     }
 
     public void cardEvent(int cardpos) throws IllegalArgumentException{
@@ -189,15 +195,10 @@ public class ActionEventGenerator extends Observable {
     }
 
     private void sendActionEvent(){
-        //notify(ae);
+        view.notifyActionEvent(ae);
         System.out.println("action event:");
         System.out.println(ae.getId());
         System.out.println(ae.getDieFromDraft());
-       /* System.out.println(ae.getToBox1().getI());
-        System.out.println(ae.getToBox1().getJ());
-        System.out.println(ae.getFromBoxList().get(0));
-        System.out.println(ae.getId());
-        System.out.println(ae.getId());*/
 
         if(idx!=stateArray.size()){
             idx++;
@@ -210,6 +211,7 @@ public class ActionEventGenerator extends Observable {
             }
             gController.setUpState(stateArray.get(idx));
         }
+
     }
 
     private void nextAction(){

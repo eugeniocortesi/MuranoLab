@@ -14,7 +14,6 @@ public class ToolsActionEventGenerator {
     private String input;
     private ConsoleTools cTools = new ConsoleTools();
 
-
     public DieInt askForDie(boolean draftP){
         int n=-1;
         boolean dieOk=false;
@@ -65,14 +64,16 @@ public class ToolsActionEventGenerator {
         boolean toMenu=false;
         while(!toMenu){
             System.out.println("'OK' per tornare al menù");
-            try{
+            try {
                 input = br.readLine();
-            } catch (IOException e){
+            }
+            catch(IOException e){
                 e.printStackTrace();
             }
             if(input.equalsIgnoreCase("OK")){
                 toMenu=true;
             }
+            if(input.equals("")){toMenu=true; MyTurnMenu.stop=true;}
         }
         return true;
     }

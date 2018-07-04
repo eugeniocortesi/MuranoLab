@@ -8,6 +8,7 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
+import it.polimi.ingsw.LM26.observers.serverController.Observable;
 import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataClientImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.*;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Observer;
+import java.util.concurrent.CountDownLatch;
 
 import static org.fusesource.jansi.Ansi.Color.*;
 import static org.fusesource.jansi.Ansi.ansi;
@@ -31,16 +33,15 @@ public class ConsoleStrings extends ViewInterface {
     private ClientInt clientBase;
     private ClientView clientView;
 
-    DataClientImplementation dataClientImplementation;
     DataClientConfiguration dataClientConfiguration;
 
     private ConsoleTools consoleTools = new ConsoleTools();
     private PlayerMenuInt playerMenu;
-    private ActionEvent event;
-    private ArrayList<ActionEvent> events = new ArrayList<ActionEvent>();
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private String s= "";
-    private Observer observer;
+    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private InputLoop inputLoop;
+    private CountDownLatch countDownLatch;
 
     public static void main(String[] args) {
         //System.out.println("\u00AF"+"\u2310"+"\u00AC"+"\u2319"+"\u2310");
@@ -58,10 +59,11 @@ public class ConsoleStrings extends ViewInterface {
         AnsiConsole.systemInstall();
         playerMenu=null;
         this.clientBase = clientBase;
-        dataClientImplementation = new DataClientImplementation();
-        dataClientConfiguration = dataClientImplementation.implementation();
+        dataClientConfiguration = new DataClientConfiguration();
+        dataClientConfiguration = dataClientConfiguration.implementation();
         System.out.println("SocketPort " +dataClientConfiguration.getClientSOCKETPORT()+ " ClientRMI " + dataClientConfiguration.getClientRMIPORT()
                 + " ServerRMI "+ dataClientConfiguration.getServerRMIPORT());
+        inputLoop = new InputLoop();
         //showNetChoise();
     }
 
@@ -91,8 +93,10 @@ public class ConsoleStrings extends ViewInterface {
             clientBase.setConnection(false);
         }
         clientView.connect();
-
+        register(clientView);
     }
+
+
 
 
     public void initialScreen(){
@@ -167,10 +171,29 @@ public class ConsoleStrings extends ViewInterface {
     @Override
     public void showSetPlayerMenu(String name, PlayerZone player) {
         if (player.getPlayerState().equals(PlayerState.BEGINNING)) {
-            this.setPlayerMenu(new MyTurnMenu(clientView));
+            this.setPlayerMenu(new MyTurnMenu(clientView, this));
         }
-        else this.setPlayerMenu(new NotMyTurnMenu(clientView));
-        showCurrentMenu(null);
+        else this.setPlayerMenu(new NotMyTurnMenu(clientView, this));
+
+        if(!inputLoop.isRunning()){
+            inputLoop = new InputLoop();
+            inputLoop.start();
+        }
+        else showCurrentMenu(null);
+
+        try{
+            countDownLatch.countDown();
+        }
+        catch(NullPointerException e){
+        }
+    }
+
+    public void handleInput(String input){
+        playerMenu.handleInput(input);
+    }
+
+    public boolean evaluateCondition(String input){
+        return playerMenu.evaluateCondition(input);
     }
 
     @Override
@@ -217,5 +240,42 @@ public class ConsoleStrings extends ViewInterface {
     public void showPrivateCard(String name, ObjectivePrivateCard privateCard) {
         ConsoleTools.setPrivateCard(privateCard);
         consoleTools.printPrivateCard();
+    }
+
+    public void notifyMessage(ActionEvent ae){
+        notify(ae);
+        countDownLatch = new CountDownLatch(1);
+        try {
+            countDownLatch.await();
+        }
+        catch(InterruptedException e){
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private class InputLoop extends Thread{
+
+        private boolean isRunning = false;
+        @Override
+        public void run() {
+            isRunning = true;
+            String playerInput = "";
+
+            do {
+                showCurrentMenu(null);
+                try {
+                    playerInput = reader.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } while (evaluateCondition(playerInput));
+            handleInput(playerInput);
+            isRunning = false;
+
+        }
+
+        public boolean isRunning(){
+            return isRunning;
+        }
     }
 }

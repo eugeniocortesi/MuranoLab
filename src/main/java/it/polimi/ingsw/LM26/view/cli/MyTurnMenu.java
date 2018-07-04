@@ -12,21 +12,24 @@ import java.io.InputStreamReader;
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class MyTurnMenu extends Observable implements PlayerMenuInt{
-    String input;
-    ClientView clientView;
-    ConsoleTools consoleTools= new ConsoleTools();
-    private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    ActionEventGenerator ae= new ActionEventGenerator();
-    ActionEvent actionEvent;
+    private ClientView clientView;
+    static boolean stop=false;
+    private ConsoleTools consoleTools= new ConsoleTools();
+    private ActionEventGenerator ae;
+    private ActionEvent actionEvent;
+    private ConsoleStrings cs;
 
-    public MyTurnMenu(ClientView clientView) {
+    public MyTurnMenu(ClientView clientView, ConsoleStrings cs) {
+        ae= new ActionEventGenerator();
         this.clientView = clientView;
+        this.cs = cs;
         register(clientView);
         System.out.println("Registered");
     }
 
     @Override
     public void showMenu(){
+
         System.out.println(ansi().eraseScreen());
         System.out.println("E' il tuo turno, scrivi\n" +
                 "'A' per vedere la zona di gioco di un altro giocatore\n" +
@@ -35,11 +38,17 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
                 "'D' per posizionare un dado nella Plancia Vetrata\n" +
                 "'U' per usare una carta utensile\n" +
                 "'P' per passare il turno\n");
-        try{
-            input = br.readLine();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+
+
+    }
+
+    public boolean evaluateCondition(String input){
+        return  !(input.equalsIgnoreCase("A") || input.equalsIgnoreCase("T")
+                || input.equalsIgnoreCase("C") || input.equalsIgnoreCase("D")
+                ||input.equalsIgnoreCase("U")||input.equalsIgnoreCase("P"));
+    }
+
+    public void handleInput(String input){
         System.out.println(ansi().eraseScreen());
         if(input.equalsIgnoreCase("A")){
             consoleTools.showAnotherPlayer();
@@ -57,24 +66,32 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
             consoleTools.printDraftPool();
             consoleTools.showInstructionsForPlacement();
             actionEvent=ae.askForDiePlacing();
-            notify(actionEvent);
+            if(!stop){
+                notify(actionEvent);
+            }
+            stop=false;
         }
         else if(input.equalsIgnoreCase("U")){
             consoleTools.printToolCardsOnBoard();
             consoleTools.printRoundTrack();
             consoleTools.printDraftPool();
             actionEvent=ae.askToolCard();
-            notify(actionEvent);
+            if(!stop){
+                notify(actionEvent);
+            }
+            stop=false;
         }
         else if(input.equalsIgnoreCase("P")){
             actionEvent=ae.loseTurn();
-            notify(actionEvent);
+            cs.notifyMessage(actionEvent);
         }
         if(input.equalsIgnoreCase("A")||input.equalsIgnoreCase("T")||input.equalsIgnoreCase("C")){
             actionEvent=ae.askForMenu(true);
-            notify(actionEvent);
+            if(!stop){
+                notify(actionEvent);
+            }
+            stop=false;
         }
     }
-
 
 }

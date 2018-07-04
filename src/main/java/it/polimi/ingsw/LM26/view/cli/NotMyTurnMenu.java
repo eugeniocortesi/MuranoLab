@@ -12,32 +12,37 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
 
-    String input;
-    ConsoleTools consoleTools= new ConsoleTools();
-    private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private ConsoleTools consoleTools= new ConsoleTools();
     private ClientView clientView;
-    private ActionEventGenerator ae= new ActionEventGenerator();
+    private ActionEventGenerator ae;
     private ActionEvent actionEvent;
+    private ConsoleStrings cs;
 
-    public NotMyTurnMenu(ClientView clientView) {
+    public NotMyTurnMenu(ClientView clientView, ConsoleStrings cs) {
+        ae= new ActionEventGenerator();
         this.clientView = clientView;
         register(clientView);
         System.out.println("Registered");
+        this.cs = cs;
     }
 
     @Override
     public void showMenu(){
+
         System.out.println(ansi().eraseScreen());
         System.out.println("E' il turno di un altro giocatore, scrivi\n" +
                 "'A' per vedere la zona di gioco di un altro giocatore\n" +
                 "'T' per vedere la tua zona di gioco\n" +
                 "'G' per vedere l'area comune di gioco\n" +
                 "'C' per vedere una carta");
-        try{
-            input = br.readLine();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+
+    }
+
+    public boolean evaluateCondition(String input){
+        return (!(input.equalsIgnoreCase("A") || input.equalsIgnoreCase("T") || input.equalsIgnoreCase("C") || input.equalsIgnoreCase("G")));
+    }
+
+    public void handleInput(String input){
         System.out.println(ansi().eraseScreen());
         if(input.equalsIgnoreCase("A")){
             consoleTools.showAnotherPlayer();
@@ -53,9 +58,9 @@ public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
             consoleTools.showCards();
         }
         actionEvent=ae.askForMenu(true);
-        notify(actionEvent);
-        //clientView.sendActionEventFromView(actionEvent);
+        if(!MyTurnMenu.stop && input!=""){
+            notify(actionEvent);
+        }
+        MyTurnMenu.stop=false;
     }
-
-
 }

@@ -10,6 +10,7 @@ import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
 import it.polimi.ingsw.LM26.view.GUI.ActionEventGenerator;
 import it.polimi.ingsw.LM26.view.GUI.GameState;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
+import it.polimi.ingsw.LM26.view.GUI.View;
 import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,6 +37,7 @@ public class GameController {
     private PlayerZone me=null;
     private ActionEventGenerator aeGenerator;
     private GameState gameState;
+    private View view;
 
     @FXML
     private FrameBoardController plZone1Controller;
@@ -67,10 +69,11 @@ public class GameController {
 
 //TODO GESTISCI LE ECCEZIONI DELL'ACTIONEVENTGENERATOR
 
-    public void setupGame(boolean myTurn){
+    public void setupGame(boolean myTurn, View view){
         imageManager=new ImageManager();
-        aeGenerator=new ActionEventGenerator(this);
+        aeGenerator=new ActionEventGenerator(this, view);
         this.myTurn=myTurn;
+        this.view=view;
 
         dPoolController.setUpDPool(this);
         rTrackController.setUpRTrack(this, aeGenerator);
@@ -106,7 +109,10 @@ public class GameController {
 
     public void isMyTurn(boolean myTurn){
         if(me!=null){
-            if(!myTurn) disableEverything();
+            if(!myTurn) {
+                disableEverything();
+                gameState=GameState.DONOTHING;
+            }
             else setUpState(GameState.BEGINMOVE);
         }
     }
@@ -121,8 +127,12 @@ public class GameController {
             dPoolController.updateDPool(imageManager);
             myFBoardController.updateFrameBoard(me, imageManager);
             plZone1Controller.updateFrameBoard(plListWithoutMe.get(0), imageManager);
-            plZone2Controller.updateFrameBoard(plListWithoutMe.get(1), imageManager);
-            plZone3Controller.updateFrameBoard(plListWithoutMe.get(2), imageManager);
+            if(plListWithoutMe.size()>1){
+                plZone2Controller.updateFrameBoard(plListWithoutMe.get(1), imageManager);
+                if(plListWithoutMe.size()>2){
+                    plZone3Controller.updateFrameBoard(plListWithoutMe.get(2), imageManager);
+                }
+            }
             setUpState(gameState);
         }
     }
@@ -165,7 +175,8 @@ public class GameController {
                 dieValue.setDisable(false);
                 setInstructions("Scegli il valore del dado");
                 break;
-            case ACTIONEVENT: break;
+            case ACTIONEVENT:
+            case DONOTHING: break;
         }
     }
 
