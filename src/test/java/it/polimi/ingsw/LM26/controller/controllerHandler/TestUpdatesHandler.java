@@ -11,6 +11,9 @@ import it.polimi.ingsw.LM26.observers.serverController.ActionEventTimerEnd;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
+import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.ENDING;
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 import static org.junit.Assert.*;
 
@@ -19,40 +22,74 @@ public class TestUpdatesHandler {
 
     Model model = singletonModel();
     Controller controller = new Controller();
-    SetupHandler setup ;
-    UpdatesHandler updates;
+
 
     @Before
     public void setup(){
         model.reset();
-        setup = new SetupHandler(controller, model);
-        updates = new UpdatesHandler(controller);
+        controller.startServer();
+
+
     }
 
     @Test
-
     public void check(){
+        /*
 
-      /*  ActionEventPlayer pl1= new ActionEventPlayer("name1", true);
+        ActionEventPlayer pl1= new ActionEventPlayer("name1", true);
         ActionEventPlayer pl2= new ActionEventPlayer("name1", false);
 
 
-        updates.updatePlayers(pl1);
+        controller.getUpdatesHandler().updatePlayers(pl1);
 
         assertEquals(model.getPlayer(0).getName(), "name1");
         assertEquals(model.getPlayer(0).getNumber(), 1);
-        updates.updatePlayers(pl2);
+        controller.getUpdatesHandler().updatePlayers(pl2);
         assertEquals(model.getPlayer(0).getPlayerState(), PlayerState.STANDBY);
-        updates.updatePlayers(pl1);
+        controller.getUpdatesHandler().updatePlayers(pl1);
         assertEquals(model.getPlayer(0).getPlayerState(), PlayerState.ENDING);
 
         model.getPlayerList().add(new PlayerZone("name2", 1));
-        ActionEventPlayer pl3= new ActionEventPlayer("name1", false);
-        ActionEventPlayer pl4= new ActionEventPlayer("name2", false);
-        updates.updatePlayers(pl3);
-        updates.updatePlayers(pl4);
+
+
+        PlayerZone player1 = new PlayerZone("eugenio", 0);
+        PlayerZone player2 = new PlayerZone("Chiara", 1);
+        PlayerZone player3 = new PlayerZone( "Claudia", 2);
+
+
+        player1.setPlayerState(ENDING);
+        player2.setPlayerState(ENDING);
+        player3.setPlayerState(ENDING);
+
+        player1.setNumberPlayer(1);
+        player1.setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(0));
+        player2.setNumberPlayer(2);
+        player2.setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(1));
+        player3.setNumberPlayer(3);
+        player3.setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(2));
+
+
+        ArrayList<PlayerZone> playerList = new ArrayList<PlayerZone>();
+
+        playerList.add(player1);
+        playerList.add(player2);
+        playerList.add(player3);
+
+
+        model.getDecks().getObjectivePrivateCardDeck().get(0).setPlayer(player1);
+        model.getDecks().getObjectivePrivateCardDeck().get(1).setPlayer(player2);
+        model.getDecks().getObjectivePrivateCardDeck().get(2).setPlayer(player3);
+
+
+        model.setPlayerList(playerList);
+
+        ActionEventPlayer pl3= new ActionEventPlayer("eugenio", false);
+        ActionEventPlayer pl4= new ActionEventPlayer("Chiara", false);
+
         CentralPhase central =new CentralPhase();
         controller.setGamePhase(central);
+        controller.getUpdatesHandler().updatePlayers(pl3);
+        controller.getUpdatesHandler().updatePlayers(pl4);
         assertTrue(central.getOnePlayer());
 
         model.getPlayerList().get(0).setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(0));
@@ -65,7 +102,7 @@ public class TestUpdatesHandler {
         ActionEventTimerEnd actionEventTimerEnd = new ActionEventTimerEnd("s", true);
         actionEventTimerEnd.setName("name1");
 
-        updates.updateActionEventTimerEnd(actionEventTimerEnd);
+        controller.getUpdatesHandler().updateActionEventTimerEnd(actionEventTimerEnd);
         assertEquals(model.getPlayer(0).getName(), "name2");
 */
     }
