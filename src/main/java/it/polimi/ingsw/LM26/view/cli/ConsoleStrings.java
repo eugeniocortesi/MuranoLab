@@ -10,7 +10,6 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
 import it.polimi.ingsw.LM26.observers.serverController.Observable;
 import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataClientConfiguration;
-import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataClientImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.*;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRMI;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket.ClientViewSocket;
@@ -60,7 +59,7 @@ public class ConsoleStrings extends ViewInterface {
         this.clientBase = clientBase;
         dataClientConfiguration = new DataClientConfiguration();
         dataClientConfiguration = dataClientConfiguration.implementation();
-        System.out.println("SocketPort " +dataClientConfiguration.getClientSOCKETPORT()+ " ClientRMI " + dataClientConfiguration.getClientRMIPORT()
+        System.out.println("SocketPort " +dataClientConfiguration.getClientSOCKETPORT()
                 + " ServerRMI "+ dataClientConfiguration.getServerRMIPORT());
         inputLoop = new InputLoop();
         //showNetChoise();

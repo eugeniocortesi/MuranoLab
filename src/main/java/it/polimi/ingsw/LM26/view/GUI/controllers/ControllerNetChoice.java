@@ -1,7 +1,6 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
 import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataClientConfiguration;
-import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataClientImplementation;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRMI;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket.ClientViewSocket;
 import it.polimi.ingsw.LM26.view.GUI.View;
@@ -30,7 +29,7 @@ public class ControllerNetChoice {
         this.view=view;
         dClientConfig = new DataClientConfiguration();
         dClientConfig = dClientConfig.implementation();
-        System.out.println("SocketPort " +dClientConfig.getClientSOCKETPORT()+ " ClientRMI " + dClientConfig.getClientRMIPORT()
+        System.out.println("SocketPort " +dClientConfig.getClientSOCKETPORT()
                 + " ServerRMI "+ dClientConfig.getServerRMIPORT());
     }
 
