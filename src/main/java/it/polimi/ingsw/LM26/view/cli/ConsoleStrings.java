@@ -180,12 +180,6 @@ public class ConsoleStrings extends ViewInterface {
             inputLoop.start();
         }
         else showCurrentMenu(null);
-
-        try{
-            countDownLatch.countDown();
-        }
-        catch(NullPointerException e){
-        }
     }
 
     public void handleInput(String input){
@@ -199,6 +193,10 @@ public class ConsoleStrings extends ViewInterface {
     @Override
     public void showAnswerFromController(String name, String answer) {
         System.out.println(answer);
+        try{
+            countDownLatch.countDown();
+        }
+        catch(NullPointerException e){ }
     }
 
     @Override
