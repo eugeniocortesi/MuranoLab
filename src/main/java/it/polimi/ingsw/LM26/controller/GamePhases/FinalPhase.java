@@ -173,7 +173,9 @@ public class FinalPhase implements PhaseInt {
 
             player.getScoreMarker().incrementScore(result);
 
-            model.getScoreTrackInt().addToScoreTrack(player.getScoreMarker());
+            if(result>=0)
+
+                model.getScoreTrackInt().addToScoreTrack(player.getScoreMarker());
         }
     }
 
@@ -200,6 +202,12 @@ public class FinalPhase implements PhaseInt {
     public boolean getOnePlayer() {
 
         return true;
+    }
+
+    @Override
+    public int getRoundNumber() {
+
+        throw new UnsupportedOperationException("Not supported here");
     }
 
     @Override

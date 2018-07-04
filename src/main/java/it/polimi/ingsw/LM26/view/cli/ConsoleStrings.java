@@ -227,10 +227,10 @@ public class ConsoleStrings extends ViewInterface {
         if(m == null)
             System.out.println("Model null");
 
-        System.out.println("playerlist "+ m.getPlayerList());
+       /* System.out.println("playerlist "+ m.getPlayerList());
         for(int i = 0; i<m.getPlayerList().size(); i++){
             System.out.println(m.getPlayerList().get(i)+ "player");
-        }
+        }*/
         ConsoleTools.setModel(m);
     }
 

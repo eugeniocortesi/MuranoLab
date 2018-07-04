@@ -4,7 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.ingsw.LM26.model.Cards.*;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.*;
+import it.polimi.ingsw.LM26.controller.ToolCardsDecorator.*;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.PublicCardEffects.*;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.PlayArea.ScoreTrack;
 import it.polimi.ingsw.LM26.model.PlayArea.ScoreTrackInt;
@@ -15,6 +16,7 @@ import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZoneInt;
 import it.polimi.ingsw.LM26.model.Serialization.*;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.*;
 import it.polimi.ingsw.LM26.observers.serverController.VisitorInt;
 import it.polimi.ingsw.LM26.model.Model;
 

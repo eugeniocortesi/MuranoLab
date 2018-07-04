@@ -1,19 +1,13 @@
 package it.polimi.ingsw.LM26.controller.GamePhases;
 
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
-import it.polimi.ingsw.LM26.model.Cards.ToolCard;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
-import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
-import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.Token;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
@@ -131,6 +125,12 @@ public class InitialPhase implements PhaseInt {
 
     @Override
     public boolean getOnePlayer() {
+
+        throw new UnsupportedOperationException("Not supported here");
+    }
+
+    @Override
+    public int getRoundNumber() {
 
         throw new UnsupportedOperationException("Not supported here");
     }

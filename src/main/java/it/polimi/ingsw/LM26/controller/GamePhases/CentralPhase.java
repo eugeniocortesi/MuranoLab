@@ -126,6 +126,12 @@ public class CentralPhase implements PhaseInt{
     }
 
     @Override
+    public int getRoundNumber() {
+
+        return rounds.size();
+    }
+
+    @Override
     public Round getCurrentRound() {
 
         return round;
@@ -136,5 +142,7 @@ public class CentralPhase implements PhaseInt{
 
         throw new UnsupportedOperationException("Not supported here");
     }
+
+
 
 }

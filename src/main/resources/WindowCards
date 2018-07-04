@@ -886,5 +886,42 @@
       ]
     },
     "inUse": false
-  }
+  },
+      {
+        "token": 6,
+        "title": "Personalized BLUE",
+        "matrix": {
+          "matrix": [
+            [
+              "BLUE",
+              "BLUE",
+              "BLUE",
+              "BLUE",
+              "EMPTY"
+            ],
+            [
+              "BLUE",
+              "BLUE",
+              "EMPTY",
+              "LIGHT2",
+              "DARK6"
+            ],
+            [
+              "BLUE",
+              "EMPTY",
+              "DARK6",
+              "DARK5",
+              "MEDIUMS3"
+            ],
+            [
+              "EMPTY",
+              "DARK5",
+              "MEDIUMS4",
+              "LIGHT2",
+              "LIGHT1"
+            ]
+          ]
+        },
+        "inUse": false
+      }
 ]

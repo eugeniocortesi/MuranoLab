@@ -1,37 +1,22 @@
 package it.polimi.ingsw.LM26.view.GUI;
 
-import it.polimi.ingsw.LM26.controller.GamePhases.Game;
-import it.polimi.ingsw.LM26.controller.GamePhases.InitialPhase;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
-import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Bag;
-import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
-import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
-import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
-import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
-import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientInt;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
 import it.polimi.ingsw.LM26.view.GUI.controllers.*;
-import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
-import it.polimi.ingsw.LM26.view.cli.PlayerMenuInt;
 import javafx.application.Platform;
-import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-
-import static it.polimi.ingsw.LM26.model.Serialization.reloadDecks.loadDecks;
 
 
 public class View extends ViewInterface {

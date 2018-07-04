@@ -1,12 +1,13 @@
 package it.polimi.ingsw.LM26.model.Cards.factory;
 
 import it.polimi.ingsw.LM26.model.Cards.CardInt;
-import it.polimi.ingsw.LM26.model.Serialization.Effect;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.PublicCardEffects.Effect;
 import it.polimi.ingsw.LM26.model.Serialization.Elements.elements;
 import it.polimi.ingsw.LM26.model.Serialization.Matrix;
 
 
 public class CardCreator {
+    /*
 
     public static CardInt createCard(int id, elements colour) {
 
@@ -34,5 +35,5 @@ public class CardCreator {
         CardInt card = ConcreteWindowPatternCardCreator.createCard(token, title, matrix);
 
         return card;
-    }
+    }*/
 }

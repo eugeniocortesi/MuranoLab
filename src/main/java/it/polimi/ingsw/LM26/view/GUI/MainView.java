@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-import static it.polimi.ingsw.LM26.model.Serialization.reloadDecks.loadDecks;
+import static it.polimi.ingsw.LM26.model.Cards.reloadDecks.loadDecks;
 
 
 public class MainView extends Application {

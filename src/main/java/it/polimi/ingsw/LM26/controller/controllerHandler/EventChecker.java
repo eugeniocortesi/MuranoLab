@@ -2,9 +2,9 @@ package it.polimi.ingsw.LM26.controller.controllerHandler;
 
 import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.ChangeDieWithTheBag11;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.DrawOneMoreDie8;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.RollAgainADie6;
+import it.polimi.ingsw.LM26.controller.ToolCardsDecorator.ChangeDieWithTheBag11;
+import it.polimi.ingsw.LM26.controller.ToolCardsDecorator.DrawOneMoreDie8;
+import it.polimi.ingsw.LM26.controller.ToolCardsDecorator.RollAgainADie6;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
@@ -24,6 +24,8 @@ public class EventChecker {
     }
 
     public boolean checkPlacement(DieInt dieFromDraft, Box toBox, PlayerZone player) {
+
+        if( dieFromDraft==null ) return false;
 
         //this control is used for card 6 and 11 (if it's first attempt of placing goes wrong)
 

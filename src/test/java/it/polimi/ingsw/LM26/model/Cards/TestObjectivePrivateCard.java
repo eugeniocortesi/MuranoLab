@@ -8,13 +8,11 @@ import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.Serialization.Elements;
-import it.polimi.ingsw.LM26.model.Serialization.Shades;
 import org.junit.Test;
 
 import java.util.Random;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
-import static org.junit.Assert.*;
 
 public class TestObjectivePrivateCard {
 

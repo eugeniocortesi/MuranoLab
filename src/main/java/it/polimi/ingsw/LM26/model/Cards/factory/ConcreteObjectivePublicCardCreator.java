@@ -1,8 +1,8 @@
 package it.polimi.ingsw.LM26.model.Cards.factory;
 
 import it.polimi.ingsw.LM26.model.Cards.CardInt;
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCard;
-import it.polimi.ingsw.LM26.model.Serialization.Effect;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.ObjectivePublicCard;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.PublicCardEffects.Effect;
 
 public class ConcreteObjectivePublicCardCreator extends CardCreator {
 

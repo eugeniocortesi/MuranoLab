@@ -22,5 +22,7 @@ public interface PhaseInt extends Serializable{
     public int getNrounds();
 
     public boolean getOnePlayer();
+
+    public int getRoundNumber();
 }
 

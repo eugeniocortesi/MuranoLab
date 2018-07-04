@@ -3,13 +3,13 @@ package it.polimi.ingsw.LM26.controller.controllerHandler;
 import it.polimi.ingsw.LM26.controller.Controller;
 import it.polimi.ingsw.LM26.controller.ControllerInt;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.ChangeDieWithTheBag11;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.DrawOneMoreDie8;
+import it.polimi.ingsw.LM26.controller.ToolCardsDecorator.ChangeDieWithTheBag11;
+import it.polimi.ingsw.LM26.controller.ToolCardsDecorator.DrawOneMoreDie8;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
-import it.polimi.ingsw.LM26.model.Cards.ToolCardsDecorator.RollAgainADie6;
+import it.polimi.ingsw.LM26.controller.ToolCardsDecorator.RollAgainADie6;
 import it.polimi.ingsw.LM26.model.Model;
 import org.omg.PortableInterceptor.LOCATION_FORWARD;
 
@@ -160,7 +160,7 @@ public class EventHandler {
 
             System.out.println("Getted id 12 (action event)");
 
-            controller.getViewGameInterface().showCurrentMenu(player.getName());
+            controller.getViewGameInterface().showSetPlayerMenu(player.getName(), player);
 
             return false;
         }
