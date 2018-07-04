@@ -13,7 +13,6 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 public class MyTurnMenu extends Observable implements PlayerMenuInt{
     private ClientView clientView;
-    static boolean stop=false;
     private ConsoleTools consoleTools= new ConsoleTools();
     private ActionEventGenerator ae;
     private ActionEvent actionEvent;
@@ -66,20 +65,15 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
             consoleTools.printDraftPool();
             consoleTools.showInstructionsForPlacement();
             actionEvent=ae.askForDiePlacing();
-            if(!stop){
-                notify(actionEvent);
-            }
-            stop=false;
+            notify(actionEvent);
         }
         else if(input.equalsIgnoreCase("U")){
             consoleTools.printToolCardsOnBoard();
             consoleTools.printRoundTrack();
             consoleTools.printDraftPool();
             actionEvent=ae.askToolCard();
-            if(!stop){
-                notify(actionEvent);
-            }
-            stop=false;
+            notify(actionEvent);
+
         }
         else if(input.equalsIgnoreCase("P")){
             actionEvent=ae.loseTurn();
@@ -87,10 +81,7 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
         }
         if(input.equalsIgnoreCase("A")||input.equalsIgnoreCase("T")||input.equalsIgnoreCase("C")){
             actionEvent=ae.askForMenu(true);
-            if(!stop){
-                notify(actionEvent);
-            }
-            stop=false;
+            notify(actionEvent);
         }
     }
 

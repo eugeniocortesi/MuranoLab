@@ -39,7 +39,6 @@ public class ConsoleStrings extends ViewInterface {
     private PlayerMenuInt playerMenu;
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private String s= "";
-    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private InputLoop inputLoop;
     private CountDownLatch countDownLatch;
 
@@ -227,10 +226,10 @@ public class ConsoleStrings extends ViewInterface {
         if(m == null)
             System.out.println("Model null");
 
-       /* System.out.println("playerlist "+ m.getPlayerList());
+        System.out.println("playerlist "+ m.getPlayerList());
         for(int i = 0; i<m.getPlayerList().size(); i++){
             System.out.println(m.getPlayerList().get(i)+ "player");
-        }*/
+        }
         ConsoleTools.setModel(m);
     }
 
@@ -241,14 +240,17 @@ public class ConsoleStrings extends ViewInterface {
     }
 
     public void notifyMessage(ActionEvent ae){
-        notify(ae);
-        countDownLatch = new CountDownLatch(1);
-        try {
-            countDownLatch.await();
+        if(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerState()==PlayerState.BEGINNING){
+            notify(ae);
+            countDownLatch = new CountDownLatch(1);
+            try {
+                countDownLatch.await();
+            }
+            catch(InterruptedException e){
+                Thread.currentThread().interrupt();
+            }
         }
-        catch(InterruptedException e){
-            Thread.currentThread().interrupt();
-        }
+        else showSetPlayerMenu(null, ConsoleTools.model.getPlayer(ConsoleTools.id));
     }
 
     private class InputLoop extends Thread{
@@ -262,7 +264,7 @@ public class ConsoleStrings extends ViewInterface {
             do {
                 showCurrentMenu(null);
                 try {
-                    playerInput = reader.readLine();
+                    playerInput = br.readLine();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -277,3 +279,6 @@ public class ConsoleStrings extends ViewInterface {
         }
     }
 }
+
+
+

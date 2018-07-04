@@ -243,7 +243,7 @@ public class ConsoleTools {
             }
             System.out.println("Segnalini Favore da spendere per usare la carta: ");
             System.out.flush();
-            for(int j=0; j<model.getOnBoardCards().getToolCardList().get(i).getToken(); j++) {System.out.print("\u25CB "); System.out.flush();}
+            //for(int j=0; j<model.getOnBoardCards().getToolCardList().get(i).getToken(); j++) {System.out.print("\u25CB "); System.out.flush();}
             System.out.println();
             System.out.println("Carta numero "+(i+1));
         }

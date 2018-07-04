@@ -73,7 +73,6 @@ public class ToolsActionEventGenerator {
             if(input.equalsIgnoreCase("OK")){
                 toMenu=true;
             }
-            if(input.equals("")){toMenu=true; MyTurnMenu.stop=true;}
         }
         return true;
     }
