@@ -26,13 +26,8 @@ public class RMIAcceptor {
 
     private int RMIPORTServer;
 
-    private int RMIPORTClient;
-
-    private String address;
-
     private ClientAcceptorRemote stub;
 
-    private static final Logger LOGGER = Logger.getLogger(RMIAcceptor.class.getName());
 
     /**
      * Constructor
@@ -44,87 +39,57 @@ public class RMIAcceptor {
 
         myserver = serverBase;
 
-        this.RMIPORTClient = data.getClientRMIPORT();
-
         this.RMIPORTServer = data.getServerRMIPORT();
-
-        this.address = data.getIp();
 
     }
 
     /**
-     * Method that creates the stub
+     * Method that creates the stub that accepts all RMI connections
      */
 
-    public void bind(){
+    public void bind() {
 
-        try{
-
+        try {
 
             ClientAcceptorRemote clientAcceptorRemote = new ClientManagerAcceptor(this);
 
             stub = (ClientAcceptorRemote) UnicastRemoteObject.exportObject(clientAcceptorRemote, RMIPORTServer);
 
+            System.out.println("RMI SERVER PORT: " + RMIPORTServer);
+
             Registry registry = LocateRegistry.createRegistry(RMIPORTServer);
 
             registry.bind("ClientManagerRemote", stub);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (AlreadyBoundException e) {
-            e.printStackTrace();
+
+        } catch (RemoteException | AlreadyBoundException e) {
+
+            System.err.println("Impossible to create stub, reset server and try again");
+
         }
-
-        /*
-
-        try{
-            ClientManager clientManagerRMI = new ClientManagerRMI(myserver, this.RMIPORTServer, this.RMIPORTClient, address);
-
-            Thread t = new Thread(clientManagerRMI);
-
-
-
-            ClientManagerRemote clientManagerRemote = new ClientManagerRMIRemote(clientManagerRMI);
-
-            stub = (ClientManagerRemote) UnicastRemoteObject.exportObject(clientManagerRemote, RMIPORTServer);
-
-            Registry registry = LocateRegistry.createRegistry(RMIPORTServer);
-
-            registry.bind("ClientManagerRemote",  stub);
-
-            LOGGER.log(Level.WARNING,"Server ready, stub created");
-
-            t.start();
-
-        }catch (Exception e){
-
-            System.err.println("Server enable to create the stub, reset and try");
-        }
-
-
-       /* try {
-            // Getting the registry
-            Registry registry = LocateRegistry.getRegistry(address, RMIPORTClient);
-            //Looking up the registry for the remote object
-            ClientViewRemote skeleton = (ClientViewRemote) registry.lookup("ClientViewRemote");
-            myserver.addView(skeleton);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (NotBoundException e) {
-            e.printStackTrace();
-        }*/
     }
+
+    /**
+     * Method that creates a stub and a clientManagerRMI for each client
+     * returns the stub created to the client
+     * Add the clientViewRemote to the clientManagerRMI created
+     * @param clientViewRemote skeleton of the client
+     * @return clientManagerRemote = stub
+     */
+
 
     public ClientManagerRemote create(ClientViewRemote clientViewRemote) {
 
-        ClientManagerRMI clientManagerRMI = new ClientManagerRMI(myserver, RMIPORTServer, RMIPORTClient, address);
+        ClientManagerRMI clientManagerRMI = new ClientManagerRMI(myserver);
 
         clientManagerRMI.setSkeleton(clientViewRemote);
 
         ClientManagerRemote clientManagerRemote = null;
         try {
             clientManagerRemote = new ClientManagerRMIRemote(clientManagerRMI);
+
         } catch (RemoteException e) {
-            e.printStackTrace();
+
+            System.err.println("Unable to create the stub, reset server and try again");
         }
 
         return clientManagerRemote;
