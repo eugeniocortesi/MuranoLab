@@ -52,13 +52,9 @@ public class TimerTaskPlayers extends TimerTask {
         }
         else{
 
-            ActionEventTimerEnd timerEnd = new ActionEventTimerEnd("ready", true);
-
             LOGGER.log(Level.SEVERE,"Timer end");
 
             serverBase.setGameIsGoing(true);
-
-            serverBase.getQueueController().pushMessage(timerEnd);
 
             serverBase.getClientManagerList().checkNumberLogged();
 

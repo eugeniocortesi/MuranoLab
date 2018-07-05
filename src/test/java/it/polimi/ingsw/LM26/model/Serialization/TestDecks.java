@@ -16,10 +16,7 @@ public class TestDecks {
     public void setup() {
         decks = new Decks();
 
-        try {
-            decks.setup();
-        } catch (IOException e) {
-        }
+        decks.setup();
 
         decks.serialize();
     }

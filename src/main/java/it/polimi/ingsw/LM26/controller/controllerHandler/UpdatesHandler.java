@@ -19,25 +19,27 @@ public class UpdatesHandler implements Observer {
 
     /**
      * Constructor
+     *
      * @param controller reference to Controller
      */
 
     public UpdatesHandler(Controller controller) {
 
-        this.controller= controller;
+        this.controller = controller;
     }
 
     /**
      * Method that receive and actionEventPlayer from Server
      * if player is connected => creates a new PlayerZone
      * Otherwise set Stanby Player
+     *
      * @param actionEventPlayer information about a player
      */
 
     @Override
     public void updatePlayers(ActionEventPlayer actionEventPlayer) {
 
-        if(actionEventPlayer.isConnection())
+        if (actionEventPlayer.isConnection())
 
             controller.getSetupHandler().setupPlayers(actionEventPlayer.getNamePlayer());
 
@@ -49,9 +51,9 @@ public class UpdatesHandler implements Observer {
     @Override
     public void updateAction(ActionEvent actionEvent) {
 
-        LOGGER.log(Level.INFO,"Arrived action event "+ actionEvent);
+        LOGGER.log(Level.INFO, "Arrived action event " + actionEvent);
 
-        System.out.println("Arrived action event! ID: "+ actionEvent.getId()+ " Player: "+ actionEvent.getPlayer());
+        System.out.println("Arrived action event! ID: " + actionEvent.getId() + " Player: " + actionEvent.getPlayer());
 
         controller.setActionEvent(actionEvent);
     }
@@ -59,7 +61,7 @@ public class UpdatesHandler implements Observer {
     @Override
     public void updateWindowPattern(ActionEventWindow actionEventWindow) {
 
-        LOGGER.log(Level.INFO,"Notify window arrived");
+        LOGGER.log(Level.INFO, "Notify window arrived");
 
         controller.getSetupHandler().assignWindowCard(actionEventWindow.getName(), actionEventWindow.getWindowPatternCard());
     }
@@ -75,19 +77,12 @@ public class UpdatesHandler implements Observer {
     @Override
     public void updateActionEventTimerEnd(ActionEventTimerEnd timerEnd) {
 
-        if(timerEnd.getName().equals("ready") && timerEnd.getTimerEnd()){   //There are 2 players and timer end -> begin game
+        if (timerEnd.getTimerEnd()) {  //A player has end his time to do the Window action
 
-            LOGGER.log(Level.INFO,"Game start!");
-        }
-
-        else if(timerEnd.getTimerEnd()){  //A player has end his time to do the action
-
-            LOGGER.log(Level.INFO,timerEnd.getName()+ " client has finished his time");
+            LOGGER.log(Level.INFO, timerEnd.getName() + " client has finished his time");
 
             controller.getSetupHandler().deletePlayer(timerEnd);
-        }
-
-        else{
+        } else {
 
             throw new UnsupportedOperationException("Not supported yet.");
         }

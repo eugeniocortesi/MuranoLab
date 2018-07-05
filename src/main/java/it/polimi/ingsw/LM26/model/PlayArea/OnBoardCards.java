@@ -21,6 +21,8 @@ public class OnBoardCards implements Serializable {
 
     private ArrayList<Integer> toolNumberList;
 
+    private int[] cardsToken;
+
     public OnBoardCards(){
     }
 
@@ -31,6 +33,8 @@ public class OnBoardCards implements Serializable {
         this.toolCardList = new ArrayList<ToolCardInt>();
 
         this.toolNumberList = new ArrayList<Integer>();
+
+        cardsToken = new int[3];
 
         setPublicCards();
 
@@ -120,6 +124,8 @@ public class OnBoardCards implements Serializable {
             three.add(model.getDecks().getToolCardDeck().get(index));
 
             toolNumberList.add(index + 1);
+
+            cardsToken[j]=1;
         }
 
         toolCardList = three;
@@ -192,5 +198,14 @@ public class OnBoardCards implements Serializable {
         model.getDecks().getObjectivePrivateCardDeck().get(index).setPlayer(player);
 
         return model.getDecks().getObjectivePrivateCardDeck().get(index);
+    }
+
+    public void setSecondUsage(ToolCardInt toolCard) {
+
+        for(int i=0; i<toolCardList.size(); i++)
+
+            if(toolCardList.get(i).equals(toolCard))
+
+                cardsToken[i]=2;
     }
 }

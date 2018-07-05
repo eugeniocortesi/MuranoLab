@@ -15,12 +15,11 @@ public class reloadDecks implements Serializable{
 
         decks = new Decks();
 
-            try {
-                decks.setup();
-            } catch (IOException e) {
-            }
 
-            decks.serialize();
+                decks.setup();
+
+
+                decks.serialize();
 
 
         return decks;

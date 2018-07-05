@@ -10,6 +10,7 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
+import javax.tools.Tool;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
@@ -121,7 +122,12 @@ public class EventChecker {
             }
         } else if (player.getToken().getTokenNumber() > 0) {
 
-            if (pay ) toolCard.setOneToken(player);
+            if (pay ){
+
+                toolCard.setOneToken(player);
+
+                model.getOnBoardCards().setSecondUsage(toolCard);
+            }
 
             return true;
         }
@@ -130,178 +136,4 @@ public class EventChecker {
 
         return false;
     }
-
-   /* public boolean check(ToolCardInt twoThree, Box fromBox, Box toBox, int player) {
-
-        PlayerZone pl = model.getPlayerList().get(player);
-
-        if (pl.getActionHistory().isCardUsed()) {
-
-            System.out.println("Action already done ");
-
-            return false;
-        }
-
-        if (checkToken(model.getPlayerList().get(player), twoThree))
-
-            if (twoThree.play(fromBox, toBox, player)) {
-
-                pl.getActionHistory().setCardUsed(true);
-
-                return true;
-            }
-
-        return false;
-    }
-
-    public boolean check(ToolCardInt four, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
-
-        PlayerZone pl = model.getPlayerList().get(player);
-
-        if (pl.getActionHistory().isCardUsed()) return false;
-
-        if (checkToken(model.getPlayerList().get(player), four))
-
-            if (four.play(fromBoxList, toBoxList, player)) {
-
-                pl.getActionHistory().setCardUsed(true);
-
-                return true;
-            }
-
-        return false;
-    }
-
-    public boolean check(ToolCardInt nine, DieInt dieFromDraft, Box toBox, int player) {
-
-        PlayerZone pl = model.getPlayerList().get(player);
-
-        if (pl.getActionHistory().isCardUsed()) return false;
-
-        if (checkToken(model.getPlayerList().get(player), nine))
-
-            if (nine.play(dieFromDraft, toBox, player)) {
-
-                pl.getActionHistory().setCardUsed(true);
-
-                return true;
-            }
-
-        return false;
-    }
-
-    public boolean check(ToolCardInt five, DieInt dieFromDraft, DieInt dieFromRoundTrack, int player) {
-
-        PlayerZone pl = model.getPlayerList().get(player);
-
-        if (pl.getActionHistory().isCardUsed()) return false;
-
-        if (model.getRoundTrackInt().getRoundTrackTurnList().isEmpty()) return false;
-
-        if (checkToken(model.getPlayerList().get(player), five))
-
-            if (five.play(dieFromDraft, dieFromRoundTrack)) {
-
-                pl.getActionHistory().setCardUsed(true);
-
-                return true;
-            }
-
-        return false;
-    }
-
-    public boolean check(ToolCardInt one, DieInt dieFromDraft, String inDeCrement, int player) {
-
-        PlayerZone pl = model.getPlayerList().get(player);
-
-        if (pl.getActionHistory().isCardUsed()) return false;
-
-        if (checkToken(model.getPlayerList().get(player), one))
-
-            if (one.play(dieFromDraft, inDeCrement)) {
-
-                pl.getActionHistory().setCardUsed(true);
-
-                return true;
-            }
-
-        return false;
-    }
-
-    public boolean check(ToolCardInt sixTenEleven, DieInt dieFromDraft, int player) {
-
-        PlayerZone pl = model.getPlayerList().get(player);
-
-        if (pl.getActionHistory().isCardUsed()) return false;
-
-        if (checkToken(model.getPlayerList().get(player), sixTenEleven))
-
-            if (sixTenEleven.play(dieFromDraft, player)) {
-
-                pl.getActionHistory().setCardUsed(true);
-
-                return true;
-            }
-
-        return false;
-    }
-
-    public boolean check(ToolCardInt eleven, int number, Box toBox, int player) {
-
-        PlayerZone pl = model.getPlayerList().get(player);
-
-        if (eleven.play(number, toBox, player)) {
-
-            pl.getActionHistory().setCardUsed(true);
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean check(ToolCardInt sevenEight, int player) {
-
-        PlayerZone pl = model.getPlayerList().get(player);
-
-        if (pl.getActionHistory().isCardUsed()) return false;
-
-        if (checkToken(model.getPlayerList().get(player), sevenEight))
-
-            if (sevenEight.play(player)) {
-
-                pl.getActionHistory().setCardUsed(true);
-
-                return true;
-            }
-
-        return false;
-    }
-
-    public boolean check(ToolCardInt twelve, DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, int player) {
-
-        PlayerZone pl = model.getPlayerList().get(player);
-
-        if (pl.getActionHistory().isCardUsed()) {
-
-            System.out.println("Action already done ");
-
-            return false;
-        }
-
-        if (model.getRoundTrackInt().getRoundTrackTurnList().isEmpty()) return false;
-
-        if (checkToken(model.getPlayerList().get(player), twelve))
-
-            if (twelve.play(fromRoundTrack, fromBoxList, toBoxList, player)) {
-
-                pl.getActionHistory().setCardUsed(true);
-
-                return true;
-            }
-
-        return false;
-    }
-    */
-
 }
