@@ -23,22 +23,22 @@ public class ClientStarter extends Application{
 
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String s = null;
+        String s = "";
 
         System.out.println("Scegli uno tra i seguenti metodi di gioco:\nCLI: c\nGUI: g");
         try {
             s = br.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Impossible to take input, reset and try again");
         }
 
         while (!(s.equalsIgnoreCase("c") || s.equalsIgnoreCase("g"))) {
             try {
                 s = br.readLine();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println("Impossible to take input, reset and try again");
             }
-            if (!(s.equalsIgnoreCase("c") || s.equalsIgnoreCase("c"))) System.out.println("c o g!!");
+            if (!(s.equalsIgnoreCase("c") || s.equalsIgnoreCase("g"))) System.out.println("c o g!!");
         }
         if (s.equalsIgnoreCase("C")) {
 

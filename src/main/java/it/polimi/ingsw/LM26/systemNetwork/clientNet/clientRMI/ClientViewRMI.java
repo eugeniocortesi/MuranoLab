@@ -76,62 +76,9 @@ public class ClientViewRMI extends ClientView {
     @Override
     public void connect(){
 
-    //    bind();
         getStub();
     }
 
-    /**
-     * Method that creates the Skeleton
-     * Calls connect method in the stub
-     */
-
-    /*private void bind(){
-
-        //Creates skeleton
-
-        try{
-            ClientViewRMIRemote clientViewRMIRemote = new ClientViewRMIRemote(this);
-
-            ClientViewRemote skeleton = (ClientViewRemote) UnicastRemoteObject.exportObject(clientViewRMIRemote, RMIPORTClient);
-            LOGGER.log(Level.INFO, "trying to connect to: {0}",address);
-            Registry registry = LocateRegistry.createRegistry(RMIPORTClient);
-            //Registry registry = LocateRegistry.getRegistry(address, RMIPORTServer );
-            registry.bind("ClientViewRemote"+id,  skeleton);
-            LOGGER.log(Level.WARNING,"Client ready, created skeleton");
-
-            getStub(id);
-            stub.connect();
-
-
-
-        }catch (Exception e){
-
-            System.err.println("Enable to reach the Server (skeleton), reset and try again");
-
-        }
-    }*/
-
-    /*private void getStub(int id){
-
-        Registry registry = null;
-
-        try {
-            System.out.println("0, id: " +id );
-
-            registry = LocateRegistry.getRegistry(address, RMIPORTServer);
-
-            System.out.println("1");
-            //Looking up the registry for the remote object
-            stub = (ClientManagerRemote) registry.lookup("ClientManagerRemote"+id);
-
-            System.out.println("2");
-            LOGGER.log(Level.SEVERE,"Updated the stub");
-
-        } catch (RemoteException | NotBoundException e) {
-
-            System.err.println("Enable to reach the Server(second stub), reset and try again");
-        }
-    }
 
     /**
      * Method called to get the Stub
@@ -142,6 +89,8 @@ public class ClientViewRMI extends ClientView {
 
         //Takes the stub
         Registry registry = null;
+
+        System.setProperty("java.rmi.server.hostname", address);
 
         try {
 

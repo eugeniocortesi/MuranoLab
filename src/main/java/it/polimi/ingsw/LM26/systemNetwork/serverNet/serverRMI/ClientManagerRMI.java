@@ -57,6 +57,7 @@ public class ClientManagerRMI extends ClientManager {
      * Starts the timer Network
      * Then call method "requestedLogin" in the client
      */
+    @Override
     public void connect() {
 
         timerPlayer = new TimerPlayer(this, myserver);
@@ -82,6 +83,7 @@ public class ClientManagerRMI extends ClientManager {
         t.start();
     }
 
+    @Override
     public int getAvailableId(){
 
         return myserver.lobbySize();

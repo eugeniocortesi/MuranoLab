@@ -99,7 +99,9 @@ public class ListenerClientManager extends Thread {
 
             recognize(message);
 
-            run();
+            if(inAction)
+
+                listen();
 
             message = null;
         }
