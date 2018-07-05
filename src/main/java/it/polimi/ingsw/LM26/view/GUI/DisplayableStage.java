@@ -11,10 +11,8 @@ public class DisplayableStage {
 
     private Pane pane;
     private FXMLLoader fxmlLoader;
-    private Stage primaryStage;
 
     public DisplayableStage(String name) {
-        this.primaryStage=primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader(DisplayableStage.class.getResource(name));
         this.fxmlLoader=fxmlLoader;
         try {
