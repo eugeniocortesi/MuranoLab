@@ -17,6 +17,10 @@ import java.util.logging.Logger;
 import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
 import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
 
+/**
+ * @author Eugenio Cortesi
+ * class that for each part of the game gets the corrent players and turns
+ */
 public class RoundsHandler extends Thread {
 
     private PlayerZone playing;
@@ -39,10 +43,9 @@ public class RoundsHandler extends Thread {
 
     private int i = 0;
 
-    private PlayerZone playerEnding;
-
-
     public RoundsHandler(Model model, ControllerInt controller) {
+
+        LOGGER.setLevel(Level.ALL);
 
         this.controller = controller;
 
@@ -52,9 +55,10 @@ public class RoundsHandler extends Thread {
 
         this.model = model;
 
+        controller.setGamePhase(game.getPhase());
+
         this.model.hasChanged();
 
-        //Taking end timer in milliseconds from file
         TimerImplementation timerImplementation = new TimerImplementation();
 
         TimerConfiguration timerConfiguration = timerImplementation.implentation();
@@ -68,6 +72,12 @@ public class RoundsHandler extends Thread {
         play();
     }
 
+    /**
+     * this method runs the game, sends messages to view and asks to show menu to players
+     * it selects the next player from the current round and the next round from the central phase of the game.
+     * if the player ends his time for a action, goes to standby or pass the turn, the turn ends.
+     * after every action is notify all clients that model has changed.
+     */
     public void play() {
 
         for (int j = 0; j < model.getPlayerList().size(); j++)
@@ -87,20 +97,11 @@ public class RoundsHandler extends Thread {
             while (game.getPhase().getCurrentRound().getRoundState() != FINISHED) {
 
                 //TODO DELETE
-                System.out.println("              CHANGE TURN: " + playing.getName());
                 LOGGER.log(Level.SEVERE, playing.getName() + " is playing ");
                 playing.getPlayerBoard().printCard();
-                System.out.println("DraftPool");
+                LOGGER.log(Level.INFO, "DraftPool");
                 model.getDraftPool().printDraftPool();
 
-                for (int j = 0; j < model.getPlayerList().size(); j++)
-
-                    if (!playing.equals(model.getPlayer(j)))
-
-                        controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "E' il turno di " + playing.getName());
-
-                    else
-                        controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "TUO TURNO " + playing.getName());
 
                 ttask1 = timerActionPlayer.scheduleTimerActionPlayer(controller.getSetupHandler(), playing.getName());
 
@@ -127,7 +128,7 @@ public class RoundsHandler extends Thread {
 
                 } else if (playing.getActionHistory().isFreezed()) {
 
-                    System.out.println("this turn you are freezed");
+                    LOGGER.log(Level.INFO, "this turn you are freezed");
 
                     controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Salti il turno");
                 }
@@ -141,7 +142,7 @@ public class RoundsHandler extends Thread {
 
                 timerActionPlayer.resetTimer();
 
-                playerEnding = playing;
+                PlayerZone playerEnding = playing;
 
                 game.getPhase().getCurrentRound().endAction();
 
@@ -149,14 +150,18 @@ public class RoundsHandler extends Thread {
 
                 model.hasChanged();
 
+                //TODO DELETE
+                for (int j = 0; j < model.getPlayerList().size(); j++)
+                    if (!playing.equals(model.getPlayer(j)))
+                        controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "E' il turno di " + playing.getName());
+
+                    else
+                        controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "TUO TURNO " + playing.getName());
+
                 controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
 
                 result = false;
             }
-
-            System.out.println("end turn " + i);
-
-            model.getRoundTrackInt().dump();
 
             game.getPhase().nextRound(game.getPhase().getCurrentRound(), game);
 
@@ -168,9 +173,16 @@ public class RoundsHandler extends Thread {
         controller.declareScoresAndWinner(game.getPhase().getWinner());
     }
 
-    public void firstAction() {
+    /**
+     * this method receive the event for the first action and give it to the handler
+     * when the handler returns the boolean true/false, the method communicates to client the answer
+     * and if it's negative, it asks to client to redo the action trough menu showing
+     */
+    private void firstAction() {
 
-        System.out.println("        FIRST ACTION ");
+        //TODO DELETE
+        LOGGER.log(Level.INFO, "        FIRST ACTION ");
+
 
         while (!result) {
 
@@ -178,29 +190,29 @@ public class RoundsHandler extends Thread {
 
                 if (controller.handler(event)) {
 
-                    System.out.println("done");
+                    LOGGER.log(Level.INFO, "done");
 
                     if (event.getId() == 11)
 
                         controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Passi il turno ");
 
-                    else if (model.getRestrictions().getColor() != null) //from card 11
+                    else if (model.getRestrictions().getColor() != null)  //from card 11
 
                         controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Hai estratto un dado " + model.getRestrictions().getColor());
 
                     else controller.getViewGameInterface().showAnswerFromController(playing.getName(), "OK");
 
+                    //TODO DELETE
                     playing.getPlayerBoard().printCard();
-
-                    System.out.println("DraftPool");
-
+                    LOGGER.log(Level.INFO, "DraftPool");
                     model.getDraftPool().printDraftPool();
+
 
                     model.hasChanged();
 
                     result = true;
                 } else {
-                    System.out.println("match error 1 ");
+                    LOGGER.log(Level.INFO, "match error 1 ");
 
                     controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Errore: vuoi riprovare?");
 
@@ -213,9 +225,17 @@ public class RoundsHandler extends Thread {
         }
     }
 
-    public void secondAction() {
+    /**
+     * this method receive the event for the second action (if the client didn't pass the turn) and give it to the handler
+     * when the handler returns the boolean true/false, the method communicates to client the answer
+     * * and if it's negative, it asks to client to redo the action trough menu showing.
+     * if ToolCard 8 has been used by the client, the method asks for one more action.
+     */
+    private void secondAction() {
 
-        System.out.println("        SECOND ACTION ");
+        //TODO DELETE
+        LOGGER.log(Level.INFO, "        SECOND ACTION ");
+
 
         while (!result) {
 
@@ -223,7 +243,7 @@ public class RoundsHandler extends Thread {
 
                 if (controller.handler(event)) {
 
-                    System.out.println("done");
+                    LOGGER.log(Level.INFO, "done");
 
                     if (event.getId() == 11)
 
@@ -231,11 +251,11 @@ public class RoundsHandler extends Thread {
 
                     else controller.getViewGameInterface().showAnswerFromController(playing.getName(), "OK");
 
-                    playing.getPlayerBoard().printCard();
 
-                    System.out.println("DraftPool");
-
+                    //TODO DELETE
+                    LOGGER.log(Level.INFO, "DraftPool");
                     model.getDraftPool().printDraftPool();
+
 
                     if (model.getRestrictions().isTool8needPlacement()) {
 
@@ -249,7 +269,7 @@ public class RoundsHandler extends Thread {
 
                         playing.getActionHistory().setFreezed(true);
 
-                        System.out.println("choose another die");
+                        LOGGER.log(Level.INFO, "choose another die");
 
                         controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Ok, scegli un altro dado");
 
@@ -266,7 +286,7 @@ public class RoundsHandler extends Thread {
                         result = true;
                     }
                 } else {
-                    System.out.println("match error 2 ");
+                    LOGGER.log(Level.INFO, "match error 2 ");
 
                     controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Errore: vuoi riprovare?");
 
@@ -280,13 +300,15 @@ public class RoundsHandler extends Thread {
         }
     }
 
-    public void waitEvent() {
+    /**
+     * this method makes sure that every time a "ask menu event" has arrived from the client
+     * it handles it and wait an other event right away
+     */
+    private void waitEvent() {
 
         waitCorrectPlayer();
 
         while (event != null && event.getId() == 12) {
-
-            System.out.println("        SHOWING MENU to player " + event.getPlayer());
 
             controller.handler(event);
 
@@ -294,11 +316,15 @@ public class RoundsHandler extends Thread {
         }
     }
 
-    public void waitCorrectPlayer() {
-
-        if (playing.getActionHistory().isJump()) System.out.println("ERROR: you don't need to wait an event ");
-
-        LOGGER.log(Level.WARNING, "Event match: " + event);
+    /**
+     * the scope of this method is to get an event from the queue,
+     * if the queue is empty, it waits for a new event to arrive
+     * and refuse an event if the client sending it is not the player that is playing this round.
+     * Numerous controls are necessary:
+     * for instance if a player goes to standby while the method is waiting
+     * or the timer for the action ends, the method exits the while and ends.
+     */
+    private void waitCorrectPlayer() {
 
         do {
 
@@ -306,9 +332,7 @@ public class RoundsHandler extends Thread {
 
         } while (event == null && playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump());
 
-        while (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump() && event!= null && event.getPlayer() != playing.getIDPlayer() && event.getId() != 12) {
-
-            System.out.println("THIS IS NOT THE RIGHT PLAYER: EVENT REFUSED ");
+        while (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump() && event != null && event.getPlayer() != playing.getIDPlayer() && event.getId() != 12) {
 
             do {
 
@@ -316,15 +340,6 @@ public class RoundsHandler extends Thread {
 
             } while (event == null && playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump());
         }
-
-        if (playing.getActionHistory().isJump()) {
-
-            System.out.println("STOP WAITING because the player end his time");
-
-            controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Your time ended.");
-        }
-
-        if (playing.getPlayerState() == STANDBY) System.out.println("STOP WAITING because the player went in STANDBY");
     }
 
     public PhaseInt getGame() {
@@ -332,13 +347,13 @@ public class RoundsHandler extends Thread {
         return game.getPhase();
     }
 
-    public TimerTaskActionEvent getTimerTaskActionEvent() {
-
-        return ttask1;
-    }
-
     public TimerActionPlayer getTimerActionPlayer() {
 
         return timerActionPlayer;
+    }
+
+    public TimerTaskActionEvent getTimerTaskActionEvent() {
+
+        return ttask1;
     }
 }

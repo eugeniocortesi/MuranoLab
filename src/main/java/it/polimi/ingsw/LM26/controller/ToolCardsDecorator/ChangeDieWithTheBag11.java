@@ -20,8 +20,11 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
     }
 
     public ChangeDieWithTheBag11(ToolCard toolcard) {
+
         this.toolcard = toolcard;
+
         this.type="ChangeDieWithTheBag11";
+
         this.typeToolCard = "ToolCard";
     }
 

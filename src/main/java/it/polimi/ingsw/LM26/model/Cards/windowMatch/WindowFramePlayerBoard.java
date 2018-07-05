@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class WindowFramePlayerBoard implements Serializable {
 
-    private Box boardMatrix[][];
+    private Box[][] boardMatrix;
 
     private Color color;
 

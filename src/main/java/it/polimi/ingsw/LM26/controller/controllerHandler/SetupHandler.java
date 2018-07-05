@@ -9,8 +9,12 @@ import it.polimi.ingsw.LM26.observers.serverController.ActionEventTimerEnd;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ViewGameInterface;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+/**
+ * @author Eugenio Cortesi
+ */
 public class SetupHandler {
 
     private ControllerInt controller;
@@ -19,13 +23,21 @@ public class SetupHandler {
 
     private ViewGameInterface server;
 
+    private static final Logger LOGGER = Logger.getLogger(RoundsHandler.class.getName());
+
     public SetupHandler(ControllerInt controllerInt, Model model) {
+
+        LOGGER.setLevel(Level.ALL);
 
         controller = controllerInt;
 
         this.model = model;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setupPlayers(String name) {
 
         if (model.getPlayer(name) == null) {
@@ -36,7 +48,7 @@ public class SetupHandler {
 
             model.getPlayerList().add(player);
 
-            System.out.println("ADDED "+ player.getName() + player.getIDPlayer() + player.getNumber());
+            LOGGER.log(Level.INFO,"ADDED "+ player.getName() + player.getIDPlayer() + player.getNumber());
         }
 
         else model.getPlayer(name).setPlayerState(PlayerState.ENDING);
@@ -50,7 +62,7 @@ public class SetupHandler {
 
         model.getPlayer(name).getWindowPatternCard().printCard();
 
-        System.out.println("Assigned card to player " + name);
+        LOGGER.log(Level.INFO,"Assigned card to player " + name);
 
         controller.playersReady();
     }
@@ -94,16 +106,6 @@ public class SetupHandler {
         for (int i = 0; i < model.getPlayerList().size(); i++) {
 
             ArrayList<WindowPatternCard> windowlist = model.getOnBoardCards().giveFourWindowPattern();
-
-            //TODO DELETE
-
-            System.out.println(windowlist.size());
-            if (model.getPlayerList().get(i).getName() == null)
-                System.out.println("name null");
-            else if (model.getDecks().getWindowPatternCardDeck() == null)
-                System.out.println("cards null");
-            if (server == null)
-                System.out.println("server: " + server);
 
             if(server!=null)
 

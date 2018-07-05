@@ -110,8 +110,7 @@ public class Controller implements ControllerInt {
 
         for (int i = 0; i < model.getPlayerList().size(); i++)
 
-                server.showEndGame(model.getPlayer(i).getName(), model.getPlayer(i).getScoreMarker().getPoints(), winner.getName(), winner.getScoreMarker().getPoints() );
-
+            server.showEndGame(model.getPlayer(i).getName(), model.getPlayer(i).getScoreMarker().getPoints(), winner.getName(), winner.getScoreMarker().getPoints());
     }
 
     @Override

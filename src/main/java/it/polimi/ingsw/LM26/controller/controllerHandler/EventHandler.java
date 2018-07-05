@@ -1,28 +1,25 @@
 package it.polimi.ingsw.LM26.controller.controllerHandler;
 
-import it.polimi.ingsw.LM26.controller.Controller;
 import it.polimi.ingsw.LM26.controller.ControllerInt;
 import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
-import it.polimi.ingsw.LM26.controller.ToolCardsDecorator.ChangeDieWithTheBag11;
-import it.polimi.ingsw.LM26.controller.ToolCardsDecorator.DrawOneMoreDie8;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
-import it.polimi.ingsw.LM26.controller.ToolCardsDecorator.RollAgainADie6;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskActionEvent;
-import org.omg.PortableInterceptor.LOCATION_FORWARD;
 
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-
+/**
+ * @author EugenioCortesi
+ * class the reads a new event, parse the type and select the right checks to do.
+ */
 public class EventHandler {
 
     private Model model;
-
-    private EventChecker eventChecker;
 
     private Boolean result;
 
@@ -30,21 +27,31 @@ public class EventHandler {
 
     private ControllerInt controller;
 
-    PlayerZone player;
+    private PlayerZone player;
+
+    private static final Logger LOGGER = Logger.getLogger(EventChecker.class.getName());
 
     public EventHandler(ActionEvent event, Model model, ControllerInt controller) {
 
         this.model = model;
 
+        LOGGER.setLevel(Level.ALL);
+
         this.controller = controller;
 
-        eventChecker = new EventChecker(model);
+        EventChecker eventChecker = new EventChecker(model);
 
         this.event = event;
 
         result = handle(eventChecker);
     }
 
+    /**
+     * this method is called from the RoundsHandler: it used to say if the client action can be done or not.
+     * it parse the id action and call the specific action checks.
+     * @param eventChecker istance of eventChecker object
+     * @return the boolean returned is the ultimate acceptance of the action
+     */
     public boolean handle(EventChecker eventChecker) {
 
         ToolCardInt toolCard;
@@ -166,7 +173,7 @@ public class EventHandler {
 
         if (event.getId() == 11) {
 
-            System.out.println("i'll pass ");
+            LOGGER.log(Level.INFO, "i'll pass ");
 
             player.getActionHistory().setJump(true);
 
@@ -185,7 +192,7 @@ public class EventHandler {
 
         if (event.getId() == 12) {
 
-            System.out.println("Getted id 12 (action event)");
+            LOGGER.log(Level.INFO, "Getted id 12 (action event)");
 
             controller.getViewGameInterface().showSetPlayerMenu(player.getName(), player);
 
@@ -200,6 +207,10 @@ public class EventHandler {
         return result;
     }
 
+    /**
+     * the method get the card from the cards on board
+     * @return toolCard object with the id requested in the event
+     */
     public ToolCardInt getToolCard() {
 
         for (int i = 0; i < model.getOnBoardCards().getToolCardList().size(); i++)
@@ -211,6 +222,10 @@ public class EventHandler {
         return null;
     }
 
+    /**
+     * @param c vector with round track coordinated
+     * @return die from round track requested in the action
+     */
     public DieInt getTrackDieCopy(int[] c) {
 
         if (model.getRoundTrackInt().getRoundTrackTurnList().size() < c[0] || model.getRoundTrackInt().getRoundTrackTurn(c[0]).size() < c[1])
@@ -220,14 +235,24 @@ public class EventHandler {
         return model.getRoundTrackInt().getRoundTrackTurn(c[0] + 1).get(c[1]);
     }
 
-    public Box getBoxCopy(Box b) throws NoSuchElementException {
+    /**
+     *
+     * @param b copy of board cell sended from client
+     * @return cell of the client board
+     */
+    public Box getBoxCopy(Box b)  {
 
         if(b==null)return null;
 
         return player.getPlayerBoard().getBoardMatrix()[b.getI()][b.getJ()];
     }
 
-    public DieInt getDraftDieCopy(DieInt die) {
+    /**
+     *
+     * @param die copy of die sended from client
+     * @return right istance of die requested
+     */
+    private DieInt getDraftDieCopy(DieInt die) {
 
         if(die==null) return null;
 
@@ -240,17 +265,20 @@ public class EventHandler {
         return null;
     }
 
+    /**
+     *
+     * @param a copy of Array of board cells sended from client
+     * @return right istance of Array of board cells
+     */
     public ArrayList<Box> getBoxListCopy(ArrayList<Box> a) {
 
         if(a==null) return null;
 
-        ArrayList<Box> toReturn = new ArrayList<Box>();
+        ArrayList<Box> toReturn = new ArrayList<>();
 
         Box[][] board = player.getPlayerBoard().getBoardMatrix();
 
-            for (int i = 0; i < a.size(); i++)
-
-                toReturn.add(board[a.get(i).getI()][a.get(i).getJ()]);
+        for (Box anA : a) toReturn.add(board[anA.getI()][anA.getJ()]);
 
         return toReturn;
     }
