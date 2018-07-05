@@ -65,14 +65,14 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
             consoleTools.printDraftPool();
             consoleTools.showInstructionsForPlacement();
             actionEvent=ae.askForDiePlacing();
-            notify(actionEvent);
+            cs.notifyMessage(actionEvent);
         }
         else if(input.equalsIgnoreCase("U")){
             consoleTools.printToolCardsOnBoard();
             consoleTools.printRoundTrack();
             consoleTools.printDraftPool();
             actionEvent=ae.askToolCard();
-            notify(actionEvent);
+            cs.notifyMessage(actionEvent);
 
         }
         else if(input.equalsIgnoreCase("P")){
@@ -81,7 +81,7 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
         }
         if(input.equalsIgnoreCase("A")||input.equalsIgnoreCase("T")||input.equalsIgnoreCase("C")){
             actionEvent=ae.askForMenu(true);
-            notify(actionEvent);
+            cs.notifyMessage(actionEvent);
         }
     }
 

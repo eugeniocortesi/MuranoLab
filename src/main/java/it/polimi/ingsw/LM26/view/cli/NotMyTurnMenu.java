@@ -58,6 +58,6 @@ public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
             consoleTools.showCards();
         }
         actionEvent=ae.askForMenu(true);
-        notify(actionEvent);
+        cs.notifyMessage(actionEvent);
     }
 }

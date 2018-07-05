@@ -137,6 +137,7 @@ public class ActionEventGenerator {
 
     private ActionEvent fromToBox2(int tCardPos){
         Box box;
+        String reply;
         ActionEvent ae=fromToBox1(tCardPos);
         ae.setId(3);
         ArrayList<Box> arrayFrom=new ArrayList<Box>();
@@ -144,14 +145,17 @@ public class ActionEventGenerator {
         ArrayList<Box> arrayTo=new ArrayList<Box>();
         arrayTo.add(ae.getToBox1());
         ae.setFromBox1(null); ae.setFromBox1(null);
-        System.out.println("Cella da cui vuoi prendere il dado:");
-        box=tceGenerator.askForDieFromFrameboard(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix(), true);
-        arrayFrom.add(box);
-        ae.setFromBoxList(arrayFrom);
-        System.out.println("Cella in cui vuoi mettere il dado:");
-        box=tceGenerator.askForDieFromFrameboard(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix(), false);
-        arrayTo.add(box);
-        ae.setToBoxList(arrayTo);
+        reply=tceGenerator.askFor1or2();
+        if(reply.equalsIgnoreCase("A")){
+            System.out.println("Cella da cui vuoi prendere il dado:");
+            box=tceGenerator.askForDieFromFrameboard(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix(), true);
+            arrayFrom.add(box);
+            ae.setFromBoxList(arrayFrom);
+            System.out.println("Cella in cui vuoi mettere il dado:");
+            box=tceGenerator.askForDieFromFrameboard(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix(), false);
+            arrayTo.add(box);
+            ae.setToBoxList(arrayTo);
+        }
         return ae;
     }
 
@@ -177,7 +181,7 @@ public class ActionEventGenerator {
             System.out.println("Dado dal tracciato dei round:");
             ae.setDieFromRoundTrack(tceGenerator.askForDie(false));
         }
-        else{System.out.println("Tracciato dei round vuoto, mossa non valida");
+        else{System.out.println("Tracciato dei round vuoto, la mossa non sarà ritenuta valida");
             invalidActionEvent=true;
         }
         return ae;

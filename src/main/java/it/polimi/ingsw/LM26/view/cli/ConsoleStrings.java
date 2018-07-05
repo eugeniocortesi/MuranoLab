@@ -39,6 +39,7 @@ public class ConsoleStrings extends ViewInterface {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private String s= "";
     private InputLoop inputLoop;
+    private ActionEventGenerator aeGenerator;
     private CountDownLatch countDownLatch;
 
     public static void main(String[] args) {
@@ -56,6 +57,7 @@ public class ConsoleStrings extends ViewInterface {
         System.setProperty("jansi.passthrough", "true"); //TODO remove later
         AnsiConsole.systemInstall();
         playerMenu=null;
+        aeGenerator=new ActionEventGenerator();
         this.clientBase = clientBase;
         dataClientConfiguration = new DataClientConfiguration();
         dataClientConfiguration = dataClientConfiguration.implementation();
@@ -168,6 +170,10 @@ public class ConsoleStrings extends ViewInterface {
 
     @Override
     public void showSetPlayerMenu(String name, PlayerZone player) {
+        try{
+            countDownLatch.countDown();
+        }
+        catch(NullPointerException e){ }
         if (player.getPlayerState().equals(PlayerState.BEGINNING)) {
             this.setPlayerMenu(new MyTurnMenu(clientView, this));
         }
@@ -241,17 +247,19 @@ public class ConsoleStrings extends ViewInterface {
     public void notifyMessage(ActionEvent ae){
         if(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerState()==PlayerState.BEGINNING && !ActionEventGenerator.invalidActionEvent){
             notify(ae);
-            countDownLatch = new CountDownLatch(1);
-            try {
-                countDownLatch.await();
-            }
-            catch(InterruptedException e){
-                Thread.currentThread().interrupt();
-            }
+            System.out.println("notify1");
         }
         else {
             ActionEventGenerator.invalidActionEvent=false;
-            showSetPlayerMenu(null, ConsoleTools.model.getPlayer(ConsoleTools.id));
+            notify(aeGenerator.askForMenu(false));
+            System.out.println("notify2");
+        }
+        countDownLatch = new CountDownLatch(1);
+        try {
+            countDownLatch.await();
+        }
+        catch(InterruptedException e){
+            Thread.currentThread().interrupt();
         }
     }
 

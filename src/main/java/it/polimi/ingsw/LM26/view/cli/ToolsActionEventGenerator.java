@@ -44,21 +44,34 @@ public class ToolsActionEventGenerator {
         ArrayList<String> chars= new ArrayList<String>();
         chars.add("I");
         chars.add("D");
-        String incdec=this.askbetweenTwo(chars);
+        String incdec=askBetweenTwo(chars);
         if(incdec.equalsIgnoreCase("I")) return "increment";
         else return "decrement";
     }
 
+    public String askFor1or2(){
+        System.out.println("Premi 'F' per fermarti, 'A' per posizionare un altro dado");
+        ArrayList<String> chars= new ArrayList<String>();
+        chars.add("F");
+        chars.add("A");
+        return askBetweenTwo(chars);
+    }
+
     public Box askForDieFromFrameboard(Box[][] matrix, boolean from){
         boolean ok=false;
-        Box b;
-        do {
-            b=askForRowCol(matrix);
-            if(from && b.isIsPresent() || !from && !b.isIsPresent()){
-                ok=true;
-            }
-            else System.out.println("Posizione non valida, riprova");
-        }while (!ok);
+        Box b=null;
+        if(!(from && ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().isEmpty())){
+            do {
+                b=askForRowCol(matrix);
+                if(from && b.isIsPresent() || !from && !b.isIsPresent()){
+                    ok=true;
+                }
+                else System.out.println("Posizione non valida, riprova");
+            }while (!ok);
+        }
+        else{ System.out.println("Plancia Vetrata vuota: esegui le istruzioni, ma la mossa non sarà valida");
+            ActionEventGenerator.invalidActionEvent=true;
+        }
         return b;
     }
 
@@ -102,7 +115,7 @@ public class ToolsActionEventGenerator {
         ArrayList<String> chars=new ArrayList<String>();
         chars.add("P");
         chars.add("S");
-        return this.askbetweenTwo(chars);
+        return this.askBetweenTwo(chars);
     }
 
     public int askforToolCardOnboard(){
@@ -129,7 +142,7 @@ public class ToolsActionEventGenerator {
         return n;
     }
 
-    private String askbetweenTwo(ArrayList<String> choice){
+    private String askBetweenTwo(ArrayList<String> choice){
        String first= choice.get(0);
         String sec= choice.get(1);
         String s="";
