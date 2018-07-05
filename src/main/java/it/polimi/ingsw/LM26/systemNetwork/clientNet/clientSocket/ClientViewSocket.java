@@ -345,6 +345,12 @@ public class ClientViewSocket extends ClientView {
 
     }
 
+    @Override
+    public void endGame(String name, int score, String winner, int scoreWinner) {
+
+        concreteClientView.showEndGame(name, score, winner, scoreWinner);
+    }
+
     /**
      * Method that notify to the Vuew the model arrived
      * @param m new Model arrived

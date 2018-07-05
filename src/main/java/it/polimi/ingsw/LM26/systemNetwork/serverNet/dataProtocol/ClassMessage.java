@@ -31,7 +31,8 @@ public abstract class ClassMessage {
         LOGGER.setLevel(Level.OFF);
 
         JsonReader jsonReader = new JsonReader(new StringReader(s));
-        //jsonReader.setLenient(true);
+
+        jsonReader.setLenient(true);
         try{
             while(jsonReader.hasNext()) {
                 JsonToken nextToken = jsonReader.peek();

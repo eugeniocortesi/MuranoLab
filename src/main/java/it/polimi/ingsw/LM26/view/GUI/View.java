@@ -218,7 +218,7 @@ public class View extends ViewInterface {
     }
 
     @Override
-    public void showEndGame(String name, java.lang.Object score) {
+    public void showEndGame(String name, int score, String winner, int scoreWinner) {
         Platform.runLater(new Runnable() {
             public void run() {
                 FXMLLoader fLoader=displayableStageScores.getFxmlLoader();

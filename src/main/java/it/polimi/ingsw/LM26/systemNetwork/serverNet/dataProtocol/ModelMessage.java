@@ -57,7 +57,6 @@ public class ModelMessage extends ClassMessage{
 
         ModelMessage model= gson.fromJson(protocolJson, ModelMessage.class );
 
-
         return model;
     }
 
@@ -69,8 +68,8 @@ public class ModelMessage extends ClassMessage{
     public String serializeClassMessage(){
 
         Gson gson = new GsonBuilder().create();
-        String msgJson = gson.toJson(this);
-        return msgJson;
+
+        return gson.toJson(this);
     }
 
     /**

@@ -488,8 +488,15 @@ public class ClientManagerSocket extends ClientManager {
      */
 
     @Override
-    public void sendEndGame(Object score) {
-        //TODO it
+    public void sendEndGame(String username, int score, String winner, int scoreWinner) {
+
+        LOGGER.log(Level.SEVERE,"server is sending score");
+
+        EndMessage dataMessage = new EndMessage("endGame", username, score, winner, scoreWinner);
+
+        String s = dataMessage.serializeClassMessage();
+
+        sendMessage(s);
     }
 
     /**

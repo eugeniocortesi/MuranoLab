@@ -64,11 +64,13 @@ public abstract class ViewGameInterface extends Observable {
     public abstract void showAnswerFromController(String name,String answer);
 
     /**
-     * Method that sends to the View final score of the game
+     * Method that sends for each player his score and the name and the score of the winner
      * @param name username of the player
-     * @param score final score of the game
+     * @param score points of the player
+     * @param winner username of the winner
+     * @param scoreWinner points of the winner
      */
 
-    public abstract void showEndGame(String name, Object score);
+    public abstract void showEndGame(String name, int score, String winner, int scoreWinner);
 
 }

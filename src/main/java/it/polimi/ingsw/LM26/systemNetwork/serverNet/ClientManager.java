@@ -138,10 +138,13 @@ public abstract class ClientManager implements Runnable, ObserverSimple {
 
     /**
      * Method that sends the score
-     * @param score final points of the player
+     * @param username username of the player
+     * @param score points of the player
+     * @param winner username of the winner
+     * @param scoreWinner points of the winner
      */
 
-    public abstract void sendEndGame(Object score);
+    public abstract void sendEndGame(String username, int score, String winner, int scoreWinner);
 
     /*
     Method from ClientManager to Client View that checks if the connection il alive

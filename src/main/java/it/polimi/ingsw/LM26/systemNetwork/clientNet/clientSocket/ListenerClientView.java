@@ -248,6 +248,14 @@ public class ListenerClientView extends Thread {
             clientView.pong();
 
         }
+        else if(op.equals("endGame")){
+
+            LOGGER.log(Level.SEVERE, "In end game message body");
+
+            EndMessage m = EndMessage.deserializeEndMessage(message);
+
+            clientView.endGame(m.getUsername(), m.getScore(), m.getWinner(), m.getScoreWinner());
+        }
         else {
 
             LOGGER.log(Level.WARNING,"Message not recognized");

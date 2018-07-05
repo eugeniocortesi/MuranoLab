@@ -371,9 +371,9 @@ public class ServerBase extends ViewGameInterface {
      */
 
     @Override
-    public void showEndGame(String name, Object score) {
+    public void showEndGame(String name, int score, String winner, int scoreWinner) {
 
-        clientManagerList.getClientManager(name).sendEndGame(score);
+        clientManagerList.getClientManager(name).sendEndGame(name, score, winner, scoreWinner);
         end();
     }
 

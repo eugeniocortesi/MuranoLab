@@ -407,6 +407,20 @@ public class ClientViewRMI extends ClientView {
     }
 
     /**
+     * Method that show the score for each player
+     * @param username username of the player
+     * @param score points for each player
+     * @param winner username of the winner
+     * @param scoreWinner points of the winner
+     */
+
+    @Override
+    public void endGame(String username, int score, String winner, int scoreWinner) {
+
+        concreteClientView.showEndGame(username, score, winner, scoreWinner);
+    }
+
+    /**
      * Method not called in this implementation
      * @param actionEventPlayer information about player connection
      */

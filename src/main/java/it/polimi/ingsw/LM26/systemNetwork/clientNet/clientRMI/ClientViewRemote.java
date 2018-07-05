@@ -119,4 +119,15 @@ public interface ClientViewRemote extends Remote {
      */
 
     void pong() throws RemoteException;
+
+    /**
+     * Method called to receive the final score
+     * @param name username of the player
+     * @param score points of the player
+     * @param winner username of the winner
+     * @param scoreWinner points of the winner
+     * @throws RemoteException
+     */
+
+    void endGame(String name, int score, String winner, int scoreWinner) throws RemoteException;
 }

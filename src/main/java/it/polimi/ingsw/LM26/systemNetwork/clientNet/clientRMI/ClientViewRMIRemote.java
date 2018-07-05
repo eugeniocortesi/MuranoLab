@@ -91,4 +91,9 @@ public class ClientViewRMIRemote extends UnicastRemoteObject implements ClientVi
         clientViewRMI.pong();
     }
 
+    @Override
+    public void endGame(String name, int score, String winner, int scoreWinner) throws RemoteException {
+        clientViewRMI.endGame(name, score, winner, scoreWinner);
+    }
+
 }

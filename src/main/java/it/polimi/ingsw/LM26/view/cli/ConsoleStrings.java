@@ -204,7 +204,7 @@ public class ConsoleStrings extends ViewInterface {
     }
 
     @Override
-    public void showEndGame(String name, Object score) {
+    public void showEndGame(String name, int score, String winnner, int scoreWinner) {
 
     }
 

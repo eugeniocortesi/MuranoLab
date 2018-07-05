@@ -342,11 +342,17 @@ public class ClientManagerRMI extends ClientManager {
 
     /**
      * Method that sends to the player his points
+     * @param name username of the player
      * @param score points of the player
+     * @param winner username of the winner
+     * @param scoreWinner points of the winner
      */
+
     @Override
-    public void sendEndGame(Object score) {
-        //TODO
+    public void sendEndGame(String name, int score, String winner, int scoreWinner) {
+
+        Thread t = new Thread (new myRunnableEnd(name, score, winner, scoreWinner));
+        t.start();
     }
 
     /**
@@ -549,7 +555,8 @@ public class ClientManagerRMI extends ClientManager {
      */
     private class MyRunnableAddedPlayer implements Runnable {
         volatile String username;
-        public MyRunnableAddedPlayer(String name) {
+
+        MyRunnableAddedPlayer(String name) {
             username = name;
         }
 
@@ -573,7 +580,7 @@ public class ClientManagerRMI extends ClientManager {
 
         volatile String name;
 
-        public myRunnableCurrentMenu(String name) {
+        myRunnableCurrentMenu(String name) {
 
             this.name = name;
         }
@@ -583,7 +590,9 @@ public class ClientManagerRMI extends ClientManager {
 
             try {
                 LOGGER.log(Level.SEVERE,"Sending player zone");
+
                 skeleton.sendCurrentMenu(name);
+
             } catch (RemoteException e) {
                 System.err.println("Connection reset");
             }
@@ -596,7 +605,7 @@ public class ClientManagerRMI extends ClientManager {
      */
     private class myRunnablePing implements Runnable {
 
-        public myRunnablePing() {
+        myRunnablePing() {
         }
 
 
@@ -612,6 +621,34 @@ public class ClientManagerRMI extends ClientManager {
         }
     }
 
+    /**
+     *  Class that sends score to each player
+     */
+
+    private class myRunnableEnd implements Runnable {
+
+        volatile String username;
+        volatile int score;
+        volatile String winner;
+        volatile int scoreWinner;
+
+        public myRunnableEnd(String username, int score, String winner, int scoreWinner) {
+            this.username = username;
+            this.score = score;
+            this.winner = winner;
+            this.scoreWinner = scoreWinner;
+        }
+
+        @Override
+        public void run() {
+
+            try{
+                skeleton.endGame(username, score, winner, scoreWinner);
+            } catch (RemoteException e) {
+                System.err.println("Connection refused");
+            }
+        }
+    }
 }
 
 

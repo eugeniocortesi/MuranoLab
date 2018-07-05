@@ -126,4 +126,10 @@ public abstract class ClientView extends ObservableSimple implements Observer {
      */
 
     public abstract void pong();
+
+    /**
+     * Method that sends the score to the View
+     */
+
+    public abstract void endGame(String name, int score, String winner, int scoreWinner);
 }
