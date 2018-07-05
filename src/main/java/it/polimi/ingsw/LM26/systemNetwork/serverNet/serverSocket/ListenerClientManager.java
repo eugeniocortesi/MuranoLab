@@ -38,7 +38,7 @@ public class ListenerClientManager extends Thread {
 
         clientManagerSocket= managerSocket;
 
-        LOGGER.setLevel(Level.FINE);
+        LOGGER.setLevel(Level.ALL);
 
         try {
             this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -117,6 +117,8 @@ public class ListenerClientManager extends Thread {
         if (message == null)
 
             return;
+
+        LOGGER.log(Level.WARNING, message);
 
         DataMessage dataMessage = new DataMessage(null,null);
 

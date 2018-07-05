@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class ClientBaseStarter {
     public static void main(String[] args) {
 
-        Logger.getLogger(ServerBase.class.getPackage().getName()).getParent().getHandlers()[0].setLevel(Level.OFF);
+        //Logger.getLogger(ServerBase.class.getPackage().getName()).getParent().getHandlers()[0].setLevel(Level.OFF);
 
         ClientBase clientBase = new ClientBase();
         ViewInterface view = new ConsoleStrings(clientBase);

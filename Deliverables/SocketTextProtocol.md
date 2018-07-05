@@ -1,16 +1,40 @@
-# TEXT PROTOCOL SOCKET
+# SOCKET TEXT PROTOCOL 
 
 
 
-# ClassMessage
+## ClassMessage
 
-ClassMessage
+ClassMessage : abtract class bases for all different messages
 
 
-## Connection and Login Phase
-####Connect
+##1. Check Connection
 
- **client:**
+ **From server:**
+DataMessage
+
+> Field1 : operation : String
+
+> Field2: field1 : String
+
+
+
+
+   `{ "operation" : "ping", "field1" : "<ping>" }`
+   
+ **From client:**
+DataMessage
+
+> Field1 : operation : String
+
+> Field2: field1 : String
+
+
+   `{ "operation" : "pong", "field1" : "<pong>"}`
+
+##2. Connection and Login Phase
+####2.1 Connect
+
+ **From client:**
 
 ConnectMessage
 
@@ -22,7 +46,7 @@ ConnectMessage
 
    `{ "op" : "connect" , "id" : " <id>"}`
    
- **server:**
+ **From server:**
 
 ConnectMessage
 
@@ -35,9 +59,10 @@ ConnectMessage
 
    `{ "op" : "connected", "id" : "<id>" }`
 
- **client:**
 
- ####Login 
+ ####2.2 Login 
+ 
+ **From client:**
 DataMessage
 
 > Field1 : operation : String
@@ -46,11 +71,11 @@ DataMessage
 
 
 
-   `{ "method" : "login" , "field1" : " <username>"}`
+   `{ "operation" : "login" , "field1" : " <username>"}`
 
     
 
- **server:**
+ **From server:**
 DataMessage
 
 > Field1 : operation : String
@@ -62,7 +87,9 @@ DataMessage
 
    `{ "operation" : "logged", "field1" : "<username>" }`
    
- **server:**
+OR
+
+ **From server:**
 DataMessage
 
 > Field1 : operation : String
@@ -72,7 +99,9 @@ DataMessage
 
    `{ "operation" : "not_logged", "field1" : "<username>"}`
    
-**server:**
+   OR
+   
+**From server:**
 
 DataMessage
 
@@ -82,8 +111,10 @@ DataMessage
 
 
    `{ "operation" : "too_many_users", "field1" : "<username>"}`
+   
+  ####2.3 Disconnect
 
- **client:**
+ **From client:**
 
 DataMessage
 
@@ -95,7 +126,7 @@ DataMessage
 
    `{ "operation" : "disconnect" , "field1" : " <username>"}`
    
-**server**
+**From server**
 
 
 DataMessage
@@ -109,11 +140,23 @@ DataMessage
    `{ "operation" : "disconnected" , "field1" : " <username>"}`
 
 
+#### 2.4 Addiction of a new player
+**From server**
 
-## Initial Game - Preparation
-####Sending windowPatternCard
+DataMessage
 
- **server:**
+> Field1 : operation : String
+
+> Field2: field1 : String
+
+
+`{ "operation" : "added_player" , "field1" : " <username>"}`
+
+
+##3. Initial Game - Preparation
+####3.1 Sending WindowPatternCard
+
+ **From server:**
 
 WindowInitialMessage
 > Field1: meth : String
@@ -126,7 +169,7 @@ WindowInitialMessage
 
    `{ "meth" : "send_windowlist", "user : "<username>" , id" : "<int>" , "windowlist" : "<Arraylist<WindowPatternCard>>"}`
 
- **client:**
+ **From client:**
 
 WindowAnswerMessage
 
@@ -139,8 +182,8 @@ WindowAnswerMessage
 
    `{ "meth" : "send_windowcard", "actionEventWindow" : "<ActionEventWindow>" }`
    
-   ####Sending privatecard
-  **server:**
+####3.2 Sending PrivateCard
+**From server:**
 
 PrivateCardMessage
 
@@ -153,9 +196,9 @@ PrivateCardMessage
 
    `{ "idPrivateCard" : "send_privatecard", "privatecard" : "<ObjectivePrivateCard>" }`  
 
-####Sending Model
+####3.3 Sending Model
 
- **server:**
+ **From server:**
 
 ModelMessage
 
@@ -169,31 +212,44 @@ ModelMessage
 
 
 
-## GameTurn
+##4. GameTurn
 
+####4.1 Begin turn
 
+ **From server:**
+ 
+ BeginTurnMessage
 
- **server:**
-
-> Field1: operation: String
+> Field1: idBeginTurn: String
 
 > Field2: username: String
 
-> Field3: diceList: ArrayList<'Die'>
+> Field3: playerZone: PlayerZone
 
 
 
-`{ "operation": "pull_out" , "username": "<username>", "diceList": ""}`
+`{"idBeginTurn":"send_beginturnmessage","username":"a","playerZone": "<PlayerZone>"}`
+
+
+
+**From server**
+ShowCurrentMenu
+
+DataMessage
+
+> Field1 : operation : String
+
+> Field2: field1 : String
+
+
+`{"operation" : "send_currentmenu" , "field1" : "<username>"}`
 
 
 
 
+#### 4.2 Sending ActionEvent
 
-
-
-### Sending ActionEvent
-
- **client:**
+ **From client:**
 
 > Field1: idEvent: String
 
@@ -204,8 +260,10 @@ ModelMessage
 
 
 
-**server**
- DataMessage
+**From server**
+
+DataMessage
+
 > Field1 : operation : String
 
 > Field2: field1 : String
@@ -216,36 +274,42 @@ ModelMessage
 
 
 
-## End Game
+## 5. End Game
 
 
 
-###Winner
+####5.1 Winner and points
 
-**server:**
+**From server**
 
-> Field1: operation: String
+EndMessage
+
+> Field1: endId: String
 
 > Field2: username: String
 
-> Field3: points: Int
+> Field3: score: int
+
+> Field4: winner: String
+
+> Field5 : scoreWinner: int
 
 
 
-   `{"operation" : "end_game_winner"   , "username" : "<username>", "points" : "<point>" }`
+   `{"endId" : "endGame"   , "username" : "<username>", "score" : "<int>", "winner" : "<String>", "scoreWinner": "<int>" }`
 
  
 
-###Loser
+####5.2 End game
 
-**server:**
+**From server**
+
+DataMessage
 
 > Field1: operation: String
 
-> Field2: username: String
-
-> Field3: points: Int
+> Field2: field1: String
 
 
 
-  `  {"operation" : "game_over"   , "username" : "<username>", "points" : "<point>" }`
+  ` {"operation":"send_answer_from_controller","field1":"<String>"}`

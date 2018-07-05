@@ -123,6 +123,8 @@ public class ListenerClientView extends Thread {
 
             return;
 
+        LOGGER.log(Level.WARNING, message);
+
         DataMessage dataMessage = new DataMessage(null,null);
 
         String op = dataMessage.parserFirstElement(message);

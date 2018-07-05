@@ -25,19 +25,6 @@ public class PlayerConnectionMessage extends ClassMessage {
     }
 
     /**
-     * Method that return from a string with json the PlayerConnectionMessage
-     * @param protocolJson string to deserialize
-     * @return PlayerConnectionMessage
-     */
-
-    static public PlayerConnectionMessage deserializeEventMessage(String protocolJson){
-
-        Gson gson = new Gson();
-
-        return gson.fromJson(protocolJson, PlayerConnectionMessage.class);
-    }
-
-    /**
      * Calls the visitor pattern on the message
      * @param visitorInt instance of visitor
      */
