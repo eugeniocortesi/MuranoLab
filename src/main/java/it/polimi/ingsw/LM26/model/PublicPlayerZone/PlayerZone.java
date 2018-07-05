@@ -23,8 +23,6 @@ public class PlayerZone extends PlayerZoneInt {
 
     private int privatePoints;
 
-    private int lastRoundTurn;
-
     private ActionHistory actionHistory;
 
     public PlayerZone(){
@@ -42,7 +40,6 @@ public class PlayerZone extends PlayerZoneInt {
         this.token = null;
         this.scoreMarker = null;
         this.privatePoints = 0;
-        this.lastRoundTurn = 0;
         this.typePlayerZone = "PlayerZone";
 
     }
@@ -93,14 +90,6 @@ public class PlayerZone extends PlayerZoneInt {
 
     public void setPlayerState(PlayerState playerState) {
         this.playerState = playerState;
-    }
-
-    public int getLastRoundTurn() {
-        return lastRoundTurn;
-    }
-
-    public void setLastRoundTurn(int lastRoundTurn) {
-        this.lastRoundTurn = lastRoundTurn;
     }
 
     public ActionHistory getActionHistory() { return actionHistory; }

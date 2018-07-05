@@ -22,13 +22,13 @@ public class DifferentColorShadeOnRowColomn extends Effect {
     }
 
     private String isrowColomn() {
-        if (rowColomn==true)
+        if (rowColomn)
         return "Rows";
         else return "Columns";
     }
 
     private String iscolorShades() {
-        if (colorShades==true)
+        if (colorShades)
             return "Colors";
         else return "Shades";
     }
@@ -56,27 +56,27 @@ public class DifferentColorShadeOnRowColomn extends Effect {
                     for (int j = 0; j < 5; j++) {
                         if (board[i][j].isIsPresent()) {
                             if (board[i][j].getDie().getColor() == Color.ANSI_BLUE)
-                                if(blue4==false) {
+                                if(!blue4) {
                                     blue4 = true;
                                 }
                                 else repeated=true;
                             if (board[i][j].getDie().getColor() == Color.ANSI_RED)
-                                if(red2==false) {
+                                if(!red2) {
                                     red2= true;
                                 }
                                 else repeated=true;
                             if (board[i][j].getDie().getColor() == Color.ANSI_YELLOW)
-                                if(yellow5==false) {
+                                if(!yellow5) {
                                     yellow5= true;
                                 }
                                 else repeated=true;
                             if (board[i][j].getDie().getColor() == Color.ANSI_GREEN)
-                                if(green1==false) {
+                                if(!green1) {
                                     green1= true;
                                 }
                                 else repeated=true;
                             if (board[i][j].getDie().getColor() == Color.ANSI_PURPLE)
-                                if(purple3==false) {
+                                if(!purple3) {
                                     purple3= true;
                                 }
                                 else repeated=true;
@@ -96,27 +96,27 @@ public class DifferentColorShadeOnRowColomn extends Effect {
                     for (int j = 0; j < 4; j++) {
                         if (board[j][i].isIsPresent()) {
                             if (board[j][i].getDie().getColor() == Color.ANSI_BLUE)
-                                if(blue4==false) {
+                                if(!blue4) {
                                     blue4 = true;
                                 }
                                 else repeated=true;
                             if (board[j][i].getDie().getColor() == Color.ANSI_RED)
-                                if(red2==false) {
+                                if(!red2) {
                                     red2= true;
                                 }
                                 else repeated=true;
                             if (board[j][i].getDie().getColor() == Color.ANSI_YELLOW)
-                                if(yellow5==false) {
+                                if(!yellow5) {
                                     yellow5= true;
                                 }
                                 else repeated=true;
                             if (board[j][i].getDie().getColor() == Color.ANSI_GREEN)
-                                if(green1==false) {
+                                if(!green1) {
                                     green1= true;
                                 }
                                 else repeated=true;
                             if (board[j][i].getDie().getColor() == Color.ANSI_PURPLE)
-                                if(purple3==false) {
+                                if(!purple3) {
                                     purple3= true;
                                 }
                                 else repeated=true;
@@ -138,32 +138,32 @@ public class DifferentColorShadeOnRowColomn extends Effect {
                     for (int j = 0; j < 5; j++) {
                         if (board[i][j].isIsPresent()) {
                             if (board[i][j].getDie().getValue()== 1)
-                                if(blue4==false) {
+                                if(!blue4) {
                                     blue4 = true;
                                 }
                                 else repeated=true;
                             if (board[i][j].getDie().getValue() == 2)
-                                if(red2==false) {
+                                if(!red2) {
                                     red2= true;
                                 }
                                 else repeated=true;
                             if (board[i][j].getDie().getValue() == 3)
-                                if(yellow5==false) {
+                                if(!yellow5) {
                                     yellow5= true;
                                 }
                                 else repeated=true;
                             if (board[i][j].getDie().getValue() == 4)
-                                if(green1==false) {
+                                if(!green1) {
                                     green1= true;
                                 }
                                 else repeated=true;
                             if (board[i][j].getDie().getValue() == 5)
-                                if(purple3==false) {
+                                if(!purple3) {
                                     purple3= true;
                                 }
                                 else repeated=true;
                             if (board[i][j].getDie().getValue()==6)
-                                if(six==false) {
+                                if(!six) {
                                     six= true;
                                 }
                                 else repeated=true;
@@ -184,32 +184,32 @@ public class DifferentColorShadeOnRowColomn extends Effect {
                     for (int j = 0; j < 4; j++) {
                         if (board[j][i].isIsPresent()) {
                             if (board[j][i].getDie().getValue()== 1)
-                                if(blue4==false) {
+                                if(!blue4) {
                                     blue4 = true;
                                 }
                                 else repeated=true;
                             if (board[j][i].getDie().getValue() == 2)
-                                if(red2==false) {
+                                if(!red2) {
                                     red2= true;
                                 }
                                 else repeated=true;
                             if (board[j][i].getDie().getValue() == 3)
-                                if(yellow5==false) {
+                                if(!yellow5) {
                                     yellow5= true;
                                 }
                                 else repeated=true;
                             if (board[j][i].getDie().getValue() == 4)
-                                if(green1==false) {
+                                if(!green1) {
                                     green1= true;
                                 }
                                 else repeated=true;
                             if (board[j][i].getDie().getValue() == 5)
-                                if(purple3==false) {
+                                if(!purple3) {
                                     purple3= true;
                                 }
                                 else repeated=true;
                             if (board[j][i].getDie().getValue()==6)
-                                if(six==false) {
+                                if(!six) {
                                     six= true;
                                 }
                                 else repeated=true;

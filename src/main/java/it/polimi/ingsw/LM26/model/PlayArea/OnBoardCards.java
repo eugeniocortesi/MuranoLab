@@ -133,7 +133,7 @@ public class OnBoardCards implements Serializable {
         toolNumberList.forEach(n -> System.out.println(n));
     }
 
-    public ArrayList<WindowPatternCard> getFourWindowPattern() {
+    public ArrayList<WindowPatternCard> giveFourWindowPattern() {
 
         Model model= singletonModel();
 
@@ -170,7 +170,7 @@ public class OnBoardCards implements Serializable {
         return four;
     }
 
-    public ObjectivePrivateCard getPrivateCard(PlayerZone player) {
+    public ObjectivePrivateCard distributePrivateCard(PlayerZone player) {
 
         Model model = singletonModel();
 

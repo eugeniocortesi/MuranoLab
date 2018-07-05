@@ -28,7 +28,7 @@ public class TestOnBoardCards {
 
         model.getDecks().getWindowPatternCardDeck().get(8).setInUse(true);
 
-        four=model.getOnBoardCards().getFourWindowPattern();
+        four=model.getOnBoardCards().giveFourWindowPattern();
 
         assertEquals(four.size(), 4);
 

@@ -88,14 +88,14 @@ public class SetupHandler {
 
         for (int j = 0; j < model.getPlayerList().size(); j++)
 
-            server.showPrivateCard(model.getPlayerList().get(j).getName(), model.getOnBoardCards().getPrivateCard(model.getPlayerList().get(j)));
+            server.showPrivateCard(model.getPlayerList().get(j).getName(), model.getOnBoardCards().distributePrivateCard(model.getPlayerList().get(j)));
     }
 
     public void setupWindowCard() {
 
         for (int i = 0; i < model.getPlayerList().size(); i++) {
 
-            ArrayList<WindowPatternCard> windowlist = model.getOnBoardCards().getFourWindowPattern();
+            ArrayList<WindowPatternCard> windowlist = model.getOnBoardCards().giveFourWindowPattern();
 
             //TODO DELETE
 

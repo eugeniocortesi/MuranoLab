@@ -61,7 +61,7 @@ public class TestFinalPhase {
         }
         System.out.println("\n");
         for(int i=0; i<playerList.size(); i++){
-            playerList.get(i).setLastRoundTurn(i);
+            playerList.get(i).setNumberPlayer(i);
         }
         System.out.println("\n");
         player = finalPhase.declareWinner();
@@ -122,10 +122,10 @@ public class TestFinalPhase {
             playerList.get(i).setPrivatePoints(44);
             playerList.get(i).setToken(new Token(0));
         }
-        playerList.get(0).setLastRoundTurn(1);
-        playerList.get(1).setLastRoundTurn(0);
-        playerList.get(2).setLastRoundTurn(2);
-        playerList.get(3).setLastRoundTurn(3);
+        playerList.get(0).setNumberPlayer(1);
+        playerList.get(1).setNumberPlayer(0);
+        playerList.get(2).setNumberPlayer(2);
+        playerList.get(3).setNumberPlayer(3);
         player=finalPhase.declareWinner();
         assertEquals(playerList.get(1), player);
     }

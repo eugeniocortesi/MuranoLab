@@ -31,7 +31,7 @@ public class ScoreMarker implements Serializable {
 
     public int getRealPoints() {
 
-        if (more50==true) {
+        if (more50) {
 
             return points + 50;
         }
