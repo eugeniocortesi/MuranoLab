@@ -59,6 +59,8 @@ public class RoundsHandler extends Thread {
 
             playing = game.getPhase().getCurrentRound().nextPlayer();
 
+            model.hasChanged();
+
             for (int j = 0; j < model.getPlayerList().size(); j++)
 
                 controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "Inizia il turno " + game.getPhase().getRoundNumber());
@@ -113,6 +115,8 @@ public class RoundsHandler extends Thread {
                 game.getPhase().getCurrentRound().endAction();
 
                 playing = game.getPhase().getCurrentRound().nextPlayer();
+
+                model.hasChanged();
 
                 controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
 
