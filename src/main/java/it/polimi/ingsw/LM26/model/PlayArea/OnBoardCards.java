@@ -209,8 +209,8 @@ public class OnBoardCards implements Serializable {
                 cardsToken[i]=2;
     }
 
-    public ArrayList<Integer> getToolNumberList() {
-
-        return toolNumberList;
+    public int[] getCardsToken() {
+        
+        return cardsToken;
     }
 }

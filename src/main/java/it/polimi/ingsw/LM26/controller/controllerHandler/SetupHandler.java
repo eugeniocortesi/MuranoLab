@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 /**
  * @author Eugenio Cortesi
+ * this class apport modifies in model after updates
  */
 public class SetupHandler {
 
@@ -35,7 +36,7 @@ public class SetupHandler {
     }
 
     /**
-     *
+     * this method get a name and if the name already exist means that the player was in standby and now is back on the game, else if the name
      * @param name
      */
     public void setupPlayers(String name) {
