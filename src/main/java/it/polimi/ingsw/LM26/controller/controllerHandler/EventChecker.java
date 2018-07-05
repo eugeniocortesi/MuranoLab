@@ -9,10 +9,13 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
+ * EventChecker class
  * @author Eugenio Cortesi
- * eventChecker class implements methods that checks if an action can be done, analyzing players and game situation.
+ * this class implements methods that checks if an action can be done, analyzing players and game situation.
  */
+
 public class EventChecker {
 
     private Model model;
@@ -26,6 +29,7 @@ public class EventChecker {
         LOGGER.setLevel(Level.ALL);
     }
 
+
     /**
      * method that checks if a die can be placed on the position choosen.
      * if it's second attempt of placing from card 6 or 11, a control makes sure that client uses the same die choosen or assigned in the last attempt of placing.
@@ -36,6 +40,7 @@ public class EventChecker {
      * @param player client that sended the place die request
      * @return true if a placement went well, otherwise false
      */
+
     public boolean checkPlacement(DieInt dieFromDraft, Box toBox, PlayerZone player) {
 
         if( dieFromDraft==null ) return false;
@@ -94,6 +99,7 @@ public class EventChecker {
 
     }
 
+
     /**
      * this checks if the client has already use a card in his turn.
      * If he has, but card is 11 this control is bypassed because this specific card needs more than one action.
@@ -101,6 +107,7 @@ public class EventChecker {
      * @param card card selected by client
      * @return true, is controls are true
      */
+
     public boolean checkActionAvailability(PlayerZone player, ToolCardInt card){
 
         if (player.getActionHistory().isCardUsed() && ! model.getRestrictions().isFirstPart()) {
@@ -113,11 +120,13 @@ public class EventChecker {
         return (checkToken(player, card, false ));
     }
 
+
     /**
      * it controls if the card requested in the action event is one of the three selected
      * @param i id of the card in the event
      * @return true, if the card is one the selected ones
      */
+
     public boolean checkCard(int i) {
 
         if( i>model.getDecks().getToolCardDeck().size()) return false;
@@ -131,6 +140,7 @@ public class EventChecker {
         return false;
     }
 
+
     /**
      * this check-method is used two times: the first one to check is the player has enough token to use the card requested,
      * the second one to put tokens on the card (pay)
@@ -139,6 +149,7 @@ public class EventChecker {
      * @param pay boolean that says if this is the first usage type (just controlling) or the second (paying)
      * @return true, if client has enough tokens and if the payment is done
      */
+
     public boolean checkToken(PlayerZone player, ToolCardInt toolCard, Boolean pay) {
 
         if (toolCard.getToken() > 0) {

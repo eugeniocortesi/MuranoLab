@@ -13,10 +13,13 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
+ * EventHandler class
  * @author EugenioCortesi
  * class the reads a new event, parse the type and select the right checks to do.
  */
+
 public class EventHandler {
 
     private Model model;
@@ -29,7 +32,16 @@ public class EventHandler {
 
     private PlayerZone player;
 
-    private static final Logger LOGGER = Logger.getLogger(EventChecker.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(EventHandler.class.getName());
+
+
+    /**
+     * Constructor
+     * it creates the eventChecker object, saves the result of the action, after have handling it with checkers
+     * @param event got from server, to handle
+     * @param model istance of model class
+     * @param controller istance of controller class
+     */
 
     public EventHandler(ActionEvent event, Model model, ControllerInt controller) {
 
@@ -46,12 +58,14 @@ public class EventHandler {
         result = handle(eventChecker);
     }
 
+
     /**
-     * this method is called from the RoundsHandler: it used to say if the client action can be done or not.
+     * this method is called from the RoundsHandler: it's used to say if the client action can be done or not.
      * it parse the id action and call the specific action checks.
      * @param eventChecker istance of eventChecker object
      * @return the boolean returned is the ultimate acceptance of the action
      */
+
     public boolean handle(EventChecker eventChecker) {
 
         ToolCardInt toolCard;
@@ -207,10 +221,12 @@ public class EventHandler {
         return result;
     }
 
+
     /**
      * the method get the card from the cards on board
      * @return toolCard object with the id requested in the event
      */
+
     public ToolCardInt getToolCard() {
 
         for (int i = 0; i < model.getOnBoardCards().getToolCardList().size(); i++)
@@ -222,10 +238,12 @@ public class EventHandler {
         return null;
     }
 
+
     /**
      * @param c vector with round track coordinated
      * @return die from round track requested in the action
      */
+
     public DieInt getTrackDieCopy(int[] c) {
 
         if (model.getRoundTrackInt().getRoundTrackTurnList().size() < c[0] || model.getRoundTrackInt().getRoundTrackTurn(c[0]).size() < c[1])
@@ -235,11 +253,12 @@ public class EventHandler {
         return model.getRoundTrackInt().getRoundTrackTurn(c[0] + 1).get(c[1]);
     }
 
+
     /**
-     *
      * @param b copy of board cell sended from client
      * @return cell of the client board
      */
+
     public Box getBoxCopy(Box b)  {
 
         if(b==null)return null;
@@ -247,11 +266,12 @@ public class EventHandler {
         return player.getPlayerBoard().getBoardMatrix()[b.getI()][b.getJ()];
     }
 
+
     /**
-     *
      * @param die copy of die sended from client
      * @return right istance of die requested
      */
+
     private DieInt getDraftDieCopy(DieInt die) {
 
         if(die==null) return null;
@@ -265,11 +285,12 @@ public class EventHandler {
         return null;
     }
 
+
     /**
-     *
      * @param a copy of Array of board cells sended from client
      * @return right istance of Array of board cells
      */
+
     public ArrayList<Box> getBoxListCopy(ArrayList<Box> a) {
 
         if(a==null) return null;

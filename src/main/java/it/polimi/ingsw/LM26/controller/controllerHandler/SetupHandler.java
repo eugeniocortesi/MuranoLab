@@ -12,10 +12,13 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
+ * SetupHandler class
  * @author Eugenio Cortesi
  * this class apport modifies in model after updates
  */
+
 public class SetupHandler {
 
     private ControllerInt controller;
@@ -24,7 +27,7 @@ public class SetupHandler {
 
     private ViewGameInterface server;
 
-    private static final Logger LOGGER = Logger.getLogger(RoundsHandler.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SetupHandler.class.getName());
 
     public SetupHandler(ControllerInt controllerInt, Model model) {
 
@@ -35,10 +38,12 @@ public class SetupHandler {
         this.model = model;
     }
 
+
     /**
-     * this method get a name and if the name already exist means that the player was in standby and now is back on the game, else if the name
-     * @param name
+     * @param name method gets a name and if the name already exist it means that the player was in standby and now is back in the game,
+     *              else if the name wasn't in the players list it creates the player
      */
+
     public void setupPlayers(String name) {
 
         if (model.getPlayer(name) == null) {
@@ -55,18 +60,27 @@ public class SetupHandler {
         else model.getPlayer(name).setPlayerState(PlayerState.ENDING);
     }
 
-    public void assignWindowCard(String name, WindowPatternCard windowPatternCard) {
 
-        windowPatternCard.printCard();
+    /**
+     * every time that a pattern has been setted to the player, it calls the method that check if all player are ready to start the game
+     * @param name of the player that choose one of the four window patter cards extracted for him
+     * @param windowPatternCard choosen, to be setted in the player
+     */
+
+    public void assignWindowCard(String name, WindowPatternCard windowPatternCard) {
 
         model.getPlayer(name).setWindowPatternCard(windowPatternCard);
 
-        model.getPlayer(name).getWindowPatternCard().printCard();
-
-        LOGGER.log(Level.INFO,"Assigned card to player " + name);
-
         controller.playersReady();
     }
+
+
+    /**
+     * after that server notifies of a disconnected player or that a client decided to stop playing, this method is called and it sets the standby status
+     * to the client in standby, it sends a message to all clients that this one went in standby and then it counts how many players remain in the game,
+     * because when only one player remains it calls the endGame-Controller-method
+     * @param namePlayer name of the client in standby
+     */
 
     public void setStandbyPlayer(String namePlayer) {
 
@@ -95,26 +109,41 @@ public class SetupHandler {
 
     }
 
+
+    /**
+     * this method sends the selected private card to the assigned client
+     */
+
     public void setupPrivateCard() {
 
         for (int j = 0; j < model.getPlayerList().size(); j++)
 
-            server.showPrivateCard(model.getPlayerList().get(j).getName(), model.getOnBoardCards().distributePrivateCard(model.getPlayerList().get(j)));
+            server.showPrivateCard(model.getPlayer(j).getName(), model.getOnBoardCards().distributePrivateCard(model.getPlayer(j)));
     }
+
+    /**
+     * this method sends four window pattern cards to all the player, they will then choose one of them
+     */
 
     public void setupWindowCard() {
 
         for (int i = 0; i < model.getPlayerList().size(); i++) {
 
-            ArrayList<WindowPatternCard> windowlist = model.getOnBoardCards().giveFourWindowPattern();
+            ArrayList<WindowPatternCard> windowList = model.getOnBoardCards().giveFourWindowPattern();
 
             if(server!=null)
 
-            server.showWindowPattern(model.getPlayerList().get(i).getName(), model.getPlayerList().get(i).getIDPlayer(), windowlist);
+            server.showWindowPattern(model.getPlayer(i).getName(), model.getPlayer(i).getIDPlayer(), windowList);
 
-            windowlist.clear();
+            windowList.clear();
         }
     }
+
+    /**
+     *
+     * @param timerEnd when the updates handler receives this event means that a player disconnected before the start of the game
+     *                 (he did non answer the pattern card), so it must be deleted and deregistered from the list of clients that observe model
+     */
 
     public void deletePlayer(ActionEventTimerEnd timerEnd) {
 
@@ -126,6 +155,11 @@ public class SetupHandler {
 
         controller.playersReady();
     }
+
+    /**
+     * this method is used when a action timer ends: a player ended this time and he must jump the turn
+     * @param name of client that jump
+     */
 
     public void setUpJumpTurn(String name) {
 

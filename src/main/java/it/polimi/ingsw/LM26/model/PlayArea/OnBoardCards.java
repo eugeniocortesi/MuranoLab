@@ -210,7 +210,7 @@ public class OnBoardCards implements Serializable {
     }
 
     public int[] getCardsToken() {
-        
+
         return cardsToken;
     }
 }

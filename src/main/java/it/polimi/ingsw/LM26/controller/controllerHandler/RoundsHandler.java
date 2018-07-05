@@ -17,10 +17,13 @@ import java.util.logging.Logger;
 import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
 import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
 
+
 /**
+ * RoundsHandler class
  * @author Eugenio Cortesi
  * class that for each part of the game gets the corrent players and turns
  */
+
 public class RoundsHandler extends Thread {
 
     private PlayerZone playing;
@@ -42,6 +45,15 @@ public class RoundsHandler extends Thread {
     private ActionEvent event;
 
     private int i = 0;
+
+
+    /**
+     * Constructor
+     * starts the game: initialPhase and centralPhase with doAction method of pattern state
+     * it sends the first notify of the model to the view and it creates the timer
+     * @param model istance of model class
+     * @param controller istance of controller class
+     */
 
     public RoundsHandler(Model model, ControllerInt controller) {
 
@@ -72,12 +84,14 @@ public class RoundsHandler extends Thread {
         play();
     }
 
+
     /**
      * this method runs the game, sends messages to view and asks to show menu to players
      * it selects the next player from the current round and the next round from the central phase of the game.
      * if the player ends his time for a action, goes to standby or pass the turn, the turn ends.
      * after every action is notify all clients that model has changed.
      */
+
     public void play() {
 
         for (int j = 0; j < model.getPlayerList().size(); j++)
@@ -173,11 +187,13 @@ public class RoundsHandler extends Thread {
         controller.declareScoresAndWinner(game.getPhase().getWinner());
     }
 
+
     /**
      * this method receive the event for the first action and give it to the handler
      * when the handler returns the boolean true/false, the method communicates to client the answer
      * and if it's negative, it asks to client to redo the action trough menu showing
      */
+
     private void firstAction() {
 
         //TODO DELETE
@@ -225,12 +241,14 @@ public class RoundsHandler extends Thread {
         }
     }
 
+
     /**
      * this method receive the event for the second action (if the client didn't pass the turn) and give it to the handler
      * when the handler returns the boolean true/false, the method communicates to client the answer
      * * and if it's negative, it asks to client to redo the action trough menu showing.
      * if ToolCard 8 has been used by the client, the method asks for one more action.
      */
+
     private void secondAction() {
 
         //TODO DELETE
@@ -300,10 +318,12 @@ public class RoundsHandler extends Thread {
         }
     }
 
+
     /**
      * this method makes sure that every time a "ask menu event" has arrived from the client
      * it handles it and wait an other event right away
      */
+
     private void waitEvent() {
 
         waitCorrectPlayer();
@@ -316,6 +336,7 @@ public class RoundsHandler extends Thread {
         }
     }
 
+
     /**
      * the scope of this method is to get an event from the queue,
      * if the queue is empty, it waits for a new event to arrive
@@ -324,6 +345,7 @@ public class RoundsHandler extends Thread {
      * for instance if a player goes to standby while the method is waiting
      * or the timer for the action ends, the method exits the while and ends.
      */
+
     private void waitCorrectPlayer() {
 
         do {
