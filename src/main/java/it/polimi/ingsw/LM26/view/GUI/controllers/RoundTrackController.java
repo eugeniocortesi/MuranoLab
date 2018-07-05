@@ -28,34 +28,36 @@ public class RoundTrackController {
     private TilePane diceLists;
 
     public void setUpRTrack(GameController gController, ActionEventGenerator aeGenerator){
-        this. gController=gController;
+        this.gController=gController;
         this.aeGenerator=aeGenerator;
-        ArrayList<RoundTrackTurn> roundTrackList = ModelManager.getModel().getRoundTrackInt().getRoundTrackTurnList();
-        for(int i=0; i<roundTrackList.size(); i++) {
-            ImageView num=keepFirstImage(i);
-            int n=i;
-            num.setOnMouseClicked((MouseEvent event) ->handleDieClicked(n));
-        }
     }
 
     public void updateRoundTrack(ImageManager imageManager){
         this.imManager=imageManager;
         roundTrackList = ModelManager.getModel().getRoundTrackInt().getRoundTrackTurnList();
         for(int i=0; i<roundTrackList.size(); i++){
-            ImageView num=keepFirstImage(i);
-            imageManager.setDie(num, roundTrackList.get(i).getDiceList().get(0));
-            if(roundTrackList.get(i).getDiceList().size()>1){
-                VBox diceList=(VBox) diceLists.getChildren().get(i);
-                for(int j=1; j<roundTrackList.get(i).getDiceList().size(); j++){
-                    ImageView newDie= new ImageView();
-                    newDie.setFitHeight(40);
-                    newDie.setFitHeight(40);
-                    imageManager.setDie(newDie, roundTrackList.get(i).getDiceList().get(j));
-                    int n=j, m=i;
-                    newDie.setOnMouseClicked((MouseEvent event)->handleDieClicked(9+n+(m*8)));
-                    diceList.getChildren().add(newDie);
-                }
+            if(roundTrackList.get(i).getDiceList().get(0)!=null){
+                ImageView num=keepFirstImage(i);
+                int r=i;
+                num.setOnMouseClicked((MouseEvent event) ->handleDieClicked(r));
+                imageManager.setDie(num, roundTrackList.get(i).getDiceList().get(0));
             }
+                if(roundTrackList.get(i).getDiceList().size()>1){
+                    VBox diceList=(VBox) diceLists.getChildren().get(i);
+                    for(int j=1; j<roundTrackList.get(i).getDiceList().size(); j++){
+                        ImageView newDie= new ImageView();
+                        newDie.setFitHeight(40);
+                        newDie.setFitHeight(40);
+                        imageManager.setDie(newDie, roundTrackList.get(i).getDiceList().get(j));
+                        int n=j, m=i;
+                        newDie.setOnMouseClicked((MouseEvent event)->handleDieClicked(9+n+(m*8)));
+                        diceList.getChildren().add(newDie);
+                    }
+
+                    for(int k=0; k<(diceList.getChildren().size()-roundTrackList.get(i).getDiceList().size());k++){
+                        diceList.getChildren().remove(diceList.getChildren().size()-1);
+                    }
+                }
         }
     }
 

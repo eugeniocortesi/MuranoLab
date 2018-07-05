@@ -22,6 +22,7 @@ public class ActionEventGenerator {
     private ArrayList<Box> toBoxes;
     private int[] rTrackcoordinates;
     private View view;
+    private boolean array=false;
 
     public ActionEventGenerator(GameController gController, View view) {
         this.gController=gController;
@@ -33,6 +34,7 @@ public class ActionEventGenerator {
         stateArray=new ArrayList<GameState>();
         stateArray.add(GameState.DRAFTPOOL);
         stateArray.add(GameState.FRAMEBOARD);
+        array=false;
     }
 
     public void endTurn(){
@@ -41,6 +43,10 @@ public class ActionEventGenerator {
         ae.setPlayer(ModelManager.getId());
         ae.setId(11);
         gController.setInstructions("Fine turno");
+        view.notifyActionEvent(ae);
+    }
+
+    public void endTCardMove(){
         view.notifyActionEvent(ae);
     }
 
@@ -67,8 +73,9 @@ public class ActionEventGenerator {
                     stateArray.add(GameState.ROUNDTRACK);
                     stateArray.add(GameState.FRAMEBOARD);
                     stateArray.add(GameState.FRAMEBOARD);
+                    stateArray.add(GameState.CONTINUECHOICE);
                     stateArray.add(GameState.FRAMEBOARD);
-                    stateArray.add(GameState.FRAMEBOARD);
+                    array=true;
                 }break;
                 case 4:{
                     ae.setId(3);
@@ -76,6 +83,7 @@ public class ActionEventGenerator {
                     stateArray.add(GameState.FRAMEBOARD);
                     stateArray.add(GameState.FRAMEBOARD);
                     stateArray.add(GameState.FRAMEBOARD);
+                    array=true;
                 }break;
                 case 2:
                 case 3:{
@@ -135,31 +143,48 @@ public class ActionEventGenerator {
     public void frameBoardEvent(Box box) throws IllegalArgumentException{
         if(box==null) throw new IllegalArgumentException("null box from frame board");
         else{
-            if(contCellsFrameBoard==0){
-                if(idx==stateArray.size()-1){
-                    ae.setToBox1(box);
+            if(((contCellsFrameBoard==0 && idx!=stateArray.size()-1) || contCellsFrameBoard==3) && !box.isIsPresent()){
+                gController.setMoveLabel("Cella senza dado. Selezionane un'altra");
+                idx--;
+            }
+            else{
+                if(contCellsFrameBoard==0){
+                    if(idx==stateArray.size()-1){
+                        ae.setToBox1(box);
+                    }
+                    else if(array){
+                        fromBoxes =new ArrayList<Box>();
+                        fromBoxes.add(box);
+                        ae.setFromBoxList(fromBoxes);
+                    }
+                    else ae.setFromBox1(box);
                 }
-                else ae.setFromBox1(box);
+                else if(contCellsFrameBoard==1){
+                    if(array){
+                        toBoxes =new ArrayList<Box>();
+                        toBoxes.add(box);
+                        ae.setFromBoxList(toBoxes);
+                        gController.moveDieTemporarily(ae.getFromBoxList().get(0),box);
+                    }
+                    else {
+                        ae.setToBox1(box);
+                        gController.moveDieTemporarily(ae.getFromBox1(),box);
+                    }
+                }
+                else if(contCellsFrameBoard==2){
+                    fromBoxes.add(box);
+                    ae.setFromBoxList(fromBoxes);
+                }
+                if(contCellsFrameBoard==3){
+                    toBoxes.add(box);
+                    ae.setToBoxList(toBoxes);
+                    gController.moveDieTemporarily(ae.getFromBoxList().get(1), box);
+                }
+                if(contCellsFrameBoard==1 && ae.getCardID()==12){
+                    gController.setMoveLabel("Esegui le istruzioni per spostare un altro dado, altrimenti premi 'Fine mossa'");
+                }
+                contCellsFrameBoard++;
             }
-            else if(contCellsFrameBoard==1){
-                ae.setToBox1(box);
-            }
-            else if(contCellsFrameBoard==2){
-                fromBoxes =new ArrayList<Box>();
-                fromBoxes.add(ae.getFromBox1());
-                fromBoxes.add(box);
-                ae.setFromBoxList(fromBoxes);
-                ae.setFromBox1(null);
-            }
-            if(contCellsFrameBoard==3){
-                toBoxes =new ArrayList<Box>();
-                toBoxes.add(ae.getToBox1());
-                toBoxes.add(box);
-                ae.setFromBoxList(toBoxes);
-                ae.setToBox1(null);
-
-            }
-            contCellsFrameBoard++;
             nextAction();
         }
     }
@@ -211,16 +236,28 @@ public class ActionEventGenerator {
             }
             gController.setUpState(stateArray.get(idx));
         }
-
+        else{
+            reset();
+        }
     }
 
     private void nextAction(){
         idx++;
-        if(idx==stateArray.size() || stateArray.get(idx)==GameState.ACTIONEVENT){
+        if(idx==stateArray.size() || (idx<stateArray.size() && stateArray.get(idx)==GameState.ACTIONEVENT)){
             sendActionEvent();
         }
         else{
-            gController.setUpState(stateArray.get(idx));
+            if(stateArray.get(idx)==GameState.ROUNDTRACK && ModelManager.getModel().getRoundTrackInt().getRoundTrackTurnList().size()==0){
+                gController.setMoveLabel("Il tracciato dei round è vuoto, mossa non valida");
+                reset();
+                gController.setUpState(GameState.BEGINMOVE);
+            }
+            else if((stateArray.get(idx)==GameState.FRAMEBOARD && (contCellsFrameBoard==2 || (contCellsFrameBoard==0 && idx!=stateArray.size()-1))) && ModelManager.getModel().getPlayer(ModelManager.getId()).getPlayerBoard().isEmpty()){
+                gController.setMoveLabel("Plancia Vetrata vuota, mossa non valida");
+                reset();
+                gController.setUpState(GameState.BEGINMOVE);
+            }
+            else gController.setUpState(stateArray.get(idx));
         }
     }
 }

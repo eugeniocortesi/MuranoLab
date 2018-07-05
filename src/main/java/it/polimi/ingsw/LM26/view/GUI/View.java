@@ -212,9 +212,13 @@ public class View extends ViewInterface {
 
     @Override
     public void showAnswerFromController(String name, String answer) {
-        FXMLLoader fLoader=displayableStageGame.getFxmlLoader();
-        GameController gc=fLoader.getController();
-        gc.setInstructions(answer);
+        Platform.runLater(new Runnable() {
+            public void run() {
+                FXMLLoader fLoader=displayableStageGame.getFxmlLoader();
+                GameController gc=fLoader.getController();
+                gc.setInstructionsController(answer);
+            }
+        });
     }
 
     @Override

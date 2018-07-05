@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRMI;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket.ClientViewSocket;
@@ -38,14 +39,20 @@ public class ControllerNetChoice {
     public void handleRmiSocketButton(ActionEvent event){
         RadioButton selected= (RadioButton)connection.getSelectedToggle();
         ok.setDisable(true);
+        ClientView clientView;
+
         if(selected.getText().equals("RMI")){
-            View.setClientView( new ClientViewRMI(view, dClientConfig ));
+            clientView = new ClientViewRMI(view, dClientConfig );
+            View.setClientView( clientView);
             View.getClientBase().setConnection(true);
         }
         else{
-            View.setClientView(new ClientViewSocket(view, dClientConfig));
+            clientView = new ClientViewSocket(view, dClientConfig);
+            View.setClientView(clientView);
             View.getClientBase().setConnection(false);
+            System.out.println("CREated socket");
         }
         View.getClientView().connect();
+        view.register(clientView);
     }
 }

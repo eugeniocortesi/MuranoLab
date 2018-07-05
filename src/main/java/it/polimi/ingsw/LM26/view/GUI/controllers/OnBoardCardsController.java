@@ -5,6 +5,7 @@ import it.polimi.ingsw.LM26.view.GUI.ActionEventGenerator;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
 import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -22,6 +23,8 @@ public class OnBoardCardsController {
 
     @FXML
     private TilePane cards;
+    @FXML
+    private TilePane tokens;
 
     public void setUpCards(ImageManager imManager, GameController gController, ActionEventGenerator aeGenerator){
         imageManager=imManager;
@@ -44,6 +47,17 @@ public class OnBoardCardsController {
         }
     }
 
+    public void updateCardsToken(){
+        for(int i=0; i<tokens.getChildren().size(); i++){
+            Label numToken=(Label) tokens.getChildren().get(i);
+            if(ModelManager.getModel().getOnBoardCards().getCardsToken()[i]==1){
+                numToken.setText("Costo: 1 Segnalino Favore");
+            }
+            else numToken.setText("Costo: 2 Segnalini Favore");
+
+        }
+    }
+
     public void setDisable(boolean disable){
         for(int i=0; i<cards.getChildren().size(); i++){
             cards.getChildren().get(i).setDisable(disable);
@@ -51,7 +65,7 @@ public class OnBoardCardsController {
     }
 
     public void handleCardClicked(int idx){
-        gController.setInstructions(Integer.toString(idx+1));
+        gController.setMoveLabel("Selezionata carta "+(idx+1));
         try{
             aeGenerator.cardEvent(idx);
         }catch(IllegalArgumentException e){

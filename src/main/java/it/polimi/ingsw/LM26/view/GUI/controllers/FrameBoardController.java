@@ -20,8 +20,7 @@ import javafx.scene.shape.Circle;
 
 import javax.xml.ws.Action;
 
-import static it.polimi.ingsw.LM26.model.PlayArea.Color.ANSI_YELLOW;
-import static it.polimi.ingsw.LM26.model.PlayArea.Color.WHITE;
+import static it.polimi.ingsw.LM26.model.PlayArea.Color.*;
 
 public class FrameBoardController {
 
@@ -91,16 +90,24 @@ public class FrameBoardController {
            imageManager.setDie(imView, box.getDie());
         }
         else{
-            if(box.getPatternBox().isShade()) imView.setImage(imageManager.getGreyDie(box.getPatternBox().getValue()));
+          setPatternBox(box);
+        }
+    }
+
+    private void setPatternBox(Box box){
+        ImageView imView=(ImageView) tilepane.getChildren().get(((box.getI()*5)+box.getJ()));
+        if(box.getPatternBox().isShade()) imView.setImage(imageManager.getGreyDie(box.getPatternBox().getValue()));
+        else{
+            if(box.getPatternBox().getColor()== WHITE) {
+                imView.setImage(imageManager.getGreyDie(0));
+            }
             else{
-                if(box.getPatternBox().getColor()!= WHITE){
-                    switch (box.getPatternBox().getColor()){
-                        case ANSI_YELLOW:{imView.setImage(imageManager.getYellowDie(0)); break;}
-                        case ANSI_BLUE:{imView.setImage(imageManager.getBlueDie(0)); break;}
-                        case ANSI_RED:{imView.setImage(imageManager.getRedDie(0)); break;}
-                        case ANSI_PURPLE:{imView.setImage(imageManager.getPurpleDie(0)); break;}
-                        case ANSI_GREEN:{imView.setImage(imageManager.getGreenDie(0)); break;}
-                    }
+                switch (box.getPatternBox().getColor()){
+                    case ANSI_YELLOW:{imView.setImage(imageManager.getYellowDie(0)); break;}
+                    case ANSI_BLUE:{imView.setImage(imageManager.getBlueDie(0)); break;}
+                    case ANSI_RED:{imView.setImage(imageManager.getRedDie(0)); break;}
+                    case ANSI_PURPLE:{imView.setImage(imageManager.getPurpleDie(0)); break;}
+                    case ANSI_GREEN:{imView.setImage(imageManager.getGreenDie(0)); break;}
                 }
             }
         }
@@ -117,9 +124,9 @@ public class FrameBoardController {
     private void handleCellClicked(int index){
         int r=(Math.floorDiv(index-1, ncol));
         int c=((index-1)%ncol);
-        gController.setInstructions(Integer.toString(r)+" "+Integer.toString(c));
         player=ModelManager.getModel().getPlayer(playername.getText());
         Box box=player.getPlayerBoard().getBoardMatrix()[r][c];
+        gController.setMoveLabel("Selezionata cella: riga "+(r+1)+", colonna "+(c+1));
         try{
             aeGenerator.frameBoardEvent(box);
         }catch(IllegalArgumentException e){
@@ -131,5 +138,11 @@ public class FrameBoardController {
         for(int i=0; i<tilepane.getChildren().size(); i++){
             tilepane.getChildren().get(i).setDisable(disable);
         }
+    }
+
+    public void shiftDie(Box from, Box to){
+        setPatternBox(from);
+        ImageView imTo=(ImageView) tilepane.getChildren().get(((to.getI()*5)+to.getJ()));
+        imageManager.setDie(imTo, from.getDie());
     }
 }

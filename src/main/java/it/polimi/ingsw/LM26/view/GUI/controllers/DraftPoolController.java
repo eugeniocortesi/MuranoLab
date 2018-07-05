@@ -30,6 +30,12 @@ public class DraftPoolController {
             int d=i;
             dPool.getChildren().get(i).setOnMouseClicked((MouseEvent event)->handleDiceClicked(d));
         }
+        for(int i= ModelManager.getModel().getDraftPool().getInDraft().size(); i<dPool.getChildren().size(); i++){
+            ImageView emptyCell=(ImageView) dPool.getChildren().get(i);
+            try{
+                emptyCell.setImage(null);
+            }catch (RuntimeException e){ }
+        }
     }
 
     public void setDisable(boolean disable){
@@ -39,8 +45,8 @@ public class DraftPoolController {
     }
 
     private void handleDiceClicked(int idx){
-        gController.setInstructions(Integer.toString(idx+1));
         die=ModelManager.getModel().getDraftPool().getInDraft().get(idx);
+        gController.setMoveLabel("Selezionato dado numero "+(idx+1));
         gController.sendDPoolEvent(die);
     }
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
@@ -60,14 +61,18 @@ public class GameController {
     @FXML
     private Button endMove;
     @FXML
+    private Button endToolCard;
+    @FXML
     private Label instructions;
+    @FXML
+    private Label instructionsController;
+    @FXML
+    private Label move;
     @FXML
     private Menu inDecrement;
     @FXML
     private Menu dieValue;
 
-
-//TODO GESTISCI LE ECCEZIONI DELL'ACTIONEVENTGENERATOR
 
     public void setupGame(boolean myTurn, View view){
         imageManager=new ImageManager();
@@ -110,7 +115,7 @@ public class GameController {
     public void isMyTurn(boolean myTurn){
         if(me!=null){
             if(!myTurn) {
-                disableEverything();
+                setInstructions("Turno di un altro giocatore");
                 gameState=GameState.DONOTHING;
             }
             else setUpState(GameState.BEGINMOVE);
@@ -121,16 +126,21 @@ public class GameController {
         instructions.setText(s);
     }
 
+    public void setInstructionsController(String s) {instructionsController.setText(s);}
+
+    public void setMoveLabel(String s) {move.setText(s);}
+
     public void updateGame(){
         if(me!=null){
             rTrackController.updateRoundTrack(imageManager);
             dPoolController.updateDPool(imageManager);
-            myFBoardController.updateFrameBoard(me, imageManager);
-            plZone1Controller.updateFrameBoard(plListWithoutMe.get(0), imageManager);
+            onBCardsController.updateCardsToken();
+            myFBoardController.updateFrameBoard(ModelManager.getModel().getPlayer(me.getIDPlayer()), imageManager);
+            plZone1Controller.updateFrameBoard(ModelManager.getModel().getPlayer(plListWithoutMe.get(0).getIDPlayer()), imageManager);
             if(plListWithoutMe.size()>1){
-                plZone2Controller.updateFrameBoard(plListWithoutMe.get(1), imageManager);
+                plZone2Controller.updateFrameBoard(ModelManager.getModel().getPlayer(plListWithoutMe.get(1).getIDPlayer()), imageManager);
                 if(plListWithoutMe.size()>2){
-                    plZone3Controller.updateFrameBoard(plListWithoutMe.get(2), imageManager);
+                    plZone3Controller.updateFrameBoard(ModelManager.getModel().getPlayer(plListWithoutMe.get(2).getIDPlayer()), imageManager);
                 }
             }
             setUpState(gameState);
@@ -144,6 +154,8 @@ public class GameController {
         rTrackController.setDisable(true);
         inDecrement.setDisable(true);
         dieValue.setDisable(true);
+        endMove.setDisable(true);
+        endToolCard.setDisable(true);
     }
 
     public void setUpState(GameState gState){
@@ -153,35 +165,49 @@ public class GameController {
             case BEGINMOVE:
                 dPoolController.setDisable(false);
                 onBCardsController.setDisable(false);
+                endMove.setDisable(false);
                 setInstructions("Inizio turno: puoi posizionare un dado o usare una carta strumento");
                 break;
+            case CONTINUECHOICE:
+                endToolCard.setDisable(false);
             case FRAMEBOARD:
                 myFBoardController.setDisable(false);
+                endMove.setDisable(false);
                 setInstructions("Scegli sulla Plancia Vetrata");
                 break;
             case DRAFTPOOL:
                 dPoolController.setDisable(false);
+                endMove.setDisable(false);
                 setInstructions("Scegli un dado dalla Riserva");
                 break;
             case ROUNDTRACK:
                 rTrackController.setDisable(false);
+                endMove.setDisable(false);
                 setInstructions("Scegli un dado dal tracciato dei round");
                 break;
             case INDECREMENT:
                 inDecrement.setDisable(false);
+                endMove.setDisable(false);
                 setInstructions("Scegli se incrementare o decrementare il valore del dado");
                 break;
             case DIEVALUE:
                 dieValue.setDisable(false);
+                endMove.setDisable(false);
                 setInstructions("Scegli il valore del dado");
                 break;
-            case ACTIONEVENT:
-            case DONOTHING: break;
+            case DONOTHING:
+                disableEverything();
+                break;
+            case ACTIONEVENT: break;
         }
     }
 
     public void handleEndMove(ActionEvent event){
         aeGenerator.endTurn();
+    }
+
+    public void handleEndToolCard(ActionEvent event){
+        aeGenerator.endTCardMove();
     }
 
     private void handleInDecrement(int idx){
@@ -209,5 +235,9 @@ public class GameController {
         }catch (IllegalArgumentException e){
             e.printStackTrace();
         }
+    }
+
+    public void moveDieTemporarily(Box f, Box t){
+        myFBoardController.shiftDie(f,t);
     }
 }

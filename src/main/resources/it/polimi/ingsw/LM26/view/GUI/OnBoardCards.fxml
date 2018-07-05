@@ -8,10 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.LM26.view.GUI.controllers.OnBoardCardsController">
    <children>
-      <TilePane hgap="5.0" prefColumns="3" prefHeight="200.0" prefRows="1" prefTileWidth="160.0" prefWidth="200.0">
+      <TilePane fx:id="tokens" hgap="5.0" prefColumns="3" prefHeight="200.0" prefRows="1" prefTileWidth="160.0" prefWidth="200.0">
          <children>
             <Label text="Costo: 1 Segnalino Favore" />
             <Label text="Costo: 1 Segnalino Favore" />

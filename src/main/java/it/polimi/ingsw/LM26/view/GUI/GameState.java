@@ -7,6 +7,7 @@ public enum GameState {
     ROUNDTRACK,
     INDECREMENT,
     DIEVALUE,
+    CONTINUECHOICE,
     ACTIONEVENT,
     DONOTHING
 }
