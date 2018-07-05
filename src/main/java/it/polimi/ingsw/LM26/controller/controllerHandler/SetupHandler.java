@@ -107,6 +107,8 @@ public class SetupHandler {
             if (server == null)
                 System.out.println("server: " + server);
 
+            if(server!=null)
+
             server.showWindowPattern(model.getPlayerList().get(i).getName(), model.getPlayerList().get(i).getIDPlayer(), windowlist);
 
             windowlist.clear();

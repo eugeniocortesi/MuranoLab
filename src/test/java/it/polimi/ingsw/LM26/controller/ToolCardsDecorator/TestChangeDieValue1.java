@@ -19,6 +19,8 @@ public class TestChangeDieValue1 {
     @Test
     public void checkEffect(){
 
+        model.reset();
+
         die=model.getBag().draw();
 
         die.roll();

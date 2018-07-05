@@ -18,6 +18,7 @@ public class TestRollAgainADie6 {
     @Test
     public void checkEffect() {
 
+        model.reset();
         model.getPlayerList().add(new PlayerZone("name", 0));
         DieInt die = new Die(Color.ANSI_RED);
         die.roll();

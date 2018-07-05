@@ -20,30 +20,49 @@ import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
 public class RoundsHandler extends Thread {
 
     private PlayerZone playing;
+
     private boolean result = false;
+
     private Model model;
+
     private Game game;
+
     private ControllerInt controller;
+
     private TimerActionPlayer timerActionPlayer;
+
+    private TimerTaskActionEvent ttask1;
+
     private static final Logger LOGGER = Logger.getLogger(RoundsHandler.class.getName());
+
     private ActionEvent event;
+
     private int i = 0;
-    PlayerZone playerEnding;
+
+    private PlayerZone playerEnding;
+
 
     public RoundsHandler(Model model, ControllerInt controller) {
 
         this.controller = controller;
+
         this.game = new Game();  //initialPhase
+
         game.getPhase().doAction(game);    //centralPhase
+
         this.model = model;
+
         this.model.hasChanged();
 
         //Taking end timer in milliseconds from file
         TimerImplementation timerImplementation = new TimerImplementation();
+
         TimerConfiguration timerConfiguration = timerImplementation.implentation();
+
         timerActionPlayer = new TimerActionPlayer(timerConfiguration.getTimerEnd());
     }
 
+    @Override
     public void run() {
 
         play();
@@ -80,7 +99,10 @@ public class RoundsHandler extends Thread {
 
                         controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "E' il turno di " + playing.getName());
 
-                    else controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "TUO TURNO " + playing.getName());
+                    else
+                        controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "TUO TURNO " + playing.getName());
+
+                ttask1 = timerActionPlayer.scheduleTimerActionPlayer(controller.getSetupHandler(), playing.getName());
 
                 controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
 
@@ -110,6 +132,15 @@ public class RoundsHandler extends Thread {
                     controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Salti il turno");
                 }
 
+                if (!playing.getActionHistory().isJump() && ttask1 != null) {
+
+                    ttask1.setArrived(true);
+
+                    ttask1.cancelTimerTask();
+                }
+
+                timerActionPlayer.resetTimer();
+
                 playerEnding = playing;
 
                 game.getPhase().getCurrentRound().endAction();
@@ -123,21 +154,16 @@ public class RoundsHandler extends Thread {
                 result = false;
             }
 
-            //all turn ended
             System.out.println("end turn " + i);
 
             model.getRoundTrackInt().dump();
 
             game.getPhase().nextRound(game.getPhase().getCurrentRound(), game);
 
-            //controller.getView().showTurnEndPhase();
-
             i++;
         }
 
         game.getPhase().doAction(game);
-
-        System.out.println("Il vincitore è " + game.getPhase().getWinner().getName());  // final phase
 
         controller.declareScoresAndWinner(game.getPhase().getWinner());
     }
@@ -149,34 +175,42 @@ public class RoundsHandler extends Thread {
         while (!result) {
 
             if (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump()) {
-                if (controller.handler(event)) {
-                    System.out.println("done");
-                    if (event.getId() == 11)
-                        controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Passi il turno ");
-                    else if (model.getRestrictions().getColor() != null) //from card 11
-                        controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Hai estratto un dado " + model.getRestrictions().getColor());
-                    else controller.getViewGameInterface().showAnswerFromController(playing.getName(), "OK");
-                    playing.getPlayerBoard().printCard();
-                    System.out.println("DraftPool");
-                    model.getDraftPool().printDraftPool();
-                    // view.showOK()
-                    model.hasChanged();
-                    result = true;
 
+                if (controller.handler(event)) {
+
+                    System.out.println("done");
+
+                    if (event.getId() == 11)
+
+                        controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Passi il turno ");
+
+                    else if (model.getRestrictions().getColor() != null) //from card 11
+
+                        controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Hai estratto un dado " + model.getRestrictions().getColor());
+
+                    else controller.getViewGameInterface().showAnswerFromController(playing.getName(), "OK");
+
+                    playing.getPlayerBoard().printCard();
+
+                    System.out.println("DraftPool");
+
+                    model.getDraftPool().printDraftPool();
+
+                    model.hasChanged();
+
+                    result = true;
                 } else {
                     System.out.println("match error 1 ");
+
                     controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Errore: vuoi riprovare?");
+
                     controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
+
                     waitEvent();
                 }
 
-                //view.showNO()
-
-                //view.showReduAction()
-
             } else result = true;
         }
-
     }
 
     public void secondAction() {
@@ -186,45 +220,62 @@ public class RoundsHandler extends Thread {
         while (!result) {
 
             if (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump()) {
+
                 if (controller.handler(event)) {
+
                     System.out.println("done");
+
                     if (event.getId() == 11)
+
                         controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Passi ");
+
                     else controller.getViewGameInterface().showAnswerFromController(playing.getName(), "OK");
+
                     playing.getPlayerBoard().printCard();
+
                     System.out.println("DraftPool");
+
                     model.getDraftPool().printDraftPool();
 
                     if (model.getRestrictions().isTool8needPlacement()) {
-                        if (playing.getActionHistory().isJump()) playing.getActionHistory().setJump(false);
-                        playing.getActionHistory().setPlacement(false);
-                        playing.getActionHistory().setDieUsed(false);
-                        model.getRestrictions().setCurrentPlacement(true);
-                        playing.getActionHistory().setFreezed(true);
-                        System.out.println("choose another die");
-                        controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Ok, scegli un altro dado");
-                        model.hasChanged();
-                        controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
-                        waitEvent();
-                        if (playing.getActionHistory().isJump()) playing.getActionHistory().setFreezed(false);
 
+                        if (playing.getActionHistory().isJump()) playing.getActionHistory().setJump(false);
+
+                        playing.getActionHistory().setPlacement(false);
+
+                        playing.getActionHistory().setDieUsed(false);
+
+                        model.getRestrictions().setCurrentPlacement(true);
+
+                        playing.getActionHistory().setFreezed(true);
+
+                        System.out.println("choose another die");
+
+                        controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Ok, scegli un altro dado");
+
+                        model.hasChanged();
+
+                        controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
+
+                        waitEvent();
+
+                        if (playing.getActionHistory().isJump()) playing.getActionHistory().setFreezed(false);
                     } else {
                         model.hasChanged();
+
                         result = true;
                     }
                 } else {
                     System.out.println("match error 2 ");
+
                     controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Errore: vuoi riprovare?");
+
                     controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
+
                     waitEvent();
+
                     if (playing.getActionHistory().isJump()) playing.getActionHistory().setFreezed(false);
-
                 }
-
-                //view.showNO()
-
-                //view.showReduAction()
-
             } else result = true;
         }
     }
@@ -247,46 +298,24 @@ public class RoundsHandler extends Thread {
 
         if (playing.getActionHistory().isJump()) System.out.println("ERROR: you don't need to wait an event ");
 
-        event = controller.getActionEvent();
-
         LOGGER.log(Level.WARNING, "Event match: " + event);
 
-        TimerTaskActionEvent ttask1 = timerActionPlayer.scheduleTimerActionPlayer(controller.getSetupHandler(), playing.getName());
-
-        while (event == null && playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump()) {
+        do {
 
             event = controller.getActionEvent();
-        }
 
-        if (!playing.getActionHistory().isJump() && ttask1 != null) {
+        } while (event == null && playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump());
 
-            ttask1.setArrived(true);
-        }
-
-        while (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump() && event.getPlayer() != playing.getIDPlayer() && event.getId() != 12) {
-
-            timerActionPlayer.resetTimer();
-
-            TimerTaskActionEvent ttask2 = timerActionPlayer.scheduleTimerActionPlayer(controller.getSetupHandler(), playing.getName());
+        while (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump() && event!= null && event.getPlayer() != playing.getIDPlayer() && event.getId() != 12) {
 
             System.out.println("THIS IS NOT THE RIGHT PLAYER: EVENT REFUSED ");
 
-            //view.showWrongPlayer()
-
-            event = controller.getActionEvent();
-
-            while (event == null && playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump()) {
+            do {
 
                 event = controller.getActionEvent();
-            }
 
-            if (!playing.getActionHistory().isJump() && ttask2 != null) {
-
-                ttask2.setArrived(true);
-            }
+            } while (event == null && playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump());
         }
-
-        timerActionPlayer.resetTimer();
 
         if (playing.getActionHistory().isJump()) {
 
@@ -301,5 +330,15 @@ public class RoundsHandler extends Thread {
     public PhaseInt getGame() {
 
         return game.getPhase();
+    }
+
+    public TimerTaskActionEvent getTimerTaskActionEvent() {
+
+        return ttask1;
+    }
+
+    public TimerActionPlayer getTimerActionPlayer() {
+
+        return timerActionPlayer;
     }
 }

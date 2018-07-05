@@ -17,6 +17,7 @@ public class TestRollAllDraftDice7 {
 
     @Before
     public void setup(){
+        model.reset();
 
         model.getPlayerList().add(new PlayerZone("name", 0));
 

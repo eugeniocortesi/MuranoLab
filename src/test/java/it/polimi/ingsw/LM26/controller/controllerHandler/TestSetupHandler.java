@@ -10,7 +10,6 @@ import static org.junit.Assert.*;
 public class TestSetupHandler {
 
     Controller controller=new Controller();
-    Model model=singletonModel();
 
     @Test
     public void checkAddPlayer(){

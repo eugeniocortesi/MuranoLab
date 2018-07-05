@@ -185,7 +185,7 @@ public class MatchTest {
 
 
         if(playing.getPlayerState()!=STANDBY) // for sure i got an event
-        while (event.getPlayer()!=playing.getIDPlayer() && playing.getPlayerState()!=STANDBY) {
+        while (event!= null &&  event.getPlayer()!=playing.getIDPlayer() && playing.getPlayerState()!=STANDBY) {
             event = controller.getActionEvent();
             while (event == null && playing.getPlayerState()!=STANDBY ){
                 event = controller.getActionEvent();

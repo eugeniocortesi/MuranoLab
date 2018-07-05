@@ -24,6 +24,8 @@ public class TestChangeDieWithTheBag11 {
     @Before
     public void setup(){
 
+        model.reset();
+
         int i, index;
         for (i = 0; i < 2; i++)
             model.getPlayerList().add(new PlayerZone("name" + i, i));

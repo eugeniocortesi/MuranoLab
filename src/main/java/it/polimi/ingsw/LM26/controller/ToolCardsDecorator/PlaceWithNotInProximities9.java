@@ -40,8 +40,6 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
 
         int j = toBox.getJ();
 
-        if( dieFromDraft==null ) return false;
-
         PlaceDie placement = new PlaceDie(dieFromDraft, toBox, player);
 
         if (player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) {

@@ -59,4 +59,18 @@ public class TimerTaskActionEvent extends TimerTask{
 
         timer.purge();
     }
+
+
+    /**
+     * Method that delete timer and his timerTask
+     */
+
+    public void cancelTimerTask(){
+
+        //cancel timer and his tasks
+        timer.cancel();
+
+        timer.purge();
+
+    }
 }

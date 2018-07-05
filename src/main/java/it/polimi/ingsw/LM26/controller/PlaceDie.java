@@ -92,14 +92,7 @@ public class PlaceDie {
 
     public boolean checkColorRestriction() {
 
-        if (toBox.getPatternBox().isShade()) {
-
-            System.out.println("ok color restriction");
-
-            return true;
-        } else
-
-            if (toBox.getPatternBox().getColor() == die.getColor() || toBox.getPatternBox().getColor() == WHITE) {
+        if (toBox.getPatternBox().isShade() || toBox.getPatternBox().getColor() == die.getColor() || toBox.getPatternBox().getColor() == WHITE) {
 
             System.out.println("ok color restriction");
 
@@ -113,14 +106,7 @@ public class PlaceDie {
 
     public boolean checkValueRestriction() {
 
-        if (toBox.getPatternBox().isColor()) {
-
-            System.out.println("ok value restriction");
-
-            return true;
-        } else
-
-            if (toBox.getPatternBox().getValue() == die.getValue()) {
+        if (toBox.getPatternBox().isColor() || toBox.getPatternBox().getValue() == die.getValue()) {
 
             System.out.println("ok value restriction");
 
@@ -373,4 +359,3 @@ public class PlaceDie {
         else return true;
     }
 }
-

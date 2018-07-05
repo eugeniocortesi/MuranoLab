@@ -21,6 +21,7 @@ public class TestRollToTheOppositeFace10 {
     @Before
     public void setup(){
 
+        model.reset();
         player=new PlayerZone("name" , 0);
 
         model.getPlayerList().add(player);

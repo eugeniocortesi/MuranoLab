@@ -11,6 +11,7 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.controller.ToolCardsDecorator.RollAgainADie6;
 import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskActionEvent;
 import org.omg.PortableInterceptor.LOCATION_FORWARD;
 
 import java.util.ArrayList;
@@ -168,6 +169,16 @@ public class EventHandler {
             System.out.println("i'll pass ");
 
             player.getActionHistory().setJump(true);
+
+            TimerTaskActionEvent ttask1 = controller.getRoundsHandler().getTimerTaskActionEvent();
+
+            if(ttask1 != null) {
+
+                ttask1.setArrived(true);
+                ttask1.cancelTimerTask();
+            }
+
+            controller.getRoundsHandler().getTimerActionPlayer().resetTimer();
 
             return true;
         }

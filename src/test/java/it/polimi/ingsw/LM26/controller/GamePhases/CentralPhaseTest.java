@@ -30,6 +30,7 @@ public class CentralPhaseTest {
     public void setup(){
 
         model= singletonModel();
+        model.reset();
 
         PlayerZone player1 = new PlayerZone("eugenio", 0);
         PlayerZone player2 = new PlayerZone("Chiara", 1);

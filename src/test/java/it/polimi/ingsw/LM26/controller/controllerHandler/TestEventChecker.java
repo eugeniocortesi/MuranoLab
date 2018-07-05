@@ -26,6 +26,7 @@ public class TestEventChecker {
 
     public void setup() {
 
+        model.reset();
         int i;
         for (i = 0; i < 2; i++)
             model.getPlayerList().add(new PlayerZone("name" + i, i));

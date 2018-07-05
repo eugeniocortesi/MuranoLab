@@ -7,7 +7,7 @@ import it.polimi.ingsw.LM26.model.Serialization.Matrix;
 
 public class WindowPatternCard extends CardInt {
 
-    private int token;
+    private int token=0;
 
     private String title;
 

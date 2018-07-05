@@ -108,15 +108,10 @@ public class Controller implements ControllerInt {
 
     public void declareScoresAndWinner(PlayerZone winner) {
 
-        for (int i = 0; i < model.getPlayerList().size(); i++) {
+        for (int i = 0; i < model.getPlayerList().size(); i++)
 
-            if (winner.equals(model.getPlayerList().get(i)))
+                server.showEndGame(model.getPlayer(i).getName(), model.getPlayer(i).getScoreMarker().getPoints(), winner.getName(), winner.getScoreMarker().getPoints() );
 
-                server.showAnswerFromController(winner.getName(), "Sei il Vincitore");
-
-            else
-                server.showAnswerFromController(model.getPlayerList().get(i).getName(), winner.getName() + " è il vincitore");
-        }
     }
 
     @Override

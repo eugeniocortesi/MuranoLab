@@ -31,7 +31,7 @@ public class TestMoveTwoDice4 {
 
     @Before
     public void setup() {
-
+        model.reset();
         int i;
         int index = 0;
         for (i = 0; i < 2; i++)
