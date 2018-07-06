@@ -194,6 +194,8 @@ public class FinalPhase implements PhaseInt {
             if(result>0)
 
                 model.getScoreTrackInt().addToScoreTrack(player.getScoreMarker());
+
+            model.hasChanged();
         }
     }
 
