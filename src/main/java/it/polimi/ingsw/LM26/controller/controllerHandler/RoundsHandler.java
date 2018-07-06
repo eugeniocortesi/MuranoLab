@@ -101,9 +101,9 @@ public class RoundsHandler extends Thread {
 
     public void play() {
 
-        for (int j = 0; j < model.getPlayerList().size(); j++)
+        //for (int j = 0; j < model.getPlayerList().size(); j++)
 
-            controller.getViewGameInterface().showSetPlayerMenu(model.getPlayerList().get(j).getName(), model.getPlayerList().get(j));
+            //controller.getViewGameInterface().showSetPlayerMenu(model.getPlayerList().get(j).getName(), model.getPlayerList().get(j));
 
         while (i < game.getPhase().getNrounds() && !game.getPhase().getOnePlayer()) {
 
@@ -122,13 +122,20 @@ public class RoundsHandler extends Thread {
 
 
                 //TODO DELETE
-                for (int j = 0; j < model.getPlayerList().size(); j++)
+                for (int j = 0; j < model.getPlayerList().size(); j++) {
+
                     if (!playing.equals(model.getPlayer(j)))
                         controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "E' il turno di " + playing.getName());
-                    else controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "TUO TURNO " + playing.getName());
+                    if( i == 0)controller.getViewGameInterface().showSetPlayerMenu(model.getPlayerList().get(j).getName(), model.getPlayerList().get(j));
+                    else {controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
+                        controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
+                    }
+                }
 
 
-                if(playerEnding!=null) controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
+
+
+                //if(playerEnding!=null) controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
 
 
                 //TODO DELETE
@@ -143,7 +150,7 @@ public class RoundsHandler extends Thread {
 
                 ttask1 = timerActionPlayer.scheduleTimerActionPlayer(controller.getSetupHandler(), playing.getName());
 
-                controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
+               // controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
 
                 waitEvent();
 

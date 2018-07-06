@@ -35,8 +35,9 @@ public class RollToTheOppositeFace10 extends ToolCardDecorator {
         this.typeToolCard = "ToolCard";
     }
 
+
     /**
-     *
+     * this action is always doable: 6->1, 5->2, 4->3
      * @param dieFromDraft dieFromDraft die from draft pool selected by client for the action
      * @param player of the action
      * @return the success of the card usage
@@ -46,10 +47,6 @@ public class RollToTheOppositeFace10 extends ToolCardDecorator {
     public boolean play (DieInt dieFromDraft, PlayerZone player) {
 
         if( dieFromDraft==null ) return false;
-
-        //6  1
-        //5  2
-        //4  3
 
         int val=0;
 

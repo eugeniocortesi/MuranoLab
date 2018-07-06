@@ -40,6 +40,18 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
         this.typeToolCard = "ToolCard";
     }
 
+
+    /**
+     * this method accomplishes the first part of the card usage:
+     * it gets the die from draft pool, puts it back into the bag and it communicates to the client the color of the die that has been pulled out of the bag.
+     * a placement is going to be required so if the client has already done a placement, the card request is refused.
+     * to keep track of the fact that first part of the action is done, but the second is already to be accomplished,
+     * the method stores in model-restrictions the information.
+     * @param dieFromDraft die from draft pool selected by client for the action
+     * @param player of the action
+     * @return success of the action
+     */
+
     @Override
     public boolean play (DieInt dieFromDraft, PlayerZone player) {
 
@@ -88,6 +100,18 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
 
         return true;
     }
+
+
+    /**
+     * the method accomplishes the second part of this card-action and it can return true only if the relative model-restriction parameter is true.
+     * the method checks if the number sent is correct, then tries to place it.
+     * if the placement is not accepted, the method stores the die in mode-restrictions to be sure that
+     * in the next attempts of placement for this specific action, if the client sets a different die the placement fails again
+     * @param number number to sets on the die from the first part of the action
+     * @param toBox moves die to this board cell
+     * @param player of the action
+     * @return success of the action
+     */
 
     @Override
     public boolean play(int number, Box toBox, PlayerZone player) {

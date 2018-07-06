@@ -1,17 +1,22 @@
 package it.polimi.ingsw.LM26.model.PlayArea.diceObjects;
 
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  * Bag class
  * @author Chiara Criscuolo
  * Contains 90 dice
  */
-public class Bag implements Serializable{
+
+public class Bag implements Serializable {
 
     private ArrayList<DieInt> inBag;
 
@@ -30,11 +35,15 @@ public class Bag implements Serializable{
     //Cont how many purple dice are in the bag
     private int contPurple;
 
-    public int size(){
+    private static final Logger LOGGER = Logger.getLogger(Bag.class.getName());
+
+    public int size() {
+
         return inBag.size();
     }
 
     public ArrayList<DieInt> getInBag() {
+
         return inBag;
     }
 
@@ -42,135 +51,161 @@ public class Bag implements Serializable{
      * Constructor
      */
 
-    public Bag(){
+    public Bag() {
 
-        inBag = new ArrayList<DieInt>();
+        inBag = new ArrayList<>();
+
         fill();
+
         contBlue = 18;
+
         contGreen = 18;
+
         contPurple = 18;
+
         contRed = 18;
+
         contYellow = 18;
+
+        LOGGER.setLevel(Level.ALL);
     }
 
     /**
      * Fill the bag
      */
 
-    private void fill(){
+    private void fill() {
 
         Color c;
+
         Die d;
+
         for (int i = 0; i < 90 / 5; i++) {
 
-            c =Color.ANSI_BLUE;
+            c = Color.ANSI_BLUE;
+
             d = new Die(c);
+
             this.inBag.add(d);
 
-            c =Color.ANSI_GREEN;
+
+            c = Color.ANSI_GREEN;
+
             d = new Die(c);
+
             this.inBag.add(d);
 
-            c =Color.ANSI_RED;
+            c = Color.ANSI_RED;
+
             d = new Die(c);
+
             this.inBag.add(d);
 
-            c =Color.ANSI_YELLOW;
+            c = Color.ANSI_YELLOW;
+
             d = new Die(c);
+
             this.inBag.add(d);
 
-            c =Color.ANSI_PURPLE;
+            c = Color.ANSI_PURPLE;
+
             d = new Die(c);
+
             this.inBag.add(d);
         }
-
     }
+
 
     /**
      * Draw a die with color but not face
-     * Then update the contators
+     * Then update the counters
      * @return die drawn
      */
 
-    public DieInt draw(){
+    public DieInt draw() {
 
-            int count = inBag.size();
-            if (count == 0)
-                return null;
-            Random rand = new Random();
-            int index = rand.nextInt(count);
-            DieInt d = inBag.get(index);
-            this.inBag.remove(d);
-            if ( d.getColor().equals( Color.ANSI_BLUE ))
-                contBlue--;
-            if (d.getColor().equals(Color.ANSI_GREEN))
-                contGreen--;
-            if( d.getColor().equals(Color.ANSI_PURPLE))
-                contPurple--;
-            if ( d.getColor().equals(Color.ANSI_RED))
-                contRed--;
-            if( d.getColor().equals(Color.ANSI_YELLOW))
-                contYellow--;
+        int count = inBag.size();
 
-            return d;
+        if (count == 0) return null;
+
+        Random rand = new Random();
+
+        int index = rand.nextInt(count);
+
+        DieInt d = inBag.get(index);
+
+        this.inBag.remove(d);
+
+        if (d.getColor().equals(Color.ANSI_BLUE)) contBlue--;
+
+        if (d.getColor().equals(Color.ANSI_GREEN)) contGreen--;
+
+        if (d.getColor().equals(Color.ANSI_PURPLE)) contPurple--;
+
+        if (d.getColor().equals(Color.ANSI_RED)) contRed--;
+
+        if (d.getColor().equals(Color.ANSI_YELLOW)) contYellow--;
+
+        return d;
     }
 
     public void dump() {
 
-            int count = inBag.size();
-            System.out.print("elems: ");
-            System.out.println(count);
-            for (DieInt d : inBag) {
-                System.out.println(d);
-            }
+        int count = inBag.size();
+
+        LOGGER.log(Level.INFO, "elems: ");
+
+        LOGGER.log(Level.INFO, " " + count);
+
+        for (DieInt d : inBag) {
+
+            LOGGER.log(Level.INFO, " " + d);
+        }
     }
 
     /**
-     * add d in the bag and updates conts
+     * add d in the bag and updates counts
      * @param d die to be added
      */
 
-    public void add(DieInt d){
+    public void add(DieInt d) {
 
         inBag.add(d);
 
-        if ( d.getColor().equals( Color.ANSI_BLUE ))
-            contBlue++;
-        if (d.getColor().equals(Color.ANSI_GREEN))
-            contGreen++;
-        if( d.getColor().equals(Color.ANSI_PURPLE))
-            contPurple++;
-        if ( d.getColor().equals(Color.ANSI_RED))
-            contRed++;
-        if( d.getColor().equals(Color.ANSI_YELLOW))
-            contYellow++;
+        if (d.getColor().equals(Color.ANSI_BLUE)) contBlue++;
 
+        if (d.getColor().equals(Color.ANSI_GREEN)) contGreen++;
+
+        if (d.getColor().equals(Color.ANSI_PURPLE)) contPurple++;
+
+        if (d.getColor().equals(Color.ANSI_RED)) contRed++;
+
+        if (d.getColor().equals(Color.ANSI_YELLOW)) contYellow++;
     }
 
 
-    public int getContRed(){
+    public int getContRed() {
 
-            return contRed;
-        }
+        return contRed;
+    }
 
-    public int getContYellow(){
+    public int getContYellow() {
 
-            return contYellow;
+        return contYellow;
+    }
 
-        }
+    public int getContGreen() {
 
-    public int getContGreen(){
+        return contGreen;
+    }
 
-            return contGreen;
-        }
+    public int getContBlue() {
 
-    public int getContBlue(){
+        return contBlue;
+    }
 
-            return contBlue;
-            }
+    public int getContPurple() {
 
-    public int getContPurple(){
-
-            return contPurple;
-        }
+        return contPurple;
+    }
 }

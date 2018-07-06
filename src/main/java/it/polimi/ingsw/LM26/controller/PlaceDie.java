@@ -1,12 +1,19 @@
 package it.polimi.ingsw.LM26.controller;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
-import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static it.polimi.ingsw.LM26.model.PlayArea.Color.WHITE;
-import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
+
+/**
+ * PlaceDie class
+ * @author Eugenio Cortesi
+ * class place a die on the board, if restrictions are respected
+ */
 
 public class PlaceDie {
 
@@ -16,9 +23,21 @@ public class PlaceDie {
 
     private PlayerZone player;
 
-    private int i, j;
+    private int i;
+
+    private int j;
 
     private Box[][] board;
+
+    private static final Logger LOGGER = Logger.getLogger(PlaceDie.class.getName());
+
+
+    /**
+     * Constructor
+     * @param dieFromDraft die to place
+     * @param toBox destination cell
+     * @param player that required the placement
+     */
 
     public PlaceDie(DieInt dieFromDraft, Box toBox, PlayerZone player) {
 
@@ -33,7 +52,17 @@ public class PlaceDie {
         this.player = player;
 
         this.board = player.getPlayerBoard().getBoardMatrix();
+
+        LOGGER.setLevel(Level.ALL);
     }
+
+
+    /**
+     * if the board is empty the method call the one for the first placement
+     * if the destination cell is already been covered the action is refuse
+     * if al restriction al respected the die is placed (linked on this cell to the board)
+     * @return final result of the placement action
+     */
 
     public boolean placeDie() {
 
@@ -41,7 +70,7 @@ public class PlaceDie {
 
         if (toBox.isIsPresent()) {
 
-            System.out.println("a die is already present here ");
+            LOGGER.log(Level.INFO, "a die is already present here ");
 
             return false;
         }
@@ -53,12 +82,18 @@ public class PlaceDie {
             return true;
         }
 
-        System.out.println("error in general place die ");
+        LOGGER.log(Level.INFO, "error in general place die ");
 
         return false;
     }
 
-    public boolean placeFirstDie() {
+
+    /**
+     * the die must be placed on the edge, but event if the coordinates are corrected, all the restrictions must be respected
+     * @return result of the first placement
+     */
+
+    private boolean placeFirstDie() {
 
         if (checkEdgeRestrictions()) {
 
@@ -70,7 +105,7 @@ public class PlaceDie {
 
                 return true;
 
-            } else System.out.println("error in place first die ");
+            } else LOGGER.log(Level.INFO, "error in place first die ");
 
             return false;
         }
@@ -82,7 +117,7 @@ public class PlaceDie {
 
         if (!(i == 0 || i == 3 || j == 0 || j == 4)) {
 
-            System.out.println("error: first die must be placed on the edge");
+            LOGGER.log(Level.INFO, "error: first die must be placed on the edge");
 
             return false;
         }
@@ -94,12 +129,12 @@ public class PlaceDie {
 
         if (toBox.getPatternBox().isShade() || toBox.getPatternBox().getColor() == die.getColor() || toBox.getPatternBox().getColor() == WHITE) {
 
-            System.out.println("ok color restriction");
+            LOGGER.log(Level.INFO, "ok color restriction");
 
             return true;
         }
 
-        System.out.println("error in color restriction");
+        LOGGER.log(Level.INFO, "error in color restriction");
 
         return false;
     }
@@ -108,25 +143,32 @@ public class PlaceDie {
 
         if (toBox.getPatternBox().isColor() || toBox.getPatternBox().getValue() == die.getValue()) {
 
-            System.out.println("ok value restriction");
+            LOGGER.log(Level.INFO, "ok value restriction");
 
             return true;
         }
 
-        System.out.println("error in value restriction");
+        LOGGER.log(Level.INFO, "error in value restriction");
 
         return false;
     }
+
+
+    /**
+     * every cell on the board is addiacent to from 3 to 8 cells,
+     * so the method checks the coordinates of the cell and check if the restrictions are respected for each of the cells near this one.
+     * @return result of nearby restrictions
+     */
 
     public boolean checkNearByRestrictions() {
 
         if (i == 0) {
 
-            if (j == 0) { //angolo alto a sinistra
+            if (j == 0) {    //high left corner
 
-                if (!checkRightDie()) return false;
+                if (checkRightDie()) return false;
 
-                if (!checkDownDie()) return false;
+                if (checkDownDie()) return false;
 
                 if (checkRight()) return true;
 
@@ -134,11 +176,11 @@ public class PlaceDie {
 
                 if (checkRightDown()) return true;
 
-            } else if (j == 4) { //angolo in alto a destra
+            } else if (j == 4) {    //high right corner
 
-                if (!checkLeftDie()) return false;
+                if (checkLeftDie()) return false;
 
-                if (!checkDownDie()) return false;
+                if (checkDownDie()) return false;
 
                 if (checkLeft()) return true;
 
@@ -146,13 +188,13 @@ public class PlaceDie {
 
                 if (checkLeftDown()) return true;
 
-            } else {    //tutti gli altri valori prima riga
+            } else {    //all other cells line first line
 
-                if (!checkLeftDie()) return false;
+                if (checkLeftDie()) return false;
 
-                if (!checkRightDie()) return false;
+                if (checkRightDie()) return false;
 
-                if (!checkDownDie()) return false;
+                if (checkDownDie()) return false;
 
                 if (checkLeft()) return true;
 
@@ -166,11 +208,11 @@ public class PlaceDie {
             }
         } else if (i == 3) {
 
-            if (j == 0) { //angolo in basso a sinistra
+            if (j == 0) {    //low left corner
 
-                if (!checkUpDie()) return false;
+                if (checkUpDie()) return false;
 
-                if (!checkRightDie()) return false;
+                if (checkRightDie()) return false;
 
                 if (checkUp()) return true;
 
@@ -178,11 +220,11 @@ public class PlaceDie {
 
                 if (checkRightUp()) return true;
 
-            } else if (j == 4) {   // angolo in basso a destra
+            } else if (j == 4) {    //low right corner
 
-                if (!checkUpDie()) return false;
+                if (checkUpDie()) return false;
 
-                if (!checkLeftDie()) return false;
+                if (checkLeftDie()) return false;
 
                 if (checkUp()) return true;
 
@@ -190,13 +232,13 @@ public class PlaceDie {
 
                 if (checkLeftUp()) return true;
 
-            } else {   //tutti gli altri valori ultima riga
+            } else {    //all other cells line last line
 
-                if (!checkUpDie()) return false;
+                if (checkUpDie()) return false;
 
-                if (!checkRightDie()) return false;
+                if (checkRightDie()) return false;
 
-                if (!checkLeftDie()) return false;
+                if (checkLeftDie()) return false;
 
                 if (checkUp()) return true;
 
@@ -208,13 +250,13 @@ public class PlaceDie {
 
                 if (checkLeftUp()) return true;
             }
-        } else if (j == 0) {    //tutti gli altri valori prima colonna
+        } else if (j == 0) {    //all other cells in first column
 
-            if (!checkUpDie()) return false;
+            if (checkUpDie()) return false;
 
-            if (!checkRightDie()) return false;
+            if (checkRightDie()) return false;
 
-            if (!checkDownDie()) return false;
+            if (checkDownDie()) return false;
 
             if (checkUp()) return true;
 
@@ -226,13 +268,13 @@ public class PlaceDie {
 
             if (checkRightDown()) return true;
 
-        } else if (j == 4) {     //tutti gli altri valori ultima colonna
+        } else if (j == 4) {    //all other cells in last column
 
-            if (!checkDownDie()) return false;
+            if (checkDownDie()) return false;
 
-            if (!checkLeftDie()) return false;
+            if (checkLeftDie()) return false;
 
-            if (!checkUpDie()) return false;
+            if (checkUpDie()) return false;
 
             if (checkLeft()) return true;
 
@@ -244,24 +286,24 @@ public class PlaceDie {
 
             if (checkLeftDown()) return true;
 
-        } else  //tutti i valori non di margine
+        } else    //all other inner cells
 
             if (checkAll()) return true;
 
-        System.out.println("error in position restriction");
+        LOGGER.log(Level.INFO, "error in position restriction");
 
         return false;
     }
 
-    public boolean checkAll() {
+    private boolean checkAll() {
 
-        if (!checkLeftDie()) return false;
+        if (checkLeftDie()) return false;
 
-        if (!checkRightDie()) return false;
+        if (checkRightDie()) return false;
 
-        if (!checkDownDie()) return false;
+        if (checkDownDie()) return false;
 
-        if (!checkUpDie()) return false;
+        if (checkUpDie()) return false;
 
         if (checkLeft()) return true;
 
@@ -282,80 +324,69 @@ public class PlaceDie {
         return false;
     }
 
-    public boolean checkRight() {
+    private boolean checkRight() {
 
         return (board[i][j + 1].isIsPresent());
     }
 
-    public boolean checkLeft() {
+    private boolean checkLeft() {
 
         return (board[i][j - 1].isIsPresent());
     }
 
-    public boolean checkUp() {
+    private boolean checkUp() {
 
         return (board[i - 1][j].isIsPresent());
     }
 
-    public boolean checkDown() {
+    private boolean checkDown() {
 
         return (board[i + 1][j].isIsPresent());
     }
 
-    public boolean checkRightUp() {
+    private boolean checkRightUp() {
 
         return (board[i - 1][j + 1].isIsPresent());
     }
 
-    public boolean checkRightDown() {
+    private boolean checkRightDown() {
 
         return (board[i + 1][j + 1].isIsPresent());
     }
 
-    public boolean checkLeftUp() {
+    private boolean checkLeftUp() {
 
         return (board[i - 1][j - 1].isIsPresent());
     }
 
-    public boolean checkLeftDown() {
+    private boolean checkLeftDown() {
 
         return (board[i + 1][j - 1].isIsPresent());
     }
 
-    public boolean checkLeftDie() {
 
+    /**
+     * orthogonally dice can't have same value or color
+     * @return result from the checks of the die near the cell the client wants to place the die on
+     */
 
-        if (board[i][j - 1].isIsPresent() && (board[i][j - 1].getDie().getColor().equals(die.getColor()) || board[i][j - 1].getDie().getValue() == die.getValue()))
+    private boolean checkLeftDie() {
 
-            return false;
-
-        else return true;
+        return board[i][j - 1].isIsPresent() && (board[i][j - 1].getDie().getColor().equals(die.getColor()) || board[i][j - 1].getDie().getValue() == die.getValue());
     }
 
-    public boolean checkRightDie() {
+    private boolean checkRightDie() {
 
-        if (board[i][j + 1].isIsPresent() && (board[i][j + 1].getDie().getColor().equals(die.getColor()) || board[i][j + 1].getDie().getValue() == die.getValue()))
-
-            return false;
-
-        else return true;
+        return board[i][j + 1].isIsPresent() && (board[i][j + 1].getDie().getColor().equals(die.getColor()) || board[i][j + 1].getDie().getValue() == die.getValue());
     }
 
-    public boolean checkUpDie() {
+    private boolean checkUpDie() {
 
-        if (board[i - 1][j].isIsPresent() && (board[i - 1][j].getDie().getColor().equals(die.getColor()) || board[i - 1][j].getDie().getValue() == die.getValue()))
-
-            return false;
-
-        else return true;
+        return board[i - 1][j].isIsPresent() && (board[i - 1][j].getDie().getColor().equals(die.getColor()) || board[i - 1][j].getDie().getValue() == die.getValue());
     }
 
-    public boolean checkDownDie() {
+    private boolean checkDownDie() {
 
-        if (board[i + 1][j].isIsPresent() && (board[i + 1][j].getDie().getColor().equals(die.getColor()) || board[i + 1][j].getDie().getValue() == die.getValue()))
-
-            return false;
-
-        else return true;
+        return board[i + 1][j].isIsPresent() && (board[i + 1][j].getDie().getColor().equals(die.getColor()) || board[i + 1][j].getDie().getValue() == die.getValue());
     }
 }

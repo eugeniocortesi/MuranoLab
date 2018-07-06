@@ -42,7 +42,7 @@ public class RollAgainADie6 extends ToolCardDecorator {
     /**
      * method refuses the action if a die has been already placed by the client in this turn.
      * after have rolled the die chosen by client, the method saves it in model-restrictions so that,
-     * when the client sends back the placement action  with the coordinates for the placing, if he choose a different dia the placement is refused.
+     * when the client sends back the placement action with the coordinates for the placing, if he choose a different die the placement is refused.
      * @param dieFromDraft die selected by client for the action
      * @param player of the action
      * @return the success of the card usage

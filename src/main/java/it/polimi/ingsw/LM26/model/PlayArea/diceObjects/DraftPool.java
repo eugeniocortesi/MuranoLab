@@ -2,6 +2,8 @@ package it.polimi.ingsw.LM26.model.PlayArea.diceObjects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * DraftPool class
@@ -13,19 +15,24 @@ public class DraftPool implements Serializable {
 
     private ArrayList<DieInt> inDraft;
 
-    public DraftPool(){
+    private static final Logger LOGGER = Logger.getLogger(Die.class.getName());
+
+    public DraftPool() {
     }
 
     public DraftPool(String s) {
 
-        this.inDraft = new ArrayList<DieInt>();
+        this.inDraft = new ArrayList<>();
+
+        LOGGER.setLevel(Level.ALL);
     }
 
     public ArrayList<DieInt> getInDraft() {
+
         return inDraft;
     }
 
-    public DieInt get(int i){
+    public DieInt get(int i) {
 
         return inDraft.get(i);
     }
@@ -38,35 +45,33 @@ public class DraftPool implements Serializable {
      * Shortcut to print DraftPool
      */
 
-    public void printDraftPool(){
+    public void printDraftPool() {
 
-        for(int i=0; i<inDraft.size(); i++)
-            System.out.print("\t" + inDraft.get(i).toString() + " ");
-            System.out.println();
+        for (DieInt anInDraft : inDraft) LOGGER.log(Level.INFO, "\t" + anInDraft.toString() + " ");
     }
 
-    public int size(){
+    public int size() {
+
         return inDraft.size();
     }
 
-    //TODO to test
-
-    public void addDie(DieInt d){
+    public void addDie(DieInt d) {
 
         inDraft.add(d);
     }
 
+    public void removeAllDice() {
 
-    public void removeAllDice(){
+        int dim = inDraft.size();
 
-        int dim= inDraft.size();
-        for( int i = 0; i<dim ; i++)
+        for (int i = 0; i < dim; i++)
+
             inDraft.remove(0);
     }
 
-    public void remove(DieInt d){
+    public void remove(DieInt d) {
 
-            inDraft.remove(d);
+        inDraft.remove(d);
     }
 }
 

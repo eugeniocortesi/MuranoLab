@@ -33,5 +33,5 @@ public interface ControllerInt {
 
     ServerBase getServer();
 
-    public RoundsHandler getRoundsHandler();
+    RoundsHandler getRoundsHandler();
 }

@@ -40,7 +40,7 @@ public class MoveTwoDice4 extends ToolCardDecorator {
      *if dice are already present in the destination cells or if in the starting cells there aren't the action fails
      * if just one of the two placement fails, the other is undone and the action fails
      * @param fromBoxList list of cells from which dice are moved
-     * @param toBoxList list of cells towards which dice are moved
+     * @param toBoxList list of cells towards to dice are moved
      * @param player of the action
      * @return the success of the card usage
      */

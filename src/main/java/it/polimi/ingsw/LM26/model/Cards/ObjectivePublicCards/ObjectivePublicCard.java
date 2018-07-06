@@ -1,8 +1,19 @@
 package it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards;
 
 import it.polimi.ingsw.LM26.model.Cards.CardInt;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.PublicCardEffects.ColoredDiagonals;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.PublicCardEffects.Effect;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+/**
+ * ObjectivePublicCard class
+ * @author Eugenio Cortesi
+ */
 
 public class ObjectivePublicCard extends CardInt {
 
@@ -14,6 +25,8 @@ public class ObjectivePublicCard extends CardInt {
 
     private boolean inUse = false;
 
+    private static final Logger LOGGER = Logger.getLogger(ObjectivePrivateCard.class.getName());
+
     public ObjectivePublicCard() {
     }
 
@@ -24,6 +37,8 @@ public class ObjectivePublicCard extends CardInt {
         this.id = id;
 
         this.typeCard = "ObjectivePublicCard";
+
+        LOGGER.setLevel(Level.ALL);
     }
 
     public ObjectivePublicCard(int id, int points, Effect effect) {
@@ -35,7 +50,16 @@ public class ObjectivePublicCard extends CardInt {
         this.effect = effect;
 
         this.typeCard = "ObjectivePublicCard";
+
+        LOGGER.setLevel(Level.ALL);
     }
+
+
+    /**
+     * the methos gets for a player the points he gained from this objective
+     * @param player owner of the board on which the method is asking the points for this effect
+     * @return number of points
+     */
 
     public int computePoints(PlayerZone player) {
 
@@ -55,11 +79,11 @@ public class ObjectivePublicCard extends CardInt {
 
     public void printCard() {
 
-        System.out.println(getId());
+        LOGGER.log(Level.INFO, " "+ getId()%10);
 
-        if (getId() != 10) System.out.println(getPoints());
+        if (getId() != 10) LOGGER.log(Level.INFO, " "+ getPoints());
 
-        System.out.println(getEffect());
+        LOGGER.log(Level.INFO, getEffect());
     }
 
     public String getEffect() {

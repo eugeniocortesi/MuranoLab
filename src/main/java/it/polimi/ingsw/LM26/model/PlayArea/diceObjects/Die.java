@@ -1,14 +1,18 @@
 package it.polimi.ingsw.LM26.model.PlayArea.diceObjects;
 
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Die class
  * @author Chiara Criscuolo
  * It contains all informations about a single die
  */
+
 public class Die extends DieInt {
 
     private Color color;
@@ -17,23 +21,43 @@ public class Die extends DieInt {
 
     private int number = 0;
 
+    private static final String[] faces;
+
+    private static final Logger LOGGER = Logger.getLogger(Die.class.getName());
+
     public Die() {
 
+        LOGGER.setLevel(Level.ALL);
     }
 
-    public static final String[] faces = {
+    /**
+     * Constructor
+     *
+     * @param color color to assign
+     */
 
-            "\u2680",
+    public Die(Color color) {
 
-            "\u2681",
+        this.color = color;
 
-            "\u2682",
+        this.typeDie = "Die";
+    }
 
-            "\u2683",
+    static {
+        faces = new String[]{
 
-            "\u2684",
+                "\u2680",
 
-            "\u2685"};
+                "\u2681",
+
+                "\u2682",
+
+                "\u2683",
+
+                "\u2684",
+
+                "\u2685"};
+    }
 
     /**
      * It assign to a die a random face
@@ -59,17 +83,17 @@ public class Die extends DieInt {
 
         int value = 0;
 
-        if (face == "\u2680" || number == 1) value = 1;
+        if (face.equals("\u2680") || number == 1) value = 1;
 
-        if (face == "\u2681" || number == 2) value = 2;
+        if (face.equals("\u2681") || number == 2) value = 2;
 
-        if (face == "\u2682" || number == 3) value = 3;
+        if (face.equals("\u2682") || number == 3) value = 3;
 
-        if (face == "\u2683" || number == 4) value = 4;
+        if (face.equals("\u2683") || number == 4) value = 4;
 
-        if (face == "\u2684" || number == 5) value = 5;
+        if (face.equals("\u2684") || number == 5) value = 5;
 
-        if (face == "\u2685" || number == 6) value = 6;
+        if (face.equals("\u2685") || number == 6) value = 6;
 
         return value;
     }
@@ -79,19 +103,19 @@ public class Die extends DieInt {
      * And assign it to the die
      */
 
-    public void setNumber() {
+    private void setNumber() {
 
-        if (face == "\u2680" ) number = 1;
+        if (face.equals("\u2680")) number = 1;
 
-        if (face == "\u2681" ) number = 2;
+        if (face.equals("\u2681")) number = 2;
 
-        if (face == "\u2682" ) number = 3;
+        if (face.equals("\u2682")) number = 3;
 
-        if (face == "\u2683" ) number = 4;
+        if (face.equals("\u2683")) number = 4;
 
-        if (face == "\u2684" ) number = 5;
+        if (face.equals("\u2684")) number = 5;
 
-        if (face == "\u2685" ) number = 6;
+        if (face.equals("\u2685")) number = 6;
     }
 
     /**
@@ -101,17 +125,24 @@ public class Die extends DieInt {
 
     public void increment() {
 
-        if (face == "\u2685") face = "\u2680";
+        if ("\u2685".equals(face)) {
+            face = "\u2680";
 
-        else if (face == "\u2684") face = "\u2685";
+        } else if ("\u2684".equals(face)) {
+            face = "\u2685";
 
-        else if (face == "\u2683") face = "\u2684";
+        } else if ("\u2683".equals(face)) {
+            face = "\u2684";
 
-        else if (face == "\u2682") face = "\u2683";
+        } else if ("\u2682".equals(face)) {
+            face = "\u2683";
 
-        else if (face == "\u2681") face = "\u2682";
+        } else if ("\u2681".equals(face)) {
+            face = "\u2682";
 
-        else if (face == "\u2680") face = "\u2681";
+        } else if ("\u2680".equals(face)) {
+            face = "\u2681";
+        }
 
         setNumber();
     }
@@ -123,23 +154,31 @@ public class Die extends DieInt {
 
     public void decrement() {
 
-        if (face == "\u2680") face = "\u2685";
+        if ("\u2680".equals(face)) {
+            face = "\u2685";
 
-        else if (face == "\u2681") face = "\u2680";
+        } else if ("\u2681".equals(face)) {
+            face = "\u2680";
 
-        else if (face == "\u2682") face = "\u2681";
+        } else if ("\u2682".equals(face)) {
+            face = "\u2681";
 
-        else if (face == "\u2683") face = "\u2682";
+        } else if ("\u2683".equals(face)) {
+            face = "\u2682";
 
-        else if (face == "\u2684") face = "\u2683";
+        } else if ("\u2684".equals(face)) {
+            face = "\u2683";
 
-        else if (face == "\u2685") face = "\u2684";
+        } else if ("\u2685".equals(face)) {
+            face = "\u2684";
+        }
 
         setNumber();
     }
 
     /**
      * Takes value and assign the corresponding face to the die
+     *
      * @param value value number
      */
 
@@ -170,27 +209,18 @@ public class Die extends DieInt {
         this.typeDie = "Die";
     }
 
-    /**
-     * Constructor
-     * @param color color to assign
-     */
-
-    public Die(Color color) {
-
-        this.color = color;
-
-        this.typeDie = "Die";
-    }
-
     public Color getColor() {
+
         return color;
     }
 
     public void setColor(Color color) {
+
         this.color = color;
     }
 
     public int getNumber() {
+
         return this.number;
     }
 
@@ -209,6 +239,6 @@ public class Die extends DieInt {
 
     public void dump() {
 
-        System.out.println(this);
+        LOGGER.log(Level.INFO, " " + this);
     }
 }

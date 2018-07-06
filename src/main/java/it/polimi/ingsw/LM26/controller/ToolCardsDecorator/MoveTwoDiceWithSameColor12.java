@@ -36,18 +36,29 @@ public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
         this.typeToolCard = "ToolCard";
     }
 
+
+    /**
+     * if dice are not of the same color of the one from round track, the event is refused-
+     * if just one of the two possible movement fails the other, if done, it's undone.
+     * @param fromRoundTrack die chosen by client to show the color dice he want to move
+     * @param fromBoxList list of cells from which dice are moved
+     * @param toBoxList list of cells towards to dice are moved
+     * @param player of the action
+     * @return success of the action
+     */
+
     @Override
     public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, PlayerZone player) {
 
         if( fromBoxList == null || toBoxList == null) return false;
 
-        ArrayList <DieInt> dieList=new ArrayList<DieInt>();
+        ArrayList <DieInt> dieList= new ArrayList<>();
 
         if( fromRoundTrack==null ) return false;
 
         for(int i=0; i<fromBoxList.size(); i++)
 
-            if( !fromBoxList.get(i).isIsPresent() || toBoxList.get(i).isIsPresent() || ! fromBoxList.get(i).getDie().getColor().equals(fromRoundTrack.getColor()) )
+            if( !fromBoxList.get(i).isIsPresent() || toBoxList.get(i).isIsPresent() || !fromBoxList.get(i).getDie().getColor().equals(fromRoundTrack.getColor()) )
 
                 return false;
 

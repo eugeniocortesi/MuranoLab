@@ -1,6 +1,5 @@
 package it.polimi.ingsw.LM26.controller.GamePhases;
 
-import it.polimi.ingsw.LM26.controller.controllerHandler.UpdatesHandler;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
@@ -12,9 +11,15 @@ import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
+
+/**
+ * FinalPhase class
+ * @author Eugenio Cortesi
+ */
+
 public class FinalPhase implements PhaseInt {
 
-    Model model = singletonModel();
+    private Model model = singletonModel();
 
     private PlayerZone winner;
 
@@ -37,7 +42,7 @@ public class FinalPhase implements PhaseInt {
      * @throws IllegalArgumentException when there are problems with players' LastTurnValue
      */
 
-    public PlayerZone declareWinner() throws IllegalArgumentException{
+    public PlayerZone declareWinner() {
 
         ArrayList<PlayerZone> players = new ArrayList<PlayerZone>();
 

@@ -17,6 +17,11 @@ import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
+/**
+ * Controller class
+ * @author Eugenio Cortesi
+ */
+
 public class Controller implements ControllerInt {
 
     private Model model;
@@ -43,8 +48,13 @@ public class Controller implements ControllerInt {
 
         gameIsGoing = false;
 
-        queueEvent = new ConcurrentLinkedQueue<ActionEvent>();
+        queueEvent = new ConcurrentLinkedQueue<>();
     }
+
+
+    /**
+     * method that starts server and creates all the extensions of controller
+     */
 
     public void startServer() {
 
@@ -56,26 +66,36 @@ public class Controller implements ControllerInt {
 
         setupHandler.setServer(server);
 
-
         server.startAcceptor(updatesHandler, model);
     }
 
+
+    /**
+     * when the update gets an actionEvent this method is called, and it stores the event in a concurrent queue
+     * @param event event got from server
+     */
+
     public void setActionEvent(ActionEvent event) {
 
-        if (event != null) {
+        if (event != null)
 
             queueEvent.add(event);
 
-            LOGGER.log(Level.SEVERE, "a new event has been setted: " + event);
-        }
-
-        else LOGGER.log(Level.SEVERE, "event nullo" + event);
+            LOGGER.log(Level.SEVERE, "a new event has been set: " + event);
     }
 
+    @Override
     public ActionEvent getActionEvent() {
 
         return queueEvent.poll();
     }
+
+
+    /**
+     * when an event arrives in the roundsHandler and has to be handled this method is called
+     * @param event actionEvent to be examined
+     * @return result from eventHandler
+     */
 
     @Override
     public boolean handler(ActionEvent event) {
@@ -85,6 +105,13 @@ public class Controller implements ControllerInt {
         return handler.getResult();
     }
 
+    /**
+     * this method is called every time that a client responds to the window pattern request.
+     * if some players haven't already respond the game don't start and the method end, this
+     * until every players has his window pattern set, condition (gameIsGoing) permits the
+     * creation of roundsHandler and the start of the game
+     */
+
     @Override
     public void playersReady() {
 
@@ -92,7 +119,7 @@ public class Controller implements ControllerInt {
 
         for (int i = 0; i < model.getPlayerList().size(); i++) {
 
-            if (model.getPlayerList().get(i).getWindowPatternCard() == null && model.getPlayerList().get(i) != null) {
+            if (model.getPlayerList().get(i).getWindowPatternCard() == null) {
 
                 gameIsGoing = false;
             }
@@ -105,6 +132,11 @@ public class Controller implements ControllerInt {
             roundsHandler.start();
         }
     }
+
+    /**
+     * when game ended and finalPhase methods have been executed, this methos communicates to the clients their points and the winner
+     * @param winner client that won the game
+     */
 
     public void declareScoresAndWinner(PlayerZone winner) {
 

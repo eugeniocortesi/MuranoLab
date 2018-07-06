@@ -53,7 +53,7 @@ public class OnBoardCards implements Serializable {
         return toolNumberList;
     }
 
-    private void setPublicCards() {
+    public void setPublicCards() {
 
         Model model= singletonModel();
 

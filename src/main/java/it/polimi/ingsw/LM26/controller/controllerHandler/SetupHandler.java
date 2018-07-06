@@ -86,7 +86,7 @@ public class SetupHandler {
 
         model.getPlayer(namePlayer).setPlayerState(PlayerState.STANDBY);
 
-        ArrayList<PlayerZone> plNotStandby = new ArrayList<PlayerZone>();
+        ArrayList<PlayerZone> plNotStandby = new ArrayList<>();
 
         for (int i = 0; i < model.getPlayerList().size(); i++) {
 

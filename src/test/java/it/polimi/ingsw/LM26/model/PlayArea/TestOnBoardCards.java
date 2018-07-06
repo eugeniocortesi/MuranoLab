@@ -49,11 +49,26 @@ public class TestOnBoardCards {
                 if(j!=i) assertNotSame(model.getOnBoardCards().getToolCardList().get(i), model.getOnBoardCards().getToolCardList().get(j));
         }
 
-        for(int i=0; i<model.getOnBoardCards().getObjectivePublicCardList().size(); i++)
+        for(int i=0; i<model.getDecks().getObjectivePublicCardDeck().size(); i++)
 
-            for(int j=0; j<model.getOnBoardCards().getObjectivePublicCardList().size(); j++)
+            model.getDecks().getObjectivePublicCardDeck().get(i).setInUse(false);
 
-                if(j!=i) assertNotSame(model.getOnBoardCards().getObjectivePublicCardList().get(i), model.getOnBoardCards().getObjectivePublicCardList().get(j));
+        model.getDecks().getObjectivePublicCardDeck().get(0).setInUse(true);
+        model.getDecks().getObjectivePublicCardDeck().get(1).setInUse(true);
+        model.getDecks().getObjectivePublicCardDeck().get(2).setInUse(true);
+        model.getDecks().getObjectivePublicCardDeck().get(3).setInUse(true);
+        model.getDecks().getObjectivePublicCardDeck().get(4).setInUse(true);
+        model.getDecks().getObjectivePublicCardDeck().get(5).setInUse(true);
+        model.getDecks().getObjectivePublicCardDeck().get(6).setInUse(true);
+
+        model.getOnBoardCards().getObjectivePublicCardList().removeAll(model.getOnBoardCards().getObjectivePublicCardList());
+        model.getOnBoardCards().setPublicCards();
+
+        System.out.print("\n");
+
+        for( int i=0; i<model.getOnBoardCards().getObjectivePublicCardList().size(); i++)
+            System.out.print( model.getOnBoardCards().getObjectivePublicCardList().get(i).getId()+" ");
+
 
         for(int i=0; i<four.size();i++) {
 
@@ -67,5 +82,7 @@ public class TestOnBoardCards {
 
                 if(j!=i) assertNotSame(four.get(i), four.get(j));
         }
+
+
     }
 }

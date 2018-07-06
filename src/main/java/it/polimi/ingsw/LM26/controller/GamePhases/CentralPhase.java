@@ -1,7 +1,5 @@
 package it.polimi.ingsw.LM26.controller.GamePhases;
 
-import it.polimi.ingsw.LM26.controller.ToolCardsDecorator.ChangeDieValue1;
-import it.polimi.ingsw.LM26.controller.controllerHandler.UpdatesHandler;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import java.util.ArrayList;
@@ -18,7 +16,7 @@ import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class CentralPhase implements PhaseInt {
 
-    Model model;
+    private Model model;
 
     private static int numRounds = 10;
 

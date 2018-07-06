@@ -53,7 +53,7 @@ public class ChangeDieFromDraftToRoundTrack5 extends ToolCardDecorator {
 
         ArrayList<DieInt> inDraft = model.getDraftPool().getInDraft();
 
-        int index=0;
+        int index;
 
         if( die1== null || die2==null ) return false;
 
