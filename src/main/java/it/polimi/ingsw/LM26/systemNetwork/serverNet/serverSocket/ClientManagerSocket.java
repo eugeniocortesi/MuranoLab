@@ -62,7 +62,7 @@ public class ClientManagerSocket extends ClientManager {
 
     public ClientManagerSocket(Socket socket, ServerBase server){
 
-        LOGGER.setLevel(Level.FINE);
+        LOGGER.setLevel(Level.ALL);
 
         this.socket = socket;
 
@@ -143,9 +143,13 @@ public class ClientManagerSocket extends ClientManager {
 
         LOGGER.log(Level.WARNING, "Timer network Begin");
 
-        Thread t1 = new Thread(new MyRunnablePing());
+        //Thread t1 = new Thread(new MyRunnablePing());
 
-        t1.start();
+        //t1.start();
+
+        inActive = true;
+
+        ping();
 
     }
 
@@ -510,6 +514,8 @@ public class ClientManagerSocket extends ClientManager {
 
         if(inActive){
 
+            LOGGER.log(Level.INFO, "Sending ping");
+
             Thread t = new Thread(new MyRunnablePing());
 
             t.start();
@@ -523,6 +529,8 @@ public class ClientManagerSocket extends ClientManager {
 
     @Override
     public void pong() {
+
+        LOGGER.log(Level.INFO, "Pong arrived");
 
         timerTaskNetworkPlayers.setConnected(true);
     }

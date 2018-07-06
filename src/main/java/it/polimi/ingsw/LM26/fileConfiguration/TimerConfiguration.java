@@ -14,7 +14,7 @@ import java.io.*;
 
 public class TimerConfiguration {
 
-    private long timerEnd = 60000;
+    private long timerEnd = 180000;
 
     private long timerGameEnd = 10000;
 
@@ -60,8 +60,6 @@ public class TimerConfiguration {
         try {
 
             InputStream stream = Main.class.getResourceAsStream("TimerConfiguration");
-
-            System.out.println(stream);
 
             BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 

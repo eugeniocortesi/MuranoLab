@@ -331,7 +331,7 @@ public class ClientViewSocket extends ClientView {
 
         DataMessage dataMessage = new DataMessage("pong", "pong");
 
-        LOGGER.log(Level.SEVERE, "Pong arrived");
+        LOGGER.log(Level.SEVERE, "Ping arrived, sending pong");
 
         Thread t = new Thread(new Runnable() {
 
