@@ -91,5 +91,8 @@ This is an example of WindowPatternCard
 - matrix: each [..] is a line of the windowPatter; you can insert only 5 enum for each line from : GREEN, YELLOW, BLUE, VIOLET, RED, LIGHT1, LIGHT2, DARK5, DARK6, MEDIUMS3, MEDIUMS4, EMPTY
 - inUse: false
 
+* Copy the structure above and chane your parameters as you prefer 
+* Copy and paste the changed structure in the beginning of file opened before 
+
 ##### Enjoy creating your personalized windowPatternCard and try it in a play!
 
