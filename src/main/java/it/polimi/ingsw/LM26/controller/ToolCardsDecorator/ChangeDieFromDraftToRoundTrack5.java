@@ -7,12 +7,22 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
+
+
+/**
+ * ToolCard decorator class
+ * @author Eugenio Cortesi
+ */
 
 public class ChangeDieFromDraftToRoundTrack5 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
+
+    private static final Logger LOGGER = Logger.getLogger(ChangeDieFromDraftToRoundTrack5.class.getName());
 
     public ChangeDieFromDraftToRoundTrack5() {
     }
@@ -21,10 +31,20 @@ public class ChangeDieFromDraftToRoundTrack5 extends ToolCardDecorator {
 
         this.toolcard = toolcard;
 
+        LOGGER.setLevel(Level.ALL);
+
         this.type="ChangeDieFromDraftToRoundTrack5";
 
         this.typeToolCard = "ToolCard";
     }
+
+
+    /**
+     * it exchanges selected die
+     * @param die1 die from draft pool selected by client for the action
+     * @param die2 die from round track selected by client for the action
+     * @return the success of the card usage
+     */
 
     @Override
     public boolean play (DieInt die1, DieInt die2) {
@@ -39,7 +59,9 @@ public class ChangeDieFromDraftToRoundTrack5 extends ToolCardDecorator {
 
         int size=model.getRoundTrackInt().getRoundTrackTurnList().size();
 
-        if(size==0){System.out.println("no dice in roundTrack");
+        if(size==0) {
+
+            LOGGER.log(Level.INFO,"no dice in roundTrack");
 
             return false;
         }
@@ -59,8 +81,6 @@ public class ChangeDieFromDraftToRoundTrack5 extends ToolCardDecorator {
                 inDraft.remove(die1);
 
                 diceList.remove(die2);
-
-                model.getRoundTrackInt().dump();
 
                 return true;
             }
@@ -110,6 +130,10 @@ public class ChangeDieFromDraftToRoundTrack5 extends ToolCardDecorator {
 
         toolcard.setInUse(inUse);
     }
+
+    /**
+     * method that rewrite type for serializing with gson
+     */
 
     @Override
     public void rewrite() {

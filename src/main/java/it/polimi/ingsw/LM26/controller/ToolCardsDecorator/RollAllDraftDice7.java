@@ -7,12 +7,22 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
+
+
+/**
+ * ToolCard decorator class
+ * @author Eugenio Cortesi
+ */
 
 public class RollAllDraftDice7 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
+
+    private static final Logger LOGGER = Logger.getLogger(RollAllDraftDice7.class.getName());
 
     public RollAllDraftDice7() {
     }
@@ -21,10 +31,20 @@ public class RollAllDraftDice7 extends ToolCardDecorator {
 
         this.toolcard = toolcard;
 
+        LOGGER.setLevel(Level.ALL);
+
         this.type="RollAllDraftDice7";
 
         this.typeToolCard = "ToolCard";
     }
+
+
+    /**
+     * the method make sure that the player is in his second turn in this round;
+     * if he is not the action is refused.
+     * @param player of the action
+     * @return the success of the card usage
+     */
 
     @Override
     public boolean play (PlayerZone player ) {
@@ -35,14 +55,12 @@ public class RollAllDraftDice7 extends ToolCardDecorator {
 
         if(!player.getActionHistory().isDieUsed() && ! player.getActionHistory().isFirstTurn() && player.getActionHistory().isSecondTurn() ) {
 
-            for (int i = 0; i < inDraft.size(); i++)
-
-                inDraft.get(i).roll();
+            for (DieInt anInDraft : inDraft) anInDraft.roll();
 
             return true;
         }
 
-        else System.out.println("you can't use this card now");
+        LOGGER.log(Level.INFO,"you can't use this card now");
 
         return false;
     }
@@ -88,6 +106,10 @@ public class RollAllDraftDice7 extends ToolCardDecorator {
 
         toolcard.setInUse(inUse);
     }
+
+    /**
+     * method that rewrite type for serializing with gson
+     */
 
     @Override
     public void rewrite() {

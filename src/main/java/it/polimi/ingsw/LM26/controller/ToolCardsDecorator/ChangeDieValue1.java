@@ -6,10 +6,20 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+/**
+ * ToolCard decorator class
+ * @author Eugenio Cortesi
+ */
 
 public class ChangeDieValue1 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
+
+    private static final Logger LOGGER = Logger.getLogger(ChangeDieValue1.class.getName());
 
     public ChangeDieValue1() {
     }
@@ -18,10 +28,19 @@ public class ChangeDieValue1 extends ToolCardDecorator {
 
         this.toolcard = toolcard;
 
+        LOGGER.setLevel(Level.ALL);
+
         this.type="ChangeDieValue1";
 
         this.typeToolCard = "ToolCard";
     }
+
+    /**
+     *the action in refuse if the value is 1 or 6
+     * @param die die to change value of
+     * @param inDeCrement action information
+     * @return the success of the card usage
+     */
 
     @Override
     public boolean play (DieInt die, String inDeCrement) {
@@ -32,14 +51,12 @@ public class ChangeDieValue1 extends ToolCardDecorator {
 
             if (die.getValue() == 6) {
 
-                System.out.println("error, choose a lower value");
+                LOGGER.log(Level.INFO,"error, choose a lower value");
 
                 return false;
             }
 
             die.increment();
-
-            die.dump();
 
             return true;
         }
@@ -48,14 +65,12 @@ public class ChangeDieValue1 extends ToolCardDecorator {
 
             if (die.getValue() == 1) {
 
-                System.out.println("error, choose a higher value");
+                LOGGER.log(Level.INFO,"error, choose a higher value");
 
                 return false;
             }
 
             die.decrement();
-
-            die.dump();
 
             return true;
         }
@@ -104,6 +119,10 @@ public class ChangeDieValue1 extends ToolCardDecorator {
 
         toolcard.setInUse(inUse);
     }
+
+    /**
+     * method that rewrite type for serializing with gson
+     */
 
     @Override
     public void rewrite() {

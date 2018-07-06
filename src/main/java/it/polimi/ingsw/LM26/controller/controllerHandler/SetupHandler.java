@@ -62,9 +62,9 @@ public class SetupHandler {
 
 
     /**
-     * every time that a pattern has been setted to the player, it calls the method that check if all player are ready to start the game
+     * every time that a pattern has been set to the player, it calls the method that check if all player are ready to start the game
      * @param name of the player that choose one of the four window patter cards extracted for him
-     * @param windowPatternCard choosen, to be setted in the player
+     * @param windowPatternCard chosen, to be set in the player
      */
 
     public void assignWindowCard(String name, WindowPatternCard windowPatternCard) {
@@ -96,7 +96,7 @@ public class SetupHandler {
 
             else
 
-                server.showAnswerFromController(model.getPlayerList().get(i).getName(), "Il player " + namePlayer + " è in pausa.");
+                server.showAnswerFromController(model.getPlayerList().get(i).getName(), "Il player " + namePlayer + " e' in pausa.");
         }
 
         for(int i =0; i< model.getPlayerList().size();i++)

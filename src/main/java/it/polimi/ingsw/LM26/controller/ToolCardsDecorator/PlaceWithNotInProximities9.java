@@ -8,12 +8,22 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
+
+
+/**
+ * ToolCard decorator class
+ * @author Eugenio Cortesi
+ */
 
 public class PlaceWithNotInProximities9 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
+
+    private static final Logger LOGGER = Logger.getLogger(PlaceWithNotInProximities9.class.getName());
 
     public PlaceWithNotInProximities9() {
     }
@@ -22,10 +32,23 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
 
         this.toolcard = toolcard;
 
+        LOGGER.setLevel(Level.ALL);
+
         this.type = "PlaceWithNotInProximities9";
 
         this.typeToolCard = "ToolCard";
     }
+
+    /**
+     * method fails if a placement has already been done.
+     * if the board is empty it makes sure that the destination cell is on the edge.
+     * if the destination cell is near a die placed, the action fails.
+     * if every restriction is respected the method directly place the die and update placement-parameters
+     * @param dieFromDraft die from draft pool selected by client for the action
+     * @param toBox moves die to this board cell
+     * @param player of the action
+     * @return the success of the card usage
+     */
 
     @Override
     public boolean play(DieInt dieFromDraft, Box toBox, PlayerZone player) {
@@ -44,42 +67,41 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
 
         if (player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) {
 
-            System.out.println("action expired");
+            LOGGER.log(Level.INFO,"action expired");
 
             return false;
         }
 
         if (toBox.isIsPresent()) return false;
 
-        if (player.getPlayerBoard().isEmpty()) {
+        if (player.getPlayerBoard().isEmpty()  &&  !(i == 0 || i == 3 || j == 0 || j == 4)) {
 
-            if (!(i == 0 || i == 3 || j == 0 || j == 4)) {
-
-                System.out.println("error: first die must be placed on the edge");
+                LOGGER.log(Level.INFO,"error: first die must be placed on the edge");
 
                 return false;
             }
-        }
 
         if (placement.checkColorRestriction() && placement.checkValueRestriction()) {
 
             if (i == 0) {
 
-                if (j == 0) {  //angolo alto a sinistra
+                if (j == 0) {    //high left corner
 
                     if (board[i][j + 1].isIsPresent() || board[i + 1][j].isIsPresent() || board[i + 1][j + 1].isIsPresent())
 
                         return false;
                 }
 
-                else if (j == 4) {      //angolo alto a destra
+                else if (j == 4) {    //high right corner
 
                     if (board[i][j - 1].isIsPresent() || board[i + 1][j - i].isIsPresent() || board[i + 1][j].isIsPresent())
 
                         return false;
                 }
 
-                else if (board[i][j - 1].isIsPresent() || board[i + 1][j - 1].isIsPresent() || board[i + 1][j].isIsPresent() ||
+                else    //all other cells line first line
+
+                    if (board[i][j - 1].isIsPresent() || board[i + 1][j - 1].isIsPresent() || board[i + 1][j].isIsPresent() ||
                             board[i + 1][j + 1].isIsPresent() || board[i][j + 1].isIsPresent())
 
                     return false;
@@ -87,7 +109,7 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
 
             else if (i == 3) {
 
-                if (j == 0) {     //angolo basso a sinistra
+                if (j == 0) {    //low left corner
 
                     if (board[i][j + 1].isIsPresent() || board[i - 1][j].isIsPresent() || board[i - 1][j + 1].isIsPresent())
 
@@ -95,14 +117,14 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
 
                 }
 
-                else if (j == 4) {   //angolo basso a destra
+                else if (j == 4) {    //low right corner
 
                     if (board[i][j - 1].isIsPresent() || board[i - 1][j].isIsPresent() || board[i - 1][j - 1].isIsPresent())
 
                         return false;
                 }
 
-                else     //tutti valori ultima riga
+                else    //all other cells line last line
 
                     if (board[i][j - 1].isIsPresent() || board[i - 1][j - 1].isIsPresent() || board[i - 1][j].isIsPresent() ||
                             board[i - 1][j + 1].isIsPresent() || board[i][j + 1].isIsPresent())
@@ -110,7 +132,7 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
                         return false;
                 }
 
-                else {
+                else {    //all other cells in first column
 
                 if (j == 0) {
 
@@ -120,7 +142,7 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
                         return false;
                 }
 
-                else if (j == 4) {
+                else if (j == 4) {    //all other cells in last column
 
                     if (board[i][j - 1].isIsPresent() || board[i - 1][j - 1].isIsPresent() || board[i - 1][j].isIsPresent() ||
                             board[i + 1][j - 1].isIsPresent() || board[i + 1][j].isIsPresent())
@@ -128,7 +150,9 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
                         return false;
                 }
 
-                else if (board[i][j - 1].isIsPresent() || board[i + 1][j - 1].isIsPresent() ||
+                else    //all other inner cells
+
+                    if (board[i][j - 1].isIsPresent() || board[i + 1][j - 1].isIsPresent() ||
                         board[i + 1][j].isIsPresent() || board[i + 1][j + 1].isIsPresent() ||
                         board[i][j + 1].isIsPresent() || board[i - 1][j - 1].isIsPresent() ||
                         board[i - 1][j].isIsPresent() || board[i - 1][j + 1].isIsPresent())
@@ -196,6 +220,10 @@ public class PlaceWithNotInProximities9 extends ToolCardDecorator {
 
         toolcard.setInUse(inUse);
     }
+
+    /**
+     * method that rewrite type for serializing with gson
+     */
 
     @Override
     public void rewrite() {

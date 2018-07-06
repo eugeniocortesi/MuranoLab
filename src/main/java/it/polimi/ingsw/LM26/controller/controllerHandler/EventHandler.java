@@ -39,8 +39,8 @@ public class EventHandler {
      * Constructor
      * it creates the eventChecker object, saves the result of the action, after have handling it with checkers
      * @param event got from server, to handle
-     * @param model istance of model class
-     * @param controller istance of controller class
+     * @param model instance of model class
+     * @param controller instance of controller class
      */
 
     public EventHandler(ActionEvent event, Model model, ControllerInt controller) {
@@ -62,7 +62,8 @@ public class EventHandler {
     /**
      * this method is called from the RoundsHandler: it's used to say if the client action can be done or not.
      * it parse the id action and call the specific action checks.
-     * @param eventChecker istance of eventChecker object
+     * tokens for card usage are payed only if the action is done.
+     * @param eventChecker instance of eventChecker object
      * @return the boolean returned is the ultimate acceptance of the action
      */
 
@@ -196,6 +197,7 @@ public class EventHandler {
             if(ttask1 != null) {
 
                 ttask1.setArrived(true);
+
                 ttask1.cancelTimerTask();
             }
 
@@ -255,7 +257,7 @@ public class EventHandler {
 
 
     /**
-     * @param b copy of board cell sended from client
+     * @param b copy of board cell sent from client
      * @return cell of the client board
      */
 
@@ -268,8 +270,8 @@ public class EventHandler {
 
 
     /**
-     * @param die copy of die sended from client
-     * @return right istance of die requested
+     * @param die copy of die sent from client
+     * @return right instance of die requested
      */
 
     private DieInt getDraftDieCopy(DieInt die) {
@@ -287,8 +289,8 @@ public class EventHandler {
 
 
     /**
-     * @param a copy of Array of board cells sended from client
-     * @return right istance of Array of board cells
+     * @param a copy of Array of board cells sent from client
+     * @return right instance of Array of board cells
      */
 
     public ArrayList<Box> getBoxListCopy(ArrayList<Box> a) {

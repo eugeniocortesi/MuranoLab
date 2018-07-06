@@ -3,7 +3,6 @@ package it.polimi.ingsw.LM26.controller.GamePhases;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public interface PhaseInt extends Serializable{
 

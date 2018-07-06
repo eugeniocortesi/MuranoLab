@@ -1,16 +1,21 @@
 package it.polimi.ingsw.LM26.controller.GamePhases;
 
+import it.polimi.ingsw.LM26.controller.controllerHandler.UpdatesHandler;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
-import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
-import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-
-import java.util.ArrayList;
-
 import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
+
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+/**
+ * @author Eugenio Cortesi
+ */
 
 public class Round {
 
@@ -24,36 +29,55 @@ public class Round {
 
     private int[] turn;
 
-    public Round(int[] turn) {
+    private static final Logger LOGGER = Logger.getLogger(Round.class.getName());
+
+
+    /**
+     * Constructor
+     * it sets up things for this new turn like draft pool and players direction
+     * @param turn new players order to use in the current round
+     */
+
+    Round(int[] turn) {
 
         this.model = singletonModel();
+
+        LOGGER.setLevel(Level.ALL);
 
         this.turn = turn;
 
         pullDice();
 
-        setPlayersTurn();
+        setPlayerDirection();
     }
 
 
-    //nextPlayer va usato dopo endAction, quando il contatore è già incrementato. plStandby passato è sempre 0
-    public PlayerZone nextPlayer() throws IllegalArgumentException {
+    /**
+     * this method is called after endAction() in RoundsHandler class.
+     * it searches the player with the number in the turn vector at the current turnCounter
+     * if the player is in standby the turnCounter is incremented and the method searches again for the player with the new selected number.
+     * if during the research the it arrives to the end of the turns vector, it ends the turn and return no player.
+     * @return the next playing player
+     */
+
+    public PlayerZone nextPlayer()  {
 
         ArrayList<PlayerZone> player = model.getPlayerList();
 
-        for (int i = 0; i < player.size(); i++) {
+        for (PlayerZone aPlayer : player) {
 
-            if ((player.get(i).getIDPlayer() + 1) == turn[turnCounter]) {
+            if ((aPlayer.getIDPlayer() + 1) == turn[turnCounter]) {
 
-                if (player.get(i).getPlayerState() != STANDBY) {
+                if (aPlayer.getPlayerState() != STANDBY) {
 
-                    player.get(i).setPlayerState(PlayerState.BEGINNING);
+                    aPlayer.setPlayerState(PlayerState.BEGINNING);
 
-                    currentPlayer = player.get(i);
+                    currentPlayer = aPlayer;
 
-                    return player.get(i);
-                } else {
-                    System.out.println(player.get(i).getName() + " is in STANDBY");
+                    return aPlayer;
+                }
+
+                else { LOGGER.log(Level.INFO,aPlayer.getName() + " is in STANDBY");
 
                     turnCounter = turnCounter + 1;
 
@@ -72,10 +96,14 @@ public class Round {
         throw new IllegalArgumentException("no player has the current turn");
     }
 
-    //passa il turno al successivo, se è finito turno globale mette dadi nella casella della round track e ritorna FINISHED
+
+    /**
+     * it sets the player parameters associated to action-done, and if there aren't any more players in the turn, it ends it.
+     */
+
     public void endAction() {
 
-        setPlayersTurn();
+        setPlayerDirection();
 
         if (currentPlayer.getPlayerState() != STANDBY)
 
@@ -94,9 +122,14 @@ public class Round {
         } else roundState = RoundState.RUNNING;
     }
 
-    public void endRound() {
 
-        System.out.println(" TURN ENDED ");
+    /**
+     * method that sets turn and players parameters associated to turn-done, then it moves the remained dice from the draft pool to the roundTrack
+     */
+
+    private void endRound() {
+
+        LOGGER.log(Level.INFO," TURN ENDED ");
 
         model.getRoundTrackInt().addDice(model.getDraftPool().getInDraft());
 
@@ -111,7 +144,14 @@ public class Round {
         roundState = RoundState.FINISHED;
     }
 
-    public void setPlayersTurn() {
+
+    /**
+     * this method set the boolean corresponding to the occurrence of the player in the turn:
+     * it sets first turn to true if the direction in right (players are going to do their first turn) and second to false,
+     * then second turn to true and first to false if the direction, so they have done their first turn and are going to do the second.
+     */
+
+    private void setPlayerDirection() {
 
         if (turnCounter == 0)
 
@@ -122,24 +162,28 @@ public class Round {
                 model.getPlayer(i).getActionHistory().setSecondTurn(false);
             }
 
-        else if (turnCounter < turn.length-1) {
+        else if (turnCounter < turn.length - 1 && turn[turnCounter] == turn[turnCounter + 1])
 
-            if (turn[turnCounter] == turn[turnCounter + 1])
+            for (int i = 0; i < model.getPlayerList().size(); i++) {
 
-                for (int i = 0; i < model.getPlayerList().size(); i++) {
+                model.getPlayer(i).getActionHistory().setFirstTurn(false);
 
-                    model.getPlayer(i).getActionHistory().setFirstTurn(false);
+                model.getPlayer(i).getActionHistory().setSecondTurn(true);
+            }
 
-                    model.getPlayer(i).getActionHistory().setSecondTurn(true);
-                }
-        }
     }
 
-    public void pullDice() {
+
+    /**
+     * at the beginning of the turn, the draft pool il empty and must be filled with two dice per player plus one for the round track;
+     * no dice for players in standby
+     */
+
+    private void pullDice() {
 
         int contStandby = 0;
 
-        int contDice = 0;
+        int contDice;
 
         DieInt die;
 

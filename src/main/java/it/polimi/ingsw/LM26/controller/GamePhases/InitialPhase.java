@@ -6,14 +6,19 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.Token;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 import java.util.ArrayList;
 
-import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
+/**
+ * InitialPhase class
+ * @author Eugenio Cortesi
+ */
 
 public class InitialPhase implements PhaseInt {
 
-    Model model = singletonModel();
+    private Model model = singletonModel();
+
 
     /**
      * this methods assigns to each player his coloured score marker and window frame board, according to his ID
@@ -48,7 +53,10 @@ public class InitialPhase implements PhaseInt {
         }
     }
 
-    //distribuisce i token a tutti i giocatori in base alla loro windowPatternCard
+
+    /**
+     * it distributes tokens to player according to his window pattern card
+     */
 
     public void setTokens(){
 
@@ -57,12 +65,15 @@ public class InitialPhase implements PhaseInt {
             Token token= new Token(i.getWindowPatternCard().getToken());
 
             i.setToken(token);
-
-            System.out.println(i.getName()+" has "+ i.getToken().getTokenNumber()+" token");
         }
     }
 
-    public void insertPattern() {
+
+    /**
+     * after a player got his window pattern card, this method calls the one that insert in into the players's board
+     */
+
+    private void insertPattern() {
 
         for(int i=0; i<model.getPlayerList().size(); i++) {
 
@@ -73,7 +84,10 @@ public class InitialPhase implements PhaseInt {
     }
 
 
-    //questo metodo va chiamato dopo aver assegnato la windowPatternCard
+    /**
+     * this method is called to launch other methods of this class and create the next game phase
+     * @param game instance of game, to set the new phase
+     */
 
     @Override
     public void doAction(Game game) {

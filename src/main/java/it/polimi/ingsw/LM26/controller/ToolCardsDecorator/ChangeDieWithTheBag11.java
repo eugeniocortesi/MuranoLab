@@ -9,12 +9,22 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
+
+
+/**
+ * ToolCard decorator class
+ * @author Eugenio Cortesi
+ */
 
 public class ChangeDieWithTheBag11 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
+
+    private static final Logger LOGGER = Logger.getLogger(ChangeDieWithTheBag11.class.getName());
 
     public ChangeDieWithTheBag11() {
     }
@@ -22,6 +32,8 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
     public ChangeDieWithTheBag11(ToolCard toolcard) {
 
         this.toolcard = toolcard;
+
+        LOGGER.setLevel(Level.ALL);
 
         this.type="ChangeDieWithTheBag11";
 
@@ -41,7 +53,7 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
 
         if (player.getActionHistory().isPlacement() || player.getActionHistory().isDieUsed()) {
 
-            System.out.println("action expired");
+            LOGGER.log(Level.INFO,"action expired");
 
             return false;
         }
@@ -70,7 +82,7 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
 
             model.getRestrictions().setColor("Giallo");
 
-        System.out.println("you got a " + d.getColor() + " die ");
+        LOGGER.log(Level.INFO,"you got a " + d.getColor() + " die ");
 
         model.getRestrictions().setFirstPart(true);
 
@@ -149,6 +161,10 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
 
         toolcard.setInUse(inUse);
     }
+
+    /**
+     * method that rewrite type for serializing with gson
+     */
 
     @Override
     public void rewrite() {

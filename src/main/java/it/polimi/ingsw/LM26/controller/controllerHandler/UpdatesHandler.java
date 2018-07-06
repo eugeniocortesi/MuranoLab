@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 public class UpdatesHandler implements Observer {
 
-    Controller controller;
+    private Controller controller;
 
     private static final Logger LOGGER = Logger.getLogger(UpdatesHandler.class.getName());
 
@@ -28,8 +28,8 @@ public class UpdatesHandler implements Observer {
 
 
     /**
-     * method that receive and actionEventPlayer from Server
-     * if player is connected creates a new PlayerZone, or set his state beck to the game
+     * method receives and actionEventPlayer from Server
+     * if player is connected creates a new PlayerZone, or set his state back to the game
      * otherwise set standby Player
      * @param actionEventPlayer information about a player
      */
@@ -62,7 +62,7 @@ public class UpdatesHandler implements Observer {
 
 
     /**
-     * @param actionEventWindow choosen by a client, to be setted to him
+     * @param actionEventWindow chosen by a client, to be set to him
      */
 
     @Override
@@ -72,6 +72,7 @@ public class UpdatesHandler implements Observer {
 
         controller.getSetupHandler().assignWindowCard(actionEventWindow.getName(), actionEventWindow.getWindowPatternCard());
     }
+
 
     /**
      * when this update is called means that the player list is done and closed.
@@ -87,9 +88,10 @@ public class UpdatesHandler implements Observer {
         controller.getSetupHandler().setupPrivateCard();
     }
 
+
     /**
-     *
-     * @param timerEnd event that updated the player list when a player ends his time to answer the window pattern card he wants
+     * @param timerEnd event that updated the player list when a player ends his time to answer the window pattern card he wants,
+     *                 he must be deleted
      */
 
     @Override

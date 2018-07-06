@@ -1,99 +1,121 @@
 package it.polimi.ingsw.LM26.controller.GamePhases;
 
+import it.polimi.ingsw.LM26.controller.ToolCardsDecorator.ChangeDieValue1;
+import it.polimi.ingsw.LM26.controller.controllerHandler.UpdatesHandler;
 import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DraftPool;
-import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;
-
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
-public class CentralPhase implements PhaseInt{
+/**
+ * Class CentralPhase
+ * @author EugenioCortesi
+ * class that keeps track of round-situation and moves game toward finalPhase
+ */
 
-    private final int nrounds=10;
-
-    private ArrayList<Round> rounds;
-
-    private Round round;
-
-    private Boolean onePlayer=false;
-
-    private int[] turn; //stabilisce l'ordine dei giocatori all'interno del turno, es "12344321", "123321"..
+public class CentralPhase implements PhaseInt {
 
     Model model;
 
-    public CentralPhase() {
+    private static int numRounds = 10;
+
+    private ArrayList<Round> rounds;
+
+    private transient Round round;
+
+    private Boolean onePlayer = false;
+
+    private int[] turn;
+
+    private static final Logger LOGGER = Logger.getLogger(CentralPhase.class.getName());
+
+    /**
+     * Constructor
+     * it sets the first players order and start the first round
+     */
+
+    CentralPhase() {
 
         this.model = singletonModel();
 
-        turn=setOrder(model.getPlayerList().size());
+        LOGGER.setLevel(Level.ALL);
 
-        this.round= new Round( turn);
+        turn = setOrder(model.getPlayerList().size());
 
-        rounds= new ArrayList<Round>();
+        this.round = new Round(turn);
+
+        rounds = new ArrayList<>();
 
         rounds.add(round);
     }
 
-    //inizializza turn[]
 
-    public int[] setOrder(int nplayers) {
+    /**
+     * it sets the players order (es: 123321); every player plays one time, then another in the revers order
+     * @param nplayers playing
+     * @return the vector with the updated players order to use in the next round
+     */
 
-        turn = new int[2*nplayers];
+    private int[] setOrder(int nplayers) {
 
-        for(int i=0; i<nplayers; i++) turn[i]=model.getPlayer(i).getNumber();
+        turn = new int[2 * nplayers];
 
-        for(int i=nplayers, j=nplayers-1; j>=0; i++, j--) turn[i]=model.getPlayer(j).getNumber();
+        for (int i = 0; i < nplayers; i++) turn[i] = model.getPlayer(i).getNumber();
 
-        for(int i=0; i<turn.length; i++)
-
-            System.out.print(turn[i]);
-
-        System.out.println();
+        for (int i = nplayers, j = nplayers - 1; j >= 0; i++, j--) turn[i] = model.getPlayer(j).getNumber();
 
         return turn;
     }
 
-    public void resetOrder(int nplayers){
 
-        int last = model.getPlayer(nplayers-1).getNumber();
+    /**
+     * the first player in the sequence of playing is now the last (es: 1234 -> 2341)
+     * the method calls again setOrder to update the order vector with the changed players sequence
+     * @param nplayers playing
+     */
 
-        model.getPlayer(nplayers-1).setNumberPlayer(model.getPlayer(0).getNumber());
+    public void resetOrder(int nplayers) {
 
-        for(int i=0; i<model.getPlayerList().size()-1; i++)
+        int last = model.getPlayer(nplayers - 1).getNumber();
 
-            model.getPlayer(i).setNumberPlayer(model.getPlayer(i+1).getNumber());
+        model.getPlayer(nplayers - 1).setNumberPlayer(model.getPlayer(0).getNumber());
 
-        model.getPlayer(nplayers-2).setNumberPlayer(last);
+        for (int i = 0; i < model.getPlayerList().size() - 1; i++)
+
+            model.getPlayer(i).setNumberPlayer(model.getPlayer(i + 1).getNumber());
+
+        model.getPlayer(nplayers - 2).setNumberPlayer(last);
 
         turn = setOrder(nplayers);
     }
 
+
+    /**
+     * every time a round ends this method is called.
+     * it creates a new round if the current wasn't the 9th, otherwise if round 9th ended
+     * or if only one player remains in the game, the method creates the finalPhase
+     * @param round round that just ended
+     * @param game  instance of game, important to get the right game-phase
+     */
+
     @Override
-    public PlayerZone getWinner() {
+    public void nextRound(Round round, Game game) {
 
-        throw new UnsupportedOperationException("Not supported here");
-    }
+        if (rounds.size() == numRounds || onePlayer) {
 
-    //questo metodo si chiama da dopo il secondo round fino a dopo il decimo (dove verrà creato il prossimo stato)
-
-    @Override
-    public void nextRound(Round round, Game game){
-
-        if(rounds.size() == nrounds || onePlayer) {
-
-            System.out.println("CentralPhase: creating finalPhase ");
+            LOGGER.log(Level.INFO, "CentralPhase: creating finalPhase ");
 
             game.setPhase(new FinalPhase());
-        }
+        } else
 
-        else  if(rounds.size()<nrounds && round.getRoundState() == RoundState.FINISHED){
+            if (rounds.size() < numRounds && round.getRoundState() == RoundState.FINISHED) {
 
             resetOrder(model.getPlayerList().size());
 
-            this.round=new Round(turn);
+            this.round = new Round(turn);
 
             rounds.add(round);
         }
@@ -108,15 +130,15 @@ public class CentralPhase implements PhaseInt{
     @Override
     public void endGame() {
 
-        System.out.println("ONLY ONE PLAYER REMAINED");
+        LOGGER.log(Level.INFO, "Only one player remained");
 
-        onePlayer=true;
+        onePlayer = true;
     }
 
     @Override
     public int getNrounds() {
 
-        return nrounds;
+        return numRounds;
     }
 
     @Override
@@ -138,11 +160,14 @@ public class CentralPhase implements PhaseInt{
     }
 
     @Override
-    public void doAction(Game game) {
+    public PlayerZone getWinner() {
 
         throw new UnsupportedOperationException("Not supported here");
     }
 
+    @Override
+    public void doAction(Game game) {
 
-
+        throw new UnsupportedOperationException("Not supported here");
+    }
 }

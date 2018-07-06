@@ -1,24 +1,31 @@
 package it.polimi.ingsw.LM26.controller.GamePhases;
 
-import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
-import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.model.Serialization.Decks;
-
 import java.io.Serializable;
-import java.util.ArrayList;
+
+
+/**
+ * Game class
+ * @author Eugenio Cortesi
+ */
 
 public class Game implements Serializable {
 
     private PhaseInt phase;
+
+
+    /**
+     * Constructor
+     * it creates first game phase and keeps instance of every successive ones
+     */
 
     public Game() {
 
         this.phase = new InitialPhase();
     }
 
-    public PhaseInt getPhase(){  //usare getPhase per chiamare i metodi della fase corrente
+    public PhaseInt getPhase() {
 
-        return  phase;
+        return phase;
     }
 
     public void setPhase(PhaseInt phase){

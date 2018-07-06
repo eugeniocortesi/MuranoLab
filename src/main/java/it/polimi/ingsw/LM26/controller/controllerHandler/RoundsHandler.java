@@ -52,8 +52,8 @@ public class RoundsHandler extends Thread {
      * Constructor
      * starts the game: initialPhase and centralPhase with doAction method of pattern state
      * it sends the first notify of the model to the view and it creates the timer
-     * @param model istance of model class
-     * @param controller istance of controller class
+     * @param model instance of model class
+     * @param controller instance of controller class
      */
 
     public RoundsHandler(Model model, ControllerInt controller) {
@@ -78,6 +78,12 @@ public class RoundsHandler extends Thread {
 
         timerActionPlayer = new TimerActionPlayer(timerConfiguration.getTimerEnd());
     }
+
+
+    /**
+     * the method play is started by a thread
+     * it's important that it's execution runs independently
+     */
 
     @Override
     public void run() {
@@ -253,7 +259,7 @@ public class RoundsHandler extends Thread {
     /**
      * this method receive the event for the second action (if the client didn't pass the turn) and give it to the handler
      * when the handler returns the boolean true/false, the method communicates to client the answer
-     * * and if it's negative, it asks to client to redo the action trough menu showing.
+     * and if it's negative, it asks to client to redo the action trough menu showing.
      * if ToolCard 8 has been used by the client, the method asks for one more action.
      */
 
@@ -346,12 +352,14 @@ public class RoundsHandler extends Thread {
 
 
     /**
-     * the scope of this method is to get an event from the queue,
+     * the scope of this method is to get an event from the queue:
      * if the queue is empty, it waits for a new event to arrive
-     * and refuse an event if the client sending it is not the player that is playing this round.
-     * Numerous controls are necessary:
-     * for instance if a player goes to standby while the method is waiting
-     * or the timer for the action ends, the method exits the while and ends.
+     * and refuse the event if the client sending it is not the player that is playing this turn.
+     * (event 12 are accepted right away and handled)
+     * Other two controls are necessary and repeated throughout the method to avoid useless waiting:
+     * - for instance if a player goes to standby while the method is waiting
+     * - or if the timer for the action ends
+     * if one of these occurs the method exits the while and ends.
      */
 
     private void waitCorrectPlayer() {

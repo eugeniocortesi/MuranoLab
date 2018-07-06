@@ -1,11 +1,14 @@
 package it.polimi.ingsw.LM26.controller.GamePhases;
 
+import it.polimi.ingsw.LM26.controller.controllerHandler.UpdatesHandler;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
@@ -13,17 +16,19 @@ public class FinalPhase implements PhaseInt {
 
     Model model = singletonModel();
 
-    private ArrayList<PlayerZone> winners= new ArrayList<PlayerZone>();
-
-    private int maximum;
-
-    private int minimum;
-
     private PlayerZone winner;
 
+    private static final Logger LOGGER = Logger.getLogger(FinalPhase.class.getName());
+
+    FinalPhase() {
+
+        LOGGER.setLevel(Level.ALL);
+    }
+
+
     /**
-     * the method declares the winner: he's the one connected
-     * if there is only one player; else "The player with the highest Victory Point
+     * the method declares the winner: he's the one connected if there is only one player;
+     * else "The player with the highest Victory Point
      * total is the winner. Ties are broken by most
      * points from Private Objectives, most remaining
      * Favor Tokens, then finally by reverse player
@@ -31,9 +36,16 @@ public class FinalPhase implements PhaseInt {
      * @return the winner
      * @throws IllegalArgumentException when there are problems with players' LastTurnValue
      */
+
     public PlayerZone declareWinner() throws IllegalArgumentException{
 
         ArrayList<PlayerZone> players = new ArrayList<PlayerZone>();
+
+        ArrayList<PlayerZone> potentialWinners = new ArrayList<PlayerZone>();
+
+        int maximum;
+
+        int minimum;
 
         for(int i=0; i<model.getPlayerList().size(); i++) {
 
@@ -58,14 +70,14 @@ public class FinalPhase implements PhaseInt {
 
                 if(j.getScoreMarker().getRealPoints()==maximum)
 
-                    winners.add(j);
+                    potentialWinners.add(j);
             }
 
-            if(winners.size()==1) return winners.get(0);
+            if(potentialWinners.size()==1) return potentialWinners.get(0);
 
             else{ maximum=-1;
 
-                for(PlayerZone i : winners){
+                for(PlayerZone i : potentialWinners){
 
                     if(i.getPrivatePoints() > maximum) {
 
@@ -73,20 +85,20 @@ public class FinalPhase implements PhaseInt {
                     }
                 }
 
-                for(int j=0; j<winners.size();){
+                for(int j=0; j< potentialWinners.size();){
 
-                    if(winners.get(j).getPrivatePoints()!=maximum)
+                    if(potentialWinners.get(j).getPrivatePoints()!=maximum)
 
-                        winners.remove(j);
+                        potentialWinners.remove(j);
 
                     else j++;
                 }
 
-                if(winners.size()==1) return winners.get(0);
+                if(potentialWinners.size()==1) return potentialWinners.get(0);
 
                 else{ maximum=-1;
 
-                    for(PlayerZone i : winners){
+                    for(PlayerZone i : potentialWinners){
 
                         if(i.getToken().getTokenNumber()>maximum){
 
@@ -94,22 +106,22 @@ public class FinalPhase implements PhaseInt {
                         }
                     }
 
-                    for(int j=0; j<winners.size();){
+                    for(int j=0; j< potentialWinners.size();){
 
-                        if(winners.get(j).getToken().getTokenNumber()!=maximum)
+                        if(potentialWinners.get(j).getToken().getTokenNumber()!=maximum)
 
-                            winners.remove(j);
+                            potentialWinners.remove(j);
 
                         else j++;
                     }
 
-                    if(winners.size()==1) return winners.get(0);
+                    if(potentialWinners.size()==1) return potentialWinners.get(0);
 
                     else {
 
                         minimum=10;
 
-                        for(PlayerZone i : winners) {
+                        for(PlayerZone i : potentialWinners) {
 
                             if (i.getNumber() < minimum) {
 
@@ -117,7 +129,7 @@ public class FinalPhase implements PhaseInt {
                             }
                         }
 
-                        for(PlayerZone j : winners){
+                        for(PlayerZone j : potentialWinners){
 
                             if(j.getNumber() == minimum)
 
@@ -127,8 +139,14 @@ public class FinalPhase implements PhaseInt {
                 }
             }
         }
+
         throw new IllegalArgumentException("players have no LastRoundTurn value");
     }
+
+
+    /**
+     * method computes the scores gained by every player from private cards, public cards, tokens remained and empty spaces on the player's board
+     */
 
     public void computeScore() {
 
@@ -146,7 +164,7 @@ public class FinalPhase implements PhaseInt {
 
                     result = card.checkPoints(player.getPlayerBoard());
 
-                    System.out.println("points from private card " + card.getColour() + " " +  result);
+                    LOGGER.log(Level.INFO, "points from private card " + card.getColour() + " " +  result);
 
                     player.setPrivatePoints(result);
                 }
@@ -158,18 +176,18 @@ public class FinalPhase implements PhaseInt {
 
                 result = result + fromPublic;
 
-                System.out.println("points from public card (" + model.getOnBoardCards().getObjectivePublicCardList().get(j).getEffect() + ") : " + fromPublic);
+                LOGGER.log(Level.INFO,"points from public card (" + model.getOnBoardCards().getObjectivePublicCardList().get(j).getEffect() + ") : " + fromPublic);
             }
 
             result = result + player.getToken().getTokenNumber();
 
-            System.out.println("points from tokens " + player.getToken().getTokenNumber());
+            LOGGER.log(Level.INFO,"points from tokens " + player.getToken().getTokenNumber());
 
             int emptysp= player.getPlayerBoard().getEmptySpaces();
 
             result = result - emptysp;
 
-            System.out.println("with " + emptysp + " emptyspaces");
+            LOGGER.log(Level.INFO,"with " + emptysp + " emptyspaces");
 
             player.getScoreMarker().incrementScore(result);
 
@@ -179,10 +197,11 @@ public class FinalPhase implements PhaseInt {
         }
     }
 
-    public PlayerZone getWinner() {
 
-        return winner;
-    }
+    /**
+     * method is launched from RoundsHandler and it calls the class methods to declare points and winner
+     * @param game instance of game
+     */
 
     @Override
     public void doAction(Game game) {
@@ -190,6 +209,11 @@ public class FinalPhase implements PhaseInt {
         computeScore();
 
         winner = declareWinner();
+    }
+
+    public PlayerZone getWinner() {
+
+        return winner;
     }
 
     @Override

@@ -7,12 +7,22 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
+
+
+/**
+ * ToolCard decorator class
+ * @author Eugenio Cortesi
+ */
 
 public class RollAgainADie6 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
+
+    private static final Logger LOGGER = Logger.getLogger(RollAgainADie6.class.getName());
 
     public RollAgainADie6() {
     }
@@ -21,10 +31,22 @@ public class RollAgainADie6 extends ToolCardDecorator {
 
         this.toolcard = toolcard;
 
+        LOGGER.setLevel(Level.ALL);
+
         this.type="RollAgainADie6";
 
         this.typeToolCard = "ToolCard";
     }
+
+
+    /**
+     * method refuses the action if a die has been already placed by the client in this turn.
+     * after have rolled the die chosen by client, the method saves it in model-restrictions so that,
+     * when the client sends back the placement action  with the coordinates for the placing, if he choose a different dia the placement is refused.
+     * @param dieFromDraft die selected by client for the action
+     * @param player of the action
+     * @return the success of the card usage
+     */
 
     @Override
     public boolean play(DieInt dieFromDraft, PlayerZone player) {
@@ -39,7 +61,7 @@ public class RollAgainADie6 extends ToolCardDecorator {
 
         if (player.getActionHistory().isDieUsed() || player.getActionHistory().isPlacement())
 
-            System.out.println("you can't place the die");
+            LOGGER.log(Level.INFO,"you can't place the die");
 
         else { model.getRestrictions().setNeedPlacement(true);
 
@@ -90,6 +112,10 @@ public class RollAgainADie6 extends ToolCardDecorator {
 
         toolcard.setInUse(inUse);
     }
+
+    /**
+     * method that rewrite type for serializing with gson
+     */
 
     @Override
     public void rewrite() {

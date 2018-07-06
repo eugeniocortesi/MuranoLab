@@ -3,17 +3,24 @@ package it.polimi.ingsw.LM26.controller.ToolCardsDecorator;
 import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
-import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
+
+/**
+ * ToolCard decorator class
+ * @author Eugenio Cortesi
+ */
 
 public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
+
+    private static final Logger LOGGER = Logger.getLogger(MoveTwoDiceWithSameColor12.class.getName());
 
     public MoveTwoDiceWithSameColor12() {
     }
@@ -21,6 +28,8 @@ public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
     public MoveTwoDiceWithSameColor12(ToolCard toolcard) {
 
         this.toolcard = toolcard;
+
+        LOGGER.setLevel(Level.ALL);
 
         this.type="MoveTwoDiceWithSameColor12";
 
@@ -53,7 +62,7 @@ public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
 
         if (!placement.placeDie() ) {
 
-                System.out.println("error " + j +" placement");
+            LOGGER.log(Level.INFO,"error " + j +" placement");
 
                 for(int k=0; k<fromBoxList.size(); k++) {
 
@@ -110,6 +119,10 @@ public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
 
         toolcard.setInUse(inUse);
     }
+
+    /**
+     * method that rewrite type for serializing with gson
+     */
 
     @Override
     public void rewrite() {

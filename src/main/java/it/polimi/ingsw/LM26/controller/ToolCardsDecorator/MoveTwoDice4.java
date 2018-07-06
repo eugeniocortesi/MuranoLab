@@ -3,17 +3,24 @@ package it.polimi.ingsw.LM26.controller.ToolCardsDecorator;
 import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
-import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
+
+/**
+ * ToolCard decorator class
+ * @author Eugenio Cortesi
+ */
 
 public class MoveTwoDice4 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
+
+    private static final Logger LOGGER = Logger.getLogger(MoveTwoDice4.class.getName());
 
     public MoveTwoDice4() {
     }
@@ -22,17 +29,28 @@ public class MoveTwoDice4 extends ToolCardDecorator {
 
         this.toolcard = toolcard;
 
+        LOGGER.setLevel(Level.ALL);
+
         this.type="MoveTwoDice4";
 
         this.typeToolCard = "ToolCard";
     }
+
+    /**
+     *if dice are already present in the destination cells or if in the starting cells there aren't the action fails
+     * if just one of the two placement fails, the other is undone and the action fails
+     * @param fromBoxList list of cells from which dice are moved
+     * @param toBoxList list of cells towards which dice are moved
+     * @param player of the action
+     * @return the success of the card usage
+     */
 
     @Override
     public boolean play ( ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, PlayerZone player ) {
 
         if( fromBoxList == null || toBoxList == null) return false;
 
-        ArrayList <DieInt> dieList=new ArrayList<DieInt>();
+        ArrayList <DieInt> dieList= new ArrayList<>();
 
         for(int i=0; i<fromBoxList.size(); i++)
 
@@ -51,7 +69,7 @@ public class MoveTwoDice4 extends ToolCardDecorator {
 
             if (!placement.placeDie() ) {
 
-                System.out.println("error " + j +" placement");
+                LOGGER.log(Level.INFO,"error " + j +" placement");
 
                 for(int k=0; k<fromBoxList.size(); k++) {
 
@@ -108,6 +126,10 @@ public class MoveTwoDice4 extends ToolCardDecorator {
 
         toolcard.setInUse(inUse);
     }
+
+    /**
+     * method that rewrite type for serializing with gson
+     */
 
     @Override
     public void rewrite() {

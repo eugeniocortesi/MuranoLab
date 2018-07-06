@@ -3,17 +3,24 @@ package it.polimi.ingsw.LM26.controller.ToolCardsDecorator;
 import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.ToolCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
-import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
+
+/**
+ * ToolCard decorator class
+ * @author Eugenio Cortesi
+ */
 
 public class MoveWithNoValueRestriction3 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
+
+    private static final Logger LOGGER = Logger.getLogger(MoveWithNoValueRestriction3.class.getName());
 
     public MoveWithNoValueRestriction3() {
     }
@@ -22,10 +29,22 @@ public class MoveWithNoValueRestriction3 extends ToolCardDecorator {
 
         this.toolcard = toolcard;
 
+        LOGGER.setLevel(Level.ALL);
+
         this.type="MoveWithNoValueRestriction3";
 
         this.typeToolCard = "ToolCard";
     }
+
+
+    /**
+     * action is refuse if the placement don't respect restrictions and if there is no die on the cell selected
+     * if is the only die on the board it must be placed again on the edges.
+     * @param fromBox move die from this board cell
+     * @param toBox moves die to this board cell
+     * @param player of the action
+     * @return the success of the card usage
+     */
 
     @Override
     public boolean play (Box fromBox, Box toBox, PlayerZone player) {
@@ -36,14 +55,14 @@ public class MoveWithNoValueRestriction3 extends ToolCardDecorator {
 
         if (!fromBox.isIsPresent()) {
 
-            System.out.println("no die found");
+            LOGGER.log(Level.INFO,"no die found");
 
             return false;
         }
 
         if (toBox.isIsPresent()) {
 
-            System.out.println("a die is already present here ");
+            LOGGER.log(Level.INFO,"a die is already present here ");
 
             return false;
         }
@@ -67,7 +86,7 @@ public class MoveWithNoValueRestriction3 extends ToolCardDecorator {
             return true;
         }
 
-        System.out.println("error card 2");
+        LOGGER.log(Level.INFO,"error card 2");
 
         fromBox.setDie(die);
 
@@ -115,6 +134,10 @@ public class MoveWithNoValueRestriction3 extends ToolCardDecorator {
 
         toolcard.setInUse(inUse);
     }
+
+    /**
+     * method that rewrite type for serializing with gson
+     */
 
     @Override
     public void rewrite() {

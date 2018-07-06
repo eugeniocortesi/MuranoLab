@@ -22,7 +22,7 @@ public class EventChecker {
 
     private static final Logger LOGGER = Logger.getLogger(EventChecker.class.getName());
 
-    public EventChecker(Model model) {
+    EventChecker(Model model) {
 
         this.model = model;
 
@@ -31,13 +31,13 @@ public class EventChecker {
 
 
     /**
-     * method that checks if a die can be placed on the position choosen.
-     * if it's second attempt of placing from card 6 or 11, a control makes sure that client uses the same die choosen or assigned in the last attempt of placing.
+     * method that checks if a die can be placed on the position chosen.
+     * if it's second attempt of placing from card 6 or 11, a control makes sure that client uses the same die chosen or assigned in the last attempt of placing.
      * if a client already used his die the placement can't be done.
      * if the placement is done, this method update the player history in this half round, model restrictions, and it takes away die from draft pool.
-     * @param dieFromDraft Die choosen by client from the draftPool
-     * @param toBox Cell of the playerBoard, choosen by the client for the placement.
-     * @param player client that sended the place die request
+     * @param dieFromDraft Die chosen by client from the draftPool
+     * @param toBox Cell of the playerBoard, chosen by the client for the placement.
+     * @param player client that sent the place die request
      * @return true if a placement went well, otherwise false
      */
 
@@ -78,14 +78,14 @@ public class EventChecker {
                 model.getRestrictions().setCurrentPlacement(false);
             }
 
-            if (model.getRestrictions().isNeedPlacement()) {
+            /*if (model.getRestrictions().isNeedPlacement()) {
 
                 model.getRestrictions().setNeedPlacement(false);
 
                 model.getRestrictions().setDie(null);
 
                 model.getRestrictions().setFirstPart(false);
-            }
+            }*/
 
             return true;
         }

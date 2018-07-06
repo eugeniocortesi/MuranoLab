@@ -6,10 +6,20 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+/**
+ * ToolCard decorator class
+ * @author Eugenio Cortesi
+ */
 
 public class RollToTheOppositeFace10 extends ToolCardDecorator {
 
     private ToolCard toolcard = null;
+
+    private static final Logger LOGGER = Logger.getLogger(RollToTheOppositeFace10.class.getName());
 
     public RollToTheOppositeFace10() {
     }
@@ -18,10 +28,19 @@ public class RollToTheOppositeFace10 extends ToolCardDecorator {
 
         this.toolcard = toolcard;
 
+        LOGGER.setLevel(Level.ALL);
+
         this.type="RollToTheOppositeFace10";
 
         this.typeToolCard = "ToolCard";
     }
+
+    /**
+     *
+     * @param dieFromDraft dieFromDraft die from draft pool selected by client for the action
+     * @param player of the action
+     * @return the success of the card usage
+     */
 
     @Override
     public boolean play (DieInt dieFromDraft, PlayerZone player) {
@@ -90,6 +109,10 @@ public class RollToTheOppositeFace10 extends ToolCardDecorator {
 
         toolcard.setInUse(inUse);
     }
+
+    /**
+     * method that rewrite type for serializing with gson
+     */
 
     @Override
     public void rewrite() {
