@@ -36,6 +36,8 @@ public class ClientManagerRMI extends ClientManager {
 
     private TimerPlayer timerPlayer;
 
+    private boolean inActive;
+
     private TimerTaskActionPlayers timerTaskActionPlayers;
 
     private TimerTaskNetworkPlayers timerTaskNetworkPlayers;
@@ -50,6 +52,7 @@ public class ClientManagerRMI extends ClientManager {
 
         myserver = serverBase;
         this.user= null;
+        inActive = true;
     }
 
     /**
@@ -379,6 +382,7 @@ public class ClientManagerRMI extends ClientManager {
     public void stop() {
 
         System.err.println("Timer out: Connection reset");
+        inActive = false;
 
     }
 
@@ -613,7 +617,8 @@ public class ClientManagerRMI extends ClientManager {
 
             //LOGGER.log(Level.WARNING, "Arrived pong");
             try{
-                skeleton.pong();
+                if(inActive)
+                    skeleton.pong();
             } catch (RemoteException e) {
                 System.err.println("Connection refused");
             }

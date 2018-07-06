@@ -89,8 +89,6 @@ public class ClientViewRMI extends ClientView {
         //Takes the stub
         Registry registry = null;
 
-        System.setProperty("java.rmi.server.hostname", address);
-
         try {
 
             registry = LocateRegistry.getRegistry(address, RMIPORTServer);

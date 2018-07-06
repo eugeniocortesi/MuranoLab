@@ -42,6 +42,8 @@ public class ClientManagerSocket extends ClientManager {
 
     private int id;
 
+    private boolean inActive;
+
     private DataOutputStream writer;
 
     private TimerPlayer timerPlayer;
@@ -506,9 +508,13 @@ public class ClientManagerSocket extends ClientManager {
     @Override
     public void ping() {
 
-        Thread t = new Thread(new MyRunnablePing());
+        if(inActive){
 
-        t.start();
+            Thread t = new Thread(new MyRunnablePing());
+
+            t.start();
+        }
+
     }
 
     /**
@@ -529,6 +535,7 @@ public class ClientManagerSocket extends ClientManager {
     public void stop() {
 
         listenerClientManager.end();
+        inActive = false;
     }
 
     /**
