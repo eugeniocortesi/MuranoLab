@@ -84,7 +84,7 @@ public class ServerBase extends ViewGameInterface {
         try {
             InetAddress ip = InetAddress.getLocalHost();
 
-            System.out.println(ip);
+            System.out.println("Server address: " +ip);
 
         }catch(UnknownHostException he){
 
