@@ -241,9 +241,9 @@ public class ConsoleTools {
                         "Muovi fino a due dadi dello stesso colore di un solo dado sul Tracciato dei Round\n" +
                         "Devi rispettare tutte le restrizioni di piazzamento"); break;}
             }
-            //System.out.println("Segnalini Favore da spendere per usare la carta: ");
-            //System.out.flush();
-            //for(int j=0; j<model.getOnBoardCards().getToolCardList().get(i).getToken(); j++) {System.out.print("\u25CB "); System.out.flush();}
+            System.out.println("Segnalini Favore da spendere per usare la carta: ");
+            System.out.flush();
+            for(int j=0; j<model.getOnBoardCards().getCardsToken()[i]; j++) {System.out.print("\u25CB "); System.out.flush();}
             System.out.println("Carta numero "+(i+1)+"\n");
         }
     }

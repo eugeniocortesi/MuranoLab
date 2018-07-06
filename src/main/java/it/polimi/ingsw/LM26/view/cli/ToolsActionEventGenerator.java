@@ -57,6 +57,14 @@ public class ToolsActionEventGenerator {
         return askBetweenTwo(chars);
     }
 
+    public String askDisconnection(){
+        System.out.println("Sei sicuro di voler lasciare Sagrada? sì ('S'), no ('N')");
+        ArrayList<String> chars= new ArrayList<String>();
+        chars.add("S");
+        chars.add("N");
+        return askBetweenTwo(chars);
+    }
+
     public Box askForDieFromFrameboard(Box[][] matrix, boolean from){
         boolean ok=false;
         Box b=null;

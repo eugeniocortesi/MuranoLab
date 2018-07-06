@@ -164,11 +164,11 @@ public class ActionEventGenerator {
                         toBoxes =new ArrayList<Box>();
                         toBoxes.add(box);
                         ae.setFromBoxList(toBoxes);
-                        gController.moveDieTemporarily(ae.getFromBoxList().get(0),box);
+                        gController.moveDieTemporarilyFrameB(ae.getFromBoxList().get(0),box);
                     }
                     else {
                         ae.setToBox1(box);
-                        gController.moveDieTemporarily(ae.getFromBox1(),box);
+                        gController.moveDieTemporarilyFrameB(ae.getFromBox1(),box);
                     }
                 }
                 else if(contCellsFrameBoard==2){
@@ -178,7 +178,7 @@ public class ActionEventGenerator {
                 if(contCellsFrameBoard==3){
                     toBoxes.add(box);
                     ae.setToBoxList(toBoxes);
-                    gController.moveDieTemporarily(ae.getFromBoxList().get(1), box);
+                    gController.moveDieTemporarilyFrameB(ae.getFromBoxList().get(1), box);
                 }
                 if(contCellsFrameBoard==1 && ae.getCardID()==12){
                     gController.setMoveLabel("Esegui le istruzioni per spostare un altro dado, altrimenti premi 'Fine mossa'");

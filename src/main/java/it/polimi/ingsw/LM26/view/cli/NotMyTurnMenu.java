@@ -13,14 +13,12 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
 
     private ConsoleTools consoleTools= new ConsoleTools();
-    private ClientView clientView;
     private ActionEventGenerator ae;
     private ActionEvent actionEvent;
     private ConsoleStrings cs;
 
     public NotMyTurnMenu(ClientView clientView, ConsoleStrings cs) {
         ae= new ActionEventGenerator();
-        this.clientView = clientView;
         register(clientView);
         System.out.println("Registered");
         this.cs = cs;
@@ -34,30 +32,39 @@ public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
                 "'A' per vedere la zona di gioco di un altro giocatore\n" +
                 "'T' per vedere la tua zona di gioco\n" +
                 "'G' per vedere l'area comune di gioco\n" +
-                "'C' per vedere una carta");
+                "'C' per vedere una carta\n" +
+                "'L' per lasciare la partitan\n");
 
     }
 
     public boolean evaluateCondition(String input){
-        return (!(input.equalsIgnoreCase("A") || input.equalsIgnoreCase("T") || input.equalsIgnoreCase("C") || input.equalsIgnoreCase("G")));
+        return (!(input.equalsIgnoreCase("A") || input.equalsIgnoreCase("T")
+                || input.equalsIgnoreCase("C") || input.equalsIgnoreCase("G")
+                ||input.equalsIgnoreCase("L")));
     }
 
     public void handleInput(String input){
         System.out.println(ansi().eraseScreen());
-        if(input.equalsIgnoreCase("A")){
-            consoleTools.showAnotherPlayer();
+        if(input.equalsIgnoreCase("L")){
+            Boolean confirm=ae.disconnectConfirm();
+
         }
-        else if(input.equalsIgnoreCase("T")){
-            consoleTools.showYourplayerZone(ConsoleTools.id);
+        else{
+            if(input.equalsIgnoreCase("A")){
+                consoleTools.showAnotherPlayer();
+            }
+            else if(input.equalsIgnoreCase("T")){
+                consoleTools.showYourplayerZone(ConsoleTools.id);
+            }
+            else if(input.equalsIgnoreCase("G")){
+                consoleTools.printRoundTrack();
+                consoleTools.printDraftPool();
+            }
+            else if(input.equalsIgnoreCase("C")){
+                consoleTools.showCards();
+            }
+            actionEvent=ae.askForMenu(true);
+            cs.notifyMessage(actionEvent);
         }
-        else if(input.equalsIgnoreCase("G")){
-            consoleTools.printRoundTrack();
-            consoleTools.printDraftPool();
-        }
-        else if(input.equalsIgnoreCase("C")){
-            consoleTools.showCards();
-        }
-        actionEvent=ae.askForMenu(true);
-        cs.notifyMessage(actionEvent);
     }
 }

@@ -139,9 +139,7 @@ public class ConsoleStrings extends ViewInterface {
     public void showAddedPlayer(String s) { AnsiConsole.out().println("Nuovo giocatore aggiunto: "+s);}
 
 
-    public void showDisconnectScreen() {
-        AnsiConsole.out().println(); //è il messaggio che viene a tutti i connessi
-    }
+    public void showDisconnectScreen() { AnsiConsole.out().println("Ti sei disconnesso."); }
 
     public void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck){
         int n=-1;
