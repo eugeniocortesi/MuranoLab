@@ -8,8 +8,7 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
-import it.polimi.ingsw.LM26.observers.serverController.Observable;
-import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.fileConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.*;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRMI;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket.ClientViewSocket;
@@ -19,7 +18,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Observer;
 import java.util.concurrent.CountDownLatch;
 
 import static org.fusesource.jansi.Ansi.Color.*;

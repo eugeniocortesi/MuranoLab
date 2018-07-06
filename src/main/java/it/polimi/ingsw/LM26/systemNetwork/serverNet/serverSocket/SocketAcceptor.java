@@ -1,6 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket;
 
-import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataServerConfiguration;
+import it.polimi.ingsw.LM26.fileConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 

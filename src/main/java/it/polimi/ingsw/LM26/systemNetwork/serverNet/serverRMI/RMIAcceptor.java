@@ -1,18 +1,14 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI;
 
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRemote;
-import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataServerConfiguration;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
+import it.polimi.ingsw.LM26.fileConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 
-import java.rmi.AccessException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * RMIAcceptor class

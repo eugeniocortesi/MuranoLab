@@ -7,8 +7,7 @@ import it.polimi.ingsw.LM26.controller.GamePhases.Game;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerActionPlayer;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerConfiguration;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerImplementation;
+import it.polimi.ingsw.LM26.fileConfiguration.TimerConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerTaskActionEvent;
 
 import java.util.logging.Level;
@@ -73,9 +72,9 @@ public class RoundsHandler extends Thread {
 
         this.model.hasChanged();
 
-        TimerImplementation timerImplementation = new TimerImplementation();
+        TimerConfiguration timerConfiguration = new TimerConfiguration();
 
-        TimerConfiguration timerConfiguration = timerImplementation.implentation();
+        timerConfiguration.implementation();
 
         timerActionPlayer = new TimerActionPlayer(timerConfiguration.getTimerEnd());
     }

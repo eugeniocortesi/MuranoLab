@@ -6,13 +6,11 @@ import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
 import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.Client;
-import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataServerConfiguration;
+import it.polimi.ingsw.LM26.fileConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.RMIAcceptor;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket.SocketAcceptor;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerConfiguration;
+import it.polimi.ingsw.LM26.fileConfiguration.TimerConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerGame;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerImplementation;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -51,8 +49,6 @@ public class ServerBase extends ViewGameInterface {
 
     private DataServerConfiguration dataServerConfiguration;
 
-    private TimerImplementation timerImplementation;
-
     private TimerConfiguration timerConfiguration;
 
     private boolean gameIsGoing;
@@ -78,9 +74,9 @@ public class ServerBase extends ViewGameInterface {
 
         dataServerConfiguration = new DataServerConfiguration().implementation();
 
-        timerImplementation = new TimerImplementation();
+        timerConfiguration = new TimerConfiguration();
 
-        timerConfiguration = timerImplementation.implentation();
+        timerConfiguration.implementation();
 
         LOGGER.log(Level.WARNING, "SocketPort " +dataServerConfiguration.getSOCKETPORT()+ " ClientRMI " + dataServerConfiguration.getClientRMIPORT()
                 + " ServerRMI "+ dataServerConfiguration.getServerRMIPORT());

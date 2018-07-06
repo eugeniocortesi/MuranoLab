@@ -9,7 +9,7 @@ import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.fileConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;

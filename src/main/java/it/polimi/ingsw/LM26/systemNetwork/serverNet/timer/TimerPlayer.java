@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.timer;
 
+import it.polimi.ingsw.LM26.fileConfiguration.TimerConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 

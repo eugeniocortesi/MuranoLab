@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.model.Serialization;
+package it.polimi.ingsw.LM26.fileConfiguration;
 
 import com.google.gson.*;
 import com.google.gson.internal.Streams;
