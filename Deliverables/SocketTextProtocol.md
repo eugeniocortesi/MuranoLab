@@ -4,7 +4,7 @@
 
 ## ClassMessage
 
-ClassMessage : abtract class bases for all different messages
+ClassMessage : abtract class base for all different messages
 
 
 ##1. Check Connection
@@ -298,18 +298,3 @@ EndMessage
 
    `{"endId" : "endGame"   , "username" : "<username>", "score" : "<int>", "winner" : "<String>", "scoreWinner": "<int>" }`
 
- 
-
-####5.2 End game
-
-**From server**
-
-DataMessage
-
-> Field1: operation: String
-
-> Field2: field1: String
-
-
-
-  ` {"operation":"send_answer_from_controller","field1":"<String>"}`

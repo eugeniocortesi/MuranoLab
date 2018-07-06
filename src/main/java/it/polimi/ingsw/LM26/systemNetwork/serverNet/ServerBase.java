@@ -6,6 +6,7 @@ import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
 import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.Client;
 import it.polimi.ingsw.LM26.systemNetwork.netConfiguration.DataServerConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.RMIAcceptor;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket.SocketAcceptor;
@@ -397,8 +398,17 @@ public class ServerBase extends ViewGameInterface {
         clientManagerList.getClientManager(name).stop();
     }
 
-    public void end(){
+    public void end() {
         socketAcceptor.end();
+
+        for (Object o : clientManagerList.getManagerHashMap().entrySet()) {
+
+            Map.Entry couple = (Map.Entry) o;
+            if (couple != null) {
+                ClientManager c = (ClientManager) couple.getValue();
+                c.stop();
+            }
+        }
     }
 
 }

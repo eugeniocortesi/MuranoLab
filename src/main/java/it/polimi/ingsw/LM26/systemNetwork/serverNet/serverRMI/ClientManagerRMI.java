@@ -211,10 +211,6 @@ public class ClientManagerRMI extends ClientManager {
 
     @Override
     public void run() {
-
-
-        //TODO wait()??
-        //TODO Add JavaDoc
     }
 
     /**
@@ -383,6 +379,7 @@ public class ClientManagerRMI extends ClientManager {
     public void stop() {
 
         System.err.println("Timer out: Connection reset");
+
     }
 
     @Override
