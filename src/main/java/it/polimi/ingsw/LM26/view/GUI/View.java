@@ -13,6 +13,7 @@ import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
 import it.polimi.ingsw.LM26.view.GUI.controllers.*;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -24,7 +25,6 @@ public class View extends ViewInterface {
     private static ClientInt clientBase;
     private static ClientView clientView;
     private boolean myTurn;
-    private boolean begin=true;
 
 
     private DisplayableStage displayableStageLogin = new DisplayableStage("Login.fxml");
@@ -33,7 +33,9 @@ public class View extends ViewInterface {
     private DisplayableStage displayableStageGame = new DisplayableStage("GamePhase.fxml");
     private DisplayableStage displayableStageScores = new DisplayableStage("Scores.fxml");
     private DisplayableStage displayableStageDisconnection = new DisplayableStage("Disconnection.fxml");
+    private DisplayableStage displayableStageDisconnected = new DisplayableStage("Disconnected.fxml");
     private Stage primaryStage;
+    private DisplayableStage currentDisp;
 
 
     public View(Stage primaryStage, ClientInt clientBase) {
@@ -170,10 +172,15 @@ public class View extends ViewInterface {
         ModelManager.id = id;
         Platform.runLater(new Runnable() {
             public void run() {
+                currentDisp=displayableStageWPattern;
                 FXMLLoader fLoader = displayableStageWPattern.getFxmlLoader();
                 WindowPatternController wpController = fLoader.getController();
                 wpController.setCardLable(windowDeck, user);
                 displayableStageWPattern.show(primaryStage);
+                primaryStage.setOnCloseRequest(event ->{
+                    event.consume();
+                    confirmDisconnection(currentDisp);
+                });
             }
         });
     }
@@ -196,17 +203,15 @@ public class View extends ViewInterface {
 
     @Override
     public void showCurrentMenu(String name){
-        if(begin){
-            FXMLLoader fLoader=displayableStageGame.getFxmlLoader();
-            GameController gController=fLoader.getController();
-            gController.setupGame(myTurn, this);
-            Platform.runLater(new Runnable() {
-                public void run() {
-                    displayableStageGame.show(primaryStage);
-                }
-            });
-        }
-        begin=false;
+        currentDisp=displayableStageGame;
+        FXMLLoader fLoader=displayableStageGame.getFxmlLoader();
+        GameController gController=fLoader.getController();
+        gController.setupGame(myTurn, this);
+        Platform.runLater(new Runnable() {
+            public void run() {
+                displayableStageGame.show(primaryStage);
+            }
+        });
     }
 
 
@@ -225,9 +230,10 @@ public class View extends ViewInterface {
     public void showEndGame(String name, int score, String winner, int scoreWinner) {
         Platform.runLater(new Runnable() {
             public void run() {
+                currentDisp=displayableStageScores;
                 FXMLLoader fLoader=displayableStageScores.getFxmlLoader();
                 ScoreController sc=fLoader.getController();
-                sc.setUp();
+                sc.setUp(name, score, winner, scoreWinner);
                 displayableStageScores.show(primaryStage);
             }
         });
@@ -248,15 +254,24 @@ public class View extends ViewInterface {
     public void showDisconnectScreen() {
         Platform.runLater(() ->
         {
-            Stage discStage=new Stage();
-            discStage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fLoader=displayableStageDisconnection.getFxmlLoader();
-            DisconnectionController dc=fLoader.getController();
-            dc.disconnectionSetUp(discStage);
-            displayableStageDisconnection.showAndWait(primaryStage);
+            primaryStage.setOnCloseRequest(event -> primaryStage.close());
+            FXMLLoader fLoader=displayableStageDisconnected.getFxmlLoader();
+            DisconnectedController dc=fLoader.getController();
+            displayableStageDisconnected.show(primaryStage);
         });
     }
 
+    private void confirmDisconnection(DisplayableStage disp){
+        Stage discStage= new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Disconnection.fxml"));
+        FXMLLoader fLoader=displayableStageDisconnection.getFxmlLoader();
+        DisconnectionController dc=fLoader.getController();
+        dc.disconnectionSetUp(primaryStage, disp, this);
+        Platform.runLater(() ->
+        {
+            displayableStageDisconnection.show(primaryStage);
+        });
+    }
 
     @Override
     public void update(Model m) {

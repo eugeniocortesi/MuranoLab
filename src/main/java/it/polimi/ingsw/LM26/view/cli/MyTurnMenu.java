@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class MyTurnMenu extends Observable implements PlayerMenuInt{
-    private ClientView clientView;
     private ConsoleTools consoleTools= new ConsoleTools();
     private ActionEventGenerator ae;
     private ActionEvent actionEvent;
@@ -20,7 +19,6 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
 
     public MyTurnMenu(ClientView clientView, ConsoleStrings cs) {
         ae= new ActionEventGenerator();
-        this.clientView = clientView;
         this.cs = cs;
         register(clientView);
         System.out.println("Registered");
@@ -36,15 +34,15 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
                 "'C' per vedere una carta\n" +
                 "'D' per posizionare un dado nella Plancia Vetrata\n" +
                 "'U' per usare una carta utensile\n" +
-                "'P' per passare il turno\n");
-
-
+                "'P' per passare il turno\n" +
+                "'L' per lasciare la partita\n");
     }
 
     public boolean evaluateCondition(String input){
         return  !(input.equalsIgnoreCase("A") || input.equalsIgnoreCase("T")
                 || input.equalsIgnoreCase("C") || input.equalsIgnoreCase("D")
-                ||input.equalsIgnoreCase("U")||input.equalsIgnoreCase("P"));
+                ||input.equalsIgnoreCase("U")||input.equalsIgnoreCase("P")
+                ||input.equalsIgnoreCase("L"));
     }
 
     public void handleInput(String input){
@@ -78,6 +76,9 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
         else if(input.equalsIgnoreCase("P")){
             actionEvent=ae.loseTurn();
             cs.notifyMessage(actionEvent);
+        }
+        else if(input.equalsIgnoreCase("L")){
+            Boolean confirm=ae.disconnectConfirm();
         }
         if(input.equalsIgnoreCase("A")||input.equalsIgnoreCase("T")||input.equalsIgnoreCase("C")){
             actionEvent=ae.askForMenu(true);

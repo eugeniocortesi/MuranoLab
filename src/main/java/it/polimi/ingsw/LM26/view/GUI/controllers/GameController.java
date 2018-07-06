@@ -212,8 +212,8 @@ public class GameController {
 
     private void handleInDecrement(int idx){
         String s;
-        if(idx==0) s="Increment";
-        else s="Decrement";
+        if(idx==0) s="increment";
+        else s="decrement";
         try{
             aeGenerator.indecrementEvent(s);
         }catch (IllegalArgumentException e){
@@ -237,7 +237,7 @@ public class GameController {
         }
     }
 
-    public void moveDieTemporarily(Box f, Box t){
+    public void moveDieTemporarilyFrameB(Box f, Box t){
         myFBoardController.shiftDie(f,t);
     }
 }

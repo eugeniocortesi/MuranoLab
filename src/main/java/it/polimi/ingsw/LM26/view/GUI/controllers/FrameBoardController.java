@@ -2,6 +2,7 @@ package it.polimi.ingsw.LM26.view.GUI.controllers;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.view.GUI.ActionEventGenerator;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
@@ -55,7 +56,6 @@ public class FrameBoardController {
                 playername.setStyle("-fx-background-color: #5b0350"); break;}
         }
         int n=pl.getWindowPatternCard().getToken();
-        n=n-3;
         createTokens(n);
         playername.setText(pl.getName());
         if(pl.getIDPlayer()== ModelManager.getId()){

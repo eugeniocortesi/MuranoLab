@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class ActionEventGenerator {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     ConsoleTools cTools=new ConsoleTools();
-    ToolsActionEventGenerator tceGenerator;
+    private ToolsActionEventGenerator tceGenerator;
     public static boolean invalidActionEvent=false;
 
     ActionEventGenerator(){
@@ -45,6 +45,11 @@ public class ActionEventGenerator {
         return ae;
     }
 
+    public boolean disconnectConfirm(){
+        String s=tceGenerator.askDisconnection();
+        if(s.equalsIgnoreCase("S")) return true;
+        else return false;
+    }
 
     /**
      *it asks for the current menù screen
@@ -70,7 +75,7 @@ public class ActionEventGenerator {
             case 3:
             {actionEvent=this.fromToBox1(n-1); break;}
             case 4:
-            {actionEvent=this.fromToBox2(n-1); break;}
+            {actionEvent=this.fromToBox2(n-1, false); break;}
             case 6:
             {actionEvent=this.addToBox1(this.dieFromDraftPoolEvent(n-1));
             System.out.println("Il dado è stato riposto nella Riserva, accedivi per piazzarlo nella Plancia Vetrata.\n" +
@@ -99,8 +104,7 @@ public class ActionEventGenerator {
             case 7:
             {actionEvent=this.toolCEvent(n-1); break;}
             case 12:
-            {actionEvent=this.addDieFromRoundtrack(this.fromToBox2(n-1));
-            actionEvent.setId(10); break;}
+            {actionEvent=this.addDieFromRoundtrack(this.fromToBox2(n-1, true)); break;}
         }
         return actionEvent;
     }
@@ -135,24 +139,42 @@ public class ActionEventGenerator {
         return a;
     }
 
-    private ActionEvent fromToBox2(int tCardPos){
+    private ActionEvent fromToBox1Array(int tCardPos){
+        Box box;
+        ActionEvent a=toolCEvent(tCardPos);
+        a.setId(3);
+        System.out.println("Cella da cui vuoi prendere il dado:");
+        box=tceGenerator.askForDieFromFrameboard(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix(), true);
+        ArrayList<Box> arrayFrom=new ArrayList<Box>();
+        arrayFrom.add(box);
+        a.setFromBoxList(arrayFrom);
+        System.out.println("Cella in cui vuoi mettere il dado:");
+        box=tceGenerator.askForDieFromFrameboard(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix(), false);
+        ArrayList<Box> arrayTo=new ArrayList<Box>();
+        arrayTo.add(box);
+        a.setToBoxList(arrayTo);
+        return a;
+    }
+
+    private ActionEvent fromToBox2(int tCardPos, boolean is12){
         Box box;
         String reply;
-        ActionEvent ae=fromToBox1(tCardPos);
+        ActionEvent ae=fromToBox1Array(tCardPos);
         ae.setId(3);
-        ArrayList<Box> arrayFrom=new ArrayList<Box>();
-        arrayFrom.add(ae.getFromBox1());
-        ArrayList<Box> arrayTo=new ArrayList<Box>();
-        arrayTo.add(ae.getToBox1());
-        ae.setFromBox1(null); ae.setFromBox1(null);
-        reply=tceGenerator.askFor1or2();
+        if(is12){
+            reply=tceGenerator.askFor1or2();
+            ae.setId(10);
+        }
+        else reply="A";
         if(reply.equalsIgnoreCase("A")){
             System.out.println("Cella da cui vuoi prendere il dado:");
             box=tceGenerator.askForDieFromFrameboard(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix(), true);
+            ArrayList<Box> arrayFrom= ae.getFromBoxList();
             arrayFrom.add(box);
             ae.setFromBoxList(arrayFrom);
             System.out.println("Cella in cui vuoi mettere il dado:");
             box=tceGenerator.askForDieFromFrameboard(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerBoard().getBoardMatrix(), false);
+            ArrayList<Box> arrayTo= ae.getFromBoxList();
             arrayTo.add(box);
             ae.setToBoxList(arrayTo);
         }

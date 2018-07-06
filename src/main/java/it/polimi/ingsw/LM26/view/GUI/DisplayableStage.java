@@ -30,9 +30,4 @@ public class DisplayableStage {
         primaryStage.setScene(new Scene(pane));
         primaryStage.show();
     }
-
-    public void showAndWait(Stage primaryStage){
-        primaryStage.setScene(new Scene(pane));
-        primaryStage.showAndWait();
-    }
 }
