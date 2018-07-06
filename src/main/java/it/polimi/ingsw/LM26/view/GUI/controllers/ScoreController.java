@@ -42,7 +42,12 @@ public class ScoreController {
 
         for(PlayerZone p : ModelManager.getModel().getPlayerList()){
             if(p.getScoreMarker().getPoints()<14){
-                cell=(StackPane)row1.getChildren().get(p.getScoreMarker().getPoints()-1);
+                if(p.getScoreMarker().getPoints()==0){
+                    cell=(StackPane)row1.getChildren().get(0);
+                }
+                else{
+                    cell=(StackPane)row1.getChildren().get(p.getScoreMarker().getPoints()-1);
+                }
                 showScoreMarker(cell, p);
             }
             else if(p.getScoreMarker().getPoints()>=14 &&p.getScoreMarker().getPoints()<26){

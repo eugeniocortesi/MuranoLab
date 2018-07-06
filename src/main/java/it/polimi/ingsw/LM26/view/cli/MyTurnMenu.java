@@ -78,7 +78,11 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
             cs.notifyMessage(actionEvent);
         }
         else if(input.equalsIgnoreCase("L")){
-            Boolean confirm=ae.disconnectConfirm();
+            if(ae.disconnectConfirm()){cs.showDisconnectScreen();}
+            else {
+                actionEvent=ae.askForMenu(true);
+                cs.notifyMessage(actionEvent);
+            }
         }
         if(input.equalsIgnoreCase("A")||input.equalsIgnoreCase("T")||input.equalsIgnoreCase("C")){
             actionEvent=ae.askForMenu(true);

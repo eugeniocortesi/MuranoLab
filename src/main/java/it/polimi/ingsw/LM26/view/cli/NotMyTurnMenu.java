@@ -46,8 +46,11 @@ public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
     public void handleInput(String input){
         System.out.println(ansi().eraseScreen());
         if(input.equalsIgnoreCase("L")){
-            Boolean confirm=ae.disconnectConfirm();
-
+            if(ae.disconnectConfirm()){cs.showDisconnectScreen();}
+            else {
+                actionEvent=ae.askForMenu(true);
+                cs.notifyMessage(actionEvent);
+            }
         }
         else{
             if(input.equalsIgnoreCase("A")){

@@ -35,6 +35,7 @@ public class ActionEventGenerator {
         stateArray.add(GameState.DRAFTPOOL);
         stateArray.add(GameState.FRAMEBOARD);
         array=false;
+        contCellsFrameBoard=0;
     }
 
     public void endTurn(){

@@ -53,13 +53,13 @@ public class RoundTrackController {
                 for(int j=1; j<roundTrackList.get(i).getDiceList().size(); j++){
                     ImageView newDie= new ImageView();
                     newDie.setFitHeight(40);
-                    newDie.setFitHeight(40);
+                    newDie.setFitWidth(40);
                     imageManager.setDie(newDie, roundTrackList.get(i).getDiceList().get(j));
                     int n=j, m=i;
                     newDie.setOnMouseClicked((MouseEvent event)->handleDieClicked(9+n+(m*8)));
                     diceList.getChildren().add(newDie);
                 }
-                int n=diceList.getChildren().size()-roundTrackList.get(i).getDiceList().size();
+                int n=diceList.getChildren().size()-(roundTrackList.get(i).getDiceList().size()-1);
                 for(int k=0; k<n; k++){
                     diceList.getChildren().remove(diceList.getChildren().size()-1);
                 }
