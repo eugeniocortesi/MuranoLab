@@ -39,7 +39,10 @@ public class ScoreMarker implements Serializable {
     }
 
     public int getPoints(){
-        return this.points;
+
+        if( points >0) return points;
+
+        else return 0;
     }
 
     public void incrementScore(int increment) {

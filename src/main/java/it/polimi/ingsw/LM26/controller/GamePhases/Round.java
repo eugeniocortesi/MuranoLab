@@ -16,8 +16,6 @@ public class Round {
 
     private Model model;
 
-    //private static final int[] t = {1, 2, 3, 4};
-
     private int turnCounter = 0;
 
     private PlayerZone currentPlayer;
@@ -32,27 +30,11 @@ public class Round {
 
         this.turn = turn;
 
-        //this.assignTurn(rTrack, pZone, nrounds);
-
         pullDice();
 
         setPlayersTurn();
     }
 
-    //assegna l'ordine con cui si gioca all'interno di un turno e salva l'ordine dell'ultimo turno per la parità di punteggio
-    //roundtrack passata dalla centralPhase, l'nrounds da passare è la costante della centralPhase
-
-    /*public void assignTurn(RoundTrackInt roundTrack, ArrayList<PlayerZone> playerList, int nrounds) {
-        for (int i = 0; i < playerList.size(); i++) {
-
-            int j=t[(i ) %playerList.size()];
-
-            playerList.get(i).setNumberPlayer(j);
-
-            playerList.get(i).setLastRoundTurn(j);
-        }
-    }
-    */
 
     //nextPlayer va usato dopo endAction, quando il contatore è già incrementato. plStandby passato è sempre 0
     public PlayerZone nextPlayer() throws IllegalArgumentException {

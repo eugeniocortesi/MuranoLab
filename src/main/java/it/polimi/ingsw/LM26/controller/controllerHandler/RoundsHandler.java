@@ -26,15 +26,11 @@ import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
 
 public class RoundsHandler extends Thread {
 
-    private PlayerZone playing;
-
-    private boolean result = false;
-
     private Model model;
 
-    private Game game;
-
     private ControllerInt controller;
+
+    private Game game;
 
     private TimerActionPlayer timerActionPlayer;
 
@@ -42,7 +38,13 @@ public class RoundsHandler extends Thread {
 
     private static final Logger LOGGER = Logger.getLogger(RoundsHandler.class.getName());
 
+    private PlayerZone playing;
+
+    private PlayerZone playerEnding = null;
+
     private ActionEvent event;
+
+    private boolean result = false;
 
     private int i = 0;
 
@@ -108,13 +110,30 @@ public class RoundsHandler extends Thread {
 
                 controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "Inizia il turno " + game.getPhase().getRoundNumber());
 
-            while (game.getPhase().getCurrentRound().getRoundState() != FINISHED) {
+            while (game.getPhase().getCurrentRound().getRoundState() != FINISHED && !game.getPhase().getOnePlayer()) {
+
+                if(playing==null) playing = game.getPhase().getCurrentRound().nextPlayer();
+
+
+
+                //TODO DELETE
+                for (int j = 0; j < model.getPlayerList().size(); j++)
+                    if (!playing.equals(model.getPlayer(j)))
+                        controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "E' il turno di " + playing.getName());
+                    else controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "TUO TURNO " + playing.getName());
+
+
+                if(playerEnding!=null) controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
+
 
                 //TODO DELETE
                 LOGGER.log(Level.SEVERE, playing.getName() + " is playing ");
                 playing.getPlayerBoard().printCard();
                 LOGGER.log(Level.INFO, "DraftPool");
                 model.getDraftPool().printDraftPool();
+
+
+
 
 
                 ttask1 = timerActionPlayer.scheduleTimerActionPlayer(controller.getSetupHandler(), playing.getName());
@@ -156,23 +175,13 @@ public class RoundsHandler extends Thread {
 
                 timerActionPlayer.resetTimer();
 
-                PlayerZone playerEnding = playing;
+                playerEnding = playing;
 
                 game.getPhase().getCurrentRound().endAction();
 
                 playing = game.getPhase().getCurrentRound().nextPlayer();
 
                 model.hasChanged();
-
-                //TODO DELETE
-                for (int j = 0; j < model.getPlayerList().size(); j++)
-                    if (!playing.equals(model.getPlayer(j)))
-                        controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "E' il turno di " + playing.getName());
-
-                    else
-                        controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "TUO TURNO " + playing.getName());
-
-                controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
 
                 result = false;
             }
