@@ -4,6 +4,7 @@ package it.polimi.ingsw.LM26.model.Serialization;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import it.polimi.ingsw.LM26.Main;
 import it.polimi.ingsw.LM26.fileConfiguration.RuntimeTypeAdapterFactory1;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.ObjectivePublicCard;
@@ -14,10 +15,7 @@ import it.polimi.ingsw.LM26.controller.ToolCardsDecorator.*;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -110,12 +108,17 @@ public class Decks implements Serializable {
 
     public void serialize() {
 
-        FileReader fr1 = null, fr2 = null, fr3=null;
+       // FileReader fr1 = null, fr2 = null, fr3=null;
         BufferedReader br1 = null, br2 = null, br3=null;
 
         try {
-            fr1 = new FileReader("src/main/resources/PrivateCards");
-            br1 = new BufferedReader(fr1);
+            /*fr1 = new FileReader("src/main/resources/PrivateCards");
+            br1 = new BufferedReader(fr1);*/
+
+            InputStream stream = Main.class.getResourceAsStream("PrivateCards");
+            br1 = new BufferedReader(new InputStreamReader(stream));
+
+
 
             Type Private = new TypeToken<ArrayList<ObjectivePrivateCard>>() { }.getType();
             ArrayList<ObjectivePrivateCard> privateCards = new ArrayList<ObjectivePrivateCard>();
@@ -128,23 +131,23 @@ public class Decks implements Serializable {
 
             ObjectivePrivateCardDeck=privateCards;
 
-        } catch (IOException e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (br1 != null)
                     br1.close();
 
-                if (fr1 != null)
-                    fr1.close();
+                //if (fr1 != null)
+                //    fr1.close();
             } catch (IOException e) {
             }
         }
 
 
         try {
-            fr2 = new FileReader("src/main/resources/PublicCards");
-            br2 = new BufferedReader(fr2);
+            //fr2 = new FileReader("src/main/resources/PublicCards");
+            InputStream stream = Main.class.getResourceAsStream("PublicCards");
+            //br2 = new BufferedReader(fr2);
+            br2 = new BufferedReader(new InputStreamReader(stream));
 
             Type Public = new TypeToken<ArrayList<ObjectivePublicCard>>() {
             }.getType();
@@ -169,15 +172,13 @@ public class Decks implements Serializable {
 
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (br2 != null)
                     br2.close();
 
-                if (fr2 != null)
-                    fr2.close();
+               // if (fr2 != null)
+                //    fr2.close();
             } catch (IOException e) {
             }
 
@@ -186,9 +187,10 @@ public class Decks implements Serializable {
 
 
         try {
-            fr3 = new FileReader("src/main/resources/WindowCards");
-            br3 = new BufferedReader(fr3);
-
+            //fr3 = new FileReader("src/main/resources/WindowCards");
+           // br3 = new BufferedReader(fr3);
+            InputStream stream = Main.class.getResourceAsStream("WindowCards");
+            br3 = new BufferedReader(new InputStreamReader(stream));
 
 
             Type Window = new TypeToken<ArrayList<WindowPatternCard>>() { }.getType();
@@ -205,15 +207,13 @@ public class Decks implements Serializable {
 
             for(int i=0; i<WindowPatternCardDeck.size(); i++) WindowPatternCardDeck.get(i).createPattern();
 
-        } catch (IOException e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (br3 != null)
                     br3.close();
 
-                if (fr3 != null)
-                    fr3.close();
+                //if (fr3 != null)
+                //    fr3.close();
             } catch (IOException e) {
             }
         }
