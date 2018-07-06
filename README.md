@@ -1,7 +1,7 @@
 # MuranoLab
 
-Group Name : MuranoLab
-Group Code : LM26
+* Group Name : MuranoLab
+* Group Code : LM26
 
 ## Software Engineering Project 2018
 
@@ -86,10 +86,10 @@ Example:
   
   
 This is an example of WindowPatternCard
-> token : from 3 (easy) to 6 (difficult) from official rules but tou can insert the number you want
-> title : the title you want to the card
-> matrix: each [..] is a line of the windowPatter; you can insert only 5 enum for each line from : GREEN, YELLOW, BLUE, VIOLET, RED, LIGHT1, LIGHT2, DARK5, DARK6, MEDIUMS3, MEDIUMS4, EMPTY
-> inUse: false
+- token : from 3 (easy) to 6 (difficult) from official rules but tou can insert the number you want
+- title : the title you want to the card
+- matrix: each [..] is a line of the windowPatter; you can insert only 5 enum for each line from : GREEN, YELLOW, BLUE, VIOLET, RED, LIGHT1, LIGHT2, DARK5, DARK6, MEDIUMS3, MEDIUMS4, EMPTY
+- inUse: false
 
 ##### Enjoy creating your personalized windowPatternCard and try it in a play!
 
