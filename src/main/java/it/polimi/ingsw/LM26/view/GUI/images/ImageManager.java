@@ -48,6 +48,12 @@ public class ImageManager {
         }
     }
 
+    public Image getPatternCard(String title){
+        String s=title+".jpg";
+        Image i=new Image(ImageManager.class.getResource(s).toExternalForm());
+        return new Image(ImageManager.class.getResource(s).toExternalForm());
+    }
+
     public Image getObjectiveCard(int id){
         char[] c=Integer.toString(id).toCharArray();
         if((c[0]!='1' && c[0]!='2') || (Character.getNumericValue(c[1])>5 && c[0]=='1') || (Character.getNumericValue(c[1])>10 && c[0]=='2')){
@@ -64,6 +70,7 @@ public class ImageManager {
             }
         }
     }
+
 
     public Image getToolCard(int num){
         if(num<1 || num>12) throw new IllegalArgumentException("argument exceeds range");
@@ -101,13 +108,6 @@ public class ImageManager {
         if(index<0 || index>6) throw new IllegalArgumentException("argument exceeds range");
         return greyDiceBoxes[index];
     }
-
-   /* public static void main(String[] agrs){
-        ImageManager imageManager= new ImageManager();
-        Image im;
-        im= imageManager.getObjectiveCard(13);
-        System.out.println(im.toString());
-    }*/
 
     public void setDie(ImageView imView, DieInt die){
         switch (die.getColor()){

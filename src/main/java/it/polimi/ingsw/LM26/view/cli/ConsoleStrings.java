@@ -181,11 +181,11 @@ public class ConsoleStrings extends ViewInterface {
         showCurrentMenu(null);
     }
 
-    public void handleInput(String input){
+    private void handleInput(String input){
         playerMenu.handleInput(input);
     }
 
-    public boolean evaluateCondition(String input){
+    private boolean evaluateCondition(String input){
         return playerMenu.evaluateCondition(input);
     }
 

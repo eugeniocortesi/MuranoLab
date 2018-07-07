@@ -144,8 +144,8 @@ public class ActionEventGenerator {
     public void frameBoardEvent(Box box) throws IllegalArgumentException{
         if(box==null) throw new IllegalArgumentException("null box from frame board");
         else{
-            System.out.println(idx);
-            System.out.println(contCellsFrameBoard);
+            System.out.println("idx: " + idx);
+            System.out.println("contCellFrameBoard: " + contCellsFrameBoard);
             if(((contCellsFrameBoard==0 && idx!=stateArray.size()-1) || contCellsFrameBoard==3) && !box.isIsPresent()){
                 gController.setMoveLabel("Cella senza dado. Selezionane un'altra");
                 idx--;
@@ -178,7 +178,7 @@ public class ActionEventGenerator {
                     fromBoxes.add(box);
                     ae.setFromBoxList(fromBoxes);
                 }
-                if(contCellsFrameBoard==3){
+                else if(contCellsFrameBoard==3){
                     toBoxes.add(box);
                     ae.setToBoxList(toBoxes);
                     gController.moveDieTemporarilyFrameB(ae.getFromBoxList().get(1), box);

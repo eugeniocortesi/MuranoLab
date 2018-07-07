@@ -147,7 +147,7 @@ public class GameController {
         }
     }
 
-    public void disableEverything(){
+    private void disableEverything(){
         myFBoardController.setDisable(true);
         dPoolController.setDisable(true);
         onBCardsController.setDisable(true);
