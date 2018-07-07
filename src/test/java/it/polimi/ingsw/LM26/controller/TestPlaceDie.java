@@ -6,6 +6,7 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Bag;
+import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import org.junit.Before;
@@ -18,16 +19,22 @@ import static org.junit.Assert.*;
 
 public class TestPlaceDie {
 
-    Model model;
-    Random rand = new Random();
-    DieInt die=null;
-    PlaceDie placement=null;
-    Box[][] b=null;
-    PlayerZone player;
-    int i= 0, j= 0 ;
-    int attempt=0;
-    int dieCount=0;
-    int[][] values=new int[4][5];
+    private Model model;
+
+    private Random rand = new Random();
+
+    private Box[][] b=null;
+
+    private PlayerZone player;
+
+    private int i;
+
+    private int attempt=0;
+
+    private int dieCount=0;
+
+    private int[][] values=new int[4][5];
+
 
     @Before
 
@@ -37,15 +44,23 @@ public class TestPlaceDie {
         model.reset();
 
         model.getPlayerList().add(new PlayerZone("name" + i, i));
+
         model.getPlayerList().get(i).setNumberPlayer(i);
-        int index = rand.nextInt(model.getDecks().getWindowPatternCardDeck().size());
-        WindowPatternCard pattern = model.getDecks().getWindowPatternCardDeck().get(index);
+
+        WindowPatternCard pattern = model.getDecks().getWindowPatternCardDeck().get(0);
+
         model.getPlayerList().get(i).setWindowPatternCard(pattern);
+
         WindowFramePlayerBoard board=model.getDecks().getWindowFramePlayerBoardDeck().get(0);
+
         model.getPlayerList().get(i).setPlayerBoard(board);
+
         model.getPlayerList().get(i).getPlayerBoard().insertPatternIntoBoard(model.getPlayerList().get(i).getWindowPatternCard().getWindowPatter());
+
         b=model.getPlayerList().get(i).getPlayerBoard().getBoardMatrix();
+
         player=model.getPlayerList().get(i);
+
         player.getPlayerBoard().printCard();
     }
 
@@ -53,84 +68,179 @@ public class TestPlaceDie {
 
     public void checkPlacement(){
 
-         while (dieCount<20 ) {
-            if (model.getBag().size() == 0) model.setBag(new Bag());
-            die = model.getBag().draw();
-            die.roll();
-
-            //first placement
-
-            i = rand.nextInt(4);
-            j = rand.nextInt(5);
-            System.out.println("first placement: " + player.getPlayerBoard().isEmpty());
-            System.out.println("attempt: " + attempt + " whit: " + i + " and " + j);
-            die.dump();
-            //controlling box was empty
-            if (!b[i][j].isIsPresent()) System.out.println("box was empty");
-            placement = new PlaceDie(die, b[i][j], player);
-
-            while (!placement.placeDie() && attempt < 1000) {
-                attempt++;
-                i = rand.nextInt(4);
-                j = rand.nextInt(5);
-                if (model.getBag().size() == 0) model.setBag(new Bag());
-                die = model.getBag().draw();
-                die.roll();
-                System.out.println("attempt: " + attempt + " whit: " + i + " and " + j);
-                die.dump();
-
-                placement = new PlaceDie(die, b[i][j], player);
 
 
-                if (b[i][j].isIsPresent()) {
-                    if (b[i][j].getDie().getValue() != values[i][j]) {
-                        System.out.println("IL DADO " + i + " " + j + " HA CAMBIATO VALORE DA " + values[i][j] + " A " + b[i][j].getDie().getValue());
-                        values[i][j] = b[i][j].getDie().getValue();
-                    }
-                }
-            }
+        DieInt die = new Die(Color.ANSI_RED);
+        die.setRoll(4);
 
-            if (attempt < 1000) {
-                values[i][j] = b[i][j].getDie().getValue();
+        //Board is empty
+        PlaceDie placement = new PlaceDie(die,b[2][2], player);
+        assertFalse(placement.placeDie()); // must be on edge
 
+        placement = new PlaceDie(die,b[3][0], player);
+        assertFalse(placement.placeDie()); //error in color restriction
 
-                System.out.println("Placed: are all restrictions respected?");
-                if (!b[i][j].isIsPresent()) System.out.println("ERROR: die not setted");
-                if (dieCount == 1 && i != 0 && i != 3 && j != 0 && j != 4) System.out.println("ERROR: not on the edge");
-                if (b[i][j].getPatternBox().isShade() && b[i][j].getPatternBox().getValue() != die.getValue())
-                    System.out.println("ERROR: value non respected ");
-                if (b[i][j].getPatternBox().isColor() && !b[i][j].getPatternBox().getColor().equals(Color.WHITE) && !b[i][j].getPatternBox().getColor().equals(die.getColor()))
-                    System.out.println("ERROR: color non respected ");
+        placement = new PlaceDie(die,b[3][1], player);
+        assertFalse(placement.placeDie()); //error in value restriction
 
-                //controllare che il dado sia almeno vicino ad un'altro
+        placement = new PlaceDie(die,b[0][0], player);
+        assertTrue(placement.placeDie());
 
+        player.getPlayerBoard().printCard();
 
-                if (j < 4) {
-                    if ((b[i][j + 1].isIsPresent() && (b[i][j].getDie().getColor().equals(b[i][j + 1].getDie().getColor()) || b[i][j].getDie().getValue() == b[i][j + 1].getDie().getValue())))
-                        System.out.println("                                         error: near a die with same color/value DX");
-                }
-                if (j > 0) {
-                    if ((b[i][j - 1].isIsPresent() && (b[i][j].getDie().getColor().equals(b[i][j - 1].getDie().getColor()) || b[i][j].getDie().getValue() == b[i][j - 1].getDie().getValue())))
-                        System.out.println("                                         error: near a die with same color/value SX ");
-                }
-                if (i < 3) {
-                    if ((b[i + 1][j].isIsPresent() && (b[i][j].getDie().getColor().equals(b[i + 1][j].getDie().getColor()) || b[i][j].getDie().getValue() == b[i + 1][j].getDie().getValue())))
-                        System.out.println("                                         error: near a die with same color/value DOWN  ");
-                }
-                if (i > 0) {
-                    if ((b[i - 1][j].isIsPresent() && (b[i][j].getDie().getColor().equals(b[i - 1][j].getDie().getColor()) || b[i][j].getDie().getValue() == b[i - 1][j].getDie().getValue())))
-                        System.out.println("                                         error: near a die with same color/value UP ");
-                }
+        die = new Die(Color.ANSI_RED);
+        die.setRoll(5);
 
+        // not first die must be near another die
 
-            }
+        placement = new PlaceDie(die,b[0][2], player);
+        assertFalse(placement.placeDie());
 
-            dieCount++;
-            attempt = 0;
-            player.getPlayerBoard().printCard();
+        placement = new PlaceDie(die,b[0][3], player);
+        assertFalse(placement.placeDie());
 
-        }
-        player.getWindowPatternCard().printCard();
+        placement = new PlaceDie(die,b[0][4], player);
+        assertFalse(placement.placeDie());
+
+        placement = new PlaceDie(die,b[1][4], player);
+        assertFalse(placement.placeDie());
+
+        placement = new PlaceDie(die,b[2][0], player);
+        assertFalse(placement.placeDie());
+
+        placement = new PlaceDie(die,b[2][4], player);
+        assertFalse(placement.placeDie());
+
+        placement = new PlaceDie(die,b[3][0], player);
+        assertFalse(placement.placeDie());
+
+        placement = new PlaceDie(die,b[3][4], player);
+        assertFalse(placement.placeDie());
+
+        placement = new PlaceDie(die,b[2][2], player);
+        assertFalse(placement.placeDie());
+
+        placement = new PlaceDie(die,b[1][0], player);
+        assertFalse(placement.placeDie()); // cant be near a die of same color
+
+        die = new Die(Color.ANSI_BLUE);
+        die.setRoll(4);
+        placement = new PlaceDie(die,b[0][1], player);
+        assertFalse(placement.placeDie());  // cant be nea a die o same value
+
+        die.setRoll(5);
+        placement = new PlaceDie(die,b[0][1], player);
+        assertTrue(placement.placeDie());
+
+        player.getPlayerBoard().printCard();
+
+        die = new Die(Color.ANSI_GREEN);
+        die.setRoll(2);
+        placement = new PlaceDie(die,b[1][2], player);
+        assertTrue(placement.placeDie());
+
+        die = new Die(Color.ANSI_GREEN);
+        die.setRoll(4);
+        placement = new PlaceDie(die,b[1][1], player);
+        assertFalse(placement.placeDie());
+
+        die = new Die(Color.ANSI_RED);
+        die.setRoll(2);
+        placement = new PlaceDie(die,b[1][3], player);
+        assertFalse(placement.placeDie());
+
+        die = new Die(Color.ANSI_GREEN);
+        die.setRoll(2);
+        placement = new PlaceDie(die,b[0][2], player);
+        assertFalse(placement.placeDie());
+
+        die = new Die(Color.ANSI_GREEN);
+        die.setRoll(5);
+        placement = new PlaceDie(die,b[3][3], player);
+        assertFalse(placement.placeDie());
+
+        player.getPlayerBoard().printCard();
+
+        die = new Die(Color.ANSI_RED);
+        die.setRoll(2);
+        placement = new PlaceDie(die,b[2][1], player);
+        assertTrue(placement.placeDie());
+
+        die = new Die(Color.ANSI_GREEN);
+        die.setRoll(2);
+        placement = new PlaceDie(die,b[3][0], player);
+        assertTrue(placement.placeDie());
+
+        die = new Die(Color.ANSI_YELLOW);
+        die.setRoll(2);
+        placement = new PlaceDie(die,b[2][3], player);
+        assertTrue(placement.placeDie());
+
+        die = new Die(Color.ANSI_PURPLE);
+        die.setRoll(2);
+        placement = new PlaceDie(die,b[3][4], player);
+        assertTrue(placement.placeDie());
+
+        player.getPlayerBoard().printCard();
+
+        die = new Die(Color.ANSI_PURPLE);
+        die.setRoll(2);
+        placement = new PlaceDie(die,b[1][0], player);
+        assertTrue(placement.placeDie());
+
+        die = new Die(Color.ANSI_RED);
+        die.setRoll(6);
+        placement = new PlaceDie(die,b[1][3], player);
+        assertTrue(placement.placeDie());
+
+        die = new Die(Color.ANSI_YELLOW);
+        die.setRoll(6);
+        placement = new PlaceDie(die,b[0][4], player);
+        assertTrue(placement.placeDie());
+
+        die = new Die(Color.ANSI_YELLOW);
+        die.setRoll(6);
+        placement = new PlaceDie(die,b[1][4], player);
+        assertFalse(placement.placeDie());
+
+        die = new Die(Color.ANSI_YELLOW);
+        die.setRoll(2);
+        placement = new PlaceDie(die,b[1][4], player);
+        assertFalse(placement.placeDie());
+
+        die = new Die(Color.ANSI_BLUE);
+        die.setRoll(6);
+        placement = new PlaceDie(die,b[1][4], player);
+        assertFalse(placement.placeDie());
+
+        die = new Die(Color.ANSI_BLUE);
+        die.setRoll(6);
+        placement = new PlaceDie(die,b[0][3], player);
+        assertFalse(placement.placeDie());
+
+        die = new Die(Color.ANSI_YELLOW);
+        die.setRoll(6);
+        placement = new PlaceDie(die,b[0][3], player);
+        assertFalse(placement.placeDie());
+
+        die = new Die(Color.ANSI_YELLOW);
+        die.setRoll(4);
+        placement = new PlaceDie(die,b[0][3], player);
+        assertFalse(placement.placeDie());
+
+        player.getPlayerBoard().printCard();
+
+        b[0][0].free();
+
+        b[1][0].free();
+
+        die = new Die(Color.ANSI_YELLOW);
+        die.setRoll(1);
+        placement = new PlaceDie(die,b[0][0], player);
+        assertTrue(placement.placeDie());
+
+        player.getPlayerBoard().printCard();
+
 
     }
 
