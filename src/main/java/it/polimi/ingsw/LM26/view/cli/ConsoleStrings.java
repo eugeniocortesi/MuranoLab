@@ -138,7 +138,6 @@ public class ConsoleStrings extends ViewInterface {
 
 
     public void showDisconnectScreen() {
-        clientView.disconnect();
         AnsiConsole.out().println("Ti sei disconnesso.");
     }
 

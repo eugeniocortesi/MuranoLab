@@ -24,6 +24,9 @@ public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
         this.cs = cs;
     }
 
+    /**
+     * it shows different menù options when it's not user's turn
+     */
     @Override
     public void showMenu(){
 
@@ -37,12 +40,22 @@ public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
 
     }
 
+
+    /**
+     * @param input from the user in ConsoleStrings class
+     * @return if it is one of menù choices
+     */
     public boolean evaluateCondition(String input){
         return (!(input.equalsIgnoreCase("A") || input.equalsIgnoreCase("T")
                 || input.equalsIgnoreCase("C") || input.equalsIgnoreCase("G")
                 ||input.equalsIgnoreCase("L")));
     }
 
+
+    /**
+     * it calls methods from ActionEventGenerator class in order to create different action events
+     * @param input the checked input from user
+     */
     public void handleInput(String input){
         System.out.println(ansi().eraseScreen());
         if(input.equalsIgnoreCase("L")){

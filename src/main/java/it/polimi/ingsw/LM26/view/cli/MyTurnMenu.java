@@ -16,14 +16,19 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
     private ActionEventGenerator ae;
     private ActionEvent actionEvent;
     private ConsoleStrings cs;
+    private ClientView cView;
 
     public MyTurnMenu(ClientView clientView, ConsoleStrings cs) {
         ae= new ActionEventGenerator();
+        cView=clientView;
         this.cs = cs;
         register(clientView);
         System.out.println("Registered");
     }
 
+    /**
+     * it shows current turn menù options when it's user's turn
+     */
     @Override
     public void showMenu(){
 
@@ -38,6 +43,10 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
                 "'L' per lasciare la partita\n");
     }
 
+    /**
+     * @param input from the user in main menù
+     * @return if it is one of the menù chioces
+     */
     public boolean evaluateCondition(String input){
         return  !(input.equalsIgnoreCase("A") || input.equalsIgnoreCase("T")
                 || input.equalsIgnoreCase("C") || input.equalsIgnoreCase("D")
@@ -45,6 +54,10 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
                 ||input.equalsIgnoreCase("L"));
     }
 
+    /**
+     * it calls diffrerent methods from action event generator in order to create different action events
+     * @param input is the checked input from user
+     */
     public void handleInput(String input){
         System.out.println(ansi().eraseScreen());
         if(input.equalsIgnoreCase("A")){
@@ -78,7 +91,9 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
             cs.notifyMessage(actionEvent);
         }
         else if(input.equalsIgnoreCase("L")){
-            if(ae.disconnectConfirm()){cs.showDisconnectScreen();}
+            if(ae.disconnectConfirm()){
+                cView.disconnect();
+            }
             else {
                 actionEvent=ae.askForMenu(true);
                 cs.notifyMessage(actionEvent);
