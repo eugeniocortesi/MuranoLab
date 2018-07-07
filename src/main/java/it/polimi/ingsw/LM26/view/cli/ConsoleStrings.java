@@ -38,7 +38,7 @@ public class ConsoleStrings extends ViewInterface {
     private String s= "";
     private InputLoop inputLoop;
     private ActionEventGenerator aeGenerator;
-    private CountDownLatch countDownLatch;
+    //private CountDownLatch countDownLatch;
 
     public static void main(String[] args) {
         //System.out.println("\u00AF"+"\u2310"+"\u00AC"+"\u2319"+"\u2310");
@@ -168,10 +168,6 @@ public class ConsoleStrings extends ViewInterface {
 
     @Override
     public void showSetPlayerMenu(String name, PlayerZone player) {
-        try{
-            countDownLatch.countDown();
-        }
-        catch(NullPointerException e){ }
         if (player.getPlayerState().equals(PlayerState.BEGINNING)) {
             this.setPlayerMenu(new MyTurnMenu(clientView, this));
         }
@@ -181,7 +177,8 @@ public class ConsoleStrings extends ViewInterface {
             inputLoop = new InputLoop();
             inputLoop.start();
         }
-        else showCurrentMenu(null);
+        
+        showCurrentMenu(null);
     }
 
     public void handleInput(String input){
@@ -195,10 +192,6 @@ public class ConsoleStrings extends ViewInterface {
     @Override
     public void showAnswerFromController(String name, String answer) {
         System.out.println(answer);
-        try{
-            countDownLatch.countDown();
-        }
-        catch(NullPointerException e){ }
     }
 
     @Override
@@ -250,13 +243,13 @@ public class ConsoleStrings extends ViewInterface {
             notify(aeGenerator.askForMenu(false));
             System.out.println("notify2");
         }
-        countDownLatch = new CountDownLatch(1);
+        /*countDownLatch = new CountDownLatch(1);
         try {
             countDownLatch.await();
         }
         catch(InterruptedException e){
             Thread.currentThread().interrupt();
-        }
+        }*/
     }
 
     private class InputLoop extends Thread{
@@ -266,16 +259,16 @@ public class ConsoleStrings extends ViewInterface {
         public void run() {
             isRunning = true;
             String playerInput = "";
-
-            do {
-                showCurrentMenu(null);
-                try {
-                    playerInput = br.readLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } while (evaluateCondition(playerInput));
-            handleInput(playerInput);
+            while(isRunning) {
+                do {
+                    try {
+                        playerInput = br.readLine();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } while (evaluateCondition(playerInput));
+                handleInput(playerInput);
+            }
             isRunning = false;
 
         }
