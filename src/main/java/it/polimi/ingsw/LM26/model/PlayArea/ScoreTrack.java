@@ -16,7 +16,9 @@ public class ScoreTrack extends ScoreTrackInt {
 
     public ScoreTrack(String s){
 
-        scoreMarkerList = new ScoreMarker[50];
+        final int dimension=50;
+
+        scoreMarkerList = new ScoreMarker[dimension];
 
         this.typeScoreTrack="ScoreTrack";
     }

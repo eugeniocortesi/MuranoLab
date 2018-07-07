@@ -63,7 +63,9 @@ public class OnBoardCards implements Serializable {
 
         Model model = singletonModel();
 
-        for (int i = 0; i < 3; i++) {
+        final int toExtract = 3;
+
+        for (int i = 0; i < toExtract; i++) {
 
             int count = model.getDecks().getObjectivePublicCardDeck().size();
 
@@ -96,9 +98,11 @@ public class OnBoardCards implements Serializable {
 
         int count = model.getDecks().getToolCardDeck().size();
 
+        final int toExtract = 3;
+
         ArrayList<ToolCardInt> three = new ArrayList<>();
 
-        for (int j = 0; j < 3; j++) {
+        for (int j = 0; j < toExtract; j++) {
 
             Random rand = new Random();
 
@@ -142,7 +146,9 @@ public class OnBoardCards implements Serializable {
 
         int count = temp.size();
 
-        for (int j = 0; j < 4; j++) {
+        final int toDistribute = 4;
+
+        for (int j = 0; j < toDistribute; j++) {
 
             Random rand = new Random();
 

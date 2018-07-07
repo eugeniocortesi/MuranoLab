@@ -56,15 +56,17 @@ public class Bag implements Serializable {
 
         fill();
 
-        contBlue = 18;
+        int colorNumber = 18;
 
-        contGreen = 18;
+        contBlue = colorNumber;
 
-        contPurple = 18;
+        contGreen = colorNumber;
 
-        contRed = 18;
+        contPurple = colorNumber;
 
-        contYellow = 18;
+        contRed = colorNumber;
+
+        contYellow = colorNumber;
 
         LOGGER.setLevel(Level.ALL);
     }
@@ -79,7 +81,9 @@ public class Bag implements Serializable {
 
         Die d;
 
-        for (int i = 0; i < 90 / 5; i++) {
+        final int diceInBag = 90;
+
+        for (int i = 0; i < diceInBag / 5; i++) {
 
             c = Color.ANSI_BLUE;
 

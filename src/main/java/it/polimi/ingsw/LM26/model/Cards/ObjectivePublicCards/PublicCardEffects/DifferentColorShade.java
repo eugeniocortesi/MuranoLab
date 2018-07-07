@@ -49,15 +49,19 @@ public class DifferentColorShade extends Effect {
 
         int min;
 
+        final int row=4;
+
+        final int column=5;
+
         if (!colorShades) {
 
             num[5] = 18;
 
             min = 18;
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < row; i++)
 
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < column; j++)
 
                     if (board[i][j].isIsPresent()) {
 
@@ -75,9 +79,9 @@ public class DifferentColorShade extends Effect {
 
             min = 20;
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < row; i++)
 
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < column; j++)
 
                     if (board[i][j].isIsPresent()) {
 

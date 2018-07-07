@@ -18,7 +18,9 @@ public class Box implements Serializable {
 
     private boolean isPresent = false;
 
-    private int i = 0, j = 0;
+    private int i = 0;
+
+    private int j = 0;
 
     public Box(){
     }

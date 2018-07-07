@@ -23,16 +23,20 @@ public class WindowFramePlayerBoard implements Serializable {
 
     private int numDice = 0;
 
+    private static final int row = 4;
+
+    private static final int column = 5;
+
     public WindowFramePlayerBoard(){
     }
 
     public WindowFramePlayerBoard(int id, Color color) {
 
-        boardMatrix = new Box[4][5];
+        boardMatrix = new Box[row][column];
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < row; i++)
 
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < column; j++)
 
                 boardMatrix[i][j] = new Box(i, j);
 
@@ -71,9 +75,9 @@ public class WindowFramePlayerBoard implements Serializable {
 
         hasPatternCard = true;
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < row; i++)
 
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < column; j++)
 
                 boardMatrix[i][j].setPatternBox(patternMatrix[i][j]);
     }
@@ -89,9 +93,9 @@ public class WindowFramePlayerBoard implements Serializable {
 
         int count = 0;
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < row; i++) {
 
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < column; j++) {
 
                 if (!boardMatrix[i][j].isIsPresent()) count++;
             }
@@ -133,9 +137,9 @@ public class WindowFramePlayerBoard implements Serializable {
 
         if (hasPatternCard)
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < row; i++) {
 
-                for (int j = 0; j < 5; j++) {
+                for (int j = 0; j < column; j++) {
 
                     if (boardMatrix[i][j].isIsPresent())
 

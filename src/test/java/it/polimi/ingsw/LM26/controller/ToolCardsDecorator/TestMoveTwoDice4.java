@@ -10,6 +10,7 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.AnnotatedArrayType;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,9 +21,9 @@ public class TestMoveTwoDice4 {
 
 
     Model model = singletonModel();
-    Random rand = new Random();
-    PlayerZone player;
-    Box[][] board;
+    private Random rand = new Random();
+    private PlayerZone player;
+    private Box[][] board;
     DieInt die1, die2, die3, die4, die5;
     PlaceDie placement;
     ArrayList<Box> from = new ArrayList<>();
@@ -51,7 +52,60 @@ public class TestMoveTwoDice4 {
     @Test
     public void checkEffect() {
 
-        int i, j, k, h;
+      /*  player.getPlayerBoard().printCard();
+
+        DieInt die = new Die(Color.ANSI_RED);
+        die.setRoll(4);
+
+        PlaceDie placement = new PlaceDie(die, board[0][0], player);
+        placement.placeDie();
+
+        die = new Die(Color.ANSI_YELLOW);
+        die.setRoll(6);
+
+        placement = new PlaceDie(die, board[0][1], player);
+        placement.placeDie();
+
+        die = new Die(Color.ANSI_GREEN);
+        die.setRoll(6);
+
+        placement = new PlaceDie(die, board[1][2], player);
+        placement.placeDie();
+
+        die = new Die(Color.ANSI_YELLOW);
+        die.setRoll(4);
+
+        placement = new PlaceDie(die, board[0][1], player);
+        placement.placeDie();
+
+        die = new Die(Color.ANSI_YELLOW);
+        die.setRoll(6);
+
+        placement = new PlaceDie(die, board[0][1], player);
+        placement.placeDie();
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*int i, j, k, h;
 
         die1 = new Die(Color.ANSI_BLUE);
         die1.roll();
@@ -149,6 +203,6 @@ public class TestMoveTwoDice4 {
                 assertEquals(to.get(1).getDie().getColor(), to.get(1).getPatternBox().getColor());
             if (to.get(1).getPatternBox().isShade())
                 assertEquals(to.get(1).getDie().getValue(), to.get(1).getPatternBox().getValue());
-        }
+        }*/
     }
 }

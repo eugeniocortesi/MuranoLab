@@ -71,7 +71,7 @@ public class DifferentColorShadeOnRowColomn extends Effect {
     /**
      * the method is implemented for all the 4 combination and it read the matrix by rows and columns
      * -different colors in column
-     * -differen colors in line
+     * -different colors in line
      * -different shades in column
      * -different shades in line
      * @param b board on which calculate points
@@ -82,15 +82,19 @@ public class DifferentColorShadeOnRowColomn extends Effect {
 
         Box[][] board = b.getBoardMatrix();
 
+        final int row=4;
+
+        final int column=5;
+
         int count = 0;
 
         if (colorShades) {
 
             if (rowColomn) {
 
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < row; i++) {
 
-                    for (int j = 0; j < 5; j++) {
+                    for (int j = 0; j < column; j++) {
 
                         if (board[i][j].isIsPresent()) {
 
@@ -133,9 +137,9 @@ public class DifferentColorShadeOnRowColomn extends Effect {
                 }
             }
 
-            else { for (int i = 0; i < 5; i++) {
+            else { for (int i = 0; i < column; i++) {
 
-                    for (int j = 0; j < 4; j++) {
+                    for (int j = 0; j < row; j++) {
 
                         if (board[j][i].isIsPresent()) {
 
@@ -181,9 +185,9 @@ public class DifferentColorShadeOnRowColomn extends Effect {
 
         else { if (rowColomn) {
 
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < row; i++) {
 
-                    for (int j = 0; j < 5; j++) {
+                    for (int j = 0; j < column; j++) {
 
                         if (board[i][j].isIsPresent()) {
 
@@ -232,9 +236,9 @@ public class DifferentColorShadeOnRowColomn extends Effect {
                 }
             }
 
-            else { for (int i = 0; i < 5; i++) {
+            else { for (int i = 0; i < column; i++) {
 
-                    for (int j = 0; j < 4; j++) {
+                    for (int j = 0; j < row; j++) {
 
                         if (board[j][i].isIsPresent()) {
 

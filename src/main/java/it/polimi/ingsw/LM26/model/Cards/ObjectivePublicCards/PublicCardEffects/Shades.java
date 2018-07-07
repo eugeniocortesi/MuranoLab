@@ -41,6 +41,10 @@ public class Shades extends Effect implements Serializable{
 
         Box[][] board = b.getBoardMatrix();
 
+        final int row=4;
+
+        final int column=5;
+
         int shade1=0;
 
         int shade2=0;
@@ -70,9 +74,9 @@ public class Shades extends Effect implements Serializable{
             shade2=2;
         }
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < row; i++)
 
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < column; j++)
 
                 if (board[i][j].isIsPresent()) {
 

@@ -22,6 +22,10 @@ public class WindowPatternCard extends CardInt {
 
     private boolean inUse = false;
 
+    private static final int row=4;
+
+    private static final int column=5;
+
     public WindowPatternCard(){
     }
 
@@ -44,11 +48,11 @@ public class WindowPatternCard extends CardInt {
 
     public void createPattern() {
 
-        patternMatrix = new PatternBox[4][5];
+        patternMatrix = new PatternBox[row][column];
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < row; i++)
 
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < column; j++)
 
                 patternMatrix[i][j] = new PatternBox();
 
@@ -95,9 +99,9 @@ public class WindowPatternCard extends CardInt {
 
         String escape;
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < row; i++) {
 
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < column; j++) {
 
                 if (patternMatrix[i][j].isColor()) {
 

@@ -87,9 +87,13 @@ public class ObjectivePrivateCard extends CardInt {
 
         int count = 0;
 
-        for (int i = 0; i < 4; i++)
+        final int row=4;
 
-            for (int j = 0; j < 5; j++)
+        final int column=5;
+
+        for (int i = 0; i < row; i++)
+
+            for (int j = 0; j < column; j++)
 
                 if (b[i][j].isIsPresent() && b[i][j].getDie().getColor().equals(this.getColour()))
 

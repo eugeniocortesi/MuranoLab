@@ -49,13 +49,17 @@ public class ColoredDiagonals extends Effect {
 
         int count = 0;
 
+        final int row=4;
+
+        final int column=5;
+
         int i;
 
         int j;
 
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < row; i++) {
 
-            for (j = 0; j < 5; j++) {
+            for (j = 0; j < column; j++) {
 
                 if (board[i][j].isIsPresent()) {
 
