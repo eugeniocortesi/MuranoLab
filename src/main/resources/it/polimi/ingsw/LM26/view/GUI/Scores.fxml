@@ -14,7 +14,7 @@
    <children>
       <VBox alignment="TOP_CENTER">
          <children>
-            <Label text="SEI ARRIVATO 2^!">
+            <Label fx:id="winlose">
                <VBox.margin>
                   <Insets bottom="40.0" top="40.0" />
                </VBox.margin>
@@ -501,6 +501,22 @@
                   </TilePane>
                </children>
             </VBox>
+            <Label fx:id="win" text="vincitore">
+               <padding>
+                  <Insets top="50.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Dubai Regular" size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="scores" text="tuo punteggio">
+               <font>
+                  <Font name="Dubai Regular" size="22.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
    </children>

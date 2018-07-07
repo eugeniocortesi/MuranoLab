@@ -66,7 +66,8 @@ public class ConsoleTools {
     }
 
     public String printDie(DieInt die){
-        String face=numToFace(die.getNumber());
+        String face=Integer.toString(die.getNumber());
+        //String face=numToFace(die.getNumber());
         String escape=die.getColor().escape();
         return (escape+face+Color.RESET);
     }
@@ -155,10 +156,10 @@ public class ConsoleTools {
             System.out.flush();
         }
         else if(p.isShade()){
-            if(numToFace(p.getValue())!=null){
-                System.out.print(numToFace(p.getValue())+"|");
-                System.out.flush();
-            }
+            //if(numToFace(p.getValue())!=null){
+            System.out.print(Integer.toString(p.getValue())+"|");
+            System.out.flush();
+
         }
     }
 

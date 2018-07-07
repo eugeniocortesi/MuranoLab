@@ -33,7 +33,7 @@ public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
                 "'T' per vedere la tua zona di gioco\n" +
                 "'G' per vedere l'area comune di gioco\n" +
                 "'C' per vedere una carta\n" +
-                "'L' per lasciare la partitan\n");
+                "'L' per lasciare la partita\n");
 
     }
 

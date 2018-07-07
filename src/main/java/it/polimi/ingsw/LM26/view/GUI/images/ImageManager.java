@@ -57,7 +57,11 @@ public class ImageManager {
             if(c[0]=='1'){
                 return objectivePrivateCards[Character.getNumericValue(c[1]-1)];
             }
-            else return objectivePublicCards[Character.getNumericValue(c[1]-1)];
+            else {
+                if(c.length==2)
+                return objectivePublicCards[Character.getNumericValue(c[1]-1)];
+                else return objectivePrivateCards[10+(Character.getNumericValue(c[2]-1))];
+            }
         }
     }
 

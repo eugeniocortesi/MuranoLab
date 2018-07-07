@@ -204,7 +204,12 @@ public class ConsoleStrings extends ViewInterface {
 
     @Override
     public void showEndGame(String name, int score, String winnner, int scoreWinner) {
-
+        if(name.equals(winnner)){
+            System.out.println("Hai vinto con "+scoreWinner+" punti!");
+        }
+        else {
+            System.out.println("Ha vinto "+winnner+".\nPunti totalizzati: "+score+"\nPunti del vincitore: "+scoreWinner);
+        }
     }
 
     /**

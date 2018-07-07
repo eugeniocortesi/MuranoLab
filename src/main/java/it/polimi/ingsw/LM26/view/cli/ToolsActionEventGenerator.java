@@ -94,7 +94,7 @@ public class ToolsActionEventGenerator {
         return matrix[r-1][c-1];
     }
 
-    public boolean askEndMove(){
+    public void askEndMove(){
         boolean toMenu=false;
         while(!toMenu){
             System.out.println("'OK' per tornare al menù");
@@ -108,7 +108,6 @@ public class ToolsActionEventGenerator {
                 toMenu=true;
             }
         }
-        return true;
     }
 
     public int askNumber(){

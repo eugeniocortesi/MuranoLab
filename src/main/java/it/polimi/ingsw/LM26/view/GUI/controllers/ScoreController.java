@@ -24,6 +24,12 @@ public class ScoreController {
     private  TilePane row3;
     @FXML
     private  TilePane row4;
+    @FXML
+    private Label winlose;
+    @FXML
+    private Label win;
+    @FXML
+    private Label scores;
 
 
 
@@ -62,10 +68,18 @@ public class ScoreController {
                 cell=(StackPane)row3.getChildren().get(p.getScoreMarker().getPoints()-39);
                 showScoreMarker(cell, p);
             }
+            if(name.equals(winner)){
+                winlose.setText("Hai vinto!");
+            }
+            else{
+                winlose.setText("Hai perso");
+                scores.setText(name+": "+score+" punti");
+            }
+            win.setText("Vince "+name+" con "+scoreWinner+" punti");
         }
     }
 
-    public  void showScoreMarker(StackPane stackPane, PlayerZone pl){
+    private void showScoreMarker(StackPane stackPane, PlayerZone pl){
         Label l=(Label)stackPane.getChildren().get(0);
         if(pl.getScoreMarker().getRealPoints()>50){
             l.setText("50");
@@ -83,5 +97,6 @@ public class ScoreController {
         else if(pl.getIDPlayer()==3){
             stackPane.setStyle("-fx-background-color: #d341bd");
         }
+        stackPane.setStyle("-fx-background-radius: 10");
     }
 }
