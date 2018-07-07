@@ -94,7 +94,7 @@ public class ClientManagerSocket extends ClientManager {
      * @param messageSent String
      */
 
-    private void sendMessage(String messageSent) {
+    private synchronized void sendMessage(String messageSent) {
 
         if(messageSent == null ){
             return;

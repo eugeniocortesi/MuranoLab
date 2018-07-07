@@ -211,6 +211,7 @@ public class ClientViewSocket extends ClientView {
         LOGGER.log(Level.SEVERE,"Client disconnected");
 
         concreteClientView.showDisconnectScreen();
+        System.exit(0);
     }
 
     /**
@@ -349,6 +350,7 @@ public class ClientViewSocket extends ClientView {
     public void endGame(String name, int score, String winner, int scoreWinner) {
 
         concreteClientView.showEndGame(name, score, winner, scoreWinner);
+        System.exit(0);
     }
 
     /**

@@ -189,6 +189,8 @@ public class ClientViewRMI extends ClientView {
         LOGGER.log(Level.SEVERE,"Client disconnected");
 
         concreteClientView.showDisconnectScreen();
+
+        System.exit(0);
     }
 
     /**
@@ -364,6 +366,7 @@ public class ClientViewRMI extends ClientView {
     public void endGame(String username, int score, String winner, int scoreWinner) {
 
         concreteClientView.showEndGame(username, score, winner, scoreWinner);
+        System.exit(0);
     }
 
     /**

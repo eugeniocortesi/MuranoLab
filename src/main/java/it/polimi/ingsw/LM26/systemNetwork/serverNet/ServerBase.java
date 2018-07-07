@@ -74,9 +74,7 @@ public class ServerBase extends ViewGameInterface {
 
         dataServerConfiguration = new DataServerConfiguration().implementation();
 
-        timerConfiguration = new TimerConfiguration();
-
-        timerConfiguration.implementation();
+        timerConfiguration = TimerConfiguration.implementation();
 
         LOGGER.log(Level.WARNING, "SocketPort " +dataServerConfiguration.getSOCKETPORT()+ " ClientRMI " + dataServerConfiguration.getClientRMIPORT()
                 + " ServerRMI "+ dataServerConfiguration.getServerRMIPORT());
@@ -166,9 +164,10 @@ public class ServerBase extends ViewGameInterface {
 
         if(checkNumberUsers()){
 
-            updatePlayers(s);
-
             boolean b = clientManagerList.addClientManager(s, clientManager);
+
+            if(b)
+                updatePlayers(s);
 
             if(clientManagerListSize()== 2){
 
@@ -198,7 +197,8 @@ public class ServerBase extends ViewGameInterface {
 
                 ClientManager cm = (ClientManager) couple.getValue();
 
-                cm.sendAddedPlayer(s);
+                if(!(couple.getKey().equals(s)))
+                    cm.sendAddedPlayer(s);
             }
             else{
 
@@ -405,6 +405,7 @@ public class ServerBase extends ViewGameInterface {
                 c.stop();
             }
         }
+        System.exit(0);
     }
 
 }

@@ -72,9 +72,7 @@ public class RoundsHandler extends Thread {
 
         this.model.hasChanged();
 
-        TimerConfiguration timerConfiguration = new TimerConfiguration();
-
-        timerConfiguration.implementation();
+        TimerConfiguration timerConfiguration = TimerConfiguration.implementation();
 
         timerActionPlayer = new TimerActionPlayer(timerConfiguration.getTimerEnd());
     }

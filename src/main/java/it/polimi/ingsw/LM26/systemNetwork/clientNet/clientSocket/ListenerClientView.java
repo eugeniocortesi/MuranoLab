@@ -65,7 +65,7 @@ public class ListenerClientView extends Thread {
      * @return message string arrived from Server
      */
 
-    private String receiveMessage(){
+    private synchronized String receiveMessage(){
 
         String messageReceived = null;
         try {

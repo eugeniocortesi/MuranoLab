@@ -26,9 +26,9 @@ public abstract class ClassMessage {
      * @return String = first element of s
      */
 
-    public String parserFirstElement(String s){
+    public synchronized String parserFirstElement(String s){
 
-        LOGGER.setLevel(Level.OFF);
+        LOGGER.setLevel(Level.ALL);
 
         JsonReader jsonReader = new JsonReader(new StringReader(s));
 
@@ -48,7 +48,7 @@ public abstract class ClassMessage {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Enable to parse message");
+            System.err.println("Enable to parse message: "+s);
             return null;
         }
         return null;
@@ -58,7 +58,7 @@ public abstract class ClassMessage {
      * Method that serializes each message using Gson
      * @return serialized message (String)
      */
-    public String serializeClassMessage(){
+    public synchronized String serializeClassMessage(){
 
         Gson gson = new Gson();
         return gson.toJson(this);

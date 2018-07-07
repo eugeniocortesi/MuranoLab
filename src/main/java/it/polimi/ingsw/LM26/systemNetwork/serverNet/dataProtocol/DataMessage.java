@@ -33,7 +33,7 @@ public class DataMessage extends ClassMessage {
      * @return DataMessage
      */
 
-    static public DataMessage deserializeDataMessage(String protocolJson){
+    static synchronized public DataMessage deserializeDataMessage(String protocolJson){
         Gson gson = new Gson();
 
         return gson.fromJson(protocolJson, DataMessage.class);

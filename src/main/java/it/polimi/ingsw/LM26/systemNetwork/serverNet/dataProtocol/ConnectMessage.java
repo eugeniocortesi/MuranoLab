@@ -33,7 +33,7 @@ public class ConnectMessage extends ClassMessage {
      * @return ConnectMessage
      */
 
-    static public ConnectMessage deserializeConnectMessage(String protocolJson){
+    static synchronized public ConnectMessage deserializeConnectMessage(String protocolJson){
 
         Gson gson = new Gson();
 

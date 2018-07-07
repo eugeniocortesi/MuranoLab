@@ -14,9 +14,9 @@ import java.io.*;
 
 public class TimerConfiguration {
 
-    private long timerEnd = 180000;
+    private long timerEnd;
 
-    private long timerGameEnd = 10000;
+    private long timerGameEnd;
 
     public long getTimerEnd() {
         return timerEnd;
@@ -55,7 +55,7 @@ public class TimerConfiguration {
      * @exception Exception if it can't read the file amd return null
      */
 
-    public TimerConfiguration implementation(){
+    public static TimerConfiguration implementation(){
 
         try {
 
