@@ -4,6 +4,14 @@ import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
 import java.io.Serializable;
 
+
+/**
+ * PatternBox class
+ * @author Eugenio Cortesi
+ * class creates the object that represents one single cell of the WindowPatternCard
+ * a cell of this type can have a color or a shade and it stores the information about the two possibilities
+ */
+
 public class PatternBox  implements Serializable {
 
     private Color color = null;
@@ -14,7 +22,7 @@ public class PatternBox  implements Serializable {
 
     private int value = 0;
 
-    public PatternBox(){
+    PatternBox(){
     }
 
     public Color getColor() {

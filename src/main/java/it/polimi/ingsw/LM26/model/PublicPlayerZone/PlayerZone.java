@@ -3,13 +3,20 @@ package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 
+
+/**
+ * PlayerZone class
+ * @author Eugenio Cortesi
+ * class associated to a single client, it sotre his information.
+ */
+
 public class PlayerZone extends PlayerZoneInt {
 
     private String namePlayer;
 
     private int numberPlayer;
 
-    private int IDPlayer;
+    private int idPlayer;
 
     private WindowFramePlayerBoard playerBoard;
 
@@ -25,88 +32,135 @@ public class PlayerZone extends PlayerZoneInt {
 
     private ActionHistory actionHistory;
 
-    public PlayerZone(){
-
+    public PlayerZone() {
     }
 
-    public PlayerZone(String namePlayer, int IDPlayer) {
+    public PlayerZone(String namePlayer, int idPlayer) {
 
         this.namePlayer = namePlayer;
-        this.IDPlayer = IDPlayer;
-        this.playerState = PlayerState.ENDING;
-        this.actionHistory = new ActionHistory();
-        this.playerBoard = null;
-        this.windowPatternCard = null;
-        this.token = null;
-        this.scoreMarker = null;
-        this.privatePoints = 0;
-        this.typePlayerZone = "PlayerZone";
 
+        this.idPlayer = idPlayer;
+
+        this.playerState = PlayerState.ENDING;
+
+        this.actionHistory = new ActionHistory();
+
+        this.playerBoard = null;
+
+        this.windowPatternCard = null;
+
+        this.token = null;
+
+        this.scoreMarker = null;
+
+        this.privatePoints = 0;
+
+        this.typePlayerZone = "PlayerZone";
     }
 
-    public Token getToken() { return token; }
+    public Token getToken() {
 
-    public int getIDPlayer() { return IDPlayer; }
+        return token;
+    }
+
+    public int getIDPlayer() {
+
+        return idPlayer;
+    }
 
     public void setToken(Token token) {
+
         this.token = token;
     }
 
     public void setScoreMarker(ScoreMarker scoreMarker) {
+
         this.scoreMarker = scoreMarker;
     }
 
     public String getName() {
+
         return namePlayer;
     }
 
-    public int getNumber() { return numberPlayer; }
+    public int getNumber() {
+
+        return numberPlayer;
+    }
 
     public WindowFramePlayerBoard getPlayerBoard() {
+
         return playerBoard;
     }
 
     public WindowPatternCard getWindowPatternCard() {
+
         return windowPatternCard;
     }
 
     public PlayerState getPlayerState() {
+
         return playerState;
     }
 
-    public int getPrivatePoints() { return privatePoints; }
+    public int getPrivatePoints() {
 
-    public void setPrivatePoints(int privatePoints) { this.privatePoints = privatePoints; }
+        return privatePoints;
+    }
 
-    public ScoreMarker getScoreMarker() { return scoreMarker; }
+    public void setPrivatePoints(int privatePoints) {
 
-    public void setNumberPlayer(int numberPlayer) { this.numberPlayer = numberPlayer; }
+        this.privatePoints = privatePoints;
+    }
+
+    public ScoreMarker getScoreMarker() {
+
+        return scoreMarker;
+    }
+
+    public void setNumberPlayer(int numberPlayer) {
+
+        this.numberPlayer = numberPlayer;
+    }
 
     public void setPlayerBoard(WindowFramePlayerBoard playerBoard) {
+
         this.playerBoard = playerBoard;
     }
 
-    public void setWindowPatternCard(WindowPatternCard windowPatternCard) { this.windowPatternCard = windowPatternCard; }
+    public void setWindowPatternCard(WindowPatternCard windowPatternCard) {
+
+        this.windowPatternCard = windowPatternCard;
+    }
 
     public void setPlayerState(PlayerState playerState) {
+
         this.playerState = playerState;
     }
 
-    public ActionHistory getActionHistory() { return actionHistory; }
+    public ActionHistory getActionHistory() {
+
+        return actionHistory;
+    }
 
     @Override
     public void rewrite() {
 
         this.typePlayerZone = "PlayerZone";
 
-        if(windowPatternCard!= null){
+        if (windowPatternCard != null) {
+
             windowPatternCard.rewrite();
         }
-        if (playerBoard!= null && playerBoard.getBoardMatrix()!= null) {
 
-            for(int i=0; i<4; i++) {
+        if (playerBoard != null && playerBoard.getBoardMatrix() != null) {
+
+            for (int i = 0; i < 4; i++) {
+
                 for (int j = 0; j < 5; j++) {
-                    if (playerBoard.getBoardMatrix()[i][j].getDie()!=null)
+
+                    if (playerBoard.getBoardMatrix()[i][j].getDie() != null)
+
                         playerBoard.getBoardMatrix()[i][j].getDie().rewrite();
                 }
             }

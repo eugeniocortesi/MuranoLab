@@ -1,32 +1,43 @@
 package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Token class
+ * @author Eugenio Cortesi
+ */
 
 public class Token implements Serializable {
 
-    private int token;
+    private int tokens;
 
-    //durante l'assegnazione dei token la chiamata al costruttore
-    //vorrà come argomento Player.getPatternCard().getToken()
-    //nella funzione assignToken di InitialPhase chiamerà 4 volte il costruttore di token
-    //attraverso il metodo setToken di Player il token creato viene assegnato al giocatore
+    private transient static final Logger LOGGER = Logger.getLogger(Token.class.getName());
+
+    /**
+     * player's tokens are assigned in initialPhase, and correspond to the token of the player's board.
+     * @param token number of tokens to assign to a player
+     */
 
     public Token(int token) {
 
-        this.token = token;
+        this.tokens = token;
+
+        LOGGER.setLevel(Level.ALL);
     }
 
     public int getTokenNumber() {
-        return token;
+
+        return tokens;
     }
 
-    public void decrementToken(){
+    public void decrementToken() {
 
-        if(token == 0) System.out.println("Impossible, player has 0 tokens") ;
+        if (tokens == 0)
 
-        else token--;
+            LOGGER.log(Level.INFO, "Impossible, player has 0 tokens");
 
-        }
-
-
+        else tokens--;
+    }
 }

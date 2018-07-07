@@ -6,7 +6,17 @@ import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Serialization.Elements.elements;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static it.polimi.ingsw.LM26.model.Serialization.Elements.elements.*;
+
+
+/**
+ * ObjectivePrivateCard class
+ * @author Eugenio Cortesi
+ */
+
 
 public class ObjectivePrivateCard extends CardInt {
 
@@ -16,7 +26,9 @@ public class ObjectivePrivateCard extends CardInt {
 
     private PlayerZone player;
 
-    int id;
+    private int id;
+
+    private transient static final Logger LOGGER = Logger.getLogger(ObjectivePrivateCard.class.getName());
 
     public ObjectivePrivateCard(){
     }
@@ -28,7 +40,15 @@ public class ObjectivePrivateCard extends CardInt {
         this.id = id;
 
         this.typeCard = "ObjectivePrivateCard";
+
+        LOGGER.setLevel(Level.ALL);
     }
+
+
+    /**
+     * method translates the card-information from the fle rider to the current information used in the game
+     * @return color-type
+     */
 
     public Color getColour() {
 
@@ -54,6 +74,12 @@ public class ObjectivePrivateCard extends CardInt {
 
         else return null;
     }
+
+    /**
+     * method is used in the final phase. it adds up the value of the dice with the color of the specific private card
+     * @param board player's board to do the computation on
+     * @return result of the computation
+     */
 
     public int checkPoints(WindowFramePlayerBoard board) {
 
@@ -92,6 +118,13 @@ public class ObjectivePrivateCard extends CardInt {
         return player;
     }
 
+
+    /**
+     * when a card is selected and assigned to a player, it is showed to him only and not stored.
+     * After that each card stores the information about the owner and will not be sent again.
+     * @param player owner of the card
+     */
+
     public void setPlayer(PlayerZone player) {
 
         this.player = player;
@@ -99,9 +132,7 @@ public class ObjectivePrivateCard extends CardInt {
 
     public void printCard() {
 
-        System.out.println(getId());
-
-        System.out.println(getColour());
+        LOGGER.log(Level.INFO, "Private Card: "+ getId() + " "+ getColour());
     }
 
     @Override

@@ -2,7 +2,6 @@ package it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards;
 
 import it.polimi.ingsw.LM26.model.Cards.CardInt;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.PublicCardEffects.ColoredDiagonals;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.PublicCardEffects.Effect;
 
@@ -25,7 +24,7 @@ public class ObjectivePublicCard extends CardInt {
 
     private boolean inUse = false;
 
-    private static final Logger LOGGER = Logger.getLogger(ObjectivePrivateCard.class.getName());
+    private transient static final Logger LOGGER = Logger.getLogger(ObjectivePrivateCard.class.getName());
 
     public ObjectivePublicCard() {
     }

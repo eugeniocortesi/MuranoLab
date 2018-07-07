@@ -2,9 +2,14 @@ package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 
 import java.io.Serializable;
 
+/**
+ * PlayerZone abstract class
+ * @author Eugenio Cortesi
+ */
+
 public abstract class PlayerZoneInt implements Serializable {
 
-    public String typePlayerZone;
+    String typePlayerZone;
 
     public abstract void rewrite();
 }

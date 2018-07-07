@@ -49,7 +49,7 @@ public class View extends ViewInterface {
         //TODO remove later
        /* ModelManager.model = new Model();
         Decks deck =loadDecks();
-        ModelManager.privateCard = deck.getObjectivePrivateCardDeck().get(0);
+        ModelManager.privateCard = deck.getObjectivePrivateCards().get(0);
         ModelManager.setId(0);
         OnBoardCards obc = new OnBoardCards();
         ArrayList<PlayerZone> plList = new ArrayList<PlayerZone>();

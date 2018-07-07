@@ -7,9 +7,14 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * ToolCard abstract class
+ * @author Eugenio Cortesi
+ */
+
 public abstract class ToolCardInt implements Serializable {
 
-    public String typeToolCard;
+    protected String typeToolCard;
 
     public ToolCardInt() {
     }

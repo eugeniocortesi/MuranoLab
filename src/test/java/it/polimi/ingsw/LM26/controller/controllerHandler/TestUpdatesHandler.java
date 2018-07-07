@@ -76,9 +76,9 @@ public class TestUpdatesHandler {
         playerList.add(player3);
 
 
-        model.getDecks().getObjectivePrivateCardDeck().get(0).setPlayer(player1);
-        model.getDecks().getObjectivePrivateCardDeck().get(1).setPlayer(player2);
-        model.getDecks().getObjectivePrivateCardDeck().get(2).setPlayer(player3);
+        model.getDecks().getObjectivePrivateCards().get(0).setPlayer(player1);
+        model.getDecks().getObjectivePrivateCards().get(1).setPlayer(player2);
+        model.getDecks().getObjectivePrivateCards().get(2).setPlayer(player3);
 
 
         model.setPlayerList(playerList);

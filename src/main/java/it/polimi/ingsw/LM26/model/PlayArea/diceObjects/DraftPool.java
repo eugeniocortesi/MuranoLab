@@ -15,7 +15,7 @@ public class DraftPool implements Serializable {
 
     private ArrayList<DieInt> inDraft;
 
-    private static final Logger LOGGER = Logger.getLogger(Die.class.getName());
+    private transient static final Logger LOGGER = Logger.getLogger(Die.class.getName());
 
     public DraftPool() {
     }
@@ -38,6 +38,7 @@ public class DraftPool implements Serializable {
     }
 
     public void setInDraft(ArrayList<DieInt> inDraft) {
+
         this.inDraft = inDraft;
     }
 
@@ -47,7 +48,7 @@ public class DraftPool implements Serializable {
 
     public void printDraftPool() {
 
-        for (DieInt anInDraft : inDraft) LOGGER.log(Level.INFO, "\t" + anInDraft.toString() + " ");
+        for (DieInt anInDraft : inDraft) System.out.print("\t" + anInDraft.toString() + " ");
     }
 
     public int size() {

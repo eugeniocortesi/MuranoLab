@@ -5,6 +5,11 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * RoundTrack abstract class
+ * @author Eugenio Cortesi
+ */
+
 public abstract class RoundTrackInt implements Serializable{
 
     String typeRoundTrack;

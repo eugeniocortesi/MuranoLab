@@ -1,12 +1,7 @@
 package it.polimi.ingsw.LM26.model.Serialization;
 
-import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
-
-import static org.junit.Assert.*;
 
 public class TestDecks {
 
@@ -25,11 +20,11 @@ public class TestDecks {
     public void check(){
 
         System.out.println("Public cards");
-        for(int i=0; i<decks.getObjectivePublicCardDeck().size(); i++)
+        for(int i = 0; i<decks.getObjectivePublicCardDeck().size(); i++)
             decks.getObjectivePublicCardDeck().get(i).printCard();
 
         System.out.println("Private cards");
-        for(int i=0; i<decks.getObjectivePrivateCardDeck().size(); i++)
+        for(int i = 0; i<decks.getObjectivePrivateCardDeck().size(); i++)
             decks.getObjectivePrivateCardDeck().get(i).printCard();
 
         System.out.print("Window patter");

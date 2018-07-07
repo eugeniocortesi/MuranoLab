@@ -5,6 +5,11 @@ import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.Serialization.Matrix;
 
 
+/**
+ * WindowPatternCard class
+ * @author Eugenio Cortesi
+ */
+
 public class WindowPatternCard extends CardInt {
 
     private int token=0;
@@ -30,6 +35,12 @@ public class WindowPatternCard extends CardInt {
 
         this.typeCard = "WindowPatternCard";
     }
+
+
+    /**
+     * the method creates the new PatternBox-structure and calls the method that transforms the elements-structure read from the file into the new one
+     * to the current use in the game: the new structure is of type PatternBox
+     */
 
     public void createPattern() {
 
@@ -70,6 +81,11 @@ public class WindowPatternCard extends CardInt {
 
         return patternMatrix;
     }
+
+
+    /**
+     * method is useful to print the cards in tests, System.out can't be avoided
+     */
 
     public void printCard() {
 

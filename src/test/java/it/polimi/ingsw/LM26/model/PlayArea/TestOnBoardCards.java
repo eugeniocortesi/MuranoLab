@@ -2,7 +2,6 @@ package it.polimi.ingsw.LM26.model.PlayArea;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class TestOnBoardCards {
                 if(j!=i) assertNotSame(model.getOnBoardCards().getToolCardList().get(i), model.getOnBoardCards().getToolCardList().get(j));
         }
 
-        for(int i=0; i<model.getDecks().getObjectivePublicCardDeck().size(); i++)
+        for(int i = 0; i<model.getDecks().getObjectivePublicCardDeck().size(); i++)
 
             model.getDecks().getObjectivePublicCardDeck().get(i).setInUse(false);
 

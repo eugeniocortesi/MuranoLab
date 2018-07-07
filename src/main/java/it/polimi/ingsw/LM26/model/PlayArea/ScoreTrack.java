@@ -2,7 +2,10 @@ package it.polimi.ingsw.LM26.model.PlayArea;
 
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;
 
-import java.util.ArrayList;
+/**
+ * ScoreTrack class
+ * @author Eugenio Cortesi
+ */
 
 public class ScoreTrack extends ScoreTrackInt {
 

@@ -4,6 +4,11 @@ import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
 import java.io.Serializable;
 
+/**
+ * WindowFramePlayerBoard class
+ * @author Eugenio Cortesi
+ */
+
 public class WindowFramePlayerBoard implements Serializable {
 
     private Box[][] boardMatrix;
@@ -56,6 +61,12 @@ public class WindowFramePlayerBoard implements Serializable {
         return color;
     }
 
+
+    /**
+     * the method scands the matrix and assigns to each cell the one with same coordinates from the WindowPatternCard
+     * @param patternMatrix matrix structure of the WindowPatternCard
+     */
+
     public void insertPatternIntoBoard(PatternBox[][] patternMatrix) {
 
         hasPatternCard = true;
@@ -66,6 +77,13 @@ public class WindowFramePlayerBoard implements Serializable {
 
                 boardMatrix[i][j].setPatternBox(patternMatrix[i][j]);
     }
+
+
+    /**
+     * the method is able to say how many cells with no linked die are in a board.
+     * the computation is used in the final phase of the game.
+     * @return number of empty spaces
+     */
 
     public int getEmptySpaces() {
 
@@ -101,6 +119,11 @@ public class WindowFramePlayerBoard implements Serializable {
 
         numDice = numDice + 1;
     }
+
+
+    /**
+     * method is useful to print the cards in tests, System.out can't be avoided
+     */
 
     public void printCard() {
 

@@ -2,21 +2,31 @@ package it.polimi.ingsw.LM26.model.PublicPlayerZone;
 
 import java.io.Serializable;
 
-public class ActionHistory implements Serializable{
+/**
+ * Action History class
+ * @author Eugenio
+ * class that keeps track of the clients moves ( usage of a card or placement of a die),
+ * store his location in the turn(first turn -> right order, second turn -> reverse order),
+ * and if he can contune the turn or he is freezed in the current one, beacuse of oreviusly restrictive action,
+ * so that future actions can be allawoe or denied.
+ * every Actionhistory object is specific of a client
+ */
 
-    private boolean dieUsed=false;
+public class ActionHistory implements Serializable {
 
-    private boolean firstTurn=false;
+    private boolean dieUsed = false;
 
-    private boolean secondTurn= false;
+    private boolean firstTurn = false;
 
-    private boolean placement=false;
+    private boolean secondTurn = false;
 
-    private boolean cardUsed=false;
+    private boolean placement = false;
 
-    private boolean freezed=false;
+    private boolean cardUsed = false;
 
-    private boolean jump=false;
+    private boolean freezed = false;
+
+    private boolean jump = false;
 
     public boolean isFirstTurn() {
         return firstTurn;
@@ -50,36 +60,58 @@ public class ActionHistory implements Serializable{
         this.cardUsed = cardUsed;
     }
 
-    public boolean isDieUsed() { return dieUsed; }
+    public boolean isDieUsed() {
+        return dieUsed;
+    }
 
-    public void setDieUsed(boolean dieUsed) { this.dieUsed = dieUsed; }
+    public void setDieUsed(boolean dieUsed) {
+        this.dieUsed = dieUsed;
+    }
 
-    public boolean isFreezed() { return freezed; }
+    public boolean isFreezed() {
+        return freezed;
+    }
 
-    public void setFreezed(boolean freezed) { this.freezed = freezed; }
+    public void setFreezed(boolean freezed) {
+        this.freezed = freezed;
+    }
 
-    public boolean isJump() { return jump;}
+    public boolean isJump() {
+        return jump;
+    }
 
-    public void setJump(boolean jump) { this.jump = jump; }
+    public void setJump(boolean jump) {
+        this.jump = jump;
+    }
+
+
+    /**
+     * part of the information is reset at the end of the client's turn
+     */
 
     public void deleteTurnHistory() {
 
-       dieUsed=false;
+        dieUsed = false;
 
-       placement=false;
+        placement = false;
 
-       cardUsed=false;
+        cardUsed = false;
 
-       jump=false;
+        jump = false;
     }
 
-    public void deleteRoundHistory(){
 
-        freezed= false;
+    /**
+     * all the client's information is reset at the end of the round
+     */
 
-        firstTurn=false;
+    public void deleteRoundHistory() {
 
-        secondTurn= false;
+        freezed = false;
+
+        firstTurn = false;
+
+        secondTurn = false;
 
         deleteTurnHistory();
     }

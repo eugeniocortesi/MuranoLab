@@ -4,34 +4,47 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 
 import java.util.ArrayList;
 
-public class RoundTrack extends RoundTrackInt{
+
+/**
+ * RoundTrack class
+ * @author Eugenio Cortesi
+ */
+
+public class RoundTrack extends RoundTrackInt {
 
     private ArrayList<RoundTrackTurn> roundTrackTurnList;
 
     private int currentTurn;
 
-    public RoundTrack(){
+    public RoundTrack() {
     }
 
-    public RoundTrack(String s){
+    public RoundTrack(String s) {
 
-        roundTrackTurnList = new ArrayList<RoundTrackTurn>();
+        roundTrackTurnList = new ArrayList<>();
 
         currentTurn = 1;
-        this.typeRoundTrack="RoundTrack";
+
+        this.typeRoundTrack = "RoundTrack";
     }
 
-    public int getCurrentTurn(){
+    public int getCurrentTurn() {
 
         return currentTurn;
     }
 
-    public void update(){
+    public void update() {
 
-        this.currentTurn = roundTrackTurnList.size()+1;
+        this.currentTurn = roundTrackTurnList.size() + 1;
     }
 
-    public void addDice( ArrayList<DieInt> ad){
+
+    /**
+     * when dice must be added to round track, the methos creates the sub-structure to store them
+     * @param ad dice list to be added
+     */
+
+    public void addDice(ArrayList<DieInt> ad) {
 
         RoundTrackTurn r = new RoundTrackTurn(ad);
 
@@ -39,34 +52,36 @@ public class RoundTrack extends RoundTrackInt{
 
     }
 
-    public ArrayList<DieInt> getRoundTrackTurn(int turn){
-        return roundTrackTurnList.get((turn-1)).getDiceList();
+    public ArrayList<DieInt> getRoundTrackTurn(int turn) {
+
+        return roundTrackTurnList.get((turn - 1)).getDiceList();
     }
 
-    public void dump(){
+    public ArrayList<RoundTrackTurn> getRoundTrackTurnList() {
 
-        for (int i = 0; i< roundTrackTurnList.size(); i++){
+        return roundTrackTurnList;
+    }
 
-            this.roundTrackTurnList.get(i).dump();
+    public void dump() {
+
+        for (RoundTrackTurn aRoundTrackTurnList : roundTrackTurnList) {
+
+            aRoundTrackTurnList.dump();
         }
     }
 
     @Override
     public void rewrite() {
 
-        this.typeRoundTrack="RoundTrack";
+        this.typeRoundTrack = "RoundTrack";
 
-        if(roundTrackTurnList!=null){
+        if (roundTrackTurnList != null) {
 
-            for(int i=0; i< roundTrackTurnList.size(); i++){
+            for (int i = 0; i < roundTrackTurnList.size(); i++) {
 
                 roundTrackTurnList.get(i).rewrite();
             }
         }
 
-    }
-
-    public ArrayList<RoundTrackTurn> getRoundTrackTurnList() {
-        return roundTrackTurnList;
     }
 }

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.LM26.model.PlayArea.diceObjects;
 
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 
 import java.io.Serializable;

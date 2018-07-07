@@ -5,6 +5,14 @@ import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * ToolCard class
+ * @author Eugenio Cortesi
+ * this class represent the inner object of the ToolCard, beacuse each card is a decoration on this one.
+ */
 
 public class ToolCard extends ToolCardInt {
 
@@ -14,6 +22,8 @@ public class ToolCard extends ToolCardInt {
 
     private int token = 0;
 
+    transient private static final Logger LOGGER = Logger.getLogger(ToolCard.class.getName());
+
     public ToolCard() {
     }
 
@@ -22,7 +32,16 @@ public class ToolCard extends ToolCardInt {
         this.num = num;
 
         this.typeToolCard = "ToolCard";
+
+        LOGGER.setLevel(Level.ALL);
     }
+
+    /**
+     * these two methos are used to make a client pay for the usage of a card
+     * it directly takes away token from the client and adds them to the card.
+     * of course the game wants that if the card is never used the token to pay is only one.
+     * @param player that uses the card
+     */
 
     @Override
     public void setOneToken(PlayerZone player) {
@@ -63,7 +82,7 @@ public class ToolCard extends ToolCardInt {
     @Override
     public void printCard() {
 
-        System.out.println(getNum());
+        LOGGER.log(Level.INFO, " "+ getNum());
     }
 
     @Override

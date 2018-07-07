@@ -105,6 +105,8 @@ public class RoundsHandler extends Thread {
 
             //controller.getViewGameInterface().showSetPlayerMenu(model.getPlayerList().get(j).getName(), model.getPlayerList().get(j));
 
+        boolean firstShow=true;
+
         while (i < game.getPhase().getNrounds() && !game.getPhase().getOnePlayer()) {
 
             playing = game.getPhase().getCurrentRound().nextPlayer();
@@ -126,13 +128,12 @@ public class RoundsHandler extends Thread {
 
                     if (!playing.equals(model.getPlayer(j)))
                         controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "E' il turno di " + playing.getName());
-                    if( i == 0)controller.getViewGameInterface().showSetPlayerMenu(model.getPlayerList().get(j).getName(), model.getPlayerList().get(j));
+                    if(firstShow)controller.getViewGameInterface().showSetPlayerMenu(model.getPlayerList().get(j).getName(), model.getPlayerList().get(j));
                     else {controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
                         controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
                     }
                 }
-
-
+                firstShow=false;
 
 
                 //if(playerEnding!=null) controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
