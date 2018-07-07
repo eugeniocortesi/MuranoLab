@@ -295,7 +295,7 @@ public class EventHandler {
 
     public ArrayList<Box> getBoxListCopy(ArrayList<Box> a) {
 
-        if(a==null) return null;
+        if(a==null || a.size()>2 ) return null;
 
         ArrayList<Box> toReturn = new ArrayList<>();
 

@@ -109,6 +109,8 @@ public class Round {
 
             currentPlayer.setPlayerState(PlayerState.ENDING);
 
+        System.out.print("SETTING "+currentPlayer +" IN ENDING ");
+
         currentPlayer.getActionHistory().deleteTurnHistory();
 
         model.getRestrictions().resetRestrictions();

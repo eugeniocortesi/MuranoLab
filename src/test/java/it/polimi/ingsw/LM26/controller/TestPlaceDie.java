@@ -128,8 +128,11 @@ public class TestPlaceDie {
         placement = new PlaceDie(die,b[0][1], player);
         assertFalse(placement.placeDie());  // cant be nea a die o same value
 
-        die.setRoll(5);
-        placement = new PlaceDie(die,b[0][1], player);
+        System.out.print(player.getPlayerBoard().getNumDice());
+        System.out.print(player.getPlayerBoard().isEmpty());
+
+        die.setRoll(4);
+        placement = new PlaceDie(die,b[1][1], player);
         assertTrue(placement.placeDie());
 
         player.getPlayerBoard().printCard();

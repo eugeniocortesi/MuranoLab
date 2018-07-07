@@ -1,5 +1,6 @@
 package it.polimi.ingsw.LM26.controller.GamePhases;
 
+import it.polimi.ingsw.LM26.controller.Controller;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Bag;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
@@ -11,6 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
 import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.ENDING;
@@ -36,6 +39,8 @@ public class TestRound {
 
     @Before
     public void setup(){
+
+        Logger.getLogger(Controller.class.getPackage().getName()).getParent().getHandlers()[0].setLevel(Level.OFF);
 
         model= singletonModel();
         model.reset();
@@ -157,6 +162,8 @@ public class TestRound {
 
             playing = game.getPhase().getCurrentRound().nextPlayer();
 
+            System.out.println("     NUOVO ROUND");
+
             while (game.getPhase().getCurrentRound().getRoundState() != FINISHED) {
 
                 System.out.println("              CHANGE TURN: " + playing.getName());
@@ -231,7 +238,7 @@ public class TestRound {
 
     @Test
     public void checkStandby() {
-
+        System.out.println("      ____________________________________       ");
         int j=0, i=0;
         PlayerZone playing;
         playerZones = model.getPlayerList();

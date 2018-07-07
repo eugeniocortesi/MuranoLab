@@ -47,12 +47,11 @@ public class MatchTest {
 
                 //TODO DELETE
                 System.out.println("              CHANGE TURN: " + playing.getName());
-                LOGGER.log(Level.SEVERE, playing.getName() + " is playing ");
                 playing.getPlayerBoard().printCard();
                 System.out.println("DraftPool");
                 model.getDraftPool().printDraftPool();
 
-                System.out.println("        FIRST ACTION ");
+                System.out.println("\n        FIRST ACTION ");
 
                 waitCorrectPlayer();
 
@@ -64,7 +63,7 @@ public class MatchTest {
 
                         result = false;
 
-                        System.out.println("        SECOND ACTION ");
+                        System.out.println("\n        SECOND ACTION ");
 
                         waitCorrectPlayer();
 

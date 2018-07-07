@@ -18,7 +18,11 @@ import static it.polimi.ingsw.LM26.model.Serialization.Elements.elements.*;
 
 public class Matrix implements Serializable {
 
-    private elements[][] matrix = new elements[4][5];
+    private final static int row=4;
+
+    private final static int column=5;
+
+    private elements[][] matrix = new elements[row][column];
 
 
     /**
@@ -81,9 +85,9 @@ public class Matrix implements Serializable {
 
     public void createPatternMatrix(PatternBox[][] patternMatrix) {
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < row; i++)
 
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < column; j++) {
 
                 if (matrix[i][j] == RED) {
 

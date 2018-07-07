@@ -31,7 +31,7 @@ public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
 
         LOGGER.setLevel(Level.ALL);
 
-        this.type="MoveTwoDiceWithSameColor12";
+        this.type = "MoveTwoDiceWithSameColor12";
 
         this.typeToolCard = "ToolCard";
     }
@@ -40,42 +40,50 @@ public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
     /**
      * if dice are not of the same color of the one from round track, the event is refused-
      * if just one of the two possible movement fails the other, if done, it's undone.
+     *
      * @param fromRoundTrack die chosen by client to show the color dice he want to move
-     * @param fromBoxList list of cells from which dice are moved
-     * @param toBoxList list of cells towards to dice are moved
-     * @param player of the action
+     * @param fromBoxList    list of cells from which dice are moved
+     * @param toBoxList      list of cells towards to dice are moved
+     * @param player         of the action
      * @return success of the action
      */
 
     @Override
     public boolean play(DieInt fromRoundTrack, ArrayList<Box> fromBoxList, ArrayList<Box> toBoxList, PlayerZone player) {
 
-        if( fromBoxList == null || toBoxList == null) return false;
+        if (fromBoxList == null || toBoxList == null) return false;
 
-        ArrayList <DieInt> dieList= new ArrayList<>();
+        ArrayList<DieInt> dieList = new ArrayList<>();
 
-        if( fromRoundTrack==null ) return false;
+        if (fromRoundTrack == null) return false;
 
-        for(int i=0; i<fromBoxList.size(); i++)
+        for (int i = 0; i < fromBoxList.size(); i++)
 
-            if( !fromBoxList.get(i).isIsPresent() || toBoxList.get(i).isIsPresent() || !fromBoxList.get(i).getDie().getColor().equals(fromRoundTrack.getColor()) )
+            if (!fromBoxList.get(i).isIsPresent() || toBoxList.get(i).isIsPresent() || !fromBoxList.get(i).getDie().getColor().equals(fromRoundTrack.getColor())) {
+
+                for (int k = 0; k < dieList.size(); k++) {
+
+                    fromBoxList.get(k).setDie(dieList.get(k));
+
+                    toBoxList.get(k).free();
+                }
 
                 return false;
-
-             else { dieList.add(fromBoxList.get(i).getDie());
+            } else {
+                dieList.add(fromBoxList.get(i).getDie());
 
                 fromBoxList.get(i).free();
             }
 
-        for(int j=0; j<fromBoxList.size(); j++){
+        for (int j = 0; j < fromBoxList.size(); j++) {
 
-        PlaceDie placement = new PlaceDie(dieList.get(j), toBoxList.get(j) , player);
+            PlaceDie placement = new PlaceDie(dieList.get(j), toBoxList.get(j), player);
 
-        if (!placement.placeDie() ) {
+            if (!placement.placeDie()) {
 
-            LOGGER.log(Level.INFO,"error " + j +" placement");
+                LOGGER.log(Level.INFO, "error " + j + " placement");
 
-                for(int k=0; k<fromBoxList.size(); k++) {
+                for (int k = 0; k < fromBoxList.size(); k++) {
 
                     fromBoxList.get(k).setDie(dieList.get(k));
 
@@ -90,31 +98,31 @@ public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
     }
 
     @Override
-    public int getNum(){
+    public int getNum() {
 
         return toolcard.getNum();
     }
 
     @Override
-    public void printCard(){
+    public void printCard() {
 
         toolcard.printCard();
     }
 
     @Override
-    public int getToken(){
+    public int getToken() {
 
         return toolcard.getToken();
     }
 
     @Override
-    public void setOneToken(PlayerZone player){
+    public void setOneToken(PlayerZone player) {
 
         toolcard.setOneToken(player);
     }
 
     @Override
-    public void setTwoToken(PlayerZone player){
+    public void setTwoToken(PlayerZone player) {
 
         toolcard.setTwoToken(player);
     }
@@ -138,13 +146,13 @@ public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
     @Override
     public void rewrite() {
 
-        this.type="MoveTwoDiceWithSameColor12";
+        this.type = "MoveTwoDiceWithSameColor12";
 
         this.typeToolCard = "ToolCard";
     }
 
     @Override
-    public boolean play(Box fromBox, Box toBox,  PlayerZone player){
+    public boolean play(Box fromBox, Box toBox, PlayerZone player) {
 
         throw new UnsupportedOperationException("Not supported here");
     }
@@ -156,7 +164,7 @@ public class MoveTwoDiceWithSameColor12 extends ToolCardDecorator {
     }
 
     @Override
-    public boolean play(DieInt dieFromDraft, Box toBox,PlayerZone player){
+    public boolean play(DieInt dieFromDraft, Box toBox, PlayerZone player) {
 
         throw new UnsupportedOperationException("Not supported here");
     }

@@ -99,10 +99,6 @@ public class RoundsHandler extends Thread {
 
     public void play() {
 
-        //for (int j = 0; j < model.getPlayerList().size(); j++)
-
-            //controller.getViewGameInterface().showSetPlayerMenu(model.getPlayerList().get(j).getName(), model.getPlayerList().get(j));
-
         boolean firstShow=true;
 
         while (i < game.getPhase().getNrounds() && !game.getPhase().getOnePlayer()) {
@@ -113,7 +109,7 @@ public class RoundsHandler extends Thread {
 
             for (int j = 0; j < model.getPlayerList().size(); j++)
 
-                controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "Inizia il turno " + game.getPhase().getRoundNumber());
+                controller.getViewGameInterface().showAnswerFromController(model.getPlayer(j).getName(), "Inizia il round " + game.getPhase().getRoundNumber());
 
             while (game.getPhase().getCurrentRound().getRoundState() != FINISHED && !game.getPhase().getOnePlayer()) {
 
@@ -128,29 +124,22 @@ public class RoundsHandler extends Thread {
                     if(firstShow)controller.getViewGameInterface().showSetPlayerMenu(model.getPlayerList().get(j).getName(), model.getPlayerList().get(j));
                 }
 
-                if(!firstShow){controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
+                if(!firstShow){
+
+                    if(!playing.equals(playerEnding))controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
 
                     controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
                 }
 
                 firstShow=false;
 
-                //if(playerEnding!=null) controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
-
-
                 //TODO DELETE
-                LOGGER.log(Level.SEVERE, playing.getName() + " is playing ");
+                System.out.println("              CHANGE TURN: " + playing.getName());
                 playing.getPlayerBoard().printCard();
                 LOGGER.log(Level.INFO, "DraftPool");
                 model.getDraftPool().printDraftPool();
 
-
-
-
-
                 ttask1 = timerActionPlayer.scheduleTimerActionPlayer(controller.getSetupHandler(), playing.getName());
-
-               // controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
 
                 waitEvent();
 
@@ -191,9 +180,12 @@ public class RoundsHandler extends Thread {
 
                 game.getPhase().getCurrentRound().endAction();
 
-                playing = game.getPhase().getCurrentRound().nextPlayer();
+                if(game.getPhase().getCurrentRound().getRoundState()!=FINISHED) {
 
-                model.hasChanged();
+                    playing = game.getPhase().getCurrentRound().nextPlayer();
+
+                    model.hasChanged();
+                }
 
                 result = false;
             }
@@ -240,6 +232,7 @@ public class RoundsHandler extends Thread {
                     else controller.getViewGameInterface().showAnswerFromController(playing.getName(), "OK");
 
                     //TODO DELETE
+
                     playing.getPlayerBoard().printCard();
                     LOGGER.log(Level.INFO, "DraftPool");
                     model.getDraftPool().printDraftPool();
