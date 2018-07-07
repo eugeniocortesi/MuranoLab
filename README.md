@@ -163,5 +163,5 @@ This is an example of WindowPatternCard
 * Decide how to personalize your windowPatternCard and press esc : wq and enter to save and quit
 
 
-##### Enjoy creating your personalized windowPatternCard and try it in a play!
+##### Pay attention to the game rules and enjoy creating your personalized windowPatternCard and try it in a play!
 
