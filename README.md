@@ -32,7 +32,7 @@ Implementation of the board game "Sagrada" distributed by Cranio.
 * Change extension from Client.zip to Client.jar 
 * Open Client.jar by bash
 
-##### For OS/Linux
+##### For macOS/Linux
 * Download Server.jar and Client.jar from Deliverables
 * Open Server.jar by bash 
 * Open bash and write `vim Client.jar`
@@ -50,7 +50,7 @@ Implementation of the board game "Sagrada" distributed by Cranio.
 Additional Functionality
 
 ##### For Windows
-* Change extension from Client.jar to Client.zip 
+* Change extension from Server.jar to Server.zip 
 * Open WindowsCards
 
 Example:
@@ -107,7 +107,7 @@ This is an example of WindowPatternCard
 
 
 ##### For OS/Linux
-* Open bash and write `vim Client.jar`
+* Open bash and write `vim Server.jar`
 * Scroll up to open it/polimi/ingsw/LM26/WindowsCards and press enter
 
 Example:
