@@ -39,8 +39,7 @@ public class TestMoveTwoDice4 {
             model.getPlayerList().add(new PlayerZone("name" + i, i));
         for (i = 0; i < 2; i++) {
             model.getPlayerList().get(i).setNumberPlayer(i);
-            index = rand.nextInt(model.getDecks().getWindowPatternCardDeck().size());
-            model.getPlayerList().get(i).setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(index));
+            model.getPlayerList().get(i).setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(0));
             model.getPlayerList().get(i).setPlayerBoard(model.getDecks().getWindowFramePlayerBoardDeck().get(i));
             model.getPlayerList().get(i).getPlayerBoard().insertPatternIntoBoard(model.getPlayerList().get(i).getWindowPatternCard().getWindowPatter());
         }
@@ -52,19 +51,23 @@ public class TestMoveTwoDice4 {
     @Test
     public void checkEffect() {
 
-      /*  player.getPlayerBoard().printCard();
+        player.getPlayerBoard().printCard();
 
         DieInt die = new Die(Color.ANSI_RED);
         die.setRoll(4);
 
-        PlaceDie placement = new PlaceDie(die, board[0][0], player);
-        placement.placeDie();
+        PlaceDie   placement = new PlaceDie(die,board[0][0], player);
+        assertTrue(placement.placeDie());
 
-        die = new Die(Color.ANSI_YELLOW);
+        die = new Die(Color.ANSI_BLUE);
         die.setRoll(6);
 
         placement = new PlaceDie(die, board[0][1], player);
         placement.placeDie();
+
+
+
+
 
         die = new Die(Color.ANSI_GREEN);
         die.setRoll(6);
@@ -75,21 +78,32 @@ public class TestMoveTwoDice4 {
         die = new Die(Color.ANSI_YELLOW);
         die.setRoll(4);
 
-        placement = new PlaceDie(die, board[0][1], player);
+        placement = new PlaceDie(die, board[2][3], player);
         placement.placeDie();
 
-        die = new Die(Color.ANSI_YELLOW);
+        die = new Die(Color.ANSI_PURPLE);
         die.setRoll(6);
 
-        placement = new PlaceDie(die, board[0][1], player);
+        placement = new PlaceDie(die, board[3][4], player);
         placement.placeDie();
 
+        player.getPlayerBoard().printCard();
 
 
-*/
+        from = new ArrayList<Box>();
+
+        to = new ArrayList<Box>();
+
+        from.add(board[0][0]);
+        from.add(board[0][1]);
+
+        to.add(board[0][1]);
+        to.add(board[0][0]);
+
+        assertFalse(model.getDecks().getToolCardDeck().get(3).play(from, to, player));
 
 
-
+        player.getPlayerBoard().printCard();
 
 
 
