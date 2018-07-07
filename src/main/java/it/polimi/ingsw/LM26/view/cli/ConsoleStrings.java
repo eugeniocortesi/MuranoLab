@@ -177,7 +177,7 @@ public class ConsoleStrings extends ViewInterface {
             inputLoop = new InputLoop();
             inputLoop.start();
         }
-        
+
         showCurrentMenu(null);
     }
 
