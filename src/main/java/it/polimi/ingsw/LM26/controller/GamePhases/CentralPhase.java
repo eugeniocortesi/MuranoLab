@@ -123,11 +123,12 @@ public class CentralPhase implements PhaseInt {
         }
     }
 
-    @Override
-    public int[] getTurn() {
 
-        return turn;
-    }
+    /**
+     * the method stores the last player not in standby, so that if he goes to standby before of the points computation,
+     * he will be classified as winner even if he has already disconnected.
+     * @param last last player not in standby
+     */
 
     @Override
     public void endGame(PlayerZone last) {
@@ -138,6 +139,13 @@ public class CentralPhase implements PhaseInt {
 
         this.last=last;
     }
+
+    @Override
+    public int[] getTurn() {
+
+        return turn;
+    }
+
 
     @Override
     public int getNrounds() {

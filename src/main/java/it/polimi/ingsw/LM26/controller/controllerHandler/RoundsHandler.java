@@ -93,10 +93,10 @@ public class RoundsHandler extends Thread {
 
 
     /**
-     * this method runs the game, sends messages to view and asks to show menu to players
+     * this method runs the game, sends messages to view and asks to show menu to players.
      * it selects the next player from the current round and the next round from the central phase of the game.
      * if the player ends his time for a action, goes to standby or pass the turn, the turn ends.
-     * after every action is notify all clients that model has changed.
+     * after every action it'is notify to all clients that model has changed.
      */
 
     public void play() {
@@ -115,7 +115,12 @@ public class RoundsHandler extends Thread {
 
             while (game.getPhase().getCurrentRound().getRoundState() != FINISHED && !game.getPhase().getOnePlayer()) {
 
-                if(playing==null) playing = game.getPhase().getCurrentRound().nextPlayer();
+                if(playing==null){
+
+                    playing = game.getPhase().getCurrentRound().nextPlayer();
+
+                    model.hasChanged();
+                }
 
                 for (int j = 0; j < model.getPlayerList().size(); j++) {
 
@@ -130,7 +135,7 @@ public class RoundsHandler extends Thread {
 
                     if(!playing.equals(playerEnding))controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
 
-                    controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
+                    if(playing.getActionHistory().isFreezed())controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
                 }
 
                 firstShow=false;

@@ -16,7 +16,7 @@ import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 /**
  * OnBoardCard class
  * @author Eugenio Cortesi
- * class sores the selected cards that remains on the 'table' in an area shared by all players
+ * class distribures cards and stores the tool and public selected, those will remain on the 'table', area shared by all players
  */
 
 public class OnBoardCards implements Serializable {
@@ -34,7 +34,7 @@ public class OnBoardCards implements Serializable {
 
     /**
      * Constructor
-     * it creates the structures and calls the method two distribute the card needed randomly
+     * it creates the structures and calls the methods two distribute randomly the cards needed
      * @param s parameter to distinguish this from the empty constructor
      */
 
@@ -55,7 +55,7 @@ public class OnBoardCards implements Serializable {
 
 
     /**
-     * method distribute three random PublicCard.
+     * method distribute three random PublicCards.
      * it necessary a control that makes sure to not extract two times the same card
      */
 
@@ -88,7 +88,7 @@ public class OnBoardCards implements Serializable {
 
 
     /**
-     * method distribute three random PublicCard.
+     * method distribute three random ToolCards.
      * it necessary a control that makes sure to not extract two times the same card
      */
 
@@ -129,10 +129,10 @@ public class OnBoardCards implements Serializable {
 
 
     /**
-     * the method distribute four window pattern cards to all players (method recalled for each player), so they can choose the favorite.
+     * the method distributes four window pattern cards to all players (method recalled for each player), so they can choose the favorite.
      * the method is located here because the distribution action is shared with all the players,
      * but the only card stored is the one chosen by the client after the server sent him the four selected.
-     * it necessary a control that makes sure to not extract two times the same card
+     * it's necessary a control that makes sure to not extract two times the same card
      * @return four selected WindowPatternCards
      */
 
@@ -178,7 +178,7 @@ public class OnBoardCards implements Serializable {
      * the method distribute one private card to all players (method recalled for each player).
      * the method is located here because the distribution action is shared with all the players, even if the card are covered.
      * the cards are not stored here, because it's a shared area, but each card has the reference to the owner.
-     * it necessary a control that makes sure to not extract two times the same card
+     * it's necessary a control that makes sure to not extract two times the same card
      * @return four selected WindowPatternCards
      */
 
