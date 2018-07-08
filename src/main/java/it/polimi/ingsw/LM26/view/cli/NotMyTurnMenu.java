@@ -16,12 +16,14 @@ public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
     private ActionEventGenerator ae;
     private ActionEvent actionEvent;
     private ConsoleStrings cs;
+    private ClientView clientView;
 
     public NotMyTurnMenu(ClientView clientView, ConsoleStrings cs) {
         ae= new ActionEventGenerator();
         register(clientView);
         System.out.println("Registered");
         this.cs = cs;
+        this.clientView=clientView;
     }
 
     /**
@@ -59,7 +61,7 @@ public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
     public void handleInput(String input){
         System.out.println(ansi().eraseScreen());
         if(input.equalsIgnoreCase("L")){
-            if(ae.disconnectConfirm()){cs.showDisconnectScreen();}
+            if(ae.disconnectConfirm()){clientView.disconnect();}
             else {
                 actionEvent=ae.askForMenu(true);
                 cs.notifyMessage(actionEvent);

@@ -24,20 +24,15 @@ public class ActionEventGenerator {
     private View view;
     private boolean array=false;
 
-    /*public boolean isBegin(){
-        try{
-            return !(stateArray.get(idx-1)==GameState.ACTIONEVENT);
-        }catch(ArrayIndexOutOfBoundsException e){
-            return true;
-        }
-    }*/
-
     public ActionEventGenerator(GameController gController, View view) {
         this.gController=gController;
         this.view=view;
         reset();
     }
 
+    /**
+     * it resets some parameters and the stateArray
+     */
     private void reset(){
         stateArray=new ArrayList<GameState>();
         stateArray.add(GameState.DRAFTPOOL);
@@ -46,6 +41,9 @@ public class ActionEventGenerator {
         contCellsFrameBoard=0;
     }
 
+    /**
+     * it creates and sends the action event of end turn
+     */
     public void endTurn(){
         ae=new ActionEvent();
         ae.setNoAction(true);
@@ -55,10 +53,17 @@ public class ActionEventGenerator {
         view.notifyActionEvent(ae);
     }
 
+    /**
+     * it stops the chain of states
+     */
     public void endTCardMove(){
         view.notifyActionEvent(ae);
     }
 
+    /**
+     * @param cardpos card position in on board card array list
+     * @throws IllegalArgumentException if cardpos is <0 or >2
+     */
     public void cardEvent(int cardpos) throws IllegalArgumentException{
         idx=0;
         contCellsFrameBoard=0;
@@ -128,6 +133,12 @@ public class ActionEventGenerator {
         else gController.setUpState(stateArray.get(idx));
     }
 
+    /**
+     *
+     * @param die from draft pool
+     * @param gameState if the state is BEGINMOVE or DRAFTPOOL
+     * @throws IllegalArgumentException if die==null
+     */
     public void draftPoolEvent(DieInt die, GameState gameState) throws IllegalArgumentException{
         if(gameState==GameState.BEGINMOVE){
             idx=0;
@@ -143,6 +154,10 @@ public class ActionEventGenerator {
         }
     }
 
+    /**
+     * @param box the selected box from frame board
+     * @throws IllegalArgumentException if box==null
+     */
     public void frameBoardEvent(Box box) throws IllegalArgumentException{
         if(box==null) throw new IllegalArgumentException("null box from frame board");
         else{
@@ -191,6 +206,10 @@ public class ActionEventGenerator {
         }
     }
 
+    /**
+     * @param val value selected
+     * @throws IllegalArgumentException if value exceeds the bounds
+     */
     public void dieValueEvent(int val) throws IllegalArgumentException{
         if(val>6 || val<1) throw new IllegalArgumentException("wrong die value");
         else{
@@ -199,6 +218,12 @@ public class ActionEventGenerator {
         }
     }
 
+    /**
+     * @param die die from draft pool
+     * @param turnIdx index of the turn from which the die is kept
+     * @param dieListIdx index of dice list of the turn "turnIdx"
+     * @throws IllegalArgumentException if actual parameters are wrong
+     */
     public void roundTrackEvent(DieInt die, int turnIdx, int dieListIdx) throws IllegalArgumentException{
         ArrayList<RoundTrackTurn> rTrack=ModelManager.getModel().getRoundTrackInt().getRoundTrackTurnList();
         if(die==null || turnIdx<0 || turnIdx>rTrack.size() || dieListIdx<0 || dieListIdx>rTrack.get(turnIdx).getDiceList().size()) throw new IllegalArgumentException("null die from round track or wrong coordinates");
