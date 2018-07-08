@@ -130,6 +130,8 @@ public class ChangeDieWithTheBag11 extends ToolCardDecorator {
 
             player.getPlayerBoard().incrementNumDice();
 
+            player.getPlayerBoard().setEmpty(false);
+
             player.getActionHistory().setDieUsed(true);
 
             player.getActionHistory().setPlacement(true);

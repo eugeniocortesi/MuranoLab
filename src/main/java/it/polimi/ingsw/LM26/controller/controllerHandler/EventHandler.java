@@ -122,7 +122,7 @@ public class EventHandler {
 
                 if (event.getId() == 5)
 
-                    if (toolCard.play(event.getDieFromDraft(), event.getDieFromRoundTrack())) {
+                    if (toolCard.play(getDraftDieCopy(event.getDieFromDraft()), getTrackDieCopy(event.getrTrackCoordinates()))) {
 
                         player.getActionHistory().setCardUsed(true);
 
@@ -133,7 +133,7 @@ public class EventHandler {
 
                 if (event.getId() == 6)
 
-                    if (toolCard.play(event.getDieFromDraft(), event.getInDeCrement())) {
+                    if (toolCard.play(getDraftDieCopy(event.getDieFromDraft()), event.getInDeCrement())) {
 
                         player.getActionHistory().setCardUsed(true);
 
@@ -175,7 +175,7 @@ public class EventHandler {
 
                 if (event.getId() == 10)
 
-                    if (toolCard.play(event.getDieFromRoundTrack(), getBoxListCopy(event.getFromBoxList()), getBoxListCopy(event.getToBoxList()), player)) {
+                    if (toolCard.play(getTrackDieCopy(event.getrTrackCoordinates()), getBoxListCopy(event.getFromBoxList()), getBoxListCopy(event.getToBoxList()), player)) {
 
                         player.getActionHistory().setCardUsed(true);
 
@@ -280,7 +280,7 @@ public class EventHandler {
 
         for (int i = 0; i < model.getDraftPool().size(); i++)
 
-            if (model.getDraftPool().get(i).getValue() == die.getValue() && model.getDraftPool().get(i).getColor().equals(die.getColor()))
+            if (model.getDraftPool().get(i).getNumber() == die.getNumber() && model.getDraftPool().get(i).getColor().equals(die.getColor()))
 
                 return model.getDraftPool().get(i);
 

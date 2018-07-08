@@ -39,6 +39,9 @@ public class MatchTest {
 
     public void play() {
 
+        for(int i=0; i<model.getOnBoardCards().getToolArrayList().size();i++)
+            System.out.print(model.getOnBoardCards().getToolArrayList().get(i));
+
         while(i<game.getPhase().getNrounds() && !game.getPhase().getOnePlayer()) {
 
             playing = game.getPhase().getCurrentRound().nextPlayer();

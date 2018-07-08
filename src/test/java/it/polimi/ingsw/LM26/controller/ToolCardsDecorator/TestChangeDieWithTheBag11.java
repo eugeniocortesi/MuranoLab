@@ -31,8 +31,7 @@ public class TestChangeDieWithTheBag11 {
             model.getPlayerList().add(new PlayerZone("name" + i, i));
         for (i = 0; i < 2; i++) {
             model.getPlayerList().get(i).setNumberPlayer(i);
-            index = rand.nextInt(model.getDecks().getWindowPatternCardDeck().size());
-            model.getPlayerList().get(i).setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(index));
+            model.getPlayerList().get(i).setWindowPatternCard(model.getDecks().getWindowPatternCardDeck().get(0));
             model.getPlayerList().get(i).setPlayerBoard(model.getDecks().getWindowFramePlayerBoardDeck().get(i));
             model.getPlayerList().get(i).getPlayerBoard().insertPatternIntoBoard(model.getPlayerList().get(i).getWindowPatternCard().getWindowPatter());
         }
@@ -55,42 +54,38 @@ public class TestChangeDieWithTheBag11 {
         //no placement has been done
         assertTrue(model.getDecks().getToolCardDeck().get(10).play(die, model.getPlayerList().get(0)));
 
-        assertFalse(model.getDraftPool().getInDraft().contains(die));
-        if(model.getBag().getInBag().contains(die))
-            System.out.println("bag contains die ");
-        assertTrue(model.getRestrictions().isFirstPart());
+        assertTrue((model.getRestrictions().isFirstPart()));
+
+        assertTrue(model.getBag().getInBag().contains(die));
+
         System.out.println(model.getRestrictions().getDie().getColor());
 
-        //a placement has been done
+        model.getDraftPool().printDraftPool();
+
+
+
+       assertEquals(model.getDraftPool().getInDraft().size(), 4);
+
+       assertFalse(model.getDraftPool().getInDraft().contains(die));
+
+        assertFalse(model.getDecks().getToolCardDeck().get(10).play(10, board[0][0], player));
+
+        assertFalse(model.getDecks().getToolCardDeck().get(10).play(4, board[1][1], player));
+
+        assertTrue(model.getDraftPool().getInDraft().contains(model.getRestrictions().getDie()));
+
+        assertTrue(model.getRestrictions().isNeedPlacement());
+
+        assertEquals(model.getDraftPool().getInDraft().size(), 5);
+
+        assertTrue(model.getDecks().getToolCardDeck().get(10).play(4, board[1][0], player));
+
         model.getPlayerList().get(0).getActionHistory().setDieUsed(true);
         model.getPlayerList().get(0).getActionHistory().setPlacement(true);
-        assertFalse(model.getDecks().getToolCardDeck().get(10).play(die, model.getPlayerList().get(0)));
 
-        die = model.getRestrictions().getDie();
-        die.setRoll(3);
 
-        boolean ok=false;
-        int count=0;
 
-        while(!ok && count<1000) {
 
-            int i = rand.nextInt(4);
-            int j = rand.nextInt(5);
-
-            if (model.getDecks().getToolCardDeck().get(10).play(3, board[i][j],player)) {
-                player.getPlayerBoard().printCard();
-                ok = true;
-            } else {
-                System.out.println("attempt "+ count+ " went wrong");
-                assertEquals(model.getRestrictions().getDie().getValue(), 3);
-                assertTrue(model.getRestrictions().isNeedPlacement());
-            }
-            count++;
-        }
-
-        System.out.println(count);
-        model.getRestrictions().setFirstPart(false);
-        assertFalse(model.getDecks().getToolCardDeck().get(10).play(3, board[0][0], player));
 
     }
 

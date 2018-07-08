@@ -74,6 +74,8 @@ public class RoundsHandler extends Thread {
 
         TimerConfiguration timerConfiguration = TimerConfiguration.implementation();
 
+        assert timerConfiguration != null;
+
         timerActionPlayer = new TimerActionPlayer(timerConfiguration.getTimerEnd());
     }
 
@@ -319,6 +321,10 @@ public class RoundsHandler extends Thread {
                     }
                 } else {
                     LOGGER.log(Level.INFO, "match error 2 ");
+
+                    if (event.getId() == 9) controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Riprova con un piazzamento classico, ma con lo stesso dado ");
+
+                    else controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Passi il turno ");
 
                     controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Errore: vuoi riprovare?");
 
