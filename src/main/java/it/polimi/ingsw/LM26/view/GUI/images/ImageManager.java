@@ -49,8 +49,13 @@ public class ImageManager {
     }
 
     public Image getPatternCard(String title){
-        String s=title+".jpg";
-        Image i=new Image(ImageManager.class.getResource(s).toExternalForm());
+        String s="";
+        if(title.length()>=12 && title.substring(0,11).equalsIgnoreCase("personalized")){
+            s="esempio.jpg";
+        }
+        else{
+            s=title+".jpg";
+        }
         return new Image(ImageManager.class.getResource(s).toExternalForm());
     }
 

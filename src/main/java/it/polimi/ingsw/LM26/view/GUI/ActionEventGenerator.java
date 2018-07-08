@@ -24,6 +24,14 @@ public class ActionEventGenerator {
     private View view;
     private boolean array=false;
 
+    /*public boolean isBegin(){
+        try{
+            return !(stateArray.get(idx-1)==GameState.ACTIONEVENT);
+        }catch(ArrayIndexOutOfBoundsException e){
+            return true;
+        }
+    }*/
+
     public ActionEventGenerator(GameController gController, View view) {
         this.gController=gController;
         this.view=view;
@@ -59,66 +67,60 @@ public class ActionEventGenerator {
         ae.setPlayer(ModelManager.getId());
         int cardid=ModelManager.getModel().getOnBoardCards().getToolArrayList().get(cardpos);
         ae.setCardID(cardid);
-        if(cardid==6){
-            ae.setId(7);
-            stateArray.add(0, GameState.DRAFTPOOL);
-            stateArray.add(1,GameState.ACTIONEVENT);
-        }
-        else{
-            stateArray.clear();
-            switch(cardid){
-                case 7:
-                case 8: {ae.setId(8);}break;
-                case 12:{
-                    ae.setId(10);
-                    stateArray.add(GameState.ROUNDTRACK);
-                    stateArray.add(GameState.FRAMEBOARD);
-                    stateArray.add(GameState.FRAMEBOARD);
-                    stateArray.add(GameState.CONTINUECHOICE);
-                    stateArray.add(GameState.FRAMEBOARD);
-                    array=true;
-                }break;
-                case 4:{
-                    ae.setId(3);
-                    stateArray.add(GameState.FRAMEBOARD);
-                    stateArray.add(GameState.FRAMEBOARD);
-                    stateArray.add(GameState.FRAMEBOARD);
-                    stateArray.add(GameState.FRAMEBOARD);
-                    array=true;
-                }break;
-                case 2:
-                case 3:{
-                    ae.setId(2);
-                    stateArray.add(GameState.FRAMEBOARD);
-                    stateArray.add(GameState.FRAMEBOARD);
-                }break;
-                case 11:{
-                    ae.setId(7);
-                    stateArray.add(GameState.DRAFTPOOL);
-                    stateArray.add(GameState.ACTIONEVENT);
-                    stateArray.add(GameState.DIEVALUE);
-                    stateArray.add(GameState.FRAMEBOARD);
-                }break;
-                case 9:{
-                    ae.setId(4);
-                    stateArray.add(GameState.DRAFTPOOL);
-                    stateArray.add(GameState.FRAMEBOARD);
-                }break;
-                case 10:{
-                    ae.setId(7);
-                    stateArray.add(GameState.DRAFTPOOL);
-                }break;
-                case 5:{
-                    ae.setId(5);
-                    stateArray.add(GameState.DRAFTPOOL);
-                    stateArray.add(GameState.ROUNDTRACK);
-                }break;
-                case 1:{
-                    ae.setId(6);
-                    stateArray.add(GameState.DRAFTPOOL);
-                    stateArray.add(GameState.INDECREMENT);
-                } break;
-            }
+        stateArray.clear();
+        switch(cardid){
+            case 7:
+            case 8: {ae.setId(8);}break;
+            case 12:{
+                ae.setId(10);
+                stateArray.add(GameState.ROUNDTRACK);
+                stateArray.add(GameState.FRAMEBOARD);
+                stateArray.add(GameState.FRAMEBOARD);
+                stateArray.add(GameState.CONTINUECHOICE);
+                stateArray.add(GameState.FRAMEBOARD);
+                array=true;
+            }break;
+            case 4:{
+                ae.setId(3);
+                stateArray.add(GameState.FRAMEBOARD);
+                stateArray.add(GameState.FRAMEBOARD);
+                stateArray.add(GameState.FRAMEBOARD);
+                stateArray.add(GameState.FRAMEBOARD);
+                array=true;
+            }break;
+            case 2:
+            case 3:{
+                ae.setId(2);
+                stateArray.add(GameState.FRAMEBOARD);
+                stateArray.add(GameState.FRAMEBOARD);
+            }break;
+            case 11:{
+                ae.setId(7);
+                stateArray.add(GameState.DRAFTPOOL);
+                stateArray.add(GameState.ACTIONEVENT);
+                stateArray.add(GameState.DIEVALUE);
+                stateArray.add(GameState.FRAMEBOARD);
+            }break;
+            case 9:{
+                ae.setId(4);
+                stateArray.add(GameState.DRAFTPOOL);
+                stateArray.add(GameState.FRAMEBOARD);
+            }break;
+            case 6:
+            case 10:{
+                ae.setId(7);
+                stateArray.add(GameState.DRAFTPOOL);
+            }break;
+            case 5:{
+                ae.setId(5);
+                stateArray.add(GameState.DRAFTPOOL);
+                stateArray.add(GameState.ROUNDTRACK);
+            }break;
+            case 1:{
+                ae.setId(6);
+                stateArray.add(GameState.DRAFTPOOL);
+                stateArray.add(GameState.INDECREMENT);
+            } break;
         }
         if(stateArray.size()==0){
             sendActionEvent();
@@ -146,7 +148,7 @@ public class ActionEventGenerator {
         else{
             System.out.println("idx: " + idx);
             System.out.println("contCellFrameBoard: " + contCellsFrameBoard);
-            if(((contCellsFrameBoard==0 && idx!=stateArray.size()-1) || contCellsFrameBoard==3) && !box.isIsPresent()){
+            if(((contCellsFrameBoard==0 && idx!=stateArray.size()-1) || contCellsFrameBoard==2) && !box.isIsPresent()){
                 gController.setMoveLabel("Cella senza dado. Selezionane un'altra");
                 idx--;
             }
@@ -228,8 +230,9 @@ public class ActionEventGenerator {
         if(idx!=stateArray.size()){
             idx++;
             if(ae.getCardID()==11){
+                ae = new ActionEvent();
+                ae.setCardID(11);
                 ae.setId(9);
-                ae.setDieFromDraft(null);
             }
             else if(ae.getCardID()==6){
                 ae.setId(1);
@@ -243,8 +246,12 @@ public class ActionEventGenerator {
 
     private void nextAction(){
         idx++;
-        if(idx==stateArray.size() || (idx<stateArray.size() && stateArray.get(idx)==GameState.ACTIONEVENT)){
+        if(idx==stateArray.size()){
             sendActionEvent();
+        }
+        else if(idx<stateArray.size() && stateArray.get(idx)==GameState.ACTIONEVENT){
+            sendActionEvent();
+            gController.setUpState(stateArray.get(idx));
         }
         else{
             if(stateArray.get(idx)==GameState.ROUNDTRACK && ModelManager.getModel().getRoundTrackInt().getRoundTrackTurnList().size()==0){

@@ -93,13 +93,13 @@ public class RoundTrackController {
             die=roundTrackList.get(idx).getDiceList().get(0);
             turn= idx;
             dieidx=0;
-            //gController.setInstructions("rt: prima riga, posto "+(idx+1));
+            gController.setMoveLabel("rt: prima riga, posto "+(idx+1));
         }
         else{
             die=roundTrackList.get(Math.floorDiv((idx-9),8)).getDiceList().get((idx-9)%8);
             turn= Math.floorDiv((idx-9),8);
             dieidx=(idx-9)%8;
-            //gController.setInstructions("rt: riga"+Math.floorDiv((idx-9),8)+", posto "+((idx-9)%8)+"indice "+idx);
+            gController.setMoveLabel("rt: riga"+Math.floorDiv((idx-9),8)+", posto "+((idx-9)%8)+"indice "+idx);
         }
         try{
             aeGenerator.roundTrackEvent(die, turn, dieidx);
