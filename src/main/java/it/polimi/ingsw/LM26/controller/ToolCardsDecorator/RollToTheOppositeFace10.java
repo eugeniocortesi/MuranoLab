@@ -37,7 +37,7 @@ public class RollToTheOppositeFace10 extends ToolCardDecorator {
 
 
     /**
-     * this action is always doable: 6->1, 5->2, 4->3
+     * this action is always doable: 6 implies 1, 5 implies 2, 4 implies 3
      * @param dieFromDraft dieFromDraft die from draft pool selected by client for the action
      * @param player of the action
      * @return the success of the card usage

@@ -59,7 +59,7 @@ public class ActionEventGenerator {
 
     /**
      * @param cardpos card position in on board card array list
-     * @throws IllegalArgumentException if cardpos is <0 or >2
+     * @throws IllegalArgumentException if cardpos is less than 0 or greater than 2
      */
     public void cardEvent(int cardpos) throws IllegalArgumentException{
         idx=0;

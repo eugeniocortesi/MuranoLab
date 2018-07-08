@@ -25,7 +25,7 @@ public class Matrix implements Serializable {
     private elements[][] matrix = new elements[row][column];
 
 
-    /**
+    /*
      * Constructor
      * it's used by Gson to deserialize WindowPatternCard elements-matrix
      */
@@ -79,7 +79,6 @@ public class Matrix implements Serializable {
 
     /**
      * method that transforms the elements-structure read from the file into the new patternBox-structure
-     *
      * @param patternMatrix new structure sto fill with transformed elements
      */
 

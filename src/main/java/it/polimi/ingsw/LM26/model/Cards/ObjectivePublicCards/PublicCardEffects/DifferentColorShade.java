@@ -17,7 +17,7 @@ public class DifferentColorShade extends Effect {
 
     /**
      * Constructor
-     * @param colorShades color->false, shade->true
+     * @param colorShades color implies false, shade implies true
      */
 
     public DifferentColorShade(boolean colorShades) {

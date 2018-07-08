@@ -73,7 +73,7 @@ public class CentralPhase implements PhaseInt {
 
 
     /**
-     * the first player in the sequence of playing is now the last (es: 1234 -> 2341)
+     * the first player in the sequence of playing is now the last (es: 1234 becomes 2341)
      * the method calls again setOrder to update the order vector with the changed players sequence
      * @param nplayers playing
      */

@@ -35,8 +35,8 @@ public class DifferentColorShadeOnRowColomn extends Effect {
 
     /**
      * Constructor
-     * @param colorShades color->true, shade->false
-     * @param rowColumn row->true, column->false
+     * @param colorShades color implies true, shade implies false
+     * @param rowColumn row implies true, column implies false
      */
 
     public DifferentColorShadeOnRowColomn(boolean colorShades, boolean rowColumn) {

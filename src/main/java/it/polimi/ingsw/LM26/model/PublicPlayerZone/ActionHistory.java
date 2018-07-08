@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Action History class
  * @author Eugenio
  * class that keeps track of the clients moves ( usage of a card or placement of a die),
- * store his location in the turn(first turn -> right order, second turn -> reverse order),
+ * store his location in the turn(first turn impplies right order, second turn implies reverse order),
  * and if he can contune the turn or he is freezed in the current one, beacuse of oreviusly restrictive action,
  * so that future actions can be allawoe or denied.
  * every Actionhistory object is specific of a client
