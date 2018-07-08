@@ -24,22 +24,23 @@ Implementation of the board game "Sagrada" distributed by Cranio.
 ## How to start connection
 ##### For Windows
 * Download Server.jar and Client.jar from Deliverables
-* Open Server.jar by bash 
+* Open Server.jar by bash with the command `java -jar Server.jar`
 * Change extension from Client.jar to Client.zip 
 * Open it/polimi/ingsw/LM26/DataClientConfiguration
 * Change `"ip": "127.0.0.1"` in `"ip": "XXX"` where XXX is the Server ip written when the Server.jar has started
 * Save and close Client.zip
 * Change extension from Client.zip to Client.jar 
-* Open Client.jar by bash
+* Open Client.jar by bash with the command `java -jar Client.jar`
 
 ##### For macOS/Linux
 * Download Server.jar and Client.jar from Deliverables
-* Open Server.jar by bash 
+* Open Server.jar by bash with the command `java -jar Server.jar`
 * Open bash and write `vim Client.jar`
 * Scroll up to open it/polimi/ingsw/LM26/DataClientConfiguration and press enter
 * Press i and change `"ip": "127.0.0.1"` in `"ip": "XXX"` where XXX is the Server ip written when the Server.jar has started
-* Press esc : wq and enter, close bash
-* Open Client.jar by bash
+* Press esc, then :wq and enter
+* Press :q and close bash
+* Open Client.jar by bash with the command `java -jar Client.jar`
 
 
 ##### Now you can play!
@@ -160,7 +161,8 @@ This is an example of WindowPatternCard
 - inUse: false
 
 * Press i and change the structure in the file copying this example and pasting it in the beginning of the file
-* Decide how to personalize your windowPatternCard and press esc : wq and enter to save and quit
+* Decide how to personalize your windowPatternCard and press esc, then :wq and enter to save and quit
+* Press :q and close the bash
 
 
 ##### Pay attention to the game rules and enjoy creating your personalized windowPatternCard and try it in a play!
