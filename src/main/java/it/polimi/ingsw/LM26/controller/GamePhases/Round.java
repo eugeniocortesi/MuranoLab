@@ -1,6 +1,5 @@
 package it.polimi.ingsw.LM26.controller.GamePhases;
 
-import it.polimi.ingsw.LM26.controller.controllerHandler.UpdatesHandler;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
@@ -108,8 +107,6 @@ public class Round {
         if (currentPlayer.getPlayerState() != STANDBY)
 
             currentPlayer.setPlayerState(PlayerState.ENDING);
-
-        System.out.print("SETTING "+currentPlayer +" IN ENDING ");
 
         currentPlayer.getActionHistory().deleteTurnHistory();
 

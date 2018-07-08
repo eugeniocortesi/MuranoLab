@@ -248,7 +248,7 @@ public class EventHandler {
 
     public DieInt getTrackDieCopy(int[] c) {
 
-        if (model.getRoundTrackInt().getRoundTrackTurnList().size() < c[0] || model.getRoundTrackInt().getRoundTrackTurn(c[0]).size() < c[1])
+        if (model.getRoundTrackInt().getRoundTrackTurnList().size() < c[0] || model.getRoundTrackInt().getRoundTrackTurn(c[0] +1 ).size() < c[1])
 
             return null;
 

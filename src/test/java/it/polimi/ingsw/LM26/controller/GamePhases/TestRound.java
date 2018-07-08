@@ -16,7 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
+import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.BEGINNING;
 import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.ENDING;
+import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -35,6 +37,7 @@ public class TestRound {
     private ArrayList<PlayerZone> playerZones = new ArrayList<PlayerZone>();
     private Model model;
     private PhaseInt central;
+    int standby=0, ending=0, begin=0;
     private Game game;
 
     @Before
@@ -85,9 +88,7 @@ public class TestRound {
     }
 
     @Test
-    //4 giocatori, controlla che solo a fine round lo stato sia "FINISHED",
-    // che il dado nella draftpool sia trasferito nella roundtrack,
-    // controlla che ad ogni turno (senza disconnessioni) 3 giocatori siano in "ENDING" e uno sia in "BEGINNING"
+
     public void checkEndActionNextPlayer() {
 
 
@@ -115,13 +116,13 @@ public class TestRound {
     }
 
     @Test
-    //test uguale a quello di prima, ma prova il caso di player 4 in standby
+
     public void checkEndActionNextPlayerStandby() {
         round = new Round(central.getTurn());
         model.getPlayerList().get(3).setPlayerState(PlayerState.STANDBY);
         bag = new Bag();
         round = new Round(central.getTurn());
-        player = model.getPlayerList().get(0); //per non far finire il turno al giocatore in standby
+        player = model.getPlayerList().get(0);
         player = round.nextPlayer();
         while (round.getTurnCounter() < (turn.length - 1)) {
             round.endAction();
@@ -151,7 +152,7 @@ public class TestRound {
     public void checkNextPlayer() {
 
         int j=0;
-        PlayerZone playing;
+        PlayerZone playing=null;
         playerZones = model.getPlayerList();
         model.setBag(new Bag());
         Game game=new Game();  //initialPhase
@@ -161,64 +162,65 @@ public class TestRound {
         while (!game.getPhase().getOnePlayer() && j < game.getPhase().getNrounds()  ) {
 
             playing = game.getPhase().getCurrentRound().nextPlayer();
-
             System.out.println("     NUOVO ROUND");
 
             while (game.getPhase().getCurrentRound().getRoundState() != FINISHED) {
 
-                System.out.println("              CHANGE TURN: " + playing.getName());
 
-                int n=game.getPhase().getCurrentRound().getTurnCounter();
+                    System.out.println("              CHANGE TURN: " + playing.getName());
 
-                if(n<(game.getPhase().getTurn().length / 2)-1) {
-                    assertTrue(playing.getActionHistory().isFirstTurn());
-                    assertFalse(playing.getActionHistory().isSecondTurn());
-                }
+                    int n = game.getPhase().getCurrentRound().getTurnCounter();
 
-                if(n>(game.getPhase().getTurn().length / 2)-1) {
-                    assertTrue(playing.getActionHistory().isSecondTurn());
-                    assertFalse(playing.getActionHistory().isFirstTurn());
-                }
+                    if (n < (game.getPhase().getTurn().length / 2) - 1) {
+                        assertTrue(playing.getActionHistory().isFirstTurn());
+                        assertFalse(playing.getActionHistory().isSecondTurn());
+                    }
 
-                playing.getActionHistory().setPlacement(true);
-                playing.getActionHistory().setJump(true);
-                playing.getActionHistory().setCardUsed(true);
-                playing.getActionHistory().setDieUsed(true);
-                playing.getActionHistory().setFreezed(true);
+                    if (n > (game.getPhase().getTurn().length / 2) - 1) {
+                        assertTrue(playing.getActionHistory().isSecondTurn());
+                        assertFalse(playing.getActionHistory().isFirstTurn());
+                    }
 
-                model.getRestrictions().setNeedPlacement(true);
-                model.getRestrictions().setFirstPart(true);
-                model.getRestrictions().setTool8needPlacement(true);
-                model.getRestrictions().setCurrentPlacement(true);
-                model.getRestrictions().setColor("verde");
-                model.getRestrictions().setDie(new Die());
+                    playing.getActionHistory().setPlacement(true);
+                    playing.getActionHistory().setJump(true);
+                    playing.getActionHistory().setCardUsed(true);
+                    playing.getActionHistory().setDieUsed(true);
+                    playing.getActionHistory().setFreezed(true);
 
-                game.getPhase().getCurrentRound().endAction();
+                    model.getRestrictions().setNeedPlacement(true);
+                    model.getRestrictions().setFirstPart(true);
+                    model.getRestrictions().setTool8needPlacement(true);
+                    model.getRestrictions().setCurrentPlacement(true);
+                    model.getRestrictions().setColor("verde");
+                    model.getRestrictions().setDie(new Die());
 
-                if(n<(game.getPhase().getTurn().length)-1 &&  game.getPhase().getTurn()[n]==game.getPhase().getTurn()[n+1]) {
-                    assertTrue(playing.getActionHistory().isSecondTurn());
-                    assertFalse(playing.getActionHistory().isFirstTurn());
-                }
+                    game.getPhase().getCurrentRound().endAction();
 
-                //check reset partial action history after a turn && restrictions
+                    if (n < (game.getPhase().getTurn().length) - 1 && game.getPhase().getTurn()[n] == game.getPhase().getTurn()[n + 1]) {
+                        assertTrue(playing.getActionHistory().isSecondTurn());
+                        assertFalse(playing.getActionHistory().isFirstTurn());
+                    }
 
-                assertFalse(playing.getActionHistory().isPlacement() && playing.getActionHistory().isDieUsed()
-                        && playing.getActionHistory().isJump() && playing.getActionHistory().isCardUsed());
+                    //check reset partial action history after a turn && restrictions
 
-               if (n<(game.getPhase().getTurn().length)-1) assertTrue(playing.getActionHistory().isFreezed());
+                    assertFalse(playing.getActionHistory().isPlacement() && playing.getActionHistory().isDieUsed()
+                            && playing.getActionHistory().isJump() && playing.getActionHistory().isCardUsed());
+
+                    if (n < (game.getPhase().getTurn().length) - 1) assertTrue(playing.getActionHistory().isFreezed());
                     else {
                         assertFalse(playing.getActionHistory().isFreezed());
-                    assertFalse(playing.getActionHistory().isSecondTurn());
-               }
+                        assertFalse(playing.getActionHistory().isSecondTurn());
+                    }
 
-                assertFalse(model.getRestrictions().isNeedPlacement() && model.getRestrictions().isFirstPart()
-                        && model.getRestrictions().isTool8needPlacement()
-                && model.getRestrictions().isCurrentPlacement());
+                    assertFalse(model.getRestrictions().isNeedPlacement() && model.getRestrictions().isFirstPart()
+                            && model.getRestrictions().isTool8needPlacement()
+                            && model.getRestrictions().isCurrentPlacement());
 
-                assertEquals(model.getRestrictions().getDie(), null);
-                assertEquals(model.getRestrictions().getColor(), null);
+                    assertEquals(model.getRestrictions().getDie(), null);
+                    assertEquals(model.getRestrictions().getColor(), null);
 
-                playing = game.getPhase().getCurrentRound().nextPlayer();
+                    playing = game.getPhase().getCurrentRound().nextPlayer();
+
 
             }
 
@@ -245,61 +247,125 @@ public class TestRound {
         model.setBag(new Bag());
         Game game=new Game();  //initialPhase
         game.getPhase().doAction(game);
+        int myStandBycounter=0;
 
         while (j < game.getPhase().getNrounds() && !game.getPhase().getOnePlayer()) {
 
             playing = game.getPhase().getCurrentRound().nextPlayer();
 
+            System.out.println("     NUOVO ROUND");
+
             while (game.getPhase().getCurrentRound().getRoundState() != FINISHED) {
 
-                System.out.println("              CHANGE TURN: " + playing.getName());
 
-                if (i == 5) {
-                    playerZones.get(1).setPlayerState(PlayerState.STANDBY);
-                    System.out.println(playerZones.get(1).getName() + " went in STANDBY");
-                }
-                if (i == 9) {
-                    playerZones.get(3).setPlayerState(PlayerState.STANDBY);
-                    System.out.println(playerZones.get(3).getName() + " went in STANDBY");
-                }
-                if (i == 12) {
-                    playerZones.get(0).setPlayerState(PlayerState.STANDBY);
-                    System.out.println(playerZones.get(0).getName() + " went in STANDBY");
-                }
-                if (i == 17) {
-                    playerZones.get(1).setPlayerState(PlayerState.ENDING);
-                    System.out.println(playerZones.get(1).getName() + " exit STANDBY");
-                }
-                if (i == 20) {
-                    playerZones.get(3).setPlayerState(PlayerState.ENDING);
-                    System.out.println(playerZones.get(3).getName() + "exit STANDBY");
-                }
-                if (i == 24) {
-                    playerZones.get(2).setPlayerState(PlayerState.STANDBY);
-                    System.out.println(playerZones.get(2).getName() + " went in STANDBY");
-                }
+                    System.out.println("              CHANGE TURN: " + playing.getName());
 
-                if (i == 27) {
-                    playerZones.get(3).setPlayerState(PlayerState.STANDBY);
-                    System.out.println(playerZones.get(3).getName() + "went STANDBY");
-                }
+                    if (i == 5) {
+                        playerZones.get(1).setPlayerState(PlayerState.STANDBY);
+                        count();
+                        System.out.println(playerZones.get(1).getName() + " went in STANDBY");
+                        myStandBycounter++;
+                        assertEquals(standby,myStandBycounter);
+                        assertEquals(ending, 3-myStandBycounter);
+                        assertEquals(begin, 1);
+                    }
 
-                if (i == 19) {
-                    playerZones.get(1).setPlayerState(PlayerState.ENDING);
-                    System.out.println(playerZones.get(1).getName() + " exit STANDBY");
-                }
+                    if (i == 9) {
+                        playerZones.get(3).setPlayerState(PlayerState.STANDBY);
+                        count();
+                        System.out.println(playerZones.get(3).getName() + " went in STANDBY");
+                        myStandBycounter++;
+                        assertEquals(standby,myStandBycounter);
+                        assertEquals(ending, 3-myStandBycounter);
+                        assertEquals(begin, 1);
+                    }
+                    if (i == 12) {
+                        playerZones.get(0).setPlayerState(PlayerState.STANDBY);
+                        count();
+                        System.out.println(playerZones.get(0).getName() + " went in STANDBY");
+                        myStandBycounter++;
+                        assertEquals(standby,myStandBycounter);
+                        assertEquals(ending, 3-myStandBycounter);
+                        assertEquals(begin, 1);
+                    }
+                    if (i == 16) {
+                        if (playerZones.get(1).getPlayerState()!=BEGINNING) {
+                            playerZones.get(1).setPlayerState(PlayerState.ENDING);
+                            count();
+                            System.out.println(playerZones.get(1).getName() + " exit STANDBY");
+                            myStandBycounter--;
+                            assertEquals(standby,myStandBycounter);
+                            assertEquals(ending, 3-myStandBycounter);
+                            assertEquals(begin, 1);
+                        }
+                    }
+                    if (i == 19) {
+                        if (playerZones.get(3).getPlayerState()!=BEGINNING) {
+                            playerZones.get(3).setPlayerState(PlayerState.ENDING);
+                            count();
+                            System.out.println(playerZones.get(3).getName() + "exit STANDBY");
+                            myStandBycounter--;
+                            assertEquals(standby,myStandBycounter);
+                            assertEquals(ending, 3-myStandBycounter);
+                            assertEquals(begin, 1);
+                        }
+                    }
+                    if (i == 22) {
+                        playerZones.get(2).setPlayerState(PlayerState.STANDBY);
+                        count();
+                        System.out.println(playerZones.get(2).getName() + " went in STANDBY");
+                        myStandBycounter++;
+                        assertEquals(standby,myStandBycounter);
+                        assertEquals(ending, 3-myStandBycounter);
+                        assertEquals(begin, 1);
+                    }
 
-                i++;
+                    if (i == 23) {
+                        playerZones.get(3).setPlayerState(PlayerState.STANDBY);
+                        count();
+                        System.out.println(playerZones.get(3).getName() + "went STANDBY");
+                        myStandBycounter++;
+                        assertEquals(standby,myStandBycounter);
+                        assertEquals(ending, 3-myStandBycounter);
+                        assertEquals(begin, 1);
+                    }
 
-                game.getPhase().getCurrentRound().endAction();
+                    if (i == 26) {
+                        if (playerZones.get(1).getPlayerState()!=BEGINNING) {
+                            playerZones.get(1).setPlayerState(PlayerState.ENDING);
+                            count();
+                            System.out.println(playerZones.get(1).getName() + " exit STANDBY");
+                            myStandBycounter--;
+                            assertEquals(standby,myStandBycounter);
+                            assertEquals(ending, 3-myStandBycounter);
+                            assertEquals(begin, 1);
+                        }
+                    }
 
-                playing = game.getPhase().getCurrentRound().nextPlayer();
+                    i++;
+
+                    game.getPhase().getCurrentRound().endAction();
+
+                    if(game.getPhase().getCurrentRound().getRoundState()!=FINISHED)
+
+                     playing = game.getPhase().getCurrentRound().nextPlayer();
 
             }
 
             game.getPhase().nextRound(game.getPhase().getCurrentRound(), game);
 
             j++;
+        }
+
+    }
+
+    public void count(){
+
+        standby=0; ending=0; begin=0;
+        for(int i=0;i<model.getPlayerList().size();i++){
+            if (model.getPlayer(i).getPlayerState()==STANDBY)standby++;
+            if (model.getPlayer(i).getPlayerState()==ENDING)ending++;
+            if (model.getPlayer(i).getPlayerState()==BEGINNING)begin++;
         }
 
     }

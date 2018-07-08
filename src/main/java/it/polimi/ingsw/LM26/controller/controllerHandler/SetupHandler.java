@@ -69,9 +69,12 @@ public class SetupHandler {
 
     public void assignWindowCard(String name, WindowPatternCard windowPatternCard) {
 
-        model.getPlayer(name).setWindowPatternCard(windowPatternCard);
+        if(model.getPlayer(name)!=null) {
 
-        controller.playersReady();
+            model.getPlayer(name).setWindowPatternCard(windowPatternCard);
+
+            controller.playersReady();
+        }
     }
 
 
