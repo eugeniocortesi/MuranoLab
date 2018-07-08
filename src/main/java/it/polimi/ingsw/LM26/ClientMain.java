@@ -1,9 +1,6 @@
 package it.polimi.ingsw.LM26;
 
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.Client;
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientBase;
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientInt;
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.*;
 import it.polimi.ingsw.LM26.view.GUI.View;
 import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 import javafx.application.Application;
@@ -12,6 +9,8 @@ import javafx.stage.Stage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class ClientMain extends Application{
@@ -21,6 +20,7 @@ public class ClientMain extends Application{
 
     public static void main(String[] args) {
 
+        Logger.getLogger(ClientView.class.getPackage().getName()).getParent().getHandlers()[0].setLevel(Level.OFF);
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String s = "";

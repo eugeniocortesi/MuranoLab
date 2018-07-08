@@ -43,7 +43,7 @@ public class ClientViewSocket extends ClientView {
 
     private PrintWriter outSocket;
 
-    private String username;
+    private volatile String username;
 
     private static final Logger LOGGER = Logger.getLogger(ClientViewSocket.class.getName());
 
@@ -147,8 +147,6 @@ public class ClientViewSocket extends ClientView {
     public void login(String name) {
 
         DataMessage message = new DataMessage("login", name);
-
-        System.out.println("LOGIN " +name);
 
         outSocket.println(message.serializeClassMessage());
 

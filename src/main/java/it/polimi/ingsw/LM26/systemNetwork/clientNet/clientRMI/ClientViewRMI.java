@@ -201,6 +201,7 @@ public class ClientViewRMI extends ClientView {
 
         try {
 
+            System.out.println(username);
             stub.disconnect(username);
 
         } catch (RemoteException e) {

@@ -27,6 +27,8 @@ public class ListenerClientView extends Thread {
 
     private ClientViewSocket clientView;
 
+    private volatile boolean inActive;
+
     private static final Logger LOGGER = Logger.getLogger(ListenerClientView.class.getName());
 
     /**
@@ -38,6 +40,8 @@ public class ListenerClientView extends Thread {
     public ListenerClientView(ClientViewSocket clientView, Socket socket) {
 
         this.clientView = clientView;
+
+        this.inActive = true;
 
         LOGGER.setLevel(Level.SEVERE);
 
@@ -57,7 +61,8 @@ public class ListenerClientView extends Thread {
 
     @Override
     public void run(){
-        listen();
+        if(inActive)
+            listen();
     }
 
     /**
@@ -95,7 +100,7 @@ public class ListenerClientView extends Thread {
 
         String message = null;
 
-            while(message == null) {
+            while(message == null && inActive) {
 
                 message = receiveMessage();
             }
@@ -107,7 +112,8 @@ public class ListenerClientView extends Thread {
 
                 t.start();
 
-                listen();
+                if(inActive)
+                    listen();
             }
             message = null;
     }
@@ -143,9 +149,15 @@ public class ListenerClientView extends Thread {
 
             LOGGER.log(Level.SEVERE,"In logged body");
 
+            dataMessage = DataMessage.deserializeDataMessage(message);
+
             clientView.logged(true,dataMessage.getField1());
+
+            System.out.println("Logged: "+ dataMessage.getField1());
         }
         else if(op.equals("not_logged")){
+
+            dataMessage = DataMessage.deserializeDataMessage(message);
 
             LOGGER.log(Level.SEVERE,"In not logged body");
 
@@ -227,7 +239,10 @@ public class ListenerClientView extends Thread {
 
             LOGGER.log(Level.SEVERE, "In send disconnected message body");
 
+            inActive = false;
+
             clientView.disconnected();
+
         }
         else if(op.equals("added_player")){
 
@@ -256,7 +271,10 @@ public class ListenerClientView extends Thread {
 
             EndMessage m = EndMessage.deserializeEndMessage(message);
 
+            inActive= false;
+
             clientView.endGame(m.getUsername(), m.getScore(), m.getWinner(), m.getScoreWinner());
+
         }
         else {
 

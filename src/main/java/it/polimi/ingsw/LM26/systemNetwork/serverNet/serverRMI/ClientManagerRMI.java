@@ -207,8 +207,11 @@ public class ClientManagerRMI extends ClientManager {
     public void disconnect(String s) {
 
         LOGGER.log(Level.SEVERE,"User " + s + " tries to disconnect");
+
         ActionEventPlayer actionEventPlayer = new ActionEventPlayer(s, false);
+
         myserver.getQueueController().pushMessage(actionEventPlayer);
+
         disconnected();
     }
 
@@ -330,9 +333,7 @@ public class ClientManagerRMI extends ClientManager {
      */
     @Override
     public void sendCurrentMenu(String name) {
-        //TODO CHECK IF IT WILL BE DELETED
-        //timerPlayer.resetTActionPlayer();
-        //timerTaskActionPlayers = timerPlayer.scheduleTActionPlayer();
+
         Thread t = new Thread(new myRunnableCurrentMenu(name));
         t.start();
 

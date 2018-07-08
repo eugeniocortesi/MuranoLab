@@ -310,6 +310,8 @@ public class ServerBase extends ViewGameInterface {
     @Override
     public void showWindowPattern(String user, int id, ArrayList<WindowPatternCard> windowDeck) {
 
+        if(clientManagerList.getClientManager(user)!= null)
+
         clientManagerList.getClientManager(user).choseWindowPattern(user, id, windowDeck);
 
     }
@@ -323,6 +325,8 @@ public class ServerBase extends ViewGameInterface {
     @Override
     public void showPrivateCard(String name, ObjectivePrivateCard privateCard) {
 
+        if(clientManagerList.getClientManager(name)!=null)
+
         clientManagerList.getClientManager(name).sendPrivateCard(privateCard);
     }
 
@@ -335,6 +339,8 @@ public class ServerBase extends ViewGameInterface {
     @Override
     public void showSetPlayerMenu(String name, PlayerZone player) {
 
+        if(clientManagerList.getClientManager(name)!=null)
+
         clientManagerList.getClientManager(name).sendBeginTurnMessage(name, player);
     }
 
@@ -345,6 +351,8 @@ public class ServerBase extends ViewGameInterface {
 
     @Override
     public void showCurrentMenu(String name) {
+
+        if(clientManagerList.getClientManager(name)!=null)
 
         clientManagerList.getClientManager(name).sendCurrentMenu(name);
     }
@@ -358,7 +366,9 @@ public class ServerBase extends ViewGameInterface {
     @Override
     public void showAnswerFromController(String name, String answer) {
 
-        clientManagerList.getClientManager(name).sendAnswerFromController(answer);
+        if(clientManagerList.getClientManager(name)!=null)
+
+            clientManagerList.getClientManager(name).sendAnswerFromController(answer);
     }
 
     /**
@@ -370,8 +380,10 @@ public class ServerBase extends ViewGameInterface {
     @Override
     public void showEndGame(String name, int score, String winner, int scoreWinner) {
 
+        if(clientManagerList.getClientManager(name)!= null)
+
         clientManagerList.getClientManager(name).sendEndGame(name, score, winner, scoreWinner);
-        end();
+
     }
 
     /**

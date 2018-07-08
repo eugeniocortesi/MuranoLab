@@ -256,8 +256,6 @@ public class ClientManagerSocket extends ClientManager {
 
                 DataMessage dataMessage = new DataMessage("logged", name);
 
-                dataMessage.dump();
-
                 this.user= name;
 
                 //A player has returned to play
@@ -301,10 +299,10 @@ public class ClientManagerSocket extends ClientManager {
 
         DataMessage dataMessage = new DataMessage("disconnected", user);
 
+        sendMessage(dataMessage.serializeClassMessage());
+
         //Remove it
         server.getClientManagerList().removeClientManager(user);
-
-        sendMessage(dataMessage.serializeClassMessage());
     }
 
     /**
