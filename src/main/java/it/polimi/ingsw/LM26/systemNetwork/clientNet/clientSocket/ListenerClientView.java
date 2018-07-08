@@ -4,7 +4,6 @@ import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ModelMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.*;
 
 import java.io.BufferedReader;

@@ -14,7 +14,6 @@ import org.junit.Test;
 import java.util.Random;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
-import static org.junit.Assert.*;
 
 public class TestColoredDiagonals {
 

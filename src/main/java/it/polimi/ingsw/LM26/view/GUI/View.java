@@ -45,44 +45,6 @@ public class View extends ViewInterface {
         //Initialize client Net
         View.clientBase = clientBase;
         discStage.initModality(Modality.APPLICATION_MODAL);
-
-        //TODO remove later
-       /* ModelManager.model = new Model();
-        Decks deck =loadDecks();
-        ModelManager.privateCard = deck.getObjectivePrivateCards().get(0);
-        ModelManager.setId(0);
-        OnBoardCards obc = new OnBoardCards();
-        ArrayList<PlayerZone> plList = new ArrayList<PlayerZone>();
-        for (int i = 0; i < 4; i++) {
-            PlayerZone pl = new PlayerZone("Name", i);
-            plList.add(pl);
-            pl.setWindowPatternCard(deck.getWindowPatternCardDeck().get(i + 3));
-        }
-        plList.get(0).setPlayerState(PlayerState.BEGINNING);
-        Game game = new Game(plList, deck, obc);
-        game.getPhase().doAction(game, plList);
-
-
-        ModelManager.model.setOnBoardCards(obc);
-        ModelManager.model.setPlayerList(plList);
-
-        DieInt d;
-        Bag bag = new Bag();
-        ArrayList<DieInt> dList = new ArrayList<DieInt>();
-        for (int j = 0; j < 5; j++) {
-            d = bag.draw();
-            d.roll();
-            dList.add(d);
-        }
-        DraftPool dPool = new DraftPool();
-        dPool.setInDraft(dList);
-        ModelManager.model.setDraftPool(dPool);
-        RoundTrackInt rTrack = new RoundTrack();
-        for (int f = 0; f < 5; f++) {
-            rTrack.addDice(dList);
-        }
-        ModelManager.model.setRoundTrackInt(rTrack);
-        this.update(ModelManager.model);*/
     }
 
     public static ClientInt getClientBase() {
@@ -112,7 +74,6 @@ public class View extends ViewInterface {
             }
         });
 
-        //TODO add clientVIew initialization
     }
 
     @Override

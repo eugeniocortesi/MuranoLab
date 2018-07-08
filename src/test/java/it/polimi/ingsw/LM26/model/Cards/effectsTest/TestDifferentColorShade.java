@@ -6,15 +6,12 @@ import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.PublicCardEffects.D
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Random;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
-import static org.junit.Assert.*;
 
 public class TestDifferentColorShade {
 

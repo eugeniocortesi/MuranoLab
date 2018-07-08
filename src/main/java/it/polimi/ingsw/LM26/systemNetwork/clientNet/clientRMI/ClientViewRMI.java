@@ -1,15 +1,15 @@
 
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI;
 
+import it.polimi.ingsw.LM26.fileConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventPlayer;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventTimerEnd;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
-import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
-import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.fileConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.ClientAcceptorRemote;
@@ -33,8 +33,6 @@ public class ClientViewRMI extends ClientView {
 
     private int RMIPORTServer;
 
-    //private int RMIPORTClient;
-
     private String address;
 
     private int id;
@@ -55,8 +53,6 @@ public class ClientViewRMI extends ClientView {
         this.concreteClientView = concreteClientView;
 
         RMIPORTServer = data.getServerRMIPORT();
-
-        //RMIPORTClient =data.getClientRMIPORT();
 
         address = data.getIp();
 
@@ -113,7 +109,7 @@ public class ClientViewRMI extends ClientView {
         } catch (RemoteException | NotBoundException e) {
 
             LOGGER.log(Level.SEVERE, "Could not reach server: {0}", e.getMessage());
-            System.err.println("Enable to reach the Server(first stub), reset and try again");
+            System.err.println("Unable to reach the Server(first stub), reset and try again");
         }
     }
 
@@ -144,7 +140,7 @@ public class ClientViewRMI extends ClientView {
 
         } catch (RemoteException e) {
 
-            System.err.println("Enable to reach the Server, insert name again");
+            System.err.println("Unable to reach the Server, insert name again");
             concreteClientView.showLoginScreen();
         }
     }
@@ -206,7 +202,7 @@ public class ClientViewRMI extends ClientView {
 
         } catch (RemoteException e) {
 
-            System.err.println("Enable to reach the Server");
+            System.err.println("Unable to reach the Server");
         }
     }
 
@@ -244,7 +240,7 @@ public class ClientViewRMI extends ClientView {
 
         } catch (RemoteException e) {
 
-            System.err.println("Enable to reach the Server");
+            System.err.println("Unable to reach the Server");
         }
     }
 
@@ -287,7 +283,7 @@ public class ClientViewRMI extends ClientView {
 
         } catch (RemoteException e) {
 
-            System.err.println("Enable to reach the Server");
+            System.err.println("Unable to reach the Server");
         }
     }
 

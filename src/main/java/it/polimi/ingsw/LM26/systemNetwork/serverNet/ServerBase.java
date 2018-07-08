@@ -1,15 +1,15 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
-import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.observers.serverController.*;
+import it.polimi.ingsw.LM26.fileConfiguration.DataServerConfiguration;
+import it.polimi.ingsw.LM26.fileConfiguration.TimerConfiguration;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
 import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
-import it.polimi.ingsw.LM26.fileConfiguration.DataServerConfiguration;
+import it.polimi.ingsw.LM26.observers.serverController.*;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI.RMIAcceptor;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket.SocketAcceptor;
-import it.polimi.ingsw.LM26.fileConfiguration.TimerConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.timer.TimerGame;
 
 import java.net.InetAddress;
@@ -243,24 +243,10 @@ public class ServerBase extends ViewGameInterface {
      */
 
     public boolean checkNumberUsers(){
-        //if(gameIsGoing)
-          //  return true;
+
         if (clientManagerListSize()<4)
             return true;
 
-
-        /*else if (!playing) {
-            Model model = SingletonModel.singletonModel();
-            System.out.println("Inserisci nome: ");
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            try {
-                String nome = br.readLine();
-                System.out.println("Name preso");
-                showWindowPattern(nome, 0, model.getDecks().getWindowPatternCardDeck());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
         return false;
     }
 
@@ -283,8 +269,6 @@ public class ServerBase extends ViewGameInterface {
         while(iterator.hasNext()){
 
             Map.Entry couple = (Map.Entry)iterator.next();
-
-            //System.out.println(couple.getKey());
 
             if((ObserverSimple) couple.getValue()!= null)
                 model.register((ObserverSimple) couple.getValue());

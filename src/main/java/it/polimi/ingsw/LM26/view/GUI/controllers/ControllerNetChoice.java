@@ -1,7 +1,7 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.fileConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRMI;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket.ClientViewSocket;
 import it.polimi.ingsw.LM26.view.GUI.View;

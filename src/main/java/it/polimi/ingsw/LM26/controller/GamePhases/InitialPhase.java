@@ -6,9 +6,10 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.ScoreMarker;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.Token;
 import it.polimi.ingsw.LM26.model.Serialization.Decks;
-import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 import java.util.ArrayList;
+
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 /**
  * InitialPhase class

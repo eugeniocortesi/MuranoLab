@@ -1,10 +1,8 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.view.GUI.DisplayableStage;
 import it.polimi.ingsw.LM26.view.GUI.View;
 import javafx.event.ActionEvent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class DisconnectionController {

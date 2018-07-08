@@ -2,11 +2,8 @@ package it.polimi.ingsw.LM26.view.GUI;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
-import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
-import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackInt;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackTurn;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
-import it.polimi.ingsw.LM26.observers.serverController.Observable;
 import it.polimi.ingsw.LM26.view.GUI.controllers.GameController;
 
 import java.util.ArrayList;

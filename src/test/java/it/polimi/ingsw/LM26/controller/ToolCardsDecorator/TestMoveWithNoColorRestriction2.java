@@ -10,11 +10,11 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.GregorianCalendar;
 import java.util.Random;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class TestMoveWithNoColorRestriction2 {
 

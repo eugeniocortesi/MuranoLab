@@ -13,7 +13,8 @@ import org.junit.Test;
 import java.util.Random;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class TestMoveWithNoValueRestriction3 {
 

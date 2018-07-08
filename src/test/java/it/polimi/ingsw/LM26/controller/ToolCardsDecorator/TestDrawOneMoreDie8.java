@@ -1,21 +1,14 @@
 package it.polimi.ingsw.LM26.controller.ToolCardsDecorator;
 
-import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.util.Random;
-
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
-import static javafx.scene.input.KeyCode.R;
-import static javafx.scene.input.KeyCode.S;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class TestDrawOneMoreDie8 {
 

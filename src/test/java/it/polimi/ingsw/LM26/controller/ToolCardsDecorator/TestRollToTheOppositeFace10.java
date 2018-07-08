@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class TestRollToTheOppositeFace10 {
 

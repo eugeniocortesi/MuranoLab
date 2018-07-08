@@ -1,11 +1,7 @@
 package it.polimi.ingsw.LM26.controller.controllerHandler;
 
 import it.polimi.ingsw.LM26.controller.Controller;
-import it.polimi.ingsw.LM26.model.Model;
 import org.junit.Test;
-
-import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
-import static org.junit.Assert.*;
 
 public class TestSetupHandler {
 

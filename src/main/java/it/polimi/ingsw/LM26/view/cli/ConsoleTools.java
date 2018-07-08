@@ -91,7 +91,6 @@ public class ConsoleTools {
      */
     public void showYourplayerZone(int myid) {
         System.out.println("La tua area di gioco: ");
-        System.out.println(model.getPlayerList() + " playerlist " + model+ " model");
         this.printFrameBoard(model.getPlayerList().get(myid));
         for(int i=0; i< model.getPlayerList().get(myid).getToken().getTokenNumber();i++){
             System.out.print("\u25CB ");

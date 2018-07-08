@@ -1,15 +1,15 @@
 
 package it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket;
 
+import it.polimi.ingsw.LM26.fileConfiguration.DataClientConfiguration;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventPlayer;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventTimerEnd;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
-import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
-import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.fileConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ConnectMessage;
@@ -17,7 +17,10 @@ import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.DataMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.EventMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.WindowAnswerMessage;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;

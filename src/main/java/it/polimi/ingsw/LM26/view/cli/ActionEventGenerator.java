@@ -1,14 +1,9 @@
 package it.polimi.ingsw.LM26.view.cli;
 
-import it.polimi.ingsw.LM26.model.Serialization.Decks;
-import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class ActionEventGenerator {

@@ -16,13 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static it.polimi.ingsw.LM26.controller.GamePhases.RoundState.FINISHED;
-import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.BEGINNING;
-import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.ENDING;
-import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
+import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.*;
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TestRound {
 

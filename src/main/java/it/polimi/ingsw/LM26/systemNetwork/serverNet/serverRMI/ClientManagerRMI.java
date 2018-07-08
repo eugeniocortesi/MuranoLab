@@ -1,13 +1,13 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI;
 
 
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventPlayer;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
-import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
-import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRemote;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
@@ -66,6 +66,7 @@ public class ClientManagerRMI extends ClientManager {
         timerPlayer = new TimerPlayer(this, myserver);
 
         myserver.addClientManager(this);
+
         //Start Network Timer
         timerTaskNetworkPlayers = timerPlayer.scheduleTNetwork();
         LOGGER.log(Level.WARNING, "Timer network Begin");
@@ -613,7 +614,6 @@ public class ClientManagerRMI extends ClientManager {
         @Override
         public void run() {
 
-            //LOGGER.log(Level.WARNING, "Arrived pong");
             try{
                 if(inActive)
                     skeleton.pong();

@@ -1,6 +1,9 @@
 package it.polimi.ingsw.LM26;
 
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.*;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.Client;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientInt;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
 import it.polimi.ingsw.LM26.view.GUI.View;
 import it.polimi.ingsw.LM26.view.cli.ConsoleStrings;
 import javafx.application.Application;
@@ -60,7 +63,6 @@ public class ClientMain extends Application{
     public void start(Stage primaryStage) throws Exception {
 
         view = new View(primaryStage, client);
-        //view.showCurrentMenu("name");
         view.showNetChoise();
     }
 }

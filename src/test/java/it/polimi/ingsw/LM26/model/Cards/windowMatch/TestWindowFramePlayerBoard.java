@@ -8,6 +8,7 @@ import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import org.junit.Test;
 
 import java.util.Random;
+
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 public class TestWindowFramePlayerBoard {

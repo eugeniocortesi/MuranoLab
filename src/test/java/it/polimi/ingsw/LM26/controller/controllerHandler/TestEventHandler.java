@@ -7,7 +7,6 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +14,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class TestEventHandler {
 

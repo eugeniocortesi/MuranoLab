@@ -1,9 +1,7 @@
 package it.polimi.ingsw.LM26.model.Cards.effectsTest;
 
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.ObjectivePublicCard;
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.PublicCardEffects.ColoredDiagonals;
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.PublicCardEffects.DifferentColorShade;
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.PublicCardEffects.DifferentColorShadeOnRowColomn;
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.PublicCardEffects.Shades;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
@@ -11,7 +9,6 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.Color;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.PublicCardEffects.Shades;
 import it.polimi.ingsw.LM26.model.Serialization.Elements;
 import org.junit.Test;
 

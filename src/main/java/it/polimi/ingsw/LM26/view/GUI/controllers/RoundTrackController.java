@@ -1,6 +1,5 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
-import it.polimi.ingsw.LM26.controller.GamePhases.Game;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackTurn;
 import it.polimi.ingsw.LM26.view.GUI.ActionEventGenerator;

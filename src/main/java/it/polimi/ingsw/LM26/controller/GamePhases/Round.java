@@ -4,12 +4,13 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
-import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState.STANDBY;
+import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
 
 
 /**

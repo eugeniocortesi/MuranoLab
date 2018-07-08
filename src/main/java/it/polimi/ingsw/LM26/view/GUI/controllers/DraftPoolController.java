@@ -1,7 +1,6 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
-import it.polimi.ingsw.LM26.view.GUI.ActionEventGenerator;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
 import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
 import javafx.fxml.FXML;

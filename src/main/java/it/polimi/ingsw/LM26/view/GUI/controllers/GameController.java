@@ -1,13 +1,8 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
-import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.model.PlayArea.OnBoardCards;
-import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
-import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrackTurn;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
 import it.polimi.ingsw.LM26.view.GUI.ActionEventGenerator;
 import it.polimi.ingsw.LM26.view.GUI.GameState;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
@@ -18,16 +13,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
-
-import static it.polimi.ingsw.LM26.model.PlayArea.Color.*;
 
 
 public class GameController {

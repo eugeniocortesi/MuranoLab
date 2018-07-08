@@ -1,6 +1,5 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.timer;
 
-import it.polimi.ingsw.LM26.observers.serverController.ActionEventTimerEnd;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 
 import java.util.Timer;

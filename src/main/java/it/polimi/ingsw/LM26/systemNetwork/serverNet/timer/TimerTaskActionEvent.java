@@ -4,7 +4,6 @@ import it.polimi.ingsw.LM26.controller.controllerHandler.SetupHandler;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Logger;
 
 /**
  * TimerTaskActionEvent Class

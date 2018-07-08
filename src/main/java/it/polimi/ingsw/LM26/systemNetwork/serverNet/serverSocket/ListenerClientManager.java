@@ -196,7 +196,6 @@ public class ListenerClientManager extends Thread {
     @Override
     public void run(){
 
-        //System.out.println("RUN IN ACTION" +inAction);
         if(inAction)
 
             listen();

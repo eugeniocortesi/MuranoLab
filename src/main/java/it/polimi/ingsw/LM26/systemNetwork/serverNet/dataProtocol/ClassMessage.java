@@ -48,7 +48,7 @@ public abstract class ClassMessage {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Enable to parse message: "+s);
+            System.err.println("Unable to parse message: "+s);
             return null;
         }
         return null;

@@ -1,13 +1,12 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverSocket;
 
+import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
+import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
+import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventPlayer;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
-import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
-import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
-import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.ModelMessage;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ClientManager;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.dataProtocol.*;
@@ -78,7 +77,7 @@ public class ClientManagerSocket extends ClientManager {
 
         }catch (IOException e) {
 
-            System.err.println("Enable to create a Writer, please reset Server");
+            System.err.println("Unable to create a Writer, please reset Server");
         }
 
         listenerClientManager = new ListenerClientManager(this, socket);
@@ -142,10 +141,6 @@ public class ClientManagerSocket extends ClientManager {
         timerTaskNetworkPlayers = timerPlayer.scheduleTNetwork();
 
         LOGGER.log(Level.WARNING, "Timer network Begin");
-
-        //Thread t1 = new Thread(new MyRunnablePing());
-
-        //t1.start();
 
         inActive = true;
 

@@ -5,10 +5,6 @@ import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.observers.serverController.Observable;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class MyTurnMenu extends Observable implements PlayerMenuInt{
@@ -23,7 +19,6 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
         cView=clientView;
         this.cs = cs;
         register(clientView);
-        System.out.println("Registered");
     }
 
     /**
@@ -32,7 +27,6 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
     @Override
     public void showMenu(){
 
-        System.out.println(ansi().eraseScreen());
         System.out.println("E' il tuo turno, scrivi\n" +
                 "'A' per vedere la zona di gioco di un altro giocatore\n" +
                 "'T' per vedere la tua zona di gioco e la riserva\n" +
@@ -45,7 +39,7 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
 
     /**
      * @param input from the user in main menù
-     * @return if it is one of the menù chioces
+     * @return boolean if it is one of the menù chioces
      */
     public boolean evaluateCondition(String input){
         return  !(input.equalsIgnoreCase("A") || input.equalsIgnoreCase("T")
@@ -59,7 +53,6 @@ public class MyTurnMenu extends Observable implements PlayerMenuInt{
      * @param input is the checked input from user
      */
     public void handleInput(String input){
-        System.out.println(ansi().eraseScreen());
         if(input.equalsIgnoreCase("A")){
             consoleTools.showAnotherPlayer();
         }

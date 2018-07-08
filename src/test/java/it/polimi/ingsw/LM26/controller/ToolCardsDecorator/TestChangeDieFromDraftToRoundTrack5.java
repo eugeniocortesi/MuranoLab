@@ -1,6 +1,5 @@
 package it.polimi.ingsw.LM26.controller.ToolCardsDecorator;
 
-import it.polimi.ingsw.LM26.controller.GamePhases.CentralPhase;
 import it.polimi.ingsw.LM26.controller.GamePhases.Game;
 import it.polimi.ingsw.LM26.controller.GamePhases.InitialPhase;
 import it.polimi.ingsw.LM26.controller.GamePhases.PhaseInt;
@@ -8,16 +7,14 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PlayArea.roundTrack.RoundTrack;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.model.Serialization.Decks;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class TestChangeDieFromDraftToRoundTrack5 {
 

@@ -10,12 +10,12 @@ import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.lang.reflect.AnnotatedArrayType;
 import java.util.ArrayList;
 import java.util.Random;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class TestMoveTwoDice4 {
 

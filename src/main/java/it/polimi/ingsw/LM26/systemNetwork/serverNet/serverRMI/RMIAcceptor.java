@@ -1,7 +1,7 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet.serverRMI;
 
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRemote;
 import it.polimi.ingsw.LM26.fileConfiguration.DataServerConfiguration;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRemote;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ServerBase;
 
 import java.rmi.AlreadyBoundException;

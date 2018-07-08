@@ -3,6 +3,7 @@ package it.polimi.ingsw.LM26.systemNetwork.clientNet;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
 import it.polimi.ingsw.LM26.systemNetwork.serverNet.ViewGameInterface;
+
 import java.util.ArrayList;
 
 /**

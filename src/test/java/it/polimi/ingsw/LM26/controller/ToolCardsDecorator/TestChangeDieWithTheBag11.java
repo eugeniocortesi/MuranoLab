@@ -1,6 +1,5 @@
 package it.polimi.ingsw.LM26.controller.ToolCardsDecorator;
 
-import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;

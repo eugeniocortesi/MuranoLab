@@ -1,14 +1,12 @@
 package it.polimi.ingsw.LM26.controller.ToolCardsDecorator;
 
-import it.polimi.ingsw.LM26.model.Cards.ToolCardInt;
 import it.polimi.ingsw.LM26.model.Model;
-import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.Die;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
-import org.junit.Before;
 import org.junit.Test;
 
 import static it.polimi.ingsw.LM26.model.SingletonModel.singletonModel;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class TestChangeDieValue1 {
 

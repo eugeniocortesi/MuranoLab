@@ -11,8 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 
-import javax.jws.WebParam;
-
 
 public class OnBoardCardsController {
 

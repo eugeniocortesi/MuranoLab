@@ -1,12 +1,12 @@
 package it.polimi.ingsw.LM26.systemNetwork.serverNet;
 
-import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
-import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
-import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
+import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.modelView.ObserverSimple;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.LM26.model.Cards.ObjectivePublicCards.PublicCardEffects;
 
-import it.polimi.ingsw.LM26.controller.PlaceDie;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
 

@@ -1,8 +1,5 @@
 package it.polimi.ingsw.LM26.view.GUI.controllers;
 
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientBase;
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientInt;
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 import it.polimi.ingsw.LM26.view.GUI.View;
 import it.polimi.ingsw.LM26.view.GUI.ViewControllerInt;
 import javafx.event.ActionEvent;

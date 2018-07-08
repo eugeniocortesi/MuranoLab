@@ -7,7 +7,6 @@ import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 
-import javax.print.attribute.standard.NumberUp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

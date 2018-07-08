@@ -1,15 +1,17 @@
 package it.polimi.ingsw.LM26.view.cli;
 
-import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
-import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
+import it.polimi.ingsw.LM26.fileConfiguration.DataClientConfiguration;
 import it.polimi.ingsw.LM26.model.Cards.ObjectivePrivateCard;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerState;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.observers.modelView.ObservableSimple;
-import it.polimi.ingsw.LM26.fileConfiguration.DataClientConfiguration;
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.*;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
+import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientInt;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
+import it.polimi.ingsw.LM26.systemNetwork.clientNet.ViewInterface;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientRMI.ClientViewRMI;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.clientSocket.ClientViewSocket;
 import org.fusesource.jansi.AnsiConsole;
@@ -18,7 +20,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
 
 import static org.fusesource.jansi.Ansi.Color.*;
 import static org.fusesource.jansi.Ansi.ansi;
@@ -38,20 +39,17 @@ public class ConsoleStrings extends ViewInterface {
     private String s= "";
     private InputLoop inputLoop;
     private ActionEventGenerator aeGenerator;
-    //private CountDownLatch countDownLatch;
+
 
     public ConsoleStrings(ClientInt clientBase) {
-        System.setProperty("jansi.passthrough", "true"); //TODO remove later
         AnsiConsole.systemInstall();
         playerMenu=null;
         aeGenerator=new ActionEventGenerator();
         this.clientBase = clientBase;
         dataClientConfiguration = new DataClientConfiguration();
         dataClientConfiguration = dataClientConfiguration.implementation();
-        System.out.println("SocketPort " +dataClientConfiguration.getClientSOCKETPORT()
-                + " ServerRMI "+ dataClientConfiguration.getServerRMIPORT());
         inputLoop = new InputLoop();
-        //showNetChoise();
+
     }
 
     /**
@@ -71,7 +69,6 @@ public class ConsoleStrings extends ViewInterface {
             if(!(s.equalsIgnoreCase("r") || s.equalsIgnoreCase("s"))) System.out.println("r o s!!");
         }
         if(s.equalsIgnoreCase("R")) {
-            //TODO ricorda di cambiare i costruttori ai clientView e attributo di tipo consolestring
             clientView = new ClientViewRMI(this, dataClientConfiguration );
             clientBase.setConnection(true);
         }
@@ -209,7 +206,6 @@ public class ConsoleStrings extends ViewInterface {
      */
     @Override
     public void showCurrentMenu(String name){
-        System.out.println("Show current menu");
         playerMenu.showMenu();
     }
 
@@ -233,13 +229,6 @@ public class ConsoleStrings extends ViewInterface {
             ActionEventGenerator.invalidActionEvent=false;
             notify(aeGenerator.askForMenu(false));
         }
-        /*countDownLatch = new CountDownLatch(1);
-        try {
-            countDownLatch.await();
-        }
-        catch(InterruptedException e){
-            Thread.currentThread().interrupt();
-        }*/
     }
 
     private class InputLoop extends Thread{

@@ -2,15 +2,11 @@ package it.polimi.ingsw.LM26.view.GUI.controllers;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowFramePlayerBoard;
-import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
 import it.polimi.ingsw.LM26.view.GUI.ActionEventGenerator;
 import it.polimi.ingsw.LM26.view.GUI.ModelManager;
 import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -19,9 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-import javax.xml.ws.Action;
-
-import static it.polimi.ingsw.LM26.model.PlayArea.Color.*;
+import static it.polimi.ingsw.LM26.model.PlayArea.Color.WHITE;
 
 public class FrameBoardController {
 

@@ -16,7 +16,6 @@ public class TestBagSimple {
             DieInt d = bag.draw();
             d.roll();
             System.out.println("d: " + d);
-            //d.dump();
             bag.dump();
         }
     }

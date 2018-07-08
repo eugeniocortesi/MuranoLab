@@ -4,10 +4,6 @@ import it.polimi.ingsw.LM26.observers.serverController.ActionEvent;
 import it.polimi.ingsw.LM26.observers.serverController.Observable;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
@@ -32,7 +28,6 @@ public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
     @Override
     public void showMenu(){
 
-        System.out.println(ansi().eraseScreen());
         System.out.println("E' il turno di un altro giocatore, scrivi\n" +
                 "'A' per vedere la zona di gioco di un altro giocatore\n" +
                 "'T' per vedere la tua zona di gioco\n" +
@@ -59,7 +54,6 @@ public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
      * @param input the checked input from user
      */
     public void handleInput(String input){
-        System.out.println(ansi().eraseScreen());
         if(input.equalsIgnoreCase("L")){
             if(ae.disconnectConfirm()){clientView.disconnect();}
             else {
