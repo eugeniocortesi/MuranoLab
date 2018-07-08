@@ -151,8 +151,6 @@ public class ListenerClientView extends Thread {
             dataMessage = DataMessage.deserializeDataMessage(message);
 
             clientView.logged(true,dataMessage.getField1());
-
-            System.out.println("Logged: "+ dataMessage.getField1());
         }
         else if(op.equals("not_logged")){
 
@@ -163,8 +161,6 @@ public class ListenerClientView extends Thread {
             clientView.logged(false,dataMessage.getField1());
         }
         else if(op.equals(("too_many_users"))){
-
-            System.out.println("In too many users body");
 
             clientView.tooManyUsers();
         }

@@ -140,8 +140,6 @@ public class RoundsHandler extends Thread {
 
                 firstShow=false;
 
-                model.getDraftPool().printDraftPool();
-
                 ttask1 = timerActionPlayer.scheduleTimerActionPlayer(controller.getSetupHandler(), playing.getName());
 
                 if (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump() && !playing.getActionHistory().isFreezed()) {

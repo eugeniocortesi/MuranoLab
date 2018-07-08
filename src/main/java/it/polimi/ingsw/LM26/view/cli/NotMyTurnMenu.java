@@ -17,7 +17,6 @@ public class NotMyTurnMenu extends Observable implements PlayerMenuInt {
     public NotMyTurnMenu(ClientView clientView, ConsoleStrings cs) {
         ae= new ActionEventGenerator();
         register(clientView);
-        System.out.println("Registered");
         this.cs = cs;
         this.clientView=clientView;
     }

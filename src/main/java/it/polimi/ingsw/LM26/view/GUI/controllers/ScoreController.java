@@ -34,14 +34,8 @@ public class ScoreController {
 
 
     public void setUp(String name, int score, String winner, int scoreWinner){
-        imageManager= new ImageManager();
-        Image imagebackg=imageManager.backgroundImage();
-        StackPane cell;
-        BackgroundSize backgSize = new BackgroundSize(Control.USE_COMPUTED_SIZE,Control.USE_COMPUTED_SIZE,true,true,true,false);
 
-        BackgroundImage backgImage=new BackgroundImage(imagebackg, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,backgSize);
-        Background backg= new Background(backgImage);
-        scoreTrack.setBackground(backg);
+        StackPane cell;
 
         for(PlayerZone p : ModelManager.getModel().getPlayerList()){
             if(p.getScoreMarker().getPoints()<14){

@@ -98,7 +98,7 @@ public class RoundTrackController {
             die=roundTrackList.get(Math.floorDiv((idx-9),8)).getDiceList().get((idx-9)%8);
             turn= Math.floorDiv((idx-9),8);
             dieidx=(idx-9)%8;
-            gController.setMoveLabel("rt: riga"+Math.floorDiv((idx-9),8)+", posto "+((idx-9)%8)+"indice "+idx);
+            gController.setMoveLabel("rt: riga"+Math.floorDiv((idx-9),8)+", posto "+((idx-9)%8));
         }
         try{
             aeGenerator.roundTrackEvent(die, turn, dieidx);

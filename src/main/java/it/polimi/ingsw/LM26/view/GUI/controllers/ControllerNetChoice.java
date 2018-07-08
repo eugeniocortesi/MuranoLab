@@ -30,8 +30,6 @@ public class ControllerNetChoice {
         this.view=view;
         dClientConfig = new DataClientConfiguration();
         dClientConfig = dClientConfig.implementation();
-        System.out.println("SocketPort " +dClientConfig.getClientSOCKETPORT()
-                + " ServerRMI "+ dClientConfig.getServerRMIPORT());
     }
 
 
