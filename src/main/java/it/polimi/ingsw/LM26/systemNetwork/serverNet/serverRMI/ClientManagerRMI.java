@@ -308,9 +308,6 @@ public class ClientManagerRMI extends ClientManager {
     @Override
     public void sendBeginTurnMessage(String name, PlayerZone playerZone) {
 
-        //TODO CHECK TIMER
-        //timerGame.resetTimerActionPlayer();
-        //timerTaskActionPlayers = timerGame.scheduleTimerActionPlayer(user);
         Thread t = new Thread(new MyRunnableBeginTurnMessage(name, playerZone));
         t.start();
     }
