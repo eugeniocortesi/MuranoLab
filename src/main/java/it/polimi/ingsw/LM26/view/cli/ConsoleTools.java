@@ -163,7 +163,7 @@ public class ConsoleTools {
                 printPatternBox(windowPatternCard.getWindowPatter()[i][j]);
             }
             System.out.println();
-        }
+        }System.out.println();
     }
 
 
@@ -367,15 +367,16 @@ public class ConsoleTools {
                         if(dieList.get(i).getColor().equals(Color.ANSI_GREEN)){
                             dcolored.add(i); c=chars[2];
                         }
-                    } break;
+                    }
                 }
                 else if(chars[1]=='I'){
                     for(int i=0; i<dieList.size(); i++){
                         if(dieList.get(i).getColor().equals(Color.ANSI_PURPLE)){
                             dcolored.add(i); c=chars[2];
                         }
-                    } break;
+                    }
                 }
+                break;
                 default: { return -1; }//if chars is wrong
 
             }

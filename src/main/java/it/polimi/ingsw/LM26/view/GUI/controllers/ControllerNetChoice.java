@@ -48,7 +48,6 @@ public class ControllerNetChoice {
             clientView = new ClientViewSocket(view, dClientConfig);
             View.setClientView(clientView);
             View.getClientBase().setConnection(false);
-            System.out.println("CREated socket");
         }
         View.getClientView().connect();
         view.register(clientView);
