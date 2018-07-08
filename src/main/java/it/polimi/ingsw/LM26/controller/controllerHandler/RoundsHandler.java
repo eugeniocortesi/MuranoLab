@@ -302,9 +302,9 @@ public class RoundsHandler extends Thread {
 
                     if (event.getId() == 9) controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Riprova con un piazzamento classico, ma con lo stesso dado ");
 
-                    else controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Passi il turno ");
+                    else if (event.getId() == 11) controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Passi il turno ");
 
-                    controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Errore: vuoi riprovare?");
+                    else controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Errore: vuoi riprovare?");
 
                     controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
 

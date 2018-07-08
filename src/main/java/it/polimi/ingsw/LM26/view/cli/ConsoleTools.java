@@ -72,7 +72,7 @@ public class ConsoleTools {
     private void printFrameBoard(PlayerZone pl){
         WindowFramePlayerBoard frame = pl.getPlayerBoard();
         String escape= pl.getPlayerBoard().getColor().escape();
-        System.out.println(escape+"\u2588\u2588 "+pl.getName().toUpperCase()+" \u2588\u2588"+ Color.RESET);
+        System.out.println(escape+(char)254+(char)254+pl.getName().toUpperCase()+(char)254+(char)254+ Color.RESET);
         for(int i=0; i<4; i++){
             for(int j=0; j<5; j++){
                 Box box=frame.getBoardMatrix()[i][j];
@@ -93,7 +93,7 @@ public class ConsoleTools {
         System.out.println("La tua area di gioco: ");
         this.printFrameBoard(model.getPlayerList().get(myid));
         for(int i=0; i< model.getPlayerList().get(myid).getToken().getTokenNumber();i++){
-            System.out.print("\u25CB ");
+            System.out.print("O");
             System.out.flush();
         }
         System.out.println();
@@ -127,7 +127,7 @@ public class ConsoleTools {
         System.out.print("Segnalini favore: ");
         System.out.flush();
         for(int i=0; i<  model.getPlayerList().get(id).getToken().getTokenNumber();i++){
-            System.out.print("\u25CB ");
+            System.out.print("O");
             System.out.flush();
         }
         System.out.println();
@@ -140,7 +140,7 @@ public class ConsoleTools {
     private void printPatternBox(PatternBox p){
         if(p.isColor()){
             String escape=p.getColor().escape();
-            System.out.print(escape+"\u25A0"+Color.RESET+"|");
+            System.out.print(escape+(char)254+Color.RESET+"|");
             System.out.flush();
         }
         else if(p.isShade()){
@@ -236,8 +236,8 @@ public class ConsoleTools {
             }
             System.out.println("Segnalini Favore da spendere per usare la carta: ");
             System.out.flush();
-            for(int j=0; j<model.getOnBoardCards().getCardsToken()[i]; j++) {System.out.print("\u25CB "); System.out.flush();}
-            System.out.println("Carta numero "+(i+1)+"\n");
+            for(int j=0; j<model.getOnBoardCards().getCardsToken()[i]; j++) {System.out.print((char)254); System.out.flush();}
+            System.out.println("\nCarta numero "+(i+1)+"\n");
         }
     }
 
@@ -250,7 +250,7 @@ public class ConsoleTools {
         else{
             System.out.println("CARTA PRIVATA");
             String escape=privateCard.getColour().escape();
-            System.out.println("Somma dei valori su tutti i dadi di colore "+escape+"\u25A0"+Color.RESET);
+            System.out.println("Somma dei valori su tutti i dadi di colore "+escape+(char)254+Color.RESET);
         }
     }
 
