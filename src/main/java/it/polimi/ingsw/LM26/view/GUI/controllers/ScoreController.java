@@ -61,6 +61,7 @@ public class ScoreController {
             }
             if(name.equals(winner)){
                 winlose.setText("Hai vinto!");
+                scores.setText(" ");
             }
             else{
                 winlose.setText("Hai perso");
@@ -77,17 +78,16 @@ public class ScoreController {
         }
         else l.setText("*");
         if(pl.getIDPlayer()==0){
-            stackPane.setStyle("-fx-background-color: #ff3e3e");
+            stackPane.setStyle("-fx-background-color: #ff3e3e;"+"-fx-border-width: 3;"+"-fx-background-radius: 10;"+"-fx-border-color: #000000;");
         }
         else if(pl.getIDPlayer()==1){
-            stackPane.setStyle("-fx-background-color: #29bb16");
+            stackPane.setStyle("-fx-background-color: #29bb16;"+"-fx-border-width: 3;"+"-fx-background-radius: 10;"+"-fx-border-color: #000000;");
         }
         else if(pl.getIDPlayer()==2){
-            stackPane.setStyle("-fx-background-color: #4851f4");
+            stackPane.setStyle("-fx-background-color: #4851f4;"+"-fx-border-width: 3;"+"-fx-background-radius: 10;"+"-fx-border-color: #000000;");
         }
         else if(pl.getIDPlayer()==3){
-            stackPane.setStyle("-fx-background-color: #d341bd");
+            stackPane.setStyle("-fx-background-color: #d341bd;"+"-fx-border-width: 3;"+"-fx-background-radius: 10;"+"-fx-border-color: #000000;");
         }
-        stackPane.setStyle("-fx-background-radius: 10");
     }
 }

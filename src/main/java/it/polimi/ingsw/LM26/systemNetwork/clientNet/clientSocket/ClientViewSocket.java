@@ -115,8 +115,6 @@ public class ClientViewSocket extends ClientView {
 
         ConnectMessage connectMessage = new ConnectMessage("connected", 0);
 
-        connectMessage.dump();
-
         outSocket.println(connectMessage.serializeClassMessage());
     }
 

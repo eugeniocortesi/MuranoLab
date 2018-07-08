@@ -16,7 +16,7 @@
                   <Font name="Dubai Medium" size="53.0" />
                </font>
             </Label>
-            <VBox fx:id="scoreTrack" maxHeight="277.0" maxWidth="900.0" prefHeight="220.0" prefWidth="714.0" styleClass="bodybg" stylesheets="@scoreTrack.css">
+            <VBox fx:id="scoreTrack" maxHeight="277.0" maxWidth="900.0" prefHeight="220.0" prefWidth="714.0" styleClass="bodybg">
                <children>
                   <TilePane fx:id="row1" alignment="TOP_CENTER" hgap="7.0" prefHeight="200.0" prefWidth="200.0">
                      <children>
