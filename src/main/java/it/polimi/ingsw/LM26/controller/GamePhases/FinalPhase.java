@@ -23,6 +23,8 @@ public class FinalPhase implements PhaseInt {
 
     private PlayerZone winner;
 
+    private PlayerZone last;
+
     private static final Logger LOGGER = Logger.getLogger(FinalPhase.class.getName());
 
     FinalPhase() {
@@ -44,9 +46,9 @@ public class FinalPhase implements PhaseInt {
 
     public PlayerZone declareWinner() {
 
-        ArrayList<PlayerZone> players = new ArrayList<PlayerZone>();
+        ArrayList<PlayerZone> players = new ArrayList<>();
 
-        ArrayList<PlayerZone> potentialWinners = new ArrayList<PlayerZone>();
+        ArrayList<PlayerZone> potentialWinners = new ArrayList<>();
 
         int maximum;
 
@@ -58,6 +60,8 @@ public class FinalPhase implements PhaseInt {
 
                 players.add(model.getPlayerList().get(i));
         }
+
+        if(players.isEmpty()) return last;
 
         if(players.size()==1) return players.get(0);
 
@@ -242,9 +246,9 @@ public class FinalPhase implements PhaseInt {
     }
 
     @Override
-    public void endGame() {
+    public void endGame(PlayerZone last) {
 
-        throw new UnsupportedOperationException("Not supported here");
+        this.last=last;
     }
 
     @Override

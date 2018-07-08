@@ -61,7 +61,7 @@ public class EventHandler {
 
     /**
      * this method is called from the RoundsHandler: it's used to say if the client action can be done or not.
-     * it parse the id action and call the specific action checks.
+     * it parses the id action and calls the specific action checks.
      * tokens for card usage are payed only if the action is done.
      * @param eventChecker instance of eventChecker object
      * @return the boolean returned is the ultimate acceptance of the action

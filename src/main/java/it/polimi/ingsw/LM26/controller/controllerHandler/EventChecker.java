@@ -76,16 +76,9 @@ public class EventChecker {
                 model.getRestrictions().setTool8needPlacement(false);
 
                 model.getRestrictions().setCurrentPlacement(false);
+
+                player.getActionHistory().setFreezed(true);
             }
-
-            /*if (model.getRestrictions().isNeedPlacement()) {
-
-                model.getRestrictions().setNeedPlacement(false);
-
-                model.getRestrictions().setDie(null);
-
-                model.getRestrictions().setFirstPart(false);
-            }*/
 
             return true;
         }

@@ -16,7 +16,7 @@ public interface PhaseInt extends Serializable{
 
     public PlayerZone getWinner();
 
-    public void endGame();
+    public void endGame(PlayerZone last);
 
     public int getNrounds();
 

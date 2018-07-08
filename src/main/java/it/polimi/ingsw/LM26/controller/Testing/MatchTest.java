@@ -56,9 +56,10 @@ public class MatchTest {
 
                 System.out.println("\n        FIRST ACTION ");
 
-                waitCorrectPlayer();
 
                 if (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump() && !playing.getActionHistory().isFreezed()) {
+
+                    waitCorrectPlayer();
 
                     firstAction();
 
@@ -144,7 +145,7 @@ public class MatchTest {
                         playing.getActionHistory().setPlacement(false);
                         playing.getActionHistory().setDieUsed(false);
                         model.getRestrictions().setCurrentPlacement(true);
-                        playing.getActionHistory().setFreezed(true);
+
                         System.out.println("choose another die");
                         model.hasChanged();
                         waitCorrectPlayer();

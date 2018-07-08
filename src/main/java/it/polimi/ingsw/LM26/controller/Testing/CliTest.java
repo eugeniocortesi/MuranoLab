@@ -58,7 +58,7 @@ public class CliTest {
 
                 plNotStandby.add(model.getPlayerList().get(i));
 
-        if(plNotStandby.size()==1)controller.setEndGame();
+        if(plNotStandby.size()==1)controller.setEndGame(plNotStandby.get(0));
 
         askEvent(playing);
 

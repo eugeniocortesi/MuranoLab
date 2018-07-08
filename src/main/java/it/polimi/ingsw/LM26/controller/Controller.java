@@ -170,9 +170,9 @@ public class Controller implements ControllerInt {
     }
 
     @Override
-    public void setEndGame() {
+    public void setEndGame(PlayerZone last) {
 
-        gamePhase.endGame();
+        gamePhase.endGame(last);
     }
 
     @Override

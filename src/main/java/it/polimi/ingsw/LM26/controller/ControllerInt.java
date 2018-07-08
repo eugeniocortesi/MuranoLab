@@ -25,7 +25,7 @@ public interface ControllerInt {
 
     void declareScoresAndWinner(PlayerZone winner);
 
-    void setEndGame();
+    void setEndGame(PlayerZone last);
 
     void setGamePhase(PhaseInt phase);
 

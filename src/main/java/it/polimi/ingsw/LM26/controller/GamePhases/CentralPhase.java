@@ -26,6 +26,8 @@ public class CentralPhase implements PhaseInt {
 
     private Boolean onePlayer = false;
 
+    private PlayerZone last = null;
+
     private int[] turn;
 
     private static final Logger LOGGER = Logger.getLogger(CentralPhase.class.getName());
@@ -107,6 +109,8 @@ public class CentralPhase implements PhaseInt {
             LOGGER.log(Level.INFO, "CentralPhase: creating finalPhase ");
 
             game.setPhase(new FinalPhase());
+
+            if (onePlayer)game.getPhase().endGame(last);
         } else
 
             if (rounds.size() < numRounds && round.getRoundState() == RoundState.FINISHED) {
@@ -126,11 +130,13 @@ public class CentralPhase implements PhaseInt {
     }
 
     @Override
-    public void endGame() {
+    public void endGame(PlayerZone last) {
 
         LOGGER.log(Level.INFO, "Only one player remained");
 
         onePlayer = true;
+
+        this.last=last;
     }
 
     @Override

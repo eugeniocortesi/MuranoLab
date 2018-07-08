@@ -126,7 +126,7 @@ public class InitialPhase implements PhaseInt {
     }
 
     @Override
-    public void endGame() {
+    public void endGame(PlayerZone last) {
 
         throw new UnsupportedOperationException("Not supported here");
     }

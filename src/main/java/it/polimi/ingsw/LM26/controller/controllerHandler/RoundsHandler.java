@@ -143,9 +143,9 @@ public class RoundsHandler extends Thread {
 
                 ttask1 = timerActionPlayer.scheduleTimerActionPlayer(controller.getSetupHandler(), playing.getName());
 
-                waitEvent();
-
                 if (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump() && !playing.getActionHistory().isFreezed()) {
+
+                    waitEvent();
 
                     firstAction();
 
@@ -300,8 +300,6 @@ public class RoundsHandler extends Thread {
                         playing.getActionHistory().setDieUsed(false);
 
                         model.getRestrictions().setCurrentPlacement(true);
-
-                        playing.getActionHistory().setFreezed(true);
 
                         LOGGER.log(Level.INFO, "choose another die");
 
