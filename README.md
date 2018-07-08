@@ -25,11 +25,10 @@ Implementation of the board game "Sagrada" distributed by Cranio.
 ##### For Windows
 * Download Server.jar and Client.jar from Deliverables
 * Open Server.jar by bash with the command `java -jar Server.jar`
-* Change extension from Client.jar to Client.zip 
+* Open Client.jar in WinRAR 
 * Open it/polimi/ingsw/LM26/DataClientConfiguration
 * Change `"ip": "127.0.0.1"` in `"ip": "XXX"` where XXX is the Server ip written when the Server.jar has started
-* Save and close Client.zip
-* Change extension from Client.zip to Client.jar 
+* Save and close 
 * Open Client.jar by bash with the command `java -jar Client.jar`
 
 ##### For macOS/Linux
@@ -51,8 +50,7 @@ Implementation of the board game "Sagrada" distributed by Cranio.
 Additional Functionality
 
 ##### For Windows
-* Change extension from Server.jar to Server.zip 
-* Open WindowsCards
+* Open WindowsCards in Server.jar with WinRAR
 
 Example:
 
@@ -105,6 +103,7 @@ This is an example of WindowPatternCard
 
 * Copy the structure above and chane your parameters as you prefer 
 * Copy and paste the changed structure in the beginning of file opened before 
+* Save Server.jar 
 
 
 ##### For OS/Linux
@@ -166,4 +165,3 @@ This is an example of WindowPatternCard
 
 
 ##### Pay attention to the game rules and enjoy creating your personalized windowPatternCard and try it in a play!
-
