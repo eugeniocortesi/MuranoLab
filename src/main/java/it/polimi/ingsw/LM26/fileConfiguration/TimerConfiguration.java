@@ -49,10 +49,10 @@ public class TimerConfiguration {
         }
     }
 
-    /**
+    /*
      * method that reads the file TimerConfiguration and save timerEnd
-     * @return TimerConfiguration class that memorize timerEnd
-     * @exception Exception if it can't read the file amd return null
+     * return TimerConfiguration class that memorize timerEnd
+     * exception Exception if it can't read the file amd return null
      */
 
     public static TimerConfiguration implementation(){

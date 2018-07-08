@@ -59,7 +59,7 @@ public abstract class ClientManager implements Runnable, ObserverSimple {
 
     /**
      * Method that notify that a player is trying to disconnect
-     * @param s
+     * @param s name of the player
      */
 
     public abstract void disconnect(String s );
