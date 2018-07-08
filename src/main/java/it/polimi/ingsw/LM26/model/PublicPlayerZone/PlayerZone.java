@@ -22,7 +22,7 @@ public class PlayerZone extends PlayerZoneInt {
 
     private WindowPatternCard windowPatternCard;
 
-    private PlayerState playerState;
+    private volatile PlayerState playerState;
 
     private Token token;
 
@@ -98,7 +98,7 @@ public class PlayerZone extends PlayerZoneInt {
         return windowPatternCard;
     }
 
-    public PlayerState getPlayerState() {
+    public synchronized PlayerState getPlayerState() {
 
         return playerState;
     }
@@ -133,7 +133,7 @@ public class PlayerZone extends PlayerZoneInt {
         this.windowPatternCard = windowPatternCard;
     }
 
-    public void setPlayerState(PlayerState playerState) {
+    public synchronized void setPlayerState(PlayerState playerState) {
 
         this.playerState = playerState;
     }
