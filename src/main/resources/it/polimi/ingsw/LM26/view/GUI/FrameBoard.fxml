@@ -129,7 +129,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Label fx:id="playername" prefHeight="20.0" prefWidth="50.0" style="-fx-background-color: #d3d3d3;" text="Nome" textFill="WHITE">
+            <Label fx:id="playername" prefHeight="20.0" prefWidth="124.0" style="-fx-background-color: #d3d3d3;" text="Nome" textFill="WHITE">
                <VBox.margin>
                   <Insets left="5.0" />
                </VBox.margin>

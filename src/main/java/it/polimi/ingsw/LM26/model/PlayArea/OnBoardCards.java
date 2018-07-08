@@ -102,7 +102,7 @@ public class OnBoardCards implements Serializable {
 
         ArrayList<ToolCardInt> three = new ArrayList<>();
 
-        for (int j = 0; j < toExtract; j++) {
+         /* for (int j = 0; j < toExtract; j++) {
 
             Random rand = new Random();
 
@@ -122,7 +122,22 @@ public class OnBoardCards implements Serializable {
             toolNumberList.add(index + 1);
 
             cardsToken[j] = 1;
-        }
+        }*/
+        three.add(model.getDecks().getToolCardDeck().get(10));
+
+        toolNumberList.add(10 + 1);
+
+        cardsToken[0] = 1;
+        three.add(model.getDecks().getToolCardDeck().get(11));
+
+        toolNumberList.add(11 + 1);
+
+        cardsToken[1] = 1;
+        three.add(model.getDecks().getToolCardDeck().get(9));
+
+        toolNumberList.add(9);
+
+        cardsToken[2] = 1;
 
         toolCardList = three;
     }
