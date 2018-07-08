@@ -1,4 +1,4 @@
-package it.polimi.ingsw.LM26.systemNetwork.Testing;
+package it.polimi.ingsw.LM26;
 
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.Client;
 import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientBase;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 
-public class ClientStarter extends Application{
+public class ClientMain extends Application{
 
     static ViewInterface view;
     static ClientInt client = new Client();

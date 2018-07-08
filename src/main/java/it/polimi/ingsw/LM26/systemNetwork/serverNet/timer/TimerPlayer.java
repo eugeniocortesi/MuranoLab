@@ -22,7 +22,7 @@ public class TimerPlayer {
 
     private Timer tActionPlayer;
 
-    private final long myLongNetwork = 3000;
+    private final long myLongNetwork = 10000;
 
     private long myLong;
 
