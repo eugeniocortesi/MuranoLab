@@ -14,6 +14,11 @@ public class ToolsActionEventGenerator {
     private String input;
     private ConsoleTools cTools = new ConsoleTools();
 
+    /**
+     * it asks for a string that represent a die in a list and then search for it
+     * @param draftP if is a draft pool die or a round track die
+     * @return the chosen die from draft pool/round track
+     */
     public DieInt askForDie(boolean draftP){
         int n=-1;
         boolean dieOk=false;

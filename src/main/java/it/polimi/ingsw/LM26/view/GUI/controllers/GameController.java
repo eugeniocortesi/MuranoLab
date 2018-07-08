@@ -166,7 +166,7 @@ public class GameController {
                 dPoolController.setDisable(false);
                 onBCardsController.setDisable(false);
                 endMove.setDisable(false);
-                setInstructions("Inizio turno: puoi posizionare un dado o usare una carta strumento");
+                setInstructions("Puoi posizionare un dado o usare una carta strumento");
                 break;
             case CONTINUECHOICE:
                 endToolCard.setDisable(false);

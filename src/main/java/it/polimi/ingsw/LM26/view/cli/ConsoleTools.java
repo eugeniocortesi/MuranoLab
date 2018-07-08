@@ -27,7 +27,7 @@ public class ConsoleTools {
     private String input;
     static Model model;
     static int id;
-    static ObjectivePrivateCard privateCard=null;
+    private static ObjectivePrivateCard privateCard=null;
 
     public static void setId(int id) {
         ConsoleTools.id = id;
@@ -36,38 +36,19 @@ public class ConsoleTools {
     public static void setPrivateCard(ObjectivePrivateCard privateCard) {
         ConsoleTools.privateCard = privateCard;
     }
-/* private Decks deck=singletonDecks();
 
-    public static void main(String[] args) {
-        ConsoleTools cTools = new ConsoleTools();
-        cTools.printPatternCard();
-    }
-
-    public void printPatternCard(){
-        this.printPatternCard(deck.getWindowPatternCardDeck().get(0).getTitle());
-    }*/
 
     public static void setModel(Model model) {
-        if(model== null)
-            System.out.println("Model null in consoleTools");
         ConsoleTools.model = model;
     }
 
-    private String numToFace(int n){
-        switch(n){
-            case 1:{return "\u2680";}
-            case 2:{return "\u2681";}
-            case 3:{return "\u2682";}
-            case 4:{return "\u2683";}
-            case 5:{return "\u2684";}
-            case 6:{return "\u2685";}
-            default: return null;
-        }
-    }
-
-    public String printDie(DieInt die){
+    /**
+     *
+     * @param die to print
+     * @return a colored number
+     */
+    private String printDie(DieInt die){
         String face=Integer.toString(die.getNumber());
-        //String face=numToFace(die.getNumber());
         String escape=die.getColor().escape();
         return (escape+face+Color.RESET);
     }
@@ -86,9 +67,9 @@ public class ConsoleTools {
     }
 
     /**
-     * it only shows the frame board with its dice and its  window pattern card
+     * it shows the frame board with its dice and its window pattern card
      */
-    public void printFrameBoard(PlayerZone pl){
+    private void printFrameBoard(PlayerZone pl){
         WindowFramePlayerBoard frame = pl.getPlayerBoard();
         String escape= pl.getPlayerBoard().getColor().escape();
         System.out.println(escape+"\u2588\u2588 "+pl.getName().toUpperCase()+" \u2588\u2588"+ Color.RESET);
@@ -120,6 +101,10 @@ public class ConsoleTools {
         this.printPrivateCard();
     }
 
+    /**
+     * it asks for the player you want to see, then if the name matches with another player
+     * it shows its frame board, name and tokens
+     */
     public void showAnotherPlayer(){
         boolean nomeOk=false;
         int id=-1;
@@ -149,20 +134,28 @@ public class ConsoleTools {
         System.out.println();
     }
 
-    public void printPatternBox(PatternBox p){
+    /**
+     * it prints the window pattern box without die
+     * @param p is the box to print
+     */
+    private void printPatternBox(PatternBox p){
         if(p.isColor()){
             String escape=p.getColor().escape();
-            System.out.print(escape+"\u25A0"+"|"+Color.RESET);
+            System.out.print(escape+"\u25A0"+Color.RESET+"|");
             System.out.flush();
         }
         else if(p.isShade()){
-            //if(numToFace(p.getValue())!=null){
             System.out.print(Integer.toString(p.getValue())+"|");
             System.out.flush();
 
         }
     }
 
+    /**
+     * it prints window pattern card: matrix, name and tokens
+     * @param windowPatternCard to print
+     * @throws IllegalArgumentException if the pattern card is null
+     */
     public void printPatternCard(WindowPatternCard windowPatternCard) throws IllegalArgumentException{
         if(windowPatternCard==null) throw new IllegalArgumentException("Wrong name of window pattern card");
         System.out.println(windowPatternCard.getTitle().toUpperCase()+": "+windowPatternCard.getToken()+" tokens");
@@ -178,7 +171,7 @@ public class ConsoleTools {
     /**
      * it shows all the public cards on board
      */
-    public void printPublicCardsOnBoard(){
+    private void printPublicCardsOnBoard(){
         for(ObjectivePublicCard i : model.getOnBoardCards().getObjectivePublicCardList()){
             System.out.println("CARTA OBIETTIVO PUBBLICO");
             System.out.print("obiettivo");
@@ -249,6 +242,10 @@ public class ConsoleTools {
         }
     }
 
+    /**
+     * it prints the player's private card
+     * @throws IllegalArgumentException when private card is null
+     */
     public void printPrivateCard() throws IllegalArgumentException{
         if(privateCard==null) throw new IllegalArgumentException("private card not initialized");
         else{
@@ -262,7 +259,7 @@ public class ConsoleTools {
      * it shows the updated round track table, with the first die of the stack for every turn
      */
     public void printRoundTrack(){
-        DieInt die=null;
+        DieInt die;
         int rtSize = model.getRoundTrackInt().getRoundTrackTurnList().size();
         System.out.println("TRACCIATO DEI ROUND");
         System.out.println(" 1   2   3   4   5    6   7   8   9   10");
@@ -278,6 +275,9 @@ public class ConsoleTools {
         }
     }
 
+    /**
+     * it prints the draft pool as a line of dice
+     */
     public void printDraftPool(){
         System.out.println( ansi().bold().a("riserva").boldOff());
         for(DieInt d : model.getDraftPool().getInDraft()){
@@ -287,6 +287,9 @@ public class ConsoleTools {
         System.out.println();
     }
 
+    /**
+     * ask for the type of card you want to see, then it shows that type of cards on board
+     */
     public void showCards(){
         boolean flag=false;
         System.out.println("'PU' per vedere quelle pubbliche\n" +
@@ -312,8 +315,7 @@ public class ConsoleTools {
      * @return index of die in its arraylist, -1 if user's input is wrong, -2 if draft pool is empty (but it couldn't be)
      */
     public int searchDraftPoolDie(char[] c){
-        int n=searchDie(c, model.getDraftPool().getInDraft());
-        return n;
+        return searchDie(c, model.getDraftPool().getInDraft());
     }
 
     /**
@@ -335,11 +337,16 @@ public class ConsoleTools {
         return result;
     }
 
+    /**
+     * @param chars is the user's input
+     * @param dieList list of dice with the die user has asked for
+     * @return -2 if dieList size is 0, -1 if input is wrong, else the index of searched die in dieList
+     */
     public int searchDie(char[] chars, ArrayList<DieInt> dieList){
-        ArrayList<Integer> dcolored = new ArrayList<Integer>();
+        ArrayList<Integer> dcolored = new ArrayList<>();
         char c=0;
         if(dieList.size()==0) return -2;
-        if(!(chars.length==2 || chars.length==3)){ return -1; }
+        if(!((chars.length==2 && chars[0]!='V') || (chars.length==3 && chars[0]=='V'))){ return -1; }
             switch (chars[0]){
                 case 'B': for(int i=0; i<dieList.size(); i++){
                     if(dieList.get(i).getColor().equals(Color.ANSI_BLUE)){
@@ -402,6 +409,9 @@ public class ConsoleTools {
             }
     }
 
+    /**
+     * prints instructions for placement of a die in frame board
+     */
     public void showInstructionsForPlacement(){
         System.out.println("Scegli un dado scrivendolo come colore+valore (es R2).\n" +
                 "Colori: rosso R, blu B, giallo G, verde VE, viola VI\n" +

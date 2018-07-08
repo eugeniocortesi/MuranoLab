@@ -30,7 +30,7 @@ public class ConsoleStrings extends ViewInterface {
     private ClientInt clientBase;
     private ClientView clientView;
 
-    DataClientConfiguration dataClientConfiguration;
+    private DataClientConfiguration dataClientConfiguration;
 
     private ConsoleTools consoleTools = new ConsoleTools();
     private PlayerMenuInt playerMenu;
@@ -39,17 +39,6 @@ public class ConsoleStrings extends ViewInterface {
     private InputLoop inputLoop;
     private ActionEventGenerator aeGenerator;
     //private CountDownLatch countDownLatch;
-
-    public static void main(String[] args) {
-        //System.out.println("\u00AF"+"\u2310"+"\u00AC"+"\u2319"+"\u2310");
-        /*Decks deck=singletonDecks();
-        ArrayList<WindowPatternCard> wList= new ArrayList<WindowPatternCard>();
-        for(int i=0; i<4; i++){
-            wList.add( deck.getWindowPatternCardDeck().get(i));
-        }
-        ConsoleStrings cs;
-        cs.showWindowPattern("string", 1, wList);*/
-    }
 
     public ConsoleStrings(ClientInt clientBase) {
         System.setProperty("jansi.passthrough", "true"); //TODO remove later
@@ -97,7 +86,7 @@ public class ConsoleStrings extends ViewInterface {
 
 
 
-    public void initialScreen(){
+    private void initialScreen(){
         System.out.print(ansi().a("  Benvenuti in\n    ").fg(RED).a("S").fg(YELLOW).a("A").fg(MAGENTA).a("G").fg(GREEN).a("R").fg(BLUE).a("A").fg(YELLOW).a("D").fg(GREEN).a("A\n\n").reset());
         System.out.flush();
     }
@@ -153,6 +142,9 @@ public class ConsoleStrings extends ViewInterface {
                 n=Integer.parseInt(br.readLine());
             } catch (IOException e){
                 e.printStackTrace();
+            }
+            catch (NumberFormatException e){
+                System.out.println("Non è un numero");
             }
             if(n<1 || n>4) System.out.println("Indice tra 1 e 4!!");
         }
@@ -236,12 +228,10 @@ public class ConsoleStrings extends ViewInterface {
     public void notifyMessage(ActionEvent ae){
         if(ConsoleTools.model.getPlayer(ConsoleTools.id).getPlayerState()==PlayerState.BEGINNING && !ActionEventGenerator.invalidActionEvent){
             notify(ae);
-            System.out.println("notify1");
         }
         else {
             ActionEventGenerator.invalidActionEvent=false;
             notify(aeGenerator.askForMenu(false));
-            System.out.println("notify2");
         }
         /*countDownLatch = new CountDownLatch(1);
         try {
@@ -273,7 +263,7 @@ public class ConsoleStrings extends ViewInterface {
 
         }
 
-        public boolean isRunning(){
+        boolean isRunning(){
             return isRunning;
         }
     }

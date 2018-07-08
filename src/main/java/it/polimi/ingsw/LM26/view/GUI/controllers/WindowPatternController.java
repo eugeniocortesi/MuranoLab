@@ -2,10 +2,7 @@ package it.polimi.ingsw.LM26.view.GUI.controllers;
 
 import it.polimi.ingsw.LM26.model.Cards.windowMatch.WindowPatternCard;
 import it.polimi.ingsw.LM26.observers.serverController.ActionEventWindow;
-import it.polimi.ingsw.LM26.systemNetwork.clientNet.ClientView;
-import it.polimi.ingsw.LM26.view.GUI.ModelManager;
 import it.polimi.ingsw.LM26.view.GUI.View;
-import it.polimi.ingsw.LM26.view.GUI.controllers.ControllerCardRec;
 import it.polimi.ingsw.LM26.view.GUI.images.ImageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

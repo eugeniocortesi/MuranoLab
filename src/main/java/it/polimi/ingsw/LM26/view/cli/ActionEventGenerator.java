@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class ActionEventGenerator {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    ConsoleTools cTools=new ConsoleTools();
+    private ConsoleTools cTools=new ConsoleTools();
     private ToolsActionEventGenerator tceGenerator;
     public static boolean invalidActionEvent=false;
 
@@ -26,7 +26,7 @@ public class ActionEventGenerator {
      */
     public ActionEvent askForDiePlacing(){
         Box rc;
-        DieInt d=null;
+        DieInt d;
         ActionEvent actionEvent = new ActionEvent();
         d=tceGenerator.askForDie(true);
         actionEvent.setDieFromDraft(d);
@@ -37,6 +37,10 @@ public class ActionEventGenerator {
         return  actionEvent;
     }
 
+    /**
+     * it initialise an action event to say that the user pass the turn
+     * @return
+     */
     public ActionEvent loseTurn(){
         ActionEvent ae=new ActionEvent();
         ae.setNoAction(true);
@@ -47,8 +51,7 @@ public class ActionEventGenerator {
 
     public boolean disconnectConfirm(){
         String s=tceGenerator.askDisconnection();
-        if(s.equalsIgnoreCase("S")) return true;
-        else return false;
+        return s.equalsIgnoreCase("S");
     }
 
     /**
@@ -89,8 +92,7 @@ public class ActionEventGenerator {
             actionEvent.setId(5); break;}
             case 1:
             {actionEvent=this.dfdIncrement(n-1); break;}
-            case 10:
-                actionEvent=this.dieFromDraftPoolEvent(n-1);
+            case 10: {actionEvent=this.dieFromDraftPoolEvent(n-1); break;}
             case 11:{
                 String fs=tceGenerator.askFirstSecondPart();
                 if(fs.equalsIgnoreCase("p")){
