@@ -37,7 +37,7 @@ public class CentralPhase implements PhaseInt {
      * it sets the first players order and start the first round
      */
 
-    CentralPhase() {
+    public CentralPhase() {
 
         this.model = singletonModel();
 

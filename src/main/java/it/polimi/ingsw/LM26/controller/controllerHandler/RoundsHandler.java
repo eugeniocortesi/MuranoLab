@@ -135,7 +135,7 @@ public class RoundsHandler extends Thread {
 
                     if(!playing.equals(playerEnding))controller.getViewGameInterface().showSetPlayerMenu(playerEnding.getName(), playerEnding);
 
-                    if(playing.getActionHistory().isFreezed())controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
+                    if(!playing.getActionHistory().isFreezed()) controller.getViewGameInterface().showSetPlayerMenu(playing.getName(), playing);
                 }
 
                 firstShow=false;

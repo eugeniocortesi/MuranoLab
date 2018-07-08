@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class TestSetupHandler {
 
-    Controller controller=new Controller();
+    private Controller controller=new Controller();
 
     @Test
     public void checkAddPlayer(){
