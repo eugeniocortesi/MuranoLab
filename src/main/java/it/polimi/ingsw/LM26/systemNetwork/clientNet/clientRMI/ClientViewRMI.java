@@ -190,7 +190,6 @@ public class ClientViewRMI extends ClientView {
 
         concreteClientView.showDisconnectScreen();
 
-        System.exit(0);
     }
 
     /**

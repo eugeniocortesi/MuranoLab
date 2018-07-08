@@ -211,7 +211,6 @@ public class ClientViewSocket extends ClientView {
         LOGGER.log(Level.SEVERE,"Client disconnected");
 
         concreteClientView.showDisconnectScreen();
-        System.exit(0);
     }
 
     /**
