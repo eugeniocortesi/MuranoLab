@@ -61,7 +61,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>it.polimi.ingsw.LM26.Main</mainClass>
+                            <mainClass>it.polimi.ingsw.LM26.systemNetwork.Testing.ClientStarter</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

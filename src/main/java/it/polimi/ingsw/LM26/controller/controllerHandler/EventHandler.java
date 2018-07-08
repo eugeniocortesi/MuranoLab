@@ -115,7 +115,7 @@ public class EventHandler {
 
                         player.getActionHistory().setCardUsed(true);
 
-                        eventChecker.checkToken(player, toolCard,true);
+                        eventChecker.checkToken(player, toolCard, true);
 
                         return true;
                     } else return false;
@@ -280,7 +280,7 @@ public class EventHandler {
 
         for (int i = 0; i < model.getDraftPool().size(); i++)
 
-            if (model.getDraftPool().get(i).getNumber() == die.getNumber() && model.getDraftPool().get(i).getColor().equals(die.getColor()))
+            if (model.getDraftPool().get(i).getValue() == die.getValue() && model.getDraftPool().get(i).getColor().equals(die.getColor()))
 
                 return model.getDraftPool().get(i);
 

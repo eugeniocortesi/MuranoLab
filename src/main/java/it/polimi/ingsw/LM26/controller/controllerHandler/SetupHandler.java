@@ -87,29 +87,31 @@ public class SetupHandler {
 
     public void setStandbyPlayer(String namePlayer) {
 
-        model.getPlayer(namePlayer).setPlayerState(PlayerState.STANDBY);
+        if (model.getPlayer(namePlayer)!=null) {
 
-        ArrayList<PlayerZone> plNotStandby = new ArrayList<>();
+            model.getPlayer(namePlayer).setPlayerState(PlayerState.STANDBY);
 
-        for (int i = 0; i < model.getPlayerList().size(); i++) {
+            ArrayList<PlayerZone> plNotStandby = new ArrayList<>();
 
-            if (model.getPlayerList().get(i).getName().equals(namePlayer))
+            for (int i = 0; i < model.getPlayerList().size(); i++) {
 
-                server.showAnswerFromController(namePlayer, "Sei in pausa.");
+                if (model.getPlayerList().get(i).getName().equals(namePlayer))
 
-            else
+                    server.showAnswerFromController(namePlayer, "Sei in pausa.");
 
-                server.showAnswerFromController(model.getPlayerList().get(i).getName(), "Il player " + namePlayer + " e' in pausa.");
+                else
+
+                    server.showAnswerFromController(model.getPlayerList().get(i).getName(), "Il player " + namePlayer + " e' in pausa.");
+            }
+
+            for (int i = 0; i < model.getPlayerList().size(); i++)
+
+                if (!model.getPlayerList().get(i).getPlayerState().equals(PlayerState.STANDBY))
+
+                    plNotStandby.add(model.getPlayerList().get(i));
+
+            if (plNotStandby.size() == 1) controller.setEndGame(plNotStandby.get(0));
         }
-
-        for(int i =0; i< model.getPlayerList().size();i++)
-
-            if(!model.getPlayerList().get(i).getPlayerState().equals(PlayerState.STANDBY))
-
-                plNotStandby.add(model.getPlayerList().get(i));
-
-        if(plNotStandby.size()==1)controller.setEndGame(plNotStandby.get(0));
-
     }
 
 

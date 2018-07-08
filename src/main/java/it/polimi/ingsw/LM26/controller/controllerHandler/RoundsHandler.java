@@ -140,10 +140,6 @@ public class RoundsHandler extends Thread {
 
                 firstShow=false;
 
-                //TODO DELETE
-                System.out.println("              CHANGE TURN: " + playing.getName());
-                playing.getPlayerBoard().printCard();
-                LOGGER.log(Level.INFO, "DraftPool");
                 model.getDraftPool().printDraftPool();
 
                 ttask1 = timerActionPlayer.scheduleTimerActionPlayer(controller.getSetupHandler(), playing.getName());
@@ -216,10 +212,6 @@ public class RoundsHandler extends Thread {
 
     private void firstAction() {
 
-        //TODO DELETE
-        LOGGER.log(Level.INFO, "        FIRST ACTION ");
-
-
         while (!result) {
 
             if (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump()) {
@@ -237,13 +229,6 @@ public class RoundsHandler extends Thread {
                         controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Hai estratto un dado " + model.getRestrictions().getColor());
 
                     else controller.getViewGameInterface().showAnswerFromController(playing.getName(), "OK");
-
-                    //TODO DELETE
-
-                    playing.getPlayerBoard().printCard();
-                    LOGGER.log(Level.INFO, "DraftPool");
-                    model.getDraftPool().printDraftPool();
-
 
                     model.hasChanged();
 
@@ -272,10 +257,6 @@ public class RoundsHandler extends Thread {
 
     private void secondAction() {
 
-        //TODO DELETE
-        LOGGER.log(Level.INFO, "        SECOND ACTION ");
-
-
         while (!result) {
 
             if (playing.getPlayerState() != STANDBY && !playing.getActionHistory().isJump()) {
@@ -289,12 +270,6 @@ public class RoundsHandler extends Thread {
                         controller.getViewGameInterface().showAnswerFromController(playing.getName(), "Passi ");
 
                     else controller.getViewGameInterface().showAnswerFromController(playing.getName(), "OK");
-
-
-                    //TODO DELETE
-                    LOGGER.log(Level.INFO, "DraftPool");
-                    model.getDraftPool().printDraftPool();
-
 
                     if (model.getRestrictions().isTool8needPlacement()) {
 

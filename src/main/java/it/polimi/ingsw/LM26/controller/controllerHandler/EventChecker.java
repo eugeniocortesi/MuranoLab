@@ -6,6 +6,8 @@ import it.polimi.ingsw.LM26.model.Cards.windowMatch.Box;
 import it.polimi.ingsw.LM26.model.Model;
 import it.polimi.ingsw.LM26.model.PlayArea.diceObjects.DieInt;
 import it.polimi.ingsw.LM26.model.PublicPlayerZone.PlayerZone;
+
+import javax.print.attribute.standard.NumberUp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,7 +45,7 @@ public class EventChecker {
 
     public boolean checkPlacement(DieInt dieFromDraft, Box toBox, PlayerZone player) {
 
-        if( dieFromDraft==null ) return false;
+        if( dieFromDraft==null || toBox== null) return false;
 
         if (model.getRestrictions().isNeedPlacement() && !dieFromDraft.equals(model.getRestrictions().getDie())) {
 
