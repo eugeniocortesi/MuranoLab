@@ -237,6 +237,10 @@ public class ActionEventGenerator {
         }
     }
 
+    /**
+     * @param increment string "incement"  or "decrement"
+     * @throws IllegalArgumentException if string increment is wrong
+     */
     public void indecrementEvent(String increment) throws IllegalArgumentException{
         if(!(increment.equalsIgnoreCase("increment") || increment.equalsIgnoreCase("decrement"))) throw new IllegalArgumentException("wrong increment string");
         else{
@@ -246,10 +250,15 @@ public class ActionEventGenerator {
         }
     }
 
+    /**
+     * it sends action event if stateArray a index idx is finished or if the state is ACtIONEVENT,
+     * doing different things in this case
+     */
     private void sendActionEvent(){
         view.notifyActionEvent(ae);
         System.out.println("action event:");
         System.out.println(ae.getId());
+        System.out.println(ae.getCardID());
         System.out.println(ae.getDieFromDraft());
 
         if(idx!=stateArray.size()){

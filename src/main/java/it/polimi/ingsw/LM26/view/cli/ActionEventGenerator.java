@@ -84,7 +84,7 @@ public class ActionEventGenerator {
             case 4:
             {actionEvent=this.fromToBox2(n-1, false); break;}
             case 6:
-            {actionEvent=this.addToBox1(this.dieFromDraftPoolEvent(n-1));
+            {actionEvent=this.dieFromDraftPoolEvent(n-1);
             System.out.println("Il dado è stato riposto nella Riserva, accedivi per piazzarlo nella Plancia Vetrata.\n" +
                     "Se non puoi piazzarlo, passa il turno");
             break;}
